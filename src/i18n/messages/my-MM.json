@@ -342,7 +342,7 @@
     "loadingChart": "ဂရပ် တင်နေသည်...",
     "mainSidebar": "မူလဘက်ဘက်",
     "mobileNavigation": "မိုဘိုင်းလမ်းညွှန်",
-    "notificationDescription": "{title}. {body}",
+    "notificationDescription": "{title}။ {body}",
     "notifications": "အသိပေးချက်များ",
     "openChatbot": "AI ချတ်ဘော့ ဖွင့်မည်",
     "pairingCode": "တွဲချိတ်ကုဒ်: {code}",
@@ -433,24 +433,24 @@
       "verifyEmailTitle": "သင့်အီးမေးလ် အတည်ပြုမည်"
     },
     "upgrade": {
-      "continueFreeTrial": "Continue with free trial ({daysRemaining} days left)",
-      "daysLeft": "{daysRemaining} days left in your free trial",
+      "continueFreeTrial": "အခမဲ့ စမ်းသပ်ကာလ ဆက်ရန် ({daysRemaining} ရက် ကျန်)",
+      "daysLeft": "သင့်အခမဲ့ စမ်းသပ်ကာလတွင် {daysRemaining} ရက် ကျန်ရှိ",
       "features": {
         "aiInsights": {
-          "description": "Smart categorization and spending analysis",
-          "title": "AI-Powered Insights"
+          "description": "စမတ် အမျိုးအစားခွဲခြင်းနှင့် သုံးစွဲမှု ခွဲခြမ်းစိတ်ဖြာခြင်း",
+          "title": "AI-စွမ်းအင်သုံး ထိုးထွင်းသိမြင်မှုများ"
         },
         "bankSecurity": {
-          "description": "Your data is encrypted and never shared",
-          "title": "Bank-Level Security"
+          "description": "သင့်ဒေတာကို ကုဒ်ဝှက်ထားပြီး မည်သူနှင့်မျှ မျှဝေပါ",
+          "title": "ဘဏ်အဆင့် လုံခြုံရေး"
         },
         "subscriptionTracking": {
-          "description": "Never miss a recurring charge again",
-          "title": "Subscription Tracking"
+          "description": "ထပ်ခါတလဲလဲ ငွေကောက်ခံမှုတစ်ခုမျှ လွတ်မခံပါ",
+          "title": "စာရင်းသွင်းမှု ခြေရာခံခြင်း"
         },
         "unlimitedTransactions": {
-          "description": "Import and track as many transactions as you need",
-          "title": "Unlimited Transactions"
+          "description": "လိုအပ်သလောက် ငွေလွှဲများ သွင်းယူ၍ ခြေရာခံပါ",
+          "title": "ငွေလွှဲ အကန့်အသတ်မဲ့"
         }
       },
       "lifetimeAccess": "အင်္ဂါရပ်အားလုံးကို တစ်သက်တာ ဝင်ရောက်ခွင့် ရယူပါ",
@@ -783,423 +783,423 @@
         },
         "cancelSubscription": {
           "description": "See savings from canceling a recurring charge",
-          "title": "Cancel Subscription"
+          "title": "စာရင်းသွင်းမှု ဖျက်သိမ်းရန်"
         },
         "changeIncome": {
           "description": "Model an income increase or decrease",
-          "title": "Change Income"
+          "title": "ဝင်ငွေ ပြောင်းရန်"
         },
         "increaseSavings": {
           "description": "See goal timeline acceleration",
-          "title": "Increase Savings"
+          "title": "စုဆောင်းမှု တိုးရန်"
         },
         "payOffDebt": {
           "description": "Calculate interest savings from early payoff",
-          "title": "Pay Off Debt"
+          "title": "အကြွေး ဆပ်ရန်"
         }
       }
     },
     "templates": {
-      "backToSchool": "Back to School",
-      "categories": "Categories",
-      "holidaySeason": "Holiday Season",
-      "homeImprovement": "Home Improvement",
-      "preview": "Preview",
-      "summerTravel": "Summer Travel",
-      "taxSeason": "Tax Season",
-      "title": "Budget Templates",
-      "useTemplate": "Use Template",
-      "weddingEvent": "Wedding / Event"
+      "backToSchool": "ကျောင်းပြန်ဖွင့်",
+      "categories": "အမျိုးအစားများ",
+      "holidaySeason": "အားလပ်ရက် ရာသီ",
+      "homeImprovement": "အိမ်ပြင်ဆင်ခြင်း",
+      "preview": "ကြိုကြည့်ရန်",
+      "summerTravel": "နွေရာသီ ခရီးသွား",
+      "taxSeason": "အခွန် ရာသီ",
+      "title": "ဘတ်ဂျက် ပုံစံများ",
+      "useTemplate": "ပုံစံ သုံးရန်",
+      "weddingEvent": "မင်္ဂလာ / ပွဲတော်"
     },
     "weeklyRecap": {
-      "dismissed": "Dismissed for this week",
-      "lastWeek": "Last week",
-      "thisWeek": "This week",
-      "title": "Weekly Recap",
-      "topCategories": "Top Categories",
-      "viewFullReview": "View Full Review"
+      "dismissed": "ဤအပတ်အတွက် ပယ်ဖျက်ပြီး",
+      "lastWeek": "ယခင်အပတ်",
+      "thisWeek": "ဤအပတ်",
+      "title": "အပတ်စဉ် အကျဉ်းချုပ်",
+      "topCategories": "ထိပ်တန်း အမျိုးအစားများ",
+      "viewFullReview": "ပြည့်စုံသော သုံးသပ်ချက် ကြည့်ရန်"
     }
   },
   "bulkActions": {
-    "applyTo": "Apply to {count}",
-    "categorize": "Categorize",
-    "clearSelection": "Clear selection",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
-    "delete": "Delete",
-    "deleteWarning": "This action cannot be undone.",
-    "export": "Export",
-    "noSubcategory": "No subcategory",
-    "selectAll": "Select all",
-    "selectCategory": "Select category...",
-    "selected": "{count} selected"
+    "applyTo": "{count} ခုသို့ ထည့်ရန်",
+    "categorize": "အမျိုးအစားခွဲရန်",
+    "clearSelection": "ရွေးချယ်မှု ရှင်းရန်",
+    "confirmDelete": "ငွေလွှဲ {count, plural, =1 {၁ ခု} other {# ခု}} ဖျက်မည်လား?",
+    "delete": "ဖျက်ရန်",
+    "deleteWarning": "ဤလုပ်ဆောင်ချက်ကို ပြန်ပြင်၍ မရပါ။",
+    "export": "ထုတ်ယူရန်",
+    "noSubcategory": "အမျိုးအစားခွဲ မရှိ",
+    "selectAll": "အားလုံး ရွေးရန်",
+    "selectCategory": "အမျိုးအစား ရွေးပါ...",
+    "selected": "{count} ခု ရွေးထား"
   },
   "calculators": {
     "budgetAnalyzer": {
-      "actual": "Actual",
-      "balanced": "Your Budget is Balanced!",
-      "description": "Analyze your spending against the popular budgeting rule",
-      "enterSpending": "Enter your monthly spending by category:",
-      "exceeding": "Exceeding",
-      "inputTitle": "Your Monthly Finances",
-      "monthlyIncome": "Monthly Net Income",
-      "monthlyIncomeHelp": "Your take-home pay after taxes",
-      "needs": "Needs",
-      "needsAdjustment": "Adjustments Recommended",
-      "needsDescription": "Housing, utilities, groceries, insurance, minimum debt payments",
-      "needsExamples": "rent, utilities, groceries",
-      "over": "Over",
-      "ruleExplanation": "The 50/30/20 Rule",
-      "savings": "Savings",
-      "savingsDescription": "Emergency fund, investments, retirement, extra debt payments",
-      "savingsExamples": "savings, investments, extra debt",
-      "subtitle": "See how your budget measures up",
-      "target": "Target",
-      "title": "50/30/20 Budget Analyzer",
-      "under": "On Track",
-      "variance": "Variance",
-      "wants": "Wants",
-      "wantsDescription": "Dining out, entertainment, shopping, subscriptions",
-      "wantsExamples": "dining, entertainment, shopping"
+      "actual": "အမှန်တကယ်",
+      "balanced": "သင့်ဘတ်ဂျက် ချိန်ခွင်ညီ!",
+      "description": "လူကြိုက်များသော ဘတ်ဂျက်စည်းမျဉ်းနှင့် သင့်သုံးစွဲမှုကို ခွဲခြမ်းစိတ်ဖြာပါ",
+      "enterSpending": "အမျိုးအစားအလိုက် လစဉ် သုံးစွဲမှု ထည့်ပါ:",
+      "exceeding": "ကျော်လွန်",
+      "inputTitle": "သင့်လစဉ် ငွေကြေး",
+      "monthlyIncome": "လစဉ် အသားတင် ဝင်ငွေ",
+      "monthlyIncomeHelp": "အခွန်ဖြတ်ပြီးနောက် သင့်ရရှိငွေ",
+      "needs": "လိုအပ်ချက်များ",
+      "needsAdjustment": "ချိန်ညှိမှုများ အကြံပြု",
+      "needsDescription": "အိမ်ငှား၊ ဓာတ်အား၊ စျေးဝယ်၊ အာမခံ၊ အနိမ့်ဆုံး အကြွေးပေးချေမှုများ",
+      "needsExamples": "အိမ်ငှား၊ ဓာတ်အား၊ စျေးဝယ်",
+      "over": "ကျော်",
+      "ruleExplanation": "50/30/20 စည်းမျဉ်း",
+      "savings": "စုဆောင်းမှု",
+      "savingsDescription": "အရေးပေါ်ရန်ပုံငွေ၊ ရင်းနှီးမြုပ်နှံမှု၊ အငြိမ်းစား၊ အပို အကြွေးပေးချေမှုများ",
+      "savingsExamples": "စုဆောင်းမှု၊ ရင်းနှီးမြုပ်နှံမှု၊ အပိုအကြွေး",
+      "subtitle": "သင့်ဘတ်ဂျက် ဘယ်လောက် ကောင်းသည်ကို ကြည့်ပါ",
+      "target": "ပစ်မှတ်",
+      "title": "50/30/20 ဘတ်ဂျက် ခွဲခြမ်းစိတ်ဖြာစက်",
+      "under": "လမ်းကြောင်းမှန်",
+      "variance": "ကွာဟချက်",
+      "wants": "လိုချင်ချက်များ",
+      "wantsDescription": "အပြင်စားသောက်၊ ဖျော်ဖြေရေး၊ ဈေးဝယ်ထွက်၊ စာရင်းသွင်းမှုများ",
+      "wantsExamples": "စားသောက်၊ ဖျော်ဖြေရေး၊ ဈေးဝယ်ထွက်"
     },
     "common": {
-      "back": "Back to calculators",
-      "calculate": "Calculate",
-      "months": "months",
-      "reset": "Reset",
-      "save": "Save Plan",
-      "years": "years"
+      "back": "တွက်ချက်စက်များသို့ ပြန်ရန်",
+      "calculate": "တွက်ချက်ရန်",
+      "months": "လ",
+      "reset": "ပြန်သတ်မှတ်ရန်",
+      "save": "အစီအစဉ် သိမ်းရန်",
+      "years": "နှစ်"
     },
     "compoundInterest": {
-      "annualRate": "Annual Interest Rate (%)",
-      "annualRateHelp": "Savings: 4-5%, Bonds: 5-6%, Stocks: 7-10%",
-      "assumptionCompounding": "Compounding",
-      "assumptionReinvest": "All interest reinvested",
-      "assumptionTiming": "Contributions at end of each period",
-      "chartTitle": "Growth Over Time",
-      "compoundingFrequency": "Compounding Frequency",
-      "description": "See how your money grows with the power of compound interest",
-      "effectiveRate": "Effective Annual Rate",
-      "finalBalance": "Final Balance",
-      "formulaExplanation": "FV = Future Value, PV = Present Value, r = annual rate, n = compounds per year, t = years, PMT = periodic payment",
+      "annualRate": "နှစ်စဉ် အတိုးနှုန်း (%)",
+      "annualRateHelp": "စုဆောင်းရေး: 4-5%, ငွေချေးစာချုပ်: 5-6%, ရှယ်ယာ: 7-10%",
+      "assumptionCompounding": "ပေါင်းစပ်ခြင်း",
+      "assumptionReinvest": "အတိုးအားလုံး ပြန်လည်ရင်းနှီးမြုပ်နှံ",
+      "assumptionTiming": "ကာလပိုင်းတစ်ခုစီ အဆုံးတွင် ထည့်ဝင်မှု",
+      "chartTitle": "အချိန်နှင့်အမျှ တိုးတက်မှု",
+      "compoundingFrequency": "ပေါင်းစပ်မှု အကြိမ်ရေ",
+      "description": "ပေါင်းစပ်အတိုး၏ စွမ်းအားဖြင့် သင့်ငွေ တိုးပုံကို ကြည့်ပါ",
+      "effectiveRate": "ထိရောက်သော နှစ်စဉ် နှုန်း",
+      "finalBalance": "နောက်ဆုံး လက်ကျန်",
+      "formulaExplanation": "FV = အနာဂတ်တန်ဖိုး, PV = ပစ္စုပ္ပန်တန်ဖိုး, r = နှစ်စဉ်နှုန်း, n = နှစ်စဉ်ပေါင်းစပ်မှု, t = နှစ်, PMT = ကာလပိုင်းပေးချေမှု",
       "formulaText": "FV = PV(1+r/n)^(nt) + PMT[((1+r/n)^(nt)-1)/(r/n)]",
       "frequency": {
-        "annually": "Annually (1/yr)",
-        "daily": "Daily (365/yr)",
-        "monthly": "Monthly (12/yr)",
-        "quarterly": "Quarterly (4/yr)",
-        "semiannually": "Semi-annually (2/yr)",
-        "weekly": "Weekly (52/yr)"
+        "annually": "နှစ်စဉ် (1/နှစ်)",
+        "daily": "နေ့စဉ် (365/နှစ်)",
+        "monthly": "လစဉ် (12/နှစ်)",
+        "quarterly": "သုံးလတစ်ကြိမ် (4/နှစ်)",
+        "semiannually": "ခြောက်လတစ်ကြိမ် (2/နှစ်)",
+        "weekly": "အပတ်စဉ် (52/နှစ်)"
       },
-      "initialDeposit": "Initial Deposit",
-      "inputTitle": "Investment Details",
-      "interestEarned": "Interest Earned",
-      "monthlyContribution": "Monthly Contribution",
-      "resultTitle": "Your Investment Growth",
-      "subtitle": "Watch your money grow over time",
-      "title": "Compound Interest Calculator",
-      "totalContributions": "Total Contributions",
-      "years": "Investment Period (Years)"
+      "initialDeposit": "ကနဦး အပ်ငွေ",
+      "inputTitle": "ရင်းနှီးမြုပ်နှံမှု အသေးစိတ်",
+      "interestEarned": "ရရှိသော အတိုး",
+      "monthlyContribution": "လစဉ် ထည့်ဝင်မှု",
+      "resultTitle": "သင့်ရင်းနှီးမြုပ်နှံမှု တိုးတက်မှု",
+      "subtitle": "သင့်ငွေ တိုးပုံကို စောင့်ကြည့်ပါ",
+      "title": "ပေါင်းစပ်အတိုး တွက်ချက်စက်",
+      "totalContributions": "ထည့်ဝင်မှု စုစုပေါင်း",
+      "years": "ရင်းနှီးမြုပ်နှံမှု ကာလ (နှစ်)"
     },
     "debtPayoff": {
-      "addDebt": "Add Debt",
+      "addDebt": "အကြွေး ထည့်ရန်",
       "apr": "APR (%)",
-      "avalanche": "Avalanche Strategy",
-      "avalancheDescription": "Pay highest interest first to save the most money",
-      "balance": "Balance",
-      "debtName": "Name",
-      "debtNamePlaceholder": "Debt {number}",
-      "description": "Compare snowball vs avalanche strategies to pay off debt faster",
-      "extraMonthlyPayment": "Extra Monthly Payment",
-      "extraMonthlyPaymentHelp": "Additional amount you can pay beyond minimums each month",
-      "minimumPayment": "Min Payment",
-      "month": "Month",
-      "morePsychological": "Motivational wins",
-      "payment": "Payment",
-      "paymentSchedule": "Payment Schedule",
-      "payoffDate": "Payoff Time",
-      "recommended": "Recommended",
-      "remaining": "Remaining",
-      "removeDebt": "Remove debt",
-      "savingsDescription": "You'll save {amount} in interest and be debt-free {months} months sooner with the avalanche method",
-      "savingsTitle": "Interest Savings with Avalanche",
-      "snowball": "Snowball Strategy",
-      "snowballDescription": "Pay smallest balance first for quick wins and motivation",
-      "subtitle": "Find the fastest path to debt freedom",
-      "title": "Debt Payoff Calculator",
-      "totalInterest": "Total Interest",
-      "yourDebts": "Your Debts"
+      "avalanche": "Avalanche နည်းဗျူဟာ",
+      "avalancheDescription": "အများဆုံးငွေ ချွေတာရန် အမြင့်ဆုံးအတိုးကို ဦးစွာပေးပါ",
+      "balance": "လက်ကျန်",
+      "debtName": "အမည်",
+      "debtNamePlaceholder": "အကြွေး {number}",
+      "description": "အကြွေး ပိုမြန်စွာ ပေးဆပ်ရန် snowball နှင့် avalanche နည်းဗျူဟာများ နှိုင်းယှဉ်ပါ",
+      "extraMonthlyPayment": "အပို လစဉ် ပေးချေမှု",
+      "extraMonthlyPaymentHelp": "လစဉ် အနိမ့်ဆုံးထက် ပိုပေးနိုင်သော ပမာဏ",
+      "minimumPayment": "အနိမ့်ဆုံး ပေးချေမှု",
+      "month": "လ",
+      "morePsychological": "ဂုဏ်ယူမှု အောင်မြင်ချက်များ",
+      "payment": "ပေးချေမှု",
+      "paymentSchedule": "ပေးချေမှု အချိန်ဇယား",
+      "payoffDate": "ပေးဆပ်ချိန်",
+      "recommended": "အကြံပြု",
+      "remaining": "ကျန်ရှိ",
+      "removeDebt": "အကြွေး ဖယ်ရှားရန်",
+      "savingsDescription": "Avalanche နည်းဖြင့် အတိုး {amount} ချွေတာပြီး {months} လ စောမည်",
+      "savingsTitle": "Avalanche ဖြင့် အတိုးချွေတာမှု",
+      "snowball": "Snowball နည်းဗျူဟာ",
+      "snowballDescription": "လျင်မြန်သော အောင်မြင်မှုနှင့် ဂုဏ်ယူမှုအတွက် အငယ်ဆုံးလက်ကျန်ကို ဦးစွာပေးပါ",
+      "subtitle": "အကြွေးကင်းမှုသို့ အမြန်ဆုံးလမ်း ရှာပါ",
+      "title": "အကြွေး ပေးဆပ်မှု တွက်ချက်စက်",
+      "totalInterest": "စုစုပေါင်း အတိုး",
+      "yourDebts": "သင့်အကြွေးများ"
     },
     "emergencyFund": {
-      "amountNeeded": "You need {amount} more to reach your goal",
-      "completionDate": "Estimated Completion",
-      "currentSavings": "Current Emergency Savings",
-      "description": "Calculate how much you need for financial security and track your progress",
-      "goalMet": "Goal Achieved!",
-      "goalProgress": "Building Your Safety Net",
-      "inputTitle": "Your Information",
-      "monthlyContribution": "Monthly Savings Amount",
-      "monthlyContributionHelp": "How much you can save towards your emergency fund each month",
-      "monthlyExpenses": "Monthly Expenses",
-      "monthlyExpensesHelp": "Include rent, utilities, groceries, insurance, and other essential costs",
-      "monthsToGoal": "Months to Reach Goal",
-      "progress": "Current Progress",
-      "resultsTitle": "Your Results",
-      "subtitle": "Build your financial safety net",
-      "targetAmount": "Target Emergency Fund",
-      "targetMonths": "Target Months of Coverage",
-      "targetMonthsHelp": "Experts recommend {months} months for most situations",
-      "tip1": "Keep your emergency fund in a high-yield savings account for easy access and better returns",
-      "tip2": "Automate your contributions by setting up automatic transfers on payday",
-      "tip3": "Start small if needed - even saving a little consistently adds up over time",
-      "tipsTitle": "Tips for Building Your Emergency Fund",
-      "title": "Emergency Fund Calculator"
+      "amountNeeded": "ပန်းတိုင်ရောက်ရန် {amount} ပိုလိုအပ်သည်",
+      "completionDate": "ခန့်မှန်း ပြီးဆုံးချိန်",
+      "currentSavings": "လက်ရှိ အရေးပေါ် စုဆောင်းမှု",
+      "description": "ငွေကြေးလုံခြုံရေးအတွက် လိုအပ်ပမာဏ တွက်ချက်ပြီး တိုးတက်မှု ခြေရာခံပါ",
+      "goalMet": "ပန်းတိုင် ရောက်ပြီ!",
+      "goalProgress": "အကာအကွယ်ကွန်ရက် တည်ဆောက်နေသည်",
+      "inputTitle": "သင့်အချက်အလက်",
+      "monthlyContribution": "လစဉ် စုဆောင်းပမာဏ",
+      "monthlyContributionHelp": "အရေးပေါ် ရန်ပုံငွေအတွက် လစဉ် စုဆောင်းနိုင်ပမာဏ",
+      "monthlyExpenses": "လစဉ် ကုန်ကျစရိတ်",
+      "monthlyExpensesHelp": "အိမ်ငှားခ၊ ဓာတ်အား၊ စျေးဝယ်၊ အာမခံနှင့် အခြား မရှိမဖြစ် ကုန်ကျစရိတ်များ ထည့်ပါ",
+      "monthsToGoal": "ပန်းတိုင်ရောက်ရန် လများ",
+      "progress": "လက်ရှိ တိုးတက်မှု",
+      "resultsTitle": "သင့်ရလဒ်များ",
+      "subtitle": "သင့်ငွေကြေး အကာအကွယ်ကွန်ရက် တည်ဆောက်ပါ",
+      "targetAmount": "ပစ်မှတ် အရေးပေါ် ရန်ပုံငွေ",
+      "targetMonths": "ပစ်မှတ် အကာအကွယ် လများ",
+      "targetMonthsHelp": "အခြေအနေအများစုအတွက် ကျွမ်းကျင်သူများ {months} လ အကြံပြုသည်",
+      "tip1": "လွယ်ကူသောဝင်ရောက်ခွင့်နှင့် ပိုကောင်းသောအပြန်အတွက် အတိုးမြင့် စုဆောင်းရေး အကောင့်တွင် ထားပါ",
+      "tip2": "လစာထုတ်ရက်တွင် အလိုအလျောက် လွှဲပြောင်းမှု သတ်မှတ်ခြင်းဖြင့် စုဆောင်းမှုကို အလိုအလျောက်လုပ်ပါ",
+      "tip3": "လိုအပ်ပါက အနည်းငယ်မှ စပါ - ဆက်တိုက် အနည်းငယ်စီ စုဆောင်းခြင်းပင် အချိန်ကြာလာသည်နှင့် စုပုံလာသည်",
+      "tipsTitle": "အရေးပေါ် ရန်ပုံငွေ တည်ဆောက်ခြင်း အကြံပြုချက်များ",
+      "title": "အရေးပေါ် ရန်ပုံငွေ တွက်ချက်စက်"
     },
     "hub": {
-      "accuracyDescription": "Using financial-grade arithmetic to avoid floating-point errors in all calculations.",
-      "accuracyTitle": "Precise Calculations",
-      "infoTitle": "About These Calculators",
-      "privacyDescription": "All calculations happen on your device. Your financial data never leaves your browser.",
-      "privacyTitle": "100% Private",
-      "sectionCore": "Core Calculators",
-      "sectionPlanning": "Financial Planning",
-      "sectionTools": "Tools & Links",
-      "subtitle": "Tools to help you plan and analyze your finances",
-      "title": "Financial Calculators"
+      "accuracyDescription": "တွက်ချက်မှုအားလုံးတွင် floating-point အမှားများ ရှောင်ရှားရန် ငွေကြေးအဆင့် သင်္ချာကို အသုံးပြုသည်။",
+      "accuracyTitle": "တိကျသော တွက်ချက်မှုများ",
+      "infoTitle": "ဤတွက်ချက်စက်များအကြောင်း",
+      "privacyDescription": "တွက်ချက်မှုအားလုံး သင့်စက်ပစ္စည်းတွင် ဖြစ်ပွားသည်။ သင့်ငွေကြေးဒေတာ သင့်ဘရောက်ဆာမှ မထွက်ပါ။",
+      "privacyTitle": "၁၀၀% လျှို့ဝှက်",
+      "sectionCore": "အဓိက တွက်ချက်စက်များ",
+      "sectionPlanning": "ငွေကြေး စီစဉ်ခြင်း",
+      "sectionTools": "ကိရိယာများ နှင့် လင့်ခ်များ",
+      "subtitle": "သင့်ငွေကြေးကို စီစဉ်၍ ခွဲခြမ်းစိတ်ဖြာရန် ကိရိယာများ",
+      "title": "ငွေကြေး တွက်ချက်စက်များ"
     },
     "inflation": {
-      "assumptionCompound": "Inflation compounds annually",
-      "assumptionConstant": "Constant annual inflation rate",
-      "chartNominal": "Nominal Value (unchanged)",
-      "chartReal": "Real Purchasing Power",
-      "chartTitle": "Purchasing Power Over Time",
-      "currentAmount": "Current Amount",
-      "description": "See how inflation erodes your purchasing power over time",
-      "formulaExplanation": "Shows how much your money will actually buy in the future, adjusted for rising prices",
+      "assumptionCompound": "ငွေကြေးဖောင်းပွမှု နှစ်စဉ် ပေါင်းစပ်သည်",
+      "assumptionConstant": "ပုံသေ နှစ်စဉ် ငွေကြေးဖောင်းပွမှုနှုန်း",
+      "chartNominal": "ပုံသေတန်ဖိုး (မပြောင်းလဲ)",
+      "chartReal": "အမှန်တကယ် ဝယ်ယူနိုင်စွမ်း",
+      "chartTitle": "အချိန်နှင့်အမျှ ဝယ်ယူနိုင်စွမ်း",
+      "currentAmount": "လက်ရှိ ပမာဏ",
+      "description": "ငွေကြေးဖောင်းပွမှုသည် သင့်ဝယ်ယူနိုင်စွမ်းကို အချိန်ကြာလာသည်နှင့် ဘယ်လို ပျက်စီးစေသည်ကို ကြည့်ပါ",
+      "formulaExplanation": "ဈေးနှုန်းမြင့်တက်မှုအတွက် ချိန်ညှိပြီး အနာဂတ်တွင် သင့်ငွေ ဘယ်လောက် ဝယ်နိုင်ကို ပြသသည်",
       "formulaText": "Real Value = Nominal Value / (1 + inflation)^years",
-      "heroDescription": "Your {amount} will have the buying power of {futureAmount} in {years} years",
-      "heroTitle": "Purchasing Power Impact",
-      "inflationRate": "Annual Inflation Rate (%)",
-      "inflationRateHelp": "US historical average: ~3%",
-      "inputTitle": "Calculate Impact",
-      "powerLost": "Purchasing Power Lost",
-      "powerRemaining": "Purchasing Power Remaining",
-      "presetAverage": "Average (3%)",
-      "presetHigh": "High (5%)",
-      "presetLow": "Low (2%)",
-      "presets": "Presets",
-      "purchasingPower": "Future Purchasing Power",
-      "resultTitle": "Detailed Breakdown",
-      "subtitle": "Understand the real cost of inflation",
-      "tableLost": "Value Lost",
-      "tableNominal": "Nominal Value",
-      "tableReal": "Real Value",
-      "tableTitle": "Year-by-Year Breakdown",
-      "tableYear": "Year",
-      "timeHorizon": "Time Horizon (Years)",
-      "title": "Inflation Impact Calculator"
+      "heroDescription": "သင့် {amount} သည် {years} နှစ်အတွင်း {futureAmount} ၏ ဝယ်ယူနိုင်စွမ်းသာ ရှိမည်",
+      "heroTitle": "ဝယ်ယူနိုင်စွမ်း သက်ရောက်မှု",
+      "inflationRate": "နှစ်စဉ် ငွေကြေးဖောင်းပွမှုနှုန်း (%)",
+      "inflationRateHelp": "US သမိုင်းဝင် ပျမ်းမျှ: ~3%",
+      "inputTitle": "သက်ရောက်မှု တွက်ချက်ရန်",
+      "powerLost": "ဆုံးရှုံးသော ဝယ်ယူနိုင်စွမ်း",
+      "powerRemaining": "ကျန်ရှိသော ဝယ်ယူနိုင်စွမ်း",
+      "presetAverage": "ပျမ်းမျှ (3%)",
+      "presetHigh": "မြင့် (5%)",
+      "presetLow": "နိမ့် (2%)",
+      "presets": "ကြိုတင်သတ်မှတ်ချက်များ",
+      "purchasingPower": "အနာဂတ် ဝယ်ယူနိုင်စွမ်း",
+      "resultTitle": "အသေးစိတ် ခွဲခြမ်းမှု",
+      "subtitle": "ငွေကြေးဖောင်းပွမှု၏ အမှန်တကယ် ကုန်ကျစရိတ်ကို နားလည်ပါ",
+      "tableLost": "ဆုံးရှုံးသော တန်ဖိုး",
+      "tableNominal": "ပုံသေ တန်ဖိုး",
+      "tableReal": "အမှန်တကယ် တန်ဖိုး",
+      "tableTitle": "နှစ်အလိုက် ခွဲခြမ်းမှု",
+      "tableYear": "နှစ်",
+      "timeHorizon": "အချိန် ကာလ (နှစ်)",
+      "title": "ငွေကြေးဖောင်းပွမှု သက်ရောက်မှု တွက်ချက်စက်"
     },
     "loanTracker": {
-      "description": "Track all your loans, payments, and payoff progress",
-      "title": "Loan Tracker"
+      "description": "သင့်ချေးငွေအားလုံး၊ ပေးချေမှုများနှင့် ပေးဆပ်မှုတိုးတက်မှု ခြေရာခံပါ",
+      "title": "ချေးငွေ ခြေရာခံစက်"
     },
     "monteCarlo": {
-      "assumptionInflation": "Inflation adjustment",
-      "assumptionInflationApplied": "Applied to withdrawals (compounding)",
-      "assumptionInflationNone": "Not applied in accumulation mode",
-      "assumptionPRNG": "Random number generator",
+      "assumptionInflation": "ငွေကြေးဖောင်းပွမှု ချိန်ညှိမှု",
+      "assumptionInflationApplied": "ထုတ်ယူမှုများတွင် ကျင့်သုံး (ပေါင်းစပ်)",
+      "assumptionInflationNone": "စုဆောင်းမှု မုဒ်တွင် မကျင့်သုံး",
+      "assumptionPRNG": "ကျပန်း နံပါတ် ထုတ်လုပ်စက်",
       "assumptionPRNGValue": "Seeded PRNG (Mulberry32) — deterministic",
-      "assumptionReturns": "Return distribution",
+      "assumptionReturns": "အပြန် ဖြန့်ဖြူးမှု",
       "assumptionReturnsValue": "Normal distribution (Box-Muller)",
-      "assumptionVolatility": "Volatility (std dev)",
-      "badgeCaution": "Needs Review",
-      "badgeRisk": "High Risk",
-      "badgeStrong": "Strong Plan",
-      "chartTitle": "Percentile Bands Over Time",
-      "description": "Stress-test your financial plan with probabilistic modeling",
-      "expectedReturn": "Expected Annual Return (%)",
-      "expectedReturnHelp": "Stocks: 7-10%, Bonds: 3-5%, Balanced: 5-7%",
-      "formulaExplanation": "Each month draws a random return from a normal distribution. Contributions are added, inflation-adjusted withdrawals subtracted. Repeated across N simulations.",
+      "assumptionVolatility": "မတည်ငြိမ်မှု (စံသွေဖယ်မှု)",
+      "badgeCaution": "ပြန်စစ်ရန် လိုအပ်",
+      "badgeRisk": "အန္တရာယ် မြင့်",
+      "badgeStrong": "ခိုင်မာသော အစီအစဉ်",
+      "chartTitle": "အချိန်နှင့်အမျှ ရာခိုင်နှုန်း အပိုင်းအခြားများ",
+      "description": "ဖြစ်နိုင်ခြေ မော်ဒယ်လ်ဖြင့် သင့်ငွေကြေး အစီအစဉ်ကို စမ်းသပ်ပါ",
+      "expectedReturn": "မျှော်မှန်း နှစ်စဉ် အပြန် (%)",
+      "expectedReturnHelp": "ရှယ်ယာ: 7-10%, ငွေချေးစာချုပ်: 3-5%, ချိန်ခွင်ညီ: 5-7%",
+      "formulaExplanation": "လတိုင်း normal distribution မှ ကျပန်း အပြန် ဆွဲယူသည်။ ထည့်ဝင်မှုများ ပေါင်းပြီး ငွေကြေးဖောင်းပွမှုချိန်ညှိ ထုတ်ယူမှုများ နုတ်သည်။ N simulation တွင် ထပ်ခါထပ်ခါ လုပ်ဆောင်သည်။",
       "formulaText": "Monthly return = Normal(μ/12, σ/√12); Balance_t = Balance_(t-1) × (1 + r_t) + C - W",
-      "heroTitle": "Simulation Results",
-      "inflationRate": "Inflation Rate (%)",
-      "initialBalance": "Starting Portfolio Balance",
-      "inputTitle": "Simulation Parameters",
-      "medianFinal": "Median Final Balance",
-      "modeAccumulation": "Saving (Accumulation)",
-      "modeWithdrawal": "Spending (Withdrawal)",
-      "monthlyContribution": "Monthly Contribution",
-      "monthlyWithdrawal": "Monthly Withdrawal",
-      "p10Final": "Worst Case (10th %ile)",
-      "p90Final": "Best Case (90th %ile)",
-      "resultsTitle": "Outcome Distribution",
-      "scenarioMode": "Scenario Mode",
-      "simulations": "Number of Simulations",
-      "simulationsHelp": "More simulations = more accurate percentiles, but slower",
-      "subtitle": "Run thousands of market simulations to see how your plan holds up",
-      "successRateDescription": "{total} simulations run, {failures} ran out of money",
-      "successRateLabel": "Success Rate",
-      "timeHorizon": "Time Horizon (Years)",
+      "heroTitle": "Simulation ရလဒ်များ",
+      "inflationRate": "ငွေကြေးဖောင်းပွမှုနှုန်း (%)",
+      "initialBalance": "စတင် ရင်းနှီးမြုပ်နှံမှု လက်ကျန်",
+      "inputTitle": "Simulation ပါရာမီတာများ",
+      "medianFinal": "အလယ်အလတ် နောက်ဆုံး လက်ကျန်",
+      "modeAccumulation": "စုဆောင်းခြင်း",
+      "modeWithdrawal": "သုံးစွဲခြင်း",
+      "monthlyContribution": "လစဉ် ထည့်ဝင်မှု",
+      "monthlyWithdrawal": "လစဉ် ထုတ်ယူမှု",
+      "p10Final": "အဆိုးဆုံး (10th %ile)",
+      "p90Final": "အကောင်းဆုံး (90th %ile)",
+      "resultsTitle": "ရလဒ် ဖြန့်ဖြူးမှု",
+      "scenarioMode": "မြင်ကွင်း မုဒ်",
+      "simulations": "Simulation အရေအတွက်",
+      "simulationsHelp": "Simulation ပိုများ = ရာခိုင်နှုန်း ပိုတိကျ၊ သို့သော် ပိုနှေး",
+      "subtitle": "သင့်အစီအစဉ် ခံနိုင်မှုကြည့်ရန် ဈေးကွက် simulation ထောင်ပေါင်းများစွာ လုပ်ပါ",
+      "successRateDescription": "Simulation {total} ခု လုပ်ပြီး၊ {failures} ခု ငွေကုန်",
+      "successRateLabel": "အောင်မြင်မှု နှုန်း",
+      "timeHorizon": "အချိန် ကာလ (နှစ်)",
       "title": "Monte Carlo Simulator",
-      "totalSimulations": "Simulations Run",
-      "volatility": "Annual Volatility / Std Dev (%)",
-      "volatilityHelp": "S&P 500 historical: ~15%. Higher = wider outcome range."
+      "totalSimulations": "လုပ်ဆောင်ပြီး Simulation များ",
+      "volatility": "နှစ်စဉ် မတည်ငြိမ်မှု / စံသွေဖယ်မှု (%)",
+      "volatilityHelp": "S&P 500 သမိုင်းဝင်: ~15%။ မြင့်ပါက = ရလဒ် အကွာအဝေး ပိုကျယ်"
     },
     "mortgage": {
-      "affordabilityTitle": "Your Affordability",
-      "annualIncome": "Annual Gross Income",
-      "annualRate": "Interest Rate (%)",
-      "annualRateHelp": "Current average: 6-7% for 30-year fixed",
-      "assumptionFixedRate": "Fixed interest rate for full term",
-      "assumptionNoEscrow": "Does not include taxes, insurance, or HOA",
-      "description": "Calculate payments or find out how much home you can afford",
-      "downPayment": "Down Payment",
-      "downPaymentAmount": "Down Payment",
-      "downPaymentPercent": "Down Payment (%)",
-      "dtiRatio": "Debt-to-Income Ratio",
-      "extraPayment": "Extra Monthly Payment",
-      "extraPaymentHelp": "Additional payment applied to principal each month",
-      "formulaExplanation": "M = Monthly payment, P = Principal, i = Monthly interest rate, n = Total number of payments",
+      "affordabilityTitle": "သင့် ဝယ်နိုင်စွမ်း",
+      "annualIncome": "နှစ်စဉ် အကြမ်း ဝင်ငွေ",
+      "annualRate": "အတိုးနှုန်း (%)",
+      "annualRateHelp": "လက်ရှိ ပျမ်းမျှ: ၃၀ နှစ် ပုံသေအတွက် 6-7%",
+      "assumptionFixedRate": "သက်တမ်းတစ်ခုလုံး ပုံသေ အတိုးနှုန်း",
+      "assumptionNoEscrow": "အခွန်၊ အာမခံ သို့မဟုတ် HOA မပါဝင်ပါ",
+      "description": "ပေးချေမှု တွက်ချက်ပါ သို့မဟုတ် ဝယ်နိုင်သော အိမ်ပမာဏ ရှာပါ",
+      "downPayment": "စရံငွေ",
+      "downPaymentAmount": "စရံငွေ",
+      "downPaymentPercent": "စရံငွေ (%)",
+      "dtiRatio": "အကြွေးနှင့်ဝင်ငွေ အချိုး",
+      "extraPayment": "အပို လစဉ် ပေးချေမှု",
+      "extraPaymentHelp": "လစဉ် ပင်ရင်းသို့ ထည့်ပေးသော အပိုပေးချေမှု",
+      "formulaExplanation": "M = လစဉ်ပေးချေမှု, P = ပင်ရင်း, i = လစဉ် အတိုးနှုန်း, n = ပေးချေမှု အကြိမ်ရေ",
       "formulaText": "M = P[i(1+i)^n] / [(1+i)^n - 1]",
-      "hideFullSchedule": "Hide Full Schedule",
-      "homePrice": "Home Price",
-      "inputTitle": "Loan Details",
-      "loanAmount": "Loan Amount",
-      "maxDTI": "Maximum DTI Ratio (%)",
-      "maxHomePrice": "Maximum Home Price",
-      "maxLoanAmount": "Maximum Loan Amount",
-      "modeAffordability": "What Can I Afford?",
-      "modePayment": "Calculate Payment",
-      "monthlyDebts": "Monthly Debt Payments",
-      "monthlyDebtsHelp": "Car loans, student loans, credit cards, etc.",
-      "monthlyPayment": "Monthly Payment",
-      "payoffMonths": "Payoff Time",
-      "resultTitle": "Payment Summary",
-      "scheduleBalance": "Balance",
-      "scheduleInterest": "Interest",
-      "scheduleMonth": "Month",
-      "schedulePayment": "Payment",
-      "schedulePrincipal": "Principal",
-      "scheduleTitle": "Amortization Schedule",
-      "showFullSchedule": "Show Full Schedule",
-      "subtitle": "Plan your home purchase with confidence",
-      "term": "Loan Term",
-      "term15": "15 Years",
-      "term30": "30 Years",
-      "title": "Mortgage Calculator",
-      "totalCost": "Total Cost of Loan",
-      "totalInterest": "Total Interest Paid"
+      "hideFullSchedule": "အပြည့် အချိန်ဇယား ဖျောက်ရန်",
+      "homePrice": "အိမ်ဈေးနှုန်း",
+      "inputTitle": "ချေးငွေ အသေးစိတ်",
+      "loanAmount": "ချေးငွေ ပမာဏ",
+      "maxDTI": "အများဆုံး DTI အချိုး (%)",
+      "maxHomePrice": "အများဆုံး အိမ်ဈေးနှုန်း",
+      "maxLoanAmount": "အများဆုံး ချေးငွေ ပမာဏ",
+      "modeAffordability": "ဘယ်လောက် ဝယ်နိုင်သနည်း?",
+      "modePayment": "ပေးချေမှု တွက်ချက်ရန်",
+      "monthlyDebts": "လစဉ် အကြွေး ပေးချေမှုများ",
+      "monthlyDebtsHelp": "ကား ချေးငွေ၊ ကျောင်းသား ချေးငွေ၊ ခရက်ဒစ်ကတ် စသည်",
+      "monthlyPayment": "လစဉ် ပေးချေမှု",
+      "payoffMonths": "ပေးဆပ်ချိန်",
+      "resultTitle": "ပေးချေမှု အကျဉ်းချုပ်",
+      "scheduleBalance": "လက်ကျန်",
+      "scheduleInterest": "အတိုး",
+      "scheduleMonth": "လ",
+      "schedulePayment": "ပေးချေမှု",
+      "schedulePrincipal": "ပင်ရင်း",
+      "scheduleTitle": "ပမာဏလျှော့ချ အချိန်ဇယား",
+      "showFullSchedule": "အပြည့် အချိန်ဇယား ပြရန်",
+      "subtitle": "ယုံကြည်မှုဖြင့် အိမ်ဝယ်ခြင်း စီစဉ်ပါ",
+      "term": "ချေးငွေ သက်တမ်း",
+      "term15": "၁၅ နှစ်",
+      "term30": "၃၀ နှစ်",
+      "title": "အိမ်ချေးငွေ တွက်ချက်စက်",
+      "totalCost": "ချေးငွေ စုစုပေါင်း ကုန်ကျစရိတ်",
+      "totalInterest": "ပေးရသော စုစုပေါင်း အတိုး"
     },
     "netWorth": {
-      "description": "View your complete financial picture with assets and liabilities",
-      "title": "Net Worth"
+      "description": "ပိုင်ဆိုင်မှုများနှင့် တာဝန်များဖြင့် ပြည့်စုံသော ငွေကြေးရုပ်ပုံ ကြည့်ပါ",
+      "title": "အသားတင်တန်ဖိုး"
     },
     "property": {
-      "description": "Track property values, vehicles, and other assets",
-      "title": "Property & Assets"
+      "description": "ပစ္စည်းတန်ဖိုး၊ ယာဉ်များနှင့် အခြား ပိုင်ဆိုင်မှုများ ခြေရာခံပါ",
+      "title": "ပစ္စည်း နှင့် ပိုင်ဆိုင်မှုများ"
     },
     "retirement": {
-      "advancedTitle": "Advanced Settings",
-      "assumptionInflation": "Inflation rate",
-      "assumptionPostReturn": "Post-retirement return",
-      "assumptionPreReturn": "Pre-retirement return",
-      "assumptionSS": "Social Security included from age {age}",
-      "balanceAtRetirement": "Balance at Retirement",
-      "chartAccumulation": "Accumulation Phase",
-      "chartTitle": "Portfolio Balance Over Time",
-      "chartWithdrawal": "Withdrawal Phase",
-      "currentAge": "Current Age",
-      "currentSavings": "Current Retirement Savings",
-      "description": "Plan your retirement with a comprehensive savings and withdrawal projection",
-      "desiredIncome": "Desired Monthly Income (today's dollars)",
-      "desiredIncomeHelp": "How much you want to spend monthly in retirement, in today's dollars",
-      "formulaExplanation": "Two-phase simulation: grow savings until retirement, then draw down with inflation-adjusted withdrawals",
+      "advancedTitle": "အဆင့်မြင့် ဆက်တင်များ",
+      "assumptionInflation": "ငွေကြေးဖောင်းပွမှုနှုန်း",
+      "assumptionPostReturn": "အငြိမ်းစားယူပြီး အပြန်",
+      "assumptionPreReturn": "အငြိမ်းစားမယူမီ အပြန်",
+      "assumptionSS": "အသက် {age} မှ လူမှုဖူလုံရေး ထည့်သွင်းပြီး",
+      "balanceAtRetirement": "အငြိမ်းစားယူချိန် လက်ကျန်",
+      "chartAccumulation": "စုဆောင်းမှု အဆင့်",
+      "chartTitle": "အချိန်နှင့်အမျှ ရင်းနှီးမြုပ်နှံမှု လက်ကျန်",
+      "chartWithdrawal": "ထုတ်ယူမှု အဆင့်",
+      "currentAge": "လက်ရှိ အသက်",
+      "currentSavings": "လက်ရှိ အငြိမ်းစား စုဆောင်းမှု",
+      "description": "ပြည့်စုံသော စုဆောင်းမှုနှင့် ထုတ်ယူမှု ခန့်မှန်းချက်ဖြင့် အငြိမ်းစားယူခြင်း စီစဉ်ပါ",
+      "desiredIncome": "လိုချင်သော လစဉ် ဝင်ငွေ (ယနေ့ဒေါ်လာ)",
+      "desiredIncomeHelp": "အငြိမ်းစားတွင် လစဉ် သုံးစွဲလိုသော ပမာဏ၊ ယနေ့ ဒေါ်လာဖြင့်",
+      "formulaExplanation": "အဆင့်နှစ်ခု simulation: အငြိမ်းစားမယူမီ စုဆောင်းမှုတိုးစေ၊ ပြီးနောက် ငွေကြေးဖောင်းပွမှု ချိန်ညှိထားသော ထုတ်ယူမှုများဖြင့် လျော့ကျစေ",
       "formulaText": "Accumulation: FV = PV(1+r)^n + PMT[((1+r)^n-1)/r] | Withdrawal: Balance_n = Balance_(n-1)(1+r) - W",
-      "heroInsufficient": "Your savings may run out at age {age}",
-      "heroInsufficientBadge": "Action Needed",
-      "heroNeutralBadge": "Close",
-      "heroSufficient": "Your savings will last {years} years in retirement",
-      "heroSufficientBadge": "On Track",
-      "inflationRate": "Inflation Rate (%)",
-      "inputTitle": "Your Details",
-      "lifeExpectancy": "Life Expectancy",
-      "monthlyContribution": "Monthly Contribution",
-      "monthlyWithdrawal": "Monthly Withdrawal (at retirement)",
-      "postRetirementReturn": "Post-Retirement Return (%)",
-      "postRetirementReturnHelp": "Expected annual return while withdrawing (conservative ~4-5%)",
-      "preRetirementReturn": "Pre-Retirement Return (%)",
-      "preRetirementReturnHelp": "Expected annual return while saving (stocks avg ~7-10%)",
-      "resultTitle": "Retirement Projection",
-      "retirementAge": "Retirement Age",
-      "shortfall": "Shortfall at Life Expectancy",
-      "socialSecurity": "Social Security / Pension (monthly)",
-      "socialSecurityAge": "Social Security Start Age",
-      "subtitle": "Secure your financial future",
-      "surplus": "Surplus at Life Expectancy",
-      "title": "Retirement Planner",
-      "yearsMoneyLasts": "Years Money Lasts"
+      "heroInsufficient": "သင့်စုဆောင်းမှု အသက် {age} တွင် ကုန်နိုင်သည်",
+      "heroInsufficientBadge": "လုပ်ဆောင်ချက် လိုအပ်",
+      "heroNeutralBadge": "နီးကပ်",
+      "heroSufficient": "အငြိမ်းစားတွင် သင့်စုဆောင်းမှု {years} နှစ် ကြာမည်",
+      "heroSufficientBadge": "လမ်းကြောင်းမှန်",
+      "inflationRate": "ငွေကြေးဖောင်းပွမှုနှုန်း (%)",
+      "inputTitle": "သင့်အသေးစိတ်",
+      "lifeExpectancy": "သက်တမ်းမှန်းချက်",
+      "monthlyContribution": "လစဉ် ထည့်ဝင်မှု",
+      "monthlyWithdrawal": "လစဉ် ထုတ်ယူမှု (အငြိမ်းစားယူချိန်)",
+      "postRetirementReturn": "အငြိမ်းစားယူပြီး အပြန် (%)",
+      "postRetirementReturnHelp": "ထုတ်ယူချိန် မျှော်မှန်း နှစ်စဉ် အပြန် (သိမ်မွေ့ ~4-5%)",
+      "preRetirementReturn": "အငြိမ်းစားမယူမီ အပြန် (%)",
+      "preRetirementReturnHelp": "စုဆောင်းချိန် မျှော်မှန်း နှစ်စဉ် အပြန် (ရှယ်ယာ ပျမ်းမျှ ~7-10%)",
+      "resultTitle": "အငြိမ်းစား ခန့်မှန်းချက်",
+      "retirementAge": "အငြိမ်းစားယူမည့် အသက်",
+      "shortfall": "သက်တမ်းမှန်းချက်တွင် လိုငွေ",
+      "socialSecurity": "လူမှုဖူလုံရေး / ပင်စင် (လစဉ်)",
+      "socialSecurityAge": "လူမှုဖူလုံရေး စတင်အသက်",
+      "subtitle": "သင့်ငွေကြေး အနာဂတ်ကို လုံခြုံစေပါ",
+      "surplus": "သက်တမ်းမှန်းချက်တွင် ပိုငွေ",
+      "title": "အငြိမ်းစား စီစဉ်စက်",
+      "yearsMoneyLasts": "ငွေ ကြာချိန် (နှစ်)"
     },
     "savingsGoal": {
-      "currentSavings": "Current Savings",
-      "description": "Plan your savings with compound interest projections",
-      "expectedReturn": "Expected Annual Return (%)",
-      "expectedReturnHelp": "High-yield savings: 4-5%, Investments: 6-8%",
-      "goalAmount": "Goal Amount",
-      "inMonths": "In {months} months",
-      "inputTitle": "Goal Details",
-      "interestEarned": "Interest Earned",
-      "modeHowMuch": "How much should I save monthly?",
-      "modeWhen": "When will I reach my goal?",
-      "monthlyContribution": "Monthly Contribution",
-      "perMonth": "per month",
-      "progress": "Current Progress",
-      "projectedAmount": "Projected Total",
-      "projectionTitle": "Savings Projection",
-      "resultHowMuchTitle": "Monthly Savings Needed",
-      "resultWhenTitle": "You'll Reach Your Goal",
-      "subtitle": "Reach your financial goals faster",
-      "targetDate": "Target Date",
-      "timelineTitle": "Growth Timeline",
-      "title": "Savings Goal Calculator",
-      "totalContributions": "Total Contributions"
+      "currentSavings": "လက်ရှိ စုဆောင်းမှု",
+      "description": "ပေါင်းစပ်အတိုးဖြင့် စုဆောင်းမှု ခန့်မှန်းချက်များ စီစဉ်ပါ",
+      "expectedReturn": "မျှော်မှန်း နှစ်စဉ် အပြန် (%)",
+      "expectedReturnHelp": "အတိုးမြင့် စုဆောင်းရေး: 4-5%, ရင်းနှီးမြုပ်နှံမှု: 6-8%",
+      "goalAmount": "ပန်းတိုင် ပမာဏ",
+      "inMonths": "{months} လအတွင်း",
+      "inputTitle": "ပန်းတိုင် အသေးစိတ်",
+      "interestEarned": "ရရှိသော အတိုး",
+      "modeHowMuch": "လစဉ် ဘယ်လောက် စုသင့်သနည်း?",
+      "modeWhen": "ပန်းတိုင်ကို ဘယ်တော့ ရောက်မည်နည်း?",
+      "monthlyContribution": "လစဉ် ထည့်ဝင်မှု",
+      "perMonth": "တစ်လလျှင်",
+      "progress": "လက်ရှိ တိုးတက်မှု",
+      "projectedAmount": "ခန့်မှန်း စုစုပေါင်း",
+      "projectionTitle": "စုဆောင်းမှု ခန့်မှန်းချက်",
+      "resultHowMuchTitle": "လစဉ် စုဆောင်းရန် လိုအပ်ပမာဏ",
+      "resultWhenTitle": "ပန်းတိုင် ရောက်မည့်အချိန်",
+      "subtitle": "ငွေကြေးပန်းတိုင်များကို ပိုမြန်စွာ ရောက်ပါ",
+      "targetDate": "ပစ်မှတ် ရက်စွဲ",
+      "timelineTitle": "တိုးတက်မှု အချိန်ဇယား",
+      "title": "စုဆောင်းမှု ပန်းတိုင် တွက်ချက်စက်",
+      "totalContributions": "ထည့်ဝင်မှု စုစုပေါင်း"
     },
     "subscriptionCost": {
-      "addSubscription": "Add Subscription",
-      "amount": "Amount",
-      "breakdown": "Essential vs Non-Essential",
-      "byCategory": "By Category",
-      "daily": "Daily",
-      "description": "Track and analyze the true cost of your subscriptions",
-      "essential": "Essential",
-      "essentialCost": "Essential",
+      "addSubscription": "စာရင်းသွင်းမှု ထည့်ရန်",
+      "amount": "ပမာဏ",
+      "breakdown": "မရှိမဖြစ် နှင့် မရှိမဖြစ်မဟုတ်",
+      "byCategory": "အမျိုးအစားအလိုက်",
+      "daily": "နေ့စဉ်",
+      "description": "သင့်စာရင်းသွင်းမှုများ၏ အမှန်တကယ် ကုန်ကျစရိတ်ကို ခြေရာခံ ခွဲခြမ်းစိတ်ဖြာပါ",
+      "essential": "မရှိမဖြစ်",
+      "essentialCost": "မရှိမဖြစ်",
       "frequency": {
-        "annual": "Annual",
-        "biweekly": "Bi-weekly",
-        "label": "Frequency",
-        "monthly": "Monthly",
-        "quarterly": "Quarterly",
-        "weekly": "Weekly"
+        "annual": "နှစ်စဉ်",
+        "biweekly": "နှစ်ပတ်တစ်ကြိမ်",
+        "label": "အကြိမ်ရေ",
+        "monthly": "လစဉ်",
+        "quarterly": "သုံးလတစ်ကြိမ်",
+        "weekly": "အပတ်စဉ်"
       },
-      "monthly": "Monthly",
-      "monthlyIncome": "Monthly Income",
-      "name": "Name",
-      "namePlaceholder": "e.g., Netflix, Spotify",
-      "nonEssentialCost": "Non-Essential",
-      "perYear": "/year",
-      "percentOfIncome": "% of Income",
-      "potentialSavings": "Potential Yearly Savings",
-      "potentialSavingsHelp": "If you cancelled all non-essential subscriptions",
-      "remove": "Remove subscription",
-      "showIncomePercent": "Show percentage of income",
-      "subtitle": "See where your recurring money goes",
-      "title": "Subscription Cost Calculator",
-      "totalCost": "Total Subscription Cost",
-      "yearly": "Yearly",
-      "yourSubscriptions": "Your Subscriptions"
+      "monthly": "လစဉ်",
+      "monthlyIncome": "လစဉ် ဝင်ငွေ",
+      "name": "အမည်",
+      "namePlaceholder": "ဥပမာ Netflix, Spotify",
+      "nonEssentialCost": "မရှိမဖြစ်မဟုတ်",
+      "perYear": "/နှစ်",
+      "percentOfIncome": "ဝင်ငွေ၏ %",
+      "potentialSavings": "ဖြစ်နိုင်သော နှစ်စဉ် စုဆောင်းမှု",
+      "potentialSavingsHelp": "မရှိမဖြစ်မဟုတ်သော စာရင်းသွင်းမှုအားလုံး ဖျက်သိမ်းပါက",
+      "remove": "စာရင်းသွင်းမှု ဖယ်ရှားရန်",
+      "showIncomePercent": "ဝင်ငွေ ရာခိုင်နှုန်း ပြရန်",
+      "subtitle": "ထပ်ခါတလဲလဲ ငွေ ဘယ်ကို သွားသည်ကို ကြည့်ပါ",
+      "title": "စာရင်းသွင်းမှု ကုန်ကျစရိတ် တွက်ချက်စက်",
+      "totalCost": "စုစုပေါင်း စာရင်းသွင်းမှု ကုန်ကျစရိတ်",
+      "yearly": "နှစ်စဉ်",
+      "yourSubscriptions": "သင့်စာရင်းသွင်းမှုများ"
     },
     "transparency": {
-      "assumptions": "Assumptions",
-      "formula": "Formula",
-      "title": "How This Works"
+      "assumptions": "ယူဆချက်များ",
+      "formula": "ပုံသေနည်း",
+      "title": "အလုပ်လုပ်ပုံ"
     },
     "chart": {
       "year": "နှစ် {n}",
@@ -1237,24 +1237,24 @@
     "openCalculator": "ဂဏန်းတွက်စက် ဖွင့်ရန်"
   },
   "calendarExport": {
-    "addToCalendar": "Add to Calendar",
+    "addToCalendar": "ပြက္ခဒိန်သို့ ထည့်ရန်",
     "dialog": {
-      "cancel": "Cancel",
-      "description": "Add bill reminders to your calendar",
-      "deselectAll": "Deselect all",
-      "export": "Export {count} subscription(s)",
-      "exportMethod": "Export Method",
-      "exporting": "Exporting...",
-      "selectAll": "Select all",
-      "selectSubscriptions": "Select Subscriptions",
-      "title": "Export to Calendar"
+      "cancel": "ပယ်ဖျက်ရန်",
+      "description": "ငွေတောင်းခံလွှာ သတိပေးချက်များကို သင့်ပြက္ခဒိန်သို့ ထည့်ပါ",
+      "deselectAll": "အားလုံး မရွေးရန်",
+      "export": "စာရင်းသွင်းမှု {count} ခု ထုတ်ယူရန်",
+      "exportMethod": "ထုတ်ယူနည်း",
+      "exporting": "ထုတ်ယူနေသည်...",
+      "selectAll": "အားလုံး ရွေးရန်",
+      "selectSubscriptions": "စာရင်းသွင်းမှုများ ရွေးပါ",
+      "title": "ပြက္ခဒိန်သို့ ထုတ်ယူရန်"
     },
-    "downloadAllICS": "Download All as ICS",
-    "downloadICS": "Download ICS File",
-    "exportToCalendar": "Export to Calendar",
+    "downloadAllICS": "ICS အားလုံး ဒေါင်းလုဒ်",
+    "downloadICS": "ICS ဖိုင် ဒေါင်းလုဒ်",
+    "exportToCalendar": "ပြက္ခဒိန်သို့ ထုတ်ယူရန်",
     "googleCalendar": "Google Calendar",
     "outlookCalendar": "Outlook Calendar",
-    "selectSubscriptions": "Select Subscriptions..."
+    "selectSubscriptions": "စာရင်းသွင်းမှုများ ရွေးပါ..."
   },
   "categories": {
     "cancel": "Cancel",
@@ -1290,94 +1290,94 @@
   },
   "chatbot": {
     "buttons": {
-      "clearHistory": "Clear chat history",
-      "exportConversation": "Export conversation",
-      "send": "Send"
+      "clearHistory": "ချက် မှတ်တမ်း ရှင်းရန်",
+      "exportConversation": "စကားဝိုင်း ထုတ်ယူရန်",
+      "send": "ပို့ရန်"
     },
     "disabled": {
-      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
-      "enableButton": "Enable Chatbot",
-      "title": "Chatbot Disabled"
+      "description": "စတင်ရန် ဆက်တင် → လျှို့ဝှက်ရေး → ဘတ်ဂျက် ချက်ဘော့တွင် ဖွင့်ပါ။",
+      "enableButton": "ချက်ဘော့ ဖွင့်ရန်",
+      "title": "ချက်ဘော့ ပိတ်ထား"
     },
     "emptyState": {
-      "description": "Ask me anything about your finances. Here are some examples:",
+      "description": "သင့်ငွေကြေးအကြောင်း ဘာမဆို မေးပါ။ ဥပမာအချို့:",
       "examples": {
-        "balance": "What's my total account balance?",
-        "budget": "Am I over budget in any categories?",
-        "groceries": "Show me my recent grocery purchases",
-        "spending": "How much did I spend this month?"
+        "balance": "စုစုပေါင်း အကောင့်လက်ကျန် ဘယ်လောက်လဲ?",
+        "budget": "အမျိုးအစားတစ်ခုခုတွင် ဘတ်ဂျက်ကျော်နေသလား?",
+        "groceries": "မကြာသေးမီ စျေးဝယ်မှုများ ပြပါ",
+        "spending": "ဤလတွင် ဘယ်လောက် သုံးစွဲခဲ့သနည်း?"
       },
-      "title": "Start a Conversation"
+      "title": "စကားဝိုင်း စတင်ပါ"
     },
     "header": {
-      "subtitle": "Ask me about your finances",
-      "title": "Budget Assistant"
+      "subtitle": "သင့်ငွေကြေးအကြောင်း မေးပါ",
+      "title": "ဘတ်ဂျက် လက်ထောက်"
     },
     "input": {
-      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training.",
-      "placeholder": "Ask about your finances..."
+      "disclaimer": "OpenAI GPT-4 ဖြင့် စွမ်းအင်ရ။ သင့်ဒေတာကို လုံခြုံစွာ လုပ်ဆောင်ပြီး လေ့ကျင့်ရန် အသုံးမပြုပါ။",
+      "placeholder": "သင့်ငွေကြေးအကြောင်း မေးပါ..."
     },
     "messages": {
-      "dataAccessed": "Data accessed:",
-      "error": "Error",
-      "thinking": "Thinking..."
+      "dataAccessed": "ဝင်ရောက်ထားသော ဒေတာ:",
+      "error": "အမှား",
+      "thinking": "စဉ်းစားနေသည်..."
     }
   },
   "chatbotHelp": {
     "tabs": {
-      "actions": "Actions",
-      "budget": "Budget",
-      "income": "Income",
-      "spending": "Spending",
-      "trends": "Trends"
+      "actions": "လုပ်ဆောင်ချက်များ",
+      "budget": "ဘတ်ဂျက်",
+      "income": "ဝင်ငွေ",
+      "spending": "သုံးစွဲမှု",
+      "trends": "လမ်းကြောင်းများ"
     }
   },
   "chatbotOptIn": {
     "buttons": {
-      "decline": "No Thanks",
-      "enable": "Enable Chatbot"
+      "decline": "မလိုပါ",
+      "enable": "ချက်ဘော့ ဖွင့်ရန်"
     },
     "capabilities": {
-      "actions": "Optionally perform actions like adding transactions or creating budgets",
-      "answer": "Answer questions about your transactions, budgets, and spending patterns",
-      "insights": "Provide insights and recommendations based on your data",
-      "search": "Search your financial data using natural language",
-      "title": "What the Chatbot Can Do"
+      "actions": "ငွေလွှဲထည့်ခြင်း သို့မဟုတ် ဘတ်ဂျက်ဖန်တီးခြင်းကဲ့သို့ လုပ်ဆောင်ချက်များ လုပ်နိုင်သည်",
+      "answer": "သင့် ငွေလွှဲများ၊ ဘတ်ဂျက်များနှင့် သုံးစွဲမှုပုံစံများအကြောင်း မေးခွန်းများ ဖြေပေးသည်",
+      "insights": "သင့်ဒေတာပေါ်အခြေခံ ထိုးထွင်းသိမြင်မှုများနှင့် အကြံပြုချက်များ ပေးသည်",
+      "search": "သဘာဝဘာသာစကားဖြင့် သင့်ငွေကြေးဒေတာကို ရှာဖွေသည်",
+      "title": "ချက်ဘော့ လုပ်နိုင်သည့်အရာများ"
     },
-    "closeDialog": "Close chatbot opt-in dialog",
+    "closeDialog": "ချက်ဘော့ သဘောတူမှု ဒိုင်ယာလော့ ပိတ်ရန်",
     "controls": {
       "dataAccess": {
         "fullAccess": {
-          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data",
-          "title": "Full Access"
+          "description": "ချက်ဘော့သည် ငွေလွှဲထည့်ခြင်း၊ ဘတ်ဂျက်ဖန်တီးခြင်း၊ ဒေတာပြောင်းလဲခြင်းများ လုပ်နိုင်သည်",
+          "title": "ဝင်ရောက်ခွင့်အပြည့်"
         },
-        "label": "What can the chatbot do with your data?",
+        "label": "ချက်ဘော့သည် သင့်ဒေတာဖြင့် ဘာလုပ်နိုင်သနည်း?",
         "readOnly": {
-          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets",
-          "title": "Read-Only (Recommended)"
+          "description": "ချက်ဘော့သည် သင့်ဒေတာကို ကြည့်ပြီး မေးခွန်းများ ဖြေနိုင်သော်လည်း ငွေလွှဲ/ဘတ်ဂျက်များ ထည့်၊ ပြင်၊ ဖျက်ခြင်း မလုပ်နိုင်ပါ",
+          "title": "ဖတ်ရုံ (အကြံပြု)"
         }
       },
       "retention": {
-        "days30": "30 days",
-        "days7": "7 days (Recommended)",
-        "forever": "Keep forever",
-        "label": "How long should we keep your conversations?",
-        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
+        "days30": "၃၀ ရက်",
+        "days7": "၇ ရက် (အကြံပြု)",
+        "forever": "အမြဲ ထားရန်",
+        "label": "စကားဝိုင်းများကို မည်မျှကြာ ထားမည်နည်း?",
+        "note": "စကားဝိုင်းများကို သင့်ဘရောက်ဆာတွင် ဒေသတွင်း သိမ်းထားသည်။ ဆက်တင် → လျှို့ဝှက်ရေးတွင် အချိန်မရွေး ဖျက်နိုင်သည်။"
       },
-      "title": "Privacy Controls"
+      "title": "လျှို့ဝှက်ရေး ထိန်းချုပ်မှုများ"
     },
     "gdpr": {
-      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+      "notice": "<strong>သင့်အခွင့်အရေးများ:</strong> ချက်ဘော့ဖွင့်ခြင်းဖြင့် OpenAI ၏ API မှတဆင့် သင့်ငွေကြေးဒေတာ လုပ်ဆောင်ခြင်းကို သဘောတူပါသည်။ ဆက်တင် → လျှို့ဝှက်ရေးတွင် ချက်ဘော့ပိတ်ခြင်းဖြင့် သဘောတူမှုကို အချိန်မရွေး ရုပ်သိမ်းနိုင်သည်။"
     },
     "privacy": {
-      "dataSent": "Financial data is sent to the API to answer your questions",
-      "disable": "You can disable the chatbot anytime in Settings → Privacy",
-      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
-      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
-      "title": "Privacy & Data Usage"
+      "dataSent": "သင့်မေးခွန်းများ ဖြေရန် ငွေကြေးဒေတာကို API သို့ ပေးပို့သည်",
+      "disable": "ဆက်တင် → လျှို့ဝှက်ရေးတွင် ချက်ဘော့ကို အချိန်မရွေး ပိတ်နိုင်သည်",
+      "noTraining": "OpenAI သည် API ဒေတာကို မော်ဒယ်များ လေ့ကျင့်ရန် အသုံးမပြုပါ (၎င်းတို့၏ မူဝါဒအရ)",
+      "processedBy": "သင့်စကားဝိုင်းများကို OpenAI ၏ GPT-4 API ဖြင့် လုပ်ဆောင်သည်",
+      "title": "လျှို့ဝှက်ရေးနှင့် ဒေတာအသုံးပြုမှု"
     },
-    "subtitle": "AI-powered financial assistant",
-    "title": "Enable Budget Chatbot?"
+    "subtitle": "AI-စွမ်းအင်သုံး ငွေကြေး လက်ထောက်",
+    "title": "ဘတ်ဂျက် ချက်ဘော့ ဖွင့်မည်လား?"
   },
   "columnMapper": {
     "amount": "Amount",
@@ -1409,40 +1409,40 @@
     "useSavedMapping": "Use Saved Mapping"
   },
   "combobox": {
-    "noResults": "No results found.",
-    "search": "Search...",
-    "select": "Select..."
+    "noResults": "ရလဒ် မတွေ့ပါ။",
+    "search": "ရှာဖွေပါ...",
+    "select": "ရွေးချယ်ပါ..."
   },
   "commandPalette": {
     "commands": {
-      "addTransaction": "Add Transaction",
-      "budgets": "Budgets",
-      "categories": "Categories",
-      "darkTheme": "Dark Theme",
-      "dashboard": "Dashboard",
-      "exportData": "Export Data",
-      "futurePlans": "Future Plans",
-      "highContrastTheme": "High-Contrast Theme",
-      "importCsv": "Import CSV",
-      "investments": "Investments",
-      "lightTheme": "Light Theme",
-      "loans": "Loans",
-      "newBudget": "New Budget",
-      "reports": "Reports",
-      "retirement": "Retirement",
-      "scanReceipt": "Scan Receipt",
-      "settings": "Settings",
-      "transactions": "Transactions"
+      "addTransaction": "ငွေလွှဲ ထည့်ရန်",
+      "budgets": "ဘတ်ဂျက်များ",
+      "categories": "အမျိုးအစားများ",
+      "darkTheme": "မှောင်သော အပြင်အဆင်",
+      "dashboard": "ဒက်ရှ်ဘုတ်",
+      "exportData": "ဒေတာ ထုတ်ယူရန်",
+      "futurePlans": "အနာဂတ် အစီအစဉ်များ",
+      "highContrastTheme": "မြင့်မားသောကန့်လန့်ဖြတ် အပြင်အဆင်",
+      "importCsv": "CSV သွင်းယူရန်",
+      "investments": "ရင်းနှီးမြုပ်နှံမှုများ",
+      "lightTheme": "တောက်ပသော အပြင်အဆင်",
+      "loans": "ချေးငွေများ",
+      "newBudget": "ဘတ်ဂျက်အသစ်",
+      "reports": "အစီရင်ခံစာများ",
+      "retirement": "အငြိမ်းစား",
+      "scanReceipt": "ပြေစာ စကင်ဖတ်ရန်",
+      "settings": "ဆက်တင်များ",
+      "transactions": "ငွေလွှဲများ"
     },
     "groups": {
-      "appearance": "Appearance",
-      "quickActions": "Quick Actions",
-      "tools": "Tools & Settings",
-      "tracking": "Tracking & Analysis",
-      "wealth": "Wealth & Planning"
+      "appearance": "အသွင်အပြင်",
+      "quickActions": "အမြန် လုပ်ဆောင်ချက်များ",
+      "tools": "ကိရိယာများ နှင့် ဆက်တင်များ",
+      "tracking": "ခြေရာခံခြင်း နှင့် ခွဲခြမ်းစိတ်ဖြာခြင်း",
+      "wealth": "ဓနဥစ္စာ နှင့် စီစဉ်ခြင်း"
     },
-    "noResults": "No results found.",
-    "placeholder": "Type a command or search..."
+    "noResults": "ရလဒ် မတွေ့ပါ။",
+    "placeholder": "အမိန့် ရိုက်ပါ သို့မဟုတ် ရှာပါ..."
   },
   "common": {
     "cancel": "မလုပ်တော့ပါ",
@@ -1465,168 +1465,168 @@
   "dashboard": {
     "widgets": {
       "accountBalances": {
-        "addAccount": "Add Account",
-        "allTransactions": "All Transactions",
-        "imported": "Imported",
-        "netWorth": "Net Worth",
-        "noAccounts": "No accounts added yet",
-        "title": "Account Balances",
-        "viewAll": "View All"
+        "addAccount": "အကောင့် ထည့်ရန်",
+        "allTransactions": "ငွေလွှဲအားလုံး",
+        "imported": "သွင်းယူပြီး",
+        "netWorth": "အသားတင်တန်ဖိုး",
+        "noAccounts": "အကောင့်များ မထည့်ရသေးပါ",
+        "title": "အကောင့် လက်ကျန်များ",
+        "viewAll": "အားလုံးကြည့်ရန်"
       },
       "budgetProgress": {
-        "createBudget": "Create Budget",
-        "noBudgets": "No budgets set",
-        "overBudget": "Over budget by {amount}",
-        "remaining": "Remaining",
-        "spent": "Spent",
-        "title": "Budget Progress",
-        "viewAll": "View All Budgets"
+        "createBudget": "ဘတ်ဂျက် ဖန်တီးရန်",
+        "noBudgets": "ဘတ်ဂျက် သတ်မှတ်မထားပါ",
+        "overBudget": "ဘတ်ဂျက် {amount} ကျော်လွန်",
+        "remaining": "ကျန်ရှိ",
+        "spent": "သုံးစွဲပြီး",
+        "title": "ဘတ်ဂျက် တိုးတက်မှု",
+        "viewAll": "ဘတ်ဂျက်အားလုံး ကြည့်ရန်"
       },
       "eventBudget": {
-        "noEvents": "No active events",
-        "title": "Event Budgets",
-        "viewAll": "View All"
+        "noEvents": "လက်ရှိ ပွဲတော်များ မရှိပါ",
+        "title": "ပွဲတော် ဘတ်ဂျက်များ",
+        "viewAll": "အားလုံးကြည့်ရန်"
       },
       "incomeVsExpenses": {
-        "addTransactions": "Add Transactions",
-        "expenses": "Expenses",
-        "income": "Income",
-        "net": "Net",
-        "noData": "No transactions yet",
-        "thisMonth": "This Month",
-        "title": "Income vs Expenses"
+        "addTransactions": "ငွေလွှဲများ ထည့်ရန်",
+        "expenses": "ကုန်ကျစရိတ်",
+        "income": "ဝင်ငွေ",
+        "net": "အသားတင်",
+        "noData": "ငွေလွှဲများ မရှိသေးပါ",
+        "thisMonth": "ဤလ",
+        "title": "ဝင်ငွေ နှင့် ကုန်ကျစရိတ်"
       },
       "monthlyTrends": {
-        "expenses": "Expenses",
-        "income": "Income",
-        "lastSixMonths": "Last 6 Months",
-        "needMoreData": "Add transactions for 2+ months to see trends",
-        "notEnoughData": "Not enough history",
-        "title": "Monthly Trends"
+        "expenses": "ကုန်ကျစရိတ်",
+        "income": "ဝင်ငွေ",
+        "lastSixMonths": "လွန်ခဲ့သော ၆ လ",
+        "needMoreData": "လမ်းကြောင်းများကြည့်ရန် ၂ လ+ ငွေလွှဲများ ထည့်ပါ",
+        "notEnoughData": "မှတ်တမ်း မလုံလောက်ပါ",
+        "title": "လစဉ် လမ်းကြောင်းများ"
       },
       "netWorthMini": {
-        "assets": "Assets",
-        "liabilities": "Liabilities",
-        "title": "Net Worth",
-        "viewDetails": "View Details"
+        "assets": "ပိုင်ဆိုင်မှုများ",
+        "liabilities": "တာဝန်များ",
+        "title": "အသားတင်တန်ဖိုး",
+        "viewDetails": "အသေးစိတ် ကြည့်ရန်"
       },
       "recentTransactions": {
-        "addTransaction": "Add Transaction",
-        "noTransactions": "No transactions yet",
-        "title": "Recent Transactions",
-        "uncategorized": "Uncategorized",
-        "viewAll": "View All"
+        "addTransaction": "ငွေလွှဲ ထည့်ရန်",
+        "noTransactions": "ငွေလွှဲများ မရှိသေးပါ",
+        "title": "မကြာသေးမီ ငွေလွှဲများ",
+        "uncategorized": "အမျိုးအစား မခွဲရသေးပါ",
+        "viewAll": "အားလုံးကြည့်ရန်"
       },
       "safeToSpend": {
-        "caution": "Watch spending",
-        "createBudget": "Create Budget",
-        "dailyBudget": "Daily budget",
-        "danger": "Over budget",
-        "daysRemaining": "{days} days left",
-        "noBudgets": "No budgets set up yet",
-        "noData": "No budgets set up yet",
-        "overBudget": "{amount} over budget",
-        "perCategory": "Per category",
-        "remaining": "{amount} remaining",
-        "safe": "On track",
-        "title": "Safe to Spend",
-        "totalSafe": "Total safe to spend",
-        "viewAll": "View All"
+        "caution": "သုံးစွဲမှု သတိထားပါ",
+        "createBudget": "ဘတ်ဂျက် ဖန်တီးရန်",
+        "dailyBudget": "နေ့စဉ် ဘတ်ဂျက်",
+        "danger": "ဘတ်ဂျက် ကျော်လွန်",
+        "daysRemaining": "{days} ရက် ကျန်ရှိ",
+        "noBudgets": "ဘတ်ဂျက် မသတ်မှတ်ရသေးပါ",
+        "noData": "ဘတ်ဂျက် မသတ်မှတ်ရသေးပါ",
+        "overBudget": "{amount} ဘတ်ဂျက်ကျော်",
+        "perCategory": "အမျိုးအစားတစ်ခုချင်း",
+        "remaining": "{amount} ကျန်ရှိ",
+        "safe": "လမ်းကြောင်းမှန်နေသည်",
+        "title": "သုံးစွဲရန် လုံခြုံသော ပမာဏ",
+        "totalSafe": "သုံးစွဲရန် လုံခြုံသော စုစုပေါင်း",
+        "viewAll": "အားလုံးကြည့်ရန်"
       },
       "spendingByCategory": {
-        "addTransactions": "Add Transactions",
-        "moreCategories": "+{count} more categories",
-        "noData": "No spending tracked yet",
-        "thisMonth": "This Month",
-        "title": "Spending by Category",
-        "total": "Total",
-        "uncategorized": "Uncategorized"
+        "addTransactions": "ငွေလွှဲများ ထည့်ရန်",
+        "moreCategories": "+{count} အမျိုးအစား ပိုကြည့်ရန်",
+        "noData": "သုံးစွဲမှု ခြေရာခံမှု မရှိသေးပါ",
+        "thisMonth": "ဤလ",
+        "title": "အမျိုးအစားအလိုက် သုံးစွဲမှု",
+        "total": "စုစုပေါင်း",
+        "uncategorized": "အမျိုးအစား မခွဲရသေးပါ"
       },
       "streaks": {
-        "badges": "badges",
-        "dayStreak": "day streak",
-        "points": "points",
-        "title": "Streaks & Badges"
+        "badges": "တံဆိပ်များ",
+        "dayStreak": "ရက် ဆက်တိုက်",
+        "points": "အမှတ်များ",
+        "title": "ဆက်တိုက်မှတ်တမ်း နှင့် တံဆိပ်များ"
       },
       "upcomingBills": {
-        "addSubscription": "Add Subscription",
-        "dueIn": "Due in {days} days",
-        "dueToday": "Due today",
-        "dueTomorrow": "Due tomorrow",
-        "noBills": "No upcoming bills",
-        "title": "Upcoming Bills",
-        "viewAll": "View All"
+        "addSubscription": "စာရင်းသွင်းမှု ထည့်ရန်",
+        "dueIn": "{days} ရက်အတွင်း ပေးရမည်",
+        "dueToday": "ယနေ့ ပေးရမည်",
+        "dueTomorrow": "မနက်ဖြန် ပေးရမည်",
+        "noBills": "လာမည့် ငွေတောင်းခံလွှာ မရှိပါ",
+        "title": "လာမည့် ငွေတောင်းခံလွှာများ",
+        "viewAll": "အားလုံးကြည့်ရန်"
       },
       "weeklyRecap": {
-        "title": "Weekly Recap",
-        "viewFull": "Full Review",
-        "vsLastWeek": "vs last week"
+        "title": "အပတ်စဉ် အကျဉ်းချုပ်",
+        "viewFull": "ပြည့်စုံသော သုံးသပ်ချက်",
+        "vsLastWeek": "ယခင်အပတ်နှင့် နှိုင်းယှဉ်"
       }
     }
   },
   "dashboardCustomizer": {
-    "alwaysVisible": "Always visible",
-    "ariaLabel": "Customize dashboard layout",
-    "button": "Customize",
-    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
-    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
-    "reorderTitle": "Reorder Widgets",
-    "resetButton": "Reset to Defaults",
-    "title": "Customize Dashboard",
-    "toggleVisibility": "Toggle {name} visibility",
-    "widgetVisibility": "Widget Visibility",
-    "widgetsVisible": "{visible} of {total} widgets visible"
+    "alwaysVisible": "အမြဲ မြင်နိုင်",
+    "ariaLabel": "ဒက်ရှ်ဘုတ် အပြင်အဆင် စိတ်ကြိုက်ပြင်ဆင်ရန်",
+    "button": "စိတ်ကြိုက်ပြင်ဆင်ရန်",
+    "description": "ဒက်ရှ်ဘုတ် ဝီဂျက်များကို ပြ/ဖျောက်ပါ။ ပြန်စီရန် ဝီဂျက်များကို ဆွဲယူပါ။",
+    "reorderDescription": "ဝီဂျက် အစီအစဉ်ပြောင်းရန် ဒက်ရှ်ဘုတ်ပေါ်တွင် ဝီဂျက်များကို တိုက်ရိုက် ဆွဲယူထည့်ပါ။ ဝီဂျက်ကတ်တစ်ခုစီရှိ ဆွဲကိုင် (⋮⋮) ကို မောက်စ် သို့မဟုတ် ထိတွေ့ဖြင့် ကိုင်ပါ။",
+    "reorderTitle": "ဝီဂျက်များ ပြန်စီရန်",
+    "resetButton": "မူလအခြေအနေသို့ ပြန်သတ်မှတ်ရန်",
+    "title": "ဒက်ရှ်ဘုတ် စိတ်ကြိုက်ပြင်ဆင်ခြင်း",
+    "toggleVisibility": "{name} မြင်နိုင်မှု ပြောင်းရန်",
+    "widgetVisibility": "ဝီဂျက် မြင်နိုင်မှု",
+    "widgetsVisible": "{total} ခုအနက် {visible} ခု ဝီဂျက် မြင်ရ"
   },
   "debtAnalysis": {
     "cards": {
       "avgRate": {
-        "subtitle": "Weighted average",
-        "title": "Avg Interest Rate"
+        "subtitle": "အလေးချိန်ပေး ပျမ်းမျှ",
+        "title": "ပျမ်းမျှ အတိုးနှုန်း"
       },
       "debtFreeDate": {
-        "subtitle": "Estimated payoff",
-        "title": "Debt-Free Date"
+        "subtitle": "ခန့်မှန်း ပေးဆပ်မှု",
+        "title": "အကြွေးကင်းရက်"
       },
       "monthlyPayment": {
-        "subtitle": "Total monthly obligations",
-        "title": "Monthly Payment"
+        "subtitle": "လစဉ် စုစုပေါင်း တာဝန်များ",
+        "title": "လစဉ် ပေးချေမှု"
       },
       "totalDebt": {
-        "subtitle": "Across {count} active loans",
-        "title": "Total Debt"
+        "subtitle": "လက်ရှိ ချေးငွေ {count} ခုတွင်",
+        "title": "စုစုပေါင်း အကြွေး"
       }
     },
     "charts": {
       "byType": {
-        "description": "Distribution of debt across loan types",
-        "title": "Debt by Type"
+        "description": "ချေးငွေအမျိုးအစားများအလိုက် အကြွေး ဖြန့်ဖြူးမှု",
+        "title": "အမျိုးအစားအလိုက် အကြွေး"
       },
       "projection": {
-        "description": "Expected debt reduction over the next year",
-        "expectedReduction": "Expected reduction: {amount} over 12 months",
-        "title": "12-Month Payoff Projection"
+        "description": "နောက် တစ်နှစ်အတွင်း မျှော်မှန်း အကြွေးလျော့ချမှု",
+        "expectedReduction": "မျှော်မှန်း လျော့ချမှု: ၁၂ လအတွင်း {amount}",
+        "title": "၁၂ လ ပေးဆပ်မှု ခန့်မှန်းချက်"
       }
     },
     "comparison": {
-      "description": "Side-by-side comparison of your active loans",
+      "description": "သင့်လက်ရှိ ချေးငွေများ ဘေးချင်းကပ် နှိုင်းယှဉ်ချက်",
       "headers": {
-        "balance": "Balance",
-        "interestRate": "Interest Rate",
-        "loan": "Loan",
-        "monthlyPayment": "Monthly Payment",
-        "percentOfTotal": "% of Total Debt"
+        "balance": "လက်ကျန်",
+        "interestRate": "အတိုးနှုန်း",
+        "loan": "ချေးငွေ",
+        "monthlyPayment": "လစဉ် ပေးချေမှု",
+        "percentOfTotal": "စုစုပေါင်း အကြွေး၏ %"
       },
-      "title": "Loan Comparison",
-      "total": "Total"
+      "title": "ချေးငွေ နှိုင်းယှဉ်ချက်",
+      "total": "စုစုပေါင်း"
     },
     "empty": {
-      "addFirstLoan": "Add Your First Loan",
-      "description": "You don't have any active loans. Add a loan to see debt analytics.",
-      "title": "No Debt to Analyze"
+      "addFirstLoan": "သင့်ပထမဆုံး ချေးငွေ ထည့်ပါ",
+      "description": "လက်ရှိ ချေးငွေ မရှိပါ။ အကြွေး ခွဲခြမ်းစိတ်ဖြာမှု ကြည့်ရန် ချေးငွေ ထည့်ပါ။",
+      "title": "ခွဲခြမ်းစိတ်ဖြာရန် အကြွေး မရှိပါ"
     },
-    "subtitle": "Comprehensive view of your loans and obligations",
-    "title": "Debt Analysis",
-    "viewAllLoans": "View All Loans"
+    "subtitle": "သင့်ချေးငွေများနှင့် တာဝန်များ ပြည့်စုံသော ခြုံငုံမြင်ကွင်း",
+    "title": "အကြွေး ခွဲခြမ်းစိတ်ဖြာမှု",
+    "viewAllLoans": "ချေးငွေအားလုံး ကြည့်ရန်"
   },
   "debtOverview": {
     "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
@@ -1795,99 +1795,99 @@
     "confirmAction": "လုပ်ဆောင်ချက်ကို အတည်ပြုပါ"
   },
   "draggableWidget": {
-    "dragToReorder": "Drag to reorder widget"
+    "dragToReorder": "ဝီဂျက် ပြန်စီရန် ဆွဲယူပါ"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
-    "yearsAndMonths": "{years}y {months}m"
+    "months": "{count, plural, =1 {၁ လ} other {# လ}}",
+    "years": "{count, plural, =1 {၁ နှစ်} other {# နှစ်}}",
+    "yearsAndMonths": "{years}နှစ် {months}လ"
   },
   "emptyStates": {
     "budgets": {
-      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
-      "heading": "No Budgets Created",
-      "primaryCta": "Create Your First Budget"
+      "description": "မတူညီသော အမျိုးအစားများတွင် သုံးစွဲမှုကို ခြေရာခံပြီး ငွေကြေးပန်းတိုင်များ အောင်မြင်ရန် ဘတ်ဂျက်များ ဖန်တီးပါ။",
+      "heading": "ဘတ်ဂျက် မဖန်တီးရသေးပါ",
+      "primaryCta": "သင့်ပထမဆုံး ဘတ်ဂျက် ဖန်တီးပါ"
     },
     "categories": {
-      "description": "Create custom categories to organize your transactions beyond the default ones.",
-      "heading": "No Custom Categories",
-      "primaryCta": "Add Category"
+      "description": "သင့်ငွေလွှဲများကို စီစဉ်ရန် စိတ်ကြိုက် အမျိုးအစားများ ဖန်တီးပါ။",
+      "heading": "စိတ်ကြိုက် အမျိုးအစားများ မရှိပါ",
+      "primaryCta": "အမျိုးအစား ထည့်ရန်"
     },
     "dashboard": {
-      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
-      "heading": "Welcome to Your Budget App!",
-      "primaryCta": "Import CSV",
-      "secondaryCta": "Add Transaction"
+      "description": "သင့်ငွေကြေး ခြုံငုံသုံးသပ်ချက်ကို ကြည့်ရန် ဘဏ်ငွေလွှဲများ သွင်းယူခြင်းဖြင့် စတင်ပါ။",
+      "heading": "ဘတ်ဂျက်အက်ပ်မှ ကြိုဆိုပါသည်!",
+      "primaryCta": "CSV သွင်းယူရန်",
+      "secondaryCta": "ငွေလွှဲ ထည့်ရန်"
     },
     "futurePlans": {
-      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
-      "heading": "No Future Plans",
-      "primaryCta": "Create a Goal"
+      "description": "အိမ်ဝယ်ခြင်း၊ ပညာရေးအတွက် စုဆောင်းခြင်း၊ အားလပ်ရက် စီစဉ်ခြင်းကဲ့သို့ ငွေကြေးပန်းတိုင်များ သတ်မှတ်ပါ။",
+      "heading": "အနာဂတ် အစီအစဉ် မရှိပါ",
+      "primaryCta": "ပန်းတိုင် ဖန်တီးရန်"
     },
     "investments": {
-      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
-      "heading": "No Investments Tracked",
-      "primaryCta": "Add Investment Account"
+      "description": "ရင်းနှီးမြုပ်နှံမှု စွမ်းဆောင်ရည်နှင့် အသားတင်တန်ဖိုးကို စောင့်ကြည့်ရန် ရင်းနှီးမြုပ်နှံမှု အကောင့်များနှင့် ပိုင်ဆိုင်မှုများကို ခြေရာခံပါ။",
+      "heading": "ခြေရာခံထားသော ရင်းနှီးမြုပ်နှံမှု မရှိပါ",
+      "primaryCta": "ရင်းနှီးမြုပ်နှံမှု အကောင့် ထည့်ရန်"
     },
     "loans": {
-      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
-      "heading": "No Loans Tracked",
-      "primaryCta": "Add Your First Loan"
+      "description": "ချေးငွေ ပေးဆပ်မှုတိုးတက်မှု ပြသရန်နှင့် ပေးချေမှုများ စီစဉ်ရန် ချေးငွေများ၊ အိမ်ချေးငွေများ၊ အကြွေးများကို ခြေရာခံပါ။",
+      "heading": "ခြေရာခံထားသော ချေးငွေ မရှိပါ",
+      "primaryCta": "သင့်ပထမဆုံး ချေးငွေ ထည့်ပါ"
     },
     "reports": {
-      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
-      "heading": "No Data to Report",
-      "primaryCta": "Add Transactions",
-      "secondaryCta": "Import CSV"
+      "description": "သုံးစွဲမှုပုံစံများအကြောင်း အစီရင်ခံစာများ ထုတ်ရန် ငွေလွှဲများနှင့် ဘတ်ဂျက်များ ထည့်ပါ။",
+      "heading": "အစီရင်ခံရန် ဒေတာ မရှိပါ",
+      "primaryCta": "ငွေလွှဲများ ထည့်ရန်",
+      "secondaryCta": "CSV သွင်းယူရန်"
     },
     "retirement": {
-      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
-      "heading": "No Retirement Plans",
-      "primaryCta": "Start Planning"
+      "description": "အကောင့်များ ခြေရာခံခြင်း၊ လိုအပ်ချက်များ ခန့်မှန်းခြင်းဖြင့် အငြိမ်းစားယူခြင်း စီစဉ်ပါ။",
+      "heading": "အငြိမ်းစား အစီအစဉ် မရှိပါ",
+      "primaryCta": "စီစဉ်မှု စတင်ရန်"
     },
     "transactions": {
-      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
-      "heading": "No Transactions Yet",
-      "primaryCta": "Add Transaction",
-      "secondaryCta": "Import CSV"
+      "description": "သင့်ပထမဆုံး ငွေလွှဲကို ထည့်ခြင်းဖြင့် သုံးစွဲမှု ခြေရာခံမှု စတင်ပါ။ လက်ဖြင့်ထည့် သို့မဟုတ် CSV ဖိုင်မှ သွင်းယူနိုင်သည်။",
+      "heading": "ငွေလွှဲများ မရှိသေးပါ",
+      "primaryCta": "ငွေလွှဲ ထည့်ရန်",
+      "secondaryCta": "CSV သွင်းယူရန်"
     }
   },
   "errorRecovery": {
-    "aiAnalysis": "AI Analysis:",
-    "closeModal": "Close modal",
+    "aiAnalysis": "AI ခွဲခြမ်းစိတ်ဖြာမှု:",
+    "closeModal": "မော်ဒယ် ပိတ်ရန်",
     "footer": {
-      "close": "Close",
-      "needHelp": "Need more help?",
-      "viewGuide": "View troubleshooting guide"
+      "close": "ပိတ်ရန်",
+      "needHelp": "အကူအညီ ပိုလိုပါသလား?",
+      "viewGuide": "ပြဿနာဖြေရှင်းမှု လမ်းညွှန် ကြည့်ရန်"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
-      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
-      "optionsTitle": "Recovery Options"
+      "canRecover": "သတင်းကောင်း! ဤအမှားမှ ပြန်ယူရန် နည်းလမ်း {count} {count, plural, =1 {ခု} other {ခု}} တွေ့ရှိသည်။",
+      "cannotRecover": "ပြန်ယူ၍ မရပါ။ သင့်ဘဏ်မှ ဖိုင်ကို ပြန်ထုတ်ယူ သို့မဟုတ် အခြားဖော်မတ် ကြိုးစားပါ။",
+      "optionsTitle": "ပြန်ယူမှု ရွေးချယ်စရာများ"
     },
-    "subtitle": "Don't worry! We can help you fix this.",
+    "subtitle": "စိတ်မပူပါနှင့်! ဤအရာကို ပြင်ရန် ကူညီနိုင်ပါသည်။",
     "suggestions": {
-      "autoFix": "AUTO-FIX",
-      "autoFixButton": "Auto-Fix",
-      "confidence": "{percent}% confidence",
-      "fixing": "Fixing...",
-      "learnMore": "Learn More",
-      "technicalDetails": "Technical Details"
+      "autoFix": "အလိုအလျောက် ပြင်ဆင်",
+      "autoFixButton": "အလိုအလျောက် ပြင်ဆင်",
+      "confidence": "{percent}% ယုံကြည်မှု",
+      "fixing": "ပြင်ဆင်နေသည်...",
+      "learnMore": "ပိုမိုလေ့လာရန်",
+      "technicalDetails": "နည်းပညာ အသေးစိတ်"
     },
     "summary": {
-      "category": "Category: {category}",
-      "title": "Error Summary"
+      "category": "အမျိုးအစား: {category}",
+      "title": "အမှား အကျဉ်းချုပ်"
     },
     "technical": {
-      "canRecover": "Can Recover:",
-      "errorCategory": "Error Category:",
-      "no": "No",
-      "severity": "Severity:",
-      "suggestions": "Suggestions:",
-      "title": "Advanced Technical Details",
-      "yes": "Yes"
+      "canRecover": "ပြန်ယူနိုင်:",
+      "errorCategory": "အမှား အမျိုးအစား:",
+      "no": "မဟုတ်",
+      "severity": "ပြင်းထန်မှု:",
+      "suggestions": "အကြံပြုချက်များ:",
+      "title": "အဆင့်မြင့် နည်းပညာ အသေးစိတ်",
+      "yes": "ဟုတ်"
     },
-    "title": "Import Failed"
+    "title": "သွင်းယူမှု မအောင်မြင်ပါ"
   },
   "export": {
     "allDataDeleted": "All data has been deleted. The page will now refresh.",
@@ -1974,78 +1974,78 @@
   },
   "exportDialog": {
     "buttons": {
-      "cancel": "Cancel",
-      "done": "Done!",
-      "download": "Download",
-      "export": "Export Data"
+      "cancel": "ပယ်ဖျက်ရန်",
+      "done": "ပြီးပါပြီ!",
+      "download": "ဒေါင်းလုဒ်",
+      "export": "ဒေတာ ထုတ်ယူရန်"
     },
     "complete": {
-      "download": "Your file is ready to download",
-      "success": "Export complete! Check your downloads folder."
+      "download": "သင့်ဖိုင် ဒေါင်းလုဒ်လုပ်ရန် အဆင်သင့်ဖြစ်ပြီ",
+      "success": "ထုတ်ယူမှု ပြီးပါပြီ! သင့် ဒေါင်းလုဒ် ဖိုဒါ စစ်ဆေးပါ။"
     },
     "dataSummary": {
-      "accounts": "Accounts",
-      "estimatedSize": "Est. Size",
-      "title": "Data Summary",
-      "transactions": "Transactions"
+      "accounts": "အကောင့်များ",
+      "estimatedSize": "ခန့်မှန်း အရွယ်အစား",
+      "title": "ဒေတာ အကျဉ်းချုပ်",
+      "transactions": "ငွေလွှဲများ"
     },
     "exporting": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Exporting..."
+      "pleaseWait": "ခဏစောင့်ပါ၊ အချိန်အနည်းငယ် ကြာနိုင်သည်",
+      "title": "ထုတ်ယူနေသည်..."
     },
     "format": {
       "budget": {
-        "description": "Complete backup including all data",
-        "label": ".budget file"
+        "description": "ဒေတာအားလုံး ပါဝင်သော ပြည့်စုံသော အရန်ကူး",
+        "label": ".budget ဖိုင်"
       },
       "csv": {
-        "description": "Spreadsheet-compatible format",
-        "label": "CSV file"
+        "description": "စာရင်းဇယားနှင့် သဟဇာတဖြစ်သော ဖော်မတ်",
+        "label": "CSV ဖိုင်"
       },
       "json": {
-        "description": "Developer-friendly format",
-        "label": "JSON file"
+        "description": "ဆော့ဖ်ဝဲရေးသူအတွက် ဖော်မတ်",
+        "label": "JSON ဖိုင်"
       },
-      "label": "Export Format"
+      "label": "ထုတ်ယူမှု ဖော်မတ်"
     },
     "options": {
       "encrypt": {
-        "description": "Protect your data with AES-256 encryption",
-        "label": "Encrypt with Password"
+        "description": "AES-256 ကုဒ်ဝှက်ခြင်းဖြင့် သင့်ဒေတာကို ကာကွယ်ပါ",
+        "label": "စကားဝှက်ဖြင့် ကုဒ်ဝှက်ရန်"
       },
       "includeReceipts": {
-        "description": "Attach receipt images (increases file size)",
-        "label": "Include Receipts"
+        "description": "ပြေစာပုံများ ပူးတွဲရန် (ဖိုင်အရွယ်အစား တိုးမည်)",
+        "label": "ပြေစာများ ထည့်သွင်းရန်"
       }
     },
     "password": {
-      "confirm": "Confirm Password",
-      "confirmPlaceholder": "Confirm password",
-      "hint": "Password Hint (Optional)",
-      "hintNote": "This hint will be stored unencrypted in the file",
-      "hintPlaceholder": "A hint to help you remember",
-      "label": "Password",
-      "minLength": "Password must be at least 8 characters",
-      "mismatch": "Passwords do not match",
-      "placeholder": "Enter password (min 8 characters)",
-      "required": "Password is required for encryption"
+      "confirm": "စကားဝှက် အတည်ပြုရန်",
+      "confirmPlaceholder": "စကားဝှက် အတည်ပြုရန်",
+      "hint": "စကားဝှက် အကြံပြု (ရွေးချယ်စရာ)",
+      "hintNote": "ဤအကြံပြုချက်ကို ဖိုင်တွင် ကုဒ်မဝှက်ဘဲ သိမ်းထားမည်",
+      "hintPlaceholder": "မှတ်မိရန် အကြံပြုချက်",
+      "label": "စကားဝှက်",
+      "minLength": "စကားဝှက် အနည်းဆုံး စာလုံး ၈ လုံး ရှိရမည်",
+      "mismatch": "စကားဝှက်များ မကိုက်ညီပါ",
+      "placeholder": "စကားဝှက် ထည့်ပါ (အနည်းဆုံး စာလုံး ၈ လုံး)",
+      "required": "ကုဒ်ဝှက်ခြင်းအတွက် စကားဝှက် လိုအပ်ပါသည်"
     },
-    "subtitle": "Download your budget data",
-    "title": "Export Data"
+    "subtitle": "သင့်ဘတ်ဂျက် ဒေတာ ဒေါင်းလုဒ်လုပ်ရန်",
+    "title": "ဒေတာ ထုတ်ယူရန်"
   },
   "filters": {
-    "account": "Account",
-    "allAccounts": "All accounts",
-    "allCategories": "All categories",
-    "allTypes": "All types",
-    "apply": "Apply filters",
-    "category": "Category",
-    "clearFilters": "Clear filters",
-    "dateRange": "Date range",
-    "expense": "Expense",
-    "income": "Income",
-    "search": "Search transactions...",
-    "type": "Type"
+    "account": "အကောင့်",
+    "allAccounts": "အကောင့်အားလုံး",
+    "allCategories": "အမျိုးအစားအားလုံး",
+    "allTypes": "အမျိုးအစားအားလုံး",
+    "apply": "စစ်ထုတ်မှုများ ထည့်ရန်",
+    "category": "အမျိုးအစား",
+    "clearFilters": "စစ်ထုတ်မှုများ ရှင်းရန်",
+    "dateRange": "ရက်စွဲ အကွာအဝေး",
+    "expense": "ကုန်ကျစရိတ်",
+    "income": "ဝင်ငွေ",
+    "search": "ငွေလွှဲများ ရှာပါ...",
+    "type": "အမျိုးအစား"
   },
   "footer": {
     "copyright": "© {year} {brandName}",
@@ -2098,14 +2098,14 @@
     "title": "Friday Review"
   },
   "healthScore": {
-    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "ariaLabel": "ငွေကြေးကျန်းမာရေး အမှတ်: ၁၀၀ အနက် {score}။ {interpretation}",
     "emptyState": {
-      "line1": "Add transactions to see your",
-      "line2": "Financial Health Score"
+      "line1": "သင့် ငွေကြေးကျန်းမာရေးအမှတ် ကြည့်ရန်",
+      "line2": "ငွေလွှဲများ ထည့်ပါ"
     },
-    "grade": "Grade: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health",
+    "grade": "အဆင့်: {grade}",
+    "missingFactors": "{count, plural, =1 {အချက် ၁ ခု ပျောက်ဆုံး} other {အချက် # ခု ပျောက်ဆုံး}}",
+    "title": "ငွေကြေး ကျန်းမာရေး",
     "history": {
       "title": "အမှတ်မှတ်တမ်း",
       "monthsOfData": "ဒေတာ {count} {count, plural, =1 {လ} other {လ}}",
@@ -2217,124 +2217,124 @@
   },
   "importDialog": {
     "buttons": {
-      "back": "Back",
-      "cancel": "Cancel",
-      "done": "Done",
-      "import": "Import Data"
+      "back": "နောက်သို့",
+      "cancel": "ပယ်ဖျက်ရန်",
+      "done": "ပြီးပါပြီ",
+      "import": "ဒေတာ သွင်းယူရန်"
     },
     "complete": {
-      "itemsImported": "{count} items imported successfully",
-      "success": "Import Complete!",
-      "withIssues": "Import Completed with Issues"
+      "itemsImported": "{count} ခု အောင်မြင်စွာ သွင်းယူပြီး",
+      "success": "သွင်းယူမှု ပြီးပါပြီ!",
+      "withIssues": "ပြဿနာများဖြင့် သွင်းယူမှု ပြီးပါပြီ"
     },
     "conflicts": {
-      "existing": "{count} existing",
-      "handleLabel": "Handle Conflicts",
+      "existing": "{count} ရှိပြီးသား",
+      "handleLabel": "ကွဲလွဲမှုများ ကိုင်တွယ်ရန်",
       "overwrite": {
-        "description": "Replace with imported",
-        "label": "Overwrite"
+        "description": "သွင်းယူထားသည်ဖြင့် အစားထိုးရန်",
+        "label": "အစားထိုးရန်"
       },
       "rename": {
-        "description": "Import as new entries",
-        "label": "Create new"
+        "description": "ဝင်ရောက်မှုအသစ်အဖြစ် သွင်းယူရန်",
+        "label": "အသစ်ဖန်တီးရန်"
       },
       "skip": {
-        "description": "Keep current data",
-        "label": "Skip existing"
+        "description": "လက်ရှိ ဒေတာကို ထားရန်",
+        "label": "ရှိပြီးသားကို ကျော်ရန်"
       },
-      "title": "Conflicts Found"
+      "title": "ကွဲလွဲမှုများ တွေ့ရှိ"
     },
     "encryption": {
-      "decrypt": "Decrypt & Continue",
-      "encrypted": "This file is encrypted",
-      "enterPassword": "Enter password",
-      "hint": "Hint: {hint}",
-      "password": "Password"
+      "decrypt": "ကုဒ်ဖြေ၍ ဆက်လုပ်ရန်",
+      "encrypted": "ဤဖိုင်ကို ကုဒ်ဝှက်ထားသည်",
+      "enterPassword": "စကားဝှက် ထည့်ပါ",
+      "hint": "အကြံပြု: {hint}",
+      "password": "စကားဝှက်"
     },
     "importing": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Importing your data..."
+      "pleaseWait": "ခဏစောင့်ပါ၊ အချိန်အနည်းငယ် ကြာနိုင်သည်",
+      "title": "သင့်ဒေတာ သွင်းယူနေသည်..."
     },
     "preview": {
-      "dataToImport": "Data to Import",
-      "exported": "Exported",
-      "fileInfo": "File Information",
-      "version": "Version"
+      "dataToImport": "သွင်းယူရမည့် ဒေတာ",
+      "exported": "ထုတ်ယူပြီး",
+      "fileInfo": "ဖိုင် အချက်အလက်",
+      "version": "ဗားရှင်း"
     },
     "selectFile": {
-      "dragDrop": "or drag and drop here",
-      "label": "Click to select a .budget file"
+      "dragDrop": "သို့မဟုတ် ဤနေရာတွင် ဆွဲယူထည့်ပါ",
+      "label": ".budget ဖိုင် ရွေးရန် နှိပ်ပါ"
     },
-    "subtitle": "Restore from .budget file",
-    "title": "Import Data"
+    "subtitle": ".budget ဖိုင်မှ ပြန်လည်ရယူရန်",
+    "title": "ဒေတာ သွင်းယူရန်"
   },
   "investmentAccountModal": {
     "buttons": {
-      "cancel": "Cancel",
-      "create": "Create Account",
-      "saving": "Saving...",
-      "update": "Update Account"
+      "cancel": "ပယ်ဖျက်ရန်",
+      "create": "အကောင့် ဖန်တီးရန်",
+      "saving": "သိမ်းနေသည်...",
+      "update": "အကောင့် အပ်ဒိတ်ရန်"
     },
-    "closeModal": "Close modal",
+    "closeModal": "မော်ဒယ် ပိတ်ရန်",
     "errors": {
-      "saveFailed": "Failed to save account"
+      "saveFailed": "အကောင့် သိမ်းခြင်း မအောင်မြင်ပါ"
     },
     "fields": {
       "accountNumber": {
-        "label": "Account Number (Optional)",
-        "placeholder": "e.g., Last 4 digits: 1234"
+        "label": "အကောင့် နံပါတ် (ရွေးချယ်စရာ)",
+        "placeholder": "ဥပမာ - နောက်ဆုံး ဂဏန်း ၄ လုံး: 1234"
       },
       "institution": {
-        "label": "Financial Institution (Optional)",
-        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
+        "label": "ငွေကြေးအဖွဲ့အစည်း (ရွေးချယ်စရာ)",
+        "placeholder": "ဥပမာ - Questrade, Wealthsimple, TD Direct"
       },
       "name": {
-        "label": "Account Name",
-        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
+        "label": "အကောင့် အမည်",
+        "placeholder": "ဥပမာ - My RRSP, TFSA Savings, Company Stock"
       },
       "type": {
         "descriptions": {
-          "Company shares": "Employee stock purchase or stock options",
-          "Non-registered": "Taxable investment account",
-          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
-          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
+          "Company shares": "ဝန်ထမ်း ရှယ်ယာ ဝယ်ခြင်း သို့မဟုတ် ရှယ်ယာ ရွေးချယ်ခွင့်",
+          "Non-registered": "အခွန်ကျသင့် ရင်းနှီးမြုပ်နှံမှု အကောင့်",
+          "RRSP": "Registered Retirement Savings Plan - အခွန်ဆိုင်းငံ့ တိုးတက်မှု",
+          "TFSA": "Tax-Free Savings Account - အခွန်ကင်း တိုးတက်မှုနှင့် ထုတ်ယူမှု"
         },
-        "label": "Account Type"
+        "label": "အကောင့် အမျိုးအစား"
       }
     },
     "title": {
-      "add": "Add Investment Account",
-      "edit": "Edit Investment Account"
+      "add": "ရင်းနှီးမြုပ်နှံမှု အကောင့် ထည့်ရန်",
+      "edit": "ရင်းနှီးမြုပ်နှံမှု အကောင့် ပြင်ဆင်ရန်"
     },
     "validation": {
-      "nameRequired": "Please enter an account name"
+      "nameRequired": "အကောင့် အမည် ထည့်ပါ"
     }
   },
   "investmentCharts": {
-    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "emptyState": "ပြသရန် ပိုင်ဆိုင်မှုများ မရှိပါ။ ဂရပ်များကြည့်ရန် ပိုင်ဆိုင်မှုများ ထည့်ပါ။",
     "legend": {
-      "gain": "Gain",
-      "loss": "Loss"
+      "gain": "အမြတ်",
+      "loss": "အရှုံး"
     },
     "tableHeaders": {
-      "allocation": "Allocation",
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "gainLoss": "Gain/Loss",
-      "percentReturn": "% Return",
-      "symbol": "Symbol",
-      "total": "Total"
+      "allocation": "ခွဲဝေမှု",
+      "costBasis": "ကုန်ကျစရိတ် အခြေခံ",
+      "currentValue": "လက်ရှိ တန်ဖိုး",
+      "gainLoss": "အမြတ်/အရှုံး",
+      "percentReturn": "% အပြန်",
+      "symbol": "သင်္ကေတ",
+      "total": "စုစုပေါင်း"
     },
     "titles": {
-      "accountTypeAllocation": "Allocation by Account Type",
-      "gainLoss": "Gain/Loss by Holding",
-      "performanceSummary": "Performance Summary",
-      "portfolioAllocation": "Portfolio Allocation by Holding"
+      "accountTypeAllocation": "အကောင့်အမျိုးအစားအလိုက် ခွဲဝေမှု",
+      "gainLoss": "ပိုင်ဆိုင်မှုအလိုက် အမြတ်/အရှုံး",
+      "performanceSummary": "စွမ်းဆောင်ရည် အကျဉ်းချုပ်",
+      "portfolioAllocation": "ပိုင်ဆိုင်မှုအလိုက် ရင်းနှီးမြုပ်နှံမှု ခွဲဝေမှု"
     },
     "tooltip": {
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "percentOfPortfolio": "{percent}% of portfolio"
+      "costBasis": "ကုန်ကျစရိတ် အခြေခံ",
+      "currentValue": "လက်ရှိ တန်ဖိုး",
+      "percentOfPortfolio": "ရင်းနှီးမြုပ်နှံမှု၏ {percent}%"
     }
   },
   "investments": {
@@ -2408,57 +2408,57 @@
     "value": "Value"
   },
   "lanSync": {
-    "description": "Sync your budget data across devices on your local network",
+    "description": "သင့်ဒေသတွင်း ကွန်ရက်ပေါ်ရှိ စက်ပစ္စည်းများအကြား ဘတ်ဂျက်ဒေတာ စင့်ခ်လုပ်ပါ",
     "device": {
-      "connect": "Connect",
-      "connected": "Connected",
-      "disconnect": "Disconnect",
-      "removeDevice": "Remove Device",
-      "sync": "Sync",
-      "syncing": "Syncing..."
+      "connect": "ချိတ်ဆက်ရန်",
+      "connected": "ချိတ်ဆက်ပြီး",
+      "disconnect": "ချိတ်ဆက်ဖြုတ်ရန်",
+      "removeDevice": "စက်ပစ္စည်း ဖယ်ရှားရန်",
+      "sync": "စင့်ခ်",
+      "syncing": "စင့်ခ်နေသည်..."
     },
-    "disabled": "Disabled",
-    "enabled": "Enabled",
+    "disabled": "ပိတ်ထား",
+    "enabled": "ဖွင့်ထား",
     "howItWorks": {
       "step1": {
-        "description": "Scan a QR code or enter connection details to pair devices on the same network",
-        "title": "Pair Devices"
+        "description": "တူညီသော ကွန်ရက်ပေါ်ရှိ စက်ပစ္စည်းများကို QR ကုဒ် စကင်ဖတ် သို့မဟုတ် ချိတ်ဆက်မှု အသေးစိတ် ထည့်ခြင်းဖြင့် တွဲပါ",
+        "title": "စက်ပစ္စည်းများ တွဲပါ"
       },
       "step2": {
-        "description": "Data is encrypted end-to-end and syncs directly between devices - no cloud required",
-        "title": "Sync Securely"
+        "description": "ဒေတာကို အဆုံးမှအဆုံး ကုဒ်ဝှက်ထားပြီး စက်ပစ္စည်းများကြား တိုက်ရိုက် စင့်ခ်လုပ်သည် - cloud မလိုအပ်ပါ",
+        "title": "လုံခြုံစွာ စင့်ခ်"
       },
       "step3": {
-        "description": "Changes sync automatically when devices are connected on the same network",
-        "title": "Automatic Updates"
+        "description": "တူညီသော ကွန်ရက်တွင် ချိတ်ဆက်ထားချိန် ပြောင်းလဲမှုများ အလိုအလျောက် စင့်ခ်လုပ်သည်",
+        "title": "အလိုအလျောက် အပ်ဒိတ်များ"
       },
-      "title": "How LAN Sync Works"
+      "title": "LAN စင့်ခ် အလုပ်လုပ်ပုံ"
     },
     "pairedDevices": {
-      "addDevice": "Add Device",
-      "addFirstDevice": "Add Your First Device",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
-      "emptyDescription": "Pair a device to start syncing your budget data",
-      "emptyTitle": "No devices paired",
-      "noDevices": "No devices paired yet",
-      "title": "Paired Devices"
+      "addDevice": "စက်ပစ္စည်း ထည့်ရန်",
+      "addFirstDevice": "ပထမဆုံး စက်ပစ္စည်း ထည့်ပါ",
+      "deviceCount": "{count, plural, =1 {စက်ပစ္စည်း ၁ ခု တွဲထား} other {စက်ပစ္စည်း # ခု တွဲထား}}",
+      "emptyDescription": "ဘတ်ဂျက်ဒေတာ စင့်ခ်စတင်ရန် စက်ပစ္စည်း တွဲပါ",
+      "emptyTitle": "တွဲထားသော စက်ပစ္စည်း မရှိပါ",
+      "noDevices": "တွဲထားသော စက်ပစ္စည်း မရှိသေးပါ",
+      "title": "တွဲထားသော စက်ပစ္စည်းများ"
     },
     "removeDialog": {
-      "cancel": "Cancel",
-      "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
-      "remove": "Remove",
-      "title": "Remove Device"
+      "cancel": "ပယ်ဖျက်ရန်",
+      "description": "\"{deviceName}\" ကို ဖယ်ရှားမည်မှာ သေချာပါသလား? စက်ပစ္စည်းကို တွဲချိတ်ဖြုတ်ပြီး ဒေတာစင့်ခ်ရန် ပြန်တွဲရမည်။",
+      "remove": "ဖယ်ရှားရန်",
+      "title": "စက်ပစ္စည်း ဖယ်ရှားရန်"
     },
-    "syncAll": "Sync All",
+    "syncAll": "အားလုံး စင့်ခ်",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
-      "justNow": "Just now",
-      "lastSync": "Last sync: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
-      "neverSynced": "Never synced"
+      "daysAgo": "{count, plural, =1 {၁ ရက် ကြာပြီ} other {# ရက် ကြာပြီ}}",
+      "hoursAgo": "{count, plural, =1 {၁ နာရီ ကြာပြီ} other {# နာရီ ကြာပြီ}}",
+      "justNow": "ခုမှ",
+      "lastSync": "နောက်ဆုံး စင့်ခ်: {time}",
+      "minutesAgo": "{count, plural, =1 {၁ မိနစ် ကြာပြီ} other {# မိနစ် ကြာပြီ}}",
+      "neverSynced": "စင့်ခ် မလုပ်ရသေးပါ"
     },
-    "title": "LAN Sync"
+    "title": "LAN စင့်ခ်"
   },
   "landing": {
     "accessibility": {
@@ -2616,22 +2616,22 @@
         "viewPricing": "စျေးနှုန်းကို ကြည့်ပါ"
       },
       "demo": {
-        "cloudStorage": "Cloud storage",
-        "dining": "Dining",
-        "expenses": "Expenses",
-        "foodToday": "Food • Today",
-        "groceries": "Groceries",
-        "groceryStore": "Grocery Store",
-        "income": "Income",
-        "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
-        "netWorth": "Net worth",
+        "cloudStorage": "Cloud သိုလှောင်မှု",
+        "dining": "စားသောက်",
+        "expenses": "ကုန်ကျစရိတ်",
+        "foodToday": "အစားအစာ • ယနေ့",
+        "groceries": "စျေးဝယ်",
+        "groceryStore": "စျေးဆိုင်",
+        "income": "ဝင်ငွေ",
+        "incomeYesterday": "ဝင်ငွေ • မနေ့က",
+        "monthly": "လစဉ်",
+        "netWorth": "အသားတင်တန်ဖိုး",
         "netflix": "Netflix",
-        "salary": "Salary",
-        "shopping": "Shopping",
+        "salary": "လစာ",
+        "shopping": "ဈေးဝယ်ထွက်",
         "spotify": "Spotify",
-        "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "subscriptionOct24": "စာရင်းသွင်းမှု • အောက်တို ၂၄",
+        "yearly": "နှစ်စဉ်"
       },
       "modes": {
         "budgets": "ဘတ်ဂျက်များ",
@@ -3061,28 +3061,28 @@
     "weekStartsOn": "Week Starts On"
   },
   "manualPairing": {
-    "codeHint": "6-character code shown on the host device",
-    "codeInvalid": "Pairing code must be 6 alphanumeric characters",
-    "codeRequired": "Pairing code is required",
-    "connect": "Connect",
-    "connecting": "Connecting...",
-    "description": "Enter the connection details shown on the host device",
-    "fixFormErrors": "Please fix the form errors",
-    "helpStep1": "Open Budget App on the device you want to sync with",
-    "helpStep2": "Go to Settings → LAN Sync",
-    "helpStep3": "Tap \"Allow Connections\"",
-    "helpStep4": "The IP address, port, and pairing code will be displayed below the QR code",
-    "helpTitle": "Finding Connection Details",
-    "hideHelp": "Hide Help",
-    "ipAddress": "IP Address",
-    "ipInvalid": "Invalid IP address format (e.g., 192.168.1.100)",
-    "ipRequired": "IP address is required",
-    "optionalDefault": "optional, default: {port}",
-    "pairingCode": "Pairing Code",
-    "port": "Port",
-    "portInvalid": "Port must be between 1 and 65535",
-    "title": "Manual Entry",
-    "whereToFind": "Where do I find these?"
+    "codeHint": "အိမ်ရှင် စက်ပစ္စည်းတွင် ပြထားသော ၆ လုံးပါ ကုဒ်",
+    "codeInvalid": "တွဲချိတ် ကုဒ်သည် အက္ခရာဂဏန်း ၆ လုံး ဖြစ်ရမည်",
+    "codeRequired": "တွဲချိတ် ကုဒ် လိုအပ်ပါသည်",
+    "connect": "ချိတ်ဆက်ရန်",
+    "connecting": "ချိတ်ဆက်နေသည်...",
+    "description": "အိမ်ရှင် စက်ပစ္စည်းတွင် ပြထားသော ချိတ်ဆက်မှု အသေးစိတ်ကို ထည့်ပါ",
+    "fixFormErrors": "ဖောင် အမှားများကို ပြင်ပါ",
+    "helpStep1": "စင့်ခ်လုပ်လိုသော စက်ပစ္စည်းတွင် ဘတ်ဂျက်အက်ပ် ဖွင့်ပါ",
+    "helpStep2": "ဆက်တင် → LAN စင့်ခ် သို့ သွားပါ",
+    "helpStep3": "\"ချိတ်ဆက်မှုများ ခွင့်ပြုရန်\" နှိပ်ပါ",
+    "helpStep4": "IP လိပ်စာ၊ အပေါက်နှင့် တွဲချိတ် ကုဒ်ကို QR ကုဒ်အောက်တွင် ပြမည်",
+    "helpTitle": "ချိတ်ဆက်မှု အသေးစိတ် ရှာခြင်း",
+    "hideHelp": "အကူအညီ ဖျောက်ရန်",
+    "ipAddress": "IP လိပ်စာ",
+    "ipInvalid": "IP လိပ်စာ ဖော်မတ် မမှန်ပါ (ဥပမာ 192.168.1.100)",
+    "ipRequired": "IP လိပ်စာ လိုအပ်ပါသည်",
+    "optionalDefault": "ရွေးချယ်စရာ၊ မူလ: {port}",
+    "pairingCode": "တွဲချိတ် ကုဒ်",
+    "port": "အပေါက်",
+    "portInvalid": "အပေါက်သည် ၁ နှင့် ၆၅၅၃၅ ကြားရှိရမည်",
+    "title": "လက်ဖြင့် ထည့်ခြင်း",
+    "whereToFind": "ဤအရာများကို ဘယ်တွင် ရှာရမည်နည်း?"
   },
   "mobileNav": {
     "accounts": "အကောင့်များ",
@@ -3093,11 +3093,11 @@
   },
   "morePage": {
     "groups": {
-      "toolsSettings": "Tools & Settings",
-      "trackingAnalysis": "Tracking & Analysis",
-      "wealthPlanning": "Wealth & Planning"
+      "toolsSettings": "ကိရိယာများ နှင့် ဆက်တင်များ",
+      "trackingAnalysis": "ခြေရာခံခြင်း နှင့် ခွဲခြမ်းစိတ်ဖြာခြင်း",
+      "wealthPlanning": "ဓနဥစ္စာ နှင့် စီစဉ်ခြင်း"
     },
-    "title": "More"
+    "title": "ပိုမို"
   },
   "nav": {
     "about": "အကြောင်း",
@@ -3184,33 +3184,33 @@
     "title": "Notifications"
   },
   "notifications": {
-    "clearAll": "Clear all",
-    "dismiss": "Dismiss",
-    "empty": "No notifications",
-    "emptyAll": "You're all caught up!",
-    "emptySnoozed": "No snoozed notifications",
-    "emptyUnread": "No unread notifications",
-    "markAllRead": "Mark all read",
-    "snooze": "Snooze",
+    "clearAll": "အားလုံး ရှင်းရန်",
+    "dismiss": "ပယ်ဖျက်ရန်",
+    "empty": "အကြောင်းကြားချက် မရှိပါ",
+    "emptyAll": "အားလုံး ဖတ်ပြီးပါပြီ!",
+    "emptySnoozed": "ဆိုင်းငံ့ထားသော အကြောင်းကြားချက် မရှိပါ",
+    "emptyUnread": "မဖတ်ရသေးသော အကြောင်းကြားချက် မရှိပါ",
+    "markAllRead": "အားလုံး ဖတ်ပြီးသားအဖြစ် မှတ်ရန်",
+    "snooze": "ဆိုင်းငံ့ရန်",
     "snoozeOptions": {
-      "1day": "1 day",
-      "1hour": "1 hour",
-      "1week": "1 week",
-      "3days": "3 days",
-      "3hours": "3 hours"
+      "1day": "၁ ရက်",
+      "1hour": "၁ နာရီ",
+      "1week": "၁ ပတ်",
+      "3days": "၃ ရက်",
+      "3hours": "၃ နာရီ"
     },
-    "snoozedUntil": "Snoozed for {time}",
+    "snoozedUntil": "{time} ဆိုင်းငံ့ထား",
     "tabs": {
-      "all": "All",
-      "snoozed": "Snoozed",
-      "unread": "Unread"
+      "all": "အားလုံး",
+      "snoozed": "ဆိုင်းငံ့ထား",
+      "unread": "မဖတ်ရသေး"
     },
-    "title": "Notifications",
+    "title": "အကြောင်းကြားချက်များ",
     "types": {
-      "bill_reminder": "Bill Reminder",
-      "budget_alert": "Budget Alert",
-      "goal_milestone": "Goal Milestone",
-      "system": "System"
+      "bill_reminder": "ငွေတောင်းခံလွှာ သတိပေးချက်",
+      "budget_alert": "ဘတ်ဂျက် သတိပေးချက်",
+      "goal_milestone": "ပန်းတိုင် မိုင်တိုင်",
+      "system": "စနစ်"
     }
   },
   "ocr": {
@@ -3398,45 +3398,45 @@
     }
   },
   "overspendingAlerts": {
-    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
-    "percentOfBudget": "{percent}% of budget",
+    "exceededWarning": "ဤနှုန်းဖြင့် ဤလတွင် သင့်ဘတ်ဂျက်ထက် {amount} ကျော်မည်။",
+    "percentOfBudget": "ဘတ်ဂျက်၏ {percent}%",
     "progress": {
-      "label": "Current progress"
+      "label": "လက်ရှိ တိုးတက်မှု"
     },
     "stats": {
-      "budget": "Budget",
-      "daysLeft": "Days Left",
-      "projectedTotal": "Projected Total",
-      "spentSoFar": "Spent So Far"
+      "budget": "ဘတ်ဂျက်",
+      "daysLeft": "ကျန်ရက်",
+      "projectedTotal": "ခန့်မှန်း စုစုပေါင်း",
+      "spentSoFar": "ယခုထိ သုံးစွဲပြီး"
     },
     "tip": {
-      "label": "Tip:",
-      "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
+      "label": "အကြံပြု:",
+      "reduceSpending": "ဘတ်ဂျက်အတွင်း ရှိနေရန် နေ့စဉ် သုံးစွဲမှုကို {amount} သို့ လျှော့ချပါ။"
     }
   },
   "pairingDialog": {
-    "anErrorOccurred": "An error occurred",
-    "connecting": "Connecting...",
-    "connectingToDevice": "Connecting to device...",
-    "description": "Connect to another device on your local network",
-    "deviceAdded": "Device added. Connect to complete pairing.",
-    "failedToInitialize": "Failed to initialize device. Please try again.",
-    "host": "Host",
-    "ipAddressDescription": "Enter your local IP address to allow other devices to connect.",
-    "ipAddressRequired": "IP Address Required",
+    "anErrorOccurred": "အမှား ဖြစ်ပွားခဲ့သည်",
+    "connecting": "ချိတ်ဆက်နေသည်...",
+    "connectingToDevice": "စက်ပစ္စည်းသို့ ချိတ်ဆက်နေသည်...",
+    "description": "သင့်ဒေသတွင်း ကွန်ရက်ပေါ်ရှိ အခြားစက်ပစ္စည်းနှင့် ချိတ်ဆက်ရန်",
+    "deviceAdded": "စက်ပစ္စည်း ထည့်ပြီး။ တွဲချိတ်မှု ပြီးရန် ချိတ်ဆက်ပါ။",
+    "failedToInitialize": "စက်ပစ္စည်း စတင်ခြင်း မအောင်မြင်ပါ။ ထပ်ကြိုးစားပါ။",
+    "host": "အိမ်ရှင်",
+    "ipAddressDescription": "အခြားစက်ပစ္စည်းများ ချိတ်ဆက်ခွင့်ပြုရန် သင့်ဒေသတွင်း IP လိပ်စာ ထည့်ပါ။",
+    "ipAddressRequired": "IP လိပ်စာ လိုအပ်",
     "ipPlaceholder": "192.168.1.100",
-    "manual": "Manual",
-    "pairingFailed": "Pairing Failed",
-    "pairingSuccessful": "Pairing successful!",
-    "pendingConnection": "Pending Connection",
-    "readyDescription": "Other devices can now scan this QR code or enter the connection details manually.",
-    "readyForConnections": "Ready for Connections",
-    "readyToConnectTo": "Ready to connect to {deviceName}",
-    "scan": "Scan",
-    "set": "Set",
-    "title": "LAN Sync Pairing",
-    "tryAgain": "Try Again",
-    "verifyingConnection": "Verifying connection..."
+    "manual": "လက်ဖြင့်",
+    "pairingFailed": "တွဲချိတ်မှု မအောင်မြင်",
+    "pairingSuccessful": "တွဲချိတ်မှု အောင်မြင်!",
+    "pendingConnection": "ဆိုင်းငံ့ ချိတ်ဆက်မှု",
+    "readyDescription": "အခြားစက်ပစ္စည်းများ ဤ QR ကုဒ်ကို စကင်ဖတ် သို့မဟုတ် ချိတ်ဆက်မှု အသေးစိတ် လက်ဖြင့်ထည့်နိုင်ပြီ။",
+    "readyForConnections": "ချိတ်ဆက်မှုများအတွက် အဆင်သင့်",
+    "readyToConnectTo": "{deviceName} သို့ ချိတ်ဆက်ရန် အဆင်သင့်",
+    "scan": "စကင်ဖတ်",
+    "set": "သတ်မှတ်ရန်",
+    "title": "LAN စင့်ခ် တွဲချိတ်ခြင်း",
+    "tryAgain": "ထပ်ကြိုးစားရန်",
+    "verifyingConnection": "ချိတ်ဆက်မှု စစ်ဆေးနေသည်..."
   },
   "paymentHistoryPanel": {
     "actions": "Actions",
@@ -3485,35 +3485,35 @@
     "viewTransaction": "View transaction"
   },
   "pinDialog": {
-    "cancel": "Cancel",
-    "changeDescription": "Change the PIN for this profile.",
-    "changePin": "Change PIN",
-    "confirmNewPinLabel": "Confirm New PIN",
-    "confirmNewPinPlaceholder": "Confirm new PIN",
-    "continue": "Continue",
-    "currentPinLabel": "Current PIN",
-    "defaultProfileName": "Profile",
-    "enterCurrentPinPlaceholder": "Enter current PIN",
-    "enterNewPinPlaceholder": "Enter new PIN",
-    "enterPinPlaceholder": "Enter PIN",
-    "errorIncorrectPin": "Incorrect current PIN",
-    "errorInvalidPin": "Invalid PIN",
-    "errorPinMismatch": "PINs do not match",
-    "errorSetFailed": "Failed to set PIN",
-    "errorVerificationFailed": "Verification failed",
-    "newPinLabel": "New PIN (4-6 digits)",
-    "pinAdviceText": "Choose a PIN that's easy to remember but hard to guess. Avoid simple patterns like 1234 or repeated digits.",
-    "removeConfirmation": "Are you sure you want to remove PIN protection? This profile will be accessible without any authentication.",
-    "removeDescription": "Remove PIN protection from this profile. Anyone will be able to access it.",
-    "removePin": "Remove PIN",
-    "setDescription": "Set a PIN to protect this profile from unauthorized access.",
-    "setPin": "Set PIN",
-    "tryAgainIn": "Try again in {seconds} seconds",
-    "unlock": "Unlock",
-    "unlockDescription": "Enter your PIN to access this profile",
-    "unlockTitle": "Unlock {name}",
-    "useDifferentProfile": "Use Different Profile",
-    "verifyAndRemove": "Verify & Remove"
+    "cancel": "ပယ်ဖျက်ရန်",
+    "changeDescription": "ဤပရိုဖိုင်းအတွက် PIN ပြောင်းရန်။",
+    "changePin": "PIN ပြောင်းရန်",
+    "confirmNewPinLabel": "PIN အသစ် အတည်ပြုရန်",
+    "confirmNewPinPlaceholder": "PIN အသစ် အတည်ပြုပါ",
+    "continue": "ဆက်လုပ်ရန်",
+    "currentPinLabel": "လက်ရှိ PIN",
+    "defaultProfileName": "ပရိုဖိုင်း",
+    "enterCurrentPinPlaceholder": "လက်ရှိ PIN ထည့်ပါ",
+    "enterNewPinPlaceholder": "PIN အသစ် ထည့်ပါ",
+    "enterPinPlaceholder": "PIN ထည့်ပါ",
+    "errorIncorrectPin": "လက်ရှိ PIN မမှန်ပါ",
+    "errorInvalidPin": "PIN မမှန်ပါ",
+    "errorPinMismatch": "PIN များ မကိုက်ညီပါ",
+    "errorSetFailed": "PIN သတ်မှတ်ခြင်း မအောင်မြင်ပါ",
+    "errorVerificationFailed": "စစ်ဆေးခြင်း မအောင်မြင်ပါ",
+    "newPinLabel": "PIN အသစ် (ဂဏန်း ၄-၆ လုံး)",
+    "pinAdviceText": "မှတ်မိလွယ်သော်လည်း ခန့်မှန်းရခက်သော PIN ကို ရွေးပါ။ 1234 ကဲ့သို့ ရိုးရှင်းသော ပုံစံများ သို့မဟုတ် ထပ်ခါတလဲလဲ ဂဏန်းများ ရှောင်ပါ။",
+    "removeConfirmation": "PIN ကာကွယ်မှုကို ဖယ်ရှားမည်မှာ သေချာပါသလား? ဤပရိုဖိုင်းကို စစ်မှန်ကြောင်းအထောက်အထား မလိုဘဲ ဝင်ရောက်နိုင်မည်။",
+    "removeDescription": "ဤပရိုဖိုင်းမှ PIN ကာကွယ်မှု ဖယ်ရှားရန်။ မည်သူမဆို ဝင်ရောက်နိုင်မည်။",
+    "removePin": "PIN ဖယ်ရှားရန်",
+    "setDescription": "ခွင့်ပြုချက်မရှိ ဝင်ရောက်မှုမှ ကာကွယ်ရန် PIN သတ်မှတ်ပါ။",
+    "setPin": "PIN သတ်မှတ်ရန်",
+    "tryAgainIn": "{seconds} စက္ကန့်အတွင်း ထပ်ကြိုးစားပါ",
+    "unlock": "ဖွင့်ရန်",
+    "unlockDescription": "ဤပရိုဖိုင်းသို့ ဝင်ရောက်ရန် PIN ထည့်ပါ",
+    "unlockTitle": "{name} ကို ဖွင့်ရန်",
+    "useDifferentProfile": "အခြား ပရိုဖိုင်း သုံးရန်",
+    "verifyAndRemove": "စစ်ဆေး၍ ဖယ်ရှားရန်"
   },
   "planning": {
     "future": {
@@ -3716,26 +3716,26 @@
   },
   "predictiveSpendingChart": {
     "legend": {
-      "actual": "Actual",
-      "confidenceInterval": "Confidence Interval",
-      "predicted": "Predicted"
+      "actual": "အမှန်တကယ်",
+      "confidenceInterval": "ယုံကြည်မှု ကြားကာလ",
+      "predicted": "ခန့်မှန်းထား"
     },
-    "noData": "No data available for predictions",
-    "predictionUnavailable": "Prediction Unavailable",
+    "noData": "ခန့်မှန်းချက်များအတွက် ဒေတာ မရှိပါ",
+    "predictionUnavailable": "ခန့်မှန်းချက် မရရှိနိုင်ပါ",
     "stats": {
-      "avgConfidence": "Avg Confidence",
-      "nextMonth": "Next Month",
-      "threeMonthAvg": "3-Month Avg"
+      "avgConfidence": "ပျမ်းမျှ ယုံကြည်မှု",
+      "nextMonth": "နောက်လ",
+      "threeMonthAvg": "၃ လ ပျမ်းမျှ"
     },
     "table": {
-      "confidence": "Confidence",
-      "month": "Month",
-      "predicted": "Predicted",
-      "range": "Range",
-      "title": "Monthly Predictions"
+      "confidence": "ယုံကြည်မှု",
+      "month": "လ",
+      "predicted": "ခန့်မှန်းထား",
+      "range": "အကွာအဝေး",
+      "title": "လစဉ် ခန့်မှန်းချက်များ"
     },
-    "title": "Spending Forecast: {category}",
-    "trainingModel": "Training model and generating predictions..."
+    "title": "သုံးစွဲမှု ခန့်မှန်းချက်: {category}",
+    "trainingModel": "မော်ဒယ် လေ့ကျင့်နေပြီး ခန့်မှန်းချက်များ ထုတ်နေသည်..."
   },
   "privacyPanel": {
     "active": "Active",
@@ -3825,27 +3825,27 @@
     "whatsSentDescription": "Only cleaned transaction descriptions (e.g., \"AMAZON.COM\"). No account numbers, names, or addresses. Powered by OpenAI GPT-4o-mini."
   },
   "profileDialog": {
-    "cancel": "Cancel",
-    "confirmPinLabel": "Confirm PIN",
-    "confirmPinPlaceholder": "Confirm PIN",
-    "createDescription": "Add a new profile for a family member. Each profile can have its own private budgets.",
-    "createTitle": "Create Profile",
-    "defaultProfileNote": "This is the default profile and will be selected on app start.",
-    "editDescription": "Update the profile name and avatar color.",
-    "editTitle": "Edit Profile",
-    "enterPinPlaceholder": "Enter PIN",
-    "errorCreateFailed": "Failed to create profile",
-    "errorInvalidPin": "Invalid PIN",
-    "errorNameRequired": "Please enter a name for the profile",
-    "errorNameTooLong": "Name must be 30 characters or less",
-    "errorPinMismatch": "PINs do not match",
-    "errorUpdateFailed": "Failed to update profile",
-    "nameLabel": "Name",
-    "namePlaceholder": "Enter profile name",
-    "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
-    "pinLabel": "PIN (4-6 digits)",
-    "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes",
+    "cancel": "ပယ်ဖျက်ရန်",
+    "confirmPinLabel": "PIN အတည်ပြုရန်",
+    "confirmPinPlaceholder": "PIN အတည်ပြုပါ",
+    "createDescription": "မိသားစုဝင်အတွက် ပရိုဖိုင်းအသစ် ထည့်ပါ။ ပရိုဖိုင်းတစ်ခုစီတွင် ကိုယ်ပိုင် ဘတ်ဂျက်များ ရှိနိုင်သည်။",
+    "createTitle": "ပရိုဖိုင်း ဖန်တီးရန်",
+    "defaultProfileNote": "ဤသည်မှာ မူလ ပရိုဖိုင်းဖြစ်ပြီး အက်ပ် စတင်ချိန်တွင် ရွေးချယ်ထားမည်။",
+    "editDescription": "ပရိုဖိုင်း အမည်နှင့် ကိုယ်ပွား အရောင် အပ်ဒိတ်ရန်။",
+    "editTitle": "ပရိုဖိုင်း ပြင်ဆင်ရန်",
+    "enterPinPlaceholder": "PIN ထည့်ပါ",
+    "errorCreateFailed": "ပရိုဖိုင်း ဖန်တီးခြင်း မအောင်မြင်ပါ",
+    "errorInvalidPin": "PIN မမှန်ပါ",
+    "errorNameRequired": "ပရိုဖိုင်းအတွက် အမည် ထည့်ပါ",
+    "errorNameTooLong": "အမည် စာလုံး ၃၀ သို့မဟုတ် နည်းရမည်",
+    "errorPinMismatch": "PIN များ မကိုက်ညီပါ",
+    "errorUpdateFailed": "ပရိုဖိုင်း အပ်ဒိတ်ခြင်း မအောင်မြင်ပါ",
+    "nameLabel": "အမည်",
+    "namePlaceholder": "ပရိုဖိုင်း အမည် ထည့်ပါ",
+    "pinHelpText": "PIN သည် ဤပရိုဖိုင်းသို့ ဝင်ရောက်ခွင့်ကို ကာကွယ်သည်။ မှတ်မိလွယ်သော်လည်း လွယ်ကူလွန်းခြင်း မရှိသော တစ်ခုကို ရွေးပါ။",
+    "pinLabel": "PIN (ဂဏန်း ၄-၆ လုံး)",
+    "protectWithPin": "PIN ဖြင့် ကာကွယ်ရန်",
+    "saveChanges": "ပြောင်းလဲမှုများ သိမ်းရန်",
     "errorDeleteFailed": "ပရိုဖိုင်ကို ဖျက်၍မရပါ",
     "deleteTitle": "ပရိုဖိုင်ကို ဖျက်မလား?",
     "defaultProfile": "မူလပရိုဖိုင်",
@@ -3855,27 +3855,27 @@
     "deleteButton": "ပရိုဖိုင်ဖျက်ရန်"
   },
   "pullToRefresh": {
-    "pull": "Pull to refresh",
-    "release": "Release to refresh"
+    "pull": "ပြန်တင်ရန် ဆွဲပါ",
+    "release": "ပြန်တင်ရန် လွှတ်ပါ"
   },
   "pwaInstall": {
     "buttons": {
-      "install": "Install",
-      "notNow": "Not now"
+      "install": "ထည့်သွင်းရန်",
+      "notNow": "ယခု မဟုတ်သေးပါ"
     },
-    "close": "Close install prompt",
-    "description": "Add to your home screen for quick access and offline use",
+    "close": "ထည့်သွင်းမှု အကြံပြုချက် ပိတ်ရန်",
+    "description": "အမြန်ဝင်ရောက်ခွင့်နှင့် အော့ဖ်လိုင်းအသုံးပြုမှုအတွက် ပင်မစခရင်သို့ ထည့်ပါ",
     "features": {
-      "fastSecure": "Fast & secure",
-      "noAppStore": "No app store needed",
-      "offline": "Works offline"
+      "fastSecure": "မြန်ဆန်ပြီး လုံခြုံ",
+      "noAppStore": "အက်ပ်စတိုး မလိုအပ်ပါ",
+      "offline": "အော့ဖ်လိုင်းတွင် အလုပ်လုပ်သည်"
     },
-    "iosAddToHome": "\"Add to Home Screen\"",
-    "iosForFullExperience": "for the full app experience with faster loading.",
-    "iosTap": "Tap",
-    "iosThen": "then",
-    "iosTitle": "Install Budget App",
-    "title": "Install Budget App"
+    "iosAddToHome": "\"ပင်မစခရင်သို့ ထည့်ပါ\"",
+    "iosForFullExperience": "ပိုမိုမြန်ဆန်သော တင်ခြင်းဖြင့် အပြည့်အဝ အက်ပ်အတွေ့အကြုံအတွက်။",
+    "iosTap": "နှိပ်ပါ",
+    "iosThen": "ပြီးလျှင်",
+    "iosTitle": "ဘတ်ဂျက်အက်ပ် ထည့်သွင်းရန်",
+    "title": "ဘတ်ဂျက်အက်ပ် ထည့်သွင်းရန်"
   },
   "qrScanner": {
     "allowCameraAccess": "Please allow camera access when prompted",
@@ -3906,38 +3906,38 @@
   },
   "quickCategorize": {
     "buttons": {
-      "apply": "Apply Category",
-      "cancel": "Cancel",
-      "save": "Save"
+      "apply": "အမျိုးအစား ထည့်ရန်",
+      "cancel": "ပယ်ဖျက်ရန်",
+      "save": "သိမ်းရန်"
     },
-    "clickToSelect": "Click a category to select",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
-    "general": "General",
-    "noResults": "No categories found",
-    "pressEnter": "Press ↵ Enter",
-    "saving": "Saving...",
-    "searchPlaceholder": "Search categories...",
-    "title": "Quick Categorize"
+    "clickToSelect": "ရွေးရန် အမျိုးအစားကို နှိပ်ပါ",
+    "description": "{count, plural, =1 {ဤငွေလွှဲ} other {ငွေလွှဲ # ခု}} အတွက် အမျိုးအစား ရွေးပါ",
+    "general": "အထွေထွေ",
+    "noResults": "အမျိုးအစား မတွေ့ပါ",
+    "pressEnter": "↵ Enter နှိပ်ပါ",
+    "saving": "သိမ်းဆည်းနေသည်...",
+    "searchPlaceholder": "အမျိုးအစားများ ရှာပါ...",
+    "title": "အမြန် အမျိုးအစားခွဲခြင်း"
   },
   "quickFilters": {
-    "all": "All",
-    "categories": "Categories",
-    "clearFilters": "Clear Filters",
-    "moreCategories": "+{count} more",
+    "all": "အားလုံး",
+    "categories": "အမျိုးအစားများ",
+    "clearFilters": "စစ်ထုတ်မှုများ ရှင်းရန်",
+    "moreCategories": "+{count} ပိုကြည့်ရန်",
     "presets": {
-      "last30": "Last 30 Days",
-      "last90": "Last 90 Days",
-      "thisMonth": "This Month",
-      "thisYear": "This Year"
+      "last30": "လွန်ခဲ့သော ၃၀ ရက်",
+      "last90": "လွန်ခဲ့သော ၉၀ ရက်",
+      "thisMonth": "ဤလ",
+      "thisYear": "ဤနှစ်"
     },
-    "timePeriod": "Time Period"
+    "timePeriod": "ကာလ"
   },
   "quickStats": {
-    "balance": "Total Balance",
-    "expenses": "Expenses",
-    "income": "Income",
-    "savingsRate": "Savings Rate",
-    "savingsRateDescription": "Percentage of income saved this month"
+    "balance": "စုစုပေါင်း လက်ကျန်",
+    "expenses": "ကုန်ကျစရိတ်",
+    "income": "ဝင်ငွေ",
+    "savingsRate": "စုဆောင်းမှု နှုန်း",
+    "savingsRateDescription": "ဤလတွင် ဝင်ငွေ၏ စုဆောင်းနိုင်သော ရာခိုင်နှုန်း"
   },
   "receiptThumbnail": {
     "close": "Close",
@@ -3954,65 +3954,65 @@
   },
   "receiptUpload": {
     "buttons": {
-      "attachReceipt": "Attach Receipt",
-      "chooseDifferent": "Choose Different",
-      "extractData": "Extract Data",
-      "extracting": "Extracting..."
+      "attachReceipt": "ပြေစာ ပူးတွဲရန်",
+      "chooseDifferent": "အခြား ရွေးရန်",
+      "extractData": "ဒေတာ ထုတ်ယူရန်",
+      "extracting": "ထုတ်ယူနေသည်..."
     },
     "camera": {
-      "takePhoto": "Take Photo with Camera",
-      "useDevice": "Use your device camera to capture receipt"
+      "takePhoto": "ကင်မရာဖြင့် ဓာတ်ပုံ ရိုက်ရန်",
+      "useDevice": "ပြေစာ ဖမ်းယူရန် သင့်စက်ပစ္စည်း ကင်မရာကို သုံးပါ"
     },
-    "cameraInputLabel": "Camera capture input",
+    "cameraInputLabel": "ကင်မရာ ဖမ်းယူမှု ထည့်သွင်းချက်",
     "dropzone": {
-      "browseFiles": "or <link>browse files</link>",
-      "dragDrop": "Drag & drop receipt here",
-      "dropHere": "Drop the receipt here",
-      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+      "browseFiles": "သို့မဟုတ် <link>ဖိုင်များ ရှာဖွေပါ</link>",
+      "dragDrop": "ပြေစာကို ဆွဲယူထည့်ပါ",
+      "dropHere": "ပြေစာကို ဤနေရာတွင် ထည့်ပါ",
+      "supportedFormats": "JPG, PNG, PDF ပံ့ပိုးသည် • အများဆုံး {size}MB"
     },
     "errors": {
-      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
-      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
-      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
-      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
-      "rejected": "File was rejected. Please try again",
-      "tooLarge": "File is too large. Maximum size is {size}MB"
+      "couldNotExtract": "ပြေစာမှ ဒေတာ ထုတ်ယူ၍ မရပါ။ လက်ဖြင့် ထည့်ပါ။",
+      "extractionFailed": "ဒေတာ ထုတ်ယူခြင်း မအောင်မြင်ပါ။ ထပ်ကြိုးစား သို့မဟုတ် လက်ဖြင့် ထည့်ပါ။",
+      "invalidType": "ဖိုင်အမျိုးအစား မမှန်ပါ။ JPG, PNG နှင့် PDF ဖိုင်များသာ ခွင့်ပြုသည်",
+      "ocrImagesOnly": "OCR သည် ပုံဖိုင်များ (JPG, PNG) အတွက်သာ ပံ့ပိုးသည်",
+      "rejected": "ဖိုင် ပယ်ချခံရသည်။ ထပ်ကြိုးစားပါ",
+      "tooLarge": "ဖိုင် ကြီးလွန်းသည်။ အများဆုံး အရွယ်အစား {size}MB"
     },
     "extracted": {
-      "amount": "Amount:",
-      "confidence": "Confidence: {percent}%",
-      "date": "Date:",
-      "merchant": "Merchant:",
-      "title": "Data Extracted"
+      "amount": "ပမာဏ:",
+      "confidence": "ယုံကြည်မှု: {percent}%",
+      "date": "ရက်စွဲ:",
+      "merchant": "ကုန်သည်:",
+      "title": "ဒေတာ ထုတ်ယူပြီး"
     },
     "pdf": {
-      "noPreview": "Preview not available",
-      "title": "PDF Receipt"
+      "noPreview": "ကြိုကြည့်ရှုခြင်း မရရှိနိုင်ပါ",
+      "title": "PDF ပြေစာ"
     },
-    "receiptPreview": "Receipt preview",
-    "removeFile": "Remove file"
+    "receiptPreview": "ပြေစာ ကြိုကြည့်ရှု",
+    "removeFile": "ဖိုင် ဖယ်ရှားရန်"
   },
   "recurringTransactions": {
-    "confidence": "{percent}% confidence",
-    "estimatedMonthly": "Estimated Monthly",
+    "confidence": "{percent}% ယုံကြည်မှု",
+    "estimatedMonthly": "ခန့်မှန်း လစဉ်",
     "frequency": {
-      "biweekly": "Bi-weekly",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "biweekly": "နှစ်ပတ်တစ်ကြိမ်",
+      "monthly": "လစဉ်",
+      "quarterly": "သုံးလတစ်ကြိမ်",
+      "weekly": "အပတ်စဉ်"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
-    "next": "Next: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "inDays": "{count, plural, =0 {(ယနေ့)} =1 {(၁ ရက်အတွင်း)} other {(# ရက်အတွင်း)}}",
+    "next": "နောက်: {date}",
+    "occurrences": "{count, plural, =1 {ဖြစ်ပွားမှု ၁ ခု ရှာဖွေတွေ့ရှိ} other {ဖြစ်ပွားမှု # ခု ရှာဖွေတွေ့ရှိ}}",
     "perPeriod": {
-      "month": "per month",
-      "quarter": "per quarter",
-      "twoWeeks": "per 2 weeks",
-      "week": "per week"
+      "month": "တစ်လလျှင်",
+      "quarter": "သုံးလလျှင်",
+      "twoWeeks": "နှစ်ပတ်လျှင်",
+      "week": "တစ်ပတ်လျှင်"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
-    "subtitle": "Detected subscriptions and bills",
-    "title": "Recurring Transactions"
+    "showingPatterns": "{count, plural, =1 {ထပ်ခါတလဲလဲ ငွေလွှဲပုံစံ ၁ ခု ပြသနေသည်} other {ထပ်ခါတလဲလဲ ငွေလွှဲပုံစံ # ခု ပြသနေသည်}}",
+    "subtitle": "ရှာဖွေတွေ့ရှိထားသော စာရင်းသွင်းမှုများနှင့် ငွေတောင်းခံလွှာများ",
+    "title": "ထပ်ခါတလဲလဲ ငွေလွှဲများ"
   },
   "reports": {
     "addTransactionsToSeeFlow": "Add income and expense transactions to see your money flow",
@@ -4142,13 +4142,13 @@
     "yourAccounts": "Your Accounts"
   },
   "shortcutsModal": {
-    "close": "Close shortcuts help",
+    "close": "အမြန်ချိတ်ဆက်မှု အကူအညီ ပိတ်ရန်",
     "proTip": {
-      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
-      "title": "💡 Pro Tip"
+      "description": "ဖောင်များတွင် ရိုက်နေချိန်မှလွဲ၍ မည်သည့်စာမျက်နှာတွင်မဆို ကီးဘုတ် အမြန်ချိတ်ဆက်မှုများ အလုပ်လုပ်သည်။ ဤအကူအညီကိုကြည့်ရန် {key} ကို အချိန်မရွေးနှိပ်ပါ။",
+      "title": "💡 အကြံပြု"
     },
-    "subtitle": "Power-user productivity tips",
-    "title": "Keyboard Shortcuts"
+    "subtitle": "ကျွမ်းကျင်သူအတွက် ကုန်ထုတ်စွမ်းအား အကြံပြုချက်များ",
+    "title": "ကီးဘုတ် အမြန်ချိတ်ဆက်မှုများ"
   },
   "sidebar": {
     "actions": {
@@ -4245,167 +4245,167 @@
   },
   "simplefinSettings": {
     "connectedAccounts": {
-      "description": "Manage your linked bank accounts",
-      "title": "Connected Accounts"
+      "description": "ချိတ်ဆက်ထားသော ဘဏ်အကောင့်များ စီမံရန်",
+      "title": "ချိတ်ဆက်ထားသော အကောင့်များ"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
-      "connectButton": "Connect Bank Account",
-      "connected": "Connected",
-      "description": "Connect your bank accounts to automatically import transactions",
-      "notConnected": "Not Connected",
-      "notConnectedDesc": "Connect your bank accounts to start importing transactions",
-      "title": "SimpleFIN Connection"
+      "accountsLinked": "{count, plural, =1 {အကောင့် ၁ ခု ချိတ်ဆက်ပြီး} other {အကောင့် # ခု ချိတ်ဆက်ပြီး}}",
+      "connectButton": "ဘဏ်အကောင့် ချိတ်ဆက်ရန်",
+      "connected": "ချိတ်ဆက်ပြီး",
+      "description": "ငွေလွှဲများ အလိုအလျောက် သွင်းယူရန် သင့်ဘဏ်အကောင့်များကို ချိတ်ဆက်ပါ",
+      "notConnected": "ချိတ်ဆက်မထားပါ",
+      "notConnectedDesc": "ငွေလွှဲများ သွင်းယူမှု စတင်ရန် သင့်ဘဏ်အကောင့်များကို ချိတ်ဆက်ပါ",
+      "title": "SimpleFIN ချိတ်ဆက်မှု"
     },
     "disconnect": {
-      "button": "Disconnect",
-      "cancel": "Cancel",
-      "confirm": "Disconnect",
-      "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
-      "dialogTitle": "Disconnect SimpleFIN?"
+      "button": "ချိတ်ဆက်ဖြုတ်ရန်",
+      "cancel": "ပယ်ဖျက်ရန်",
+      "confirm": "ချိတ်ဆက်ဖြုတ်ရန်",
+      "dialogDescription": "သင့်ဘဏ်အကောင့်များနှင့် ချိတ်ဆက်မှုကို ဖယ်ရှားမည်။ ရှိပြီးသား ငွေလွှဲများ မဖျက်ပါ၊ သို့သော် ငွေလွှဲအသစ်များ အလိုအလျောက် စင့်ခ်မဖြစ်တော့ပါ။",
+      "dialogTitle": "SimpleFIN ချိတ်ဆက်ဖြုတ်မည်လား?"
     },
     "help": {
-      "bridgeDashboard": "SimpleFIN Bridge Dashboard",
-      "protocolDocs": "SimpleFIN Protocol Documentation",
-      "title": "Need Help?"
+      "bridgeDashboard": "SimpleFIN Bridge ဒက်ရှ်ဘုတ်",
+      "protocolDocs": "SimpleFIN ပရိုတိုကော စာရွက်စာတမ်း",
+      "title": "အကူအညီ လိုပါသလား?"
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
-      "lastSynced": "Last synced: {time}",
-      "lessThanHour": "Less than an hour ago",
-      "never": "Never",
-      "syncNow": "Sync Now",
-      "syncing": "Syncing..."
+      "hoursAgo": "{hours, plural, =1 {၁ နာရီ ကြာပြီ} other {# နာရီ ကြာပြီ}}",
+      "lastSynced": "နောက်ဆုံး စင့်ခ်: {time}",
+      "lessThanHour": "တစ်နာရီ မပြည့်သေးပါ",
+      "never": "မဖြစ်တော့ပါ",
+      "syncNow": "ယခု စင့်ခ်ရန်",
+      "syncing": "စင့်ခ်နေသည်..."
     },
     "syncSettings": {
       "autoCategorize": {
-        "description": "Automatically categorize imported transactions using AI",
-        "label": "Auto-Categorize"
+        "description": "AI ဖြင့် သွင်းယူထားသော ငွေလွှဲများကို အလိုအလျောက် အမျိုးအစားခွဲရန်",
+        "label": "အလိုအလျောက် အမျိုးအစားခွဲ"
       },
       "autoSync": {
-        "description": "Automatically sync transactions on a schedule",
-        "label": "Automatic Sync"
+        "description": "အချိန်ဇယားအတိုင်း ငွေလွှဲများ အလိုအလျောက် စင့်ခ်လုပ်ရန်",
+        "label": "အလိုအလျောက် စင့်ခ်"
       },
-      "description": "Configure how and when transactions are synced",
+      "description": "ငွေလွှဲများ စင့်ခ်လုပ်ပုံနှင့် အချိန် ပြင်ဆင်ရန်",
       "frequency": {
-        "every12Hours": "Every 12 hours",
-        "every2Days": "Every 2 days",
-        "every6Hours": "Every 6 hours",
-        "hint": "SimpleFIN allows up to 24 requests per day. Daily sync is recommended.",
-        "label": "Sync Frequency",
-        "onceDaily": "Once daily"
+        "every12Hours": "၁၂ နာရီတိုင်း",
+        "every2Days": "၂ ရက်တိုင်း",
+        "every6Hours": "၆ နာရီတိုင်း",
+        "hint": "SimpleFIN သည် တစ်ရက်လျှင် တောင်းဆိုမှု ၂၄ ခုအထိ ခွင့်ပြုသည်။ နေ့စဉ် စင့်ခ် အကြံပြုသည်။",
+        "label": "စင့်ခ် အကြိမ်ရေ",
+        "onceDaily": "နေ့စဉ် တစ်ကြိမ်"
       },
       "notifications": {
-        "description": "Show notification when sync completes",
-        "label": "Sync Notifications"
+        "description": "စင့်ခ် ပြီးဆုံးချိန် အကြောင်းကြားချက် ပြရန်",
+        "label": "စင့်ခ် အကြောင်းကြားချက်များ"
       },
       "pendingTransactions": {
-        "description": "Include transactions that haven't posted yet",
-        "label": "Import Pending Transactions"
+        "description": "မတင်ရသေးသော ငွေလွှဲများ ထည့်သွင်းရန်",
+        "label": "ဆိုင်းငံ့ ငွေလွှဲများ သွင်းယူရန်"
       },
-      "title": "Sync Settings",
+      "title": "စင့်ခ် ဆက်တင်များ",
       "transactionHistory": {
-        "days": "{count} days",
-        "hint": "How many days of transaction history to fetch (max 60 days per SimpleFIN)",
-        "label": "Transaction History"
+        "days": "{count} ရက်",
+        "hint": "ငွေလွှဲ မှတ်တမ်း ရက်ဘယ်နှစ်ရက် ယူမည်နည်း (SimpleFIN အရ အများဆုံး ၆၀ ရက်)",
+        "label": "ငွေလွှဲ မှတ်တမ်း"
       }
     }
   },
   "simplefinStatus": {
-    "active": "Active",
-    "asOf": "as of {date}",
-    "cancel": "Cancel",
-    "connected": "Connected",
-    "connecting": "Connecting...",
-    "disconnected": "Disconnected",
-    "dismiss": "Dismiss",
-    "error": "Error",
-    "errorsLabel": "Errors:",
-    "expired": "Expired",
-    "hoursAgo": "{hours}h ago",
-    "imported": "Imported",
-    "justNow": "just now",
-    "lastSynced": "Last synced: {time}",
-    "minutesAgo": "{minutes}m ago",
-    "neverSynced": "Never synced",
-    "noBankAccounts": "No bank accounts connected",
-    "pause": "Pause",
-    "paused": "Paused",
-    "processing": "Processing: {account}",
-    "resume": "Resume",
-    "skippedDuplicates": "Skipped (duplicates)",
+    "active": "လက်ရှိ",
+    "asOf": "{date} အရ",
+    "cancel": "ပယ်ဖျက်ရန်",
+    "connected": "ချိတ်ဆက်ပြီး",
+    "connecting": "ချိတ်ဆက်နေသည်...",
+    "disconnected": "ချိတ်ဆက်ဖြုတ်ပြီး",
+    "dismiss": "ပယ်ဖျက်ရန်",
+    "error": "အမှား",
+    "errorsLabel": "အမှားများ:",
+    "expired": "သက်တမ်းကုန်ပြီ",
+    "hoursAgo": "{hours} နာရီ ကြာပြီ",
+    "imported": "သွင်းယူပြီး",
+    "justNow": "ခုမှ",
+    "lastSynced": "နောက်ဆုံး စင့်ခ်: {time}",
+    "minutesAgo": "{minutes} မိနစ် ကြာပြီ",
+    "neverSynced": "စင့်ခ် မလုပ်ရသေးပါ",
+    "noBankAccounts": "ဘဏ်အကောင့် ချိတ်ဆက်မထားပါ",
+    "pause": "ရပ်ဆိုင်းရန်",
+    "paused": "ရပ်ဆိုင်းထား",
+    "processing": "လုပ်ဆောင်နေသည်: {account}",
+    "resume": "ပြန်လည်စတင်ရန်",
+    "skippedDuplicates": "ကျော်ပြီး (ထပ်နေမှု)",
     "statusLabel": "SimpleFIN: {status}",
-    "sync": "Sync",
-    "syncComplete": "Sync Complete",
-    "syncCompletedWithErrors": "Sync Completed with Errors",
-    "syncFailed": "Sync Failed",
-    "syncSuccessful": "Sync Successful",
-    "syncedDaysAgo": "Synced {days}d ago",
-    "syncedHoursAgo": "Synced {hours}h ago",
-    "syncedJustNow": "Synced just now",
-    "syncedYesterday": "Synced yesterday",
-    "syncing": "Syncing...",
-    "transactionsCount": "({count} transactions)",
-    "unlink": "Unlink",
-    "warningsLabel": "Warnings:"
+    "sync": "စင့်ခ်",
+    "syncComplete": "စင့်ခ် ပြီးဆုံး",
+    "syncCompletedWithErrors": "အမှားများဖြင့် စင့်ခ် ပြီးဆုံး",
+    "syncFailed": "စင့်ခ် မအောင်မြင်",
+    "syncSuccessful": "စင့်ခ် အောင်မြင်",
+    "syncedDaysAgo": "{days} ရက် ကြာပြီ စင့်ခ်ပြီး",
+    "syncedHoursAgo": "{hours} နာရီ ကြာပြီ စင့်ခ်ပြီး",
+    "syncedJustNow": "ခုမှ စင့်ခ်ပြီး",
+    "syncedYesterday": "မနေ့က စင့်ခ်ပြီး",
+    "syncing": "စင့်ခ်နေသည်...",
+    "transactionsCount": "(ငွေလွှဲ {count} ခု)",
+    "unlink": "ချိတ်ဆက်ဖြုတ်ရန်",
+    "warningsLabel": "သတိပေးချက်များ:"
   },
   "spendingTrendChart": {
-    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "forecastFooter": "လွန်ခဲ့သော {months} လ၏ linear regression အပေါ်အခြေခံ ခန့်မှန်းချက်",
     "legend": {
-      "actualSpending": "Actual Spending",
-      "projected": "Projected"
+      "actualSpending": "အမှန်တကယ် သုံးစွဲမှု",
+      "projected": "ခန့်မှန်းထား"
     },
-    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "notEnoughData": "လမ်းကြောင်းများ ဖန်တီးရန် ဒေတာ မလုံလောက်ပါ။ အနည်းဆုံး ၂ လ ငွေလွှဲများ ထည့်ပါ။",
     "stats": {
-      "avgMonthly": "Avg Monthly",
-      "lastMonth": "Last Month",
-      "projected": "Projected"
+      "avgMonthly": "ပျမ်းမျှ လစဉ်",
+      "lastMonth": "ယခင်လ",
+      "projected": "ခန့်မှန်းထား"
     },
-    "title": "Spending Trends & Forecast"
+    "title": "သုံးစွဲမှု လမ်းကြောင်းများ နှင့် ခန့်မှန်းချက်"
   },
   "splitTransaction": {
-    "addSplit": "Add Split ({current}/{max})",
-    "amount": "Amount",
+    "addSplit": "ခွဲမှု ထည့်ရန် ({current}/{max})",
+    "amount": "ပမာဏ",
     "buttons": {
-      "cancel": "Cancel",
-      "save": "Save Split",
-      "saving": "Saving..."
+      "cancel": "ပယ်ဖျက်ရန်",
+      "save": "ခွဲမှု သိမ်းရန်",
+      "saving": "သိမ်းနေသည်..."
     },
-    "category": "Category",
-    "closeModal": "Close modal",
-    "date": "Date:",
-    "distributeEvenly": "Distribute Evenly",
+    "category": "အမျိုးအစား",
+    "closeModal": "မော်ဒယ် ပိတ်ရန်",
+    "date": "ရက်စွဲ:",
+    "distributeEvenly": "တူညီစွာ ခွဲဝေရန်",
     "errors": {
-      "saveFailed": "Failed to save split transaction"
+      "saveFailed": "ခွဲမှု ငွေလွှဲ သိမ်းခြင်း မအောင်မြင်ပါ"
     },
     "help": {
-      "step1": "Enter the amount for each category (must total ${amount})",
-      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
-      "step3": "Add up to 5 splits per transaction",
-      "step4": "The original transaction will be hidden and replaced with split items",
-      "title": "How to split transactions:"
+      "step1": "အမျိုးအစားတစ်ခုချင်းအတွက် ပမာဏ ထည့်ပါ (စုစုပေါင်း ${amount} ဖြစ်ရမည်)",
+      "step2": "အမျိုးအစားအားလုံးတွင် တူညီစွာ ခွဲရန် \"တူညီစွာ ခွဲဝေရန်\" ကို သုံးပါ",
+      "step3": "ငွေလွှဲတစ်ခုလျှင် အများဆုံး ခွဲမှု ၅ ခု ထည့်ပါ",
+      "step4": "မူလ ငွေလွှဲကို ဖျောက်ပြီး ခွဲမှုများဖြင့် အစားထိုးမည်",
+      "title": "ငွေလွှဲ ခွဲနည်း:"
     },
-    "maxSplitsReached": "Maximum 5 splits allowed",
-    "minSplitsRequired": "Minimum 2 splits required",
-    "none": "None",
-    "notes": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Business expense, Personal use",
-    "originalAmount": "Original Amount:",
-    "removeThisSplit": "Remove this split",
-    "selectCategory": "Select category...",
-    "splitsCount": "Splits ({current}/{max})",
-    "subcategory": "Subcategory",
-    "title": "Split Transaction",
+    "maxSplitsReached": "အများဆုံး ခွဲမှု ၅ ခု ခွင့်ပြုသည်",
+    "minSplitsRequired": "အနည်းဆုံး ခွဲမှု ၂ ခု လိုအပ်သည်",
+    "none": "မရှိ",
+    "notes": "မှတ်စု (ရွေးချယ်စရာ)",
+    "notesPlaceholder": "ဥပမာ - လုပ်ငန်း ကုန်ကျစရိတ်၊ ကိုယ်ပိုင် အသုံး",
+    "originalAmount": "မူလ ပမာဏ:",
+    "removeThisSplit": "ဤခွဲမှု ဖယ်ရှားရန်",
+    "selectCategory": "အမျိုးအစား ရွေးပါ...",
+    "splitsCount": "ခွဲမှုများ ({current}/{max})",
+    "subcategory": "အမျိုးအစားခွဲ",
+    "title": "ငွေလွှဲ ခွဲခြင်း",
     "validation": {
-      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
-      "amountsMustMatch": "Split amounts must equal the original transaction amount",
-      "categoryRequired": "All splits must have a category",
-      "matchesOriginal": "✓ Matches original",
-      "overBy": "Over by ${amount}",
-      "readyToSave": "Split amounts match the original transaction. Ready to save!",
-      "total": "Total:",
-      "underBy": "Under by ${amount}"
+      "adjustAmounts": "မူလငွေလွှဲပမာဏနှင့် ကိုက်ညီရန် ခွဲမှုပမာဏများကို ချိန်ညှိပါ။",
+      "amountsMustMatch": "ခွဲမှုပမာဏများသည် မူလငွေလွှဲပမာဏနှင့် ညီရမည်",
+      "categoryRequired": "ခွဲမှုအားလုံးတွင် အမျိုးအစား ရှိရမည်",
+      "matchesOriginal": "✓ မူလနှင့် ကိုက်ညီ",
+      "overBy": "${amount} ပိုနေသည်",
+      "readyToSave": "ခွဲမှုပမာဏများ မူလငွေလွှဲနှင့် ကိုက်ညီသည်။ သိမ်းရန် အဆင်သင့်!",
+      "total": "စုစုပေါင်း:",
+      "underBy": "${amount} လိုနေသည်"
     }
   },
   "splits": {
@@ -4494,64 +4494,64 @@
   },
   "subscriptionCard": {
     "badges": {
-      "aiVerified": "AI Verified",
-      "cancelled": "Cancelled",
-      "paused": "Paused",
-      "trial": "Trial"
+      "aiVerified": "AI အတည်ပြုပြီး",
+      "cancelled": "ဖျက်သိမ်းပြီး",
+      "paused": "ရပ်ဆိုင်းထား",
+      "trial": "စမ်းသပ်ကာလ"
     },
     "buttons": {
-      "claimManage": "Claim & Manage",
-      "edit": "Edit",
-      "transactions": "Transactions"
+      "claimManage": "ယူ၍ စီမံရန်",
+      "edit": "ပြင်ဆင်ရန်",
+      "transactions": "ငွေလွှဲများ"
     },
     "confidence": {
-      "high": "High",
-      "label": "Detection Confidence",
-      "low": "Low",
-      "medium": "Medium"
+      "high": "မြင့်",
+      "label": "ရှာဖွေတွေ့ရှိမှု ယုံကြည်မှု",
+      "low": "နိမ့်",
+      "medium": "အလယ်အလတ်"
     },
     "details": {
-      "charges": "{count} charges",
-      "daysBefore": "{count} days before",
-      "firstCharge": "First Charge",
-      "lastCharge": "Last Charge",
-      "occurrences": "Occurrences",
-      "payment": "Payment",
-      "reminder": "Reminder"
+      "charges": "ငွေကောက်ခံမှု {count} ကြိမ်",
+      "daysBefore": "{count} ရက် ကြိုတင်",
+      "firstCharge": "ပထမဆုံး ငွေကောက်ခံမှု",
+      "lastCharge": "နောက်ဆုံး ငွေကောက်ခံမှု",
+      "occurrences": "ဖြစ်ပွားမှုများ",
+      "payment": "ပေးချေမှု",
+      "reminder": "သတိပေးချက်"
     },
     "interval": {
-      "annual": "Annual",
-      "bi-weekly": "Bi-weekly",
-      "irregular": "Irregular",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "annual": "နှစ်စဉ်",
+      "bi-weekly": "နှစ်ပတ်တစ်ကြိမ်",
+      "irregular": "မမှန်မကန်",
+      "monthly": "လစဉ်",
+      "quarterly": "သုံးလတစ်ကြိမ်",
+      "weekly": "အပတ်စဉ်"
     },
-    "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
+    "lowConfidenceWarning": "ဤစာရင်းသွင်းမှုကို ယုံကြည်မှုနိမ့်စွာ ရှာဖွေတွေ့ရှိသည်။ အတည်ပြု၍ လက်ဖြင့်စီမံရန် ယူပါ။",
     "menu": {
-      "cancelSubscription": "Cancel Subscription",
-      "claimManage": "Claim & Manage",
-      "delete": "Delete",
-      "edit": "Edit",
-      "notSubscription": "Not a Subscription",
-      "pause": "Pause",
-      "resume": "Resume",
-      "viewTransactions": "View Transactions"
+      "cancelSubscription": "စာရင်းသွင်းမှု ဖျက်သိမ်းရန်",
+      "claimManage": "ယူ၍ စီမံရန်",
+      "delete": "ဖျက်ရန်",
+      "edit": "ပြင်ဆင်ရန်",
+      "notSubscription": "စာရင်းသွင်းမှု မဟုတ်ပါ",
+      "pause": "ရပ်ဆိုင်းရန်",
+      "resume": "ပြန်လည်စတင်ရန်",
+      "viewTransactions": "ငွေလွှဲများ ကြည့်ရန်"
     },
     "source": {
-      "auto-detected": "Auto-detected",
-      "manual": "Manual",
-      "merged": "Tracked"
+      "auto-detected": "အလိုအလျောက် ရှာဖွေတွေ့ရှိ",
+      "manual": "လက်ဖြင့်",
+      "merged": "ခြေရာခံထား"
     },
     "stats": {
-      "amount": "Amount",
-      "annualCost": "Annual Cost",
-      "frequency": "Frequency",
-      "nextCharge": "Next Charge",
-      "totalSpent": "Total Spent"
+      "amount": "ပမာဏ",
+      "annualCost": "နှစ်စဉ် ကုန်ကျစရိတ်",
+      "frequency": "အကြိမ်ရေ",
+      "nextCharge": "နောက် ငွေကောက်ခံမှု",
+      "totalSpent": "သုံးစွဲပြီးစုစုပေါင်း"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {စမ်းသပ်ကာလ ၁ ရက် ကျန်} other {စမ်းသပ်ကာလ # ရက် ကျန်}}"
     },
     "reminderToggle": {
       "disableReminder": "သတိပေးချက်ပိတ်မည်",
@@ -4560,30 +4560,30 @@
     }
   },
   "subscriptionCostChart": {
-    "emptyState": "No active subscriptions to analyze",
-    "loadingChart": "Loading chart...",
-    "moreCharges": "+{count} more charges",
-    "perMonth": "/month",
+    "emptyState": "ခွဲခြမ်းစိတ်ဖြာရန် လက်ရှိ စာရင်းသွင်းမှု မရှိပါ",
+    "loadingChart": "ဂရပ် တင်နေသည်...",
+    "moreCharges": "+{count} ငွေသွင်းမှု ပိုကြည့်ရန်",
+    "perMonth": "/လ",
     "sections": {
-      "costByCategory": "Cost by Category",
-      "potentialSavings": "Potential Savings",
-      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+      "costByCategory": "အမျိုးအစားအလိုက် ကုန်ကျစရိတ်",
+      "potentialSavings": "ဖြစ်နိုင်သော စုဆောင်းမှု",
+      "upcomingCharges": "လာမည့် ငွေသွင်းမှုများ (နောက် ၃၀ ရက်)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
-      "annualCost": "Annual Cost",
-      "monthlyCost": "Monthly Cost",
-      "next30Days": "Next 30 Days",
-      "projectedYearly": "Projected yearly spend",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "activeSubscriptions": "{count, plural, =1 {လက်ရှိ စာရင်းသွင်းမှု ၁ ခု} other {လက်ရှိ စာရင်းသွင်းမှု # ခု}}",
+      "annualCost": "နှစ်စဉ် ကုန်ကျစရိတ်",
+      "monthlyCost": "လစဉ် ကုန်ကျစရိတ်",
+      "next30Days": "နောက် ၃၀ ရက်",
+      "projectedYearly": "ခန့်မှန်း နှစ်စဉ် သုံးစွဲမှု",
+      "upcomingCharges": "{count, plural, =1 {လာမည့် ငွေသွင်းမှု ၁ ခု} other {လာမည့် ငွေသွင်းမှု # ခု}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "ဖျက်သိမ်းထားနိုင်သော စာရင်းသွင်းမှုများ",
+      "inactiveDescription": "{count, plural, =1 {စာရင်းသွင်းမှု ၁ ခု မကြာသေးမီ} other {စာရင်းသွင်းမှု # ခု မကြာသေးမီ}} ငွေမကောက်ပါ။ ဖျက်သိမ်းထားခြင်း ရှိမရှိ စစ်ဆေးပါ။",
+      "trialsTitle": "စမ်းသပ်ကာလ မကြာမီ ကုန်ဆုံးမည်",
+      "trialsDescription": "{count, plural, =1 {စမ်းသပ်ကာလ ၁ ခု} other {စမ်းသပ်ကာလ # ခု}} နောက် ၇ ရက်အတွင်း ကုန်ဆုံးမည်။ မသုံးပါက ဖျက်သိမ်းပါ။",
+      "highCostTitle": "ကုန်ကျစရိတ်မြင့်သော စာရင်းသွင်းမှုများ",
+      "highCostDescription": "ဤစာရင်းသွင်းမှုများသည် သင့်သုံးစွဲမှု၏ အစိတ်အပိုင်းကြီး ဖြစ်သည်။ တန်ဖိုးအပြည့် ရနေခြင်း ရှိမရှိ စဉ်းစားပါ။"
     }
   },
   "subscriptionModal": {
@@ -4696,19 +4696,19 @@
     }
   },
   "syncStatus": {
-    "daysAgo": "{days}d ago",
-    "devices": "{connected}/{total} devices",
-    "devicesConnected": "{connected}/{total} devices connected",
-    "hoursAgo": "{hours}h ago",
-    "justNow": "Just now",
-    "lastSync": "Last sync: {time}",
-    "minutesAgo": "{minutes}m ago",
-    "never": "Never",
-    "offline": "Offline",
-    "partialSync": "Partial Sync",
-    "syncError": "Sync Error",
-    "synced": "Synced",
-    "syncing": "Syncing..."
+    "daysAgo": "{days} ရက် ကြာပြီ",
+    "devices": "စက်ပစ္စည်း {connected}/{total}",
+    "devicesConnected": "စက်ပစ္စည်း {connected}/{total} ချိတ်ဆက်ပြီး",
+    "hoursAgo": "{hours} နာရီ ကြာပြီ",
+    "justNow": "ခုမှ",
+    "lastSync": "နောက်ဆုံး စင့်ခ်: {time}",
+    "minutesAgo": "{minutes} မိနစ် ကြာပြီ",
+    "never": "မဖြစ်တော့ပါ",
+    "offline": "အော့ဖ်လိုင်း",
+    "partialSync": "တစ်စိတ်တစ်ပိုင်း စင့်ခ်",
+    "syncError": "စင့်ခ် အမှား",
+    "synced": "စင့်ခ်ပြီး",
+    "syncing": "စင့်ခ်နေသည်..."
   },
   "tooltip": {
     "ariaLabel": "ပိုမိုသိရှိရန်",
@@ -4749,142 +4749,142 @@
   },
   "transactionModal": {
     "account": {
-      "label": "Account"
+      "label": "အကောင့်"
     },
     "advancedOptions": {
-      "available": "{count} available",
-      "label": "Advanced Options"
+      "available": "{count} ခု ရရှိနိုင်",
+      "label": "အဆင့်မြင့် ရွေးချယ်စရာများ"
     },
     "amount": {
-      "label": "Amount",
+      "label": "ပမာဏ",
       "placeholder": "0.00",
-      "validationError": "Please enter a valid amount"
+      "validationError": "ခိုင်လုံသော ပမာဏ ထည့်ပါ"
     },
     "buttons": {
-      "add": "Add Transaction",
-      "adding": "Adding...",
-      "cancel": "Cancel",
-      "update": "Update Transaction",
-      "updating": "Updating..."
+      "add": "ငွေလွှဲ ထည့်ရန်",
+      "adding": "ထည့်နေသည်...",
+      "cancel": "ပယ်ဖျက်ရန်",
+      "update": "ငွေလွှဲ အပ်ဒိတ်ရန်",
+      "updating": "အပ်ဒိတ်နေသည်..."
     },
     "category": {
-      "aiCategorizing": "AI categorizing...",
-      "create": "Create",
-      "createNew": "+ Create New Category",
-      "label": "Category",
-      "lastUsed": "Using last: {category}",
-      "namePlaceholder": "Category name...",
-      "selectPlaceholder": "Select category...",
-      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+      "aiCategorizing": "AI အမျိုးအစားခွဲနေသည်...",
+      "create": "ဖန်တီးရန်",
+      "createNew": "+ အမျိုးအစားအသစ် ဖန်တီးရန်",
+      "label": "အမျိုးအစား",
+      "lastUsed": "နောက်ဆုံးသုံး: {category}",
+      "namePlaceholder": "အမျိုးအစား အမည်...",
+      "selectPlaceholder": "အမျိုးအစား ရွေးပါ...",
+      "subcategoriesPlaceholder": "အမျိုးအစားခွဲများ (ရွေးချယ်စရာ၊ ကော်မာဖြင့်ခွဲ)"
     },
-    "closeModal": "Close modal",
+    "closeModal": "မော်ဒယ် ပိတ်ရန်",
     "createCategory": {
-      "created": "Category \"{name}\" created!",
-      "failed": "Failed to create category",
-      "nameRequired": "Category name is required"
+      "created": "အမျိုးအစား \"{name}\" ဖန်တီးပြီး!",
+      "failed": "အမျိုးအစား ဖန်တီးခြင်း မအောင်မြင်ပါ",
+      "nameRequired": "အမျိုးအစား အမည် လိုအပ်ပါသည်"
     },
     "date": {
-      "label": "Date"
+      "label": "ရက်စွဲ"
     },
     "description": {
-      "label": "Description",
-      "placeholder": "e.g., Grocery shopping at Sobeys"
+      "label": "ဖော်ပြချက်",
+      "placeholder": "ဥပမာ - စူပါမားကက်တွင် စျေးဝယ်ခြင်း"
     },
     "learned": {
-      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
-      "title": "Learned!"
+      "description": "ဆင်တူပြင်ဆင်မှု ၃ ခုပြီးနောက် ဤကုန်သည်မှ နောင်ငွေလွှဲများကို အလိုအလျောက် အမျိုးအစားခွဲမည်။",
+      "title": "သင်ယူပြီး!"
     },
     "notes": {
-      "label": "Notes",
-      "placeholder": "Add any additional notes..."
+      "label": "မှတ်စုများ",
+      "placeholder": "အပိုမှတ်စုများ ထည့်ပါ..."
     },
     "receipts": {
-      "addNew": "Add New Receipt",
-      "deleteConfirm": "Are you sure you want to delete this receipt?",
-      "deleteFailed": "Failed to delete receipt",
-      "deleteReceipt": "Delete receipt",
-      "existing": "Existing receipts ({count})",
-      "label": "Receipt Attachments",
-      "newFile": "New: {filename}",
-      "remove": "Remove",
-      "viewFull": "View full receipt"
+      "addNew": "ပြေစာအသစ် ထည့်ရန်",
+      "deleteConfirm": "ဤပြေစာကို ဖျက်မည်မှာ သေချာပါသလား?",
+      "deleteFailed": "ပြေစာ ဖျက်ခြင်း မအောင်မြင်ပါ",
+      "deleteReceipt": "ပြေစာ ဖျက်ရန်",
+      "existing": "ရှိပြီးသား ပြေစာများ ({count})",
+      "label": "ပြေစာ ပူးတွဲမှုများ",
+      "newFile": "အသစ်: {filename}",
+      "remove": "ဖယ်ရှားရန်",
+      "viewFull": "ပြေစာအပြည့် ကြည့်ရန်"
     },
     "subcategory": {
-      "label": "Subcategory",
-      "none": "None",
-      "selectPlaceholder": "Select subcategory..."
+      "label": "အမျိုးအစားခွဲ",
+      "none": "မရှိ",
+      "selectPlaceholder": "အမျိုးအစားခွဲ ရွေးပါ..."
     },
     "tags": {
-      "label": "Tags (comma-separated)",
-      "placeholder": "e.g., groceries, weekly, essential"
+      "label": "တဂ်များ (ကော်မာဖြင့်ခွဲ)",
+      "placeholder": "ဥပမာ - စျေးဝယ်၊ အပတ်စဉ်၊ မရှိမဖြစ်"
     },
     "title": {
-      "add": "Add Transaction",
-      "edit": "Edit Transaction"
+      "add": "ငွေလွှဲ ထည့်ရန်",
+      "edit": "ငွေလွှဲ ပြင်ဆင်ရန်"
     },
     "type": {
-      "expense": "Expense",
-      "income": "Income",
-      "label": "Type"
+      "expense": "ကုန်ကျစရိတ်",
+      "income": "ဝင်ငွေ",
+      "label": "အမျိုးအစား"
     }
   },
   "transactionSearch": {
-    "amountRangeLabel": "Amount range",
-    "clearRecent": "Clear",
-    "filterName": "Filter name",
-    "noResults": "No transactions found",
-    "noResultsDescription": "Try a different search or adjust your filters",
-    "noTransactionsYet": "No transactions yet",
-    "placeholder": "Search transactions...",
-    "placeholderExtended": "Try 'coffee last week' or 'amount:>50'",
-    "recentSearchLabel": "Recent search",
-    "recentSearches": "Recent Searches",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
-    "save": "Save",
-    "saveFilter": "Save Filter",
-    "savedFilters": "Saved Filters",
-    "searchFilterLabel": "Search filter",
-    "searchTipAmount": "Use <code>$50-100</code> for amount ranges",
-    "searchTipChars": "Type 3+ characters to search transactions",
-    "searchTipNL": "Try <code>coffee last week</code> for natural language",
-    "searchTipsIntro": "Search Tips:",
-    "searchingFor": "Searching for: {query}",
+    "amountRangeLabel": "ပမာဏ အကွာအဝေး",
+    "clearRecent": "ရှင်းရန်",
+    "filterName": "စစ်ထုတ်မှု အမည်",
+    "noResults": "ငွေလွှဲ မတွေ့ပါ",
+    "noResultsDescription": "အခြား ရှာဖွေမှု စမ်းပါ သို့မဟုတ် စစ်ထုတ်မှုများ ချိန်ညှိပါ",
+    "noTransactionsYet": "ငွေလွှဲ မရှိသေးပါ",
+    "placeholder": "ငွေလွှဲများ ရှာပါ...",
+    "placeholderExtended": "'ကော်ဖီ ယခင်အပတ်' သို့မဟုတ် 'amount:>50' စမ်းပါ",
+    "recentSearchLabel": "မကြာသေးမီ ရှာဖွေမှု",
+    "recentSearches": "မကြာသေးမီ ရှာဖွေမှုများ",
+    "resultCount": "ရလဒ် {count} {count, plural, =1 {ခု} other {ခု}}",
+    "save": "သိမ်းရန်",
+    "saveFilter": "စစ်ထုတ်မှု သိမ်းရန်",
+    "savedFilters": "သိမ်းထားသော စစ်ထုတ်မှုများ",
+    "searchFilterLabel": "ရှာဖွေမှု စစ်ထုတ်မှု",
+    "searchTipAmount": "ပမာဏ အကွာအဝေးအတွက် <code>$50-100</code> သုံးပါ",
+    "searchTipChars": "ငွေလွှဲများ ရှာရန် စာလုံး ၃+ ရိုက်ပါ",
+    "searchTipNL": "သဘာဝဘာသာစကားအတွက် <code>coffee last week</code> စမ်းပါ",
+    "searchTipsIntro": "ရှာဖွေမှု အကြံပြုချက်များ:",
+    "searchingFor": "ရှာဖွေနေသည်: {query}",
     "suggestions": {
-      "amounts": "Amount Ranges",
-      "categories": "Categories",
-      "merchants": "Merchants",
-      "recent": "Recent"
+      "amounts": "ပမာဏ အကွာအဝေးများ",
+      "categories": "အမျိုးအစားများ",
+      "merchants": "ကုန်သည်များ",
+      "recent": "မကြာသေးမီ"
     },
-    "suggestionsHeading": "Suggestions",
+    "suggestionsHeading": "အကြံပြုချက်များ",
     "tips": {
-      "amount": "Amount: '$50-100' or 'amount:>50'",
-      "category": "Category: 'groceries' or 'category:food'",
-      "date": "Date: 'last week', 'this month', 'date:last30'",
-      "fuzzy": "Typo-tolerant: 'starbukcs' finds 'Starbucks'",
-      "title": "Search Tips",
-      "type": "Type: 'type:income' or 'type:expense'"
+      "amount": "ပမာဏ: '$50-100' သို့မဟုတ် 'amount:>50'",
+      "category": "အမျိုးအစား: 'groceries' သို့မဟုတ် 'category:food'",
+      "date": "ရက်စွဲ: 'last week', 'this month', 'date:last30'",
+      "fuzzy": "စာလုံးမှား ခံနိုင်: 'starbukcs' ဖြင့် 'Starbucks' တွေ့မည်",
+      "title": "ရှာဖွေမှု အကြံပြုချက်များ",
+      "type": "အမျိုးအစား: 'type:income' သို့မဟုတ် 'type:expense'"
     },
-    "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
-    "viewAllResults": "View all {count} results",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "transactionCount": "ငွေလွှဲ {count} {count, plural, =1 {ခု} other {ခု}}",
+    "usedTimes": "{count} {count, plural, =1 {ကြိမ်} other {ကြိမ်}} အသုံးပြုပြီး",
+    "viewAllResults": "ရလဒ် {count} ခုလုံး ကြည့်ရန်",
+    "resultsFound": "ရလဒ် {count} {count, plural, =1 {ခု} other {ခု}} တွေ့ရှိ",
+    "suggestionsAvailable": "အကြံပြုချက် {count} {count, plural, =1 {ခု} other {ခု}} ရရှိနိုင်"
   },
   "transactionTable": {
     "actions": {
-      "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
-      "split": "Split"
+      "attachReceipt": "ပြေစာ ပူးတွဲရန်",
+      "delete": "ဖျက်ရန်",
+      "edit": "ပြင်ဆင်ရန်",
+      "split": "ခွဲရန်"
     },
-    "emptyState": "No transactions to display",
+    "emptyState": "ပြသရန် ငွေလွှဲ မရှိပါ",
     "headers": {
-      "account": "Account",
-      "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
-      "date": "Date",
-      "description": "Description"
+      "account": "အကောင့်",
+      "actions": "လုပ်ဆောင်ချက်များ",
+      "amount": "ပမာဏ",
+      "category": "အမျိုးအစား",
+      "date": "ရက်စွဲ",
+      "description": "ဖော်ပြချက်"
     }
   },
   "transactions": {
@@ -4987,15 +4987,15 @@
     "youWillLose": "You will lose:"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
-    "daysRemaining": "{count} days remaining in your free trial",
-    "dismiss": "Dismiss",
-    "expired": "Your trial has expired",
-    "expiredDescription": "App is in read-only mode. Upgrade to continue managing your finances.",
-    "upgrade": "Upgrade - {price}",
-    "upgradeNow": "Upgrade Now - {price}",
-    "upgradePrompt": "Upgrade now to keep full access to your budget data.",
-    "viewPricing": "View pricing"
+    "daysLeft": "{count, plural, =0 {သင့်စမ်းသပ်ကာလ ယနေ့ ကုန်ဆုံးမည်!} =1 {စမ်းသပ်ကာလ ၁ ရက်သာ ကျန်} other {စမ်းသပ်ကာလ # ရက် ကျန်}}",
+    "daysRemaining": "သင့် အခမဲ့ စမ်းသပ်ကာလတွင် {count} ရက် ကျန်ရှိ",
+    "dismiss": "ပယ်ဖျက်ရန်",
+    "expired": "သင့် စမ်းသပ်ကာလ ကုန်ဆုံးပြီ",
+    "expiredDescription": "အက်ပ်သည် ဖတ်ရုံ မုဒ်တွင် ရှိသည်။ ငွေကြေး စီမံခန့်ခွဲမှု ဆက်လုပ်ရန် အဆင့်မြှင့်ပါ။",
+    "upgrade": "အဆင့်မြှင့်ရန် - {price}",
+    "upgradeNow": "ယခု အဆင့်မြှင့်ရန် - {price}",
+    "upgradePrompt": "သင့်ဘတ်ဂျက်ဒေတာသို့ ဝင်ရောက်ခွင့်အပြည့် ဆက်ရရှိရန် ယခု အဆင့်မြှင့်ပါ။",
+    "viewPricing": "စျေးနှုန်း ကြည့်ရန်"
   },
   "validationWarnings": {
     "aiAnalysis": "AI Analysis:",
@@ -5023,30 +5023,30 @@
     "warnings": "Warnings"
   },
   "vaultSetup": {
-    "aes256Description": "Your data is encrypted with AES-256 encryption",
-    "aes256Encryption": "AES-256 Encryption",
-    "automaticDescription": "Your device creates a unique encryption key automatically. No password to remember - your data is protected seamlessly.",
-    "automaticProtection": "Automatic Protection",
-    "bankGradeSecurity": "Bank-Grade Security",
-    "chooseProtection": "Choose how you want to protect your data:",
-    "confirmPassword": "Confirm Password",
-    "confirmYourPassword": "Confirm your password",
-    "enableEncryption": "Enable Encryption",
-    "enterStrongPassword": "Enter a strong password",
-    "important": "Important",
-    "masterPassword": "Master Password",
-    "passwordDescription": "Create a master password to encrypt your vault. More secure if you share this device with others.",
-    "passwordProtection": "Password Protection",
-    "passwordWarning": "If you forget this password, your data cannot be recovered. We cannot reset it for you.",
-    "passwordsDoNotMatch": "Passwords do not match",
-    "recommended": "Recommended",
-    "settingUp": "Setting Up...",
-    "setupError": "Failed to set up vault. Please try again.",
-    "strengthFair": "Fair",
-    "strengthStrong": "Strong",
-    "strengthVeryStrong": "Very Strong",
-    "strengthVeryWeak": "Very Weak",
-    "strengthWeak": "Weak",
+    "aes256Description": "သင့်ဒေတာကို AES-256 ကုဒ်ဝှက်ခြင်းဖြင့် ကုဒ်ဝှက်ထားသည်",
+    "aes256Encryption": "AES-256 ကုဒ်ဝှက်ခြင်း",
+    "automaticDescription": "သင့်စက်ပစ္စည်းသည် ထူးခြားသော ကုဒ်ဝှက်ရေး သော့ကို အလိုအလျောက် ဖန်တီးသည်။ စကားဝှက် မှတ်မိရန်မလို - သင့်ဒေတာကို ချောမွေ့စွာ ကာကွယ်သည်။",
+    "automaticProtection": "အလိုအလျောက် ကာကွယ်မှု",
+    "bankGradeSecurity": "ဘဏ်အဆင့် လုံခြုံရေး",
+    "chooseProtection": "သင့်ဒေတာကို ကာကွယ်လိုသော နည်းလမ်းကို ရွေးပါ:",
+    "confirmPassword": "စကားဝှက် အတည်ပြုရန်",
+    "confirmYourPassword": "သင့်စကားဝှက် အတည်ပြုပါ",
+    "enableEncryption": "ကုဒ်ဝှက်ခြင်း ဖွင့်ရန်",
+    "enterStrongPassword": "ခိုင်မာသော စကားဝှက် ထည့်ပါ",
+    "important": "အရေးကြီး",
+    "masterPassword": "မာစတာ စကားဝှက်",
+    "passwordDescription": "သင့် vault ကုဒ်ဝှက်ရန် မာစတာစကားဝှက် ဖန်တီးပါ။ ဤစက်ပစ္စည်းကို အခြားသူများနှင့် မျှဝေပါက ပိုလုံခြုံသည်။",
+    "passwordProtection": "စကားဝှက် ကာကွယ်မှု",
+    "passwordWarning": "ဤစကားဝှက်ကို မေ့ပါက သင့်ဒေတာကို ပြန်ယူ၍ မရပါ။ ကျွန်ုပ်တို့ ပြန်သတ်မှတ်ပေး၍ မရပါ။",
+    "passwordsDoNotMatch": "စကားဝှက်များ မကိုက်ညီပါ",
+    "recommended": "အကြံပြု",
+    "settingUp": "စတင်နေသည်...",
+    "setupError": "Vault စတင်ခြင်း မအောင်မြင်ပါ။ ထပ်ကြိုးစားပါ။",
+    "strengthFair": "သင့်တင့်",
+    "strengthStrong": "ခိုင်မာ",
+    "strengthVeryStrong": "အလွန်ခိုင်မာ",
+    "strengthVeryWeak": "အလွန်အားနည်း",
+    "strengthWeak": "အားနည်း",
     "zeroKnowledge": "Zero Knowledge"
   },
   "welcome": {
@@ -5063,8 +5063,8 @@
       "title": "ဘတ်ဂျက် တိုးတက်မှု"
     },
     "eventBudget": {
-      "description": "Track spending for events and projects",
-      "title": "Event Budgets"
+      "description": "ပွဲတော်များနှင့် ပရောဂျက်များအတွက် သုံးစွဲမှု ခြေရာခံပါ",
+      "title": "ပွဲတော် ဘတ်ဂျက်များ"
     },
     "incomeVsExpenses": {
       "description": "သင်၏ ဝင်ငွေများနှင့် အသုံးစရိတ်များကို နှိုင်းယှဉ်ကြည့်ပါ",
@@ -5075,163 +5075,163 @@
       "title": "လစဉ် အထွေထွေ"
     },
     "netWorthMini": {
-      "description": "Quick view of your total net worth",
-      "title": "Net Worth"
+      "description": "သင့် အသားတင်တန်ဖိုး အမြန်ကြည့်ရှုခြင်း",
+      "title": "အသားတင်တန်ဖိုး"
     },
     "recentTransactions": {
       "description": "သင်၏ နောက်ဆုံး ငွေကြေး လှုပ်ရှားမှုကို မြန်ဆန်စွာ ကြည့်ပါ",
       "title": "နောက်ဆုံး ငွေလွှဲများ"
     },
     "safeToSpend": {
-      "description": "See how much you can safely spend per category",
-      "title": "Safe to Spend"
+      "description": "အမျိုးအစားတစ်ခုချင်းအတွက် လုံခြုံစွာ သုံးစွဲနိုင်သော ပမာဏကို ကြည့်ပါ",
+      "title": "သုံးစွဲရန် လုံခြုံသော ပမာဏ"
     },
     "spendingByCategory": {
       "description": "သင်၏ ငွေကြေးကို ဘယ်မှာသွားကြောင်း ကြည့်ပါ",
       "title": "အမျိုးအစားအလိုက် အသုံးစရိတ်"
     },
     "streaks": {
-      "description": "Track your engagement streaks and achievements",
-      "title": "Streaks & Badges"
+      "description": "သင့် ဆက်တိုက်မှတ်တမ်းနှင့် အောင်မြင်မှုများကို ခြေရာခံပါ",
+      "title": "ဆက်တိုက်မှတ်တမ်း နှင့် တံဆိပ်များ"
     },
     "upcomingBills": {
       "description": "ဘီလ် အမှတ်တရများဖြင့် ငွေပေးချေမှုကို မလွတ်ပါ",
       "title": "လာမည့် ဘီလ်များ"
     },
     "weeklyRecap": {
-      "description": "Summary of your weekly spending patterns",
-      "title": "Weekly Recap"
+      "description": "သင့် အပတ်စဉ် သုံးစွဲမှုပုံစံများ အကျဉ်းချုပ်",
+      "title": "အပတ်စဉ် အကျဉ်းချုပ်"
     }
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
-      "createNew": "Create New",
-      "description": "Map YNAB categories to your existing categories or create new ones.",
-      "mapToExisting": "Map to Existing",
-      "selectCategory": "Select category...",
-      "skip": "Skip",
-      "title": "Category Mapping",
-      "willCreate": "Will create:"
+      "category": "{count, plural, =1 {အမျိုးအစား ၁ ခု} other {အမျိုးအစား # ခု}}",
+      "createNew": "အသစ် ဖန်တီးရန်",
+      "description": "YNAB အမျိုးအစားများကို သင့်ရှိပြီးသား အမျိုးအစားများသို့ ချိတ်ဆက်ပါ သို့မဟုတ် အသစ် ဖန်တီးပါ။",
+      "mapToExisting": "ရှိပြီးသားသို့ ချိတ်ဆက်ရန်",
+      "selectCategory": "အမျိုးအစား ရွေးပါ...",
+      "skip": "ကျော်ရန်",
+      "title": "အမျိုးအစား ချိတ်ဆက်မှု",
+      "willCreate": "ဖန်တီးမည်:"
     },
     "completeStep": {
-      "errors": "Errors",
-      "importAnother": "Import Another",
-      "success": "Import Complete!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
-      "viewTransactions": "View Transactions",
-      "whatNext": "What would you like to do next?",
-      "withIssues": "Import Completed with Issues"
+      "errors": "အမှားများ",
+      "importAnother": "နောက်တစ်ခု သွင်းယူရန်",
+      "success": "သွင်းယူမှု ပြီးပါပြီ!",
+      "successMessage": "YNAB မှ {count, plural, =1 {အရာ ၁ ခု} other {အရာ # ခု}} အောင်မြင်စွာ သွင်းယူပြီး။",
+      "viewTransactions": "ငွေလွှဲများ ကြည့်ရန်",
+      "whatNext": "နောက်ဘာလုပ်ချင်ပါသနည်း?",
+      "withIssues": "ပြဿနာများဖြင့် သွင်းယူမှု ပြီးပါပြီ"
     },
     "footer": {
-      "back": "Back",
-      "done": "Done",
-      "next": "Next",
-      "startImport": "Start Import"
+      "back": "နောက်သို့",
+      "done": "ပြီးပါပြီ",
+      "next": "ရှေ့သို့",
+      "startImport": "သွင်းယူမှု စတင်ရန်"
     },
     "header": {
-      "closeLabel": "Close wizard",
-      "subtitle": "Migrate your budget data seamlessly",
-      "title": "Import from YNAB"
+      "closeLabel": "ဝီဇက် ပိတ်ရန်",
+      "subtitle": "သင့်ဘတ်ဂျက်ဒေတာကို ချောမွေ့စွာ ပြောင်းရွှေ့ပါ",
+      "title": "YNAB မှ သွင်းယူရန်"
     },
     "importingStep": {
-      "finishing": "Finishing up...",
-      "importingAccounts": "Importing accounts...",
-      "importingBudgets": "Importing budgets...",
-      "importingCategories": "Importing categories...",
-      "importingTransactions": "Importing transactions...",
-      "title": "Importing your YNAB data..."
+      "finishing": "ပြီးဆုံးနေသည်...",
+      "importingAccounts": "အကောင့်များ သွင်းယူနေသည်...",
+      "importingBudgets": "ဘတ်ဂျက်များ သွင်းယူနေသည်...",
+      "importingCategories": "အမျိုးအစားများ သွင်းယူနေသည်...",
+      "importingTransactions": "ငွေလွှဲများ သွင်းယူနေသည်...",
+      "title": "သင့် YNAB ဒေတာ သွင်းယူနေသည်..."
     },
     "optionsStep": {
       "accountOptions": {
-        "includeClosedAccounts": "Include closed accounts",
-        "includeOffBudgetAccounts": "Include off-budget accounts",
-        "title": "Account Options"
+        "includeClosedAccounts": "ပိတ်ထားသော အကောင့်များ ထည့်သွင်းရန်",
+        "includeOffBudgetAccounts": "ဘတ်ဂျက်ပြင်ပ အကောင့်များ ထည့်သွင်းရန်",
+        "title": "အကောင့် ရွေးချယ်စရာများ"
       },
       "budgetOptions": {
-        "importGoals": "Import savings goals as future purchases",
-        "title": "Budget Options"
+        "importGoals": "စုဆောင်းမှု ပန်းတိုင်များကို အနာဂတ် ဝယ်ယူမှုအဖြစ် သွင်းယူရန်",
+        "title": "ဘတ်ဂျက် ရွေးချယ်စရာများ"
       },
       "hiddenCategories": {
-        "archive": "Archive",
-        "archiveDesc": "Import as archived (recommended)",
-        "description": "How to handle YNAB categories marked as hidden?",
-        "import": "Import",
-        "importDesc": "Import as active categories",
-        "skip": "Skip",
-        "skipDesc": "Don't import hidden categories",
-        "title": "Hidden Categories"
+        "archive": "သိမ်းဆည်းရန်",
+        "archiveDesc": "သိမ်းဆည်းထားသည့်အဖြစ် သွင်းယူရန် (အကြံပြု)",
+        "description": "YNAB တွင် ဖျောက်ထားသော အမျိုးအစားများကို ဘယ်လို ကိုင်တွယ်မည်နည်း?",
+        "import": "သွင်းယူရန်",
+        "importDesc": "လက်ရှိ အမျိုးအစားများအဖြစ် သွင်းယူရန်",
+        "skip": "ကျော်ရန်",
+        "skipDesc": "ဖျောက်ထားသော အမျိုးအစားများ မသွင်းယူပါ",
+        "title": "ဖျောက်ထားသော အမျိုးအစားများ"
       }
     },
     "previewStep": {
-      "accounts": "Accounts",
-      "allocations": "{count} allocations",
-      "budgetMonths": "Budget Months",
-      "categories": "Categories",
-      "dateRange": "Transaction Date Range",
-      "description": "Review the data that will be imported.",
-      "duplicates": "{count} duplicates",
-      "new": "{count} new",
-      "newMapped": "{created} new, {mapped} mapped",
-      "preparingPreview": "Preparing preview...",
-      "title": "Import Preview",
-      "transactions": "Transactions",
-      "warnings": "Warnings"
+      "accounts": "အကောင့်များ",
+      "allocations": "ခွဲဝေမှု {count} ခု",
+      "budgetMonths": "ဘတ်ဂျက် လများ",
+      "categories": "အမျိုးအစားများ",
+      "dateRange": "ငွေလွှဲ ရက်စွဲ အကွာအဝေး",
+      "description": "သွင်းယူမည့် ဒေတာကို ပြန်စစ်ပါ။",
+      "duplicates": "ထပ်နေမှု {count} ခု",
+      "new": "အသစ် {count} ခု",
+      "newMapped": "အသစ် {created} ခု၊ ချိတ်ဆက်ပြီး {mapped} ခု",
+      "preparingPreview": "ကြိုကြည့်မှု ပြင်ဆင်နေသည်...",
+      "title": "သွင်းယူမှု ကြိုကြည့်",
+      "transactions": "ငွေလွှဲများ",
+      "warnings": "သတိပေးချက်များ"
     },
     "steps": {
       "categories": {
-        "description": "Map to existing categories",
-        "title": "Categories"
+        "description": "ရှိပြီးသား အမျိုးအစားများသို့ ချိတ်ဆက်ရန်",
+        "title": "အမျိုးအစားများ"
       },
       "complete": {
-        "description": "Migration finished",
-        "title": "Complete"
+        "description": "ပြောင်းရွှေ့မှု ပြီးဆုံးပြီ",
+        "title": "ပြီးဆုံး"
       },
       "importing": {
-        "description": "Processing your data",
-        "title": "Importing"
+        "description": "သင့်ဒေတာ လုပ်ဆောင်နေသည်",
+        "title": "သွင်းယူနေသည်"
       },
       "options": {
-        "description": "Configure import settings",
-        "title": "Options"
+        "description": "သွင်းယူမှု ဆက်တင်များ ပြင်ဆင်ရန်",
+        "title": "ရွေးချယ်စရာများ"
       },
       "preview": {
-        "description": "Review before import",
-        "title": "Preview"
+        "description": "သွင်းယူမှုမတိုင်မီ ပြန်စစ်ရန်",
+        "title": "ကြိုကြည့်"
       },
       "upload": {
-        "description": "Select YNAB export file",
-        "title": "Upload"
+        "description": "YNAB ထုတ်ယူဖိုင် ရွေးပါ",
+        "title": "တင်ရန်"
       }
     },
     "uploadStep": {
-      "accounts": "Accounts",
-      "categories": "Categories",
-      "clickToSelect": "Click to select a file",
-      "dragAndDrop": "or drag and drop here",
-      "fileSummary": "File Summary",
-      "format": "Format",
-      "formatApiExport": "YNAB API Export",
-      "formatApiExportDesc": "JSON from nYNAB",
-      "formatCsv": "CSV Export",
-      "formatCsvDesc": "From YNAB web app",
+      "accounts": "အကောင့်များ",
+      "categories": "အမျိုးအစားများ",
+      "clickToSelect": "ဖိုင် ရွေးရန် နှိပ်ပါ",
+      "dragAndDrop": "သို့မဟုတ် ဆွဲယူထည့်ပါ",
+      "fileSummary": "ဖိုင် အကျဉ်းချုပ်",
+      "format": "ဖော်မတ်",
+      "formatApiExport": "YNAB API ထုတ်ယူမှု",
+      "formatApiExportDesc": "nYNAB မှ JSON",
+      "formatCsv": "CSV ထုတ်ယူမှု",
+      "formatCsvDesc": "YNAB ဝဘ်အက်ပ်မှ",
       "formatYfull": "Budget.yfull / Budget.ynab4",
-      "formatYfullDesc": "YNAB4 desktop export",
-      "parsing": "Parsing file...",
-      "supportedFormats": "Supported Formats",
-      "transactions": "Transactions"
+      "formatYfullDesc": "YNAB4 ဒက်စ်တော့ ထုတ်ယူမှု",
+      "parsing": "ဖိုင် ခွဲခြမ်းနေသည်...",
+      "supportedFormats": "ပံ့ပိုးသော ဖော်မတ်များ",
+      "transactions": "ငွေလွှဲများ"
     },
     "errors": {
-      "parseFailed": "Failed to parse YNAB file",
-      "previewFailed": "Failed to generate preview",
-      "accountImportFailed": "Account import failed: {details}",
-      "categoryImportFailed": "Category import failed: {details}",
-      "transactionImportFailed": "Transaction import failed: {details}",
-      "unknownError": "Unknown error",
-      "budgetImportFailed": "Budget import failed: {details}"
+      "parseFailed": "YNAB ဖိုင် ခွဲခြမ်းခြင်း မအောင်မြင်ပါ",
+      "previewFailed": "ကြိုကြည့်မှု ထုတ်ခြင်း မအောင်မြင်ပါ",
+      "accountImportFailed": "အကောင့် သွင်းယူခြင်း မအောင်မြင်: {details}",
+      "categoryImportFailed": "အမျိုးအစား သွင်းယူခြင်း မအောင်မြင်: {details}",
+      "transactionImportFailed": "ငွေလွှဲ သွင်းယူခြင်း မအောင်မြင်: {details}",
+      "unknownError": "အမည်မသိ အမှား",
+      "budgetImportFailed": "ဘတ်ဂျက် သွင်းယူခြင်း မအောင်မြင်: {details}"
     },
-    "importSuccess": "YNAB data imported successfully!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importSuccess": "YNAB ဒေတာ အောင်မြင်စွာ သွင်းယူပြီး!",
+    "importWithErrors": "အမှား {count, plural, =1 {၁ ခု} other {# ခု}} ဖြင့် သွင်းယူမှု ပြီးဆုံးပြီ"
   },
   "balanceReconciliation": {
     "title": "တင်သွင်းခြင်း ပြီးပါပြီ!",

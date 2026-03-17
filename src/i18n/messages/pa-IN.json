@@ -464,7 +464,7 @@
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
     },
-    "backToHome": "ਹੋਮ ਤੇ ਵਾਪਸ ਜਾਓ"
+    "backToHome": "ਮੁੱਖ ਪੰਨੇ 'ਤੇ ਵਾਪਸ ਜਾਓ"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1212,16 +1212,16 @@
       "interestEarned": "ਕਮਾਇਆ ਵਿਆਜ",
       "interest": "ਵਿਆਜ",
       "totalInterest": "ਕੁੱਲ ਵਿਆਜ",
-      "snowball": "ਸਨੋਬਾਲ",
-      "avalanche": "ਐਵਲਾਂਚ",
+      "snowball": "Snowball",
+      "avalanche": "Avalanche",
       "portfolio": "ਪੋਰਟਫੋਲੀਓ",
       "fireTarget": "FIRE ਟੀਚਾ",
       "median50th": "ਮੱਧਮਾਨ (50ਵਾਂ)",
-      "remainingBalance": "ਬਾਕੀ ਬੈਲੰਸ",
-      "totalAssets": "ਕੁੱਲ ਸੰਪਤੀਆਂ",
+      "remainingBalance": "ਬਾਕੀ ਬੈਲੇਂਸ",
+      "totalAssets": "ਕੁੱਲ ਸੰਪੱਤੀਆਂ",
       "totalLiabilities": "ਕੁੱਲ ਦੇਣਦਾਰੀਆਂ",
-      "netWorth": "ਕੁੱਲ ਸੰਪੱਤੀ",
-      "retirement": "ਰਿਟਾਇਰਮੈਂਟ"
+      "netWorth": "ਕੁੱਲ ਜਾਇਦਾਦ",
+      "retirement": "ਸੇਵਾਮੁਕਤੀ"
     },
     "scenario": {
       "compare": "ਸਥਿਤੀਆਂ ਦੀ ਤੁਲਨਾ ਕਰੋ ({count} ਸੁਰੱਖਿਅਤ)",
@@ -2107,14 +2107,14 @@
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
     "title": "Financial Health",
     "history": {
-      "title": "ਸਿਹਤ ਸਕੋਰ ਇਤਿਹਾਸ",
-      "monthsOfData": "{months} ਮਹੀਨਿਆਂ ਦਾ ਡੇਟਾ",
-      "emptyTitle": "ਅਜੇ ਕੋਈ ਇਤਿਹਾਸ ਨਹੀਂ",
-      "emptySubtitle": "ਤੁਹਾਡੇ ਪਹਿਲੇ ਮਹੀਨੇ ਤੋਂ ਬਾਅਦ ਤੁਹਾਡਾ ਸਿਹਤ ਸਕੋਰ ਇਤਿਹਾਸ ਇੱਥੇ ਦਿਖਾਈ ਦੇਵੇਗਾ",
+      "title": "ਸਕੋਰ ਇਤਿਹਾਸ",
+      "monthsOfData": "{count} {count, plural, =1 {ਮਹੀਨੇ} other {ਮਹੀਨਿਆਂ}} ਦਾ ਡਾਟਾ",
+      "emptyTitle": "ਡਾਟਾ ਇਕੱਠਾ ਹੋਣ ਨਾਲ ਤੁਹਾਡਾ ਸਕੋਰ ਇਤਿਹਾਸ ਇੱਥੇ ਦਿਖਾਈ ਦੇਵੇਗਾ",
+      "emptySubtitle": "ਅਗਲੇ ਮਹੀਨੇ ਦੁਬਾਰਾ ਜਾਂਚ ਕਰੋ!",
       "legendScore": "ਸਕੋਰ",
       "legendTrend": "ਰੁਝਾਨ",
-      "tooltipScore": "ਸਕੋਰ: {score}",
-      "tooltipTrend": "ਰੁਝਾਨ: {direction}",
+      "tooltipScore": "ਸਕੋਰ",
+      "tooltipTrend": "ਰੁਝਾਨ",
       "loadingChart": "ਚਾਰਟ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ..."
     }
   },
@@ -3352,48 +3352,48 @@
       }
     },
     "welcome": {
-      "heroTitle": "ਤੁਹਾਡਾ ਬਜਟ ਤੁਹਾਡੇ ਡਿਵਾਈਸ ਤੇ ਰਹਿੰਦਾ ਹੈ",
+      "heroTitle": "ਤੁਹਾਡਾ ਬਜਟ ਤੁਹਾਡੀ ਡਿਵਾਈਸ ਉੱਤੇ ਰਹਿੰਦਾ ਹੈ",
       "heroSubtitle": "ਸਭ ਤੋਂ ਨਿੱਜੀ ਬਜਟ ਐਪ ਵਿੱਚ ਜੀ ਆਇਆਂ ਨੂੰ। ਕੋਈ ਖਾਤੇ ਨਹੀਂ, ਕੋਈ ਕਲਾਊਡ ਨਹੀਂ, ਕੋਈ ਸਮਝੌਤਾ ਨਹੀਂ।",
       "features": {
-        "yourDataTitle": "ਤੁਹਾਡਾ ਡੇਟਾ, ਤੁਹਾਡਾ ਡਿਵਾਈਸ",
-        "yourDataDescription": "ਸਾਰਾ ਵਿੱਤੀ ਡੇਟਾ ਤੁਹਾਡੇ ਡਿਵਾਈਸ ਤੇ ਸਥਾਨਕ ਤੌਰ ਤੇ ਸਟੋਰ ਕੀਤਾ ਜਾਂਦਾ ਹੈ। ਕੋਈ ਕਲਾਊਡ ਸਰਵਰ ਨਹੀਂ, ਕੋਈ ਤੀਜੀ-ਧਿਰ ਪਹੁੰਚ ਨਹੀਂ।",
-        "encryptionTitle": "ਬੈਂਕ-ਗ੍ਰੇਡ ਐਨਕ੍ਰਿਪਸ਼ਨ",
-        "encryptionDescription": "AES-256 ਐਨਕ੍ਰਿਪਸ਼ਨ ਤੁਹਾਡੇ ਡੇਟਾ ਦੀ ਸੁਰੱਖਿਆ ਕਰਦਾ ਹੈ। ਸਿਰਫ਼ ਤੁਹਾਡੇ ਕੋਲ ਕੁੰਜੀ ਹੈ—ਇਹ ਕਦੇ ਵੀ ਤੁਹਾਡਾ ਡਿਵਾਈਸ ਨਹੀਂ ਛੱਡਦੀ।",
-        "offlineTitle": "ਔਫ਼ਲਾਈਨ ਕੰਮ ਕਰਦਾ ਹੈ",
-        "offlineDescription": "ਇੰਟਰਨੈੱਟ ਤੋਂ ਬਿਨਾਂ ਪੂਰੀ ਕਾਰਜਸ਼ੀਲਤਾ। ਗੋਪਨੀਯਤਾ-ਸੁਚੇਤ ਉਪਭੋਗਤਾਵਾਂ ਲਈ ਸੰਪੂਰਨ।",
+        "yourDataTitle": "ਤੁਹਾਡਾ ਡਾਟਾ, ਤੁਹਾਡੀ ਡਿਵਾਈਸ",
+        "yourDataDescription": "ਸਾਰਾ ਵਿੱਤੀ ਡਾਟਾ ਤੁਹਾਡੀ ਡਿਵਾਈਸ ਉੱਤੇ ਸਥਾਨਕ ਤੌਰ 'ਤੇ ਸਟੋਰ ਕੀਤਾ ਜਾਂਦਾ ਹੈ। ਕੋਈ ਕਲਾਊਡ ਸਰਵਰ ਨਹੀਂ, ਕੋਈ ਤੀਜੀ-ਧਿਰ ਪਹੁੰਚ ਨਹੀਂ।",
+        "encryptionTitle": "ਬੈਂਕ-ਪੱਧਰ ਦੀ ਏਨਕ੍ਰਿਪਸ਼ਨ",
+        "encryptionDescription": "AES-256 ਏਨਕ੍ਰਿਪਸ਼ਨ ਤੁਹਾਡੇ ਡਾਟੇ ਦੀ ਸੁਰੱਖਿਆ ਕਰਦੀ ਹੈ। ਸਿਰਫ਼ ਤੁਹਾਡੇ ਕੋਲ ਕੁੰਜੀ ਹੈ—ਇਹ ਕਦੇ ਤੁਹਾਡੀ ਡਿਵਾਈਸ ਤੋਂ ਬਾਹਰ ਨਹੀਂ ਜਾਂਦੀ।",
+        "offlineTitle": "ਔਫਲਾਈਨ ਕੰਮ ਕਰਦੀ ਹੈ",
+        "offlineDescription": "ਇੰਟਰਨੈੱਟ ਤੋਂ ਬਿਨਾਂ ਪੂਰੀ ਕਾਰਜਸ਼ੀਲਤਾ। ਗੋਪਨੀਯਤਾ-ਸਚੇਤ ਉਪਭੋਗਤਾਵਾਂ ਲਈ ਸੰਪੂਰਨ।",
         "zeroTrackingTitle": "ਜ਼ੀਰੋ ਟ੍ਰੈਕਿੰਗ",
-        "zeroTrackingDescription": "ਕੋਈ ਵਿਸ਼ਲੇਸ਼ਣ ਨਹੀਂ, ਕੋਈ ਟੈਲੀਮੈਟਰੀ ਨਹੀਂ, ਕੋਈ ਡੇਟਾ ਸੰਗ੍ਰਹਿ ਨਹੀਂ। ਤੁਹਾਡੇ ਵਿੱਤੀ ਮਾਮਲੇ ਕਿਸੇ ਦਾ ਕਾਰੋਬਾਰ ਨਹੀਂ।"
+        "zeroTrackingDescription": "ਕੋਈ ਵਿਸ਼ਲੇਸ਼ਣ ਨਹੀਂ, ਕੋਈ ਟੈਲੀਮੈਟਰੀ ਨਹੀਂ, ਕੋਈ ਡਾਟਾ ਇਕੱਤਰੀ ਨਹੀਂ। ਤੁਹਾਡੇ ਵਿੱਤ ਕਿਸੇ ਹੋਰ ਦਾ ਕੰਮ ਨਹੀਂ।"
       },
-      "whatsNext": "ਅੱਗੇ ਕੀ?",
+      "whatsNext": "ਅੱਗੇ ਕੀ ਹੈ?",
       "whatsNextIntro": "ਅਗਲੇ ਕੁਝ ਮਿੰਟਾਂ ਵਿੱਚ, ਅਸੀਂ ਤੁਹਾਡੀ ਮਦਦ ਕਰਾਂਗੇ:",
-      "step1": "ਆਪਣੇ ਮੌਜੂਦਾ ਲੈਣ-ਦੇਣ ਆਯਾਤ ਕਰੋ (ਬੈਂਕ CSV, OFX, ਜਾਂ ਹੱਥੀਂ)",
-      "step2": "ਆਪਣੇ ਖਰਚੇ ਨੂੰ ਆਪਣੇ ਆਪ ਸ਼੍ਰੇਣੀਬੱਧ ਕਰੋ",
-      "step3": "ਅਸਲ ਖਰਚੇ ਦੇ ਆਧਾਰ ਤੇ ਆਪਣਾ ਪਹਿਲਾ ਬਜਟ ਬਣਾਓ",
-      "step4": "ਬਿੱਲ ਯਾਦ-ਦਹਾਨੀਆਂ ਸੈੱਟ ਕਰੋ ਤਾਂ ਜੋ ਤੁਸੀਂ ਕੋਈ ਭੁਗਤਾਨ ਨਾ ਖੁੰਝਾਓ",
+      "step1": "ਆਪਣੇ ਮੌਜੂਦਾ ਲੈਣ-ਦੇਣ ਆਯਾਤ ਕਰੋ (ਬੈਂਕ CSV, OFX, ਜਾਂ ਮੈਨੂਅਲ)",
+      "step2": "ਆਪਣੇ ਖਰਚਿਆਂ ਨੂੰ ਆਪਣੇ ਆਪ ਸ਼੍ਰੇਣੀਬੱਧ ਕਰੋ",
+      "step3": "ਅਸਲ ਖਰਚਿਆਂ ਦੇ ਆਧਾਰ 'ਤੇ ਆਪਣਾ ਪਹਿਲਾ ਬਜਟ ਬਣਾਓ",
+      "step4": "ਬਿੱਲ ਯਾਦ-ਦਹਾਨੀਆਂ ਸੈੱਟ ਕਰੋ ਤਾਂ ਜੋ ਤੁਸੀਂ ਕਦੇ ਕੋਈ ਭੁਗਤਾਨ ਨਾ ਖੁੰਝਾਓ",
       "getStarted": "ਆਓ ਸ਼ੁਰੂ ਕਰੀਏ"
     },
     "categoryMapping": {
-      "needsCategories": "{count} ਲੈਣ-ਦੇਣ ਨੂੰ ਸ਼੍ਰੇਣੀਆਂ ਦੀ ਲੋੜ ਹੈ",
+      "needsCategories": "{count} ਲੈਣ-ਦੇਣਾਂ ਨੂੰ ਸ਼੍ਰੇਣੀਆਂ ਦੀ ਲੋੜ ਹੈ",
       "allCategorized": "ਸਾਰੇ ਲੈਣ-ਦੇਣ ਸ਼੍ਰੇਣੀਬੱਧ ਹਨ!",
       "applySmartSuggestions": "ਸਮਾਰਟ ਸੁਝਾਅ ਲਾਗੂ ਕਰੋ",
       "categorize": "ਸ਼੍ਰੇਣੀਬੱਧ ਕਰੋ",
       "percentMatch": "{percent}% ਮੇਲ",
       "rememberChoices": "ਮੇਰੀਆਂ ਸ਼੍ਰੇਣੀ ਚੋਣਾਂ ਯਾਦ ਰੱਖੋ",
-      "rememberChoicesDescription": "ਭਵਿੱਖ ਵਿੱਚ ਸਮਾਨ ਲੈਣ-ਦੇਣ ਨੂੰ ਆਪਣੇ ਆਪ ਸ਼੍ਰੇਣੀਬੱਧ ਕਰੋ",
+      "rememberChoicesDescription": "ਭਵਿੱਖ ਵਿੱਚ ਸਮਾਨ ਲੈਣ-ਦੇਣਾਂ ਨੂੰ ਆਪਣੇ ਆਪ ਸ਼੍ਰੇਣੀਬੱਧ ਕਰੋ",
       "categorized": "{count} ਸ਼੍ਰੇਣੀਬੱਧ",
       "remaining": "{count} ਬਾਕੀ",
       "continue": "ਜਾਰੀ ਰੱਖੋ",
       "continueAnyway": "ਫਿਰ ਵੀ ਜਾਰੀ ਰੱਖੋ",
       "categories": {
-        "foodDining": "ਖਾਣਾ ਅਤੇ ਖਾਣ-ਪੀਣ",
+        "foodDining": "ਭੋਜਨ ਅਤੇ ਡਾਇਨਿੰਗ",
         "transportation": "ਆਵਾਜਾਈ",
-        "billsUtilities": "ਬਿੱਲ ਅਤੇ ਉਪਯੋਗਤਾਵਾਂ",
-        "shopping": "ਖ਼ਰੀਦਦਾਰੀ",
+        "billsUtilities": "ਬਿੱਲ ਅਤੇ ਸਹੂਲਤਾਂ",
+        "shopping": "ਖਰੀਦਦਾਰੀ",
         "entertainment": "ਮਨੋਰੰਜਨ",
         "healthFitness": "ਸਿਹਤ ਅਤੇ ਤੰਦਰੁਸਤੀ",
         "personalCare": "ਨਿੱਜੀ ਦੇਖਭਾਲ",
         "income": "ਆਮਦਨ",
-        "transfers": "ਟ੍ਰਾਂਸਫ਼ਰ"
+        "transfers": "ਟ੍ਰਾਂਸਫਰ"
       }
     }
   },
@@ -4554,8 +4554,8 @@
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
     },
     "reminderToggle": {
-      "disableReminder": "ਯਾਦ-ਦਹਾਨੀ ਬੰਦ ਕਰੋ",
-      "enableReminder": "ਯਾਦ-ਦਹਾਨੀ ਚਾਲੂ ਕਰੋ",
+      "disableReminder": "ਯਾਦ-ਦਹਾਨੀ ਅਯੋਗ ਕਰੋ",
+      "enableReminder": "ਯਾਦ-ਦਹਾਨੀ ਯੋਗ ਕਰੋ",
       "off": "ਬੰਦ"
     }
   },
@@ -5277,54 +5277,54 @@
     "splits": "ਲdelays delaysdelays"
   },
   "balanceReconciliation": {
-    "title": "ਬੈਲੰਸ ਮੇਲ-ਮਿਲਾਪ",
-    "subtitle": "ਆਪਣੇ ਆਯਾਤ ਕੀਤੇ ਲੈਣ-ਦੇਣ ਨੂੰ ਆਪਣੇ ਖਾਤੇ ਦੇ ਅਸਲ ਬੈਲੰਸ ਨਾਲ ਮੇਲ ਕਰੋ",
-    "transactionsImported": "{count} ਲੈਣ-ਦੇਣ ਆਯਾਤ ਕੀਤੇ",
-    "netChange": "ਸ਼ੁੱਧ ਤਬਦੀਲੀ",
-    "currentBalanceLabel": "ਮੌਜੂਦਾ ਬੈਲੰਸ (ਬੈਂਕ ਤੋਂ)",
-    "currentBalanceLabelCredit": "ਮੌਜੂਦਾ ਬੈਲੰਸ (ਕ੍ਰੈਡਿਟ ਕਾਰਡ)",
-    "balanceHelperBank": "ਆਪਣੀ ਬੈਂਕ ਦੀ ਵੈੱਬਸਾਈਟ ਜਾਂ ਐਪ ਤੇ ਦਿਖਾਇਆ ਮੌਜੂਦਾ ਬੈਲੰਸ ਦਾਖ਼ਲ ਕਰੋ",
-    "balanceHelperCredit": "ਆਪਣੇ ਕ੍ਰੈਡਿਟ ਕਾਰਡ ਤੇ ਮੌਜੂਦਾ ਬਕਾਇਆ ਬੈਲੰਸ ਦਾਖ਼ਲ ਕਰੋ",
-    "startingBalance": "ਸ਼ੁਰੂਆਤੀ ਬੈਲੰਸ",
-    "startingBalanceCredit": "ਸ਼ੁਰੂਆਤੀ ਬੈਲੰਸ (ਕ੍ਰੈਡਿਟ ਕਾਰਡ)",
-    "balanceMatchNote": "ਇਹ ਯਕੀਨੀ ਬਣਾਉਣ ਵਿੱਚ ਮਦਦ ਕਰਦਾ ਹੈ ਕਿ ਤੁਹਾਡਾ ਲੈਣ-ਦੇਣ ਇਤਿਹਾਸ ਪੂਰਾ ਅਤੇ ਸਹੀ ਹੈ",
-    "negativeWarning": "ਇਸ ਨਾਲ ਨਕਾਰਾਤਮਕ ਸ਼ੁਰੂਆਤੀ ਬੈਲੰਸ ਹੋਵੇਗਾ। ਕਿਰਪਾ ਕਰਕੇ ਆਪਣਾ ਮੌਜੂਦਾ ਬੈਲੰਸ ਪੜਤਾਲ ਕਰੋ।",
+    "title": "ਆਯਾਤ ਪੂਰੀ ਹੋਈ!",
+    "subtitle": "{accountName} ਲਈ ਆਪਣਾ ਖਾਤਾ ਬੈਲੇਂਸ ਸੈੱਟ ਕਰੋ",
+    "transactionsImported": "{count} ਲੈਣ-ਦੇਣ ਆਯਾਤ ਕੀਤੇ ਗਏ",
+    "netChange": "ਲੈਣ-ਦੇਣ ਤੋਂ ਸ਼ੁੱਧ ਤਬਦੀਲੀ:",
+    "currentBalanceLabel": "ਤੁਹਾਡਾ ਮੌਜੂਦਾ ਬੈਂਕ ਬੈਲੇਂਸ ਕੀ ਹੈ?",
+    "currentBalanceLabelCredit": "ਤੁਹਾਡੀ ਮੌਜੂਦਾ ਬਕਾਇਆ ਰਕਮ ਕਿੰਨੀ ਹੈ?",
+    "balanceHelperBank": "ਆਪਣੀ ਬੈਂਕਿੰਗ ਐਪ ਖੋਲ੍ਹੋ ਅਤੇ ਇਸ ਖਾਤੇ ਲਈ ਦਿਖਾਇਆ ਬੈਲੇਂਸ ਦਰਜ ਕਰੋ",
+    "balanceHelperCredit": "ਆਪਣੇ ਕ੍ਰੈਡਿਟ ਕਾਰਡ ਸਟੇਟਮੈਂਟ ਉੱਤੇ ਦਿਖਾਇਆ ਮੌਜੂਦਾ ਬੈਲੇਂਸ ਦਰਜ ਕਰੋ (ਸਕਾਰਾਤਮਕ ਸੰਖਿਆ ਵਜੋਂ)",
+    "startingBalance": "ਤੁਹਾਡਾ ਸ਼ੁਰੂਆਤੀ ਬੈਲੇਂਸ:",
+    "startingBalanceCredit": "ਤੁਹਾਡੀ ਸ਼ੁਰੂਆਤੀ ਬਕਾਇਆ ਰਕਮ:",
+    "balanceMatchNote": "ਇਹ ਤੁਹਾਡੇ ਖਾਤੇ ਦਾ ਬੈਲੇਂਸ ਤੁਹਾਡੇ ਬੈਂਕ ਨਾਲ ਮੇਲ ਖਾਂਦਾ ਬਣਾਏਗਾ।",
+    "negativeWarning": "ਇਸ ਦਾ ਨਤੀਜਾ ਨਕਾਰਾਤਮਕ ਸ਼ੁਰੂਆਤੀ ਬੈਲੇਂਸ ਹੈ, ਜੋ ਚੈਕਿੰਗ/ਬੱਚਤ ਲਈ ਅਸਾਧਾਰਨ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਜਾਂਚ ਕਰੋ ਕਿ ਤੁਹਾਡਾ ਮੌਜੂਦਾ ਬੈਲੇਂਸ ਸਹੀ ਹੈ।",
     "skipForNow": "ਹੁਣ ਲਈ ਛੱਡੋ",
-    "setBalance": "ਬੈਲੰਸ ਸੈੱਟ ਕਰੋ"
+    "setBalance": "ਬੈਲੇਂਸ ਸੈੱਟ ਕਰੋ"
   },
   "recommendations": {
-    "title": "ਸਿਫ਼ਾਰਸ਼ਾਂ",
-    "subtitle": "ਤੁਹਾਡੀ ਵਿੱਤੀ ਸਿਹਤ ਦੇ ਆਧਾਰ ਤੇ ਨਿੱਜੀ ਸੁਝਾਅ",
-    "emptyState": "ਅਜੇ ਕੋਈ ਸਿਫ਼ਾਰਸ਼ਾਂ ਨਹੀਂ। ਆਪਣੇ ਵਿੱਤੀ ਮਾਮਲਿਆਂ ਨੂੰ ਟ੍ਰੈਕ ਕਰਦੇ ਰਹੋ!",
+    "title": "ਪ੍ਰਮੁੱਖ ਸਿਫ਼ਾਰਸ਼ਾਂ",
+    "subtitle": "ਆਪਣੀ ਵਿੱਤੀ ਸਿਹਤ ਨੂੰ ਬਿਹਤਰ ਬਣਾਉਣ ਦੇ ਤਰੀਕੇ",
+    "emptyState": "ਵਿਅਕਤੀਗਤ ਸਿਫ਼ਾਰਸ਼ਾਂ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਹੋਰ ਵਿੱਤੀ ਡਾਟਾ ਸ਼ਾਮਲ ਕਰੋ",
     "viewAllFactors": "ਸਾਰੇ ਕਾਰਕ ਵੇਖੋ",
     "factorLabels": {
-      "savingsRate": "ਬਚਤ ਦਰ",
-      "debtToIncome": "ਕਰਜ਼ਾ-ਆਮਦਨ ਅਨੁਪਾਤ",
-      "budgetAdherence": "ਬਜਟ ਪਾਲਣਾ",
+      "savingsRate": "ਬੱਚਤ",
+      "debtToIncome": "ਕਰਜ਼ਾ",
+      "budgetAdherence": "ਬਜਟ",
       "emergencyFund": "ਐਮਰਜੈਂਸੀ ਫੰਡ",
-      "investmentGrowth": "ਨਿਵੇਸ਼ ਵਾਧਾ",
-      "expenseStability": "ਖਰਚ ਸਥਿਰਤਾ"
+      "investmentGrowth": "ਨਿਵੇਸ਼",
+      "expenseStability": "ਖਰਚੇ"
     },
     "factorLinks": {
-      "savingsRate": "ਬਚਤ ਸੁਝਾਅ ਵੇਖੋ",
-      "debtToIncome": "ਕਰਜ਼ਾ ਪ੍ਰਬੰਧਿਤ ਕਰੋ",
-      "budgetAdherence": "ਬਜਟ ਅਨੁਕੂਲ ਕਰੋ",
-      "emergencyFund": "ਐਮਰਜੈਂਸੀ ਫੰਡ ਬਣਾਓ",
-      "investmentGrowth": "ਨਿਵੇਸ਼ ਰਣਨੀਤੀਆਂ",
-      "expenseStability": "ਖਰਚ ਸਥਿਰ ਕਰੋ"
+      "savingsRate": "ਆਮਦਨ ਵੇਖੋ",
+      "debtToIncome": "ਕਰਜ਼ੇ ਪ੍ਰਬੰਧਿਤ ਕਰੋ",
+      "budgetAdherence": "ਬਜਟ ਐਡਜਸਟ ਕਰੋ",
+      "emergencyFund": "ਬੱਚਤ ਯੋਜਨਾ ਬਣਾਓ",
+      "investmentGrowth": "ਪੋਰਟਫੋਲੀਓ ਵੇਖੋ",
+      "expenseStability": "ਰਿਪੋਰਟਾਂ ਵੇਖੋ"
     }
   },
   "anomalyAlerts": {
-    "merchant": "ਵਪਾਰੀ",
-    "amount": "ਰਕਮ",
-    "average": "ਔਸਤ",
-    "category": "ਸ਼੍ਰੇਣੀ",
-    "wasExpected": "ਕੀ ਇਹ ਉਮੀਦ ਸੀ?",
-    "expected": "ਉਮੀਦ ਅਨੁਸਾਰ",
-    "unexpected": "ਅਣਕਿਆਸੀ",
-    "markedExpected": "ਉਮੀਦ ਅਨੁਸਾਰ ਚਿੰਨ੍ਹਿਤ",
-    "markedUnexpected": "ਅਣਕਿਆਸੀ ਵਜੋਂ ਚਿੰਨ੍ਹਿਤ",
-    "moreAnomalies": "ਹੋਰ {count} ਵਿਸੰਗਤੀਆਂ",
+    "merchant": "ਵਪਾਰੀ:",
+    "amount": "ਰਕਮ:",
+    "average": "ਔਸਤ: {amount}",
+    "category": "ਸ਼੍ਰੇਣੀ:",
+    "wasExpected": "ਕੀ ਇਹ ਉਮੀਦ ਕੀਤੀ ਸੀ?",
+    "expected": "ਉਮੀਦ ਕੀਤੀ",
+    "unexpected": "ਅਚਾਨਕ",
+    "markedExpected": "ਉਮੀਦ ਕੀਤੀ ਵਜੋਂ ਚਿੰਨ੍ਹਿਤ",
+    "markedUnexpected": "ਅਚਾਨਕ ਵਜੋਂ ਚਿੰਨ੍ਹਿਤ",
+    "moreAnomalies": "+{count} ਹੋਰ {count, plural, =1 {ਅਸਾਧਾਰਨਤਾ} other {ਅਸਾਧਾਰਨਤਾਵਾਂ}}",
     "severity": {
       "high": "ਉdelays",
       "medium": "ਮdelays",
@@ -5332,26 +5332,26 @@
     }
   },
   "pdfOcr": {
-    "processing": "PDF ਪ੍ਰੋਸੈਸ ਹੋ ਰਹੀ ਹੈ...",
+    "processing": "OCR ਪ੍ਰੋਸੈਸਿੰਗ",
     "cancel": "ਰੱਦ ਕਰੋ",
-    "pageProgress": "ਸਫ਼ਾ {current} ਵਿੱਚੋਂ {total}",
-    "elapsed": "ਬੀਤਿਆ ਸਮਾਂ: {time}",
-    "remaining": "ਬਾਕੀ ਸਮਾਂ: {time}",
+    "pageProgress": "ਪੰਨਾ {current} / {total}",
+    "elapsed": "ਬੀਤਿਆ: {time}",
+    "remaining": "~{time} ਬਾਕੀ",
     "stages": {
-      "loading": "ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ",
-      "rendering": "ਰੈਂਡਰਿੰਗ",
-      "preprocessing": "ਪ੍ਰੀਪ੍ਰੋਸੈਸਿੰਗ",
-      "ocr": "OCR",
-      "parsing": "ਪਾਰਸਿੰਗ",
-      "complete": "ਪੂਰਾ",
+      "loading": "PDF ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ",
+      "rendering": "ਪੰਨੇ ਰੈਂਡਰ ਹੋ ਰਹੇ ਹਨ",
+      "preprocessing": "ਚਿੱਤਰ ਵਧਾਇਆ ਜਾ ਰਿਹਾ ਹੈ",
+      "ocr": "ਟੈਕਸਟ ਕੱਢਿਆ ਜਾ ਰਿਹਾ ਹੈ",
+      "parsing": "ਲੈਣ-ਦੇਣ ਪਾਰਸ ਹੋ ਰਹੇ ਹਨ",
+      "complete": "ਪੂਰਾ ਹੋਇਆ",
       "error": "ਗਲਤੀ",
       "cancelled": "ਰੱਦ ਕੀਤਾ",
-      "enhance": "ਸੁਧਾਰ"
+      "enhance": "ਵਧਾਓ"
     },
-    "errorRetry": "OCR ਪ੍ਰੋਸੈਸਿੰਗ ਅਸਫ਼ਲ ਹੋਈ। ਕੀ ਤੁਸੀਂ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?",
-    "cancelledRetry": "OCR ਰੱਦ ਕੀਤਾ ਗਿਆ। ਕੀ ਤੁਸੀਂ ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?",
+    "errorRetry": "OCR ਪ੍ਰੋਸੈਸਿੰਗ ਅਸਫਲ ਰਹੀ। ਕੀ ਤੁਸੀਂ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰਨਾ ਚਾਹੋਗੇ?",
+    "cancelledRetry": "OCR ਰੱਦ ਕੀਤੀ ਗਈ ਸੀ। ਕੀ ਤੁਸੀਂ ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਕਰਨਾ ਚਾਹੋਗੇ?",
     "retryButton": "OCR ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ",
-    "completedSuccess": "OCR ਸਫ਼ਲਤਾਪੂਰਵਕ ਪੂਰਾ ਹੋਇਆ!",
+    "completedSuccess": "OCR ਸਫਲਤਾਪੂਰਵਕ ਪੂਰੀ ਹੋਈ!",
     "loadingChart": "ਚਾਰਟ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ..."
   }
 }

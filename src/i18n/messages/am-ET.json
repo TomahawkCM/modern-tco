@@ -464,7 +464,7 @@
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
     },
-    "backToHome": "ወደ መነሻ ተመለስ"
+    "backToHome": "ወደ መነሻ ገጽ ተመለስ"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1212,15 +1212,15 @@
       "interestEarned": "የተገኘ ወለድ",
       "interest": "ወለድ",
       "totalInterest": "ጠቅላላ ወለድ",
-      "snowball": "ስኖውቦል",
-      "avalanche": "አቫላንች",
+      "snowball": "Snowball",
+      "avalanche": "Avalanche",
       "portfolio": "ፖርትፎሊዮ",
       "fireTarget": "FIRE ግብ",
       "median50th": "መካከለኛ (50ኛ)",
       "remainingBalance": "ቀሪ ሂሳብ",
       "totalAssets": "ጠቅላላ ንብረቶች",
-      "totalLiabilities": "ጠቅላላ እዳዎች",
-      "netWorth": "ጠቅላላ ሀብት",
+      "totalLiabilities": "ጠቅላላ ግዴታዎች",
+      "netWorth": "የተጣራ ሀብት",
       "retirement": "ጡረታ"
     },
     "scenario": {
@@ -1792,7 +1792,7 @@
     "finalConfirmation": "የመጨረሻ ይረጋገጡ:",
     "processing": "በማስተካከል...",
     "typeToConfirm": "ይህን እንደሚያሳይ ይጻፉ {text} ይረጋገጡ.",
-    "confirmAction": "ድርጊቱን ያረጋግጡ"
+    "confirmAction": "እርምጃን ያረጋግጡ"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2107,15 +2107,15 @@
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
     "title": "Financial Health",
     "history": {
-      "title": "የጤና ነጥብ ታሪክ",
-      "monthsOfData": "{months} ወራት ውሂብ",
-      "emptyTitle": "ገና ምንም ታሪክ የለም",
-      "emptySubtitle": "የጤና ነጥብ ታሪክዎ ከመጀመሪያው ወርዎ በኋላ እዚህ ይታያል",
-      "legendScore": "ነጥብ",
+      "title": "የውጤት ታሪክ",
+      "monthsOfData": "{count} {count, plural, =1 {ወር} other {ወራት}} ዳታ",
+      "emptyTitle": "ዳታ ሲሰበሰብ የውጤት ታሪክዎ እዚህ ይታያል",
+      "emptySubtitle": "በሚቀጥለው ወር ይመልከቱ!",
+      "legendScore": "ውጤት",
       "legendTrend": "አዝማሚያ",
-      "tooltipScore": "ነጥብ: {score}",
-      "tooltipTrend": "አዝማሚያ: {direction}",
-      "loadingChart": "ሰንጠረዥ በመጫን ላይ..."
+      "tooltipScore": "ውጤት",
+      "tooltipTrend": "አዝማሚያ",
+      "loadingChart": "ቻርት በመጫን ላይ..."
     }
   },
   "holdingModal": {
@@ -3353,44 +3353,44 @@
     },
     "welcome": {
       "heroTitle": "በጀትዎ በእርስዎ መሣሪያ ላይ ይኖራል",
-      "heroSubtitle": "ወደ ሚስጥራዊው የበጀት መተግበሪያ እንኳን በደህና መጡ። ምንም መለያ፣ ምንም ደመና፣ ምንም ስምምነት።",
+      "heroSubtitle": "በጣም ግላዊ ወደሆነው የበጀት መተግበሪያ እንኳን ደህና መጡ። ምንም ሂሳቦች የሉም፣ ምንም ክላውድ የለም፣ ምንም ስምምነት የለም።",
       "features": {
-        "yourDataTitle": "የእርስዎ ውሂብ፣ የእርስዎ መሣሪያ",
-        "yourDataDescription": "ሁሉም የፋይናንስ ውሂብ በመሣሪያዎ ላይ በአካባቢያዊ ሁኔታ ይከማቻል። ምንም የደመና አገልጋዮች፣ ምንም የሶስተኛ ወገን መዳረሻ።",
+        "yourDataTitle": "የእርስዎ ዳታ፣ የእርስዎ መሣሪያ",
+        "yourDataDescription": "ሁሉም የገንዘብ ዳታ በእርስዎ መሣሪያ ላይ በአካባቢው ይከማቻል። ምንም የክላውድ ሰርቨሮች የሉም፣ ምንም የሶስተኛ ወገን መዳረሻ የለም።",
         "encryptionTitle": "የባንክ ደረጃ ምስጠራ",
-        "encryptionDescription": "AES-256 ምስጠራ ውሂብዎን ይጠብቃል። ቁልፉ የእርስዎ ብቻ ነው—ከመሣሪያዎ ፈጽሞ አይወጣም።",
+        "encryptionDescription": "AES-256 ምስጠራ ዳታዎን ይጠብቃል። ቁልፉ ያለው እርስዎ ብቻ ነዎት — ከመሣሪያዎ ፈጽሞ አይወጣም።",
         "offlineTitle": "ያለ ኢንተርኔት ይሠራል",
-        "offlineDescription": "ያለ ኢንተርኔት ሙሉ ተግባር። ለግላዊነት ንቁ ተጠቃሚዎች ፍጹም።",
+        "offlineDescription": "ያለ ኢንተርኔት ሙሉ ተግባራዊነት። ለግላዊነት ንቁ ተጠቃሚዎች ፍጹም።",
         "zeroTrackingTitle": "ዜሮ ክትትል",
-        "zeroTrackingDescription": "ምንም ትንተና፣ ምንም ቴሌሜትሪ፣ ምንም ውሂብ አሰባሰብ። ፋይናንስዎ የማንም ጉዳይ አይደለም።"
+        "zeroTrackingDescription": "ምንም ትንታኔ የለም፣ ምንም ቴሌሜትሪ የለም፣ ምንም ዳታ ስብሰባ የለም። የገንዘብ ጉዳይዎ የማንም ጉዳይ አይደለም።"
       },
-      "whatsNext": "ቀጣዩ ምንድነው?",
-      "whatsNextIntro": "በሚቀጥሉት ጥቂት ደቂቃዎች እንረዳዎታለን:",
-      "step1": "ያሉዎትን ግብይቶች ያስገቡ (ባንክ CSV፣ OFX፣ ወይም በእጅ)",
+      "whatsNext": "ቀጣዩ ምንድን ነው?",
+      "whatsNextIntro": "በሚቀጥሉት ጥቂት ደቂቃዎች ውስጥ እናግዝዎታለን:",
+      "step1": "ያሉዎትን ግብይቶች ያስመጡ (የባንክ CSV፣ OFX፣ ወይም በእጅ)",
       "step2": "ወጪዎችዎን በራስ-ሰር ይመድቡ",
       "step3": "በትክክለኛ ወጪ ላይ ተመስርቶ የመጀመሪያ በጀትዎን ይፍጠሩ",
-      "step4": "ክፍያ እንዳያመልጥዎ የሂሳብ ማስታወሻዎችን ያዘጋጁ",
+      "step4": "የሂሳብ ማስታወሻዎችን ያዘጋጁ ስለዚህ ፈጽሞ ክፍያ አይዘሉም",
       "getStarted": "እንጀምር"
     },
     "categoryMapping": {
-      "needsCategories": "{count} ግብይቶች ምድቦች ያስፈልጋቸዋል",
+      "needsCategories": "{count} ግብይቶች ምድቦች ያስፈልጓቸዋል",
       "allCategorized": "ሁሉም ግብይቶች ተመድበዋል!",
-      "applySmartSuggestions": "ብልጥ ጥቆማዎችን ተግብር",
-      "categorize": "ምድብ",
-      "percentMatch": "{percent}% ተመሳሳይነት",
+      "applySmartSuggestions": "ስማርት ጥቆማዎችን ተግብር",
+      "categorize": "ምደብ",
+      "percentMatch": "{percent}% ተዛምዶ",
       "rememberChoices": "የምድብ ምርጫዎቼን አስታውስ",
-      "rememberChoicesDescription": "ተመሳሳይ ግብይቶችን ወደፊት በራስ-ሰር ምድብ",
+      "rememberChoicesDescription": "ለወደፊቱ ተመሳሳይ ግብይቶችን በራስ-ሰር ምደብ",
       "categorized": "{count} ተመድበዋል",
       "remaining": "{count} ቀሪ",
       "continue": "ቀጥል",
-      "continueAnyway": "ያም ሆኖ ቀጥል",
+      "continueAnyway": "ለማንኛውም ቀጥል",
       "categories": {
         "foodDining": "ምግብ እና ምግብ ቤት",
         "transportation": "ትራንስፖርት",
-        "billsUtilities": "ሂሳቦች እና መገልገያዎች",
+        "billsUtilities": "ሂሳቦች እና አገልግሎቶች",
         "shopping": "ግዢ",
         "entertainment": "መዝናኛ",
-        "healthFitness": "ጤና እና ስፖርት",
+        "healthFitness": "ጤና እና ብቃት",
         "personalCare": "የግል እንክብካቤ",
         "income": "ገቢ",
         "transfers": "ዝውውሮች"
@@ -4554,8 +4554,8 @@
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
     },
     "reminderToggle": {
-      "disableReminder": "ማስታወሻ አሰናክል",
-      "enableReminder": "ማስታወሻ አንቃ",
+      "disableReminder": "ማስታወሻ አጥፋ",
+      "enableReminder": "ማስታወሻ አብራ",
       "off": "ጠፍቷል"
     }
   },
@@ -5234,54 +5234,54 @@
     "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
   },
   "balanceReconciliation": {
-    "title": "ሂሳብ ማስታረቅ",
-    "subtitle": "የገቡ ግብይቶችዎን ከትክክለኛው የሂሳብ ቀሪ ሂሳብ ጋር ያዛምዱ",
-    "transactionsImported": "{count} ግብይቶች ገብተዋል",
-    "netChange": "ጠቅላላ ለውጥ",
-    "currentBalanceLabel": "የአሁን ቀሪ ሂሳብ (ከባንክ)",
-    "currentBalanceLabelCredit": "የአሁን ቀሪ ሂሳብ (ክሬዲት ካርድ)",
-    "balanceHelperBank": "በባንክ ድረ-ገጽዎ ወይም መተግበሪያዎ ላይ የሚታየውን ቀሪ ሂሳብ ያስገቡ",
-    "balanceHelperCredit": "በክሬዲት ካርድዎ ላይ ያለውን ቀሪ ዕዳ ያስገቡ",
-    "startingBalance": "የመነሻ ቀሪ ሂሳብ",
-    "startingBalanceCredit": "የመነሻ ቀሪ ሂሳብ (ክሬዲት ካርድ)",
-    "balanceMatchNote": "ይህ የግብይት ታሪክዎ ሙሉ እና ትክክለኛ መሆኑን ለማረጋገጥ ይረዳል",
-    "negativeWarning": "ይህ አሉታዊ የመነሻ ቀሪ ሂሳብ ያስከትላል። እባክዎ ቀሪ ሂሳብዎን ያረጋግጡ።",
-    "skipForNow": "ለአሁን ዝለል",
-    "setBalance": "ቀሪ ሂሳብ አቀናብር"
+    "title": "ማስመጣት ተጠናቀቀ!",
+    "subtitle": "ለ{accountName} የሂሳብ ቀሪ ይዘጋጁ",
+    "transactionsImported": "{count} ግብይቶች ተመጡ",
+    "netChange": "ከግብይቶች የተጣራ ለውጥ:",
+    "currentBalanceLabel": "የአሁኑ የባንክ ቀሪ ሂሳብዎ ምን ያህል ነው?",
+    "currentBalanceLabelCredit": "የአሁኑ ዕዳዎ ምን ያህል ነው?",
+    "balanceHelperBank": "የባንክ መተግበሪያዎን ይክፈቱ እና ለዚህ ሂሳብ የሚታየውን ቀሪ ያስገቡ",
+    "balanceHelperCredit": "በክሬዲት ካርድ መግለጫዎ ላይ የሚታየውን የአሁኑን ቀሪ ያስገቡ (በአዎንታዊ ቁጥር)",
+    "startingBalance": "የመነሻ ቀሪ ሂሳብዎ:",
+    "startingBalanceCredit": "የመነሻ ዕዳዎ:",
+    "balanceMatchNote": "ይህ የሂሳብ ቀሪዎን ከባንክዎ ጋር እንዲዛመድ ያደርጋል።",
+    "negativeWarning": "ይህ አሉታዊ የመነሻ ቀሪ ያስከትላል፣ ይህም ለቼኪንግ/ቁጠባ ያልተለመደ ነው። እባክዎ የአሁኑ ቀሪ ሂሳብዎ ትክክል መሆኑን ድጋሚ ያረጋግጡ።",
+    "skipForNow": "ለአሁን ዝለሉ",
+    "setBalance": "ቀሪ ሂሳብ ያዘጋጁ"
   },
   "recommendations": {
-    "title": "ምክሮች",
-    "subtitle": "በፋይናንስ ጤናዎ ላይ ተመስርተው ግላዊ ጥቆማዎች",
-    "emptyState": "ገና ምንም ምክሮች የሉም። ፋይናንስዎን መከታተልዎን ይቀጥሉ!",
-    "viewAllFactors": "ሁሉንም ምክንያቶች ይመልከቱ",
+    "title": "ዋና ምክሮች",
+    "subtitle": "የገንዘብ ጤናዎን ለማሻሻል መንገዶች",
+    "emptyState": "ግላዊ ምክሮችን ለመቀበል ተጨማሪ የገንዘብ ዳታ ያክሉ",
+    "viewAllFactors": "ሁሉንም ሁኔታዎች ይመልከቱ",
     "factorLabels": {
-      "savingsRate": "የቁጠባ መጠን",
-      "debtToIncome": "ዕዳ ለገቢ",
-      "budgetAdherence": "የበጀት ተገዢነት",
-      "emergencyFund": "የአደጋ ጊዜ ፈንድ",
-      "investmentGrowth": "የኢንቨስትመንት ዕድገት",
-      "expenseStability": "የወጪ መረጋጋት"
+      "savingsRate": "ቁጠባ",
+      "debtToIncome": "ዕዳ",
+      "budgetAdherence": "በጀት",
+      "emergencyFund": "ድንገተኛ ፈንድ",
+      "investmentGrowth": "ኢንቨስትመንት",
+      "expenseStability": "ወጪዎች"
     },
     "factorLinks": {
-      "savingsRate": "የቁጠባ ምክሮችን ይመልከቱ",
-      "debtToIncome": "ዕዳ ያስተዳድሩ",
-      "budgetAdherence": "በጀት ያስተካክሉ",
-      "emergencyFund": "የአደጋ ጊዜ ፈንድ ይገንቡ",
-      "investmentGrowth": "የኢንቨስትመንት ስልቶች",
-      "expenseStability": "ወጪዎችን ያረጋጉ"
+      "savingsRate": "ገቢን ይመልከቱ",
+      "debtToIncome": "ብድሮችን ያስተዳድሩ",
+      "budgetAdherence": "በጀቶችን ያስተካክሉ",
+      "emergencyFund": "ቁጠባ ያቅዱ",
+      "investmentGrowth": "ፖርትፎሊዮ ይመልከቱ",
+      "expenseStability": "ሪፖርቶችን ይመልከቱ"
     }
   },
   "anomalyAlerts": {
-    "merchant": "ነጋዴ",
-    "amount": "መጠን",
-    "average": "አማካኝ",
-    "category": "ምድብ",
-    "wasExpected": "ይህ ይጠበቅ ነበር?",
-    "expected": "የሚጠበቅ",
+    "merchant": "ነጋዴ:",
+    "amount": "መጠን:",
+    "average": "አማካይ: {amount}",
+    "category": "ምድብ:",
+    "wasExpected": "ይህ የተጠበቀ ነበር?",
+    "expected": "የተጠበቀ",
     "unexpected": "ያልተጠበቀ",
-    "markedExpected": "እንደሚጠበቅ ምልክት ተደርጓል",
+    "markedExpected": "እንደ ተጠበቀ ምልክት ተደርጓል",
     "markedUnexpected": "እንደ ያልተጠበቀ ምልክት ተደርጓል",
-    "moreAnomalies": "{count} ተጨማሪ ያልተለመዱ",
+    "moreAnomalies": "+{count} ተጨማሪ {count, plural, =1 {ያልተለመደ ነገር} other {ያልተለመዱ ነገሮች}}",
     "severity": {
       "high": "ከፍተኛ",
       "medium": "መካከለኛ",
@@ -5289,27 +5289,27 @@
     }
   },
   "pdfOcr": {
-    "processing": "PDF በማስኬድ ላይ...",
+    "processing": "OCR ሂደት",
     "cancel": "ሰርዝ",
-    "pageProgress": "ገጽ {current} ከ {total}",
+    "pageProgress": "ገጽ {current} ከ{total}",
     "elapsed": "ያለፈ: {time}",
-    "remaining": "ቀሪ: {time}",
+    "remaining": "~{time} ቀሪ",
     "stages": {
-      "loading": "በመጫን ላይ",
-      "rendering": "በማቅረብ ላይ",
-      "preprocessing": "ቅድመ ሂደት",
-      "ocr": "OCR",
-      "parsing": "በመተንተን ላይ",
-      "complete": "ተጠናቋል",
+      "loading": "PDF በመጫን ላይ",
+      "rendering": "ገጾች በማሳየት ላይ",
+      "preprocessing": "ምስልን በማሻሻል ላይ",
+      "ocr": "ጽሑፍ በማውጣት ላይ",
+      "parsing": "ግብይቶች በመተንተን ላይ",
+      "complete": "ተጠናቀቀ",
       "error": "ስህተት",
       "cancelled": "ተሰርዟል",
-      "enhance": "ማሻሻል"
+      "enhance": "አሻሽል"
     },
     "errorRetry": "OCR ሂደት አልተሳካም። እንደገና መሞከር ይፈልጋሉ?",
-    "cancelledRetry": "OCR ተሰርዟል። እንደገና ማስጀመር ይፈልጋሉ?",
+    "cancelledRetry": "OCR ተሰርዟል። እንደገና መጀመር ይፈልጋሉ?",
     "retryButton": "OCR እንደገና ሞክር",
-    "completedSuccess": "OCR በተሳካ ሁኔታ ተጠናቋል!",
-    "loadingChart": "ሰንጠረዥ በመጫን ላይ..."
+    "completedSuccess": "OCR በተሳካ ሁኔታ ተጠናቀቀ!",
+    "loadingChart": "ቻርት በመጫን ላይ..."
   },
   "developerTools": {
     "title": "የገንቢ መሳሪያዎች",
