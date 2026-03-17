@@ -615,7 +615,7 @@
       "youWillLose": "Menetät:"
     },
     "events": {
-      "_note": "Already internationalized in client.tsx using budget.events namespace",
+      "_note": "Jo kansainvälistetty client.tsx:ssä käyttäen budget.events-nimiavaruutta",
       "active": "Aktiivinen",
       "completed": "Valmis",
       "createEvent": "Luo tapahtuma",
@@ -655,7 +655,7 @@
       "yes": "Kyllä, aina"
     },
     "netWorth": {
-      "_note": "Already internationalized in client.tsx using budget.netWorth namespace",
+      "_note": "Jo kansainvälistetty client.tsx:ssä käyttäen budget.netWorth-nimiavaruutta",
       "assetBreakdown": "Varojen erittely",
       "cashChecking": "Käteinen ja käyttötilit",
       "creditCards": "Luottokortit",
@@ -677,7 +677,7 @@
     "privacy": {
       "disabled": "Taloudelliset arvot ovat näkyvissä",
       "enabled": "Taloudelliset arvot ovat piilossa",
-      "shortcut": "Cmd+Shift+P",
+      "shortcut": "Cmd+Vaihto+P",
       "tapToReveal": "Napauta paljastaaksesi",
       "toggle": "Yksityisyystila"
     },
@@ -765,7 +765,7 @@
       "totalSafe": "Turvallista kuluttaa yhteensä"
     },
     "scenarios": {
-      "_note": "Already internationalized in client.tsx using budget.scenarios namespace",
+      "_note": "Jo kansainvälistetty client.tsx:ssä käyttäen budget.scenarios-nimiavaruutta",
       "after": "Jälkeen",
       "amountLabel": "Summa",
       "annualSavings": "Vuotuiset säästöt",
@@ -1252,8 +1252,8 @@
     "downloadAllICS": "Lataa kaikki ICS-tiedostona",
     "downloadICS": "Lataa ICS-tiedosto",
     "exportToCalendar": "Vie kalenteriin",
-    "googleCalendar": "Google Calendar",
-    "outlookCalendar": "Outlook Calendar",
+    "googleCalendar": "Google-kalenteri",
+    "outlookCalendar": "Outlook-kalenteri",
     "selectSubscriptions": "Valitse tilaukset..."
   },
   "categories": {
@@ -2048,7 +2048,7 @@
     "type": "Tyyppi"
   },
   "footer": {
-    "copyright": "© {year} {brandName}",
+    "copyright": "© {year} {brandName}. Kaikki oikeudet pidätetään.",
     "links": {
       "login": "Kirjaudu sisään",
       "settings": "Asetukset",
@@ -2175,7 +2175,7 @@
     "langEnglish": "Englanti",
     "langFrench": "Ranska",
     "langGerman": "Saksa",
-    "langHindi": "Hindi",
+    "langHindi": "Hindi (हिन्दी)",
     "langItalian": "Italia",
     "langJapanese": "Japani",
     "langKorean": "Korea",
@@ -2616,22 +2616,22 @@
         "viewPricing": "Katso hinnoittelu"
       },
       "demo": {
-        "cloudStorage": "Cloud storage",
-        "dining": "Dining",
-        "expenses": "Expenses",
-        "foodToday": "Food • Today",
-        "groceries": "Groceries",
-        "groceryStore": "Grocery Store",
-        "income": "Income",
-        "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
-        "netWorth": "Net worth",
+        "cloudStorage": "Pilvitallennus",
+        "dining": "Ravintolat",
+        "expenses": "Menot",
+        "foodToday": "Ruoka • Tänään",
+        "groceries": "Ruokaostokset",
+        "groceryStore": "Ruokakauppa",
+        "income": "Tulot",
+        "incomeYesterday": "Tulo • Eilen",
+        "monthly": "Kuukausittainen",
+        "netWorth": "Nettovarallisuus",
         "netflix": "Netflix",
-        "salary": "Salary",
-        "shopping": "Shopping",
+        "salary": "Palkka",
+        "shopping": "Ostokset",
         "spotify": "Spotify",
-        "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "subscriptionOct24": "Tilaus • 24. lokakuuta",
+        "yearly": "Vuosittainen"
       },
       "modes": {
         "budgets": "Budjetit",
@@ -2983,7 +2983,7 @@
     "monthlyPaymentsCount": "{count} kuukausierää",
     "nextPayment": "Seuraava maksu",
     "noLoansMatchFilters": "Lainoja ei vastaa suodattimia",
-    "notAvailable": "N/A",
+    "notAvailable": "Ei saatavilla",
     "notes": "Muistiinpanot",
     "originalPrincipal": "Alkuperäinen pääoma",
     "overYears": "{years} vuoden aikana",
@@ -3267,8 +3267,8 @@
     "transactionSaved": "Tapahtuma tallennettu onnistuneesti!",
     "uploadReceipt": "Lataa kuitti",
     "uploadReceiptAriaLabel": "Lataa kuittikuva tai PDF",
-    "viewInTransactions": "View in Transactions",
-    "viewRawOcrText": "View raw OCR text"
+    "viewInTransactions": "Näytä tapahtumissa",
+    "viewRawOcrText": "Näytä raaka OCR-teksti"
   },
   "offline": {
     "backOnline": "Olet taas verkossa! Napsauta päivitä ladataksesi sivun uudelleen.",
@@ -3825,27 +3825,27 @@
     "whatsSentDescription": "Vain puhdistetut tapahtumakuvaukset (esim. \"AMAZON.COM\"). Ei tilinumeroita, nimiä tai osoitteita. OpenAI GPT-4o-mini."
   },
   "profileDialog": {
-    "cancel": "Cancel",
-    "confirmPinLabel": "Confirm PIN",
-    "confirmPinPlaceholder": "Confirm PIN",
-    "createDescription": "Add a new profile for a family member. Each profile can have its own private budgets.",
-    "createTitle": "Create Profile",
-    "defaultProfileNote": "This is the default profile and will be selected on app start.",
-    "editDescription": "Update the profile name and avatar color.",
-    "editTitle": "Edit Profile",
-    "enterPinPlaceholder": "Enter PIN",
-    "errorCreateFailed": "Failed to create profile",
-    "errorInvalidPin": "Invalid PIN",
-    "errorNameRequired": "Please enter a name for the profile",
-    "errorNameTooLong": "Name must be 30 characters or less",
-    "errorPinMismatch": "PINs do not match",
-    "errorUpdateFailed": "Failed to update profile",
-    "nameLabel": "Name",
-    "namePlaceholder": "Enter profile name",
-    "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
-    "pinLabel": "PIN (4-6 digits)",
-    "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes",
+    "cancel": "Peruuta",
+    "confirmPinLabel": "Vahvista PIN",
+    "confirmPinPlaceholder": "Vahvista PIN",
+    "createDescription": "Lisää uusi profiili perheenjäsenelle. Jokaisella profiililla voi olla omat yksityiset budjetit.",
+    "createTitle": "Luo profiili",
+    "defaultProfileNote": "Tämä on oletusprofiili ja valitaan sovelluksen käynnistyessä.",
+    "editDescription": "Päivitä profiilin nimi ja avatarin väri.",
+    "editTitle": "Muokkaa profiilia",
+    "enterPinPlaceholder": "Syötä PIN",
+    "errorCreateFailed": "Profiilin luominen epäonnistui",
+    "errorInvalidPin": "Virheellinen PIN",
+    "errorNameRequired": "Syötä profiilille nimi",
+    "errorNameTooLong": "Nimi saa olla enintään 30 merkkiä",
+    "errorPinMismatch": "PIN-koodit eivät täsmää",
+    "errorUpdateFailed": "Profiilin päivittäminen epäonnistui",
+    "nameLabel": "Nimi",
+    "namePlaceholder": "Syötä profiilin nimi",
+    "pinHelpText": "PIN suojaa pääsyn tähän profiiliin. Valitse jotain muistettavaa mutta ei liian yksinkertaista.",
+    "pinLabel": "PIN (4-6 numeroa)",
+    "protectWithPin": "Suojaa PIN-koodilla",
+    "saveChanges": "Tallenna muutokset",
     "errorDeleteFailed": "Profiilin poistaminen epäonnistui",
     "deleteTitle": "Poista profiili?",
     "defaultProfile": "Oletusprofiili",
@@ -3940,13 +3940,13 @@
     "savingsRateDescription": "Prosenttiosuus tuloista säästetty tässä kuussa"
   },
   "receiptThumbnail": {
-    "close": "Close",
-    "deleteConfirm": "Delete receipt \"{filename}\"?",
-    "deleteFailed": "Failed to delete receipt",
-    "deleteReceipt": "Delete receipt",
-    "downloadPdf": "Download PDF",
+    "close": "Sulje",
+    "deleteConfirm": "Poista kuitti \"{filename}\"?",
+    "deleteFailed": "Kuitin poistaminen epäonnistui",
+    "deleteReceipt": "Poista kuitti",
+    "downloadPdf": "Lataa PDF",
     "fileSize": "{size} KB",
-    "pdfReceipt": "PDF Receipt",
+    "pdfReceipt": "PDF-kuitti",
     "receiptCount": "{count, plural, =1 {1 kuitti} other {# kuittia}}",
     "unsupportedFileType": "Ei-tuettu tiedostotyyppi",
     "uploaded": "Ladattu {date}",
@@ -4245,110 +4245,110 @@
   },
   "simplefinSettings": {
     "connectedAccounts": {
-      "description": "Manage your linked bank accounts",
-      "title": "Connected Accounts"
+      "description": "Hallinnoi linkitettyjä pankkitilejäsi",
+      "title": "Yhdistetyt tilit"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
-      "connectButton": "Connect Bank Account",
-      "connected": "Connected",
-      "description": "Connect your bank accounts to automatically import transactions",
-      "notConnected": "Not Connected",
-      "notConnectedDesc": "Connect your bank accounts to start importing transactions",
-      "title": "SimpleFIN Connection"
+      "accountsLinked": "{count, plural, =1 {1 tili linkitetty} other {# tiliä linkitetty}}",
+      "connectButton": "Yhdistä pankkitili",
+      "connected": "Yhdistetty",
+      "description": "Yhdistä pankkitilisi tuodaksesi tapahtumia automaattisesti",
+      "notConnected": "Ei yhdistetty",
+      "notConnectedDesc": "Yhdistä pankkitilisi aloittaaksesi tapahtumien tuonnin",
+      "title": "SimpleFIN-yhteys"
     },
     "disconnect": {
-      "button": "Disconnect",
-      "cancel": "Cancel",
-      "confirm": "Disconnect",
-      "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
-      "dialogTitle": "Disconnect SimpleFIN?"
+      "button": "Katkaise yhteys",
+      "cancel": "Peruuta",
+      "confirm": "Katkaise yhteys",
+      "dialogDescription": "Tämä poistaa yhteyden pankkitileihisi. Olemassa olevia tapahtumia ei poisteta, mutta uudet tapahtumat eivät enää synkronoidu automaattisesti.",
+      "dialogTitle": "Katkaise SimpleFIN-yhteys?"
     },
     "help": {
-      "bridgeDashboard": "SimpleFIN Bridge Dashboard",
-      "protocolDocs": "SimpleFIN Protocol Documentation",
-      "title": "Need Help?"
+      "bridgeDashboard": "SimpleFIN Bridge -hallintapaneeli",
+      "protocolDocs": "SimpleFIN-protokollan dokumentaatio",
+      "title": "Tarvitsetko apua?"
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
-      "lastSynced": "Last synced: {time}",
-      "lessThanHour": "Less than an hour ago",
-      "never": "Never",
-      "syncNow": "Sync Now",
-      "syncing": "Syncing..."
+      "hoursAgo": "{hours, plural, =1 {1 tunti sitten} other {# tuntia sitten}}",
+      "lastSynced": "Viimeksi synkronoitu: {time}",
+      "lessThanHour": "Alle tunti sitten",
+      "never": "Ei koskaan",
+      "syncNow": "Synkronoi nyt",
+      "syncing": "Synkronoidaan..."
     },
     "syncSettings": {
       "autoCategorize": {
-        "description": "Automatically categorize imported transactions using AI",
-        "label": "Auto-Categorize"
+        "description": "Luokittele tuodut tapahtumat automaattisesti tekoälyllä",
+        "label": "Automaattinen luokittelu"
       },
       "autoSync": {
-        "description": "Automatically sync transactions on a schedule",
-        "label": "Automatic Sync"
+        "description": "Synkronoi tapahtumat automaattisesti aikataulun mukaan",
+        "label": "Automaattinen synkronointi"
       },
-      "description": "Configure how and when transactions are synced",
+      "description": "Määritä miten ja milloin tapahtumat synkronoidaan",
       "frequency": {
-        "every12Hours": "Every 12 hours",
-        "every2Days": "Every 2 days",
-        "every6Hours": "Every 6 hours",
-        "hint": "SimpleFIN allows up to 24 requests per day. Daily sync is recommended.",
-        "label": "Sync Frequency",
-        "onceDaily": "Once daily"
+        "every12Hours": "12 tunnin välein",
+        "every2Days": "2 päivän välein",
+        "every6Hours": "6 tunnin välein",
+        "hint": "SimpleFIN sallii enintään 24 pyyntöä päivässä. Päivittäinen synkronointi on suositeltavaa.",
+        "label": "Synkronointitiheys",
+        "onceDaily": "Kerran päivässä"
       },
       "notifications": {
-        "description": "Show notification when sync completes",
-        "label": "Sync Notifications"
+        "description": "Näytä ilmoitus, kun synkronointi valmistuu",
+        "label": "Synkronointi-ilmoitukset"
       },
       "pendingTransactions": {
-        "description": "Include transactions that haven't posted yet",
-        "label": "Import Pending Transactions"
+        "description": "Sisällytä tapahtumat, joita ei ole vielä kirjattu",
+        "label": "Tuo odottavat tapahtumat"
       },
-      "title": "Sync Settings",
+      "title": "Synkronointiasetukset",
       "transactionHistory": {
-        "days": "{count} days",
-        "hint": "How many days of transaction history to fetch (max 60 days per SimpleFIN)",
-        "label": "Transaction History"
+        "days": "{count} päivää",
+        "hint": "Kuinka monen päivän tapahtumahistoria haetaan (enintään 60 päivää per SimpleFIN)",
+        "label": "Tapahtumahistoria"
       }
     }
   },
   "simplefinStatus": {
-    "active": "Active",
-    "asOf": "as of {date}",
-    "cancel": "Cancel",
-    "connected": "Connected",
-    "connecting": "Connecting...",
-    "disconnected": "Disconnected",
-    "dismiss": "Dismiss",
-    "error": "Error",
-    "errorsLabel": "Errors:",
-    "expired": "Expired",
-    "hoursAgo": "{hours}h ago",
-    "imported": "Imported",
-    "justNow": "just now",
-    "lastSynced": "Last synced: {time}",
-    "minutesAgo": "{minutes}m ago",
-    "neverSynced": "Never synced",
-    "noBankAccounts": "No bank accounts connected",
-    "pause": "Pause",
-    "paused": "Paused",
-    "processing": "Processing: {account}",
-    "resume": "Resume",
-    "skippedDuplicates": "Skipped (duplicates)",
+    "active": "Aktiivinen",
+    "asOf": "tilanne {date}",
+    "cancel": "Peruuta",
+    "connected": "Yhdistetty",
+    "connecting": "Yhdistetään...",
+    "disconnected": "Yhteys katkaistu",
+    "dismiss": "Ohita",
+    "error": "Virhe",
+    "errorsLabel": "Virheet:",
+    "expired": "Vanhentunut",
+    "hoursAgo": "{hours} t sitten",
+    "imported": "Tuotu",
+    "justNow": "juuri nyt",
+    "lastSynced": "Viimeksi synkronoitu: {time}",
+    "minutesAgo": "{minutes} min sitten",
+    "neverSynced": "Ei koskaan synkronoitu",
+    "noBankAccounts": "Ei yhdistettyjä pankkitilejä",
+    "pause": "Keskeytä",
+    "paused": "Keskeytetty",
+    "processing": "Käsitellään: {account}",
+    "resume": "Jatka",
+    "skippedDuplicates": "Ohitettu (kaksoiskappaleet)",
     "statusLabel": "SimpleFIN: {status}",
-    "sync": "Sync",
-    "syncComplete": "Sync Complete",
-    "syncCompletedWithErrors": "Sync Completed with Errors",
-    "syncFailed": "Sync Failed",
-    "syncSuccessful": "Sync Successful",
-    "syncedDaysAgo": "Synced {days}d ago",
-    "syncedHoursAgo": "Synced {hours}h ago",
-    "syncedJustNow": "Synced just now",
-    "syncedYesterday": "Synced yesterday",
-    "syncing": "Syncing...",
-    "transactionsCount": "({count} transactions)",
-    "unlink": "Unlink",
-    "warningsLabel": "Warnings:"
+    "sync": "Synkronoi",
+    "syncComplete": "Synkronointi valmis",
+    "syncCompletedWithErrors": "Synkronointi valmistui virheillä",
+    "syncFailed": "Synkronointi epäonnistui",
+    "syncSuccessful": "Synkronointi onnistui",
+    "syncedDaysAgo": "Synkronoitu {days} pv sitten",
+    "syncedHoursAgo": "Synkronoitu {hours} t sitten",
+    "syncedJustNow": "Synkronoitu juuri nyt",
+    "syncedYesterday": "Synkronoitu eilen",
+    "syncing": "Synkronoidaan...",
+    "transactionsCount": "({count} tapahtumaa)",
+    "unlink": "Irrota",
+    "warningsLabel": "Varoitukset:"
   },
   "spendingTrendChart": {
     "forecastFooter": "Ennuste perustuu viimeisten {months} kuukauden lineaariseen regressioon",
@@ -4365,193 +4365,193 @@
     "title": "Kulutustrendit ja ennuste"
   },
   "splitTransaction": {
-    "addSplit": "Add Split ({current}/{max})",
-    "amount": "Amount",
+    "addSplit": "Lisää jako ({current}/{max})",
+    "amount": "Summa",
     "buttons": {
-      "cancel": "Cancel",
-      "save": "Save Split",
-      "saving": "Saving..."
+      "cancel": "Peruuta",
+      "save": "Tallenna jako",
+      "saving": "Tallennetaan..."
     },
-    "category": "Category",
-    "closeModal": "Close modal",
-    "date": "Date:",
-    "distributeEvenly": "Distribute Evenly",
+    "category": "Kategoria",
+    "closeModal": "Sulje ikkuna",
+    "date": "Päivämäärä:",
+    "distributeEvenly": "Jaa tasaisesti",
     "errors": {
-      "saveFailed": "Failed to save split transaction"
+      "saveFailed": "Jaetun tapahtuman tallentaminen epäonnistui"
     },
     "help": {
-      "step1": "Enter the amount for each category (must total ${amount})",
-      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
-      "step3": "Add up to 5 splits per transaction",
-      "step4": "The original transaction will be hidden and replaced with split items",
-      "title": "How to split transactions:"
+      "step1": "Syötä summa jokaiselle kategorialle (yhteensä ${amount})",
+      "step2": "Käytä \"Jaa tasaisesti\" jakaaksesi tasan kaikkiin kategorioihin",
+      "step3": "Lisää enintään 5 jakoa per tapahtuma",
+      "step4": "Alkuperäinen tapahtuma piilotetaan ja korvataan jaetuilla osilla",
+      "title": "Tapahtuman jakaminen:"
     },
-    "maxSplitsReached": "Maximum 5 splits allowed",
-    "minSplitsRequired": "Minimum 2 splits required",
-    "none": "None",
-    "notes": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Business expense, Personal use",
-    "originalAmount": "Original Amount:",
-    "removeThisSplit": "Remove this split",
-    "selectCategory": "Select category...",
-    "splitsCount": "Splits ({current}/{max})",
-    "subcategory": "Subcategory",
-    "title": "Split Transaction",
+    "maxSplitsReached": "Enintään 5 jakoa sallittu",
+    "minSplitsRequired": "Vähintään 2 jakoa vaaditaan",
+    "none": "Ei mitään",
+    "notes": "Muistiinpanot (valinnainen)",
+    "notesPlaceholder": "esim. Yrityskulut, Henkilökohtainen käyttö",
+    "originalAmount": "Alkuperäinen summa:",
+    "removeThisSplit": "Poista tämä jako",
+    "selectCategory": "Valitse kategoria...",
+    "splitsCount": "Jaot ({current}/{max})",
+    "subcategory": "Alakategoria",
+    "title": "Jaa tapahtuma",
     "validation": {
-      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
-      "amountsMustMatch": "Split amounts must equal the original transaction amount",
-      "categoryRequired": "All splits must have a category",
-      "matchesOriginal": "✓ Matches original",
-      "overBy": "Over by ${amount}",
-      "readyToSave": "Split amounts match the original transaction. Ready to save!",
-      "total": "Total:",
-      "underBy": "Under by ${amount}"
+      "adjustAmounts": "Säädä jakojen summia vastaamaan alkuperäisen tapahtuman summaa.",
+      "amountsMustMatch": "Jakojen summa täytyy vastata alkuperäisen tapahtuman summaa",
+      "categoryRequired": "Kaikilla jaoilla täytyy olla kategoria",
+      "matchesOriginal": "✓ Vastaa alkuperäistä",
+      "overBy": "Yli ${amount}",
+      "readyToSave": "Jakojen summa vastaa alkuperäistä tapahtumaa. Valmis tallennettavaksi!",
+      "total": "Yhteensä:",
+      "underBy": "Ali ${amount}"
     }
   },
   "splits": {
-    "addAPerson": "Add a Person",
-    "addFirstPerson": "Add Your First Person",
-    "addPerson": "Add Person",
-    "allSettledUp": "All settled up",
-    "allSettledUpWith": "All settled up with {name}!",
-    "amount": "Amount",
-    "back": "Back",
-    "backToSplits": "Back to Splits",
+    "addAPerson": "Lisää henkilö",
+    "addFirstPerson": "Lisää ensimmäinen henkilö",
+    "addPerson": "Lisää henkilö",
+    "allSettledUp": "Kaikki selvitetty",
+    "allSettledUpWith": "Kaikki selvitetty {name} kanssa!",
+    "amount": "Summa",
+    "back": "Takaisin",
+    "backToSplits": "Takaisin jakoihin",
     "confirmRemovePerson": {
-      "confirmLabel": "Remove",
-      "description": "Are you sure you want to remove this person? All their split records will be deleted.",
-      "descriptionNamed": "Are you sure you want to remove {name}? All their split records will be deleted.",
-      "title": "Remove Person"
+      "confirmLabel": "Poista",
+      "description": "Haluatko varmasti poistaa tämän henkilön? Kaikki heidän jakotietonsa poistetaan.",
+      "descriptionNamed": "Haluatko varmasti poistaa henkilön {name}? Kaikki heidän jakotietonsa poistetaan.",
+      "title": "Poista henkilö"
     },
-    "continue": "Continue",
-    "creating": "Creating...",
+    "continue": "Jatka",
+    "creating": "Luodaan...",
     "emoji": "Emoji",
-    "helpTooltip": "Split transactions with friends and family. Track who owes what and settle debts via Cash, E-Transfer, Venmo, or PayPal.",
-    "name": "Name",
-    "namePlaceholder": "e.g., Alice, Bob",
-    "netBalance": "Net Balance",
-    "noPeopleDescription": "Add people you split expenses with. Track shared bills, dinners, and more.",
-    "noPeopleTitle": "No people yet",
-    "noPeopleYet": "No people added yet",
-    "noSplitsYet": "No splits yet",
-    "owedToYou": "Owed to You",
-    "owesYou": "Owes you {amount}",
-    "owesYouLabel": "Owes you",
-    "paymentMethod": "Payment Method",
-    "people": "People ({count})",
-    "settleAmount": "Settle {amount}",
-    "settleUp": "Settle Up",
-    "settled": "Settled",
-    "settledHistory": "Settled History ({count})",
+    "helpTooltip": "Jaa tapahtumia ystävien ja perheen kanssa. Seuraa kuka on velkaa kenelle ja selvitä velat käteisellä, tilisiirrolla, Venmolla tai PayPalilla.",
+    "name": "Nimi",
+    "namePlaceholder": "esim. Matti, Liisa",
+    "netBalance": "Nettosaldo",
+    "noPeopleDescription": "Lisää henkilöitä, joiden kanssa jaat kuluja. Seuraa jaettuja laskuja, illallisia ja muuta.",
+    "noPeopleTitle": "Ei vielä henkilöitä",
+    "noPeopleYet": "Ei henkilöitä lisätty vielä",
+    "noSplitsYet": "Ei vielä jakoja",
+    "owedToYou": "Sinulle velkaa",
+    "owesYou": "On sinulle velkaa {amount}",
+    "owesYouLabel": "Velkaa sinulle",
+    "paymentMethod": "Maksutapa",
+    "people": "Henkilöt ({count})",
+    "settleAmount": "Selvitä {amount}",
+    "settleUp": "Selvitä",
+    "settled": "Selvitetty",
+    "settledHistory": "Selvityshistoria ({count})",
     "settlementMethods": {
-      "cash": "Cash",
-      "eTransfer": "E-Transfer",
-      "other": "Other",
+      "cash": "Käteinen",
+      "eTransfer": "Tilisiirto",
+      "other": "Muu",
       "paypal": "PayPal",
       "venmo": "Venmo"
     },
-    "settling": "Settling...",
-    "splitATransaction": "Split a Transaction",
+    "settling": "Selvitetään...",
+    "splitATransaction": "Jaa tapahtuma",
     "splitFlow": {
-      "amountsCorrect": "Amounts add up correctly",
-      "confirmDescription": "This will create {count, plural, one {# split} other {# splits}} for this transaction. Each person's share will be tracked until settled.",
-      "confirmSplit": "Confirm Split",
-      "howToSplit": "How to split?",
+      "amountsCorrect": "Summat täsmäävät",
+      "confirmDescription": "Tämä luo {count, plural, one {# jaon} other {# jakoa}} tälle tapahtumalle. Jokaisen henkilön osuutta seurataan selvitykseen asti.",
+      "confirmSplit": "Vahvista jako",
+      "howToSplit": "Miten jaetaan?",
       "modes": {
         "custom": {
-          "description": "Set specific amounts for each person",
-          "label": "Custom Amounts"
+          "description": "Aseta kullekin henkilölle oma summa",
+          "label": "Mukautetut summat"
         },
         "equal": {
-          "description": "Everyone pays the same amount",
-          "label": "Split Equally"
+          "description": "Jokainen maksaa saman summan",
+          "label": "Jaa tasaisesti"
         },
         "percentage": {
-          "description": "Set percentage shares for each person",
-          "label": "By Percentage"
+          "description": "Aseta prosenttiosuudet kullekin henkilölle",
+          "label": "Prosenttiosuuksien mukaan"
         }
       },
-      "noTransactions": "No transactions found",
-      "percentageTotal": "Total: {sum}% (must equal 100%)",
-      "percentagesCorrect": "Percentages add up to 100%",
-      "previewSplit": "Preview Split",
-      "remaining": "Remaining: {amount}",
-      "searchTransactions": "Search transactions...",
-      "selectTransaction": "Select a transaction",
-      "step": "Step {current} of {total}",
-      "title": "Split a Transaction",
-      "whoToSplitWith": "Who to split with?"
+      "noTransactions": "Tapahtumia ei löytynyt",
+      "percentageTotal": "Yhteensä: {sum}% (täytyy olla 100%)",
+      "percentagesCorrect": "Prosentit ovat yhteensä 100%",
+      "previewSplit": "Esikatsele jako",
+      "remaining": "Jäljellä: {amount}",
+      "searchTransactions": "Hae tapahtumia...",
+      "selectTransaction": "Valitse tapahtuma",
+      "step": "Vaihe {current} / {total}",
+      "title": "Jaa tapahtuma",
+      "whoToSplitWith": "Kenen kanssa jaetaan?"
     },
-    "subtitle": "Track shared expenses and settle up with friends",
-    "title": "Expense Splitting",
-    "total": "total",
-    "unknownTransaction": "Unknown transaction",
-    "unsettledSplitCount": "{count, plural, one {# unsettled split} other {# unsettled splits}}",
-    "unsettledSplits": "Unsettled Splits ({count})",
-    "via": "via",
-    "youOwe": "You owe {amount}",
-    "youOweLabel": "You Owe"
+    "subtitle": "Seuraa jaettuja kuluja ja selvitä ystävien kanssa",
+    "title": "Kulujen jakaminen",
+    "total": "yhteensä",
+    "unknownTransaction": "Tuntematon tapahtuma",
+    "unsettledSplitCount": "{count, plural, one {# selvittämätön jako} other {# selvittämätöntä jakoa}}",
+    "unsettledSplits": "Selvittämättömät jaot ({count})",
+    "via": "kautta",
+    "youOwe": "Olet velkaa {amount}",
+    "youOweLabel": "Olet velkaa"
   },
   "subscriptionCard": {
     "badges": {
-      "aiVerified": "AI Verified",
-      "cancelled": "Cancelled",
-      "paused": "Paused",
-      "trial": "Trial"
+      "aiVerified": "AI-vahvistettu",
+      "cancelled": "Peruutettu",
+      "paused": "Keskeytetty",
+      "trial": "Kokeilujakso"
     },
     "buttons": {
-      "claimManage": "Claim & Manage",
-      "edit": "Edit",
-      "transactions": "Transactions"
+      "claimManage": "Lunasta ja hallinnoi",
+      "edit": "Muokkaa",
+      "transactions": "Tapahtumat"
     },
     "confidence": {
-      "high": "High",
-      "label": "Detection Confidence",
-      "low": "Low",
-      "medium": "Medium"
+      "high": "Korkea",
+      "label": "Tunnistuksen luotettavuus",
+      "low": "Matala",
+      "medium": "Keskitaso"
     },
     "details": {
-      "charges": "{count} charges",
-      "daysBefore": "{count} days before",
-      "firstCharge": "First Charge",
-      "lastCharge": "Last Charge",
-      "occurrences": "Occurrences",
-      "payment": "Payment",
-      "reminder": "Reminder"
+      "charges": "{count} veloitusta",
+      "daysBefore": "{count} päivää ennen",
+      "firstCharge": "Ensimmäinen veloitus",
+      "lastCharge": "Viimeisin veloitus",
+      "occurrences": "Tapahtumat",
+      "payment": "Maksu",
+      "reminder": "Muistutus"
     },
     "interval": {
-      "annual": "Annual",
-      "bi-weekly": "Bi-weekly",
-      "irregular": "Irregular",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "annual": "Vuosittainen",
+      "bi-weekly": "Kahden viikon välein",
+      "irregular": "Epäsäännöllinen",
+      "monthly": "Kuukausittainen",
+      "quarterly": "Neljännesvuosittainen",
+      "weekly": "Viikoittainen"
     },
-    "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
+    "lowConfidenceWarning": "Tämä tilaus tunnistettiin matalalla luotettavuudella. Lunasta se vahvistaaksesi ja hallinnoidaksesi manuaalisesti.",
     "menu": {
-      "cancelSubscription": "Cancel Subscription",
-      "claimManage": "Claim & Manage",
-      "delete": "Delete",
-      "edit": "Edit",
-      "notSubscription": "Not a Subscription",
-      "pause": "Pause",
-      "resume": "Resume",
-      "viewTransactions": "View Transactions"
+      "cancelSubscription": "Peruuta tilaus",
+      "claimManage": "Lunasta ja hallinnoi",
+      "delete": "Poista",
+      "edit": "Muokkaa",
+      "notSubscription": "Ei ole tilaus",
+      "pause": "Keskeytä",
+      "resume": "Jatka",
+      "viewTransactions": "Näytä tapahtumat"
     },
     "source": {
-      "auto-detected": "Auto-detected",
-      "manual": "Manual",
-      "merged": "Tracked"
+      "auto-detected": "Automaattisesti tunnistettu",
+      "manual": "Manuaalinen",
+      "merged": "Seurattu"
     },
     "stats": {
-      "amount": "Amount",
-      "annualCost": "Annual Cost",
-      "frequency": "Frequency",
-      "nextCharge": "Next Charge",
-      "totalSpent": "Total Spent"
+      "amount": "Summa",
+      "annualCost": "Vuosikustannus",
+      "frequency": "Toistuvuus",
+      "nextCharge": "Seuraava veloitus",
+      "totalSpent": "Käytetty yhteensä"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {1 päivä jäljellä kokeilujaksosta} other {# päivää jäljellä kokeilujaksosta}}"
     },
     "reminderToggle": {
       "disableReminder": "Poista muistutus käytöstä",
@@ -4560,331 +4560,331 @@
     }
   },
   "subscriptionCostChart": {
-    "emptyState": "No active subscriptions to analyze",
-    "loadingChart": "Loading chart...",
-    "moreCharges": "+{count} more charges",
-    "perMonth": "/month",
+    "emptyState": "Ei aktiivisia tilauksia analysoitavaksi",
+    "loadingChart": "Ladataan kaaviota...",
+    "moreCharges": "+{count} lisäveloitusta",
+    "perMonth": "/kk",
     "sections": {
-      "costByCategory": "Cost by Category",
-      "potentialSavings": "Potential Savings",
-      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+      "costByCategory": "Kustannukset kategorioittain",
+      "potentialSavings": "Mahdolliset säästöt",
+      "upcomingCharges": "Tulevat veloitukset (seuraavat 30 päivää)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
-      "annualCost": "Annual Cost",
-      "monthlyCost": "Monthly Cost",
-      "next30Days": "Next 30 Days",
-      "projectedYearly": "Projected yearly spend",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "activeSubscriptions": "{count, plural, =1 {1 aktiivinen tilaus} other {# aktiivista tilausta}}",
+      "annualCost": "Vuosikustannus",
+      "monthlyCost": "Kuukausikustannus",
+      "next30Days": "Seuraavat 30 päivää",
+      "projectedYearly": "Arvioitu vuosikulutus",
+      "upcomingCharges": "{count, plural, =1 {1 tuleva veloitus} other {# tulevaa veloitusta}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "Mahdollisesti peruutetut tilaukset",
+      "inactiveDescription": "{count, plural, =1 {1 tilausta ei ole} other {# tilausta ei ole}} veloitettu hiljattain. Varmista, että ne on todella peruutettu.",
+      "trialsTitle": "Pian päättyvät kokeilujaksot",
+      "trialsDescription": "{count, plural, =1 {1 kokeilujakso} other {# kokeilujaksoa}} päättyy seuraavan 7 päivän aikana. Peruuta, jos et käytä niitä.",
+      "highCostTitle": "Kalliit tilaukset",
+      "highCostDescription": "Nämä tilaukset muodostavat suuren osan kulutuksestasi. Harkitse, saatko niistä täyden hyödyn."
     }
   },
   "subscriptionModal": {
-    "addSubscription": "Add Subscription",
-    "addTitle": "Add Subscription",
-    "adding": "Adding...",
-    "advancedOptions": "Advanced Options",
-    "amountLabel": "Amount *",
-    "autoRenewDescription": "Will this subscription renew automatically?",
-    "autoRenewLabel": "Auto-renew",
-    "beforeBilling": "before billing",
-    "billingCycleLabel": "Billing Cycle *",
-    "cancel": "Cancel",
-    "categoryLabel": "Category",
-    "categoryNone": "None",
-    "categoryPlaceholder": "Select category...",
-    "currencyCAD": "CAD - Canadian Dollar",
+    "addSubscription": "Lisää tilaus",
+    "addTitle": "Lisää tilaus",
+    "adding": "Lisätään...",
+    "advancedOptions": "Lisäasetukset",
+    "amountLabel": "Summa *",
+    "autoRenewDescription": "Uusiutuuko tämä tilaus automaattisesti?",
+    "autoRenewLabel": "Automaattinen uusiminen",
+    "beforeBilling": "ennen veloitusta",
+    "billingCycleLabel": "Laskutusjakso *",
+    "cancel": "Peruuta",
+    "categoryLabel": "Kategoria",
+    "categoryNone": "Ei mitään",
+    "categoryPlaceholder": "Valitse kategoria...",
+    "currencyCAD": "CAD - Kanadan dollari",
     "currencyEUR": "EUR - Euro",
-    "currencyGBP": "GBP - British Pound",
-    "currencyLabel": "Currency",
-    "currencySymbol": "$",
-    "currencyUSD": "USD - US Dollar",
-    "cycleAnnual": "Annual (12 months)",
-    "cycleBiWeekly": "Bi-weekly (every 2 weeks)",
-    "cycleMonthly": "Monthly",
-    "cycleQuarterly": "Quarterly (3 months)",
-    "cycleWeekly": "Weekly",
-    "descriptionLabel": "Description",
-    "descriptionPlaceholder": "e.g., Family plan, Pro tier",
-    "editTitle": "Edit Subscription",
-    "nameLabel": "Subscription Name *",
-    "namePlaceholder": "e.g., Netflix, Spotify, Adobe CC",
-    "nextBillingDateLabel": "Next Billing Date *",
-    "notesLabel": "Notes",
-    "notesPlaceholder": "Any additional notes...",
-    "paymentMethodLabel": "Payment Method",
-    "paymentMethodPlaceholder": "e.g., Visa ending 1234",
-    "remindMe": "Remind me",
-    "reminder1Day": "1 day",
-    "reminder1Week": "1 week",
-    "reminder2Weeks": "2 weeks",
-    "reminder3Days": "3 days",
-    "reminder5Days": "5 days",
-    "remindersLabel": "Reminders",
-    "saveChanges": "Save Changes",
-    "saving": "Saving...",
-    "startDateLabel": "Start Date *",
-    "statusActive": "Active",
-    "statusCancelled": "Cancelled",
-    "statusLabel": "Status",
-    "statusPaused": "Paused",
-    "statusTrial": "Trial",
-    "trialEndDateHint": "Set when your free trial ends to track it",
-    "trialEndDateLabel": "Trial End Date",
-    "validationInvalidAmount": "Please enter a valid amount",
-    "validationNameRequired": "Please enter a subscription name",
-    "validationNextBillingRequired": "Please enter the next billing date",
-    "websiteUrlLabel": "Website / Login URL"
+    "currencyGBP": "GBP - Englannin punta",
+    "currencyLabel": "Valuutta",
+    "currencySymbol": "€",
+    "currencyUSD": "USD - Yhdysvaltain dollari",
+    "cycleAnnual": "Vuosittainen (12 kuukautta)",
+    "cycleBiWeekly": "Kahden viikon välein",
+    "cycleMonthly": "Kuukausittainen",
+    "cycleQuarterly": "Neljännesvuosittainen (3 kuukautta)",
+    "cycleWeekly": "Viikoittainen",
+    "descriptionLabel": "Kuvaus",
+    "descriptionPlaceholder": "esim. Perhesuunnitelma, Pro-taso",
+    "editTitle": "Muokkaa tilausta",
+    "nameLabel": "Tilauksen nimi *",
+    "namePlaceholder": "esim. Netflix, Spotify, Adobe CC",
+    "nextBillingDateLabel": "Seuraava veloituspäivä *",
+    "notesLabel": "Muistiinpanot",
+    "notesPlaceholder": "Muita lisätietoja...",
+    "paymentMethodLabel": "Maksutapa",
+    "paymentMethodPlaceholder": "esim. Visa päättyy 1234",
+    "remindMe": "Muistuta minua",
+    "reminder1Day": "1 päivä",
+    "reminder1Week": "1 viikko",
+    "reminder2Weeks": "2 viikkoa",
+    "reminder3Days": "3 päivää",
+    "reminder5Days": "5 päivää",
+    "remindersLabel": "Muistutukset",
+    "saveChanges": "Tallenna muutokset",
+    "saving": "Tallennetaan...",
+    "startDateLabel": "Aloituspäivä *",
+    "statusActive": "Aktiivinen",
+    "statusCancelled": "Peruutettu",
+    "statusLabel": "Tila",
+    "statusPaused": "Keskeytetty",
+    "statusTrial": "Kokeilujakso",
+    "trialEndDateHint": "Aseta kokeilujakson päättymispäivä seurataksesi sitä",
+    "trialEndDateLabel": "Kokeilujakson päättymispäivä",
+    "validationInvalidAmount": "Syötä kelvollinen summa",
+    "validationNameRequired": "Syötä tilauksen nimi",
+    "validationNextBillingRequired": "Syötä seuraava veloituspäivä",
+    "websiteUrlLabel": "Verkkosivusto / Kirjautumis-URL"
   },
   "subscriptions": {
-    "addSubscription": "Add Subscription",
-    "allCategories": "All Categories",
-    "clearFilters": "Clear filters",
-    "deleteConfirmDescription": "Are you sure you want to delete this subscription? This action cannot be undone.",
-    "deleteConfirmLabel": "Delete",
-    "deleteConfirmTitle": "Delete Subscription",
-    "deleteError": "Failed to delete subscription",
-    "dismissError": "Failed to dismiss subscription",
+    "addSubscription": "Lisää tilaus",
+    "allCategories": "Kaikki kategoriat",
+    "clearFilters": "Tyhjennä suodattimet",
+    "deleteConfirmDescription": "Haluatko varmasti poistaa tämän tilauksen? Toimintoa ei voi kumota.",
+    "deleteConfirmLabel": "Poista",
+    "deleteConfirmTitle": "Poista tilaus",
+    "deleteError": "Tilauksen poistaminen epäonnistui",
+    "dismissError": "Tilauksen ohittaminen epäonnistui",
     "empty": {
-      "noMatching": "No matching subscriptions",
-      "noMatchingDescription": "Try adjusting your filters or search query.",
-      "noSubscriptions": "No subscriptions yet",
-      "noSubscriptionsDescription": "Add your subscriptions manually or import transactions to auto-detect recurring payments."
+      "noMatching": "Ei vastaavia tilauksia",
+      "noMatchingDescription": "Kokeile muuttaa suodattimia tai hakukyselyä.",
+      "noSubscriptions": "Ei vielä tilauksia",
+      "noSubscriptionsDescription": "Lisää tilauksia manuaalisesti tai tuo tapahtumia toistuvien maksujen automaattiseen tunnistamiseen."
     },
     "help": {
-      "description": "Manual: Add subscriptions you want to track precisely. Auto-detected: We analyze your transactions to find recurring patterns. Claim auto-detected subscriptions to manage them manually with reminders and more control.",
-      "title": "Smart Subscription Management"
+      "description": "Manuaalinen: Lisää tilaukset, joita haluat seurata tarkasti. Automaattisesti tunnistettu: Analysoimme tapahtumasi löytääksemme toistuvia kaavoja. Lunasta automaattisesti tunnistetut tilaukset hallinnoidaksesi niitä manuaalisesti muistutusten ja tarkemman hallinnan kera.",
+      "title": "Älykäs tilausten hallinta"
     },
-    "importTransactions": "Import Transactions",
-    "loading": "Loading subscriptions...",
-    "refreshAutoDetection": "Refresh auto-detection",
-    "saveError": "Failed to save subscription",
-    "searchPlaceholder": "Search subscriptions...",
+    "importTransactions": "Tuo tapahtumia",
+    "loading": "Ladataan tilauksia...",
+    "refreshAutoDetection": "Päivitä automaattinen tunnistus",
+    "saveError": "Tilauksen tallentaminen epäonnistui",
+    "searchPlaceholder": "Hae tilauksia...",
     "sort": {
-      "amount": "Amount",
-      "ascending": "Sort ascending",
-      "dateAdded": "Date Added",
-      "descending": "Sort descending",
-      "name": "Name",
-      "nextBilling": "Next Billing"
+      "amount": "Summa",
+      "ascending": "Lajittele nousevasti",
+      "dateAdded": "Lisäyspäivä",
+      "descending": "Lajittele laskevasti",
+      "name": "Nimi",
+      "nextBilling": "Seuraava veloitus"
     },
     "stats": {
-      "active": "Active",
-      "annual": "Annual",
-      "estimatedCost": "Estimated cost",
-      "inactive": "{count} inactive",
-      "monthly": "Monthly",
-      "next7Days": "Next 7 Days",
-      "projectedSpend": "Projected spend",
-      "upcomingCharges": "Upcoming charges"
+      "active": "Aktiivinen",
+      "annual": "Vuosittainen",
+      "estimatedCost": "Arvioitu kustannus",
+      "inactive": "{count} ei-aktiivista",
+      "monthly": "Kuukausittainen",
+      "next7Days": "Seuraavat 7 päivää",
+      "projectedSpend": "Arvioitu kulutus",
+      "upcomingCharges": "Tulevat veloitukset"
     },
-    "subtitle": "Manage your recurring payments and subscriptions",
-    "title": "Subscriptions",
+    "subtitle": "Hallinnoi toistuvia maksuja ja tilauksia",
+    "title": "Tilaukset",
     "viewMode": {
-      "active": "Active",
-      "all": "All",
-      "analysis": "Analysis",
-      "detected": "Detected",
-      "manual": "Manual"
+      "active": "Aktiiviset",
+      "all": "Kaikki",
+      "analysis": "Analyysi",
+      "detected": "Tunnistetut",
+      "manual": "Manuaaliset"
     }
   },
   "syncStatus": {
-    "daysAgo": "{days}d ago",
-    "devices": "{connected}/{total} devices",
-    "devicesConnected": "{connected}/{total} devices connected",
-    "hoursAgo": "{hours}h ago",
-    "justNow": "Just now",
-    "lastSync": "Last sync: {time}",
-    "minutesAgo": "{minutes}m ago",
-    "never": "Never",
+    "daysAgo": "{days} pv sitten",
+    "devices": "{connected}/{total} laitetta",
+    "devicesConnected": "{connected}/{total} laitetta yhdistetty",
+    "hoursAgo": "{hours} t sitten",
+    "justNow": "Juuri nyt",
+    "lastSync": "Viimeisin synkronointi: {time}",
+    "minutesAgo": "{minutes} min sitten",
+    "never": "Ei koskaan",
     "offline": "Offline",
-    "partialSync": "Partial Sync",
-    "syncError": "Sync Error",
-    "synced": "Synced",
-    "syncing": "Syncing..."
+    "partialSync": "Osittainen synkronointi",
+    "syncError": "Synkronointivirhe",
+    "synced": "Synkronoitu",
+    "syncing": "Synkronoidaan..."
   },
   "tooltip": {
     "ariaLabel": "Lisätietoja",
     "learnMore": "Lue lisää →"
   },
   "trainMl": {
-    "confidence": "Confidence",
-    "failedToLoadModel": "Failed to load model: {error}",
-    "finalLoss": "Final Loss",
-    "howItWorks": "How it works",
-    "howStep1": "Generates ~350 training examples from 35 categorization rules",
-    "howStep2": "Trains a neural network (64→32 neurons) using TensorFlow.js",
-    "howStep3": "Achieves 90%+ accuracy on test set",
-    "howStep4": "Saves model to IndexedDB for fast predictions",
-    "howStep5": "Fallback for transactions that don't match rules",
-    "howToUse": "How to Use",
-    "loadSavedModel": "Load Saved Model",
-    "lowerIsBetter": "Lower is better",
-    "modelLoadedSuccess": "Model loaded successfully!",
-    "modelSavedReady": "Model saved to IndexedDB and ready for predictions.",
-    "noSavedModel": "No saved model found. Please train first.",
-    "subtitle": "Train a neural network to categorize transactions",
-    "targetAccuracy": "Target: ≥90%",
-    "testAccuracy": "Test Accuracy",
-    "testPredictions": "Test Predictions",
-    "title": "ML Categorization Model",
-    "trainModel": "Train Model",
-    "trainingComplete": "Training Complete!",
-    "trainingFailed": "Training Failed",
-    "trainingInProgress": "Training in progress... This may take 30-60 seconds.",
-    "trainingModel": "Training Model...",
-    "unknownError": "Unknown error",
-    "useStep1": "<strong>1. Train Model:</strong> Click \"Train Model\" to generate training data and train the neural network (30-60s)",
-    "useStep2": "<strong>2. Automatic Integration:</strong> The model is automatically used as a fallback when rule-based categorization fails",
-    "useStep3": "<strong>3. Hybrid System:</strong> Rules are tried first (fast), ML is used for unknown patterns",
-    "useStep4": "<strong>4. Model Persistence:</strong> Trained model is saved to IndexedDB and loads automatically",
-    "useStep5": "<strong>5. Retraining:</strong> Run training again to update the model with new data"
+    "confidence": "Luotettavuus",
+    "failedToLoadModel": "Mallin lataaminen epäonnistui: {error}",
+    "finalLoss": "Lopullinen häviö",
+    "howItWorks": "Miten se toimii",
+    "howStep1": "Luo ~350 harjoitusesimerkkiä 35 luokittelusäännöstä",
+    "howStep2": "Kouluttaa neuroverkon (64→32 neuronia) TensorFlow.js:llä",
+    "howStep3": "Saavuttaa yli 90% tarkkuuden testidatalla",
+    "howStep4": "Tallentaa mallin IndexedDB:hen nopeita ennusteita varten",
+    "howStep5": "Varasuunnitelma tapahtumille, jotka eivät täsmää sääntöihin",
+    "howToUse": "Käyttöohjeet",
+    "loadSavedModel": "Lataa tallennettu malli",
+    "lowerIsBetter": "Pienempi on parempi",
+    "modelLoadedSuccess": "Malli ladattu onnistuneesti!",
+    "modelSavedReady": "Malli tallennettu IndexedDB:hen ja valmis ennusteisiin.",
+    "noSavedModel": "Tallennettua mallia ei löytynyt. Kouluta ensin.",
+    "subtitle": "Kouluta neuroverkko luokittelemaan tapahtumia",
+    "targetAccuracy": "Tavoite: ≥90%",
+    "testAccuracy": "Testitarkkuus",
+    "testPredictions": "Testiarviot",
+    "title": "ML-luokittelumalli",
+    "trainModel": "Kouluta malli",
+    "trainingComplete": "Koulutus valmis!",
+    "trainingFailed": "Koulutus epäonnistui",
+    "trainingInProgress": "Koulutus käynnissä... Tämä voi kestää 30–60 sekuntia.",
+    "trainingModel": "Koulutetaan mallia...",
+    "unknownError": "Tuntematon virhe",
+    "useStep1": "<strong>1. Kouluta malli:</strong> Napsauta \"Kouluta malli\" luodaksesi harjoitusdatan ja kouluttaaksesi neuroverkon (30–60 s)",
+    "useStep2": "<strong>2. Automaattinen integrointi:</strong> Mallia käytetään automaattisesti varavaihtoehtona, kun sääntöpohjainen luokittelu epäonnistuu",
+    "useStep3": "<strong>3. Hybridijärjestelmä:</strong> Sääntöjä kokeillaan ensin (nopea), ML:ää käytetään tuntemattomiin kaavoihin",
+    "useStep4": "<strong>4. Mallin pysyvyys:</strong> Koulutettu malli tallennetaan IndexedDB:hen ja latautuu automaattisesti",
+    "useStep5": "<strong>5. Uudelleenkoulutus:</strong> Suorita koulutus uudelleen päivittääksesi mallin uudella datalla"
   },
   "transactionModal": {
     "account": {
-      "label": "Account"
+      "label": "Tili"
     },
     "advancedOptions": {
-      "available": "{count} available",
-      "label": "Advanced Options"
+      "available": "{count} saatavilla",
+      "label": "Lisäasetukset"
     },
     "amount": {
-      "label": "Amount",
-      "placeholder": "0.00",
-      "validationError": "Please enter a valid amount"
+      "label": "Summa",
+      "placeholder": "0,00",
+      "validationError": "Syötä kelvollinen summa"
     },
     "buttons": {
-      "add": "Add Transaction",
-      "adding": "Adding...",
-      "cancel": "Cancel",
-      "update": "Update Transaction",
-      "updating": "Updating..."
+      "add": "Lisää tapahtuma",
+      "adding": "Lisätään...",
+      "cancel": "Peruuta",
+      "update": "Päivitä tapahtuma",
+      "updating": "Päivitetään..."
     },
     "category": {
-      "aiCategorizing": "AI categorizing...",
-      "create": "Create",
-      "createNew": "+ Create New Category",
-      "label": "Category",
-      "lastUsed": "Using last: {category}",
-      "namePlaceholder": "Category name...",
-      "selectPlaceholder": "Select category...",
-      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+      "aiCategorizing": "AI luokittelee...",
+      "create": "Luo",
+      "createNew": "+ Luo uusi kategoria",
+      "label": "Kategoria",
+      "lastUsed": "Käytetään viimeistä: {category}",
+      "namePlaceholder": "Kategorian nimi...",
+      "selectPlaceholder": "Valitse kategoria...",
+      "subcategoriesPlaceholder": "Alakategoriat (valinnainen, pilkuilla erotettu)"
     },
-    "closeModal": "Close modal",
+    "closeModal": "Sulje ikkuna",
     "createCategory": {
-      "created": "Category \"{name}\" created!",
-      "failed": "Failed to create category",
-      "nameRequired": "Category name is required"
+      "created": "Kategoria \"{name}\" luotu!",
+      "failed": "Kategorian luominen epäonnistui",
+      "nameRequired": "Kategorian nimi on pakollinen"
     },
     "date": {
-      "label": "Date"
+      "label": "Päivämäärä"
     },
     "description": {
-      "label": "Description",
-      "placeholder": "e.g., Grocery shopping at Sobeys"
+      "label": "Kuvaus",
+      "placeholder": "esim. Ruokaostokset Prismassa"
     },
     "learned": {
-      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
-      "title": "Learned!"
+      "description": "Kolmen samanlaisen korjauksen jälkeen tämän kauppiaan tulevat tapahtumat luokitellaan automaattisesti.",
+      "title": "Opittu!"
     },
     "notes": {
-      "label": "Notes",
-      "placeholder": "Add any additional notes..."
+      "label": "Muistiinpanot",
+      "placeholder": "Lisää muistiinpanoja..."
     },
     "receipts": {
-      "addNew": "Add New Receipt",
-      "deleteConfirm": "Are you sure you want to delete this receipt?",
-      "deleteFailed": "Failed to delete receipt",
-      "deleteReceipt": "Delete receipt",
-      "existing": "Existing receipts ({count})",
-      "label": "Receipt Attachments",
-      "newFile": "New: {filename}",
-      "remove": "Remove",
-      "viewFull": "View full receipt"
+      "addNew": "Lisää uusi kuitti",
+      "deleteConfirm": "Haluatko varmasti poistaa tämän kuitin?",
+      "deleteFailed": "Kuitin poistaminen epäonnistui",
+      "deleteReceipt": "Poista kuitti",
+      "existing": "Olemassa olevat kuitit ({count})",
+      "label": "Kuittiliitteet",
+      "newFile": "Uusi: {filename}",
+      "remove": "Poista",
+      "viewFull": "Näytä koko kuitti"
     },
     "subcategory": {
-      "label": "Subcategory",
-      "none": "None",
-      "selectPlaceholder": "Select subcategory..."
+      "label": "Alakategoria",
+      "none": "Ei mitään",
+      "selectPlaceholder": "Valitse alakategoria..."
     },
     "tags": {
-      "label": "Tags (comma-separated)",
-      "placeholder": "e.g., groceries, weekly, essential"
+      "label": "Tunnisteet (pilkuilla erotettu)",
+      "placeholder": "esim. ruokaostokset, viikoittaiset, välttämättömät"
     },
     "title": {
-      "add": "Add Transaction",
-      "edit": "Edit Transaction"
+      "add": "Lisää tapahtuma",
+      "edit": "Muokkaa tapahtumaa"
     },
     "type": {
-      "expense": "Expense",
-      "income": "Income",
-      "label": "Type"
+      "expense": "Meno",
+      "income": "Tulo",
+      "label": "Tyyppi"
     }
   },
   "transactionSearch": {
-    "amountRangeLabel": "Amount range",
-    "clearRecent": "Clear",
-    "filterName": "Filter name",
-    "noResults": "No transactions found",
-    "noResultsDescription": "Try a different search or adjust your filters",
-    "noTransactionsYet": "No transactions yet",
-    "placeholder": "Search transactions...",
-    "placeholderExtended": "Try 'coffee last week' or 'amount:>50'",
-    "recentSearchLabel": "Recent search",
-    "recentSearches": "Recent Searches",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
-    "save": "Save",
-    "saveFilter": "Save Filter",
-    "savedFilters": "Saved Filters",
-    "searchFilterLabel": "Search filter",
-    "searchTipAmount": "Use <code>$50-100</code> for amount ranges",
-    "searchTipChars": "Type 3+ characters to search transactions",
-    "searchTipNL": "Try <code>coffee last week</code> for natural language",
-    "searchTipsIntro": "Search Tips:",
-    "searchingFor": "Searching for: {query}",
+    "amountRangeLabel": "Summaväli",
+    "clearRecent": "Tyhjennä",
+    "filterName": "Suodattimen nimi",
+    "noResults": "Tapahtumia ei löytynyt",
+    "noResultsDescription": "Kokeile eri hakua tai muokkaa suodattimia",
+    "noTransactionsYet": "Ei vielä tapahtumia",
+    "placeholder": "Hae tapahtumia...",
+    "placeholderExtended": "Kokeile 'kahvi viime viikolla' tai 'amount:>50'",
+    "recentSearchLabel": "Viimeisin haku",
+    "recentSearches": "Viimeisimmät haut",
+    "resultCount": "{count} {count, plural, =1 {tulos} other {tulosta}}",
+    "save": "Tallenna",
+    "saveFilter": "Tallenna suodatin",
+    "savedFilters": "Tallennetut suodattimet",
+    "searchFilterLabel": "Hakusuodatin",
+    "searchTipAmount": "Käytä <code>$50-100</code> summaväleihin",
+    "searchTipChars": "Kirjoita vähintään 3 merkkiä hakeaksesi tapahtumia",
+    "searchTipNL": "Kokeile <code>kahvi viime viikolla</code> luonnollisella kielellä",
+    "searchTipsIntro": "Hakuvinkkejä:",
+    "searchingFor": "Haetaan: {query}",
     "suggestions": {
-      "amounts": "Amount Ranges",
-      "categories": "Categories",
-      "merchants": "Merchants",
-      "recent": "Recent"
+      "amounts": "Summavälit",
+      "categories": "Kategoriat",
+      "merchants": "Kauppiaat",
+      "recent": "Viimeisimmät"
     },
-    "suggestionsHeading": "Suggestions",
+    "suggestionsHeading": "Ehdotukset",
     "tips": {
-      "amount": "Amount: '$50-100' or 'amount:>50'",
-      "category": "Category: 'groceries' or 'category:food'",
-      "date": "Date: 'last week', 'this month', 'date:last30'",
-      "fuzzy": "Typo-tolerant: 'starbukcs' finds 'Starbucks'",
-      "title": "Search Tips",
-      "type": "Type: 'type:income' or 'type:expense'"
+      "amount": "Summa: '$50-100' tai 'amount:>50'",
+      "category": "Kategoria: 'ruokakauppa' tai 'category:food'",
+      "date": "Päivämäärä: 'viime viikko', 'tämä kuukausi', 'date:last30'",
+      "fuzzy": "Kirjoitusvirheitä sietävä: 'starbukcs' löytää 'Starbucks'",
+      "title": "Hakuvinkkejä",
+      "type": "Tyyppi: 'type:income' tai 'type:expense'"
     },
-    "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
-    "viewAllResults": "View all {count} results",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "transactionCount": "{count} {count, plural, =1 {tapahtuma} other {tapahtumaa}}",
+    "usedTimes": "Käytetty {count} {count, plural, =1 {kerran} other {kertaa}}",
+    "viewAllResults": "Näytä kaikki {count} tulosta",
+    "resultsFound": "{count} {count, plural, =1 {tulos} other {tulosta}} löytyi",
+    "suggestionsAvailable": "{count} {count, plural, =1 {ehdotus} other {ehdotusta}} saatavilla"
   },
   "transactionTable": {
     "actions": {
-      "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
-      "split": "Split"
+      "attachReceipt": "Liitä kuitti",
+      "delete": "Poista",
+      "edit": "Muokkaa",
+      "split": "Jaa"
     },
-    "emptyState": "No transactions to display",
+    "emptyState": "Ei tapahtumia näytettävänä",
     "headers": {
-      "account": "Account",
-      "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
-      "date": "Date",
-      "description": "Description"
+      "account": "Tili",
+      "actions": "Toiminnot",
+      "amount": "Summa",
+      "category": "Kategoria",
+      "date": "Päivämäärä",
+      "description": "Kuvaus"
     }
   },
   "transactions": {
@@ -4987,67 +4987,67 @@
     "youWillLose": "Menetät:"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
-    "daysRemaining": "{count} days remaining in your free trial",
-    "dismiss": "Dismiss",
-    "expired": "Your trial has expired",
-    "expiredDescription": "App is in read-only mode. Upgrade to continue managing your finances.",
-    "upgrade": "Upgrade - {price}",
-    "upgradeNow": "Upgrade Now - {price}",
-    "upgradePrompt": "Upgrade now to keep full access to your budget data.",
-    "viewPricing": "View pricing"
+    "daysLeft": "{count, plural, =0 {Kokeilujaksosi päättyy tänään!} =1 {Vain 1 päivä jäljellä kokeilujaksostasi} other {# päivää jäljellä kokeilujaksostasi}}",
+    "daysRemaining": "{count} päivää jäljellä ilmaisesta kokeilujaksosta",
+    "dismiss": "Ohita",
+    "expired": "Kokeilujaksosi on päättynyt",
+    "expiredDescription": "Sovellus on vain luku -tilassa. Päivitä jatkaaksesi taloutesi hallintaa.",
+    "upgrade": "Päivitä - {price}",
+    "upgradeNow": "Päivitä nyt - {price}",
+    "upgradePrompt": "Päivitä nyt säilyttääksesi täyden pääsyn budjettitietoihisi.",
+    "viewPricing": "Katso hinnoittelu"
   },
   "validationWarnings": {
-    "aiAnalysis": "AI Analysis:",
-    "amount": "Amount:",
-    "cancelImport": "Cancel Import",
-    "closeModal": "Close modal",
-    "confidence": "{percent}% confidence",
-    "continueWithAll": "Continue with All",
-    "criticalIssues": "Critical Issues",
-    "date": "Date:",
-    "description": "Description:",
-    "hideDetails": "Hide Transaction Details",
-    "ignoreAllContinue": "Ignore All & Continue",
-    "informational": "Informational",
-    "issuesDetected": "Issues Detected",
-    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
-    "marked": "Marked",
-    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
-    "remove": "Remove",
-    "removeAndContinue": "Remove {count} & Continue",
-    "suggestion": "Suggestion:",
-    "title": "Transaction Validation Results",
-    "transactionNumber": "Transaction #{number}",
-    "viewDetails": "View Transaction Details",
-    "warnings": "Warnings"
+    "aiAnalysis": "AI-analyysi:",
+    "amount": "Summa:",
+    "cancelImport": "Peruuta tuonti",
+    "closeModal": "Sulje ikkuna",
+    "confidence": "{percent}% luotettavuus",
+    "continueWithAll": "Jatka kaikkien kanssa",
+    "criticalIssues": "Kriittiset ongelmat",
+    "date": "Päivämäärä:",
+    "description": "Kuvaus:",
+    "hideDetails": "Piilota tapahtuman tiedot",
+    "ignoreAllContinue": "Ohita kaikki ja jatka",
+    "informational": "Tiedoksi",
+    "issuesDetected": "Ongelmia havaittu",
+    "issuesFound": "Löysimme {count, plural, =1 {1 ongelman} other {# ongelmaa}}, jotka vaativat huomiotasi",
+    "marked": "Merkitty",
+    "removalNote": "{count, plural, =1 {1 tapahtuma} other {# tapahtumaa}} poistetaan tuonnista, jos jatkat.",
+    "remove": "Poista",
+    "removeAndContinue": "Poista {count} ja jatka",
+    "suggestion": "Ehdotus:",
+    "title": "Tapahtumien validointitulokset",
+    "transactionNumber": "Tapahtuma #{number}",
+    "viewDetails": "Näytä tapahtuman tiedot",
+    "warnings": "Varoitukset"
   },
   "vaultSetup": {
-    "aes256Description": "Your data is encrypted with AES-256 encryption",
-    "aes256Encryption": "AES-256 Encryption",
-    "automaticDescription": "Your device creates a unique encryption key automatically. No password to remember - your data is protected seamlessly.",
-    "automaticProtection": "Automatic Protection",
-    "bankGradeSecurity": "Bank-Grade Security",
-    "chooseProtection": "Choose how you want to protect your data:",
-    "confirmPassword": "Confirm Password",
-    "confirmYourPassword": "Confirm your password",
-    "enableEncryption": "Enable Encryption",
-    "enterStrongPassword": "Enter a strong password",
-    "important": "Important",
-    "masterPassword": "Master Password",
-    "passwordDescription": "Create a master password to encrypt your vault. More secure if you share this device with others.",
-    "passwordProtection": "Password Protection",
-    "passwordWarning": "If you forget this password, your data cannot be recovered. We cannot reset it for you.",
-    "passwordsDoNotMatch": "Passwords do not match",
-    "recommended": "Recommended",
-    "settingUp": "Setting Up...",
-    "setupError": "Failed to set up vault. Please try again.",
-    "strengthFair": "Fair",
-    "strengthStrong": "Strong",
-    "strengthVeryStrong": "Very Strong",
-    "strengthVeryWeak": "Very Weak",
-    "strengthWeak": "Weak",
-    "zeroKnowledge": "Zero Knowledge"
+    "aes256Description": "Tietosi on salattu AES-256-salauksella",
+    "aes256Encryption": "AES-256-salaus",
+    "automaticDescription": "Laitteesi luo yksilöllisen salausavaimen automaattisesti. Ei salasanaa muistettavaksi – tietosi suojataan saumattomasti.",
+    "automaticProtection": "Automaattinen suojaus",
+    "bankGradeSecurity": "Pankkitason tietoturva",
+    "chooseProtection": "Valitse, miten haluat suojata tietosi:",
+    "confirmPassword": "Vahvista salasana",
+    "confirmYourPassword": "Vahvista salasanasi",
+    "enableEncryption": "Ota salaus käyttöön",
+    "enterStrongPassword": "Syötä vahva salasana",
+    "important": "Tärkeää",
+    "masterPassword": "Pääsalasana",
+    "passwordDescription": "Luo pääsalasana holvin salaamiseen. Turvallisempi, jos jaat tämän laitteen muiden kanssa.",
+    "passwordProtection": "Salasanasuojaus",
+    "passwordWarning": "Jos unohdat tämän salasanan, tietojasi ei voida palauttaa. Emme voi nollata sitä puolestasi.",
+    "passwordsDoNotMatch": "Salasanat eivät täsmää",
+    "recommended": "Suositeltava",
+    "settingUp": "Otetaan käyttöön...",
+    "setupError": "Holvin käyttöönotto epäonnistui. Yritä uudelleen.",
+    "strengthFair": "Kohtalainen",
+    "strengthStrong": "Vahva",
+    "strengthVeryStrong": "Erittäin vahva",
+    "strengthVeryWeak": "Erittäin heikko",
+    "strengthWeak": "Heikko",
+    "zeroKnowledge": "Nollatietoisuus"
   },
   "welcome": {
     "subtitle": "Aloita lisäämällä ensimmäinen tapahtumasi tai tuomalla tietoja pankistasi",
@@ -5063,8 +5063,8 @@
       "title": "Budjetin Edistyminen"
     },
     "eventBudget": {
-      "description": "Track spending for events and projects",
-      "title": "Event Budgets"
+      "description": "Seuraa tapahtumien ja projektien kuluja",
+      "title": "Tapahtumabudjetit"
     },
     "incomeVsExpenses": {
       "description": "Vertaile tuloja ja menoja ajan myötä",
@@ -5075,163 +5075,163 @@
       "title": "Kuukausitrendit"
     },
     "netWorthMini": {
-      "description": "Quick view of your total net worth",
-      "title": "Net Worth"
+      "description": "Nopea katsaus kokonaisnettovarallisuuteesi",
+      "title": "Nettovarallisuus"
     },
     "recentTransactions": {
       "description": "Nopea katsaus viimeisimpiin taloudellisiin aktiviteetteihisi",
       "title": "Viimeisimmät Tapahtumat"
     },
     "safeToSpend": {
-      "description": "See how much you can safely spend per category",
-      "title": "Safe to Spend"
+      "description": "Katso kuinka paljon voit turvallisesti käyttää kategorioittain",
+      "title": "Turvallinen kulutus"
     },
     "spendingByCategory": {
       "description": "Näe, mihin rahasi menevät visuaalisten erittelyjen avulla",
       "title": "Kulut Kategorioittain"
     },
     "streaks": {
-      "description": "Track your engagement streaks and achievements",
-      "title": "Streaks & Badges"
+      "description": "Seuraa aktiivisuusputkiasi ja saavutuksiasi",
+      "title": "Putket ja merkit"
     },
     "upcomingBills": {
       "description": "Älä koskaan unohda maksua laskumuistutusten avulla",
       "title": "Tulevat Laskut"
     },
     "weeklyRecap": {
-      "description": "Summary of your weekly spending patterns",
-      "title": "Weekly Recap"
+      "description": "Yhteenveto viikoittaisista kulutustottumuksistasi",
+      "title": "Viikkokatsaus"
     }
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
-      "createNew": "Create New",
-      "description": "Map YNAB categories to your existing categories or create new ones.",
-      "mapToExisting": "Map to Existing",
-      "selectCategory": "Select category...",
-      "skip": "Skip",
-      "title": "Category Mapping",
-      "willCreate": "Will create:"
+      "category": "{count, plural, =1 {1 kategoria} other {# kategoriaa}}",
+      "createNew": "Luo uusi",
+      "description": "Yhdistä YNAB-kategoriat olemassa oleviin kategorioihisi tai luo uusia.",
+      "mapToExisting": "Yhdistä olemassa olevaan",
+      "selectCategory": "Valitse kategoria...",
+      "skip": "Ohita",
+      "title": "Kategorioiden yhdistäminen",
+      "willCreate": "Luodaan:"
     },
     "completeStep": {
-      "errors": "Errors",
-      "importAnother": "Import Another",
-      "success": "Import Complete!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
-      "viewTransactions": "View Transactions",
-      "whatNext": "What would you like to do next?",
-      "withIssues": "Import Completed with Issues"
+      "errors": "Virheet",
+      "importAnother": "Tuo toinen",
+      "success": "Tuonti valmis!",
+      "successMessage": "{count, plural, =1 {1 kohde tuotu} other {# kohdetta tuotu}} onnistuneesti YNAB:sta.",
+      "viewTransactions": "Näytä tapahtumat",
+      "whatNext": "Mitä haluat tehdä seuraavaksi?",
+      "withIssues": "Tuonti valmistui ongelmilla"
     },
     "footer": {
-      "back": "Back",
-      "done": "Done",
-      "next": "Next",
-      "startImport": "Start Import"
+      "back": "Takaisin",
+      "done": "Valmis",
+      "next": "Seuraava",
+      "startImport": "Aloita tuonti"
     },
     "header": {
-      "closeLabel": "Close wizard",
-      "subtitle": "Migrate your budget data seamlessly",
-      "title": "Import from YNAB"
+      "closeLabel": "Sulje ohjattu toiminto",
+      "subtitle": "Siirrä budjettitietosi saumattomasti",
+      "title": "Tuo YNAB:sta"
     },
     "importingStep": {
-      "finishing": "Finishing up...",
-      "importingAccounts": "Importing accounts...",
-      "importingBudgets": "Importing budgets...",
-      "importingCategories": "Importing categories...",
-      "importingTransactions": "Importing transactions...",
-      "title": "Importing your YNAB data..."
+      "finishing": "Viimeistellään...",
+      "importingAccounts": "Tuodaan tilejä...",
+      "importingBudgets": "Tuodaan budjetteja...",
+      "importingCategories": "Tuodaan kategorioita...",
+      "importingTransactions": "Tuodaan tapahtumia...",
+      "title": "Tuodaan YNAB-tietojasi..."
     },
     "optionsStep": {
       "accountOptions": {
-        "includeClosedAccounts": "Include closed accounts",
-        "includeOffBudgetAccounts": "Include off-budget accounts",
-        "title": "Account Options"
+        "includeClosedAccounts": "Sisällytä suljetut tilit",
+        "includeOffBudgetAccounts": "Sisällytä budjetin ulkopuoliset tilit",
+        "title": "Tiliasetukset"
       },
       "budgetOptions": {
-        "importGoals": "Import savings goals as future purchases",
-        "title": "Budget Options"
+        "importGoals": "Tuo säästötavoitteet tulevina ostoina",
+        "title": "Budjettiasetukset"
       },
       "hiddenCategories": {
-        "archive": "Archive",
-        "archiveDesc": "Import as archived (recommended)",
-        "description": "How to handle YNAB categories marked as hidden?",
-        "import": "Import",
-        "importDesc": "Import as active categories",
-        "skip": "Skip",
-        "skipDesc": "Don't import hidden categories",
-        "title": "Hidden Categories"
+        "archive": "Arkistoi",
+        "archiveDesc": "Tuo arkistoituna (suositeltava)",
+        "description": "Miten käsitellään YNAB:ssa piilotetuiksi merkityt kategoriat?",
+        "import": "Tuo",
+        "importDesc": "Tuo aktiivisina kategorioina",
+        "skip": "Ohita",
+        "skipDesc": "Älä tuo piilotettuja kategorioita",
+        "title": "Piilotetut kategoriat"
       }
     },
     "previewStep": {
-      "accounts": "Accounts",
-      "allocations": "{count} allocations",
-      "budgetMonths": "Budget Months",
-      "categories": "Categories",
-      "dateRange": "Transaction Date Range",
-      "description": "Review the data that will be imported.",
-      "duplicates": "{count} duplicates",
-      "new": "{count} new",
-      "newMapped": "{created} new, {mapped} mapped",
-      "preparingPreview": "Preparing preview...",
-      "title": "Import Preview",
-      "transactions": "Transactions",
-      "warnings": "Warnings"
+      "accounts": "Tilit",
+      "allocations": "{count} kohdistusta",
+      "budgetMonths": "Budjettikuukaudet",
+      "categories": "Kategoriat",
+      "dateRange": "Tapahtumien aikaväli",
+      "description": "Tarkista tuotavat tiedot.",
+      "duplicates": "{count} kaksoiskappale(tta)",
+      "new": "{count} uutta",
+      "newMapped": "{created} uutta, {mapped} yhdistettyä",
+      "preparingPreview": "Valmistellaan esikatselua...",
+      "title": "Tuonnin esikatselu",
+      "transactions": "Tapahtumat",
+      "warnings": "Varoitukset"
     },
     "steps": {
       "categories": {
-        "description": "Map to existing categories",
-        "title": "Categories"
+        "description": "Yhdistä olemassa oleviin kategorioihin",
+        "title": "Kategoriat"
       },
       "complete": {
-        "description": "Migration finished",
-        "title": "Complete"
+        "description": "Siirto valmis",
+        "title": "Valmis"
       },
       "importing": {
-        "description": "Processing your data",
-        "title": "Importing"
+        "description": "Käsitellään tietojasi",
+        "title": "Tuodaan"
       },
       "options": {
-        "description": "Configure import settings",
-        "title": "Options"
+        "description": "Määritä tuontiasetukset",
+        "title": "Asetukset"
       },
       "preview": {
-        "description": "Review before import",
-        "title": "Preview"
+        "description": "Tarkista ennen tuontia",
+        "title": "Esikatselu"
       },
       "upload": {
-        "description": "Select YNAB export file",
-        "title": "Upload"
+        "description": "Valitse YNAB-vientitiedosto",
+        "title": "Lataa"
       }
     },
     "uploadStep": {
-      "accounts": "Accounts",
-      "categories": "Categories",
-      "clickToSelect": "Click to select a file",
-      "dragAndDrop": "or drag and drop here",
-      "fileSummary": "File Summary",
-      "format": "Format",
-      "formatApiExport": "YNAB API Export",
-      "formatApiExportDesc": "JSON from nYNAB",
-      "formatCsv": "CSV Export",
-      "formatCsvDesc": "From YNAB web app",
+      "accounts": "Tilit",
+      "categories": "Kategoriat",
+      "clickToSelect": "Napsauta valitaksesi tiedoston",
+      "dragAndDrop": "tai vedä ja pudota tähän",
+      "fileSummary": "Tiedoston yhteenveto",
+      "format": "Muoto",
+      "formatApiExport": "YNAB API -vienti",
+      "formatApiExportDesc": "JSON nYNAB:sta",
+      "formatCsv": "CSV-vienti",
+      "formatCsvDesc": "YNAB-verkkosovelluksesta",
       "formatYfull": "Budget.yfull / Budget.ynab4",
-      "formatYfullDesc": "YNAB4 desktop export",
-      "parsing": "Parsing file...",
-      "supportedFormats": "Supported Formats",
-      "transactions": "Transactions"
+      "formatYfullDesc": "YNAB4-työpöytävienti",
+      "parsing": "Jäsennetään tiedostoa...",
+      "supportedFormats": "Tuetut muodot",
+      "transactions": "Tapahtumat"
     },
     "errors": {
-      "parseFailed": "Failed to parse YNAB file",
-      "previewFailed": "Failed to generate preview",
-      "accountImportFailed": "Account import failed: {details}",
-      "categoryImportFailed": "Category import failed: {details}",
-      "transactionImportFailed": "Transaction import failed: {details}",
-      "unknownError": "Unknown error",
-      "budgetImportFailed": "Budget import failed: {details}"
+      "parseFailed": "YNAB-tiedoston jäsentäminen epäonnistui",
+      "previewFailed": "Esikatselun luominen epäonnistui",
+      "accountImportFailed": "Tilin tuonti epäonnistui: {details}",
+      "categoryImportFailed": "Kategorian tuonti epäonnistui: {details}",
+      "transactionImportFailed": "Tapahtumien tuonti epäonnistui: {details}",
+      "unknownError": "Tuntematon virhe",
+      "budgetImportFailed": "Budjetin tuonti epäonnistui: {details}"
     },
-    "importSuccess": "YNAB data imported successfully!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importSuccess": "YNAB-tiedot tuotu onnistuneesti!",
+    "importWithErrors": "Tuonti valmistui {count, plural, =1 {1 virheellä} other {# virheellä}}"
   },
   "balanceReconciliation": {
     "title": "Tuonti valmis!",
