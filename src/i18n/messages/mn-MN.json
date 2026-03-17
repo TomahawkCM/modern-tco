@@ -301,12 +301,12 @@
     "missingHeaders": "Толгой мэдээлэл дутуу эсвэл буруу",
     "missingSampleData": "Жишээ мэдээлэл дутуу эсвэл буруу",
     "noAiResponse": "AI загвараас хариу ирсэнгүй",
-    "noApiKey": "AI API key not configured. AI extraction requires an active subscription.",
-    "noFileProvided": "No file provided",
-    "rateLimitExceeded": "Rate limit exceeded. Please try again later.",
-    "responseValidationIssues": "Response structure validation had issues",
-    "unknownError": "An unknown error occurred",
-    "verifyMappings": "Please verify all mappings before importing"
+    "noApiKey": "AI API түлхүүр тохируулагдаагүй. AI задлалтад идэвхтэй захиалга шаардлагатай.",
+    "noFileProvided": "Файл өгөгдөөгүй",
+    "rateLimitExceeded": "Хүсэлтийн хязгаар хэтэрлээ. Дараа дахин оролдоно уу.",
+    "responseValidationIssues": "Хариултын бүтцийн шалгалтад асуудал гарлаа",
+    "unknownError": "Үл мэдэгдэх алдаа гарлаа",
+    "verifyMappings": "Импортлохын өмнө бүх зурагийг шалгана уу"
   },
   "aria": {
     "accessibilitySettings": "Хүртээмжийн тохиргоо",
@@ -489,14 +489,14 @@
   },
   "budget": {
     "accounts": {
-      "accountCreated": "Account created",
-      "accountDeleted": "Account deleted",
-      "accountNameLabel": "Account Name *",
-      "accountNamePlaceholder": "e.g., BMO Chequing",
+      "accountCreated": "Данс үүсгэгдлээ",
+      "accountDeleted": "Данс устгагдлаа",
+      "accountNameLabel": "Дансны нэр *",
+      "accountNamePlaceholder": "жнь., BMO харилцах",
       "accountType": {
-        "checking": "Checking",
-        "credit": "Credit Card",
-        "savings": "Savings"
+        "checking": "Харилцах",
+        "credit": "Кредит карт",
+        "savings": "Хуримтлал"
       },
       "accountTypeLabel": "Дансны төрөл",
       "accountUpdated": "Данс шинэчлэгдсэн",
@@ -821,17 +821,17 @@
     }
   },
   "bulkActions": {
-    "applyTo": "Apply to {count}",
-    "categorize": "Categorize",
-    "clearSelection": "Clear selection",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
-    "delete": "Delete",
-    "deleteWarning": "This action cannot be undone.",
-    "export": "Export",
-    "noSubcategory": "No subcategory",
-    "selectAll": "Select all",
-    "selectCategory": "Select category...",
-    "selected": "{count} selected"
+    "applyTo": "{count}-д хэрэглэх",
+    "categorize": "Ангилах",
+    "clearSelection": "Сонголт цэвэрлэх",
+    "confirmDelete": "{count, plural, =1 {1 гүйлгээг} other {# гүйлгээг}} устгах уу?",
+    "delete": "Устгах",
+    "deleteWarning": "Энэ үйлдлийг буцаах боломжгүй.",
+    "export": "Экспортлох",
+    "noSubcategory": "Дэд ангилалгүй",
+    "selectAll": "Бүгдийг сонгох",
+    "selectCategory": "Ангилал сонгох...",
+    "selected": "{count} сонгогдсон"
   },
   "calculators": {
     "budgetAnalyzer": {
@@ -1237,24 +1237,24 @@
     "openCalculator": "Тооцоолуур нээх"
   },
   "calendarExport": {
-    "addToCalendar": "Add to Calendar",
+    "addToCalendar": "Календарт нэмэх",
     "dialog": {
-      "cancel": "Cancel",
-      "description": "Add bill reminders to your calendar",
-      "deselectAll": "Deselect all",
-      "export": "Export {count} subscription(s)",
-      "exportMethod": "Export Method",
-      "exporting": "Exporting...",
-      "selectAll": "Select all",
-      "selectSubscriptions": "Select Subscriptions",
-      "title": "Export to Calendar"
+      "cancel": "Цуцлах",
+      "description": "Төлбөрийн сануулгыг календартаа нэмнэ үү",
+      "deselectAll": "Бүгдийн сонголтыг цуцлах",
+      "export": "{count} захиалга экспортлох",
+      "exportMethod": "Экспортын арга",
+      "exporting": "Экспортлож байна...",
+      "selectAll": "Бүгдийг сонгох",
+      "selectSubscriptions": "Захиалга сонгох",
+      "title": "Календарт экспортлох"
     },
-    "downloadAllICS": "Download All as ICS",
-    "downloadICS": "Download ICS File",
-    "exportToCalendar": "Export to Calendar",
-    "googleCalendar": "Google Calendar",
-    "outlookCalendar": "Outlook Calendar",
-    "selectSubscriptions": "Select Subscriptions..."
+    "downloadAllICS": "Бүгдийг ICS-ээр татах",
+    "downloadICS": "ICS файл татах",
+    "exportToCalendar": "Календарт экспортлох",
+    "googleCalendar": "Google Календар",
+    "outlookCalendar": "Outlook Календар",
+    "selectSubscriptions": "Захиалга сонгох..."
   },
   "categories": {
     "cancel": "Цуцлах",
@@ -1290,123 +1290,123 @@
   },
   "chatbot": {
     "buttons": {
-      "clearHistory": "Clear chat history",
-      "exportConversation": "Export conversation",
-      "send": "Send"
+      "clearHistory": "Чатын түүх цэвэрлэх",
+      "exportConversation": "Яриа экспортлох",
+      "send": "Илгээх"
     },
     "disabled": {
-      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
-      "enableButton": "Enable Chatbot",
-      "title": "Chatbot Disabled"
+      "description": "Эхлэхийн тулд Тохиргоо → Нууцлал → Төсвийн чатбот хэсгээс чатботыг идэвхжүүлнэ үү.",
+      "enableButton": "Чатбот идэвхжүүлэх",
+      "title": "Чатбот идэвхгүй"
     },
     "emptyState": {
-      "description": "Ask me anything about your finances. Here are some examples:",
+      "description": "Санхүүгийн талаар юу ч асуу. Жишээ нь:",
       "examples": {
-        "balance": "What's my total account balance?",
-        "budget": "Am I over budget in any categories?",
-        "groceries": "Show me my recent grocery purchases",
-        "spending": "How much did I spend this month?"
+        "balance": "Нийт дансны үлдэгдэл хэд вэ?",
+        "budget": "Ямар нэг ангилалд төсвөө хэтрүүлсэн үү?",
+        "groceries": "Сүүлийн хүнсний худалдаануудыг харуулна уу",
+        "spending": "Энэ сард хэдийг зарцуулсан бэ?"
       },
-      "title": "Start a Conversation"
+      "title": "Яриа эхлэх"
     },
     "header": {
-      "subtitle": "Ask me about your finances",
-      "title": "Budget Assistant"
+      "subtitle": "Санхүүгийн талаар асууна уу",
+      "title": "Төсвийн туслах"
     },
     "input": {
-      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training.",
-      "placeholder": "Ask about your finances..."
+      "disclaimer": "OpenAI GPT-4-ээр ажилладаг. Таны мэдээлэл аюулгүй боловсруулагдаж, сургалтанд ашиглагдахгүй.",
+      "placeholder": "Санхүүгийн талаар асууна уу..."
     },
     "messages": {
-      "dataAccessed": "Data accessed:",
-      "error": "Error",
-      "thinking": "Thinking..."
+      "dataAccessed": "Хандсан мэдээлэл:",
+      "error": "Алдаа",
+      "thinking": "Бодож байна..."
     }
   },
   "chatbotHelp": {
     "tabs": {
-      "actions": "Actions",
-      "budget": "Budget",
-      "income": "Income",
-      "spending": "Spending",
-      "trends": "Trends"
+      "actions": "Үйлдэл",
+      "budget": "Төсөв",
+      "income": "Орлого",
+      "spending": "Зарцуулалт",
+      "trends": "Чиг хандлага"
     }
   },
   "chatbotOptIn": {
     "buttons": {
-      "decline": "No Thanks",
-      "enable": "Enable Chatbot"
+      "decline": "Үгүй, баярлалаа",
+      "enable": "Чатбот идэвхжүүлэх"
     },
     "capabilities": {
-      "actions": "Optionally perform actions like adding transactions or creating budgets",
-      "answer": "Answer questions about your transactions, budgets, and spending patterns",
-      "insights": "Provide insights and recommendations based on your data",
-      "search": "Search your financial data using natural language",
-      "title": "What the Chatbot Can Do"
+      "actions": "Гүйлгээ нэмэх, төсөв үүсгэх зэрэг үйлдлийг нэмэлтээр хийнэ",
+      "answer": "Гүйлгээ, төсөв, зарцуулалтын талаарх асуултад хариулна",
+      "insights": "Мэдээллийн дүн шинжилгээ дээр суурилсан зөвлөмж өгнө",
+      "search": "Санхүүгийн мэдээллийг байгалийн хэлээр хайна",
+      "title": "Чатбот юу хийж чадах вэ"
     },
-    "closeDialog": "Close chatbot opt-in dialog",
+    "closeDialog": "Чатбот идэвхжүүлэх цонхыг хаах",
     "controls": {
       "dataAccess": {
         "fullAccess": {
-          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data",
-          "title": "Full Access"
+          "description": "Чатбот гүйлгээ нэмэх, төсөв үүсгэх, мэдээлэлд өөрчлөлт оруулах зэрэг үйлдэл хийнэ",
+          "title": "Бүрэн хандалт"
         },
-        "label": "What can the chatbot do with your data?",
+        "label": "Чатбот таны мэдээлэлтэй юу хийж чадах вэ?",
         "readOnly": {
-          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets",
-          "title": "Read-Only (Recommended)"
+          "description": "Чатбот таны мэдээллийг харж, асуултад хариулж чадна, гэхдээ гүйлгээ/төсвийг нэмэх, засах, устгах боломжгүй",
+          "title": "Зөвхөн унших (Зөвлөдөг)"
         }
       },
       "retention": {
-        "days30": "30 days",
-        "days7": "7 days (Recommended)",
-        "forever": "Keep forever",
-        "label": "How long should we keep your conversations?",
-        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
+        "days30": "30 хоног",
+        "days7": "7 хоног (Зөвлөдөг)",
+        "forever": "Үүрд хадгалах",
+        "label": "Яриаг хэр удаан хадгалах вэ?",
+        "note": "Яриа таны хөтчөд локал хадгалагддаг. Хүссэн үедээ Тохиргоо → Нууцлал хэсгээс устгаж болно."
       },
-      "title": "Privacy Controls"
+      "title": "Нууцлалын хяналт"
     },
     "gdpr": {
-      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+      "notice": "<strong>Таны эрхүүд:</strong> Чатботыг идэвхжүүлснээр та санхүүгийн мэдээллээ OpenAI-ийн API-аар боловсруулахыг зөвшөөрч байна. Тохиргоо → Нууцлал хэсгээс чатботыг идэвхгүй болгож хүссэн үедээ зөвшөөрлөө буцааж авах боломжтой. Таны мэдээлэл манай Нууцлалын бодлого болон GDPR шаардлагын дагуу боловсруулагддаг. Хүссэн үедээ ярианы түүхдээ хандах, устгах, экспортлох эрхтэй."
     },
     "privacy": {
-      "dataSent": "Financial data is sent to the API to answer your questions",
-      "disable": "You can disable the chatbot anytime in Settings → Privacy",
-      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
-      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
-      "title": "Privacy & Data Usage"
+      "dataSent": "Таны асуултад хариулахын тулд санхүүгийн мэдээлэл API руу илгээгдэнэ",
+      "disable": "Чатботыг Тохиргоо → Нууцлал хэсгээс хүссэн үедээ идэвхгүй болгож болно",
+      "noTraining": "OpenAI нь API мэдээллийг загвар сургахад ашигладаггүй (тэдний бодлогын дагуу)",
+      "processedBy": "Таны яриаг OpenAI-ийн GPT-4 API боловсруулна",
+      "title": "Нууцлал & Мэдээлэл ашиглалт"
     },
-    "subtitle": "AI-powered financial assistant",
-    "title": "Enable Budget Chatbot?"
+    "subtitle": "AI-д суурилсан санхүүгийн туслах",
+    "title": "Төсвийн чатботыг идэвхжүүлэх үү?"
   },
   "columnMapper": {
-    "amount": "Amount",
-    "amountColumn": "Amount Column",
-    "applyMapping": "Apply Mapping",
-    "bankStatementFormat": "Bank Statement Format",
-    "cancel": "Cancel",
-    "columnNumber": "Column {number}",
-    "creditColumn": "Credit Column",
-    "date": "Date",
-    "dateColumn": "Date Column",
-    "debitColumn": "Debit Column",
-    "debitCreditColumns": "Debit/Credit Columns (e.g., Home Trust)",
-    "delete": "Delete",
-    "description": "Auto-detection confidence is low. Please manually map columns.",
-    "descriptionColumn": "Description Column",
-    "descriptionHeader": "Description",
-    "dismiss": "Dismiss",
-    "lastUsed": "Last used: {date}",
-    "mapColumnsToFields": "Map Columns to Fields",
-    "pdfPreview": "PDF Data Preview (First 5 Rows)",
-    "savedMappingFound": "Saved mapping found for {bankName}",
-    "selectAllRequired": "Please select all required columns",
-    "selectColumn": "Select column...",
-    "singleAmountColumn": "Single Amount Column (e.g., BMO)",
-    "status": "Status",
-    "title": "Manual Column Mapping",
-    "transactionPreview": "Transaction Preview (First 5)",
-    "useSavedMapping": "Use Saved Mapping"
+    "amount": "Дүн",
+    "amountColumn": "Дүнгийн багана",
+    "applyMapping": "Зураг хэрэглэх",
+    "bankStatementFormat": "Банкны тайлангийн формат",
+    "cancel": "Цуцлах",
+    "columnNumber": "Багана {number}",
+    "creditColumn": "Кредит багана",
+    "date": "Огноо",
+    "dateColumn": "Огнооны багана",
+    "debitColumn": "Дебит багана",
+    "debitCreditColumns": "Дебит/Кредит багана (жнь., Home Trust)",
+    "delete": "Устгах",
+    "description": "Автомат илрүүлэлтийн итгэлцэл бага. Баганыг гараар зурагна уу.",
+    "descriptionColumn": "Тайлбарын багана",
+    "descriptionHeader": "Тайлбар",
+    "dismiss": "Хаах",
+    "lastUsed": "Сүүлд хэрэглэсэн: {date}",
+    "mapColumnsToFields": "Баганыг талбарт зурагт",
+    "pdfPreview": "PDF мэдээллийн урьдчилж харах (Эхний 5 мөр)",
+    "savedMappingFound": "{bankName}-ийн хадгалсан зураг олдлоо",
+    "selectAllRequired": "Бүх шаардлагатай баганыг сонгоно уу",
+    "selectColumn": "Багана сонгох...",
+    "singleAmountColumn": "Нэг дүнгийн багана (жнь., BMO)",
+    "status": "Төлөв",
+    "title": "Гар баганы зурагт",
+    "transactionPreview": "Гүйлгээний урьдчилж харах (Эхний 5)",
+    "useSavedMapping": "Хадгалсан зураг ашиглах"
   },
   "combobox": {
     "noResults": "Үр дүн олдсонгүй.",
@@ -1415,34 +1415,34 @@
   },
   "commandPalette": {
     "commands": {
-      "addTransaction": "Add Transaction",
-      "budgets": "Budgets",
-      "categories": "Categories",
-      "darkTheme": "Dark Theme",
-      "dashboard": "Dashboard",
-      "exportData": "Export Data",
-      "futurePlans": "Future Plans",
-      "highContrastTheme": "High-Contrast Theme",
-      "importCsv": "Import CSV",
-      "investments": "Investments",
-      "lightTheme": "Light Theme",
-      "loans": "Loans",
-      "newBudget": "New Budget",
-      "reports": "Reports",
-      "retirement": "Retirement",
-      "scanReceipt": "Scan Receipt",
-      "settings": "Settings",
-      "transactions": "Transactions"
+      "addTransaction": "Гүйлгээ нэмэх",
+      "budgets": "Төсөв",
+      "categories": "Ангилал",
+      "darkTheme": "Бараан загвар",
+      "dashboard": "Хянах самбар",
+      "exportData": "Мэдээлэл экспортлох",
+      "futurePlans": "Ирээдүйн төлөвлөгөө",
+      "highContrastTheme": "Өндөр тодосголын загвар",
+      "importCsv": "CSV импортлох",
+      "investments": "Хөрөнгө оруулалт",
+      "lightTheme": "Цайвар загвар",
+      "loans": "Зээл",
+      "newBudget": "Шинэ төсөв",
+      "reports": "Тайлан",
+      "retirement": "Тэтгэвэр",
+      "scanReceipt": "Баримт уншуулах",
+      "settings": "Тохиргоо",
+      "transactions": "Гүйлгээ"
     },
     "groups": {
-      "appearance": "Appearance",
-      "quickActions": "Quick Actions",
-      "tools": "Tools & Settings",
-      "tracking": "Tracking & Analysis",
-      "wealth": "Wealth & Planning"
+      "appearance": "Гадаад байдал",
+      "quickActions": "Түргэн үйлдэл",
+      "tools": "Хэрэгсэл & Тохиргоо",
+      "tracking": "Хяналт & Шинжилгээ",
+      "wealth": "Баялаг & Төлөвлөлт"
     },
-    "noResults": "No results found.",
-    "placeholder": "Type a command or search..."
+    "noResults": "Үр дүн олдсонгүй.",
+    "placeholder": "Команд бичих эсвэл хайх..."
   },
   "common": {
     "cancel": "Цуцлах",
@@ -1453,14 +1453,14 @@
     "success": "Амжилттай!"
   },
   "confidenceMeter": {
-    "autoCategorized": "Auto-categorized:",
-    "confidence": "{percent}% confidence",
-    "confident": "Confident",
-    "confirmCategorization": "Confirm this categorization to improve accuracy",
-    "learnFromThis": "Learn from this",
-    "lowConfidence": "Low Confidence",
-    "moderate": "Moderate",
-    "veryConfident": "Very Confident"
+    "autoCategorized": "Автомат ангилагдсан:",
+    "confidence": "{percent}% итгэлцэл",
+    "confident": "Итгэлтэй",
+    "confirmCategorization": "Нарийвчлалыг сайжруулахын тулд энэ ангиллыг баталгаажуулна уу",
+    "learnFromThis": "Үүнээс суралц",
+    "lowConfidence": "Бага итгэлцэл",
+    "moderate": "Дунд",
+    "veryConfident": "Маш итгэлтэй"
   },
   "dashboard": {
     "widgets": {
@@ -1629,51 +1629,51 @@
     "viewAllLoans": "Бүх зээлийг харах"
   },
   "debtOverview": {
-    "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
-    "activeLoansTitle": "Active Loans",
-    "addLoan": "Add Loan",
-    "avgRate": "Avg Rate",
-    "balance": "Balance",
-    "monthlyPayment": "Monthly Payment",
-    "paidOff": "{percent}% paid off",
-    "title": "Debt Overview",
-    "totalDebt": "Total Debt",
-    "upcomingPayments": "Upcoming Payments",
-    "viewAll": "View All",
-    "viewMore": "{count, plural, one {View # more loan} other {View # more loans}}"
+    "activeLoans": "{count, plural, one {# идэвхтэй зээл} other {# идэвхтэй зээл}}",
+    "activeLoansTitle": "Идэвхтэй зээлүүд",
+    "addLoan": "Зээл нэмэх",
+    "avgRate": "Дундаж хүү",
+    "balance": "Үлдэгдэл",
+    "monthlyPayment": "Сарын төлбөр",
+    "paidOff": "{percent}% төлөгдсөн",
+    "title": "Өрийн тойм",
+    "totalDebt": "Нийт өр",
+    "upcomingPayments": "Удахгүй ирэх төлбөрүүд",
+    "viewAll": "Бүгдийг харах",
+    "viewMore": "{count, plural, one {# зээл нэмж харах} other {# зээл нэмж харах}}"
   },
   "debtPayoff": {
-    "addDebt": "Add Debt",
-    "addDebtTitle": "Add Debt",
-    "addManually": "Add Manually",
-    "apr": "APR %",
-    "balance": "Balance",
-    "baselineComparison": "By using this strategy, you save {interest} in interest and pay off {months} months sooner compared to minimum payments only.",
-    "cancel": "Cancel",
-    "debtFreeDate": "Debt-Free Date",
-    "debtName": "Name",
-    "debtNamePlaceholder": "e.g. Credit Card, Car Loan",
-    "debtOverview": "Debt Overview",
-    "goToLoans": "Go to Loans",
-    "minPayment": "Min. Payment",
-    "mo": "mo",
-    "monthsToFreedom": "Months to Freedom",
-    "noDebts": "No debts added yet. Add debts manually or import from your loans.",
-    "payoffChart": "Payoff Chart",
-    "payoffTimeline": "Payoff Timeline",
-    "results": "Results",
-    "save": "Save",
-    "saveScenarioTitle": "Save Scenario",
-    "savedScenarios": "Saved Scenarios",
-    "scenarioNamePlaceholder": "e.g. Aggressive avalanche plan",
-    "strategyConfig": "Strategy",
-    "subtitle": "Plan your path to becoming debt-free",
-    "title": "Debt Payoff",
-    "totalDebt": "Total Debt",
-    "totalInterestLabel": "Total Interest",
-    "totalMinPayments": "Total Min. Payments",
-    "totalPaid": "Total Paid",
-    "weightedApr": "Weighted APR"
+    "addDebt": "Өр нэмэх",
+    "addDebtTitle": "Өр нэмэх",
+    "addManually": "Гараар нэмэх",
+    "apr": "Жилийн хүү %",
+    "balance": "Үлдэгдэл",
+    "baselineComparison": "Энэ стратегийг ашигласнаар та {interest} хүүний хэмнэлт олж, зөвхөн доод төлбөрөөс {months} сар эрт төлж дуусна.",
+    "cancel": "Цуцлах",
+    "debtFreeDate": "Өргүй болох огноо",
+    "debtName": "Нэр",
+    "debtNamePlaceholder": "жнь., Кредит карт, Автомашины зээл",
+    "debtOverview": "Өрийн тойм",
+    "goToLoans": "Зээл рүү очих",
+    "minPayment": "Доод төлбөр",
+    "mo": "с",
+    "monthsToFreedom": "Эрх чөлөөнд хүрэх сар",
+    "noDebts": "Өр нэмэгдээгүй. Гараар нэмэх эсвэл зээлээсээ импортлох.",
+    "payoffChart": "Төлөлтийн график",
+    "payoffTimeline": "Төлөлтийн хуваарь",
+    "results": "Үр дүн",
+    "save": "Хадгалах",
+    "saveScenarioTitle": "Хувилбар хадгалах",
+    "savedScenarios": "Хадгалсан хувилбарууд",
+    "scenarioNamePlaceholder": "жнь., Идэвхтэй хималын төлөвлөгөө",
+    "strategyConfig": "Стратеги",
+    "subtitle": "Өргүй болох замаа төлөвлө",
+    "title": "Өрийн төлөлт",
+    "totalDebt": "Нийт өр",
+    "totalInterestLabel": "Нийт хүү",
+    "totalMinPayments": "Нийт доод төлбөр",
+    "totalPaid": "Нийт төлсөн",
+    "weightedApr": "Жигнэсэн жилийн хүү"
   },
   "debug": {
     "actions": "Үйлдлүүд",
@@ -1853,41 +1853,41 @@
     }
   },
   "errorRecovery": {
-    "aiAnalysis": "AI Analysis:",
-    "closeModal": "Close modal",
+    "aiAnalysis": "AI шинжилгээ:",
+    "closeModal": "Цонхыг хаах",
     "footer": {
-      "close": "Close",
-      "needHelp": "Need more help?",
-      "viewGuide": "View troubleshooting guide"
+      "close": "Хаах",
+      "needHelp": "Нэмэлт тусламж хэрэгтэй юу?",
+      "viewGuide": "Алдаа шийдвэрлэх гарын авлага харах"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
-      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
-      "optionsTitle": "Recovery Options"
+      "canRecover": "Сайн мэдээ! Энэ алдааг засах {count} {count, plural, =1 {арга} other {арга}} олдлоо.",
+      "cannotRecover": "Засах боломжгүй. Файлыг банкнаасаа дахин экспортлох эсвэл өөр формат ашиглах шаардлагатай.",
+      "optionsTitle": "Засах сонголтууд"
     },
-    "subtitle": "Don't worry! We can help you fix this.",
+    "subtitle": "Санаа зовох хэрэггүй! Бид засахад тусалж чадна.",
     "suggestions": {
-      "autoFix": "AUTO-FIX",
-      "autoFixButton": "Auto-Fix",
-      "confidence": "{percent}% confidence",
-      "fixing": "Fixing...",
-      "learnMore": "Learn More",
-      "technicalDetails": "Technical Details"
+      "autoFix": "АВТО-ЗАСАХ",
+      "autoFixButton": "Авто-засах",
+      "confidence": "{percent}% итгэлцэл",
+      "fixing": "Засаж байна...",
+      "learnMore": "Дэлгэрэнгүй",
+      "technicalDetails": "Техникийн дэлгэрэнгүй"
     },
     "summary": {
-      "category": "Category: {category}",
-      "title": "Error Summary"
+      "category": "Ангилал: {category}",
+      "title": "Алдааны хураангуй"
     },
     "technical": {
-      "canRecover": "Can Recover:",
-      "errorCategory": "Error Category:",
-      "no": "No",
-      "severity": "Severity:",
-      "suggestions": "Suggestions:",
-      "title": "Advanced Technical Details",
-      "yes": "Yes"
+      "canRecover": "Засах боломжтой:",
+      "errorCategory": "Алдааны ангилал:",
+      "no": "Үгүй",
+      "severity": "Ноцтой байдал:",
+      "suggestions": "Зөвлөмж:",
+      "title": "Нарийвчилсан техникийн дэлгэрэнгүй",
+      "yes": "Тийм"
     },
-    "title": "Import Failed"
+    "title": "Импорт амжилтгүй"
   },
   "export": {
     "allDataDeleted": "Бүх мэдээлэл устгагдлаа. Хуудас шинэчлэгдэнэ.",
@@ -1974,78 +1974,78 @@
   },
   "exportDialog": {
     "buttons": {
-      "cancel": "Cancel",
-      "done": "Done!",
-      "download": "Download",
-      "export": "Export Data"
+      "cancel": "Цуцлах",
+      "done": "Дууссан!",
+      "download": "Татах",
+      "export": "Мэдээлэл экспортлох"
     },
     "complete": {
-      "download": "Your file is ready to download",
-      "success": "Export complete! Check your downloads folder."
+      "download": "Таны файл татахад бэлэн байна",
+      "success": "Экспорт дууслаа! Татсан файлаа шалгана уу."
     },
     "dataSummary": {
-      "accounts": "Accounts",
-      "estimatedSize": "Est. Size",
-      "title": "Data Summary",
-      "transactions": "Transactions"
+      "accounts": "Данс",
+      "estimatedSize": "Тооцоолсон хэмжээ",
+      "title": "Мэдээллийн хураангуй",
+      "transactions": "Гүйлгээ"
     },
     "exporting": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Exporting..."
+      "pleaseWait": "Түр хүлээнэ үү, энд хэсэг хугацаа шаардагдаж магадгүй",
+      "title": "Экспортлож байна..."
     },
     "format": {
       "budget": {
-        "description": "Complete backup including all data",
-        "label": ".budget file"
+        "description": "Бүх мэдээллийг агуулсан бүрэн нөөцлөлт",
+        "label": ".budget файл"
       },
       "csv": {
-        "description": "Spreadsheet-compatible format",
-        "label": "CSV file"
+        "description": "Хүснэгттэй нийцтэй формат",
+        "label": "CSV файл"
       },
       "json": {
-        "description": "Developer-friendly format",
-        "label": "JSON file"
+        "description": "Хөгжүүлэгчдэд ээлтэй формат",
+        "label": "JSON файл"
       },
-      "label": "Export Format"
+      "label": "Экспортын формат"
     },
     "options": {
       "encrypt": {
-        "description": "Protect your data with AES-256 encryption",
-        "label": "Encrypt with Password"
+        "description": "AES-256 шифрлэлтээр мэдээллээ хамгаална",
+        "label": "Нууц үгээр шифрлэх"
       },
       "includeReceipts": {
-        "description": "Attach receipt images (increases file size)",
-        "label": "Include Receipts"
+        "description": "Баримтын зургуудыг хавсаргах (файлын хэмжээг нэмэгдүүлнэ)",
+        "label": "Баримт оруулах"
       }
     },
     "password": {
-      "confirm": "Confirm Password",
-      "confirmPlaceholder": "Confirm password",
-      "hint": "Password Hint (Optional)",
-      "hintNote": "This hint will be stored unencrypted in the file",
-      "hintPlaceholder": "A hint to help you remember",
-      "label": "Password",
-      "minLength": "Password must be at least 8 characters",
-      "mismatch": "Passwords do not match",
-      "placeholder": "Enter password (min 8 characters)",
-      "required": "Password is required for encryption"
+      "confirm": "Нууц үг баталгаажуулах",
+      "confirmPlaceholder": "Нууц үгээ баталгаажуулна уу",
+      "hint": "Нууц үгийн сануулга (Нэмэлт)",
+      "hintNote": "Энэ сануулга файлд шифрлэгдэлгүй хадгалагдана",
+      "hintPlaceholder": "Санахад тусалдаг сануулга",
+      "label": "Нууц үг",
+      "minLength": "Нууц үг дор хаяж 8 тэмдэгт байх ёстой",
+      "mismatch": "Нууц үг таарахгүй байна",
+      "placeholder": "Нууц үг оруулна уу (дор хаяж 8 тэмдэгт)",
+      "required": "Шифрлэлтэнд нууц үг шаардлагатай"
     },
-    "subtitle": "Download your budget data",
-    "title": "Export Data"
+    "subtitle": "Төсвийн мэдээллээ татах",
+    "title": "Мэдээлэл экспортлох"
   },
   "filters": {
-    "account": "Account",
-    "allAccounts": "All accounts",
-    "allCategories": "All categories",
-    "allTypes": "All types",
-    "apply": "Apply filters",
-    "category": "Category",
-    "clearFilters": "Clear filters",
-    "dateRange": "Date range",
-    "expense": "Expense",
-    "income": "Income",
-    "search": "Search transactions...",
-    "type": "Type"
+    "account": "Данс",
+    "allAccounts": "Бүх данс",
+    "allCategories": "Бүх ангилал",
+    "allTypes": "Бүх төрөл",
+    "apply": "Шүүлтүүр хэрэглэх",
+    "category": "Ангилал",
+    "clearFilters": "Шүүлтүүр цэвэрлэх",
+    "dateRange": "Огнооны хүрээ",
+    "expense": "Зарлага",
+    "income": "Орлого",
+    "search": "Гүйлгээ хайх...",
+    "type": "Төрөл"
   },
   "footer": {
     "copyright": "© {year} {brandName}",
@@ -2058,44 +2058,44 @@
     "tagline": "Нэг удаагийн шинэчлэлтэй дээд зэргийн төсөвлөлт."
   },
   "fridayReview": {
-    "back": "Back",
-    "backToDashboard": "Back to Dashboard",
-    "closeReview": "Close review",
-    "continue": "Continue",
-    "done": "Done",
-    "goToStep": "Go to {step}",
-    "loading": "Loading your weekly review...",
-    "placeholderContent": "Step content will be implemented in subsequent tasks (F-021 through F-025).",
-    "stepCounter": "Step {current} of {total}",
-    "stepLabel": "Step {current}: {title}",
-    "stepProgress": "Step {current} of {total}: {title}",
+    "back": "Буцах",
+    "backToDashboard": "Хянах самбар руу буцах",
+    "closeReview": "Тоймыг хаах",
+    "continue": "Үргэлжлүүлэх",
+    "done": "Дууссан",
+    "goToStep": "{step} руу очих",
+    "loading": "Долоо хоногийн тоймыг ачааллаж байна...",
+    "placeholderContent": "Алхмын агуулга дараагийн даалгаварт (F-021 - F-025) хэрэгжинэ.",
+    "stepCounter": "{total} алхмын {current}",
+    "stepLabel": "Алхам {current}: {title}",
+    "stepProgress": "{total} алхмын {current}: {title}",
     "steps": {
       "budgets": {
-        "subtitle": "How are your budgets doing?",
-        "title": "Budget Check"
+        "subtitle": "Төсвүүд чинь яаж байна?",
+        "title": "Төсвийн шалгалт"
       },
       "celebration": {
-        "subtitle": "See you next Friday!",
-        "title": "Great job this week!"
+        "subtitle": "Дараагийн Баасанд уулзая!",
+        "title": "Энэ долоо хоногт сайн байлаа!"
       },
       "goals": {
-        "subtitle": "You're making progress on your goals!",
-        "title": "Goal Progress"
+        "subtitle": "Зорилгодоо ахиц гарч байна!",
+        "title": "Зорилгын явц"
       },
       "spending": {
-        "subtitle": "Here's where your money went this week.",
-        "title": "Spending Recap"
+        "subtitle": "Энэ долоо хоногт мөнгө чинь хаашаа явсан.",
+        "title": "Зарцуулалтын тойм"
       },
       "upcoming": {
-        "subtitle": "Heads up for next week.",
-        "title": "Upcoming Bills"
+        "subtitle": "Дараагийн долоо хоногт анхаараарай.",
+        "title": "Удахгүй ирэх төлбөрүүд"
       },
       "welcome": {
-        "subtitle": "Let's check in on your week.",
-        "title": "Happy Friday!"
+        "subtitle": "Долоо хоногоо нягтлацгаая.",
+        "title": "Баасанд баяртай!"
       }
     },
-    "title": "Friday Review"
+    "title": "Баасны тойм"
   },
   "healthScore": {
     "ariaLabel": "Санхүүгийн эрүүл мэндийн оноо: 100-аас {score}. {interpretation}",
@@ -2119,195 +2119,195 @@
     }
   },
   "holdingModal": {
-    "addHolding": "Add Holding",
-    "canadianStockHint": "Use .TO for Canadian stocks (e.g., TD.TO, VGRO.TO)",
-    "cancel": "Cancel",
-    "editHolding": "Edit Holding",
-    "enterSymbol": "Please enter a stock symbol",
-    "failedToSave": "Failed to save holding",
-    "notesOptional": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Part of retirement portfolio, employee stock purchase",
-    "numberOfShares": "Number of Shares",
+    "addHolding": "Хөрөнгө нэмэх",
+    "canadianStockHint": "Канадын хувьцаанд .TO ашиглана (жнь., TD.TO, VGRO.TO)",
+    "cancel": "Цуцлах",
+    "editHolding": "Хөрөнгө засах",
+    "enterSymbol": "Хувьцааны тэмдэг оруулна уу",
+    "failedToSave": "Хөрөнгө хадгалж чадсангүй",
+    "notesOptional": "Тэмдэглэл (Нэмэлт)",
+    "notesPlaceholder": "жнь., Тэтгэврийн багцын нэг хэсэг, ажилтны хувьцаа худалдан авалт",
+    "numberOfShares": "Хувьцааны тоо",
     "pricePlaceholder": "50.00",
-    "purchaseDate": "Purchase Date",
-    "purchasePricePerShare": "Purchase Price per Share",
+    "purchaseDate": "Худалдан авсан огноо",
+    "purchasePricePerShare": "Нэгж хувьцааны худалдан авах үнэ",
     "quantityPlaceholder": "100",
-    "saving": "Saving...",
-    "stockSymbol": "Stock Symbol",
-    "symbolPlaceholder": "e.g., AAPL, VGRO.TO, TD.TO",
-    "totalInvestment": "Total Investment",
-    "updateHolding": "Update Holding",
-    "validPurchasePrice": "Please enter a valid purchase price",
-    "validQuantity": "Please enter a valid quantity"
+    "saving": "Хадгалж байна...",
+    "stockSymbol": "Хувьцааны тэмдэг",
+    "symbolPlaceholder": "жнь., AAPL, VGRO.TO, TD.TO",
+    "totalInvestment": "Нийт хөрөнгө оруулалт",
+    "updateHolding": "Хөрөнгө шинэчлэх",
+    "validPurchasePrice": "Зөв худалдан авах үнэ оруулна уу",
+    "validQuantity": "Зөв тоо хэмжээ оруулна уу"
   },
   "iconPicker": {
-    "clearSearch": "Clear Search",
-    "close": "Close",
-    "currentIcon": "Current Icon",
-    "foundCount": "Found {count} icon(s)",
-    "iconsAvailable": "{count} icons available",
-    "noIconsFound": "No icons found",
-    "noIconsFoundHint": "Try a different search term or browse all icons",
-    "searchPlaceholder": "Search icons by name or category...",
-    "subtitle": "Select an icon to represent your category",
-    "title": "Choose an Icon"
+    "clearSearch": "Хайлт цэвэрлэх",
+    "close": "Хаах",
+    "currentIcon": "Одоогийн дүрс",
+    "foundCount": "{count} дүрс олдлоо",
+    "iconsAvailable": "{count} дүрс боломжтой",
+    "noIconsFound": "Дүрс олдсонгүй",
+    "noIconsFoundHint": "Өөр хайлтын нэр оруулах эсвэл бүх дүрсийг үзнэ үү",
+    "searchPlaceholder": "Дүрсийг нэр эсвэл ангиллаар хайх...",
+    "subtitle": "Ангиллаа дүрслэх дүрс сонгоно уу",
+    "title": "Дүрс сонгох"
   },
   "import": {
-    "added": "added",
-    "allTransactionsRemoved": "All transactions were removed during validation. Please try importing a different file.",
-    "autoDetect": "Auto-detect ({locale})",
-    "couldNotParseCSV": "Could not parse CSV file. Please check the file format.",
-    "detectedFormat": "Detected Format:",
-    "dismiss": "Dismiss",
-    "duplicateSingular": "duplicate",
-    "duplicatesPlural": "duplicates",
-    "exportDebugData": "Export Debug Data",
-    "formatInfoAriaLabel": "More information about CSV and OFX file formats",
-    "importCancelledValidation": "Import cancelled due to validation issues. Please review your file and try again.",
-    "importError": "Import Error",
-    "importedOn": "Imported on",
-    "invalidBankConfig": "Invalid bank configuration. Please try selecting a different bank.",
-    "invalidOFXFile": "Invalid OFX file:\n{errors}",
-    "langArabic": "Arabic",
-    "langChineseSimplified": "Chinese (Simplified)",
-    "langChineseTraditional": "Chinese (Traditional)",
-    "langDutch": "Dutch",
-    "langEnglish": "English",
-    "langFrench": "French",
-    "langGerman": "German",
-    "langHindi": "Hindi",
-    "langItalian": "Italian",
-    "langJapanese": "Japanese",
-    "langKorean": "Korean",
-    "langPolish": "Polish",
-    "langPortuguese": "Portuguese",
-    "langRussian": "Russian",
-    "langSpanish": "Spanish",
-    "langTurkish": "Turkish",
-    "largePdfTip": "💡 For very large statements, consider requesting a CSV export from your bank for faster processing.",
-    "largePdfWarning": "⚠️ Large PDF detected ({pages} pages). Processing may take longer and use significant memory.",
-    "lowConfidenceDetection": "Low confidence format detection. {suggestions}",
-    "lowOcrConfidence": "⚠️ Low OCR confidence ({percent}%). This may be a scanned/image-based PDF.",
-    "noDataAfterMapping": "No data found in CSV file after applying custom mapping.",
-    "noDataInCSV": "No data found in CSV file. The file may be empty or incorrectly formatted.",
-    "noTransactionsParsed": "No transactions could be parsed from this file.\n\nPossible causes:\n• The file format may not be recognized\n• The date or amount columns may be empty\n• The file may contain only headers\n\nTry selecting a different bank format or contact support.",
-    "ocrLanguage": "OCR Language:",
-    "pageCount": "{count} pages",
-    "partialImport": "Partial Import",
-    "percentConfident": "{percent}% confident",
-    "recentImports": "Recent Imports",
-    "recentImportsSubtitle": "View your import history and verify successful uploads",
-    "reviewTransactionsForAccuracy": "💡 Please carefully review all transactions for accuracy.",
-    "selectAccountFirst": "Please select an account before importing transactions. Go to the Accounts page to create an account first.",
-    "skipped": "skipped",
-    "subtitle": "Upload CSV, OFX, QFX, or PDF files from BMO, Home Trust, TD, Chase, and 15+ other banks",
-    "success": "Success",
-    "tipCheckConsole": "Check browser console for detailed OCR logs",
-    "tipEnsureTextPDF": "Ensure PDF is text-based (not a scanned image)",
-    "tipExportDebug": "Export debug data (button above) for support",
-    "tipTryCSV": "Try exporting as CSV instead of PDF from your bank",
-    "title": "Import Transactions",
-    "transactionSingular": "transaction",
-    "transactionsLabel": "Transactions",
-    "transactionsPlural": "transactions",
-    "troubleshootingTips": "💡 Troubleshooting tips:",
-    "unableToDetectFormat": "Unable to detect file format. Please try a different file.",
-    "unsupportedFileFormat": "Unsupported file format: {format}. Please use CSV, OFX, QFX, QIF, MT940, CAMT.053, or PDF files.",
-    "unsupportedFormat": "Unsupported file format: {format}"
+    "added": "нэмэгдсэн",
+    "allTransactionsRemoved": "Шалгалтын явцад бүх гүйлгээ устгагдлаа. Өөр файл импортлож оролдоно уу.",
+    "autoDetect": "Автомат илрүүлэлт ({locale})",
+    "couldNotParseCSV": "CSV файлыг задлаж чадсангүй. Файлын форматыг шалгана уу.",
+    "detectedFormat": "Илэрсэн формат:",
+    "dismiss": "Хаах",
+    "duplicateSingular": "давхцал",
+    "duplicatesPlural": "давхцал",
+    "exportDebugData": "Дебаг мэдээлэл экспортлох",
+    "formatInfoAriaLabel": "CSV болон OFX файлын форматын талаарх дэлгэрэнгүй мэдээлэл",
+    "importCancelledValidation": "Шалгалтын асуудлаас болж импорт цуцлагдлаа. Файлаа шалгаад дахин оролдоно уу.",
+    "importError": "Импортын алдаа",
+    "importedOn": "Импортлогдсон огноо",
+    "invalidBankConfig": "Буруу банкны тохиргоо. Өөр банк сонгож оролдоно уу.",
+    "invalidOFXFile": "Буруу OFX файл:\n{errors}",
+    "langArabic": "Араб",
+    "langChineseSimplified": "Хятад (Хялбаршуулсан)",
+    "langChineseTraditional": "Хятад (Уламжлалт)",
+    "langDutch": "Голланд",
+    "langEnglish": "Англи",
+    "langFrench": "Франц",
+    "langGerman": "Герман",
+    "langHindi": "Хинди",
+    "langItalian": "Итали",
+    "langJapanese": "Япон",
+    "langKorean": "Солонгос",
+    "langPolish": "Польш",
+    "langPortuguese": "Португал",
+    "langRussian": "Орос",
+    "langSpanish": "Испани",
+    "langTurkish": "Турк",
+    "largePdfTip": "💡 Маш том тайлангийн хувьд хурдан боловсруулахын тулд банкнаасаа CSV экспорт хүс.",
+    "largePdfWarning": "⚠️ Том PDF илэрсэн ({pages} хуудас). Боловсруулалт удааширч, санах ойг ихээр ашиглаж магадгүй.",
+    "lowConfidenceDetection": "Формат илрүүлэлтийн итгэлцэл бага. {suggestions}",
+    "lowOcrConfidence": "⚠️ OCR итгэлцэл бага ({percent}%). Энэ нь сканнердсан/зурган PDF байж магадгүй.",
+    "noDataAfterMapping": "Тусгай зурагийг хэрэглэсний дараа CSV файлд мэдээлэл олдсонгүй.",
+    "noDataInCSV": "CSV файлд мэдээлэл олдсонгүй. Файл хоосон эсвэл буруу форматтай байж магадгүй.",
+    "noTransactionsParsed": "Энэ файлаас гүйлгээ задлаж чадсангүй.\n\nБоломжит шалтгаанууд:\n• Файлын формат таниагүй байж магадгүй\n• Огноо эсвэл дүнгийн багана хоосон байж магадгүй\n• Файлд зөвхөн толгой мөр байж магадгүй\n\nӨөр банкны формат сонгох эсвэл тусламжтай холбогдоно уу.",
+    "ocrLanguage": "OCR хэл:",
+    "pageCount": "{count} хуудас",
+    "partialImport": "Хэсэгчилсэн импорт",
+    "percentConfident": "{percent}% итгэлтэй",
+    "recentImports": "Сүүлийн импортууд",
+    "recentImportsSubtitle": "Импортын түүхээ харж, амжилттай байршуулалтыг шалгана",
+    "reviewTransactionsForAccuracy": "💡 Бүх гүйлгээг нарийвчлан шалгана уу.",
+    "selectAccountFirst": "Гүйлгээ импортлохын өмнө данс сонгоно уу. Эхлээд Данс хуудаснаас данс үүсгэнэ үү.",
+    "skipped": "алгассан",
+    "subtitle": "BMO, Home Trust, TD, Chase болон 15+ бусад банкнаас CSV, OFX, QFX, PDF файл байршуулна",
+    "success": "Амжилттай",
+    "tipCheckConsole": "Нарийвчилсан OCR бүртгэлийг хөтчийн консолоос шалгана уу",
+    "tipEnsureTextPDF": "PDF нь текст дээр суурилсан (сканнердсан зураг биш) эсэхийг шалгана уу",
+    "tipExportDebug": "Тусламжийн дебаг мэдээллийг экспортлох (дээрх товч)",
+    "tipTryCSV": "Банкнаасаа PDF-ийн оронд CSV-ээр экспортлоорой",
+    "title": "Гүйлгээ импортлох",
+    "transactionSingular": "гүйлгээ",
+    "transactionsLabel": "Гүйлгээ",
+    "transactionsPlural": "гүйлгээ",
+    "troubleshootingTips": "💡 Алдаа шийдвэрлэх зөвлөмж:",
+    "unableToDetectFormat": "Файлын формат илрүүлэх боломжгүй. Өөр файл ашиглаарай.",
+    "unsupportedFileFormat": "Дэмжигдээгүй файлын формат: {format}. CSV, OFX, QFX, QIF, MT940, CAMT.053 эсвэл PDF файл ашиглана уу.",
+    "unsupportedFormat": "Дэмжигдээгүй файлын формат: {format}"
   },
   "importDialog": {
     "buttons": {
-      "back": "Back",
-      "cancel": "Cancel",
-      "done": "Done",
-      "import": "Import Data"
+      "back": "Буцах",
+      "cancel": "Цуцлах",
+      "done": "Дууссан",
+      "import": "Мэдээлэл импортлох"
     },
     "complete": {
-      "itemsImported": "{count} items imported successfully",
-      "success": "Import Complete!",
-      "withIssues": "Import Completed with Issues"
+      "itemsImported": "{count} зүйл амжилттай импортлогдлоо",
+      "success": "Импорт дууслаа!",
+      "withIssues": "Импорт асуудалтай дууслаа"
     },
     "conflicts": {
-      "existing": "{count} existing",
-      "handleLabel": "Handle Conflicts",
+      "existing": "{count} одоо байгаа",
+      "handleLabel": "Зөрчлийг шийдвэрлэх",
       "overwrite": {
-        "description": "Replace with imported",
-        "label": "Overwrite"
+        "description": "Импортлогдсоноор солих",
+        "label": "Дарж бичих"
       },
       "rename": {
-        "description": "Import as new entries",
-        "label": "Create new"
+        "description": "Шинэ бичлэгээр импортлох",
+        "label": "Шинээр үүсгэх"
       },
       "skip": {
-        "description": "Keep current data",
-        "label": "Skip existing"
+        "description": "Одоогийн мэдээллийг хадгалах",
+        "label": "Одоо байгааг алгасах"
       },
-      "title": "Conflicts Found"
+      "title": "Зөрчил олдсон"
     },
     "encryption": {
-      "decrypt": "Decrypt & Continue",
-      "encrypted": "This file is encrypted",
-      "enterPassword": "Enter password",
-      "hint": "Hint: {hint}",
-      "password": "Password"
+      "decrypt": "Нууц тайлж үргэлжлүүлэх",
+      "encrypted": "Энэ файл шифрлэгдсэн",
+      "enterPassword": "Нууц үгээ оруулна уу",
+      "hint": "Сануулга: {hint}",
+      "password": "Нууц үг"
     },
     "importing": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Importing your data..."
+      "pleaseWait": "Түр хүлээнэ үү, энд хэсэг хугацаа шаардагдаж магадгүй",
+      "title": "Мэдээлэл импортлож байна..."
     },
     "preview": {
-      "dataToImport": "Data to Import",
-      "exported": "Exported",
-      "fileInfo": "File Information",
-      "version": "Version"
+      "dataToImport": "Импортлох мэдээлэл",
+      "exported": "Экспортлогдсон",
+      "fileInfo": "Файлын мэдээлэл",
+      "version": "Хувилбар"
     },
     "selectFile": {
-      "dragDrop": "or drag and drop here",
-      "label": "Click to select a .budget file"
+      "dragDrop": "эсвэл чирэж тавина уу",
+      "label": ".budget файл сонгохын тулд дарна уу"
     },
-    "subtitle": "Restore from .budget file",
-    "title": "Import Data"
+    "subtitle": ".budget файлаас сэргээх",
+    "title": "Мэдээлэл импортлох"
   },
   "investmentAccountModal": {
     "buttons": {
-      "cancel": "Cancel",
-      "create": "Create Account",
-      "saving": "Saving...",
-      "update": "Update Account"
+      "cancel": "Цуцлах",
+      "create": "Данс үүсгэх",
+      "saving": "Хадгалж байна...",
+      "update": "Данс шинэчлэх"
     },
-    "closeModal": "Close modal",
+    "closeModal": "Цонхыг хаах",
     "errors": {
-      "saveFailed": "Failed to save account"
+      "saveFailed": "Данс хадгалж чадсангүй"
     },
     "fields": {
       "accountNumber": {
-        "label": "Account Number (Optional)",
-        "placeholder": "e.g., Last 4 digits: 1234"
+        "label": "Дансны дугаар (Нэмэлт)",
+        "placeholder": "жнь., Сүүлийн 4 орон: 1234"
       },
       "institution": {
-        "label": "Financial Institution (Optional)",
-        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
+        "label": "Санхүүгийн байгууллага (Нэмэлт)",
+        "placeholder": "жнь., Questrade, Wealthsimple, TD Direct"
       },
       "name": {
-        "label": "Account Name",
-        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
+        "label": "Дансны нэр",
+        "placeholder": "жнь., Миний RRSP, TFSA хуримтлал, Компаний хувьцаа"
       },
       "type": {
         "descriptions": {
-          "Company shares": "Employee stock purchase or stock options",
-          "Non-registered": "Taxable investment account",
-          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
-          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
+          "Company shares": "Ажилтны хувьцаа худалдан авалт эсвэл хувьцааны опцион",
+          "Non-registered": "Татвар төлдөг хөрөнгө оруулалтын данс",
+          "RRSP": "Бүртгэлтэй тэтгэврийн хуримтлалын төлөвлөгөө - Татварын хойшлуулалттай өсөлт",
+          "TFSA": "Татваргүй хуримтлалын данс - Татваргүй өсөлт ба зарлага"
         },
-        "label": "Account Type"
+        "label": "Дансны төрөл"
       }
     },
     "title": {
-      "add": "Add Investment Account",
-      "edit": "Edit Investment Account"
+      "add": "Хөрөнгө оруулалтын данс нэмэх",
+      "edit": "Хөрөнгө оруулалтын данс засах"
     },
     "validation": {
-      "nameRequired": "Please enter an account name"
+      "nameRequired": "Дансны нэр оруулна уу"
     }
   },
   "investmentCharts": {
@@ -2338,127 +2338,127 @@
     }
   },
   "investments": {
-    "account": "Account",
-    "addAccount": "Add Account",
-    "addFirstHolding": "Add Your First Holding",
-    "addHolding": "Add Holding",
+    "account": "Данс",
+    "addAccount": "Данс нэмэх",
+    "addFirstHolding": "Анхны хөрөнгөө нэмэх",
+    "addHolding": "Хөрөнгө нэмэх",
     "confirmDeleteAccount": {
-      "confirmLabel": "Delete Account & Holdings",
-      "description": "This will permanently delete the account and all associated holdings.",
-      "impactAccount": "Account: {name}",
-      "impactHistory": "All transaction history",
-      "impactHoldings": "{count, plural, one {# holding} other {# holdings}}",
-      "impactTitle": "You will lose:",
-      "impactValue": "Total value: {value}",
-      "title": "Delete Investment Account"
+      "confirmLabel": "Данс & хөрөнгө устгах",
+      "description": "Энэ нь данс болон түүнтэй холбоотой бүх хөрөнгийг бүрмөсөн устгана.",
+      "impactAccount": "Данс: {name}",
+      "impactHistory": "Бүх гүйлгээний түүх",
+      "impactHoldings": "{count, plural, one {# хөрөнгө} other {# хөрөнгө}}",
+      "impactTitle": "Та алдах зүйлс:",
+      "impactValue": "Нийт үнэ цэнэ: {value}",
+      "title": "Хөрөнгө оруулалтын данс устгах"
     },
     "confirmDeleteHolding": {
-      "confirmLabel": "Delete Holding",
-      "description": "This will permanently remove this holding from your portfolio.",
-      "impactCurrentValue": "Current value: {value}",
-      "impactPurchasePrice": "Purchase price: {price}",
-      "impactShares": "{count} shares",
-      "impactSymbol": "Symbol: {symbol}",
-      "impactTitle": "You will lose:",
-      "title": "Delete Holding"
+      "confirmLabel": "Хөрөнгө устгах",
+      "description": "Энэ нь энэ хөрөнгийг багцаас бүрмөсөн устгана.",
+      "impactCurrentValue": "Одоогийн үнэ цэнэ: {value}",
+      "impactPurchasePrice": "Худалдан авсан үнэ: {price}",
+      "impactShares": "{count} хувьцаа",
+      "impactSymbol": "Тэмдэг: {symbol}",
+      "impactTitle": "Та алдах зүйлс:",
+      "title": "Хөрөнгө устгах"
     },
-    "cost": "Cost",
-    "deleteAccount": "Delete account",
-    "deleteHolding": "Delete holding",
-    "editAccount": "Edit account",
-    "editHolding": "Edit holding",
+    "cost": "Зардал",
+    "deleteAccount": "Данс устгах",
+    "deleteHolding": "Хөрөнгө устгах",
+    "editAccount": "Данс засах",
+    "editHolding": "Хөрөнгө засах",
     "errors": {
-      "failedToLoadPrices": "Failed to load market prices. Using purchase prices.",
-      "partialPriceFetch": "Fetched {fetched}/{total} prices. Using purchase prices for missing data.",
-      "unableToFetchPrices": "Unable to fetch market prices. Using purchase prices."
+      "failedToLoadPrices": "Зах зээлийн үнэ ачаалж чадсангүй. Худалдан авах үнийг ашиглаж байна.",
+      "partialPriceFetch": "{fetched}/{total} үнэ авсан. Дутуу мэдээллийг худалдан авах үнээр ашиглаж байна.",
+      "unableToFetchPrices": "Зах зээлийн үнэ авах боломжгүй. Худалдан авах үнийг ашиглаж байна."
     },
-    "gainLoss": "Gain/Loss",
-    "hideDetails": "Hide Details",
-    "holdingsCount": "{count, plural, one {# holding} other {# holdings}}",
-    "loading": "Loading investments...",
-    "marketDataNotice": "Market Data Notice",
-    "noHoldings": "No holdings in this account yet.",
-    "portfolioAnalysis": "Portfolio Analysis",
-    "portfolioAnalysisSubtitle": "Visual breakdown of your investments",
-    "pricesUpdated": "Market prices updated {time}",
-    "refresh": "Refresh",
-    "refreshPrices": "Refresh Prices",
-    "refreshPricesTitle": "Refresh market prices",
-    "return": "Return",
-    "showDetails": "Show Details",
-    "subtitle": "Track your RRSP, TFSA, and investment accounts",
+    "gainLoss": "Ашиг/Алдагдал",
+    "hideDetails": "Дэлгэрэнгүйг нуух",
+    "holdingsCount": "{count, plural, one {# хөрөнгө} other {# хөрөнгө}}",
+    "loading": "Хөрөнгө оруулалт ачааллаж байна...",
+    "marketDataNotice": "Зах зээлийн мэдээллийн мэдэгдэл",
+    "noHoldings": "Энэ дансанд хөрөнгө алга.",
+    "portfolioAnalysis": "Багцын шинжилгээ",
+    "portfolioAnalysisSubtitle": "Хөрөнгө оруулалтын дүрслэн задаргаа",
+    "pricesUpdated": "Зах зээлийн үнэ {time}-д шинэчлэгдсэн",
+    "refresh": "Шинэчлэх",
+    "refreshPrices": "Үнэ шинэчлэх",
+    "refreshPricesTitle": "Зах зээлийн үнэ шинэчлэх",
+    "return": "Өгөөж",
+    "showDetails": "Дэлгэрэнгүйг харуулах",
+    "subtitle": "RRSP, TFSA, хөрөнгө оруулалтын дансыг хяна",
     "table": {
-      "actions": "Actions",
-      "currentPrice": "Current Price",
-      "gainLoss": "Gain/Loss",
-      "purchasePrice": "Purchase Price",
-      "shares": "Shares",
-      "symbol": "Symbol",
-      "value": "Value"
+      "actions": "Үйлдэл",
+      "currentPrice": "Одоогийн үнэ",
+      "gainLoss": "Ашиг/Алдагдал",
+      "purchasePrice": "Худалдан авсан үнэ",
+      "shares": "Хувьцаа",
+      "symbol": "Тэмдэг",
+      "value": "Үнэ цэнэ"
     },
-    "title": "Investment Portfolio",
+    "title": "Хөрөнгө оруулалтын багц",
     "toasts": {
-      "accountDeleted": "Investment account deleted successfully",
-      "failedDeleteAccount": "Failed to delete account",
-      "failedDeleteHolding": "Failed to delete holding",
-      "holdingDeleted": "Holding deleted successfully"
+      "accountDeleted": "Хөрөнгө оруулалтын данс устгагдлаа",
+      "failedDeleteAccount": "Данс устгаж чадсангүй",
+      "failedDeleteHolding": "Хөрөнгө устгаж чадсангүй",
+      "holdingDeleted": "Хөрөнгө устгагдлаа"
     },
-    "totalCost": "Total Cost",
-    "totalValue": "Total Value",
-    "value": "Value"
+    "totalCost": "Нийт зардал",
+    "totalValue": "Нийт үнэ цэнэ",
+    "value": "Үнэ цэнэ"
   },
   "lanSync": {
-    "description": "Sync your budget data across devices on your local network",
+    "description": "Төсвийн мэдээллийг локал сүлжээгээр төхөөрөмжүүд хооронд синхрончлох",
     "device": {
-      "connect": "Connect",
-      "connected": "Connected",
-      "disconnect": "Disconnect",
-      "removeDevice": "Remove Device",
-      "sync": "Sync",
-      "syncing": "Syncing..."
+      "connect": "Холбох",
+      "connected": "Холбогдсон",
+      "disconnect": "Салгах",
+      "removeDevice": "Төхөөрөмж устгах",
+      "sync": "Синх",
+      "syncing": "Синхрончлож байна..."
     },
-    "disabled": "Disabled",
-    "enabled": "Enabled",
+    "disabled": "Идэвхгүй",
+    "enabled": "Идэвхтэй",
     "howItWorks": {
       "step1": {
-        "description": "Scan a QR code or enter connection details to pair devices on the same network",
-        "title": "Pair Devices"
+        "description": "Нэг сүлжээнд байгаа төхөөрөмжүүдийг QR код уншуулах эсвэл холболтын мэдээлэл оруулж хослуулна",
+        "title": "Төхөөрөмж хослуулах"
       },
       "step2": {
-        "description": "Data is encrypted end-to-end and syncs directly between devices - no cloud required",
-        "title": "Sync Securely"
+        "description": "Мэдээлэл нь төгсгөлөөс төгсгөл шифрлэгдэж, төхөөрөмжүүд хооронд шууд синхрончлогдоно - үүл шаардлагагүй",
+        "title": "Аюулгүй синхрончлох"
       },
       "step3": {
-        "description": "Changes sync automatically when devices are connected on the same network",
-        "title": "Automatic Updates"
+        "description": "Нэг сүлжээнд холбогдсон үед өөрчлөлтүүд автоматаар синхрончлогдоно",
+        "title": "Автомат шинэчлэлт"
       },
-      "title": "How LAN Sync Works"
+      "title": "LAN синх хэрхэн ажилладаг"
     },
     "pairedDevices": {
-      "addDevice": "Add Device",
-      "addFirstDevice": "Add Your First Device",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
-      "emptyDescription": "Pair a device to start syncing your budget data",
-      "emptyTitle": "No devices paired",
-      "noDevices": "No devices paired yet",
-      "title": "Paired Devices"
+      "addDevice": "Төхөөрөмж нэмэх",
+      "addFirstDevice": "Анхны төхөөрөмжөө нэмэх",
+      "deviceCount": "{count, plural, =1 {1 төхөөрөмж хослуулсан} other {# төхөөрөмж хослуулсан}}",
+      "emptyDescription": "Төсвийн мэдээллээ синхлөхийн тулд төхөөрөмж хослуулна уу",
+      "emptyTitle": "Хослуулсан төхөөрөмж алга",
+      "noDevices": "Хослуулсан төхөөрөмж алга",
+      "title": "Хослуулсан төхөөрөмжүүд"
     },
     "removeDialog": {
-      "cancel": "Cancel",
-      "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
-      "remove": "Remove",
-      "title": "Remove Device"
+      "cancel": "Цуцлах",
+      "description": "\"{deviceName}\"-г устгахдаа итгэлтэй байна уу? Энэ нь төхөөрөмжийг салгах бөгөөд мэдээлэл синхлөхийн тулд дахин хослуулах шаардлагатай.",
+      "remove": "Устгах",
+      "title": "Төхөөрөмж устгах"
     },
-    "syncAll": "Sync All",
+    "syncAll": "Бүгдийг синхлөх",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
-      "justNow": "Just now",
-      "lastSync": "Last sync: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
-      "neverSynced": "Never synced"
+      "daysAgo": "{count, plural, =1 {1 өдрийн өмнө} other {# өдрийн өмнө}}",
+      "hoursAgo": "{count, plural, =1 {1 цагийн өмнө} other {# цагийн өмнө}}",
+      "justNow": "Саяхан",
+      "lastSync": "Сүүлийн синх: {time}",
+      "minutesAgo": "{count, plural, =1 {1 минутын өмнө} other {# минутын өмнө}}",
+      "neverSynced": "Хэзээ ч синхлөөгүй"
     },
-    "title": "LAN Sync"
+    "title": "LAN синх"
   },
   "landing": {
     "accessibility": {
@@ -3322,33 +3322,33 @@
     }
   },
   "onboardingPage": {
-    "back": "Back",
-    "getStarted": "Get Started",
-    "next": "Next",
-    "saving": "Saving...",
-    "stepCounter": "Step {current} of {total}",
+    "back": "Буцах",
+    "getStarted": "Эхэлцгээе",
+    "next": "Дараагийн",
+    "saving": "Хадгалж байна...",
+    "stepCounter": "{total} алхмын {current}",
     "steps": {
       "complete": {
-        "content": "Your profile is ready. Let's go to your dashboard.",
-        "description": "Ready to start budgeting?",
-        "title": "You're All Set!"
+        "content": "Таны профайл бэлэн боллоо. Хянах самбар руу явцгаая.",
+        "description": "Төсөвлөж эхлэхэд бэлэн үү?",
+        "title": "Бүгд бэлэн!"
       },
       "currency": {
-        "description": "Select your primary currency.",
-        "note": "You can add accounts in other currencies later.",
-        "title": "Currency & Region"
+        "description": "Үндсэн валютаа сонгоно уу.",
+        "note": "Дараа нь өөр валюттай данс нэмж болно.",
+        "title": "Валют & Бүс нутаг"
       },
       "profile": {
-        "description": "What should we call you?",
-        "nameLabel": "Your Name",
-        "namePlaceholder": "e.g. Alex",
-        "privacyNote": "This name will be used for your local profile. Your data stays on your device.",
-        "title": "Create Your Profile"
+        "description": "Таныг юу гэж дуудах вэ?",
+        "nameLabel": "Таны нэр",
+        "namePlaceholder": "жнь., Алекс",
+        "privacyNote": "Энэ нэр таны локал профайлд ашиглагдана. Мэдээлэл таны төхөөрөмжид хадгалагдана.",
+        "title": "Профайл үүсгэх"
       },
       "welcome": {
-        "content": "We'll help you set up your profile, choose your currency, and get ready to track your spending.",
-        "description": "Let's get your finances organized in minutes.",
-        "title": "Welcome to Budget App"
+        "content": "Бид танд профайл тохируулж, валют сонгож, зарцуулалтаа хянаж эхлэхэд тусална.",
+        "description": "Санхүүгээ минутын дотор эмхлэцгээе.",
+        "title": "Төсвийн аппд тавтай морил"
       }
     },
     "welcome": {
@@ -3398,20 +3398,20 @@
     }
   },
   "overspendingAlerts": {
-    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
-    "percentOfBudget": "{percent}% of budget",
+    "exceededWarning": "Энэ хурдаар явбал энэ сард төсвөө {amount}-аар хэтрэх болно.",
+    "percentOfBudget": "Төсвийн {percent}%",
     "progress": {
-      "label": "Current progress"
+      "label": "Одоогийн явц"
     },
     "stats": {
-      "budget": "Budget",
-      "daysLeft": "Days Left",
-      "projectedTotal": "Projected Total",
-      "spentSoFar": "Spent So Far"
+      "budget": "Төсөв",
+      "daysLeft": "Үлдсэн хоног",
+      "projectedTotal": "Таамагласан нийт",
+      "spentSoFar": "Одоогоор зарцуулсан"
     },
     "tip": {
-      "label": "Tip:",
-      "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
+      "label": "Зөвлөмж:",
+      "reduceSpending": "Төсвийнхөө хүрээнд үлдэхийн тулд өдрийн зарцуулалтаа {amount} болгож бууруулна уу."
     }
   },
   "pairingDialog": {
@@ -3906,31 +3906,31 @@
   },
   "quickCategorize": {
     "buttons": {
-      "apply": "Apply Category",
-      "cancel": "Cancel",
-      "save": "Save"
+      "apply": "Ангилал хэрэглэх",
+      "cancel": "Цуцлах",
+      "save": "Хадгалах"
     },
-    "clickToSelect": "Click a category to select",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
-    "general": "General",
-    "noResults": "No categories found",
-    "pressEnter": "Press ↵ Enter",
-    "saving": "Saving...",
-    "searchPlaceholder": "Search categories...",
-    "title": "Quick Categorize"
+    "clickToSelect": "Сонгохын тулд ангилал дарна уу",
+    "description": "{count, plural, =1 {энэ гүйлгээнд} other {# гүйлгээнд}} ангилал сонгоно уу",
+    "general": "Ерөнхий",
+    "noResults": "Ангилал олдсонгүй",
+    "pressEnter": "↵ Enter дарна уу",
+    "saving": "Хадгалж байна...",
+    "searchPlaceholder": "Ангилал хайх...",
+    "title": "Түргэн ангилал"
   },
   "quickFilters": {
-    "all": "All",
-    "categories": "Categories",
-    "clearFilters": "Clear Filters",
-    "moreCategories": "+{count} more",
+    "all": "Бүгд",
+    "categories": "Ангилал",
+    "clearFilters": "Шүүлтүүр цэвэрлэх",
+    "moreCategories": "+{count} дэлгэрэнгүй",
     "presets": {
-      "last30": "Last 30 Days",
-      "last90": "Last 90 Days",
-      "thisMonth": "This Month",
-      "thisYear": "This Year"
+      "last30": "Сүүлийн 30 хоног",
+      "last90": "Сүүлийн 90 хоног",
+      "thisMonth": "Энэ сар",
+      "thisYear": "Энэ жил"
     },
-    "timePeriod": "Time Period"
+    "timePeriod": "Хугацаа"
   },
   "quickStats": {
     "balance": "Нийт үлдэгдэл",
@@ -3940,79 +3940,79 @@
     "savingsRateDescription": "Энэ сард хуримтлуулсан орлогын хувь"
   },
   "receiptThumbnail": {
-    "close": "Close",
-    "deleteConfirm": "Delete receipt \"{filename}\"?",
-    "deleteFailed": "Failed to delete receipt",
-    "deleteReceipt": "Delete receipt",
-    "downloadPdf": "Download PDF",
+    "close": "Хаах",
+    "deleteConfirm": "\"{filename}\" баримтыг устгах уу?",
+    "deleteFailed": "Баримт устгаж чадсангүй",
+    "deleteReceipt": "Баримт устгах",
+    "downloadPdf": "PDF татах",
     "fileSize": "{size} KB",
-    "pdfReceipt": "PDF Receipt",
-    "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
-    "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}",
+    "pdfReceipt": "PDF баримт",
+    "receiptCount": "{count, plural, =1 {1 баримт} other {# баримт}}",
+    "unsupportedFileType": "Дэмжигдээгүй файлын төрөл",
+    "uploaded": "{date}-нд байршуулсан",
     "view": "Харах"
   },
   "receiptUpload": {
     "buttons": {
-      "attachReceipt": "Attach Receipt",
-      "chooseDifferent": "Choose Different",
-      "extractData": "Extract Data",
-      "extracting": "Extracting..."
+      "attachReceipt": "Баримт хавсаргах",
+      "chooseDifferent": "Өөр сонгох",
+      "extractData": "Мэдээлэл задлах",
+      "extracting": "Задлаж байна..."
     },
     "camera": {
-      "takePhoto": "Take Photo with Camera",
-      "useDevice": "Use your device camera to capture receipt"
+      "takePhoto": "Камераар зураг авах",
+      "useDevice": "Баримт авахын тулд төхөөрөмжийн камер ашиглана"
     },
-    "cameraInputLabel": "Camera capture input",
+    "cameraInputLabel": "Камерын оролт",
     "dropzone": {
-      "browseFiles": "or <link>browse files</link>",
-      "dragDrop": "Drag & drop receipt here",
-      "dropHere": "Drop the receipt here",
-      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+      "browseFiles": "эсвэл <link>файл сонгох</link>",
+      "dragDrop": "Баримтыг чирээд тавина уу",
+      "dropHere": "Баримтыг энд тавина уу",
+      "supportedFormats": "JPG, PNG, PDF дэмжинэ • Хамгийн их {size}MB"
     },
     "errors": {
-      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
-      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
-      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
-      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
-      "rejected": "File was rejected. Please try again",
-      "tooLarge": "File is too large. Maximum size is {size}MB"
+      "couldNotExtract": "Баримтаас мэдээлэл задлаж чадсангүй. Гараар оруулна уу.",
+      "extractionFailed": "Мэдээлэл задлаж чадсангүй. Дахин оролдох эсвэл гараар оруулна уу.",
+      "invalidType": "Буруу файлын төрөл. Зөвхөн JPG, PNG, PDF файл зөвшөөрөгдөнө",
+      "ocrImagesOnly": "OCR нь зөвхөн зурган файлд (JPG, PNG) дэмждэг",
+      "rejected": "Файл татгалзагдсан. Дахин оролдоно уу",
+      "tooLarge": "Файл хэт том. Хамгийн их хэмжээ {size}MB"
     },
     "extracted": {
-      "amount": "Amount:",
-      "confidence": "Confidence: {percent}%",
-      "date": "Date:",
-      "merchant": "Merchant:",
-      "title": "Data Extracted"
+      "amount": "Дүн:",
+      "confidence": "Итгэлцэл: {percent}%",
+      "date": "Огноо:",
+      "merchant": "Худалдаач:",
+      "title": "Мэдээлэл задлагдсан"
     },
     "pdf": {
-      "noPreview": "Preview not available",
-      "title": "PDF Receipt"
+      "noPreview": "Урьдчилж харах боломжгүй",
+      "title": "PDF баримт"
     },
-    "receiptPreview": "Receipt preview",
-    "removeFile": "Remove file"
+    "receiptPreview": "Баримтын урьдчилж харах",
+    "removeFile": "Файл устгах"
   },
   "recurringTransactions": {
-    "confidence": "{percent}% confidence",
-    "estimatedMonthly": "Estimated Monthly",
+    "confidence": "{percent}% итгэлцэл",
+    "estimatedMonthly": "Таамагласан сарын",
     "frequency": {
-      "biweekly": "Bi-weekly",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "biweekly": "Хоёр долоо хоног тутам",
+      "monthly": "Сар бүр",
+      "quarterly": "Улирал бүр",
+      "weekly": "Долоо хоног бүр"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
-    "next": "Next: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "inDays": "{count, plural, =0 {(өнөөдөр)} =1 {(1 хоногийн дараа)} other {(# хоногийн дараа)}}",
+    "next": "Дараагийн: {date}",
+    "occurrences": "{count, plural, =1 {1 тохиолдол илэрсэн} other {# тохиолдол илэрсэн}}",
     "perPeriod": {
-      "month": "per month",
-      "quarter": "per quarter",
-      "twoWeeks": "per 2 weeks",
-      "week": "per week"
+      "month": "сард",
+      "quarter": "улиралд",
+      "twoWeeks": "2 долоо хоногт",
+      "week": "долоо хоногт"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
-    "subtitle": "Detected subscriptions and bills",
-    "title": "Recurring Transactions"
+    "showingPatterns": "{count, plural, =1 {1 давтагдах гүйлгээний хэв маяг харуулж байна} other {# давтагдах гүйлгээний хэв маяг харуулж байна}}",
+    "subtitle": "Илрүүлсэн захиалга болон төлбөрүүд",
+    "title": "Давтагдах гүйлгээ"
   },
   "reports": {
     "addTransactionsToSeeFlow": "Мөнгөний урсгалыг харахын тулд гүйлгээ нэмнэ үү",
@@ -4142,13 +4142,13 @@
     "yourAccounts": "Таны данснууд"
   },
   "shortcutsModal": {
-    "close": "Close shortcuts help",
+    "close": "Товчлолын тусламжийг хаах",
     "proTip": {
-      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
-      "title": "💡 Pro Tip"
+      "description": "Гарын товчлол нь маягт бөглөж байхаас бусад аль ч хуудсанд ажиллана. Энэ тусламжийг харахын тулд хүссэн үедээ {key} дарна уу.",
+      "title": "💡 Зөвлөмж"
     },
-    "subtitle": "Power-user productivity tips",
-    "title": "Keyboard Shortcuts"
+    "subtitle": "Ажил хурдасгах зөвлөмж",
+    "title": "Гарын товчлол"
   },
   "sidebar": {
     "actions": {
@@ -4245,110 +4245,110 @@
   },
   "simplefinSettings": {
     "connectedAccounts": {
-      "description": "Manage your linked bank accounts",
-      "title": "Connected Accounts"
+      "description": "Холбогдсон банкны дансуудыг удирдах",
+      "title": "Холбогдсон данс"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
-      "connectButton": "Connect Bank Account",
-      "connected": "Connected",
-      "description": "Connect your bank accounts to automatically import transactions",
-      "notConnected": "Not Connected",
-      "notConnectedDesc": "Connect your bank accounts to start importing transactions",
-      "title": "SimpleFIN Connection"
+      "accountsLinked": "{count, plural, =1 {1 данс холбогдсон} other {# данс холбогдсон}}",
+      "connectButton": "Банкны данс холбох",
+      "connected": "Холбогдсон",
+      "description": "Гүйлгээг автоматаар импортлохын тулд банкны дансуудаа холбоно уу",
+      "notConnected": "Холбогдоогүй",
+      "notConnectedDesc": "Гүйлгээ импортлож эхлэхийн тулд банкны дансуудаа холбоно уу",
+      "title": "SimpleFIN холболт"
     },
     "disconnect": {
-      "button": "Disconnect",
-      "cancel": "Cancel",
-      "confirm": "Disconnect",
-      "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
-      "dialogTitle": "Disconnect SimpleFIN?"
+      "button": "Салгах",
+      "cancel": "Цуцлах",
+      "confirm": "Салгах",
+      "dialogDescription": "Энэ нь банкны дансуудын холболтыг устгана. Одоо байгаа гүйлгээ устахгүй, гэхдээ шинэ гүйлгээ автоматаар синхрончлогдохгүй.",
+      "dialogTitle": "SimpleFIN-г салгах уу?"
     },
     "help": {
-      "bridgeDashboard": "SimpleFIN Bridge Dashboard",
-      "protocolDocs": "SimpleFIN Protocol Documentation",
-      "title": "Need Help?"
+      "bridgeDashboard": "SimpleFIN Bridge хянах самбар",
+      "protocolDocs": "SimpleFIN протоколын баримт бичиг",
+      "title": "Тусламж хэрэгтэй юу?"
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
-      "lastSynced": "Last synced: {time}",
-      "lessThanHour": "Less than an hour ago",
-      "never": "Never",
-      "syncNow": "Sync Now",
-      "syncing": "Syncing..."
+      "hoursAgo": "{hours, plural, =1 {1 цагийн өмнө} other {# цагийн өмнө}}",
+      "lastSynced": "Сүүлд синхлөгдсөн: {time}",
+      "lessThanHour": "Нэг цагаас бага хугацааны өмнө",
+      "never": "Хэзээ ч",
+      "syncNow": "Одоо синхлөх",
+      "syncing": "Синхрончлож байна..."
     },
     "syncSettings": {
       "autoCategorize": {
-        "description": "Automatically categorize imported transactions using AI",
-        "label": "Auto-Categorize"
+        "description": "AI ашиглан импортлогдсон гүйлгээг автоматаар ангилах",
+        "label": "Автомат ангилах"
       },
       "autoSync": {
-        "description": "Automatically sync transactions on a schedule",
-        "label": "Automatic Sync"
+        "description": "Гүйлгээг хуваарийн дагуу автоматаар синхлөх",
+        "label": "Автомат синх"
       },
-      "description": "Configure how and when transactions are synced",
+      "description": "Гүйлгээг хэрхэн, хэзээ синхлөхийг тохируулна",
       "frequency": {
-        "every12Hours": "Every 12 hours",
-        "every2Days": "Every 2 days",
-        "every6Hours": "Every 6 hours",
-        "hint": "SimpleFIN allows up to 24 requests per day. Daily sync is recommended.",
-        "label": "Sync Frequency",
-        "onceDaily": "Once daily"
+        "every12Hours": "12 цаг тутам",
+        "every2Days": "2 хоног тутам",
+        "every6Hours": "6 цаг тутам",
+        "hint": "SimpleFIN нь өдөрт 24 хүртэл хүсэлт зөвшөөрдөг. Өдөрт нэг удаа синхлөхийг зөвлөдөг.",
+        "label": "Синхийн давтамж",
+        "onceDaily": "Өдөрт нэг удаа"
       },
       "notifications": {
-        "description": "Show notification when sync completes",
-        "label": "Sync Notifications"
+        "description": "Синх дуусахад мэдэгдэл харуулах",
+        "label": "Синхийн мэдэгдэл"
       },
       "pendingTransactions": {
-        "description": "Include transactions that haven't posted yet",
-        "label": "Import Pending Transactions"
+        "description": "Шивэгдээгүй гүйлгээг оруулах",
+        "label": "Хүлээгдэж буй гүйлгээг импортлох"
       },
-      "title": "Sync Settings",
+      "title": "Синхийн тохиргоо",
       "transactionHistory": {
-        "days": "{count} days",
-        "hint": "How many days of transaction history to fetch (max 60 days per SimpleFIN)",
-        "label": "Transaction History"
+        "days": "{count} хоног",
+        "hint": "Хэдэн хоногийн гүйлгээний түүхийг авах (SimpleFIN-ээр хамгийн их 60 хоног)",
+        "label": "Гүйлгээний түүх"
       }
     }
   },
   "simplefinStatus": {
-    "active": "Active",
-    "asOf": "as of {date}",
-    "cancel": "Cancel",
-    "connected": "Connected",
-    "connecting": "Connecting...",
-    "disconnected": "Disconnected",
-    "dismiss": "Dismiss",
-    "error": "Error",
-    "errorsLabel": "Errors:",
-    "expired": "Expired",
-    "hoursAgo": "{hours}h ago",
-    "imported": "Imported",
-    "justNow": "just now",
-    "lastSynced": "Last synced: {time}",
-    "minutesAgo": "{minutes}m ago",
-    "neverSynced": "Never synced",
-    "noBankAccounts": "No bank accounts connected",
-    "pause": "Pause",
-    "paused": "Paused",
-    "processing": "Processing: {account}",
-    "resume": "Resume",
-    "skippedDuplicates": "Skipped (duplicates)",
+    "active": "Идэвхтэй",
+    "asOf": "{date}-ны байдлаар",
+    "cancel": "Цуцлах",
+    "connected": "Холбогдсон",
+    "connecting": "Холбогдож байна...",
+    "disconnected": "Салгагдсан",
+    "dismiss": "Хаах",
+    "error": "Алдаа",
+    "errorsLabel": "Алдаанууд:",
+    "expired": "Хугацаа дууссан",
+    "hoursAgo": "{hours} цагийн өмнө",
+    "imported": "Импортлогдсон",
+    "justNow": "саяхан",
+    "lastSynced": "Сүүлд синхлөгдсөн: {time}",
+    "minutesAgo": "{minutes} минутын өмнө",
+    "neverSynced": "Хэзээ ч синхлөөгүй",
+    "noBankAccounts": "Банкны данс холбогдоогүй",
+    "pause": "Түр зогсоох",
+    "paused": "Түр зогссон",
+    "processing": "Боловсруулж байна: {account}",
+    "resume": "Үргэлжлүүлэх",
+    "skippedDuplicates": "Алгассан (давхцал)",
     "statusLabel": "SimpleFIN: {status}",
-    "sync": "Sync",
-    "syncComplete": "Sync Complete",
-    "syncCompletedWithErrors": "Sync Completed with Errors",
-    "syncFailed": "Sync Failed",
-    "syncSuccessful": "Sync Successful",
-    "syncedDaysAgo": "Synced {days}d ago",
-    "syncedHoursAgo": "Synced {hours}h ago",
-    "syncedJustNow": "Synced just now",
-    "syncedYesterday": "Synced yesterday",
-    "syncing": "Syncing...",
-    "transactionsCount": "({count} transactions)",
-    "unlink": "Unlink",
-    "warningsLabel": "Warnings:"
+    "sync": "Синх",
+    "syncComplete": "Синх дууслаа",
+    "syncCompletedWithErrors": "Синх алдаатай дууслаа",
+    "syncFailed": "Синх амжилтгүй",
+    "syncSuccessful": "Синх амжилттай",
+    "syncedDaysAgo": "{days} хоногийн өмнө синхлөгдсөн",
+    "syncedHoursAgo": "{hours} цагийн өмнө синхлөгдсөн",
+    "syncedJustNow": "Саяхан синхлөгдсөн",
+    "syncedYesterday": "Өчигдөр синхлөгдсөн",
+    "syncing": "Синхрончлож байна...",
+    "transactionsCount": "({count} гүйлгээ)",
+    "unlink": "Салгах",
+    "warningsLabel": "Анхааруулгууд:"
   },
   "spendingTrendChart": {
     "forecastFooter": "Таамаглал нь сүүлийн {months} сарын шугаман регрессид суурилсан",
@@ -4365,47 +4365,47 @@
     "title": "Зарцуулалтын чиг хандлага & Таамаглал"
   },
   "splitTransaction": {
-    "addSplit": "Add Split ({current}/{max})",
-    "amount": "Amount",
+    "addSplit": "Хуваалт нэмэх ({current}/{max})",
+    "amount": "Дүн",
     "buttons": {
-      "cancel": "Cancel",
-      "save": "Save Split",
-      "saving": "Saving..."
+      "cancel": "Цуцлах",
+      "save": "Хуваалт хадгалах",
+      "saving": "Хадгалж байна..."
     },
-    "category": "Category",
-    "closeModal": "Close modal",
-    "date": "Date:",
-    "distributeEvenly": "Distribute Evenly",
+    "category": "Ангилал",
+    "closeModal": "Цонхыг хаах",
+    "date": "Огноо:",
+    "distributeEvenly": "Тэнцүү хуваарилах",
     "errors": {
-      "saveFailed": "Failed to save split transaction"
+      "saveFailed": "Хуваалтын гүйлгээг хадгалж чадсангүй"
     },
     "help": {
-      "step1": "Enter the amount for each category (must total ${amount})",
-      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
-      "step3": "Add up to 5 splits per transaction",
-      "step4": "The original transaction will be hidden and replaced with split items",
-      "title": "How to split transactions:"
+      "step1": "Ангилал бүрийн дүнг оруулна уу (нийтдээ ${amount} байх ёстой)",
+      "step2": "Бүх ангилалд тэнцүү хуваахын тулд \"Тэнцүү хуваарилах\"-ыг ашиглана уу",
+      "step3": "Гүйлгээ тус бүрд 5 хүртэл хуваалт нэмж болно",
+      "step4": "Анхны гүйлгээ нуугдаж, хуваалтууд нь орлоно",
+      "title": "Гүйлгээ хэрхэн хуваах:"
     },
-    "maxSplitsReached": "Maximum 5 splits allowed",
-    "minSplitsRequired": "Minimum 2 splits required",
-    "none": "None",
-    "notes": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Business expense, Personal use",
-    "originalAmount": "Original Amount:",
-    "removeThisSplit": "Remove this split",
-    "selectCategory": "Select category...",
-    "splitsCount": "Splits ({current}/{max})",
-    "subcategory": "Subcategory",
-    "title": "Split Transaction",
+    "maxSplitsReached": "Хамгийн ихдээ 5 хуваалт зөвшөөрөгдөнө",
+    "minSplitsRequired": "Дор хаяж 2 хуваалт шаардлагатай",
+    "none": "Алга",
+    "notes": "Тэмдэглэл (Нэмэлт)",
+    "notesPlaceholder": "жнь., Бизнесийн зардал, Хувийн хэрэглээ",
+    "originalAmount": "Анхны дүн:",
+    "removeThisSplit": "Энэ хуваалтыг устгах",
+    "selectCategory": "Ангилал сонгох...",
+    "splitsCount": "Хуваалт ({current}/{max})",
+    "subcategory": "Дэд ангилал",
+    "title": "Гүйлгээ хуваах",
     "validation": {
-      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
-      "amountsMustMatch": "Split amounts must equal the original transaction amount",
-      "categoryRequired": "All splits must have a category",
-      "matchesOriginal": "✓ Matches original",
-      "overBy": "Over by ${amount}",
-      "readyToSave": "Split amounts match the original transaction. Ready to save!",
-      "total": "Total:",
-      "underBy": "Under by ${amount}"
+      "adjustAmounts": "Хуваалтын дүнг анхны гүйлгээний дүнтэй тааруулна уу.",
+      "amountsMustMatch": "Хуваалтын дүн нь анхны гүйлгээний дүнтэй тэнцэх ёстой",
+      "categoryRequired": "Бүх хуваалтад ангилал байх ёстой",
+      "matchesOriginal": "✓ Анхнытай таарч байна",
+      "overBy": "${amount}-аар хэтэрсэн",
+      "readyToSave": "Хуваалтын дүн анхны гүйлгээтэй таарч байна. Хадгалахад бэлэн!",
+      "total": "Нийт:",
+      "underBy": "${amount}-аар дутуу"
     }
   },
   "splits": {
@@ -4494,68 +4494,68 @@
   },
   "subscriptionCard": {
     "badges": {
-      "aiVerified": "AI Verified",
-      "cancelled": "Cancelled",
-      "paused": "Paused",
-      "trial": "Trial"
+      "aiVerified": "AI баталгаажуулсан",
+      "cancelled": "Цуцалсан",
+      "paused": "Түр зогссон",
+      "trial": "Туршилт"
     },
     "buttons": {
-      "claimManage": "Claim & Manage",
-      "edit": "Edit",
-      "transactions": "Transactions"
+      "claimManage": "Нэхэмж & Удирдах",
+      "edit": "Засах",
+      "transactions": "Гүйлгээ"
     },
     "confidence": {
-      "high": "High",
-      "label": "Detection Confidence",
-      "low": "Low",
-      "medium": "Medium"
+      "high": "Өндөр",
+      "label": "Илрүүлэлтийн итгэлцэл",
+      "low": "Бага",
+      "medium": "Дунд"
     },
     "details": {
-      "charges": "{count} charges",
-      "daysBefore": "{count} days before",
-      "firstCharge": "First Charge",
-      "lastCharge": "Last Charge",
-      "occurrences": "Occurrences",
-      "payment": "Payment",
-      "reminder": "Reminder"
+      "charges": "{count} төлбөр",
+      "daysBefore": "{count} хоногийн өмнө",
+      "firstCharge": "Анхны төлбөр",
+      "lastCharge": "Сүүлийн төлбөр",
+      "occurrences": "Тохиолдлууд",
+      "payment": "Төлбөр",
+      "reminder": "Сануулга"
     },
     "interval": {
-      "annual": "Annual",
-      "bi-weekly": "Bi-weekly",
-      "irregular": "Irregular",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "annual": "Жил бүр",
+      "bi-weekly": "Хоёр долоо хоног тутам",
+      "irregular": "Тогтмол бус",
+      "monthly": "Сар бүр",
+      "quarterly": "Улирал бүр",
+      "weekly": "Долоо хоног бүр"
     },
-    "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
+    "lowConfidenceWarning": "Энэ захиалга бага итгэлцэлтэй илрүүлэгдсэн. Шалгаж, гараар удирдахын тулд нэхэмжилнэ үү.",
     "menu": {
-      "cancelSubscription": "Cancel Subscription",
-      "claimManage": "Claim & Manage",
-      "delete": "Delete",
-      "edit": "Edit",
-      "notSubscription": "Not a Subscription",
-      "pause": "Pause",
-      "resume": "Resume",
-      "viewTransactions": "View Transactions"
+      "cancelSubscription": "Захиалга цуцлах",
+      "claimManage": "Нэхэмж & Удирдах",
+      "delete": "Устгах",
+      "edit": "Засах",
+      "notSubscription": "Захиалга биш",
+      "pause": "Түр зогсоох",
+      "resume": "Үргэлжлүүлэх",
+      "viewTransactions": "Гүйлгээг харах"
     },
     "source": {
-      "auto-detected": "Auto-detected",
-      "manual": "Manual",
-      "merged": "Tracked"
+      "auto-detected": "Автомат илрүүлсэн",
+      "manual": "Гар",
+      "merged": "Хянагдаж байна"
     },
     "stats": {
-      "amount": "Amount",
-      "annualCost": "Annual Cost",
-      "frequency": "Frequency",
-      "nextCharge": "Next Charge",
-      "totalSpent": "Total Spent"
+      "amount": "Дүн",
+      "annualCost": "Жилийн зардал",
+      "frequency": "Давтамж",
+      "nextCharge": "Дараагийн төлбөр",
+      "totalSpent": "Нийт зарцуулсан"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {Туршилтаас 1 хоног үлдсэн} other {Туршилтаас # хоног үлдсэн}}"
     },
     "reminderToggle": {
-      "disableReminder": "Сануулга унтраах",
-      "enableReminder": "Сануулга асаах",
+      "disableReminder": "Сануулга идэвхгүй болгох",
+      "enableReminder": "Сануулга идэвхжүүлэх",
       "off": "Унтраасан"
     }
   },
@@ -4644,55 +4644,55 @@
     "websiteUrlLabel": "Website / Login URL"
   },
   "subscriptions": {
-    "addSubscription": "Add Subscription",
-    "allCategories": "All Categories",
-    "clearFilters": "Clear filters",
-    "deleteConfirmDescription": "Are you sure you want to delete this subscription? This action cannot be undone.",
-    "deleteConfirmLabel": "Delete",
-    "deleteConfirmTitle": "Delete Subscription",
-    "deleteError": "Failed to delete subscription",
-    "dismissError": "Failed to dismiss subscription",
+    "addSubscription": "Захиалга нэмэх",
+    "allCategories": "Бүх ангилал",
+    "clearFilters": "Шүүлтүүр цэвэрлэх",
+    "deleteConfirmDescription": "Энэ захиалгыг устгахдаа итгэлтэй байна уу? Энэ үйлдлийг буцаах боломжгүй.",
+    "deleteConfirmLabel": "Устгах",
+    "deleteConfirmTitle": "Захиалга устгах",
+    "deleteError": "Захиалга устгаж чадсангүй",
+    "dismissError": "Захиалга хаалгалж чадсангүй",
     "empty": {
-      "noMatching": "No matching subscriptions",
-      "noMatchingDescription": "Try adjusting your filters or search query.",
-      "noSubscriptions": "No subscriptions yet",
-      "noSubscriptionsDescription": "Add your subscriptions manually or import transactions to auto-detect recurring payments."
+      "noMatching": "Тохирох захиалга алга",
+      "noMatchingDescription": "Шүүлтүүр эсвэл хайлтаа тохируулж оролдоорой.",
+      "noSubscriptions": "Захиалга байхгүй",
+      "noSubscriptionsDescription": "Захиалгаа гараар нэмэх эсвэл давтагдах төлбөрийг автоматаар илрүүлэхийн тулд гүйлгээ импортлоорой."
     },
     "help": {
-      "description": "Manual: Add subscriptions you want to track precisely. Auto-detected: We analyze your transactions to find recurring patterns. Claim auto-detected subscriptions to manage them manually with reminders and more control.",
-      "title": "Smart Subscription Management"
+      "description": "Гар: Нарийвчилсан хянахыг хүссэн захиалгаа нэмнэ үү. Автомат илрүүлсэн: Гүйлгээгээр давтагдах хэв маягийг олно. Автомат илрүүлсэн захиалгыг нэхэмжилж, сануулга болон нэмэлт хяналттайгаар гараар удирдна.",
+      "title": "Ухаалаг захиалгын удирдлага"
     },
-    "importTransactions": "Import Transactions",
-    "loading": "Loading subscriptions...",
-    "refreshAutoDetection": "Refresh auto-detection",
-    "saveError": "Failed to save subscription",
-    "searchPlaceholder": "Search subscriptions...",
+    "importTransactions": "Гүйлгээ импортлох",
+    "loading": "Захиалга ачааллаж байна...",
+    "refreshAutoDetection": "Автомат илрүүлэлтийг шинэчлэх",
+    "saveError": "Захиалга хадгалж чадсангүй",
+    "searchPlaceholder": "Захиалга хайх...",
     "sort": {
-      "amount": "Amount",
-      "ascending": "Sort ascending",
-      "dateAdded": "Date Added",
-      "descending": "Sort descending",
-      "name": "Name",
-      "nextBilling": "Next Billing"
+      "amount": "Дүн",
+      "ascending": "Өсөхөөр эрэмбэлэх",
+      "dateAdded": "Нэмсэн огноо",
+      "descending": "Буурахаар эрэмбэлэх",
+      "name": "Нэр",
+      "nextBilling": "Дараагийн төлбөр"
     },
     "stats": {
-      "active": "Active",
-      "annual": "Annual",
-      "estimatedCost": "Estimated cost",
-      "inactive": "{count} inactive",
-      "monthly": "Monthly",
-      "next7Days": "Next 7 Days",
-      "projectedSpend": "Projected spend",
-      "upcomingCharges": "Upcoming charges"
+      "active": "Идэвхтэй",
+      "annual": "Жилийн",
+      "estimatedCost": "Тооцоолсон зардал",
+      "inactive": "{count} идэвхгүй",
+      "monthly": "Сарын",
+      "next7Days": "Дараагийн 7 хоног",
+      "projectedSpend": "Таамагласан зарцуулалт",
+      "upcomingCharges": "Удахгүй ирэх төлбөр"
     },
-    "subtitle": "Manage your recurring payments and subscriptions",
-    "title": "Subscriptions",
+    "subtitle": "Давтагдах төлбөр болон захиалгаа удирдах",
+    "title": "Захиалга",
     "viewMode": {
-      "active": "Active",
-      "all": "All",
-      "analysis": "Analysis",
-      "detected": "Detected",
-      "manual": "Manual"
+      "active": "Идэвхтэй",
+      "all": "Бүгд",
+      "analysis": "Шинжилгээ",
+      "detected": "Илрүүлсэн",
+      "manual": "Гар"
     }
   },
   "syncStatus": {
@@ -4872,19 +4872,19 @@
   },
   "transactionTable": {
     "actions": {
-      "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
-      "split": "Split"
+      "attachReceipt": "Баримт хавсаргах",
+      "delete": "Устгах",
+      "edit": "Засах",
+      "split": "Хуваах"
     },
-    "emptyState": "No transactions to display",
+    "emptyState": "Харуулах гүйлгээ алга",
     "headers": {
-      "account": "Account",
-      "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
-      "date": "Date",
-      "description": "Description"
+      "account": "Данс",
+      "actions": "Үйлдэл",
+      "amount": "Дүн",
+      "category": "Ангилал",
+      "date": "Огноо",
+      "description": "Тайлбар"
     }
   },
   "transactions": {
@@ -4987,67 +4987,67 @@
     "youWillLose": "Та алдах зүйл:"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
-    "daysRemaining": "{count} days remaining in your free trial",
-    "dismiss": "Dismiss",
-    "expired": "Your trial has expired",
-    "expiredDescription": "App is in read-only mode. Upgrade to continue managing your finances.",
-    "upgrade": "Upgrade - {price}",
-    "upgradeNow": "Upgrade Now - {price}",
-    "upgradePrompt": "Upgrade now to keep full access to your budget data.",
-    "viewPricing": "View pricing"
+    "daysLeft": "{count, plural, =0 {Таны туршилт өнөөдөр дуусна!} =1 {Туршилтаас зөвхөн 1 хоног үлдлээ} other {Туршилтаас # хоног үлдлээ}}",
+    "daysRemaining": "Үнэгүй туршилтаас {count} хоног үлдсэн",
+    "dismiss": "Хаах",
+    "expired": "Таны туршилтын хугацаа дууслаа",
+    "expiredDescription": "Апп зөвхөн уншихад зориулсан горимд байна. Санхүүгээ удирдахын тулд шинэчилнэ үү.",
+    "upgrade": "Шинэчлэх - {price}",
+    "upgradeNow": "Одоо шинэчлэх - {price}",
+    "upgradePrompt": "Төсвийн мэдээлэлдээ бүрэн хандалтыг хадгалахын тулд одоо шинэчилнэ үү.",
+    "viewPricing": "Үнийг харах"
   },
   "validationWarnings": {
-    "aiAnalysis": "AI Analysis:",
-    "amount": "Amount:",
-    "cancelImport": "Cancel Import",
-    "closeModal": "Close modal",
-    "confidence": "{percent}% confidence",
-    "continueWithAll": "Continue with All",
-    "criticalIssues": "Critical Issues",
-    "date": "Date:",
-    "description": "Description:",
-    "hideDetails": "Hide Transaction Details",
-    "ignoreAllContinue": "Ignore All & Continue",
-    "informational": "Informational",
-    "issuesDetected": "Issues Detected",
-    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
-    "marked": "Marked",
-    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
-    "remove": "Remove",
-    "removeAndContinue": "Remove {count} & Continue",
-    "suggestion": "Suggestion:",
-    "title": "Transaction Validation Results",
-    "transactionNumber": "Transaction #{number}",
-    "viewDetails": "View Transaction Details",
-    "warnings": "Warnings"
+    "aiAnalysis": "AI шинжилгээ:",
+    "amount": "Дүн:",
+    "cancelImport": "Импорт цуцлах",
+    "closeModal": "Цонхыг хаах",
+    "confidence": "{percent}% итгэлцэл",
+    "continueWithAll": "Бүгдтэй үргэлжлүүлэх",
+    "criticalIssues": "Ноцтой асуудлууд",
+    "date": "Огноо:",
+    "description": "Тайлбар:",
+    "hideDetails": "Гүйлгээний дэлгэрэнгүйг нуух",
+    "ignoreAllContinue": "Бүгдийг алгасаж үргэлжлүүлэх",
+    "informational": "Мэдээллийн",
+    "issuesDetected": "Илэрсэн асуудлууд",
+    "issuesFound": "Таны анхаарал хэрэгтэй {count, plural, =1 {1 асуудал} other {# асуудал}} олдлоо",
+    "marked": "Тэмдэглэгдсэн",
+    "removalNote": "{count, plural, =1 {1 гүйлгээ} other {# гүйлгээ}} импортоос устгагдана.",
+    "remove": "Устгах",
+    "removeAndContinue": "{count} устгаж үргэлжлүүлэх",
+    "suggestion": "Зөвлөмж:",
+    "title": "Гүйлгээний шалгалтын үр дүн",
+    "transactionNumber": "Гүйлгээ #{number}",
+    "viewDetails": "Гүйлгээний дэлгэрэнгүйг харах",
+    "warnings": "Анхааруулгууд"
   },
   "vaultSetup": {
-    "aes256Description": "Your data is encrypted with AES-256 encryption",
-    "aes256Encryption": "AES-256 Encryption",
-    "automaticDescription": "Your device creates a unique encryption key automatically. No password to remember - your data is protected seamlessly.",
-    "automaticProtection": "Automatic Protection",
-    "bankGradeSecurity": "Bank-Grade Security",
-    "chooseProtection": "Choose how you want to protect your data:",
-    "confirmPassword": "Confirm Password",
-    "confirmYourPassword": "Confirm your password",
-    "enableEncryption": "Enable Encryption",
-    "enterStrongPassword": "Enter a strong password",
-    "important": "Important",
-    "masterPassword": "Master Password",
-    "passwordDescription": "Create a master password to encrypt your vault. More secure if you share this device with others.",
-    "passwordProtection": "Password Protection",
-    "passwordWarning": "If you forget this password, your data cannot be recovered. We cannot reset it for you.",
-    "passwordsDoNotMatch": "Passwords do not match",
-    "recommended": "Recommended",
-    "settingUp": "Setting Up...",
-    "setupError": "Failed to set up vault. Please try again.",
-    "strengthFair": "Fair",
-    "strengthStrong": "Strong",
-    "strengthVeryStrong": "Very Strong",
-    "strengthVeryWeak": "Very Weak",
-    "strengthWeak": "Weak",
-    "zeroKnowledge": "Zero Knowledge"
+    "aes256Description": "Таны мэдээлэл AES-256 шифрлэлтээр хамгаалагдсан",
+    "aes256Encryption": "AES-256 шифрлэлт",
+    "automaticDescription": "Таны төхөөрөмж өвөрмөц шифрлэлтийн түлхүүр автоматаар үүсгэдэг. Нууц үг санах шаардлагагүй - мэдээлэл чинь саадгүй хамгаалагдана.",
+    "automaticProtection": "Автомат хамгаалалт",
+    "bankGradeSecurity": "Банкны зэрэглэлийн аюулгүй байдал",
+    "chooseProtection": "Мэдээллээ хэрхэн хамгаалахыг сонгоно уу:",
+    "confirmPassword": "Нууц үг баталгаажуулах",
+    "confirmYourPassword": "Нууц үгээ баталгаажуулна уу",
+    "enableEncryption": "Шифрлэлт идэвхжүүлэх",
+    "enterStrongPassword": "Хүчтэй нууц үг оруулна уу",
+    "important": "Чухал",
+    "masterPassword": "Мастер нууц үг",
+    "passwordDescription": "Мөрдөн хамгаалах мастер нууц үг үүсгэнэ. Энэ төхөөрөмжийг бусадтай хуваалцвал илүү аюулгүй.",
+    "passwordProtection": "Нууц үгийн хамгаалалт",
+    "passwordWarning": "Энэ нууц үгийг мартвал мэдээллийг сэргээх боломжгүй. Бид дахин тохируулах боломжгүй.",
+    "passwordsDoNotMatch": "Нууц үг таарахгүй байна",
+    "recommended": "Зөвлөдөг",
+    "settingUp": "Тохируулж байна...",
+    "setupError": "Хамгаалалт тохируулж чадсангүй. Дахин оролдоно уу.",
+    "strengthFair": "Дундаж",
+    "strengthStrong": "Хүчтэй",
+    "strengthVeryStrong": "Маш хүчтэй",
+    "strengthVeryWeak": "Маш сул",
+    "strengthWeak": "Сул",
+    "zeroKnowledge": "Тэг мэдлэг"
   },
   "welcome": {
     "subtitle": "Эхлээд анхны гүйлгээгээ нэмэх эсвэл банкнаас мэдээлэл импортлоорой",
