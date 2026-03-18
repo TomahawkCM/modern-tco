@@ -1506,7 +1506,7 @@
         "remaining": "మిగిలినది",
         "spent": "ఖర్చు చేసినది",
         "title": "బడ్జెట్ పురోగతి",
-        "viewAll": "View All Budgets"
+        "viewAll": "అన్ని బడ్జెట్లను చూడండి"
       },
       "eventBudget": {
         "noEvents": "No active events",
@@ -1929,7 +1929,7 @@
     },
     "transactions": {
       "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
-      "heading": "No Transactions Yet",
+      "heading": "TEST",
       "primaryCta": "Add Transaction",
       "secondaryCta": "Import CSV"
     }
