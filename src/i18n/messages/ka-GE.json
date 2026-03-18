@@ -1,65 +1,65 @@
 {
   "accessibilitySettings": {
     "fontSize": {
-      "default": "Default",
-      "description": "Adjust the base text size for better readability",
-      "extraLarge": "Extra Large",
-      "large": "Large",
-      "title": "Font Size"
+      "default": "ნაგულისხმევი",
+      "description": "ტექსტის ბაზური ზომის მორგება უკეთესი წაკითხვადობისთვის",
+      "extraLarge": "ძალიან დიდი",
+      "large": "დიდი",
+      "title": "შრიფტის ზომა"
     },
     "infoBox": {
-      "savedAutomatically": "Settings are saved automatically and persist across sessions",
-      "seniorsOptimization": "Seniors Mode provides one-click accessibility optimization",
-      "storedLocally": "Your preferences are stored locally and never sent to servers",
-      "syncAcrossTabs": "Changes sync across all open tabs in real-time",
-      "title": "About Accessibility Settings"
+      "savedAutomatically": "პარამეტრები ავტომატურად ინახება და სესიებს შორის შენარჩუნდება",
+      "seniorsOptimization": "უფროსთა რეჟიმი ერთი დაწკაპუნებით უზრუნველყოფს ხელმისაწვდომობის ოპტიმიზაციას",
+      "storedLocally": "თქვენი პარამეტრები ლოკალურად ინახება და არასდროს იგზავნება სერვერებზე",
+      "syncAcrossTabs": "ცვლილებები რეალურ დროში სინქრონიზდება ყველა ღია ჩანართში",
+      "title": "ხელმისაწვდომობის პარამეტრების შესახებ"
     },
     "presets": {
-      "full": "Full",
-      "fullDesc": "Maximum accessibility",
-      "mild": "Mild",
-      "mildDesc": "Slightly enhanced",
-      "moderate": "Moderate",
-      "moderateDesc": "Recommended for most",
-      "off": "Off",
-      "offDesc": "Standard interface",
-      "title": "Quick Presets:"
+      "full": "სრული",
+      "fullDesc": "მაქსიმალური ხელმისაწვდომობა",
+      "mild": "მსუბუქი",
+      "mildDesc": "ოდნავ გაუმჯობესებული",
+      "moderate": "ზომიერი",
+      "moderateDesc": "რეკომენდებულია უმრავლესობისთვის",
+      "off": "გამორთული",
+      "offDesc": "სტანდარტული ინტერფეისი",
+      "title": "სწრაფი პრესეტები:"
     },
     "reducedMotion": {
-      "description": "Minimize animations and transitions for a calmer experience. Helpful for users with vestibular disorders or motion sensitivity.",
-      "title": "Reduced Motion",
-      "toggleLabel": "Toggle reduced motion mode"
+      "description": "ანიმაციებისა და გადასვლების მინიმიზაცია უფრო მშვიდი გამოცდილებისთვის. სასარგებლოა ვესტიბულარული დარღვევების ან მოძრაობის მიმართ მგრძნობიარობის მქონე მომხმარებლებისთვის.",
+      "title": "შემცირებული მოძრაობა",
+      "toggleLabel": "შემცირებული მოძრაობის რეჟიმის გადართვა"
     },
     "seniorsMode": {
-      "description": "One-click accessibility enhancement with larger text, bigger touch targets, and simplified interface",
-      "title": "Seniors Mode"
+      "description": "ერთი დაწკაპუნებით ხელმისაწვდომობის გაუმჯობესება უფრო დიდი ტექსტით, უფრო დიდი შეხების სამიზნეებით და გამარტივებული ინტერფეისით",
+      "title": "უფროსთა რეჟიმი"
     },
     "themeMode": {
-      "auto": "Auto",
-      "autoDesc": "Match system",
-      "dark": "Dark",
-      "darkDesc": "Easy on eyes",
-      "description": "Choose your preferred color scheme for the budget app",
-      "highContrast": "High Contrast",
-      "highContrastDesc": "Maximum visibility",
-      "light": "Light",
-      "lightDesc": "Bright and clear",
-      "title": "Theme Mode"
+      "auto": "ავტო",
+      "autoDesc": "სისტემის შესაბამისად",
+      "dark": "მუქი",
+      "darkDesc": "თვალებისთვის კომფორტული",
+      "description": "აირჩიეთ სასურველი ფერთა სქემა ბიუჯეტის აპისთვის",
+      "highContrast": "მაღალი კონტრასტი",
+      "highContrastDesc": "მაქსიმალური ხილვადობა",
+      "light": "ღია",
+      "lightDesc": "კაშკაშა და მკაფიო",
+      "title": "თემის რეჟიმი"
     }
   },
   "accessibilityToggle": {
-    "featuresActive": "Accessibility features active",
-    "highContrast": "High Contrast",
-    "highContrastDescription": "Enhanced color contrast",
-    "largeTextMode": "Large Text Mode",
-    "largeTextModeDescription": "Bigger text & touch targets",
-    "reduceMotion": "Reduce Motion",
-    "reduceMotionDescription": "Minimize animations",
-    "sizeLarge": "Large",
-    "sizeNormal": "Normal",
-    "sizeXLarge": "X-Large",
-    "textSize": "Text Size",
-    "title": "Accessibility"
+    "featuresActive": "ხელმისაწვდომობის ფუნქციები აქტიურია",
+    "highContrast": "მაღალი კონტრასტი",
+    "highContrastDescription": "გაძლიერებული ფერთა კონტრასტი",
+    "largeTextMode": "დიდი ტექსტის რეჟიმი",
+    "largeTextModeDescription": "უფრო დიდი ტექსტი და შეხების სამიზნეები",
+    "reduceMotion": "მოძრაობის შემცირება",
+    "reduceMotionDescription": "ანიმაციების მინიმიზაცია",
+    "sizeLarge": "დიდი",
+    "sizeNormal": "ნორმალური",
+    "sizeXLarge": "ძალიან დიდი",
+    "textSize": "ტექსტის ზომა",
+    "title": "ხელმისაწვდომობა"
   },
   "accessibleChart": {
     "buttons": {
@@ -225,40 +225,40 @@
     "whenColumn": "When"
   },
   "aiColumnMapper": {
-    "analyzing": "Analyzing CSV structure with AI...",
+    "analyzing": "CSV სტრუქტურის ანალიზი AI-ს დახმარებით...",
     "buttons": {
-      "apply": "Apply Mappings & Import",
-      "cancel": "Cancel"
+      "apply": "შესაბამისობის გამოყენება და იმპორტი",
+      "cancel": "გაუქმება"
     },
-    "closeModal": "Close modal",
-    "columnMappings": "Column Mappings",
+    "closeModal": "მოდალის დახურვა",
+    "columnMappings": "სვეტების შესაბამისობა",
     "columnTypes": {
-      "amount": "Amount",
-      "balance": "Balance",
-      "credit": "Credit",
-      "date": "Date",
-      "debit": "Debit",
-      "description": "Description",
-      "ignore": "Ignore"
+      "amount": "თანხა",
+      "balance": "ბალანსი",
+      "credit": "კრედიტი",
+      "date": "თარიღი",
+      "debit": "დებეტი",
+      "description": "აღწერა",
+      "ignore": "იგნორირება"
     },
     "confidence": {
-      "analyzed": "AI analyzed {columnCount} columns and {rowCount} sample rows",
-      "title": "Detection Confidence"
+      "analyzed": "AI-მ გააანალიზა {columnCount} სვეტი და {rowCount} ნიმუშის სტრიქონი",
+      "title": "აღმოჩენის სანდოობა"
     },
     "preview": {
-      "amount": "Amount",
-      "date": "Date",
-      "description": "Description",
-      "title": "Transaction Preview"
+      "amount": "თანხა",
+      "date": "თარიღი",
+      "description": "აღწერა",
+      "title": "ტრანზაქციის წინასწარი ხედი"
     },
-    "samples": "Samples:",
+    "samples": "ნიმუშები:",
     "saveConfig": {
-      "hint": "Next time you import from this bank, mappings will be automatic",
-      "label": "Save this bank configuration for future imports",
-      "placeholder": "Enter bank name (e.g., My Local Credit Union)"
+      "hint": "შემდეგ ჯერზე ამ ბანკიდან იმპორტისას შესაბამისობა ავტომატურად დადგინდება",
+      "label": "შეინახეთ ეს ბანკის კონფიგურაცია მომავალი იმპორტისთვის",
+      "placeholder": "შეიყვანეთ ბანკის სახელი (მაგ., ჩემი ადგილობრივი საკრედიტო კავშირი)"
     },
-    "subtitle": "Review AI-detected columns and adjust if needed",
-    "title": "AI Column Mapping Wizard"
+    "subtitle": "გადახედეთ AI-ს მიერ აღმოჩენილ სვეტებს და საჭიროებისამებრ შეცვალეთ",
+    "title": "AI სვეტების შედარების ოსტატი"
   },
   "amortizationChart": {
     "balanceDescription": "Your balance decreases over time as you make payments",
@@ -279,14 +279,14 @@
     "totalPayments": "Total Payments"
   },
   "amountFilter": {
-    "clear": "Clear",
-    "maxLabel": "Maximum amount",
-    "maxPlaceholder": "Max",
-    "maxThumb": "Maximum amount",
-    "minLabel": "Minimum amount",
-    "minPlaceholder": "Min",
-    "minThumb": "Minimum amount",
-    "title": "Amount Range"
+    "clear": "გასუფთავება",
+    "maxLabel": "მაქსიმალური თანხა",
+    "maxPlaceholder": "მაქს",
+    "maxThumb": "მაქსიმალური თანხა",
+    "minLabel": "მინიმალური თანხა",
+    "minPlaceholder": "მინ",
+    "minThumb": "მინიმალური თანხა",
+    "title": "თანხის დიაპაზონი"
   },
   "apiErrors": {
     "aiAnalysisUnavailable": "AI analysis unavailable, using pattern matching",
@@ -837,29 +837,29 @@
     "budgetAnalyzer": {
       "actual": "ფაქტობრივი",
       "balanced": "თქვენი ბიუჯეტი დაბალანსებულია!",
-      "description": "გააანალიზეთ ხარჯვა პოპულარული ბიუჯეტირების წესის მიხედვით",
-      "enterSpending": "შეიყვანეთ ყოველთვიური ხარჯვა კატეგორიების მიხედვით:",
+      "description": "გააანალიზეთ ხარჯები პოპულარული ბიუჯეტირების წესით",
+      "enterSpending": "შეიყვანეთ ყოველთვიური ხარჯები კატეგორიების მიხედვით:",
       "exceeding": "გადაჭარბება",
       "inputTitle": "თქვენი ყოველთვიური ფინანსები",
       "monthlyIncome": "ყოველთვიური წმინდა შემოსავალი",
-      "monthlyIncomeHelp": "ხელზე მისაღები თანხა გადასახადების შემდეგ",
+      "monthlyIncomeHelp": "ხელზე მისაღები ხელფასი გადასახადების შემდეგ",
       "needs": "საჭიროებები",
       "needsAdjustment": "კორექტირება რეკომენდებულია",
-      "needsDescription": "საცხოვრებელი, კომუნალური, სასურსათო, დაზღვევა, მინიმალური ვალის გადახდები",
+      "needsDescription": "საცხოვრებელი, კომუნალური, სასურსათო, დაზღვევა, მინ. ვალის გადახდები",
       "needsExamples": "ქირა, კომუნალური, სასურსათო",
-      "over": "მეტი",
+      "over": "გადამეტებული",
       "ruleExplanation": "50/30/20 წესი",
       "savings": "დანაზოგი",
-      "savingsDescription": "საგანგებო ფონდი, ინვესტიციები, პენსია, დამატებითი ვალის გადახდები",
-      "savingsExamples": "დანაზოგი, ინვესტიციები, დამატებითი ვალი",
-      "subtitle": "ნახეთ როგორია თქვენი ბიუჯეტი",
+      "savingsDescription": "გადაუდებელი ფონდი, ინვესტიციები, პენსია, დამატ. ვალის გადახდა",
+      "savingsExamples": "დანაზოგი, ინვესტიციები, ვალის გადახდა",
+      "subtitle": "ნახეთ როგორ შეესაბამება თქვენი ბიუჯეტი",
       "target": "სამიზნე",
       "title": "50/30/20 ბიუჯეტის ანალიზატორი",
       "under": "გეგმის მიხედვით",
-      "variance": "სხვაობა",
+      "variance": "განსხვავება",
       "wants": "სურვილები",
-      "wantsDescription": "რესტორნები, გართობა, საყიდლები, გამოწერები",
-      "wantsExamples": "რესტორნები, გართობა, საყიდლები"
+      "wantsDescription": "რესტორნები, გართობა, შოპინგი, გამოწერები",
+      "wantsExamples": "კვება, გართობა, შოპინგი"
     },
     "common": {
       "back": "კალკულატორებზე დაბრუნება",
@@ -872,45 +872,45 @@
     "compoundInterest": {
       "annualRate": "წლიური საპროცენტო განაკვეთი (%)",
       "annualRateHelp": "დანაზოგი: 4-5%, ობლიგაციები: 5-6%, აქციები: 7-10%",
-      "assumptionCompounding": "კაპიტალიზაცია",
-      "assumptionReinvest": "ყველა პროცენტი რეინვესტირდება",
+      "assumptionCompounding": "კომპოზიცია",
+      "assumptionReinvest": "ყველა პროცენტი ხელახლა ინვესტირებული",
       "assumptionTiming": "შენატანები თითოეული პერიოდის ბოლოს",
-      "chartTitle": "ზრდა დროთა განმავლობაში",
-      "compoundingFrequency": "კაპიტალიზაციის სიხშირე",
-      "description": "ნახეთ როგორ იზრდება თქვენი ფული რთული პროცენტით",
+      "chartTitle": "ზრდა დროის განმავლობაში",
+      "compoundingFrequency": "კომპოზიციის სიხშირე",
+      "description": "ნახეთ როგორ იზრდება თქვენი ფული რთული პროცენტის ძალით",
       "effectiveRate": "ეფექტური წლიური განაკვეთი",
       "finalBalance": "საბოლოო ბალანსი",
-      "formulaExplanation": "FV = სამომავლო ღირებულება, PV = მიმდინარე ღირებულება, r = წლიური განაკვეთი, n = კაპიტალიზაციის რაოდენობა წელიწადში, t = წლები, PMT = პერიოდული გადახდა",
+      "formulaExplanation": "FV = სამომავლო ღირებულება, PV = მიმდინარე ღირებულება, r = წლიური განაკვეთი, n = კომპოზიცია წელიწადში, t = წლები, PMT = პერიოდული გადახდა",
       "formulaText": "FV = PV(1+r/n)^(nt) + PMT[((1+r/n)^(nt)-1)/(r/n)]",
       "frequency": {
-        "annually": "წლიური (1/წ)",
+        "annually": "ყოველწლიური (1/წ)",
         "daily": "ყოველდღიური (365/წ)",
         "monthly": "ყოველთვიური (12/წ)",
         "quarterly": "კვარტალური (4/წ)",
         "semiannually": "ნახევარწლიური (2/წ)",
         "weekly": "ყოველკვირეული (52/წ)"
       },
-      "initialDeposit": "საწყისი დეპოზიტი",
+      "initialDeposit": "საწყისი შენატანი",
       "inputTitle": "ინვესტიციის დეტალები",
       "interestEarned": "მიღებული პროცენტი",
       "monthlyContribution": "ყოველთვიური შენატანი",
-      "resultTitle": "ინვესტიციის ზრდა",
-      "subtitle": "ნახეთ თქვენი ფულის ზრდა დროთა განმავლობაში",
+      "resultTitle": "თქვენი ინვესტიციის ზრდა",
+      "subtitle": "თვალი ადევნეთ ფულის ზრდას დროის განმავლობაში",
       "title": "რთული პროცენტის კალკულატორი",
-      "totalContributions": "ჯამი შენატანები",
+      "totalContributions": "მთლიანი შენატანები",
       "years": "ინვესტიციის პერიოდი (წელი)"
     },
     "debtPayoff": {
       "addDebt": "ვალის დამატება",
-      "apr": "APR (%)",
-      "avalanche": "\"ზვავი\" სტრატეგია",
-      "avalancheDescription": "ჯერ ყველაზე მაღალი პროცენტის დაფარვა ფულის დაზოგვისთვის",
+      "apr": "წლიური % (APR)",
+      "avalanche": "ზვავის სტრატეგია",
+      "avalancheDescription": "ჯერ ყველაზე მაღალი პროცენტის დაფარვა მეტი ფულის დასაზოგად",
       "balance": "ბალანსი",
       "debtName": "სახელი",
       "debtNamePlaceholder": "ვალი {number}",
-      "description": "შეადარეთ თოვლის ბურთისა და ზვავის სტრატეგიები ვალის სწრაფად დასაფარად",
+      "description": "შეადარეთ თოვლის ბურთისა და ზვავის სტრატეგიები ვალის უფრო სწრაფად დასაფარავად",
       "extraMonthlyPayment": "დამატებითი ყოველთვიური გადახდა",
-      "extraMonthlyPaymentHelp": "დამატებითი თანხა მინიმუმების ზემოთ ყოველ თვე",
+      "extraMonthlyPaymentHelp": "დამატებითი თანხა, რომლის გადახდასაც ყოველთვიურ მინიმუმს ზემოთ შეძლებთ",
       "minimumPayment": "მინ. გადახდა",
       "month": "თვე",
       "morePsychological": "მოტივაციური გამარჯვებები",
@@ -920,157 +920,157 @@
       "recommended": "რეკომენდებული",
       "remaining": "დარჩენილი",
       "removeDebt": "ვალის წაშლა",
-      "savingsDescription": "ზვავის მეთოდით {amount} პროცენტს დაზოგავთ და {months} თვით ადრე გახდებით უვალო",
-      "savingsTitle": "პროცენტის დანაზოგი ზვავის სტრატეგიით",
-      "snowball": "\"თოვლის ბურთი\" სტრატეგია",
-      "snowballDescription": "ჯერ ყველაზე მცირე ბალანსის დაფარვა სწრაფი მოტივაციისთვის",
-      "subtitle": "იპოვეთ ვალის თავისუფლებისკენ უსწრაფესი გზა",
+      "savingsDescription": "ზვავის მეთოდით დაზოგავთ {amount} პროცენტში და ვალისგან თავისუფალი იქნებით {months} თვით ადრე",
+      "savingsTitle": "პროცენტის დაზოგვა ზვავის მეთოდით",
+      "snowball": "თოვლის ბურთის სტრატეგია",
+      "snowballDescription": "ჯერ ყველაზე პატარა ბალანსის დაფარვა სწრაფი გამარჯვებისთვის",
+      "subtitle": "იპოვეთ ვალისგან თავისუფლების ყველაზე სწრაფი გზა",
       "title": "ვალის დაფარვის კალკულატორი",
-      "totalInterest": "ჯამი პროცენტი",
+      "totalInterest": "მთლიანი პროცენტი",
       "yourDebts": "თქვენი ვალები"
     },
     "emergencyFund": {
-      "amountNeeded": "მიზნის მისაღწევად {amount} გჭირდებათ",
-      "completionDate": "სავარაუდო დასრულება",
-      "currentSavings": "მიმდინარე საგანგებო დანაზოგი",
-      "description": "გამოთვალეთ რამდენი გჭირდებათ ფინანსური უსაფრთხოებისთვის",
+      "amountNeeded": "მიზნის მისაღწევად კიდევ {amount} გჭირდებათ",
+      "completionDate": "სავარაუდო დასრულების თარიღი",
+      "currentSavings": "მიმდინარე გადაუდებელი დანაზოგი",
+      "description": "გამოთვალეთ რამდენი გჭირდებათ ფინანსური უსაფრთხოებისთვის და თვალყური ადევნეთ პროგრესს",
       "goalMet": "მიზანი მიღწეულია!",
-      "goalProgress": "უსაფრთხოების ბადის მშენებლობა",
+      "goalProgress": "თქვენი უსაფრთხოების ბადის შექმნა",
       "inputTitle": "თქვენი ინფორმაცია",
-      "monthlyContribution": "ყოველთვიური დაზოგვის თანხა",
-      "monthlyContributionHelp": "რამდენის დაზოგვა შეგიძლიათ საგანგებო ფონდისთვის ყოველ თვე",
+      "monthlyContribution": "ყოველთვიური დანაზოგის თანხა",
+      "monthlyContributionHelp": "რამდენს შეძლებთ ყოველთვიურად გადაუდებელი ფონდისთვის",
       "monthlyExpenses": "ყოველთვიური ხარჯები",
-      "monthlyExpensesHelp": "ჩართეთ ქირა, კომუნალური, სასურსათო, დაზღვევა და სხვა აუცილებელი ხარჯები",
+      "monthlyExpensesHelp": "ჩართეთ ქირა, კომუნალური მომსახურება, სასურსათო, დაზღვევა და სხვა აუცილებელი ხარჯები",
       "monthsToGoal": "მიზნის მიღწევამდე თვეები",
       "progress": "მიმდინარე პროგრესი",
       "resultsTitle": "თქვენი შედეგები",
-      "subtitle": "ააშენეთ ფინანსური უსაფრთხოების ბადე",
-      "targetAmount": "სამიზნე საგანგებო ფონდი",
-      "targetMonths": "დაფარვის სამიზნე თვეები",
-      "targetMonthsHelp": "ექსპერტები {months} თვეს გირჩევენ უმეტეს შემთხვევებში",
-      "tip1": "შეინახეთ საგანგებო ფონდი მაღალშემოსავლიან დანაზოგის ანგარიშზე",
-      "tip2": "ავტომატიზირეთ შენატანები ხელფასის დღეს ავტომატური გადარიცხვებით",
-      "tip3": "დაიწყეთ მცირედით - თანმიმდევრული მცირე დაზოგვაც კი დროთა განმავლობაში გროვდება",
-      "tipsTitle": "საგანგებო ფონდის შექმნის რჩევები",
-      "title": "საგანგებო ფონდის კალკულატორი"
+      "subtitle": "შექმენით თქვენი ფინანსური უსაფრთხოების ბადე",
+      "targetAmount": "სამიზნე გადაუდებელი ფონდი",
+      "targetMonths": "სამიზნე თვეების დაფარვა",
+      "targetMonthsHelp": "ექსპერტები უმრავლეს სიტუაციებში {months} თვეს გირჩევენ",
+      "tip1": "შეინახეთ გადაუდებელი ფონდი მაღალპროცენტიან დანაზოგის ანგარიშზე მარტივი წვდომისა და უკეთესი შემოსავლისთვის",
+      "tip2": "ავტომატიზირეთ შენატანები ხელფასის დღეს ავტომატური გადარიცხვების დაყენებით",
+      "tip3": "საჭიროების შემთხვევაში დაიწყეთ მცირედით - თანმიმდევრული მცირე დანაზოგიც კი თანდათან გროვდება",
+      "tipsTitle": "რჩევები გადაუდებელი ფონდის შესაქმნელად",
+      "title": "გადაუდებელი ფონდის კალკულატორი"
     },
     "hub": {
-      "accuracyDescription": "ფინანსური ხარისხის არითმეტიკა მცოცავმძიმიანი შეცდომების თავიდან ასაცილებლად.",
+      "accuracyDescription": "ფინანსური ხარისხის არითმეტიკის გამოყენება მცურავი წერტილის შეცდომების თავიდან ასაცილებლად.",
       "accuracyTitle": "ზუსტი გამოთვლები",
       "infoTitle": "ამ კალკულატორების შესახებ",
-      "privacyDescription": "ყველა გამოთვლა ხდება თქვენს მოწყობილობაზე. ფინანსური მონაცემები ბრაუზერს არ ტოვებს.",
+      "privacyDescription": "ყველა გამოთვლა თქვენს მოწყობილობაზე ხდება. ფინანსური მონაცემები ბრაუზერს არ ტოვებს.",
       "privacyTitle": "100% კონფიდენციალური",
       "sectionCore": "ძირითადი კალკულატორები",
       "sectionPlanning": "ფინანსური დაგეგმვა",
-      "sectionTools": "ხელსაწყოები და ბმულები",
-      "subtitle": "ხელსაწყოები ფინანსების დაგეგმვისა და ანალიზისთვის",
+      "sectionTools": "ინსტრუმენტები და ბმულები",
+      "subtitle": "ინსტრუმენტები ფინანსების დაგეგმვისა და ანალიზისთვის",
       "title": "ფინანსური კალკულატორები"
     },
     "inflation": {
-      "assumptionCompound": "ინფლაცია კაპიტალიზდება ყოველწლიურად",
+      "assumptionCompound": "ინფლაცია ყოველწლიურად კომპოზიციურად იზრდება",
       "assumptionConstant": "მუდმივი წლიური ინფლაციის მაჩვენებელი",
       "chartNominal": "ნომინალური ღირებულება (უცვლელი)",
-      "chartReal": "რეალური მსყიდველობითი ძალა",
-      "chartTitle": "მსყიდველობითი ძალა დროთა განმავლობაში",
+      "chartReal": "რეალური მსყიდველობითი უნარი",
+      "chartTitle": "მსყიდველობითი უნარი დროის განმავლობაში",
       "currentAmount": "მიმდინარე თანხა",
-      "description": "ნახეთ როგორ ამცირებს ინფლაცია თქვენს მსყიდველობით ძალას",
-      "formulaExplanation": "აჩვენებს რამდენს იყიდის თქვენი ფული სამომავლოდ, ფასების ზრდის გათვალისწინებით",
+      "description": "ნახეთ როგორ ამცირებს ინფლაცია მსყიდველობით უნარს დროის განმავლობაში",
+      "formulaExplanation": "აჩვენებს რამდენს იყიდის ფული მომავალში, ფასების ზრდის გათვალისწინებით",
       "formulaText": "რეალური ღირებულება = ნომინალური ღირებულება / (1 + ინფლაცია)^წლები",
-      "heroDescription": "თქვენი {amount} ექნება {futureAmount}-ის მსყიდველობითი ძალა {years} წელიწადში",
-      "heroTitle": "მსყიდველობითი ძალის ზემოქმედება",
+      "heroDescription": "თქვენი {amount} {years} წელიწადში {futureAmount}-ის მსყიდველობით უნარს ექნება",
+      "heroTitle": "მსყიდველობითი უნარის ზეგავლენა",
       "inflationRate": "წლიური ინფლაციის მაჩვენებელი (%)",
-      "inflationRateHelp": "აშშ-ის ისტორიული საშუალო: ~3%",
-      "inputTitle": "ზემოქმედების გამოთვლა",
-      "powerLost": "დაკარგული მსყიდველობითი ძალა",
-      "powerRemaining": "დარჩენილი მსყიდველობითი ძალა",
+      "inflationRateHelp": "ისტორიული საშუალო: ~3%",
+      "inputTitle": "ზეგავლენის გამოთვლა",
+      "powerLost": "დაკარგული მსყიდველობითი უნარი",
+      "powerRemaining": "დარჩენილი მსყიდველობითი უნარი",
       "presetAverage": "საშუალო (3%)",
       "presetHigh": "მაღალი (5%)",
       "presetLow": "დაბალი (2%)",
       "presets": "პრესეტები",
-      "purchasingPower": "სამომავლო მსყიდველობითი ძალა",
-      "resultTitle": "დეტალური განაწილება",
-      "subtitle": "გაიგეთ ინფლაციის ნამდვილი ღირებულება",
+      "purchasingPower": "მომავალი მსყიდველობითი უნარი",
+      "resultTitle": "დეტალური ანალიზი",
+      "subtitle": "გაიგეთ ინფლაციის რეალური ღირებულება",
       "tableLost": "დაკარგული ღირებულება",
       "tableNominal": "ნომინალური ღირებულება",
       "tableReal": "რეალური ღირებულება",
-      "tableTitle": "წლების მიხედვით განაწილება",
+      "tableTitle": "წლების მიხედვით ანალიზი",
       "tableYear": "წელი",
       "timeHorizon": "დროის ჰორიზონტი (წელი)",
-      "title": "ინფლაციის ზემოქმედების კალკულატორი"
+      "title": "ინფლაციის ზეგავლენის კალკულატორი"
     },
     "loanTracker": {
-      "description": "თვალი ადევნეთ ყველა სესხს, გადახდას და დაფარვის პროგრესს",
-      "title": "სესხის მონიტორი"
+      "description": "თვალყური ადევნეთ ყველა სესხს, გადახდასა და დაფარვის პროგრესს",
+      "title": "სესხის ტრეკერი"
     },
     "monteCarlo": {
-      "assumptionInflation": "Inflation adjustment",
-      "assumptionInflationApplied": "Applied to withdrawals (compounding)",
-      "assumptionInflationNone": "Not applied in accumulation mode",
-      "assumptionPRNG": "Random number generator",
-      "assumptionPRNGValue": "Seeded PRNG (Mulberry32) — deterministic",
-      "assumptionReturns": "Return distribution",
-      "assumptionReturnsValue": "Normal distribution (Box-Muller)",
-      "assumptionVolatility": "Volatility (std dev)",
-      "badgeCaution": "Needs Review",
-      "badgeRisk": "High Risk",
-      "badgeStrong": "Strong Plan",
-      "chartTitle": "Percentile Bands Over Time",
-      "description": "Stress-test your financial plan with probabilistic modeling",
-      "expectedReturn": "Expected Annual Return (%)",
-      "expectedReturnHelp": "Stocks: 7-10%, Bonds: 3-5%, Balanced: 5-7%",
-      "formulaExplanation": "Each month draws a random return from a normal distribution. Contributions are added, inflation-adjusted withdrawals subtracted. Repeated across N simulations.",
-      "formulaText": "Monthly return = Normal(μ/12, σ/√12); Balance_t = Balance_(t-1) × (1 + r_t) + C - W",
-      "heroTitle": "Simulation Results",
-      "inflationRate": "Inflation Rate (%)",
-      "initialBalance": "Starting Portfolio Balance",
-      "inputTitle": "Simulation Parameters",
-      "medianFinal": "Median Final Balance",
-      "modeAccumulation": "Saving (Accumulation)",
-      "modeWithdrawal": "Spending (Withdrawal)",
-      "monthlyContribution": "Monthly Contribution",
-      "monthlyWithdrawal": "Monthly Withdrawal",
-      "p10Final": "Worst Case (10th %ile)",
-      "p90Final": "Best Case (90th %ile)",
-      "resultsTitle": "Outcome Distribution",
-      "scenarioMode": "Scenario Mode",
-      "simulations": "Number of Simulations",
-      "simulationsHelp": "More simulations = more accurate percentiles, but slower",
-      "subtitle": "Run thousands of market simulations to see how your plan holds up",
-      "successRateDescription": "{total} simulations run, {failures} ran out of money",
-      "successRateLabel": "Success Rate",
-      "timeHorizon": "Time Horizon (Years)",
-      "title": "Monte Carlo Simulator",
-      "totalSimulations": "Simulations Run",
-      "volatility": "Annual Volatility / Std Dev (%)",
-      "volatilityHelp": "S&P 500 historical: ~15%. Higher = wider outcome range."
+      "assumptionInflation": "ინფლაციის კორექტირება",
+      "assumptionInflationApplied": "გამოყენებული გამოტანებზე (კომპოზიციური)",
+      "assumptionInflationNone": "არ გამოიყენება დაგროვების რეჟიმში",
+      "assumptionPRNG": "შემთხვევითი რიცხვების გენერატორი",
+      "assumptionPRNGValue": "სათესლე PRNG (Mulberry32) — დეტერმინისტული",
+      "assumptionReturns": "შემოსავლის განაწილება",
+      "assumptionReturnsValue": "ნორმალური განაწილება (Box-Muller)",
+      "assumptionVolatility": "ვოლატილობა (სტანდ. გადახრა)",
+      "badgeCaution": "გადახედვა სჭირდება",
+      "badgeRisk": "მაღალი რისკი",
+      "badgeStrong": "ძლიერი გეგმა",
+      "chartTitle": "პროცენტილების ზოლები დროის განმავლობაში",
+      "description": "შეამოწმეთ ფინანსური გეგმა ალბათური მოდელირებით",
+      "expectedReturn": "მოსალოდნელი წლიური შემოსავალი (%)",
+      "expectedReturnHelp": "აქციები: 7-10%, ობლიგაციები: 3-5%, ბალანსირებული: 5-7%",
+      "formulaExplanation": "ყოველთვიურად შემთხვევითი შემოსავალი ნორმალური განაწილებიდან. შენატანები ემატება, ინფლაციით მორგებული გამოტანა აკლდება.",
+      "formulaText": "ყოველთვიური შემოსავალი = Normal(μ/12, σ/√12); ბალანსი_t = ბალანსი_(t-1) × (1 + r_t) + C - W",
+      "heroTitle": "სიმულაციის შედეგები",
+      "inflationRate": "ინფლაციის მაჩვენებელი (%)",
+      "initialBalance": "საწყისი პორტფელის ბალანსი",
+      "inputTitle": "სიმულაციის პარამეტრები",
+      "medianFinal": "მედიანა საბოლოო ბალანსი",
+      "modeAccumulation": "დაზოგვა (დაგროვება)",
+      "modeWithdrawal": "ხარჯვა (გამოტანა)",
+      "monthlyContribution": "ყოველთვიური შენატანი",
+      "monthlyWithdrawal": "ყოველთვიური გამოტანა",
+      "p10Final": "უარესი შემთხვევა (10-ე %)",
+      "p90Final": "საუკეთესო შემთხვევა (90-ე %)",
+      "resultsTitle": "შედეგების განაწილება",
+      "scenarioMode": "სცენარის რეჟიმი",
+      "simulations": "სიმულაციების რაოდენობა",
+      "simulationsHelp": "მეტი სიმულაცია = ზუსტი პროცენტილები, მაგრამ ნელი",
+      "subtitle": "ათასობით საბაზრო სიმულაცია გეგმის გამოსაცდელად",
+      "successRateDescription": "{total} სიმულაცია გაშვებული, {failures}-ში ფული ამოიწურა",
+      "successRateLabel": "წარმატების მაჩვენებელი",
+      "timeHorizon": "დროის ჰორიზონტი (წელი)",
+      "title": "მონტე კარლოს სიმულატორი",
+      "totalSimulations": "გაშვებული სიმულაციები",
+      "volatility": "წლიური ვოლატილობა / სტანდ. გადახრა (%)",
+      "volatilityHelp": "S&P 500 ისტორიული: ~15%. მაღალი = უფრო ფართო შედეგების დიაპაზონი."
     },
     "mortgage": {
-      "affordabilityTitle": "ხელმისაწვდომობა",
+      "affordabilityTitle": "თქვენი ხელმისაწვდომობა",
       "annualIncome": "წლიური მთლიანი შემოსავალი",
       "annualRate": "საპროცენტო განაკვეთი (%)",
-      "annualRateHelp": "მიმდინარე საშუალო: 6-7% 30-წლიანი ფიქსირებულისთვის",
-      "assumptionFixedRate": "ფიქსირებული განაკვეთი მთელი ვადის განმავლობაში",
+      "annualRateHelp": "მიმდინარე საშუალო: 6-7% 30-წლიანი ფიქსირებული",
+      "assumptionFixedRate": "ფიქსირებული საპროცენტო განაკვეთი მთელი ვადის განმავლობაში",
       "assumptionNoEscrow": "არ მოიცავს გადასახადებს, დაზღვევას ან HOA-ს",
-      "description": "გამოთვალეთ გადახდები ან გაიგეთ რამდენი სახლის შეძენა შეგიძლიათ",
-      "downPayment": "პირველადი შენატანი",
-      "downPaymentAmount": "პირველადი შენატანი",
-      "downPaymentPercent": "პირველადი შენატანი (%)",
+      "description": "გამოთვალეთ გადახდები ან გაიგეთ რა ღირებულების სახლი შეგიძლიათ",
+      "downPayment": "პირველი შენატანი",
+      "downPaymentAmount": "პირველი შენატანი",
+      "downPaymentPercent": "პირველი შენატანი (%)",
       "dtiRatio": "ვალი-შემოსავლის თანაფარდობა",
       "extraPayment": "დამატებითი ყოველთვიური გადახდა",
-      "extraPaymentHelp": "ძირითადზე ყოველთვიურად დამატებით მიმართული გადახდა",
-      "formulaExplanation": "M = ყოველთვიური გადახდა, P = ძირითადი, i = ყოველთვიური საპროცენტო განაკვეთი, n = გადახდების ჯამი რაოდენობა",
+      "extraPaymentHelp": "დამატებითი გადახდა ძირითად თანხაზე ყოველთვიურად",
+      "formulaExplanation": "M = ყოველთვიური გადახდა, P = ძირითადი თანხა, i = ყოველთვიური საპროცენტო განაკვეთი, n = გადახდების საერთო რაოდენობა",
       "formulaText": "M = P[i(1+i)^n] / [(1+i)^n - 1]",
       "hideFullSchedule": "სრული გრაფიკის დამალვა",
       "homePrice": "სახლის ფასი",
       "inputTitle": "სესხის დეტალები",
       "loanAmount": "სესხის თანხა",
-      "maxDTI": "მაქსიმალური DTI თანაფარდობა (%)",
+      "maxDTI": "მაქსიმალური DTI კოეფიციენტი (%)",
       "maxHomePrice": "მაქსიმალური სახლის ფასი",
       "maxLoanAmount": "მაქსიმალური სესხის თანხა",
       "modeAffordability": "რისი ყიდვა შემიძლია?",
       "modePayment": "გადახდის გამოთვლა",
       "monthlyDebts": "ყოველთვიური ვალის გადახდები",
-      "monthlyDebtsHelp": "ავტო სესხები, სტუდენტური სესხები, საკრედიტო ბარათები და ა.შ.",
+      "monthlyDebtsHelp": "ავტოსესხი, სტუდენტური სესხი, საკრედიტო ბარათები და ა.შ.",
       "monthlyPayment": "ყოველთვიური გადახდა",
       "payoffMonths": "დაფარვის დრო",
       "resultTitle": "გადახდის შეჯამება",
@@ -1086,68 +1086,68 @@
       "term15": "15 წელი",
       "term30": "30 წელი",
       "title": "იპოთეკის კალკულატორი",
-      "totalCost": "სესხის ჯამი ღირებულება",
-      "totalInterest": "ჯამი გადახდილი პროცენტი"
+      "totalCost": "სესხის მთლიანი ღირებულება",
+      "totalInterest": "გადახდილი მთლიანი პროცენტი"
     },
     "netWorth": {
-      "description": "ნახეთ თქვენი სრული ფინანსური სურათი აქტივებითა და ვალდებულებებით",
+      "description": "ნახეთ სრული ფინანსური სურათი აქტივებით და ვალდებულებებით",
       "title": "წმინდა ღირებულება"
     },
     "property": {
-      "description": "თვალი ადევნეთ ქონების ღირებულებებს, მანქანებს და სხვა აქტივებს",
+      "description": "თვალყური ადევნეთ ქონების ღირებულებას, ავტომობილებსა და სხვა აქტივებს",
       "title": "ქონება და აქტივები"
     },
     "retirement": {
-      "advancedTitle": "Advanced Settings",
-      "assumptionInflation": "Inflation rate",
-      "assumptionPostReturn": "Post-retirement return",
-      "assumptionPreReturn": "Pre-retirement return",
-      "assumptionSS": "Social Security included from age {age}",
-      "balanceAtRetirement": "Balance at Retirement",
-      "chartAccumulation": "Accumulation Phase",
-      "chartTitle": "Portfolio Balance Over Time",
-      "chartWithdrawal": "Withdrawal Phase",
-      "currentAge": "Current Age",
-      "currentSavings": "Current Retirement Savings",
-      "description": "Plan your retirement with a comprehensive savings and withdrawal projection",
-      "desiredIncome": "Desired Monthly Income (today's dollars)",
-      "desiredIncomeHelp": "How much you want to spend monthly in retirement, in today's dollars",
-      "formulaExplanation": "Two-phase simulation: grow savings until retirement, then draw down with inflation-adjusted withdrawals",
-      "formulaText": "Accumulation: FV = PV(1+r)^n + PMT[((1+r)^n-1)/r] | Withdrawal: Balance_n = Balance_(n-1)(1+r) - W",
-      "heroInsufficient": "Your savings may run out at age {age}",
-      "heroInsufficientBadge": "Action Needed",
-      "heroNeutralBadge": "Close",
-      "heroSufficient": "Your savings will last {years} years in retirement",
-      "heroSufficientBadge": "On Track",
-      "inflationRate": "Inflation Rate (%)",
-      "inputTitle": "Your Details",
-      "lifeExpectancy": "Life Expectancy",
-      "monthlyContribution": "Monthly Contribution",
-      "monthlyWithdrawal": "Monthly Withdrawal (at retirement)",
-      "postRetirementReturn": "Post-Retirement Return (%)",
-      "postRetirementReturnHelp": "Expected annual return while withdrawing (conservative ~4-5%)",
-      "preRetirementReturn": "Pre-Retirement Return (%)",
-      "preRetirementReturnHelp": "Expected annual return while saving (stocks avg ~7-10%)",
-      "resultTitle": "Retirement Projection",
-      "retirementAge": "Retirement Age",
-      "shortfall": "Shortfall at Life Expectancy",
-      "socialSecurity": "Social Security / Pension (monthly)",
-      "socialSecurityAge": "Social Security Start Age",
-      "subtitle": "Secure your financial future",
-      "surplus": "Surplus at Life Expectancy",
-      "title": "Retirement Planner",
-      "yearsMoneyLasts": "Years Money Lasts"
+      "advancedTitle": "დამატებითი პარამეტრები",
+      "assumptionInflation": "ინფლაციის მაჩვენებელი",
+      "assumptionPostReturn": "პოსტ-საპენსიო შემოსავალი",
+      "assumptionPreReturn": "პრე-საპენსიო შემოსავალი",
+      "assumptionSS": "სოც. დაზღვევა ჩართულია {age} წლის ასაკიდან",
+      "balanceAtRetirement": "ბალანსი პენსიაზე",
+      "chartAccumulation": "დაგროვების ფაზა",
+      "chartTitle": "პორტფელის ბალანსი დროის განმავლობაში",
+      "chartWithdrawal": "გამოტანის ფაზა",
+      "currentAge": "მიმდინარე ასაკი",
+      "currentSavings": "მიმდინარე საპენსიო დანაზოგი",
+      "description": "დაგეგმეთ პენსია ყოვლისმომცველი დანაზოგისა და გამოტანის პროგნოზით",
+      "desiredIncome": "სასურველი ყოველთვიური შემოსავალი (დღევანდელ ფასებში)",
+      "desiredIncomeHelp": "რამდენის დახარჯვა გსურთ ყოველთვიურად პენსიაზე, დღევანდელ ფასებში",
+      "formulaExplanation": "ორფაზიანი სიმულაცია: დანაზოგის ზრდა პენსიამდე, შემდეგ ინფლაციით მორგებული გამოტანა",
+      "formulaText": "დაგროვება: FV = PV(1+r)^n + PMT[((1+r)^n-1)/r] | გამოტანა: ბალანსი_n = ბალანსი_(n-1)(1+r) - W",
+      "heroInsufficient": "თქვენი დანაზოგი შეიძლება {age} წლის ასაკში ამოიწუროს",
+      "heroInsufficientBadge": "ქმედება საჭიროა",
+      "heroNeutralBadge": "ახლოს",
+      "heroSufficient": "თქვენი დანაზოგი პენსიაზე {years} წელი გეყოფათ",
+      "heroSufficientBadge": "გეგმის მიხედვით",
+      "inflationRate": "ინფლაციის მაჩვენებელი (%)",
+      "inputTitle": "თქვენი მონაცემები",
+      "lifeExpectancy": "სიცოცხლის მოსალოდნელი ხანგრძლივობა",
+      "monthlyContribution": "ყოველთვიური შენატანი",
+      "monthlyWithdrawal": "ყოველთვიური გამოტანა (პენსიაზე)",
+      "postRetirementReturn": "პოსტ-საპენსიო შემოსავალი (%)",
+      "postRetirementReturnHelp": "მოსალოდნელი წლიური შემოსავალი გამოტანის პერიოდში (კონსერვატიული ~4-5%)",
+      "preRetirementReturn": "პრე-საპენსიო შემოსავალი (%)",
+      "preRetirementReturnHelp": "მოსალოდნელი წლიური შემოსავალი დაზოგვის პერიოდში (აქციები საშ. ~7-10%)",
+      "resultTitle": "საპენსიო პროგნოზი",
+      "retirementAge": "საპენსიო ასაკი",
+      "shortfall": "დეფიციტი სიცოცხლის ბოლოს",
+      "socialSecurity": "სოციალური დაზღვევა / პენსია (ყოველთვიური)",
+      "socialSecurityAge": "სოც. დაზღვევის დაწყების ასაკი",
+      "subtitle": "უზრუნველყავით ფინანსური მომავალი",
+      "surplus": "ნამეტი სიცოცხლის ბოლოს",
+      "title": "საპენსიო დაგეგმარება",
+      "yearsMoneyLasts": "წლები რამდენიც ფული გეყოფათ"
     },
     "savingsGoal": {
       "currentSavings": "მიმდინარე დანაზოგი",
-      "description": "დაგეგმეთ დანაზოგი რთული პროცენტის პროგნოზებით",
-      "expectedReturn": "მოსალოდნელი წლიური უკუგება (%)",
-      "expectedReturnHelp": "მაღალშემოსავლიანი დანაზოგი: 4-5%, ინვესტიციები: 6-8%",
+      "description": "დაგეგმეთ დანაზოგი კომპოზიტური პროცენტის პროგნოზებით",
+      "expectedReturn": "მოსალოდნელი წლიური შემოსავალი (%)",
+      "expectedReturnHelp": "მაღალპროცენტიანი დანაზოგი: 4-5%, ინვესტიციები: 6-8%",
       "goalAmount": "მიზნის თანხა",
       "inMonths": "{months} თვეში",
       "inputTitle": "მიზნის დეტალები",
       "interestEarned": "მიღებული პროცენტი",
-      "modeHowMuch": "რამდენი უნდა დავზოგო ყოველთვიურად?",
+      "modeHowMuch": "რამდენი უნდა დავიზოგო ყოველთვიურად?",
       "modeWhen": "როდის მივაღწევ მიზანს?",
       "monthlyContribution": "ყოველთვიური შენატანი",
       "perMonth": "თვეში",
@@ -1160,7 +1160,7 @@
       "targetDate": "სამიზნე თარიღი",
       "timelineTitle": "ზრდის ვადები",
       "title": "დანაზოგის მიზნის კალკულატორი",
-      "totalContributions": "ჯამი შენატანები"
+      "totalContributions": "მთლიანი შენატანები"
     },
     "subscriptionCost": {
       "addSubscription": "გამოწერის დამატება",
@@ -1168,12 +1168,12 @@
       "breakdown": "აუცილებელი vs არააუცილებელი",
       "byCategory": "კატეგორიების მიხედვით",
       "daily": "ყოველდღიური",
-      "description": "თვალი ადევნეთ და გააანალიზეთ გამოწერების ნამდვილი ღირებულება",
+      "description": "თვალყური ადევნეთ და გააანალიზეთ გამოწერების რეალური ღირებულება",
       "essential": "აუცილებელი",
       "essentialCost": "აუცილებელი",
       "frequency": {
         "annual": "წლიური",
-        "biweekly": "ორკვირაში ერთხელ",
+        "biweekly": "ორკვირეული",
         "label": "სიხშირე",
         "monthly": "ყოველთვიური",
         "quarterly": "კვარტალური",
@@ -1185,15 +1185,15 @@
       "namePlaceholder": "მაგ., Netflix, Spotify",
       "nonEssentialCost": "არააუცილებელი",
       "perYear": "/წელი",
-      "percentOfIncome": "% შემოსავლისა",
-      "potentialSavings": "პოტენციური წლიური დანაზოგი",
+      "percentOfIncome": "შემოსავლის %",
+      "potentialSavings": "პოტენციური წლიური დაზოგვა",
       "potentialSavingsHelp": "თუ ყველა არააუცილებელ გამოწერას გააუქმებთ",
       "remove": "გამოწერის წაშლა",
       "showIncomePercent": "შემოსავლის პროცენტის ჩვენება",
-      "subtitle": "ნახეთ სად მიდის განმეორებადი თანხა",
-      "title": "გამოწერების ღირებულების კალკულატორი",
-      "totalCost": "ჯამი გამოწერების ღირებულება",
-      "yearly": "წლიური",
+      "subtitle": "ნახეთ სად მიდის თქვენი განმეორებადი ფული",
+      "title": "გამოწერის ღირებულების კალკულატორი",
+      "totalCost": "გამოწერის მთლიანი ღირებულება",
+      "yearly": "ყოველწლიური",
       "yourSubscriptions": "თქვენი გამოწერები"
     },
     "transparency": {
@@ -1211,22 +1211,22 @@
       "contributions": "შენატანები",
       "interestEarned": "მიღებული პროცენტი",
       "interest": "პროცენტი",
-      "totalInterest": "ჯამი პროცენტი",
+      "totalInterest": "მთლიანი პროცენტი",
       "snowball": "თოვლის ბურთი",
       "avalanche": "ზვავი",
       "portfolio": "პორტფელი",
       "fireTarget": "FIRE სამიზნე",
       "median50th": "მედიანა (50-ე)",
       "remainingBalance": "დარჩენილი ბალანსი",
-      "totalAssets": "ჯამი აქტივები",
-      "totalLiabilities": "ჯამი ვალდებულებები",
+      "totalAssets": "მთლიანი აქტივები",
+      "totalLiabilities": "მთლიანი ვალდებულებები",
       "netWorth": "წმინდა ღირებულება",
       "retirement": "პენსია"
     },
     "scenario": {
       "compare": "სცენარების შედარება ({count} შენახული)",
-      "selectUpTo": "აირჩიეთ მაქსიმუმ 3 სცენარი შესადარებლად:",
-      "duplicate": "დუბლირება",
+      "selectUpTo": "აირჩიეთ 3-მდე სცენარი შესადარებლად:",
+      "duplicate": "დუბლიკატი",
       "delete": "წაშლა",
       "sideBySide": "გვერდიგვერდ შედარება",
       "field": "ველი",
@@ -1240,13 +1240,13 @@
     "addToCalendar": "კალენდარში დამატება",
     "dialog": {
       "cancel": "გაუქმება",
-      "description": "გადასახადების შეხსენებების კალენდარში დამატება",
-      "deselectAll": "არჩევანის გაუქმება",
+      "description": "გადასახადის შეხსენებების დამატება კალენდარში",
+      "deselectAll": "ყველას მოხსნა",
       "export": "{count} გამოწერის ექსპორტი",
       "exportMethod": "ექსპორტის მეთოდი",
       "exporting": "ექსპორტირება...",
       "selectAll": "ყველას არჩევა",
-      "selectSubscriptions": "გამოწერების არჩევა",
+      "selectSubscriptions": "აირჩიეთ გამოწერები",
       "title": "კალენდარში ექსპორტი"
     },
     "downloadAllICS": "ყველას ჩამოტვირთვა ICS-ად",
@@ -1254,7 +1254,7 @@
     "exportToCalendar": "კალენდარში ექსპორტი",
     "googleCalendar": "Google Calendar",
     "outlookCalendar": "Outlook Calendar",
-    "selectSubscriptions": "გამოწერების არჩევა..."
+    "selectSubscriptions": "აირჩიეთ გამოწერები..."
   },
   "categories": {
     "cancel": "გაუქმება",
@@ -1295,30 +1295,30 @@
       "send": "გაგზავნა"
     },
     "disabled": {
-      "description": "ჩართეთ ჩატბოტი პარამეტრები → კონფიდენციალურობა → ბიუჯეტის ჩატბოტი, დასაწყებად.",
+      "description": "ჩართეთ ჩატბოტი პარამეტრები → კონფიდენციალურობა → ბიუჯეტის ჩატბოტი სექციაში.",
       "enableButton": "ჩატბოტის ჩართვა",
       "title": "ჩატბოტი გამორთულია"
     },
     "emptyState": {
-      "description": "მკითხეთ რამე თქვენი ფინანსების შესახებ. აი რამდენიმე მაგალითი:",
+      "description": "მკითხეთ ნებისმიერი რამ ფინანსების შესახებ. აქ არის რამდენიმე მაგალითი:",
       "examples": {
-        "balance": "რა არის ჩემი მთლიანი ანგარიშის ბალანსი?",
-        "budget": "რომელიმე კატეგორიაში ბიუჯეტს ვჭარბობ?",
-        "groceries": "მაჩვენე ბოლო სასურსათო შენაძენები",
+        "balance": "რა არის ჩემი ანგარიშის მთლიანი ბალანსი?",
+        "budget": "რომელიმე კატეგორიაში ხომ არ გადავაჭარბე ბიუჯეტს?",
+        "groceries": "მაჩვენე ბოლოდროინდელი სასურსათო შენაძენები",
         "spending": "რამდენი დავხარჯე ამ თვეში?"
       },
-      "title": "საუბრის დაწყება"
+      "title": "დაიწყეთ საუბარი"
     },
     "header": {
-      "subtitle": "მკითხეთ თქვენი ფინანსების შესახებ",
+      "subtitle": "მკითხეთ ფინანსების შესახებ",
       "title": "ბიუჯეტის ასისტენტი"
     },
     "input": {
-      "disclaimer": "მუშაობს OpenAI GPT-4-ით. თქვენი მონაცემები უსაფრთხოდ მუშავდება და სწავლებისთვის არ გამოიყენება.",
+      "disclaimer": "იკვებება OpenAI GPT-4-ით. თქვენი მონაცემები უსაფრთხოდ მუშავდება და არ გამოიყენება მოდელის სწავლებისთვის.",
       "placeholder": "იკითხეთ ფინანსების შესახებ..."
     },
     "messages": {
-      "dataAccessed": "წვდომა მოხდა მონაცემებზე:",
+      "dataAccessed": "წვდომა მონაცემებზე:",
       "error": "შეცდომა",
       "thinking": "ფიქრობს..."
     }
@@ -2270,44 +2270,44 @@
   },
   "investmentAccountModal": {
     "buttons": {
-      "cancel": "Cancel",
-      "create": "Create Account",
-      "saving": "Saving...",
-      "update": "Update Account"
+      "cancel": "გაუქმება",
+      "create": "ანგარიშის შექმნა",
+      "saving": "ინახება...",
+      "update": "ანგარიშის განახლება"
     },
-    "closeModal": "Close modal",
+    "closeModal": "მოდალის დახურვა",
     "errors": {
-      "saveFailed": "Failed to save account"
+      "saveFailed": "ანგარიშის შენახვა ვერ მოხერხდა"
     },
     "fields": {
       "accountNumber": {
-        "label": "Account Number (Optional)",
-        "placeholder": "e.g., Last 4 digits: 1234"
+        "label": "ანგარიშის ნომერი (არასავალდებულო)",
+        "placeholder": "მაგ., ბოლო 4 ციფრი: 1234"
       },
       "institution": {
-        "label": "Financial Institution (Optional)",
-        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
+        "label": "ფინანსური ინსტიტუცია (არასავალდებულო)",
+        "placeholder": "მაგ., Questrade, Wealthsimple, TD Direct"
       },
       "name": {
-        "label": "Account Name",
-        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
+        "label": "ანგარიშის სახელი",
+        "placeholder": "მაგ., ჩემი RRSP, TFSA დანაზოგი, კომპანიის აქციები"
       },
       "type": {
         "descriptions": {
-          "Company shares": "Employee stock purchase or stock options",
-          "Non-registered": "Taxable investment account",
-          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
-          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
+          "Company shares": "თანამშრომლის აქციების შეძენა ან აქციების ოფციონი",
+          "Non-registered": "დასაბეგრი საინვესტიციო ანგარიში",
+          "RRSP": "რეგისტრირებული საპენსიო დანაზოგების გეგმა - გადასახადიდან გადავადებული ზრდა",
+          "TFSA": "საგადასახადოდ თავისუფალი დანაზოგის ანგარიში - უგადასახადო ზრდა და გამოტანა"
         },
-        "label": "Account Type"
+        "label": "ანგარიშის ტიპი"
       }
     },
     "title": {
-      "add": "Add Investment Account",
-      "edit": "Edit Investment Account"
+      "add": "საინვესტიციო ანგარიშის დამატება",
+      "edit": "საინვესტიციო ანგარიშის რედაქტირება"
     },
     "validation": {
-      "nameRequired": "Please enter an account name"
+      "nameRequired": "გთხოვთ, შეიყვანეთ ანგარიშის სახელი"
     }
   },
   "investmentCharts": {
@@ -2408,57 +2408,57 @@
     "value": "ღირებულება"
   },
   "lanSync": {
-    "description": "Sync your budget data across devices on your local network",
+    "description": "სინქრონიზეთ ბიუჯეტის მონაცემები მოწყობილობებს შორის ლოკალურ ქსელში",
     "device": {
-      "connect": "Connect",
-      "connected": "Connected",
-      "disconnect": "Disconnect",
-      "removeDevice": "Remove Device",
-      "sync": "Sync",
-      "syncing": "Syncing..."
+      "connect": "დაკავშირება",
+      "connected": "დაკავშირებულია",
+      "disconnect": "გათიშვა",
+      "removeDevice": "მოწყობილობის წაშლა",
+      "sync": "სინქრონიზაცია",
+      "syncing": "სინქრონიზაცია..."
     },
-    "disabled": "Disabled",
-    "enabled": "Enabled",
+    "disabled": "გამორთულია",
+    "enabled": "ჩართულია",
     "howItWorks": {
       "step1": {
-        "description": "Scan a QR code or enter connection details to pair devices on the same network",
-        "title": "Pair Devices"
+        "description": "QR კოდის სკანირება ან კავშირის დეტალების შეყვანა ერთ ქსელში მყოფი მოწყობილობების დასაწყვილებლად",
+        "title": "მოწყობილობების დაწყვილება"
       },
       "step2": {
-        "description": "Data is encrypted end-to-end and syncs directly between devices - no cloud required",
-        "title": "Sync Securely"
+        "description": "მონაცემები დაშიფრულია ბოლოდან ბოლომდე და სინქრონიზდება პირდაპირ მოწყობილობებს შორის - ღრუბელი არ არის საჭირო",
+        "title": "უსაფრთხო სინქრონიზაცია"
       },
       "step3": {
-        "description": "Changes sync automatically when devices are connected on the same network",
-        "title": "Automatic Updates"
+        "description": "ცვლილებები ავტომატურად სინქრონიზდება, როდესაც მოწყობილობები ერთ ქსელშია დაკავშირებული",
+        "title": "ავტომატური განახლებები"
       },
-      "title": "How LAN Sync Works"
+      "title": "როგორ მუშაობს LAN სინქრონიზაცია"
     },
     "pairedDevices": {
-      "addDevice": "Add Device",
-      "addFirstDevice": "Add Your First Device",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
-      "emptyDescription": "Pair a device to start syncing your budget data",
-      "emptyTitle": "No devices paired",
-      "noDevices": "No devices paired yet",
-      "title": "Paired Devices"
+      "addDevice": "მოწყობილობის დამატება",
+      "addFirstDevice": "დაამატეთ პირველი მოწყობილობა",
+      "deviceCount": "{count, plural, =1 {1 მოწყობილობა დაწყვილებულია} other {# მოწყობილობა დაწყვილებულია}}",
+      "emptyDescription": "დააწყვილეთ მოწყობილობა ბიუჯეტის მონაცემების სინქრონიზაციის დასაწყებად",
+      "emptyTitle": "მოწყობილობები არ არის დაწყვილებული",
+      "noDevices": "მოწყობილობები ჯერ არ არის დაწყვილებული",
+      "title": "დაწყვილებული მოწყობილობები"
     },
     "removeDialog": {
-      "cancel": "Cancel",
-      "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
-      "remove": "Remove",
-      "title": "Remove Device"
+      "cancel": "გაუქმება",
+      "description": "ნამდვილად გსურთ \"{deviceName}\"-ის წაშლა? ეს გააუქმებს მოწყობილობის დაწყვილებას და მონაცემების სინქრონიზაციისთვის ხელახლა დაწყვილება იქნება საჭირო.",
+      "remove": "წაშლა",
+      "title": "მოწყობილობის წაშლა"
     },
-    "syncAll": "Sync All",
+    "syncAll": "ყველას სინქრონიზაცია",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
-      "justNow": "Just now",
-      "lastSync": "Last sync: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
-      "neverSynced": "Never synced"
+      "daysAgo": "{count, plural, =1 {1 დღის წინ} other {# დღის წინ}}",
+      "hoursAgo": "{count, plural, =1 {1 საათის წინ} other {# საათის წინ}}",
+      "justNow": "ახლახან",
+      "lastSync": "ბოლო სინქრონიზაცია: {time}",
+      "minutesAgo": "{count, plural, =1 {1 წუთის წინ} other {# წუთის წინ}}",
+      "neverSynced": "არასდროს სინქრონიზებული"
     },
-    "title": "LAN Sync"
+    "title": "LAN სინქრონიზაცია"
   },
   "landing": {
     "accessibility": {
@@ -2533,7 +2533,7 @@
     },
     "faqSection": {
       "description": "მარტივი პასუხები საერთო კითხვებზე საცდელ ვერსიებზე, ფასებზე და წვდომაზე.",
-      "title": "FAQ"
+      "title": "ხშირად დასმული კითხვები"
     },
     "features": {
       "0": {
@@ -2616,22 +2616,22 @@
         "viewPricing": "იხილეთ ფასები"
       },
       "demo": {
-        "cloudStorage": "Cloud storage",
-        "dining": "Dining",
-        "expenses": "Expenses",
-        "foodToday": "Food • Today",
-        "groceries": "Groceries",
-        "groceryStore": "Grocery Store",
-        "income": "Income",
-        "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
-        "netWorth": "Net worth",
+        "cloudStorage": "ღრუბლოვანი საცავი",
+        "dining": "კვება",
+        "expenses": "ხარჯები",
+        "foodToday": "საკვები • დღეს",
+        "groceries": "სასურსათო",
+        "groceryStore": "სასურსათო მაღაზია",
+        "income": "შემოსავალი",
+        "incomeYesterday": "შემოსავალი • გუშინ",
+        "monthly": "ყოველთვიური",
+        "netWorth": "წმინდა ღირებულება",
         "netflix": "Netflix",
-        "salary": "Salary",
-        "shopping": "Shopping",
+        "salary": "ხელფასი",
+        "shopping": "შოპინგი",
         "spotify": "Spotify",
-        "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "subscriptionOct24": "გამოწერა • ოქტ 24",
+        "yearly": "ყოველწლიური"
       },
       "modes": {
         "budgets": "ბიუჯეტები",
@@ -3115,21 +3115,21 @@
   },
   "notificationSettings": {
     "emailNotifications": {
-      "description": "შეტყობინებების მიღება ელ-ფოსტით",
-      "emailAddress": "ელ-ფოსტის მისამართი",
-      "invalidEmail": "გთხოვთ შეიყვანოთ სწორი ელ-ფოსტის მისამართი",
+      "description": "მიიღეთ შეტყობინებები ელფოსტით",
+      "emailAddress": "ელფოსტის მისამართი",
+      "invalidEmail": "გთხოვთ, შეიყვანეთ სწორი ელფოსტის მისამართი",
       "sendTest": "ტესტის გაგზავნა",
-      "testEmail": "ტესტ ელ-ფოსტა",
-      "testEmailDescription": "გაგზავნეთ ტესტ ელ-ფოსტა პარამეტრების შესამოწმებლად",
+      "testEmail": "სატესტო ელფოსტა",
+      "testEmailDescription": "გაგზავნეთ სატესტო ელფოსტა შესამოწმებლად",
       "testEmailFailed": "გაგზავნა ვერ მოხერხდა",
-      "testEmailSent": "ელ-ფოსტა გაიგზავნა!",
-      "title": "ელ-ფოსტის შეტყობინებები",
-      "types": "ელ-ფოსტის შეტყობინებების ტიპები"
+      "testEmailSent": "ელფოსტა გაგზავნილია!",
+      "title": "ელფოსტის შეტყობინებები",
+      "types": "ელფოსტის შეტყობინებების ტიპები"
     },
     "infoBox": {
-      "emailExplanation": "ელ-ფოსტის შეტყობინებები იგზავნება ჩვენი უსაფრთხო ელ-ფოსტის სერვისით და მოითხოვს სწორ ელ-ფოსტის მისამართს.",
-      "pushExplanation": "Push შეტყობინებებს ბრაუზერის ნებართვა სჭირდება და მუშაობს აპის დახურვისასაც.",
-      "storedLocally": "შეტყობინებების პარამეტრები ლოკალურად ინახება თქვენს მოწყობილობაზე."
+      "emailExplanation": "ელფოსტის შეტყობინებები იგზავნება უსაფრთხო სერვისით და მოითხოვს სწორ ელფოსტის მისამართს.",
+      "pushExplanation": "Push შეტყობინებები ბრაუზერის ნებართვას მოითხოვს და მუშაობს აპის დახურვისასაც.",
+      "storedLocally": "შეტყობინებების პარამეტრები ლოკალურად ინახება მოწყობილობაზე."
     },
     "masterToggle": {
       "description": "ყველა შეტყობინების ჩართვა ან გამორთვა",
@@ -3138,48 +3138,48 @@
     "notAvailable": "შეტყობინებების პარამეტრები მიუწვდომელია.",
     "notificationTypes": {
       "billReminders": {
-        "description": "შეტყობინება გამოწერების ვადის მოახლოებისას",
-        "title": "გადასახადების შეხსენებები"
+        "description": "შეტყობინება გამოწერის ვადამდე",
+        "title": "გადასახადის შეხსენებები"
       },
       "budgetAlerts": {
-        "description": "შეტყობინებები ბიუჯეტის ლიმიტებთან მიახლოებისას",
-        "title": "ბიუჯეტის შეტყობინებები"
+        "description": "გაფრთხილებები ბიუჯეტის ლიმიტთან მიახლოებისას",
+        "title": "ბიუჯეტის გაფრთხილებები"
       },
-      "description": "აირჩიეთ რომელი შეტყობინებების მიღება გსურთ",
+      "description": "აირჩიეთ რომელი შეტყობინებები გსურთ",
       "goalMilestones": {
-        "description": "აღნიშნეთ დანაზოგის ეტაპების მიღწევა",
-        "title": "მიზნების ეტაპები"
+        "description": "იზეიმეთ დანაზოგის ეტაპების მიღწევა",
+        "title": "მიზნის ეტაპები"
       },
       "title": "შეტყობინებების ტიპები"
     },
     "pushPermission": {
       "deniedHint": "ჩართეთ ბრაუზერის პარამეტრებში",
-      "description": "შეტყობინებების მიღება აპის დახურვისასაც",
+      "description": "მიიღეთ შეტყობინებები აპის დახურვისასაც",
       "enable": "Push შეტყობინებების ჩართვა",
-      "notSupported": "ამ ბრაუზერში მხარდაჭერილი არ არის",
+      "notSupported": "არ არის მხარდაჭერილი ამ ბრაუზერში",
       "states": {
-        "default": "დაყენებული არ არის",
+        "default": "არ არის დაყენებული",
         "denied": "დაბლოკილია",
         "granted": "ჩართულია",
-        "unsupported": "მხარდაუჭერელი"
+        "unsupported": "არ არის მხარდაჭერილი"
       },
       "title": "Push შეტყობინებები"
     },
     "quietHours": {
-      "description": "ამ დროის ფანჯარაში შეტყობინებები არ იქნება",
+      "description": "შეტყობინებები არ მოვა ამ დროის ფანჯარაში",
       "end": "დასრულების დრო",
       "start": "დაწყების დრო",
       "title": "მშვიდი საათები"
     },
     "reminderDays": {
-      "daysBeforeDue": "დღე ვადამდე",
-      "description": "რამდენი დღით ადრე შეგახსენოთ გადასახადის ვადამდე",
+      "daysBeforeDue": "დღით ადრე ვადამდე",
+      "description": "რამდენი დღით ადრე შეგახსენოთ ვადამდე",
       "title": "ნაგულისხმევი შეხსენება"
     },
     "testNotification": {
       "button": "ტესტის გაგზავნა",
-      "description": "გაგზავნეთ ტესტ შეტყობინება თქვენი პარამეტრების შესამოწმებლად",
-      "title": "ტესტ შეტყობინება"
+      "description": "გაგზავნეთ სატესტო შეტყობინება პარამეტრების შესამოწმებლად",
+      "title": "სატესტო შეტყობინება"
     },
     "title": "შეტყობინებები"
   },
@@ -3199,7 +3199,7 @@
       "3days": "3 დღე",
       "3hours": "3 საათი"
     },
-    "snoozedUntil": "გადავადებულია {time}-ით",
+    "snoozedUntil": "გადავადებული {time}-ით",
     "tabs": {
       "all": "ყველა",
       "snoozed": "გადავადებული",
@@ -3208,7 +3208,7 @@
     "title": "შეტყობინებები",
     "types": {
       "bill_reminder": "გადასახადის შეხსენება",
-      "budget_alert": "ბიუჯეტის შეტყობინება",
+      "budget_alert": "ბიუჯეტის გაფრთხილება",
       "goal_milestone": "მიზნის ეტაპი",
       "system": "სისტემა"
     }
@@ -3411,7 +3411,7 @@
     },
     "tip": {
       "label": "რჩევა:",
-      "reduceSpending": "შეამცირეთ ყოველდღიური ხარჯვა {amount}-მდე ბიუჯეტში დასარჩენად."
+      "reduceSpending": "შეამცირეთ ყოველდღიური ხარჯი {amount}-მდე ბიუჯეტში რომ დარჩეთ."
     }
   },
   "pairingDialog": {
@@ -3996,21 +3996,21 @@
     "confidence": "{percent}% სანდოობა",
     "estimatedMonthly": "სავარაუდო ყოველთვიური",
     "frequency": {
-      "biweekly": "ორკვირაში ერთხელ",
+      "biweekly": "ორკვირეული",
       "monthly": "ყოველთვიური",
       "quarterly": "კვარტალური",
       "weekly": "ყოველკვირეული"
     },
     "inDays": "{count, plural, =0 {(დღეს)} =1 {(1 დღეში)} other {(# დღეში)}}",
     "next": "შემდეგი: {date}",
-    "occurrences": "{count, plural, =1 {1 შემთხვევა აღმოჩენილი} other {# შემთხვევა აღმოჩენილი}}",
+    "occurrences": "{count, plural, =1 {აღმოჩენილია 1 შემთხვევა} other {აღმოჩენილია # შემთხვევა}}",
     "perPeriod": {
       "month": "თვეში",
       "quarter": "კვარტალში",
       "twoWeeks": "2 კვირაში",
       "week": "კვირაში"
     },
-    "showingPatterns": "{count, plural, =1 {ნაჩვენებია 1 განმეორებადი ტრანზაქციის შაბლონი} other {ნაჩვენებია # განმეორებადი ტრანზაქციის შაბლონი}}",
+    "showingPatterns": "{count, plural, =1 {ნაჩვენებია 1 განმეორებადი ტრანზაქციის ნიმუში} other {ნაჩვენებია # განმეორებადი ტრანზაქციის ნიმუში}}",
     "subtitle": "აღმოჩენილი გამოწერები და გადასახადები",
     "title": "განმეორებადი ტრანზაქციები"
   },
@@ -4245,70 +4245,70 @@
   },
   "simplefinSettings": {
     "connectedAccounts": {
-      "description": "Manage your linked bank accounts",
-      "title": "Connected Accounts"
+      "description": "მართეთ დაკავშირებული საბანკო ანგარიშები",
+      "title": "დაკავშირებული ანგარიშები"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
-      "connectButton": "Connect Bank Account",
-      "connected": "Connected",
-      "description": "Connect your bank accounts to automatically import transactions",
-      "notConnected": "Not Connected",
-      "notConnectedDesc": "Connect your bank accounts to start importing transactions",
-      "title": "SimpleFIN Connection"
+      "accountsLinked": "{count, plural, =1 {1 ანგარიში დაკავშირებულია} other {# ანგარიში დაკავშირებულია}}",
+      "connectButton": "საბანკო ანგარიშის დაკავშირება",
+      "connected": "დაკავშირებულია",
+      "description": "დაუკავშირეთ საბანკო ანგარიშები ტრანზაქციების ავტომატური იმპორტისთვის",
+      "notConnected": "არ არის დაკავშირებული",
+      "notConnectedDesc": "დაუკავშირეთ საბანკო ანგარიშები ტრანზაქციების იმპორტის დასაწყებად",
+      "title": "SimpleFIN კავშირი"
     },
     "disconnect": {
-      "button": "Disconnect",
-      "cancel": "Cancel",
-      "confirm": "Disconnect",
-      "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
-      "dialogTitle": "Disconnect SimpleFIN?"
+      "button": "გათიშვა",
+      "cancel": "გაუქმება",
+      "confirm": "გათიშვა",
+      "dialogDescription": "ეს წაშლის კავშირს საბანკო ანგარიშებთან. არსებული ტრანზაქციები არ წაიშლება, მაგრამ ახალი ტრანზაქციები აღარ სინქრონიზდება ავტომატურად.",
+      "dialogTitle": "გავთიშოთ SimpleFIN?"
     },
     "help": {
-      "bridgeDashboard": "SimpleFIN Bridge Dashboard",
-      "protocolDocs": "SimpleFIN Protocol Documentation",
-      "title": "Need Help?"
+      "bridgeDashboard": "SimpleFIN Bridge-ის მართვის პანელი",
+      "protocolDocs": "SimpleFIN პროტოკოლის დოკუმენტაცია",
+      "title": "დახმარება გჭირდებათ?"
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
-      "lastSynced": "Last synced: {time}",
-      "lessThanHour": "Less than an hour ago",
-      "never": "Never",
-      "syncNow": "Sync Now",
-      "syncing": "Syncing..."
+      "hoursAgo": "{hours, plural, =1 {1 საათის წინ} other {# საათის წინ}}",
+      "lastSynced": "ბოლო სინქრონიზაცია: {time}",
+      "lessThanHour": "ერთ საათზე ნაკლები წინ",
+      "never": "არასდროს",
+      "syncNow": "სინქრონიზაცია ახლა",
+      "syncing": "სინქრონიზაცია..."
     },
     "syncSettings": {
       "autoCategorize": {
-        "description": "Automatically categorize imported transactions using AI",
-        "label": "Auto-Categorize"
+        "description": "იმპორტირებული ტრანზაქციების ავტომატური კატეგორიზაცია AI-ს გამოყენებით",
+        "label": "ავტო-კატეგორიზაცია"
       },
       "autoSync": {
-        "description": "Automatically sync transactions on a schedule",
-        "label": "Automatic Sync"
+        "description": "ტრანზაქციების ავტომატური სინქრონიზაცია გრაფიკით",
+        "label": "ავტომატური სინქრონიზაცია"
       },
-      "description": "Configure how and when transactions are synced",
+      "description": "კონფიგურირეთ ტრანზაქციების სინქრონიზაციის დრო და წესი",
       "frequency": {
-        "every12Hours": "Every 12 hours",
-        "every2Days": "Every 2 days",
-        "every6Hours": "Every 6 hours",
-        "hint": "SimpleFIN allows up to 24 requests per day. Daily sync is recommended.",
-        "label": "Sync Frequency",
-        "onceDaily": "Once daily"
+        "every12Hours": "ყოველ 12 საათში",
+        "every2Days": "ყოველ 2 დღეში",
+        "every6Hours": "ყოველ 6 საათში",
+        "hint": "SimpleFIN დღეში 24-მდე მოთხოვნას უშვებს. რეკომენდებულია ყოველდღიური სინქრონიზაცია.",
+        "label": "სინქრონიზაციის სიხშირე",
+        "onceDaily": "დღეში ერთხელ"
       },
       "notifications": {
-        "description": "Show notification when sync completes",
-        "label": "Sync Notifications"
+        "description": "შეტყობინების ჩვენება სინქრონიზაციის დასრულებისას",
+        "label": "სინქრონიზაციის შეტყობინებები"
       },
       "pendingTransactions": {
-        "description": "Include transactions that haven't posted yet",
-        "label": "Import Pending Transactions"
+        "description": "ჯერ არ განხორციელებული ტრანზაქციების ჩართვა",
+        "label": "მომლოდინე ტრანზაქციების იმპორტი"
       },
-      "title": "Sync Settings",
+      "title": "სინქრონიზაციის პარამეტრები",
       "transactionHistory": {
-        "days": "{count} days",
-        "hint": "How many days of transaction history to fetch (max 60 days per SimpleFIN)",
-        "label": "Transaction History"
+        "days": "{count} დღე",
+        "hint": "ტრანზაქციების ისტორიის რამდენი დღე მოიტანოს (მაქს. 60 დღე SimpleFIN-ით)",
+        "label": "ტრანზაქციების ისტორია"
       }
     }
   },
@@ -4494,7 +4494,7 @@
   },
   "subscriptionCard": {
     "badges": {
-      "aiVerified": "AI დადასტურებული",
+      "aiVerified": "AI დამოწმებული",
       "cancelled": "გაუქმებული",
       "paused": "შეჩერებული",
       "trial": "საცდელი"
@@ -4511,23 +4511,23 @@
       "medium": "საშუალო"
     },
     "details": {
-      "charges": "{count} ჩამოჭრა",
+      "charges": "{count} გადახდა",
       "daysBefore": "{count} დღით ადრე",
-      "firstCharge": "პირველი ჩამოჭრა",
-      "lastCharge": "ბოლო ჩამოჭრა",
+      "firstCharge": "პირველი გადახდა",
+      "lastCharge": "ბოლო გადახდა",
       "occurrences": "შემთხვევები",
       "payment": "გადახდა",
       "reminder": "შეხსენება"
     },
     "interval": {
       "annual": "წლიური",
-      "bi-weekly": "ორკვირაში ერთხელ",
+      "bi-weekly": "ორკვირეული",
       "irregular": "არარეგულარული",
       "monthly": "ყოველთვიური",
       "quarterly": "კვარტალური",
       "weekly": "ყოველკვირეული"
     },
-    "lowConfidenceWarning": "ეს გამოწერა დაბალი სანდოობით იქნა აღმოჩენილი. მოითხოვეთ ხელით სამართავად.",
+    "lowConfidenceWarning": "ეს გამოწერა დაბალი სანდოობით იქნა აღმოჩენილი. მოითხოვეთ მისი დამოწმება და ხელით მართვა.",
     "menu": {
       "cancelSubscription": "გამოწერის გაუქმება",
       "claimManage": "მოთხოვნა და მართვა",
@@ -4539,7 +4539,7 @@
       "viewTransactions": "ტრანზაქციების ნახვა"
     },
     "source": {
-      "auto-detected": "ავტო-აღმოჩენილი",
+      "auto-detected": "ავტომატურად აღმოჩენილი",
       "manual": "ხელით",
       "merged": "თვალყურის ქვეშ"
     },
@@ -4547,11 +4547,11 @@
       "amount": "თანხა",
       "annualCost": "წლიური ღირებულება",
       "frequency": "სიხშირე",
-      "nextCharge": "შემდეგი ჩამოჭრა",
-      "totalSpent": "ჯამი დახარჯული"
+      "nextCharge": "შემდეგი გადახდა",
+      "totalSpent": "სულ დახარჯული"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {საცდელ პერიოდში 1 დღე დარჩა} other {საცდელ პერიოდში # დღე დარჩა}}"
+      "daysLeft": "{count, plural, =1 {საცდელი პერიოდის 1 დღე დარჩა} other {საცდელი პერიოდის # დღე დარჩა}}"
     },
     "reminderToggle": {
       "disableReminder": "შეხსენების გამორთვა",
@@ -4829,46 +4829,46 @@
     }
   },
   "transactionSearch": {
-    "amountRangeLabel": "Amount range",
-    "clearRecent": "Clear",
-    "filterName": "Filter name",
-    "noResults": "No transactions found",
-    "noResultsDescription": "Try a different search or adjust your filters",
-    "noTransactionsYet": "No transactions yet",
-    "placeholder": "Search transactions...",
-    "placeholderExtended": "Try 'coffee last week' or 'amount:>50'",
-    "recentSearchLabel": "Recent search",
-    "recentSearches": "Recent Searches",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
-    "save": "Save",
-    "saveFilter": "Save Filter",
-    "savedFilters": "Saved Filters",
-    "searchFilterLabel": "Search filter",
-    "searchTipAmount": "Use <code>$50-100</code> for amount ranges",
-    "searchTipChars": "Type 3+ characters to search transactions",
-    "searchTipNL": "Try <code>coffee last week</code> for natural language",
-    "searchTipsIntro": "Search Tips:",
-    "searchingFor": "Searching for: {query}",
+    "amountRangeLabel": "თანხის დიაპაზონი",
+    "clearRecent": "გასუფთავება",
+    "filterName": "ფილტრის სახელი",
+    "noResults": "ტრანზაქციები ვერ მოიძებნა",
+    "noResultsDescription": "სცადეთ სხვა ძიება ან შეცვალეთ ფილტრები",
+    "noTransactionsYet": "ჯერ ტრანზაქციები არ არის",
+    "placeholder": "ტრანზაქციების ძიება...",
+    "placeholderExtended": "სცადეთ 'ყავა გასულ კვირას' ან 'amount:>50'",
+    "recentSearchLabel": "ბოლო ძიება",
+    "recentSearches": "ბოლო ძიებები",
+    "resultCount": "{count} {count, plural, =1 {შედეგი} other {შედეგი}}",
+    "save": "შენახვა",
+    "saveFilter": "ფილტრის შენახვა",
+    "savedFilters": "შენახული ფილტრები",
+    "searchFilterLabel": "ძიების ფილტრი",
+    "searchTipAmount": "გამოიყენეთ <code>$50-100</code> თანხის დიაპაზონისთვის",
+    "searchTipChars": "აკრიფეთ 3+ სიმბოლო ტრანზაქციების საძიებლად",
+    "searchTipNL": "სცადეთ <code>coffee last week</code> ბუნებრივი ენით",
+    "searchTipsIntro": "ძიების რჩევები:",
+    "searchingFor": "ძიება: {query}",
     "suggestions": {
-      "amounts": "Amount Ranges",
-      "categories": "Categories",
-      "merchants": "Merchants",
-      "recent": "Recent"
+      "amounts": "თანხის დიაპაზონები",
+      "categories": "კატეგორიები",
+      "merchants": "მოვაჭრეები",
+      "recent": "ბოლო"
     },
-    "suggestionsHeading": "Suggestions",
+    "suggestionsHeading": "შემოთავაზებები",
     "tips": {
-      "amount": "Amount: '$50-100' or 'amount:>50'",
-      "category": "Category: 'groceries' or 'category:food'",
-      "date": "Date: 'last week', 'this month', 'date:last30'",
-      "fuzzy": "Typo-tolerant: 'starbukcs' finds 'Starbucks'",
-      "title": "Search Tips",
-      "type": "Type: 'type:income' or 'type:expense'"
+      "amount": "თანხა: '$50-100' ან 'amount:>50'",
+      "category": "კატეგორია: 'groceries' ან 'category:food'",
+      "date": "თარიღი: 'last week', 'this month', 'date:last30'",
+      "fuzzy": "ტოლერანტული აკრეფისას: 'starbukcs' პოულობს 'Starbucks'-ს",
+      "title": "ძიების რჩევები",
+      "type": "ტიპი: 'type:income' ან 'type:expense'"
     },
-    "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
-    "viewAllResults": "View all {count} results",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "transactionCount": "{count} {count, plural, =1 {ტრანზაქცია} other {ტრანზაქცია}}",
+    "usedTimes": "გამოყენებული {count} {count, plural, =1 {ჯერ} other {ჯერ}}",
+    "viewAllResults": "ყველა {count} შედეგის ნახვა",
+    "resultsFound": "{count} {count, plural, =1 {შედეგი} other {შედეგი}} ნაპოვნია",
+    "suggestionsAvailable": "{count} {count, plural, =1 {შემოთავაზება} other {შემოთავაზება}} ხელმისაწვდომია"
   },
   "transactionTable": {
     "actions": {
@@ -5105,133 +5105,133 @@
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
-      "createNew": "Create New",
-      "description": "Map YNAB categories to your existing categories or create new ones.",
-      "mapToExisting": "Map to Existing",
-      "selectCategory": "Select category...",
-      "skip": "Skip",
-      "title": "Category Mapping",
-      "willCreate": "Will create:"
+      "category": "{count, plural, =1 {1 კატეგორია} other {# კატეგორია}}",
+      "createNew": "ახლის შექმნა",
+      "description": "შეადარეთ YNAB კატეგორიები არსებულ კატეგორიებს ან შექმენით ახლები.",
+      "mapToExisting": "არსებულთან შესაბამისობა",
+      "selectCategory": "აირჩიეთ კატეგორია...",
+      "skip": "გამოტოვება",
+      "title": "კატეგორიების შესაბამისობა",
+      "willCreate": "შეიქმნება:"
     },
     "completeStep": {
-      "errors": "Errors",
-      "importAnother": "Import Another",
-      "success": "Import Complete!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
-      "viewTransactions": "View Transactions",
-      "whatNext": "What would you like to do next?",
-      "withIssues": "Import Completed with Issues"
+      "errors": "შეცდომები",
+      "importAnother": "სხვა ფაილის იმპორტი",
+      "success": "იმპორტი დასრულდა!",
+      "successMessage": "{count, plural, =1 {1 ელემენტი წარმატებით იმპორტირდა} other {# ელემენტი წარმატებით იმპორტირდა}} YNAB-დან.",
+      "viewTransactions": "ტრანზაქციების ნახვა",
+      "whatNext": "რა გსურთ შემდეგ?",
+      "withIssues": "იმპორტი დასრულდა პრობლემებით"
     },
     "footer": {
-      "back": "Back",
-      "done": "Done",
-      "next": "Next",
-      "startImport": "Start Import"
+      "back": "უკან",
+      "done": "მზადაა",
+      "next": "შემდეგი",
+      "startImport": "იმპორტის დაწყება"
     },
     "header": {
-      "closeLabel": "Close wizard",
-      "subtitle": "Migrate your budget data seamlessly",
-      "title": "Import from YNAB"
+      "closeLabel": "ოსტატის დახურვა",
+      "subtitle": "ბიუჯეტის მონაცემების უწყვეტი მიგრაცია",
+      "title": "YNAB-დან იმპორტი"
     },
     "importingStep": {
-      "finishing": "Finishing up...",
-      "importingAccounts": "Importing accounts...",
-      "importingBudgets": "Importing budgets...",
-      "importingCategories": "Importing categories...",
-      "importingTransactions": "Importing transactions...",
-      "title": "Importing your YNAB data..."
+      "finishing": "დასრულება...",
+      "importingAccounts": "ანგარიშების იმპორტი...",
+      "importingBudgets": "ბიუჯეტების იმპორტი...",
+      "importingCategories": "კატეგორიების იმპორტი...",
+      "importingTransactions": "ტრანზაქციების იმპორტი...",
+      "title": "YNAB მონაცემების იმპორტი..."
     },
     "optionsStep": {
       "accountOptions": {
-        "includeClosedAccounts": "Include closed accounts",
-        "includeOffBudgetAccounts": "Include off-budget accounts",
-        "title": "Account Options"
+        "includeClosedAccounts": "დახურული ანგარიშების ჩართვა",
+        "includeOffBudgetAccounts": "ბიუჯეტგარეშე ანგარიშების ჩართვა",
+        "title": "ანგარიშის პარამეტრები"
       },
       "budgetOptions": {
-        "importGoals": "Import savings goals as future purchases",
-        "title": "Budget Options"
+        "importGoals": "დანაზოგის მიზნების იმპორტი მომავალი შენაძენებად",
+        "title": "ბიუჯეტის პარამეტრები"
       },
       "hiddenCategories": {
-        "archive": "Archive",
-        "archiveDesc": "Import as archived (recommended)",
-        "description": "How to handle YNAB categories marked as hidden?",
-        "import": "Import",
-        "importDesc": "Import as active categories",
-        "skip": "Skip",
-        "skipDesc": "Don't import hidden categories",
-        "title": "Hidden Categories"
+        "archive": "დაარქივება",
+        "archiveDesc": "იმპორტი დაარქივებულად (რეკომენდებული)",
+        "description": "როგორ მოვიქცეთ YNAB-ში დამალულად მონიშნულ კატეგორიებთან?",
+        "import": "იმპორტი",
+        "importDesc": "იმპორტი აქტიური კატეგორიებად",
+        "skip": "გამოტოვება",
+        "skipDesc": "დამალული კატეგორიების იმპორტის გარეშე",
+        "title": "დამალული კატეგორიები"
       }
     },
     "previewStep": {
-      "accounts": "Accounts",
-      "allocations": "{count} allocations",
-      "budgetMonths": "Budget Months",
-      "categories": "Categories",
-      "dateRange": "Transaction Date Range",
-      "description": "Review the data that will be imported.",
-      "duplicates": "{count} duplicates",
-      "new": "{count} new",
-      "newMapped": "{created} new, {mapped} mapped",
-      "preparingPreview": "Preparing preview...",
-      "title": "Import Preview",
-      "transactions": "Transactions",
-      "warnings": "Warnings"
+      "accounts": "ანგარიშები",
+      "allocations": "{count} განაწილება",
+      "budgetMonths": "ბიუჯეტის თვეები",
+      "categories": "კატეგორიები",
+      "dateRange": "ტრანზაქციების თარიღების დიაპაზონი",
+      "description": "გადახედეთ იმპორტისთვის განკუთვნილ მონაცემებს.",
+      "duplicates": "{count} დუბლიკატი",
+      "new": "{count} ახალი",
+      "newMapped": "{created} ახალი, {mapped} შესაბამისობით",
+      "preparingPreview": "წინასწარი ხედის მომზადება...",
+      "title": "იმპორტის წინასწარი ხედი",
+      "transactions": "ტრანზაქციები",
+      "warnings": "გაფრთხილებები"
     },
     "steps": {
       "categories": {
-        "description": "Map to existing categories",
-        "title": "Categories"
+        "description": "შესაბამისობა არსებულ კატეგორიებთან",
+        "title": "კატეგორიები"
       },
       "complete": {
-        "description": "Migration finished",
-        "title": "Complete"
+        "description": "მიგრაცია დასრულდა",
+        "title": "დასრულებული"
       },
       "importing": {
-        "description": "Processing your data",
-        "title": "Importing"
+        "description": "თქვენი მონაცემების დამუშავება",
+        "title": "იმპორტი"
       },
       "options": {
-        "description": "Configure import settings",
-        "title": "Options"
+        "description": "იმპორტის პარამეტრების კონფიგურაცია",
+        "title": "პარამეტრები"
       },
       "preview": {
-        "description": "Review before import",
-        "title": "Preview"
+        "description": "იმპორტამდე გადახედვა",
+        "title": "წინასწარი ხედი"
       },
       "upload": {
-        "description": "Select YNAB export file",
-        "title": "Upload"
+        "description": "აირჩიეთ YNAB ექსპორტის ფაილი",
+        "title": "ატვირთვა"
       }
     },
     "uploadStep": {
-      "accounts": "Accounts",
-      "categories": "Categories",
-      "clickToSelect": "Click to select a file",
-      "dragAndDrop": "or drag and drop here",
-      "fileSummary": "File Summary",
-      "format": "Format",
-      "formatApiExport": "YNAB API Export",
-      "formatApiExportDesc": "JSON from nYNAB",
-      "formatCsv": "CSV Export",
-      "formatCsvDesc": "From YNAB web app",
+      "accounts": "ანგარიშები",
+      "categories": "კატეგორიები",
+      "clickToSelect": "დააწკაპუნეთ ფაილის ასარჩევად",
+      "dragAndDrop": "ან გადმოიტანეთ აქ",
+      "fileSummary": "ფაილის შეჯამება",
+      "format": "ფორმატი",
+      "formatApiExport": "YNAB API ექსპორტი",
+      "formatApiExportDesc": "JSON nYNAB-დან",
+      "formatCsv": "CSV ექსპორტი",
+      "formatCsvDesc": "YNAB ვებ აპიდან",
       "formatYfull": "Budget.yfull / Budget.ynab4",
-      "formatYfullDesc": "YNAB4 desktop export",
-      "parsing": "Parsing file...",
-      "supportedFormats": "Supported Formats",
-      "transactions": "Transactions"
+      "formatYfullDesc": "YNAB4 დესკტოპ ექსპორტი",
+      "parsing": "ფაილის ანალიზი...",
+      "supportedFormats": "მხარდაჭერილი ფორმატები",
+      "transactions": "ტრანზაქციები"
     },
     "errors": {
-      "parseFailed": "Failed to parse YNAB file",
-      "previewFailed": "Failed to generate preview",
-      "accountImportFailed": "Account import failed: {details}",
-      "categoryImportFailed": "Category import failed: {details}",
-      "transactionImportFailed": "Transaction import failed: {details}",
-      "unknownError": "Unknown error",
-      "budgetImportFailed": "Budget import failed: {details}"
+      "parseFailed": "YNAB ფაილის ანალიზი ვერ მოხერხდა",
+      "previewFailed": "წინასწარი ხედის გენერირება ვერ მოხერხდა",
+      "accountImportFailed": "ანგარიშის იმპორტი ვერ მოხერხდა: {details}",
+      "categoryImportFailed": "კატეგორიის იმპორტი ვერ მოხერხდა: {details}",
+      "transactionImportFailed": "ტრანზაქციის იმპორტი ვერ მოხერხდა: {details}",
+      "unknownError": "უცნობი შეცდომა",
+      "budgetImportFailed": "ბიუჯეტის იმპორტი ვერ მოხერხდა: {details}"
     },
-    "importSuccess": "YNAB data imported successfully!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importSuccess": "YNAB მონაცემები წარმატებით იმპორტირდა!",
+    "importWithErrors": "იმპორტი დასრულდა {count, plural, =1 {1 შეცდომით} other {# შეცდომით}}"
   },
   "balanceReconciliation": {
     "title": "იმპორტი დასრულებულია!",

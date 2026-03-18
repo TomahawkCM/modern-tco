@@ -1,50 +1,50 @@
 {
   "accessibilitySettings": {
     "fontSize": {
-      "default": "Default",
-      "description": "Adjust the base text size for better readability",
-      "extraLarge": "Extra Large",
-      "large": "Large",
-      "title": "Font Size"
+      "default": "ነባሪ",
+      "description": "ለተሻለ ንባብ የመሰረት ጽሁፍ መጠን ያስተካክሉ",
+      "extraLarge": "በጣም ትልቅ",
+      "large": "ትልቅ",
+      "title": "የፊደል መጠን"
     },
     "infoBox": {
-      "savedAutomatically": "Settings are saved automatically and persist across sessions",
-      "seniorsOptimization": "Seniors Mode provides one-click accessibility optimization",
-      "storedLocally": "Your preferences are stored locally and never sent to servers",
-      "syncAcrossTabs": "Changes sync across all open tabs in real-time",
-      "title": "About Accessibility Settings"
+      "savedAutomatically": "ቅንብሮች ራስ-ሰር ይቀመጣሉ እና በክፍለ ጊዜዎች ይቆያሉ",
+      "seniorsOptimization": "የአረጋውያን ሁነታ በአንድ ጠቅ ተደራሽነት ማሻሻያ ይሰጣል",
+      "storedLocally": "ምርጫዎችዎ በአካባቢ ይቀመጣሉ እና ወደ ሰርቨሮች በጭራሽ አይላኩም",
+      "syncAcrossTabs": "ለውጦች በሁሉም ክፍት ትብዎች በቀጥታ ይመሳሰላሉ",
+      "title": "ስለ ተደራሽነት ቅንብሮች"
     },
     "presets": {
-      "full": "Full",
-      "fullDesc": "Maximum accessibility",
-      "mild": "Mild",
-      "mildDesc": "Slightly enhanced",
-      "moderate": "Moderate",
-      "moderateDesc": "Recommended for most",
-      "off": "Off",
-      "offDesc": "Standard interface",
-      "title": "Quick Presets:"
+      "full": "ሙሉ",
+      "fullDesc": "ከፍተኛ ተደራሽነት",
+      "mild": "ቀለል ያለ",
+      "mildDesc": "ትንሽ የተሻሻለ",
+      "moderate": "መካከለኛ",
+      "moderateDesc": "ለአብዛኞቹ የሚመከር",
+      "off": "ጠፍቷል",
+      "offDesc": "መደበኛ በይነገጽ",
+      "title": "ፈጣን ቅድመ-ቅንብሮች:"
     },
     "reducedMotion": {
-      "description": "Minimize animations and transitions for a calmer experience. Helpful for users with vestibular disorders or motion sensitivity.",
-      "title": "Reduced Motion",
-      "toggleLabel": "Toggle reduced motion mode"
+      "description": "ለእርጋታ ተሞክሮ እንቅስቃሴዎችን እና ሽግግሮችን ይቀንሱ።",
+      "title": "ቀነሰ እንቅስቃሴ",
+      "toggleLabel": "ቀነሰ እንቅስቃሴ ሁነታ ቀያይር"
     },
     "seniorsMode": {
-      "description": "One-click accessibility enhancement with larger text, bigger touch targets, and simplified interface",
-      "title": "Seniors Mode"
+      "description": "በአንድ ጠቅ ትልቅ ጽሁፍ፣ ትልልቅ ንኪ ኢላማዎች እና ቀለል ያለ በይነገጽ",
+      "title": "የአረጋውያን ሁነታ"
     },
     "themeMode": {
-      "auto": "Auto",
-      "autoDesc": "Match system",
-      "dark": "Dark",
-      "darkDesc": "Easy on eyes",
-      "description": "Choose your preferred color scheme for the budget app",
-      "highContrast": "High Contrast",
-      "highContrastDesc": "Maximum visibility",
-      "light": "Light",
-      "lightDesc": "Bright and clear",
-      "title": "Theme Mode"
+      "auto": "ራስ-ሰር",
+      "autoDesc": "ከስርዓት ጋር ማዛመድ",
+      "dark": "ጨለማ",
+      "darkDesc": "ለዓይን ቀላል",
+      "description": "ለበጀት መተግበሪያው የሚፈልጉትን የቀለም ዕቅድ ይምረጡ",
+      "highContrast": "ከፍተኛ ንፅፅር",
+      "highContrastDesc": "ከፍተኛ ታይነት",
+      "light": "ብርሃን",
+      "lightDesc": "ብሩህ እና ግልጽ",
+      "title": "ገጽታ ሁነታ"
     }
   },
   "accessibilityToggle": {
@@ -63,34 +63,34 @@
   },
   "accessibleChart": {
     "buttons": {
-      "chart": "Chart",
-      "showChart": "Show chart view",
-      "showTable": "Show data table view",
-      "table": "Table"
+      "chart": "ቻርት",
+      "showChart": "የቻርት እይታ ያሳዩ",
+      "showTable": "የውሂብ ሠንጠረዥ እይታ ያሳዩ",
+      "table": "ሠንጠረዥ"
     },
-    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support.",
-    "chartTypeDescription": "This is a {chartType} chart with {dataPoints} data points.",
+    "chartDescription": "{description}። {dataPoints} የውሂብ ነጥቦች ታይተዋል። {dataList}። ውሂቡን በሠንጠረዥ ቅርጸት ለማየት የሠንጠረዥ ቁልፉን ይጫኑ።",
+    "chartTypeDescription": "ይህ {chartType} ቻርት ሲሆን {dataPoints} የውሂብ ነጥቦች አሉት።",
     "footer": {
-      "average": "Average:",
-      "total": "Total:"
+      "average": "አማካይ:",
+      "total": "ጠቅላላ:"
     },
     "keyboardNav": {
-      "srOnly": "Use arrow keys to navigate between rows. Press Tab to navigate to the next element.",
-      "visual": "Use ← → or ↑ ↓ keys to navigate • Home/End to jump to start/end"
+      "srOnly": "በረድፎች መካከል ለማሰስ ቀስት ቁልፎችን ይጠቀሙ። ወደ ቀጣዩ ንጥል ለመሄድ Tab ይጫኑ።",
+      "visual": "ለማሰስ ← → ወይም ↑ ↓ ቁልፎችን ይጠቀሙ • ወደ መጀመሪያ/መጨረሻ ለመዝለል Home/End"
     },
     "summary": {
-      "average": "Average: {value}.",
-      "highest": "Highest value: {label} at {value}.",
-      "lowest": "Lowest value: {label} at {value}.",
-      "total": "Total: {value}."
+      "average": "አማካይ: {value}።",
+      "highest": "ከፍተኛ ዋጋ: {label} በ{value}።",
+      "lowest": "ዝቅተኛ ዋጋ: {label} በ{value}።",
+      "total": "ጠቅላላ: {value}።"
     },
-    "switchedToChart": "Switched to chart view",
-    "switchedToTable": "Switched to table view",
+    "switchedToChart": "ወደ ቻርት እይታ ተቀይሯል",
+    "switchedToTable": "ወደ ሠንጠረዥ እይታ ተቀይሯል",
     "tableHeaders": {
-      "additionalInfo": "Additional Info",
-      "category": "Category",
-      "period": "Period",
-      "value": "Value"
+      "additionalInfo": "ተጨማሪ መረጃ",
+      "category": "ምድብ",
+      "period": "ወቅት",
+      "value": "ዋጋ"
     }
   },
   "actions": {
@@ -132,133 +132,133 @@
     "typeTransactions": "Transactions"
   },
   "admin": {
-    "actionColumn": "Action",
-    "actionsColumn": "Actions",
-    "activeTrials": "Active Trials",
-    "actorColumn": "Actor",
-    "applyRole": "Apply Role",
-    "applyRoleConfirm": "Apply role \"{role}\" to {count} users?",
-    "auditLog": "Audit Log",
-    "bulkActionsFor": "Bulk actions for {count} selected users",
-    "changeMemberRole": "Change role for {email} to \"{role}\"?",
-    "changeRoleConfirm": "Change role for {email} to \"{role}\"?",
-    "createGroup": "Create Group",
-    "daysLeft": "{days} days left",
-    "delete": "Delete",
-    "deleteGroupConfirm": "Delete group \"{name}\" and all members?",
-    "entries": "{count} entries",
-    "envCheckMessage": "Check your .env.local file to ensure the service role key is set.",
-    "expired": "Expired",
-    "exportCsv": "Export CSV",
-    "exportJson": "Export JSON",
-    "exportUsersCsv": "Export Users CSV",
-    "extendTrial": "Extend Trial",
-    "extendTrialConfirm": "Extend trial by {days} days for {count} users?",
-    "extendTrialSingle": "Extend trial by 7 days for {email}?",
-    "familyGroups": "Family Groups",
-    "filter": "Filter",
-    "filterByAction": "Filter by action or metadata",
-    "forceLogout": "Force Logout",
-    "forceLogoutConfirm": "Force logout {count} users?",
-    "forceLogoutSingle": "Force logout {email}?",
-    "groupColumn": "Group",
-    "groupCount": "{count} groups",
-    "joinedColumn": "Joined",
-    "lastLoginColumn": "Last Login",
-    "lifetimeAccess": "Lifetime Access",
-    "manageGroupMembership": "Manage group membership and roles",
-    "memberColumn": "Member",
-    "membersColumn": "Members",
-    "membersFor": "Members for {id}...",
-    "never": "Never",
-    "newGroupName": "New group name",
-    "next": "Next",
-    "noAuditEntries": "No audit entries yet.",
-    "noFamilyGroups": "No family groups found.",
-    "noGroupSelected": "No group selected.",
-    "noMembers": "No members found.",
-    "noUsersFound": "No users found.",
-    "ownerColumn": "Owner",
-    "ownerRoleRequired": "Owner role required for bulk changes",
-    "ownerRoleRequiredToEdit": "Owner role required to edit",
-    "ownerUserId": "Owner user id",
-    "pageOf": "Page {page} of {total}",
-    "paid": "Paid",
-    "paidPlans": "Paid Plans",
-    "plus7dTrial": "+7d Trial",
-    "prev": "Prev",
-    "reactivate": "Reactivate",
-    "reactivateConfirm": "Reactivate {count} users?",
-    "reactivateSingle": "Reactivate {email}?",
-    "recentAdminActions": "Recent admin actions",
-    "refresh": "Refresh",
-    "remove": "Remove",
-    "removeMember": "Remove {email} from group?",
-    "rename": "Rename",
-    "renameGroup": "Rename group",
-    "roleAdmin": "admin",
-    "roleChild": "child",
-    "roleColumn": "Role",
-    "roleMember": "member",
-    "roleOwner": "owner",
-    "roleViewer": "viewer",
-    "searchUsers": "Search users...",
-    "selectAllUsers": "Select all users",
-    "selectGroupToView": "Select a group to view members",
-    "sessionRefreshMessage": "Your session needs to be refreshed. Please sign out and sign back in to establish a new session.",
-    "signOutRefresh": "Sign Out & Refresh Session",
-    "signingOut": "Signing out...",
-    "statusColumn": "Status",
-    "subtitle": "Manage users and subscriptions",
-    "suspend": "Suspend",
-    "suspendConfirm": "Suspend {count} users?",
-    "suspendSingle": "Suspend {email}?",
-    "suspended": "Suspended",
-    "targetColumn": "Target",
-    "title": "Admin Dashboard",
-    "totalUsers": "Total Users",
-    "trial": "Trial",
-    "trialEnded": "Trial ended",
-    "trialStatusColumn": "Trial Status",
-    "unknown": "Unknown",
-    "userColumn": "User",
-    "whenColumn": "When"
+    "actionColumn": "ድርጊት",
+    "actionsColumn": "ድርጊቶች",
+    "activeTrials": "ንቁ ሙከራዎች",
+    "actorColumn": "ተዋናይ",
+    "applyRole": "ሚና ያስተግብሩ",
+    "applyRoleConfirm": "ሚና \"{role}\" ለ{count} ተጠቃሚዎች ይተግበር?",
+    "auditLog": "ኦዲት መዝገብ",
+    "bulkActionsFor": "ለ{count} ተመርጠው ተጠቃሚዎች በጅምላ ድርጊቶች",
+    "changeMemberRole": "ለ{email} ሚና ወደ \"{role}\" ይቀየር?",
+    "changeRoleConfirm": "ለ{email} ሚና ወደ \"{role}\" ይቀየር?",
+    "createGroup": "ቡድን ይፍጠሩ",
+    "daysLeft": "{days} ቀናት ቀርተዋል",
+    "delete": "ይሰርዙ",
+    "deleteGroupConfirm": "ቡድን \"{name}\" እና ሁሉንም አባላት ይሰርዙ?",
+    "entries": "{count} ግቤቶች",
+    "envCheckMessage": "አገልግሎት ሚና ቁልፍ መቀመጡን ያረጋግጡ።",
+    "expired": "ያለፈ",
+    "exportCsv": "CSV ያውጡ",
+    "exportJson": "JSON ያውጡ",
+    "exportUsersCsv": "ተጠቃሚዎች CSV ያውጡ",
+    "extendTrial": "ሙከራ ያራዝሙ",
+    "extendTrialConfirm": "ለ{count} ተጠቃሚዎች ሙከራ በ{days} ቀናት ይራዘም?",
+    "extendTrialSingle": "ለ{email} ሙከራ በ7 ቀናት ይራዘም?",
+    "familyGroups": "ቤተሰብ ቡድኖች",
+    "filter": "ያጣሩ",
+    "filterByAction": "በድርጊት ያጣሩ",
+    "forceLogout": "ያስወጡ",
+    "forceLogoutConfirm": "{count} ተጠቃሚዎችን ያስወጡ?",
+    "forceLogoutSingle": "{email} ያስወጡ?",
+    "groupColumn": "ቡድን",
+    "groupCount": "{count} ቡድኖች",
+    "joinedColumn": "የተቀላቀሉ",
+    "lastLoginColumn": "የመጨረሻ መግቢያ",
+    "lifetimeAccess": "ዘላቂ ተደራሽነት",
+    "manageGroupMembership": "የቡድን አባልነት እና ሚናዎችን ያስተዳድሩ",
+    "memberColumn": "አባል",
+    "membersColumn": "አባላት",
+    "membersFor": "ለ{id} አባላት...",
+    "never": "በጭራሽ",
+    "newGroupName": "አዲስ ቡድን ስም",
+    "next": "ቀጣይ",
+    "noAuditEntries": "ገና ኦዲት ግቤቶች የሉም።",
+    "noFamilyGroups": "ቤተሰብ ቡድኖች አልተገኙም።",
+    "noGroupSelected": "ቡድን አልተመረጠም።",
+    "noMembers": "አባላት አልተገኙም።",
+    "noUsersFound": "ተጠቃሚዎች አልተገኙም።",
+    "ownerColumn": "ባለቤት",
+    "ownerRoleRequired": "ለብዙ ለውጦች ባለቤት ሚና ያስፈልጋል",
+    "ownerRoleRequiredToEdit": "ለማስተካከል ባለቤት ሚና ያስፈልጋል",
+    "ownerUserId": "የባለቤት ተጠቃሚ ማንነት",
+    "pageOf": "ገጽ {page} ከ{total}",
+    "paid": "ተከፍሏል",
+    "paidPlans": "የተከፈለ ዕቅዶች",
+    "plus7dTrial": "+7ቀ ሙከራ",
+    "prev": "ያለፈ",
+    "reactivate": "ዳግም ያንቁ",
+    "reactivateConfirm": "{count} ተጠቃሚዎች ያንቁ?",
+    "reactivateSingle": "{email} ዳግም ያንቁ?",
+    "recentAdminActions": "የቅርብ አስተዳዳሪ ድርጊቶች",
+    "refresh": "ያድሱ",
+    "remove": "ያስወግዱ",
+    "removeMember": "{email} ከቡድን ያስወግዱ?",
+    "rename": "ስም ይቀይሩ",
+    "renameGroup": "ቡድን ስም ይቀይሩ",
+    "roleAdmin": "አስተዳዳሪ",
+    "roleChild": "ልጅ",
+    "roleColumn": "ሚና",
+    "roleMember": "አባል",
+    "roleOwner": "ባለቤት",
+    "roleViewer": "ተመልካች",
+    "searchUsers": "ተጠቃሚዎች ይፈልጉ...",
+    "selectAllUsers": "ሁሉንም ተጠቃሚዎች ይምረጡ",
+    "selectGroupToView": "አባላትን ለማየት ቡድን ይምረጡ",
+    "sessionRefreshMessage": "ክፍለ ጊዜዎ ማደስ ያስፈልገዋል። እባክዎ ይውጡ እና ዳግም ይግቡ።",
+    "signOutRefresh": "ይውጡ እና ክፍለ ጊዜ ያድሱ",
+    "signingOut": "በመውጣት ላይ...",
+    "statusColumn": "ሁኔታ",
+    "subtitle": "ተጠቃሚዎችን እና ምዝገባዎችን ያስተዳድሩ",
+    "suspend": "ያግዱ",
+    "suspendConfirm": "{count} ተጠቃሚዎች ያግዱ?",
+    "suspendSingle": "{email} ያግዱ?",
+    "suspended": "ታግዷል",
+    "targetColumn": "ኢላማ",
+    "title": "አስተዳዳሪ ዳሽቦርድ",
+    "totalUsers": "ጠቅላላ ተጠቃሚዎች",
+    "trial": "ሙከራ",
+    "trialEnded": "ሙከራ አልቋል",
+    "trialStatusColumn": "ሙከራ ሁኔታ",
+    "unknown": "ያልታወቀ",
+    "userColumn": "ተጠቃሚ",
+    "whenColumn": "መቼ"
   },
   "aiColumnMapper": {
-    "analyzing": "Analyzing CSV structure with AI...",
+    "analyzing": "የCSV ቅርጸት በAI እየተተነተነ...",
     "buttons": {
-      "apply": "Apply Mappings & Import",
-      "cancel": "Cancel"
+      "apply": "ማዛመጃዎች ያስተግብሩ እና ያስገቡ",
+      "cancel": "ይሰርዙ"
     },
-    "closeModal": "Close modal",
-    "columnMappings": "Column Mappings",
+    "closeModal": "መስኮት ይዝጉ",
+    "columnMappings": "የዓምድ ማዛመጃዎች",
     "columnTypes": {
-      "amount": "Amount",
-      "balance": "Balance",
-      "credit": "Credit",
-      "date": "Date",
-      "debit": "Debit",
-      "description": "Description",
-      "ignore": "Ignore"
+      "amount": "መጠን",
+      "balance": "ቀሪ",
+      "credit": "ገቢ",
+      "date": "ቀን",
+      "debit": "ወጪ",
+      "description": "ገለጻ",
+      "ignore": "ችላ ይበሉ"
     },
     "confidence": {
-      "analyzed": "AI analyzed {columnCount} columns and {rowCount} sample rows",
-      "title": "Detection Confidence"
+      "analyzed": "AI {columnCount} ዓምዶችን እና {rowCount} ናሙና ረድፎችን ተንትኗል",
+      "title": "የመለየት እምነት"
     },
     "preview": {
-      "amount": "Amount",
-      "date": "Date",
-      "description": "Description",
-      "title": "Transaction Preview"
+      "amount": "መጠን",
+      "date": "ቀን",
+      "description": "ገለጻ",
+      "title": "የግብይት ቅድመ-እይታ"
     },
-    "samples": "Samples:",
+    "samples": "ናሙናዎች:",
     "saveConfig": {
-      "hint": "Next time you import from this bank, mappings will be automatic",
-      "label": "Save this bank configuration for future imports",
-      "placeholder": "Enter bank name (e.g., My Local Credit Union)"
+      "hint": "ቀጣይ ጊዜ ከዚህ ባንክ ሲያስገቡ ማዛመጃዎች ራስ-ሰር ይሆናሉ",
+      "label": "ይህን የባንክ ቅንብር ለወደፊት ማስገባቶች ያስቀምጡ",
+      "placeholder": "የባንክ ስም ያስገቡ (ለምሳሌ፣ የአካባቢ ክሬዲት ዩኒዮን)"
     },
-    "subtitle": "Review AI-detected columns and adjust if needed",
-    "title": "AI Column Mapping Wizard"
+    "subtitle": "AI የለያቸውን ዓምዶች ይገምግሙ እና ካስፈለገ ያስተካክሉ",
+    "title": "የAI ዓምድ ማመሳሰያ አዋቂ"
   },
   "amortizationChart": {
     "balanceDescription": "Your balance decreases over time as you make payments",
@@ -279,196 +279,197 @@
     "totalPayments": "Total Payments"
   },
   "amountFilter": {
-    "clear": "Clear",
-    "maxLabel": "Maximum amount",
-    "maxPlaceholder": "Max",
-    "maxThumb": "Maximum amount",
-    "minLabel": "Minimum amount",
-    "minPlaceholder": "Min",
-    "minThumb": "Minimum amount",
-    "title": "Amount Range"
+    "clear": "ያጽዱ",
+    "maxLabel": "ከፍተኛ መጠን",
+    "maxPlaceholder": "ከፍ",
+    "maxThumb": "ከፍተኛ መጠን",
+    "minLabel": "ዝቅተኛ መጠን",
+    "minPlaceholder": "ዝቅ",
+    "minThumb": "ዝቅተኛ መጠን",
+    "title": "የመጠን ክልል"
   },
   "apiErrors": {
-    "aiAnalysisUnavailable": "AI analysis unavailable, using pattern matching",
-    "aiApiError": "AI API error: {message}",
-    "autoDetectionUnavailable": "Auto-detection unavailable - using column order guess",
-    "emptyAiResponse": "Empty response from AI",
-    "failedToParseResponse": "Failed to parse AI response",
-    "fileMustBePdf": "File must be a PDF",
-    "fileTooLarge": "File too large. Maximum {maxSize}.",
-    "internalServerError": "Internal server error",
-    "lowConfidence": "Low confidence - please verify mappings",
-    "missingHeaders": "Missing or invalid headers",
-    "missingSampleData": "Missing or invalid sample data",
-    "noAiResponse": "No response from AI model",
-    "noApiKey": "AI API key not configured. AI extraction requires an active subscription.",
-    "noFileProvided": "No file provided",
-    "rateLimitExceeded": "Rate limit exceeded. Please try again later.",
-    "responseValidationIssues": "Response structure validation had issues",
-    "unknownError": "An unknown error occurred",
-    "verifyMappings": "Please verify all mappings before importing"
+    "aiAnalysisUnavailable": "AI ትንተና አይገኝም፣ ንድፍ ማዛመድ ይጠቀማል",
+    "aiApiError": "AI API ስህተት: {message}",
+    "autoDetectionUnavailable": "ራስ-ሰር ማግኘት አይገኝም - የዓምድ ቅደም ተከተል ግምት ይጠቀማል",
+    "emptyAiResponse": "ከAI ባዶ ምላሽ",
+    "failedToParseResponse": "AI ምላሽ ለመተንተን አልተቻለም",
+    "fileMustBePdf": "ፋይሉ PDF መሆን አለበት",
+    "fileTooLarge": "ፋይሉ በጣም ትልቅ ነው። ከፍተኛ {maxSize}።",
+    "internalServerError": "ውስጣዊ ሰርቨር ስህተት",
+    "lowConfidence": "ዝቅተኛ እምነት - እባክዎ ማዛመጃዎችን ያረጋግጡ",
+    "missingHeaders": "የጎደሉ ወይም ልክ ያልሆኑ ራስጌዎች",
+    "missingSampleData": "የጎደሉ ወይም ልክ ያልሆኑ ናሙና ውሂቦች",
+    "noAiResponse": "ከAI ሞዴል ምላሽ የለም",
+    "noApiKey": "AI API ቁልፍ አልተዋቀረም። AI ማውጣት ንቁ ምዝገባ ያስፈልገዋል።",
+    "noFileProvided": "ፋይል አልተሰጠም",
+    "rateLimitExceeded": "የመጠን ገደብ ተሟልቷል። እባክዎ ቆየት ብለው ይሞክሩ።",
+    "responseValidationIssues": "የምላሽ መዋቅር ማረጋገጫ ችግሮች ነበሩት",
+    "unknownError": "ያልታወቀ ስህተት ተከስቷል",
+    "verifyMappings": "ከማስገባት በፊት ሁሉንም ማዛመጃዎች ያረጋግጡ"
   },
   "aria": {
-    "accessibilitySettings": "Accessibility settings",
-    "addTransaction": "Add transaction",
-    "aiChatbot": "AI chatbot - Premium feature",
-    "assistantTyping": "Assistant is typing",
-    "breadcrumb": "Breadcrumb",
-    "chatMessages": "Chat messages",
-    "clearSearch": "Clear search",
-    "close": "Close",
-    "closeAccessibilityMenu": "Close accessibility menu",
-    "closeChatbot": "Close chatbot",
-    "closeHoldingModal": "Close modal",
-    "closeIconPicker": "Close icon picker",
-    "closeModal": "Close modal",
-    "closeNotification": "Close notification",
-    "closeOnboarding": "Close onboarding wizard",
-    "closeReceiptViewer": "Close receipt viewer",
-    "closeSubscriptionModal": "Close modal",
-    "copied": "Copied",
-    "copyPairingCode": "Copy pairing code",
-    "createBudget": "Create budget",
-    "dataTable": "{title} data table",
-    "decreaseTextSize": "Decrease text size",
-    "deleteTransaction": "Delete transaction",
-    "dismiss": "Dismiss",
-    "dismissAlert": "Dismiss alert",
-    "dismissWelcome": "Dismiss welcome banner",
-    "dragToClose": "Drag down to close",
-    "editTransaction": "Edit transaction",
-    "home": "Home",
-    "increaseTextSize": "Increase text size",
-    "loadingChart": "Loading chart...",
+    "accessibilitySettings": "ተደራሽነት ቅንብሮች",
+    "addTransaction": "ግብይት ያክሉ",
+    "aiChatbot": "AI ቻትቦት - ፕሪሚየም ባህሪ",
+    "assistantTyping": "ረዳት እየተየበ ነው",
+    "breadcrumb": "ዳቦ ፍርፋሪ",
+    "chatMessages": "የቻት መልእክቶች",
+    "clearSearch": "ፍለጋ ያጽዱ",
+    "close": "ይዝጉ",
+    "closeAccessibilityMenu": "ተደራሽነት ምናሌ ይዝጉ",
+    "closeChatbot": "ቻትቦት ይዝጉ",
+    "closeHoldingModal": "መስኮት ይዝጉ",
+    "closeIconPicker": "አዶ መራጭ ይዝጉ",
+    "closeModal": "መስኮት ይዝጉ",
+    "closeNotification": "ማሳወቂያ ይዝጉ",
+    "closeOnboarding": "የመግቢያ አዋቂ ይዝጉ",
+    "closeReceiptViewer": "ደረሰኝ ተመልካች ይዝጉ",
+    "closeSubscriptionModal": "መስኮት ይዝጉ",
+    "copied": "ተቀድቷል",
+    "copyPairingCode": "ማጣመር ኮድ ይቅዱ",
+    "createBudget": "በጀት ይፍጠሩ",
+    "dataTable": "{title} ውሂብ ሠንጠረዥ",
+    "decreaseTextSize": "ጽሁፍ መጠን ይቀንሱ",
+    "deleteTransaction": "ግብይት ይሰርዙ",
+    "dismiss": "ያሰናብቱ",
+    "dismissAlert": "ማስጠንቀቂያ ያሰናብቱ",
+    "dismissWelcome": "የእንኳን ደህና መጡ ባነር ያሰናብቱ",
+    "dragToClose": "ለመዝጋት ወደ ታች ይጎትቱ",
+    "editTransaction": "ግብይት ያስተካክሉ",
+    "home": "ዋና ገጽ",
+    "increaseTextSize": "ጽሁፍ መጠን ይጨምሩ",
+    "loadingChart": "ቻርት በመጫን ላይ...",
     "mainSidebar": "ዋና ጎን አውታር",
     "mobileNavigation": "የሞባይል ንብረት",
-    "notificationDescription": "{title}. {body}",
-    "notifications": "Notifications",
-    "openChatbot": "Open AI chatbot",
-    "pairingCode": "Pairing code: {code}",
-    "primaryNav": "Primary",
+    "notificationDescription": "{title}። {body}",
+    "notifications": "ማሳወቂያዎች",
+    "openChatbot": "AI ቻትቦት ይክፈቱ",
+    "pairingCode": "ማጣመር ኮድ: {code}",
+    "primaryNav": "ዋና",
     "primaryNavigation": "ዋና ንብረት",
-    "progress": "Progress",
-    "qrCodePairing": "QR code for pairing. Pairing code: {code}",
-    "qrScannerViewport": "QR code scanner viewport",
-    "reorderDebt": "Reorder {name}",
-    "searchSuggestions": "Search suggestions",
-    "searchTips": "Search tips",
-    "selectColor": "Select color {color}",
-    "selectIcon": "Select {name} icon",
-    "selectLanguage": "Select language",
-    "selectSubscription": "Select {name}",
-    "sendMessage": "Send message",
+    "progress": "ሂደት",
+    "qrCodePairing": "ለማጣመር QR ኮድ። ኮድ: {code}",
+    "qrScannerViewport": "የQR ኮድ ስካነር እይታ",
+    "reorderDebt": "{name} ዳግም ያስተካክሉ",
+    "searchSuggestions": "የፍለጋ ጥቆማዎች",
+    "searchTips": "የፍለጋ ምክሮች",
+    "selectColor": "ቀለም {color} ይምረጡ",
+    "selectIcon": "{name} አዶ ይምረጡ",
+    "selectLanguage": "ቋንቋ ይምረጡ",
+    "selectSubscription": "{name} ይምረጡ",
+    "sendMessage": "መልእክት ይላኩ",
     "showAllMenuItems": "የምናቸውን የምንጭ ነገሮች ይዘው",
     "showSimplifiedMenu": "የቀላል ምንጭ ይዘው",
-    "syncStatus": "Sync status: {status}",
-    "toggleSeniorsMode": "Toggle Seniors Mode",
-    "typeQuestion": "Type your question",
-    "unreadNotifications": "{count, plural, =1 {1 unread notification} other {# unread notifications}}",
-    "welcomeBudgetApp": "Welcome to Budget App"
+    "syncStatus": "ማመሳሰል ሁኔታ: {status}",
+    "toggleSeniorsMode": "የአረጋውያን ሁነታ ቀያይር",
+    "typeQuestion": "ጥያቄዎን ይተይቡ",
+    "unreadNotifications": "{count, plural, =1 {1 ያልተነበበ ማሳወቂያ} other {# ያልተነበቡ ማሳወቂያዎች}}",
+    "welcomeBudgetApp": "ወደ Budget App እንኳን ደህና መጡ"
   },
   "auth": {
     "forgotPassword": {
-      "backToSignIn": "Back to Sign In",
-      "checkEmailTitle": "Check Your Email",
-      "checkSpam": "Didn't receive the email? Check your spam folder or try again.",
-      "defaultError": "Failed to send reset email",
-      "emailLabel": "Email",
+      "backToSignIn": "ወደ መግቢያ ተመለስ",
+      "checkEmailTitle": "ኢሜልዎን ያረጋግጡ",
+      "checkSpam": "ኢሜሉ አልደረሰም? የአይፈለግ ቅርጫትዎን ያረጋግጡ ወይም እንደገና ይሞክሩ።",
+      "defaultError": "ዳግም ማስጀመሪያ ኢሜል ለመላክ አልተቻለም",
+      "emailLabel": "ኢሜል",
       "emailPlaceholder": "you@example.com",
-      "rememberPassword": "Remember your password?",
-      "resetLinkSent": "We've sent a password reset link to {email}",
-      "sendResetLink": "Send Reset Link",
-      "signInLink": "Sign in",
-      "subtitle": "Enter your email and we'll send you a reset link",
-      "title": "Reset Password"
+      "rememberPassword": "የይለፍ ቃልዎን ያስታውሳሉ?",
+      "resetLinkSent": "ወደ {email} ዳግም ማስጀመሪያ ማገናኛ ልከናል",
+      "sendResetLink": "ዳግም ማስጀመሪያ ማገናኛ ይላኩ",
+      "signInLink": "ይግቡ",
+      "subtitle": "ኢሜልዎን ያስገቡ እና ዳግም ማስጀመሪያ ማገናኛ እንልክልዎታለን",
+      "title": "የይለፍ ቃል ዳግም ያስጀምሩ"
     },
     "login": {
-      "defaultError": "Failed to sign in",
-      "emailLabel": "Email",
+      "defaultError": "መግባት አልተሳካም",
+      "emailLabel": "ኢሜል",
       "emailPlaceholder": "you@example.com",
-      "forgotPassword": "Forgot password?",
-      "noAccount": "Don't have an account?",
-      "passwordLabel": "Password",
-      "signInButton": "Sign In",
-      "startFreeTrial": "Start your free trial",
-      "subtitle": "Sign in to your BudgetPro account",
-      "title": "Welcome Back"
+      "forgotPassword": "የይለፍ ቃል ረሱ?",
+      "noAccount": "ሂሳብ የለዎትም?",
+      "passwordLabel": "የይለፍ ቃል",
+      "signInButton": "ይግቡ",
+      "startFreeTrial": "ነፃ ሙከራዎን ይጀምሩ",
+      "subtitle": "ወደ BudgetPro ሂሳብዎ ይግቡ",
+      "title": "እንኳን ደህና ተመለሱ"
     },
     "resetPassword": {
-      "confirmPasswordLabel": "Confirm Password",
-      "defaultError": "Failed to reset password",
-      "invalidLinkDescription": "This password reset link is invalid or has expired. Please request a new one.",
-      "invalidLinkTitle": "Invalid or Expired Link",
-      "newPasswordLabel": "New Password",
-      "passwordHint": "Must be at least 8 characters",
-      "passwordTooShort": "Password must be at least 8 characters",
-      "passwordsMismatch": "Passwords do not match",
-      "requestNewLink": "Request New Link",
-      "resetButton": "Reset Password",
-      "subtitle": "Enter your new password below",
-      "successDescription": "Your password has been successfully reset. Redirecting you to sign in...",
-      "successTitle": "Password Updated",
-      "title": "Set New Password"
+      "confirmPasswordLabel": "የይለፍ ቃል ያረጋግጡ",
+      "defaultError": "የይለፍ ቃል ዳግም ማስጀመር አልተቻለም",
+      "invalidLinkDescription": "ይህ ማገናኛ ልክ ያልሆነ ወይም ጊዜው ያለፈ ነው። እባክዎ አዲስ ይጠይቁ።",
+      "invalidLinkTitle": "ልክ ያልሆነ ወይም ያለፈ ማገናኛ",
+      "newPasswordLabel": "አዲስ የይለፍ ቃል",
+      "passwordHint": "ቢያንስ 8 ቁምፊዎች መሆን አለበት",
+      "passwordTooShort": "የይለፍ ቃል ቢያንስ 8 ቁምፊዎች መሆን አለበት",
+      "passwordsMismatch": "የይለፍ ቃሎች አይገጣጠሙም",
+      "requestNewLink": "አዲስ ማገናኛ ይጠይቁ",
+      "resetButton": "የይለፍ ቃል ዳግም ያስጀምሩ",
+      "subtitle": "ከታች አዲስ የይለፍ ቃልዎን ያስገቡ",
+      "successDescription": "የይለፍ ቃልዎ ተዘምኗል። ወደ መግቢያ እያዞርን...",
+      "successTitle": "የይለፍ ቃል ተዘምኗል",
+      "title": "አዲስ የይለፍ ቃል ያስቀምጡ"
     },
     "signup": {
-      "confirmPasswordLabel": "Confirm Password",
-      "confirmPasswordPlaceholder": "Re-enter your password",
-      "createAccountButton": "Create Account",
-      "defaultError": "Failed to create account",
-      "emailLabel": "Email",
+      "confirmPasswordLabel": "የይለፍ ቃል ያረጋግጡ",
+      "confirmPasswordPlaceholder": "የይለፍ ቃልዎን እንደገና ያስገቡ",
+      "createAccountButton": "ሂሳብ ይፍጠሩ",
+      "defaultError": "ሂሳብ ለመፍጠር አልተቻለም",
+      "emailLabel": "ኢሜል",
       "emailPlaceholder": "you@example.com",
-      "fullNameLabel": "Full Name",
-      "fullNamePlaceholder": "John Doe",
-      "hasAccount": "Already have an account?",
-      "passwordLabel": "Password",
-      "passwordPlaceholder": "Create a strong password",
-      "passwordTooShort": "Password must be at least 8 characters long.",
-      "passwordsMismatch": "Passwords do not match. Please re-enter your password.",
-      "returnToLogin": "Return to Login",
-      "signInLink": "Sign In",
-      "subtitle": "Create your account to get started.",
-      "title": "Start Free Trial",
-      "verifyEmailActivate": "Please check your inbox to activate your 7-day free trial.",
-      "verifyEmailSent": "We've sent a confirmation link to {email}.",
-      "verifyEmailTitle": "Verify Your Email"
+      "fullNameLabel": "ሙሉ ስም",
+      "fullNamePlaceholder": "ጆን ዶ",
+      "hasAccount": "ሂሳብ አለዎት?",
+      "passwordLabel": "የይለፍ ቃል",
+      "passwordPlaceholder": "ጠንካራ የይለፍ ቃል ይፍጠሩ",
+      "passwordTooShort": "የይለፍ ቃል ቢያንስ 8 ቁምፊዎች መሆን አለበት።",
+      "passwordsMismatch": "የይለፍ ቃሎች አይገጣጠሙም። እባክዎ እንደገና ያስገቡ።",
+      "returnToLogin": "ወደ መግቢያ ተመለስ",
+      "signInLink": "ይግቡ",
+      "subtitle": "ለመጀመር ሂሳብዎን ይፍጠሩ።",
+      "title": "ነፃ ሙከራ ይጀምሩ",
+      "verifyEmailActivate": "የ7 ቀን ነፃ ሙከራዎን ለማንቃት ኢሜልዎን ያረጋግጡ።",
+      "verifyEmailSent": "ወደ {email} ማረጋገጫ ማገናኛ ልከናል።",
+      "verifyEmailTitle": "ኢሜልዎን ያረጋግጡ"
     },
     "upgrade": {
-      "continueFreeTrial": "Continue with free trial ({daysRemaining} days left)",
-      "daysLeft": "{daysRemaining} days left in your free trial",
+      "continueFreeTrial": "ከነፃ ሙከራ ይቀጥሉ ({daysRemaining} ቀናት ቀርተዋል)",
+      "daysLeft": "በነፃ ሙከራዎ {daysRemaining} ቀናት ቀርተዋል",
       "features": {
         "aiInsights": {
-          "description": "Smart categorization and spending analysis",
-          "title": "AI-Powered Insights"
+          "description": "ብልጥ ምደባ እና ወጪ ትንተና",
+          "title": "AI-ተኮር ግንዛቤዎች"
         },
         "bankSecurity": {
-          "description": "Your data is encrypted and never shared",
-          "title": "Bank-Level Security"
+          "description": "ውሂብዎ ተመስጥሯል እና በጭራሽ አይጋራም",
+          "title": "የባንክ ደረጃ ደህንነት"
         },
         "subscriptionTracking": {
-          "description": "Never miss a recurring charge again",
-          "title": "Subscription Tracking"
+          "description": "ተደጋጋሚ ክፍያ በጭራሽ አያምልጥዎ",
+          "title": "ምዝገባ ክትትል"
         },
         "unlimitedTransactions": {
-          "description": "Import and track as many transactions as you need",
-          "title": "Unlimited Transactions"
+          "description": "የሚፈልጉትን ያህል ግብይቶች ያስገቡ እና ይከታተሉ",
+          "title": "ያልተገደቡ ግብይቶች"
         }
       },
-      "lifetimeAccess": "Get lifetime access to all features",
-      "lifetimeAccessBadge": "LIFETIME ACCESS",
-      "oneTime": "one-time",
-      "payOnce": "Pay once, use forever. No subscriptions.",
-      "securePayment": "Secure payment powered by Stripe. 30-day money-back guarantee.",
-      "title": "Upgrade to Premium",
-      "trialEndedMessage": "Your {days}-day trial has ended. Upgrade to regain access to adding transactions, imports, and other features.",
-      "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
-      "trialEndedTitle": "Your Trial Has Ended",
-      "upgradeNow": "Upgrade Now - ${price}"
+      "lifetimeAccess": "ለሁሉም ባህሪያት ዘላቂ ተደራሽነት ያግኙ",
+      "lifetimeAccessBadge": "ዘላቂ ተደራሽነት",
+      "oneTime": "አንድ ጊዜ",
+      "payOnce": "አንድ ጊዜ ይክፈሉ፣ ለዘላለም ይጠቀሙ። ምዝገባ የለም።",
+      "securePayment": "ደህንነቱ የተጠበቀ ክፍያ በStripe። የ30 ቀን ገንዘብ ተመላሽ ዋስትና።",
+      "title": "ወደ ፕሪሚየም ያሻሽሉ",
+      "trialEndedMessage": "የ{days} ቀን ሙከራዎ አልቋል። ግብይቶችን ማከል፣ ማስገባት እና ሌሎች ባህሪያትን ተደራሽነት ለማግኘት ያሻሽሉ።",
+      "trialEndedSubtitle": "ወደ በጀት ውሂብዎ ሙሉ ተደራሽነት ለማግኘት አሁን ያሻሽሉ",
+      "trialEndedTitle": "ሙከራዎ አልቋል",
+      "upgradeNow": "አሁን ያሻሽሉ - ${price}"
     },
     "backToHome": "ወደ መነሻ ገጽ ተመለስ"
   },
   "bottomSheet": {
-    "close": "Close",
-    "dragToClose": "Drag down to close"
+    "close": "ይዝጉ",
+    "dragToClose": "Drag down to close",
+    "dragHandle": "ለመዝጋት ወደ ታች ይጎትቱ"
   },
   "breadcrumb": {
     "budgetAnalyzer": "Budget Analyzer",
@@ -821,385 +822,385 @@
     }
   },
   "bulkActions": {
-    "applyTo": "Apply to {count}",
-    "categorize": "Categorize",
-    "clearSelection": "Clear selection",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
-    "delete": "Delete",
-    "deleteWarning": "This action cannot be undone.",
-    "export": "Export",
-    "noSubcategory": "No subcategory",
-    "selectAll": "Select all",
-    "selectCategory": "Select category...",
-    "selected": "{count} selected"
+    "applyTo": "ለ{count} ያስተግብሩ",
+    "categorize": "ምድብ ያድርጉ",
+    "clearSelection": "ምርጫ ያጽዱ",
+    "confirmDelete": "{count, plural, =1 {1 ግብይት} other {# ግብይቶች}} ይሰረዙ?",
+    "delete": "ይሰርዙ",
+    "deleteWarning": "ይህ እርምጃ ሊቀለበስ አይችልም።",
+    "export": "ያውጡ",
+    "noSubcategory": "ንዑስ ምድብ የለም",
+    "selectAll": "ሁሉንም ይምረጡ",
+    "selectCategory": "ምድብ ይምረጡ...",
+    "selected": "{count} ተመርጠዋል"
   },
   "calculators": {
     "budgetAnalyzer": {
-      "actual": "Actual",
-      "balanced": "Your Budget is Balanced!",
-      "description": "Analyze your spending against the popular budgeting rule",
-      "enterSpending": "Enter your monthly spending by category:",
-      "exceeding": "Exceeding",
-      "inputTitle": "Your Monthly Finances",
-      "monthlyIncome": "Monthly Net Income",
-      "monthlyIncomeHelp": "Your take-home pay after taxes",
-      "needs": "Needs",
-      "needsAdjustment": "Adjustments Recommended",
-      "needsDescription": "Housing, utilities, groceries, insurance, minimum debt payments",
-      "needsExamples": "rent, utilities, groceries",
-      "over": "Over",
-      "ruleExplanation": "The 50/30/20 Rule",
-      "savings": "Savings",
-      "savingsDescription": "Emergency fund, investments, retirement, extra debt payments",
-      "savingsExamples": "savings, investments, extra debt",
-      "subtitle": "See how your budget measures up",
-      "target": "Target",
-      "title": "50/30/20 Budget Analyzer",
-      "under": "On Track",
-      "variance": "Variance",
-      "wants": "Wants",
-      "wantsDescription": "Dining out, entertainment, shopping, subscriptions",
-      "wantsExamples": "dining, entertainment, shopping"
+      "actual": "ትክክለኛ",
+      "balanced": "በጀትዎ ሚዛናዊ ነው!",
+      "description": "ወጪዎን ከታዋቂው የበጀት ህግ ጋር ያተንትኑ",
+      "enterSpending": "ወርሃዊ ወጪዎን በምድብ ያስገቡ:",
+      "exceeding": "ያለፈ",
+      "inputTitle": "ወርሃዊ ፋይናንስዎ",
+      "monthlyIncome": "ወርሃዊ ንጹህ ገቢ",
+      "monthlyIncomeHelp": "ከግብር በኋላ ለእጅ ያለ ክፍያ",
+      "needs": "ፍላጎቶች",
+      "needsAdjustment": "ማስተካከያ ይመከራል",
+      "needsDescription": "ቤት፣ መገልገያዎች፣ ምግብ ግዢ፣ ኢንሹራንስ፣ ዝቅተኛ ዕዳ ክፍያዎች",
+      "needsExamples": "ኪራይ፣ መገልገያዎች፣ ምግብ ግዢ",
+      "over": "ያለፈ",
+      "ruleExplanation": "50/30/20 ህግ",
+      "savings": "ቁጠባ",
+      "savingsDescription": "ድንገተኛ ፈንድ፣ ኢንቨስትመንቶች፣ ጡረታ፣ ተጨማሪ ዕዳ ክፍያዎች",
+      "savingsExamples": "ቁጠባ፣ ኢንቨስትመንቶች፣ ተጨማሪ ዕዳ",
+      "subtitle": "በጀትዎ እንዴት እንደሚመዘን ይመልከቱ",
+      "target": "ኢላማ",
+      "title": "50/30/20 የበጀት ተንታኝ",
+      "under": "በትክክለኛው",
+      "variance": "ልዩነት",
+      "wants": "ፍላጎቶች",
+      "wantsDescription": "ምግብ ቤት፣ መዝናኛ፣ ግዢ፣ ምዝገባዎች",
+      "wantsExamples": "ምግብ ቤት፣ መዝናኛ፣ ግዢ"
     },
     "common": {
-      "back": "Back to calculators",
-      "calculate": "Calculate",
-      "months": "months",
-      "reset": "Reset",
-      "save": "Save Plan",
-      "years": "years"
+      "back": "ወደ ካልኩሌተሮች ተመለስ",
+      "calculate": "ያስሉ",
+      "months": "ወራት",
+      "reset": "ዳግም ያስጀምሩ",
+      "save": "ዕቅድ ያስቀምጡ",
+      "years": "ዓመታት"
     },
     "compoundInterest": {
-      "annualRate": "Annual Interest Rate (%)",
-      "annualRateHelp": "Savings: 4-5%, Bonds: 5-6%, Stocks: 7-10%",
-      "assumptionCompounding": "Compounding",
-      "assumptionReinvest": "All interest reinvested",
-      "assumptionTiming": "Contributions at end of each period",
-      "chartTitle": "Growth Over Time",
-      "compoundingFrequency": "Compounding Frequency",
-      "description": "See how your money grows with the power of compound interest",
-      "effectiveRate": "Effective Annual Rate",
-      "finalBalance": "Final Balance",
-      "formulaExplanation": "FV = Future Value, PV = Present Value, r = annual rate, n = compounds per year, t = years, PMT = periodic payment",
+      "annualRate": "ዓመታዊ ወለድ መጠን (%)",
+      "annualRateHelp": "ቁጠባ: 4-5%፣ ቦንዶች: 5-6%፣ አክሲዮኖች: 7-10%",
+      "assumptionCompounding": "ውህደት",
+      "assumptionReinvest": "ሁሉም ወለድ ይመለሳል",
+      "assumptionTiming": "አስተዋጽኦዎች በእያንዳንዱ ወቅት መጨረሻ",
+      "chartTitle": "ከጊዜ ጋር ዕድገት",
+      "compoundingFrequency": "የውህደት ድግግሞሽ",
+      "description": "ገንዘብዎ በውህደት ወለድ ኃይል እንዴት እንደሚያድግ ይመልከቱ",
+      "effectiveRate": "ውጤታማ ዓመታዊ መጠን",
+      "finalBalance": "የመጨረሻ ቀሪ",
+      "formulaExplanation": "FV = የወደፊት ዋጋ፣ PV = የአሁን ዋጋ፣ r = ዓመታዊ መጠን፣ n = በዓመት ውህደቶች፣ t = ዓመታት፣ PMT = ወቅታዊ ክፍያ",
       "formulaText": "FV = PV(1+r/n)^(nt) + PMT[((1+r/n)^(nt)-1)/(r/n)]",
       "frequency": {
-        "annually": "Annually (1/yr)",
-        "daily": "Daily (365/yr)",
-        "monthly": "Monthly (12/yr)",
-        "quarterly": "Quarterly (4/yr)",
-        "semiannually": "Semi-annually (2/yr)",
-        "weekly": "Weekly (52/yr)"
+        "annually": "ዓመታዊ (1/ዓመት)",
+        "daily": "ዕለታዊ (365/ዓመት)",
+        "monthly": "ወርሃዊ (12/ዓመት)",
+        "quarterly": "ሩብ ዓመታዊ (4/ዓመት)",
+        "semiannually": "ግማሽ ዓመት (2/ዓመት)",
+        "weekly": "ሳምንታዊ (52/ዓመት)"
       },
-      "initialDeposit": "Initial Deposit",
-      "inputTitle": "Investment Details",
-      "interestEarned": "Interest Earned",
-      "monthlyContribution": "Monthly Contribution",
-      "resultTitle": "Your Investment Growth",
-      "subtitle": "Watch your money grow over time",
-      "title": "Compound Interest Calculator",
-      "totalContributions": "Total Contributions",
-      "years": "Investment Period (Years)"
+      "initialDeposit": "የመጀመሪያ ተቀማጭ",
+      "inputTitle": "የኢንቨስትመንት ዝርዝሮች",
+      "interestEarned": "የተገኘ ወለድ",
+      "monthlyContribution": "ወርሃዊ አስተዋጽኦ",
+      "resultTitle": "የኢንቨስትመንት ዕድገትዎ",
+      "subtitle": "ገንዘብዎ ከጊዜ ጋር እያደገ ይመልከቱ",
+      "title": "የውህደት ወለድ ካልኩሌተር",
+      "totalContributions": "ጠቅላላ አስተዋጽኦዎች",
+      "years": "የኢንቨስትመንት ጊዜ (ዓመታት)"
     },
     "debtPayoff": {
-      "addDebt": "Add Debt",
+      "addDebt": "ዕዳ ያክሉ",
       "apr": "APR (%)",
-      "avalanche": "Avalanche Strategy",
-      "avalancheDescription": "Pay highest interest first to save the most money",
-      "balance": "Balance",
-      "debtName": "Name",
-      "debtNamePlaceholder": "Debt {number}",
-      "description": "Compare snowball vs avalanche strategies to pay off debt faster",
-      "extraMonthlyPayment": "Extra Monthly Payment",
-      "extraMonthlyPaymentHelp": "Additional amount you can pay beyond minimums each month",
-      "minimumPayment": "Min Payment",
-      "month": "Month",
-      "morePsychological": "Motivational wins",
-      "payment": "Payment",
-      "paymentSchedule": "Payment Schedule",
-      "payoffDate": "Payoff Time",
-      "recommended": "Recommended",
-      "remaining": "Remaining",
-      "removeDebt": "Remove debt",
-      "savingsDescription": "You'll save {amount} in interest and be debt-free {months} months sooner with the avalanche method",
-      "savingsTitle": "Interest Savings with Avalanche",
-      "snowball": "Snowball Strategy",
-      "snowballDescription": "Pay smallest balance first for quick wins and motivation",
-      "subtitle": "Find the fastest path to debt freedom",
-      "title": "Debt Payoff Calculator",
-      "totalInterest": "Total Interest",
-      "yourDebts": "Your Debts"
+      "avalanche": "Avalanche ስልት",
+      "avalancheDescription": "ገንዘብ ለመቆጠብ ከፍተኛ ወለድ መጀመሪያ ይክፈሉ",
+      "balance": "ቀሪ",
+      "debtName": "ስም",
+      "debtNamePlaceholder": "ዕዳ {number}",
+      "description": "ዕዳ ለመክፈል snowball ከ avalanche ስልቶች ያወዳድሩ",
+      "extraMonthlyPayment": "ተጨማሪ ወርሃዊ ክፍያ",
+      "extraMonthlyPaymentHelp": "ከዝቅተኛ ክፍያ ባሻገር ተጨማሪ ክፍያ",
+      "minimumPayment": "ዝቅተኛ ክፍያ",
+      "month": "ወር",
+      "morePsychological": "ማበረታቻ ድሎች",
+      "payment": "ክፍያ",
+      "paymentSchedule": "የክፍያ መርሃ ግብ",
+      "payoffDate": "የክፍያ ጊዜ",
+      "recommended": "የሚመከር",
+      "remaining": "ቀሪ",
+      "removeDebt": "ዕዳ ያስወግዱ",
+      "savingsDescription": "በavalanche ዘዴ {amount} ወለድ ያስቆጥባሉ እና {months} ወራት ቀድመው ከዕዳ ነፃ ይሆናሉ",
+      "savingsTitle": "በAvalanche ወለድ ቁጠባ",
+      "snowball": "Snowball ስልት",
+      "snowballDescription": "ለፈጣን ድሎች ዝቅተኛ ቀሪ መጀመሪያ ይክፈሉ",
+      "subtitle": "ወደ ዕዳ ነጻነት ፈጣኑን መንገድ ያግኙ",
+      "title": "የዕዳ ክፍያ ካልኩሌተር",
+      "totalInterest": "ጠቅላላ ወለድ",
+      "yourDebts": "ዕዳዎችዎ"
     },
     "emergencyFund": {
-      "amountNeeded": "You need {amount} more to reach your goal",
-      "completionDate": "Estimated Completion",
-      "currentSavings": "Current Emergency Savings",
-      "description": "Calculate how much you need for financial security and track your progress",
-      "goalMet": "Goal Achieved!",
-      "goalProgress": "Building Your Safety Net",
-      "inputTitle": "Your Information",
-      "monthlyContribution": "Monthly Savings Amount",
-      "monthlyContributionHelp": "How much you can save towards your emergency fund each month",
-      "monthlyExpenses": "Monthly Expenses",
-      "monthlyExpensesHelp": "Include rent, utilities, groceries, insurance, and other essential costs",
-      "monthsToGoal": "Months to Reach Goal",
-      "progress": "Current Progress",
-      "resultsTitle": "Your Results",
-      "subtitle": "Build your financial safety net",
-      "targetAmount": "Target Emergency Fund",
-      "targetMonths": "Target Months of Coverage",
-      "targetMonthsHelp": "Experts recommend {months} months for most situations",
-      "tip1": "Keep your emergency fund in a high-yield savings account for easy access and better returns",
-      "tip2": "Automate your contributions by setting up automatic transfers on payday",
-      "tip3": "Start small if needed - even saving a little consistently adds up over time",
-      "tipsTitle": "Tips for Building Your Emergency Fund",
-      "title": "Emergency Fund Calculator"
+      "amountNeeded": "ግብዎን ለመድረስ {amount} ተጨማሪ ያስፈልግዎታል",
+      "completionDate": "ግምታዊ የማጠናቀቂያ ቀን",
+      "currentSavings": "ወቅታዊ የድንገተኛ ቁጠባ",
+      "description": "ለፋይናንስ ደህንነት ምን ያህል እንደሚያስፈልግዎ ያስሉ እና ሂደትዎን ይከታተሉ",
+      "goalMet": "ግብ ተሳክቷል!",
+      "goalProgress": "ደህንነት መረብዎን በመገንባት ላይ",
+      "inputTitle": "መረጃዎ",
+      "monthlyContribution": "ወርሃዊ የቁጠባ መጠን",
+      "monthlyContributionHelp": "በእያንዳንዱ ወር ለድንገተኛ ፈንድዎ ምን ያህል ማጠራቀም ይችላሉ",
+      "monthlyExpenses": "ወርሃዊ ወጪዎች",
+      "monthlyExpensesHelp": "ኪራይ፣ መገልገያዎች፣ ምግብ ግዢ፣ ኢንሹራንስ እና ሌሎች አስፈላጊ ወጪዎችን ያካትቱ",
+      "monthsToGoal": "ግብ ለመድረስ ወራት",
+      "progress": "ወቅታዊ ሂደት",
+      "resultsTitle": "ውጤቶችዎ",
+      "subtitle": "ፋይናንስ ደህንነት መረብዎን ይገንቡ",
+      "targetAmount": "ኢላማ ድንገተኛ ፈንድ",
+      "targetMonths": "የኢላማ ወራት ሽፋን",
+      "targetMonthsHelp": "ባለሙያዎች ለአብዛኞቹ ሁኔታዎች {months} ወራት ይመክራሉ",
+      "tip1": "ለቀላል ተደራሽነት እና ለተሻለ ምላሽ ድንገተኛ ፈንድዎን በከፍተኛ ምላሽ ቁጠባ ሂሳብ ያስቀምጡ",
+      "tip2": "በደመወዝ ቀን ራስ-ሰር ዝውውር በማዘጋጀት አስተዋጽኦዎችዎን ራስ-ሰር ያድርጉ",
+      "tip3": "ካስፈለገ ትንሽ ይጀምሩ - ትንሽ እንኳን ቋሚ ማጠራቀም ከጊዜ ጋር ይጨምራል",
+      "tipsTitle": "ድንገተኛ ፈንድዎን ለመገንባት ምክሮች",
+      "title": "የድንገተኛ ፈንድ ካልኩሌተር"
     },
     "hub": {
-      "accuracyDescription": "Using financial-grade arithmetic to avoid floating-point errors in all calculations.",
-      "accuracyTitle": "Precise Calculations",
-      "infoTitle": "About These Calculators",
-      "privacyDescription": "All calculations happen on your device. Your financial data never leaves your browser.",
-      "privacyTitle": "100% Private",
-      "sectionCore": "Core Calculators",
-      "sectionPlanning": "Financial Planning",
-      "sectionTools": "Tools & Links",
-      "subtitle": "Tools to help you plan and analyze your finances",
-      "title": "Financial Calculators"
+      "accuracyDescription": "በሁሉም ስሌቶች ውስጥ ተንሳፋፊ ነጥብ ስህተቶችን ለማስወገድ ፋይናንስ ደረጃ ስሌት ይጠቀማል።",
+      "accuracyTitle": "ትክክለኛ ስሌቶች",
+      "infoTitle": "ስለ እነዚህ ካልኩሌተሮች",
+      "privacyDescription": "ሁሉም ስሌቶች በመሳሪያዎ ላይ ይከናወናሉ። ፋይናንስ ውሂብዎ ከአሳሽዎ አይወጣም።",
+      "privacyTitle": "100% ግላዊ",
+      "sectionCore": "ዋና ካልኩሌተሮች",
+      "sectionPlanning": "ፋይናንስ ዕቅድ",
+      "sectionTools": "መሳሪያዎች እና ማገናኛዎች",
+      "subtitle": "ፋይናንስዎን ለማቀድ እና ለመተንተን መሳሪያዎች",
+      "title": "ፋይናንስ ካልኩሌተሮች"
     },
     "inflation": {
-      "assumptionCompound": "Inflation compounds annually",
-      "assumptionConstant": "Constant annual inflation rate",
-      "chartNominal": "Nominal Value (unchanged)",
-      "chartReal": "Real Purchasing Power",
-      "chartTitle": "Purchasing Power Over Time",
-      "currentAmount": "Current Amount",
-      "description": "See how inflation erodes your purchasing power over time",
-      "formulaExplanation": "Shows how much your money will actually buy in the future, adjusted for rising prices",
+      "assumptionCompound": "ዋጋ ግሽበት ዓመታዊ ይውሃዳል",
+      "assumptionConstant": "ቋሚ ዓመታዊ ዋጋ ግሽበት መጠን",
+      "chartNominal": "ስመ ዋጋ (ያልተቀየረ)",
+      "chartReal": "ትክክለኛ የግዢ ኃይል",
+      "chartTitle": "ከጊዜ ጋር የግዢ ኃይል",
+      "currentAmount": "ወቅታዊ መጠን",
+      "description": "ዋጋ ግሽበት ከጊዜ ጋር የግዢ ኃይልዎን እንዴት እንደሚሸረሽር ይመልከቱ",
+      "formulaExplanation": "ገንዘብዎ ወደፊት ምን ያህል እንደሚገዛ ያሳያል",
       "formulaText": "Real Value = Nominal Value / (1 + inflation)^years",
-      "heroDescription": "Your {amount} will have the buying power of {futureAmount} in {years} years",
-      "heroTitle": "Purchasing Power Impact",
-      "inflationRate": "Annual Inflation Rate (%)",
-      "inflationRateHelp": "US historical average: ~3%",
-      "inputTitle": "Calculate Impact",
-      "powerLost": "Purchasing Power Lost",
-      "powerRemaining": "Purchasing Power Remaining",
-      "presetAverage": "Average (3%)",
-      "presetHigh": "High (5%)",
-      "presetLow": "Low (2%)",
-      "presets": "Presets",
-      "purchasingPower": "Future Purchasing Power",
-      "resultTitle": "Detailed Breakdown",
-      "subtitle": "Understand the real cost of inflation",
-      "tableLost": "Value Lost",
-      "tableNominal": "Nominal Value",
-      "tableReal": "Real Value",
-      "tableTitle": "Year-by-Year Breakdown",
-      "tableYear": "Year",
-      "timeHorizon": "Time Horizon (Years)",
-      "title": "Inflation Impact Calculator"
+      "heroDescription": "{amount}ዎ በ{years} ዓመታት ውስጥ {futureAmount} የግዢ ኃይል ይኖረዋል",
+      "heroTitle": "የግዢ ኃይል ተፅዕኖ",
+      "inflationRate": "ዓመታዊ ዋጋ ግሽበት መጠን (%)",
+      "inflationRateHelp": "የአሜሪካ ታሪካዊ አማካይ: ~3%",
+      "inputTitle": "ተፅዕኖ ያስሉ",
+      "powerLost": "የጠፋ የግዢ ኃይል",
+      "powerRemaining": "ቀሪ የግዢ ኃይል",
+      "presetAverage": "አማካይ (3%)",
+      "presetHigh": "ከፍተኛ (5%)",
+      "presetLow": "ዝቅተኛ (2%)",
+      "presets": "ቅድመ-ቅንብሮች",
+      "purchasingPower": "ወደፊት የግዢ ኃይል",
+      "resultTitle": "ዝርዝር ትንተና",
+      "subtitle": "ትክክለኛውን የዋጋ ግሽበት ወጪ ይረዱ",
+      "tableLost": "የጠፋ ዋጋ",
+      "tableNominal": "ስመ ዋጋ",
+      "tableReal": "ትክክለኛ ዋጋ",
+      "tableTitle": "ዓመት-በ-ዓመት ዝርዝር",
+      "tableYear": "ዓመት",
+      "timeHorizon": "የጊዜ አድማስ (ዓመታት)",
+      "title": "የዋጋ ግሽበት ተፅዕኖ ካልኩሌተር"
     },
     "loanTracker": {
-      "description": "Track all your loans, payments, and payoff progress",
-      "title": "Loan Tracker"
+      "description": "ሁሉንም ብድሮችዎን፣ ክፍያዎችን እና ክፍያ ሂደትን ይከታተሉ",
+      "title": "ብድር ክትትል"
     },
     "monteCarlo": {
-      "assumptionInflation": "Inflation adjustment",
-      "assumptionInflationApplied": "Applied to withdrawals (compounding)",
-      "assumptionInflationNone": "Not applied in accumulation mode",
-      "assumptionPRNG": "Random number generator",
-      "assumptionPRNGValue": "Seeded PRNG (Mulberry32) — deterministic",
-      "assumptionReturns": "Return distribution",
-      "assumptionReturnsValue": "Normal distribution (Box-Muller)",
-      "assumptionVolatility": "Volatility (std dev)",
-      "badgeCaution": "Needs Review",
-      "badgeRisk": "High Risk",
-      "badgeStrong": "Strong Plan",
-      "chartTitle": "Percentile Bands Over Time",
-      "description": "Stress-test your financial plan with probabilistic modeling",
-      "expectedReturn": "Expected Annual Return (%)",
-      "expectedReturnHelp": "Stocks: 7-10%, Bonds: 3-5%, Balanced: 5-7%",
-      "formulaExplanation": "Each month draws a random return from a normal distribution. Contributions are added, inflation-adjusted withdrawals subtracted. Repeated across N simulations.",
+      "assumptionInflation": "ዋጋ ግሽበት ማስተካከያ",
+      "assumptionInflationApplied": "ወደ ማውጣት ይተገበራል (ውህደት)",
+      "assumptionInflationNone": "በማጠራቀም ሁነታ አይተገበርም",
+      "assumptionPRNG": "የዘፈቀደ ቁጥር ማመንጫ",
+      "assumptionPRNGValue": "ዘር ያለው PRNG (Mulberry32) — ቆራጭ",
+      "assumptionReturns": "ምላሽ ስርጭት",
+      "assumptionReturnsValue": "መደበኛ ስርጭት (Box-Muller)",
+      "assumptionVolatility": "ተለዋዋጭነት (std dev)",
+      "badgeCaution": "ግምገማ ያስፈልጋል",
+      "badgeRisk": "ከፍተኛ አደጋ",
+      "badgeStrong": "ጠንካራ ዕቅድ",
+      "chartTitle": "ፐርሰንታይል ባንዶች ከጊዜ ጋር",
+      "description": "ፋይናንስ ዕቅድዎን በአጋጣሚ ሞዴሊንግ ይፈትሹ",
+      "expectedReturn": "የሚጠበቅ ዓመታዊ ምላሽ (%)",
+      "expectedReturnHelp": "አክሲዮኖች: 7-10%፣ ቦንዶች: 3-5%፣ ሚዛናዊ: 5-7%",
+      "formulaExplanation": "እያንዳንዱ ወር ከመደበኛ ስርጭት ዘፈቀደ ምላሽ ይስባል። አስተዋጽኦዎች ይታከላሉ፣ ከዋጋ ግሽበት ጋር ማውጣት ይቀነሳል።",
       "formulaText": "Monthly return = Normal(μ/12, σ/√12); Balance_t = Balance_(t-1) × (1 + r_t) + C - W",
-      "heroTitle": "Simulation Results",
-      "inflationRate": "Inflation Rate (%)",
-      "initialBalance": "Starting Portfolio Balance",
-      "inputTitle": "Simulation Parameters",
-      "medianFinal": "Median Final Balance",
-      "modeAccumulation": "Saving (Accumulation)",
-      "modeWithdrawal": "Spending (Withdrawal)",
-      "monthlyContribution": "Monthly Contribution",
-      "monthlyWithdrawal": "Monthly Withdrawal",
-      "p10Final": "Worst Case (10th %ile)",
-      "p90Final": "Best Case (90th %ile)",
-      "resultsTitle": "Outcome Distribution",
-      "scenarioMode": "Scenario Mode",
-      "simulations": "Number of Simulations",
-      "simulationsHelp": "More simulations = more accurate percentiles, but slower",
-      "subtitle": "Run thousands of market simulations to see how your plan holds up",
-      "successRateDescription": "{total} simulations run, {failures} ran out of money",
-      "successRateLabel": "Success Rate",
-      "timeHorizon": "Time Horizon (Years)",
-      "title": "Monte Carlo Simulator",
-      "totalSimulations": "Simulations Run",
-      "volatility": "Annual Volatility / Std Dev (%)",
-      "volatilityHelp": "S&P 500 historical: ~15%. Higher = wider outcome range."
+      "heroTitle": "ሲሙሌሽን ውጤቶች",
+      "inflationRate": "ዋጋ ግሽበት መጠን (%)",
+      "initialBalance": "የመጀመሪያ ፖርትፎሊዮ ቀሪ",
+      "inputTitle": "ሲሙሌሽን ልኬቶች",
+      "medianFinal": "መካከለኛ የመጨረሻ ቀሪ",
+      "modeAccumulation": "ማጠራቀም (ቁጠባ)",
+      "modeWithdrawal": "ወጪ (ማውጣት)",
+      "monthlyContribution": "ወርሃዊ አስተዋጽኦ",
+      "monthlyWithdrawal": "ወርሃዊ ማውጣት",
+      "p10Final": "መጥፎ ሁኔታ (10ኛ %)",
+      "p90Final": "ምርጥ ሁኔታ (90ኛ %)",
+      "resultsTitle": "የውጤት ስርጭት",
+      "scenarioMode": "ሁኔታ ሁነታ",
+      "simulations": "ሲሙሌሽኖች ብዛት",
+      "simulationsHelp": "ብዙ ሲሙሌሽኖች = ትክክለኛ ፐርሰንታይሎች፣ ግን ቀርፋፋ",
+      "subtitle": "ዕቅድዎ እንዴት እንደሚቋቋም ለማየት ሺዎች ሲሙሌሽኖች ያሂዱ",
+      "successRateDescription": "{total} ሲሙሌሽኖች ተሰርተዋል፣ {failures} ገንዘብ አልቆባቸዋል",
+      "successRateLabel": "ስኬት መጠን",
+      "timeHorizon": "የጊዜ አድማስ (ዓመታት)",
+      "title": "Monte Carlo ሲሙሌተር",
+      "totalSimulations": "የተሰሩ ሲሙሌሽኖች",
+      "volatility": "ዓመታዊ ተለዋዋጭነት / ስታንዳርድ ልዩነት (%)",
+      "volatilityHelp": "S&P 500 ታሪካዊ: ~15%። ከፍተኛ = ሰፊ ውጤት ክልል።"
     },
     "mortgage": {
-      "affordabilityTitle": "Your Affordability",
-      "annualIncome": "Annual Gross Income",
-      "annualRate": "Interest Rate (%)",
-      "annualRateHelp": "Current average: 6-7% for 30-year fixed",
-      "assumptionFixedRate": "Fixed interest rate for full term",
-      "assumptionNoEscrow": "Does not include taxes, insurance, or HOA",
-      "description": "Calculate payments or find out how much home you can afford",
-      "downPayment": "Down Payment",
-      "downPaymentAmount": "Down Payment",
-      "downPaymentPercent": "Down Payment (%)",
-      "dtiRatio": "Debt-to-Income Ratio",
-      "extraPayment": "Extra Monthly Payment",
-      "extraPaymentHelp": "Additional payment applied to principal each month",
-      "formulaExplanation": "M = Monthly payment, P = Principal, i = Monthly interest rate, n = Total number of payments",
+      "affordabilityTitle": "አቅምዎ",
+      "annualIncome": "ዓመታዊ ጠቅላላ ገቢ",
+      "annualRate": "የወለድ መጠን (%)",
+      "annualRateHelp": "ወቅታዊ አማካይ: ለ30 ዓመት ቋሚ 6-7%",
+      "assumptionFixedRate": "ለሙሉ ጊዜ ቋሚ ወለድ መጠን",
+      "assumptionNoEscrow": "ግብሮች፣ ኢንሹራንስ ወይም HOA አያካትትም",
+      "description": "ክፍያዎችን ያስሉ ወይም ምን ያህል ቤት መግዛት እንደሚችሉ ይወቁ",
+      "downPayment": "ቅድመ ክፍያ",
+      "downPaymentAmount": "ቅድመ ክፍያ",
+      "downPaymentPercent": "ቅድመ ክፍያ (%)",
+      "dtiRatio": "ዕዳ-ለ-ገቢ ሬሾ",
+      "extraPayment": "ተጨማሪ ወርሃዊ ክፍያ",
+      "extraPaymentHelp": "በየወሩ ወደ ዋና ክፍያ የሚደረግ ተጨማሪ ክፍያ",
+      "formulaExplanation": "M = ወርሃዊ ክፍያ፣ P = ዋና፣ i = ወርሃዊ ወለድ መጠን፣ n = ጠቅላላ ክፍያዎች",
       "formulaText": "M = P[i(1+i)^n] / [(1+i)^n - 1]",
-      "hideFullSchedule": "Hide Full Schedule",
-      "homePrice": "Home Price",
-      "inputTitle": "Loan Details",
-      "loanAmount": "Loan Amount",
-      "maxDTI": "Maximum DTI Ratio (%)",
-      "maxHomePrice": "Maximum Home Price",
-      "maxLoanAmount": "Maximum Loan Amount",
-      "modeAffordability": "What Can I Afford?",
-      "modePayment": "Calculate Payment",
-      "monthlyDebts": "Monthly Debt Payments",
-      "monthlyDebtsHelp": "Car loans, student loans, credit cards, etc.",
-      "monthlyPayment": "Monthly Payment",
-      "payoffMonths": "Payoff Time",
-      "resultTitle": "Payment Summary",
-      "scheduleBalance": "Balance",
-      "scheduleInterest": "Interest",
-      "scheduleMonth": "Month",
-      "schedulePayment": "Payment",
-      "schedulePrincipal": "Principal",
-      "scheduleTitle": "Amortization Schedule",
-      "showFullSchedule": "Show Full Schedule",
-      "subtitle": "Plan your home purchase with confidence",
-      "term": "Loan Term",
-      "term15": "15 Years",
-      "term30": "30 Years",
-      "title": "Mortgage Calculator",
-      "totalCost": "Total Cost of Loan",
-      "totalInterest": "Total Interest Paid"
+      "hideFullSchedule": "ሙሉ መርሃ ግብ ይደብቁ",
+      "homePrice": "የቤት ዋጋ",
+      "inputTitle": "የብድር ዝርዝሮች",
+      "loanAmount": "የብድር መጠን",
+      "maxDTI": "ከፍተኛ DTI ሬሾ (%)",
+      "maxHomePrice": "ከፍተኛ የቤት ዋጋ",
+      "maxLoanAmount": "ከፍተኛ የብድር መጠን",
+      "modeAffordability": "ምን ያህል ልገዛ እችላለሁ?",
+      "modePayment": "ክፍያ ያስሉ",
+      "monthlyDebts": "ወርሃዊ ዕዳ ክፍያዎች",
+      "monthlyDebtsHelp": "የመኪና ብድር፣ የተማሪ ብድር፣ ክሬዲት ካርዶች ወዘተ",
+      "monthlyPayment": "ወርሃዊ ክፍያ",
+      "payoffMonths": "የክፍያ ጊዜ",
+      "resultTitle": "የክፍያ ማጠቃለያ",
+      "scheduleBalance": "ቀሪ",
+      "scheduleInterest": "ወለድ",
+      "scheduleMonth": "ወር",
+      "schedulePayment": "ክፍያ",
+      "schedulePrincipal": "ዋና",
+      "scheduleTitle": "የክፍያ መርሃ ግብ",
+      "showFullSchedule": "ሙሉ መርሃ ግብ ያሳዩ",
+      "subtitle": "ቤት ግዢዎን በእምነት ያቅዱ",
+      "term": "የብድር ጊዜ",
+      "term15": "15 ዓመታት",
+      "term30": "30 ዓመታት",
+      "title": "ሞርጌጅ ካልኩሌተር",
+      "totalCost": "ጠቅላላ የብድር ወጪ",
+      "totalInterest": "ጠቅላላ የተከፈለ ወለድ"
     },
     "netWorth": {
-      "description": "View your complete financial picture with assets and liabilities",
-      "title": "Net Worth"
+      "description": "ንብረቶች እና ዕዳዎች ያካተተ ሙሉ ፋይናንስ ምስልዎን ይመልከቱ",
+      "title": "ጠቅላላ ንብረት"
     },
     "property": {
-      "description": "Track property values, vehicles, and other assets",
-      "title": "Property & Assets"
+      "description": "የንብረት ዋጋዎችን፣ ተሽከርካሪዎችን እና ሌሎች ሀብቶችን ይከታተሉ",
+      "title": "ንብረት እና ሀብት"
     },
     "retirement": {
-      "advancedTitle": "Advanced Settings",
-      "assumptionInflation": "Inflation rate",
-      "assumptionPostReturn": "Post-retirement return",
-      "assumptionPreReturn": "Pre-retirement return",
-      "assumptionSS": "Social Security included from age {age}",
-      "balanceAtRetirement": "Balance at Retirement",
-      "chartAccumulation": "Accumulation Phase",
-      "chartTitle": "Portfolio Balance Over Time",
-      "chartWithdrawal": "Withdrawal Phase",
-      "currentAge": "Current Age",
-      "currentSavings": "Current Retirement Savings",
-      "description": "Plan your retirement with a comprehensive savings and withdrawal projection",
-      "desiredIncome": "Desired Monthly Income (today's dollars)",
-      "desiredIncomeHelp": "How much you want to spend monthly in retirement, in today's dollars",
-      "formulaExplanation": "Two-phase simulation: grow savings until retirement, then draw down with inflation-adjusted withdrawals",
+      "advancedTitle": "ከፍተኛ ቅንብሮች",
+      "assumptionInflation": "ዋጋ ግሽበት መጠን",
+      "assumptionPostReturn": "ድህረ-ጡረታ ምላሽ",
+      "assumptionPreReturn": "ቅድመ-ጡረታ ምላሽ",
+      "assumptionSS": "ማህበራዊ ዋስትና ከዕድሜ {age} ጀምሮ ተካቷል",
+      "balanceAtRetirement": "በጡረታ ወቅት ቀሪ",
+      "chartAccumulation": "የመጠራቀም ደረጃ",
+      "chartTitle": "ከጊዜ ጋር የፖርትፎሊዮ ቀሪ",
+      "chartWithdrawal": "የማውጣት ደረጃ",
+      "currentAge": "ወቅታዊ ዕድሜ",
+      "currentSavings": "ወቅታዊ ጡረታ ቁጠባ",
+      "description": "ሁሉን አቀፍ ቁጠባ እና ማውጣት ትንበያ ይጠቀሙ",
+      "desiredIncome": "የሚፈለግ ወርሃዊ ገቢ (ዛሬ ዶላር)",
+      "desiredIncomeHelp": "በጡረታ ወቅት ምን ያህል ወርሃዊ ማውጣት ይፈልጋሉ",
+      "formulaExplanation": "ባለ-ሁለት ደረጃ ሲሙሌሽን: እስከ ጡረታ ቁጠባ ያሳድጉ፣ ከዚያ ከዋጋ ግሽበት ጋር ያውጡ",
       "formulaText": "Accumulation: FV = PV(1+r)^n + PMT[((1+r)^n-1)/r] | Withdrawal: Balance_n = Balance_(n-1)(1+r) - W",
-      "heroInsufficient": "Your savings may run out at age {age}",
-      "heroInsufficientBadge": "Action Needed",
-      "heroNeutralBadge": "Close",
-      "heroSufficient": "Your savings will last {years} years in retirement",
-      "heroSufficientBadge": "On Track",
-      "inflationRate": "Inflation Rate (%)",
-      "inputTitle": "Your Details",
-      "lifeExpectancy": "Life Expectancy",
-      "monthlyContribution": "Monthly Contribution",
-      "monthlyWithdrawal": "Monthly Withdrawal (at retirement)",
-      "postRetirementReturn": "Post-Retirement Return (%)",
-      "postRetirementReturnHelp": "Expected annual return while withdrawing (conservative ~4-5%)",
-      "preRetirementReturn": "Pre-Retirement Return (%)",
-      "preRetirementReturnHelp": "Expected annual return while saving (stocks avg ~7-10%)",
-      "resultTitle": "Retirement Projection",
-      "retirementAge": "Retirement Age",
-      "shortfall": "Shortfall at Life Expectancy",
-      "socialSecurity": "Social Security / Pension (monthly)",
-      "socialSecurityAge": "Social Security Start Age",
-      "subtitle": "Secure your financial future",
-      "surplus": "Surplus at Life Expectancy",
-      "title": "Retirement Planner",
-      "yearsMoneyLasts": "Years Money Lasts"
+      "heroInsufficient": "ቁጠባዎ በዕድሜ {age} ሊያልቅ ይችላል",
+      "heroInsufficientBadge": "ድርጊት ያስፈልጋል",
+      "heroNeutralBadge": "ቅርብ",
+      "heroSufficient": "ቁጠባዎ በጡረታ ወቅት {years} ዓመታት ይቆያል",
+      "heroSufficientBadge": "በትክክለኛው",
+      "inflationRate": "ዋጋ ግሽበት መጠን (%)",
+      "inputTitle": "ዝርዝሮችዎ",
+      "lifeExpectancy": "ህይወት ቅድመ-ግምት",
+      "monthlyContribution": "ወርሃዊ አስተዋጽኦ",
+      "monthlyWithdrawal": "ወርሃዊ ማውጣት (በጡረታ)",
+      "postRetirementReturn": "ድህረ-ጡረታ ምላሽ (%)",
+      "postRetirementReturnHelp": "ማውጣት ሲጀምሩ የሚጠበቅ ዓመታዊ ምላሽ",
+      "preRetirementReturn": "ቅድመ-ጡረታ ምላሽ (%)",
+      "preRetirementReturnHelp": "ማጠራቀም ሲጀምሩ የሚጠበቅ ዓመታዊ ምላሽ",
+      "resultTitle": "የጡረታ ትንበያ",
+      "retirementAge": "የጡረታ ዕድሜ",
+      "shortfall": "በህይወት ቅድመ-ግምት ጉድለት",
+      "socialSecurity": "ማህበራዊ ዋስትና / ጡረታ (ወርሃዊ)",
+      "socialSecurityAge": "ማህበራዊ ዋስትና መጀመሪያ ዕድሜ",
+      "subtitle": "ፋይናንስ ወደፊትዎን ያስጠብቁ",
+      "surplus": "በህይወት ቅድመ-ግምት ትርፍ",
+      "title": "የጡረታ ዕቅድ",
+      "yearsMoneyLasts": "ገንዘብ የሚቆይባቸው ዓመታት"
     },
     "savingsGoal": {
-      "currentSavings": "Current Savings",
-      "description": "Plan your savings with compound interest projections",
-      "expectedReturn": "Expected Annual Return (%)",
-      "expectedReturnHelp": "High-yield savings: 4-5%, Investments: 6-8%",
-      "goalAmount": "Goal Amount",
-      "inMonths": "In {months} months",
-      "inputTitle": "Goal Details",
-      "interestEarned": "Interest Earned",
-      "modeHowMuch": "How much should I save monthly?",
-      "modeWhen": "When will I reach my goal?",
-      "monthlyContribution": "Monthly Contribution",
-      "perMonth": "per month",
-      "progress": "Current Progress",
-      "projectedAmount": "Projected Total",
-      "projectionTitle": "Savings Projection",
-      "resultHowMuchTitle": "Monthly Savings Needed",
-      "resultWhenTitle": "You'll Reach Your Goal",
-      "subtitle": "Reach your financial goals faster",
-      "targetDate": "Target Date",
-      "timelineTitle": "Growth Timeline",
-      "title": "Savings Goal Calculator",
-      "totalContributions": "Total Contributions"
+      "currentSavings": "ወቅታዊ ቁጠባ",
+      "description": "ቁጠባዎን ከውህደት ወለድ ትንበያዎች ጋር ያቅዱ",
+      "expectedReturn": "የሚጠበቅ ዓመታዊ ምላሽ (%)",
+      "expectedReturnHelp": "ከፍተኛ ምላሽ ቁጠባ: 4-5%፣ ኢንቨስትመንቶች: 6-8%",
+      "goalAmount": "የግብ መጠን",
+      "inMonths": "በ{months} ወራት",
+      "inputTitle": "የግብ ዝርዝሮች",
+      "interestEarned": "የተገኘ ወለድ",
+      "modeHowMuch": "በወር ምን ያህል ማጠራቀም አለብኝ?",
+      "modeWhen": "ግቤን መቼ እደርሳለሁ?",
+      "monthlyContribution": "ወርሃዊ አስተዋጽኦ",
+      "perMonth": "በወር",
+      "progress": "ወቅታዊ ሂደት",
+      "projectedAmount": "የተተነበየ ጠቅላላ",
+      "projectionTitle": "የቁጠባ ትንበያ",
+      "resultHowMuchTitle": "ወርሃዊ ቁጠባ ያስፈልጋል",
+      "resultWhenTitle": "ግብዎ ይደርሳሉ",
+      "subtitle": "ፋይናንስ ግቦችዎን በፍጥነት ይድረሱ",
+      "targetDate": "ኢላማ ቀን",
+      "timelineTitle": "የዕድገት ጊዜ ሰሌዳ",
+      "title": "የቁጠባ ግብ ካልኩሌተር",
+      "totalContributions": "ጠቅላላ አስተዋጽኦዎች"
     },
     "subscriptionCost": {
-      "addSubscription": "Add Subscription",
-      "amount": "Amount",
-      "breakdown": "Essential vs Non-Essential",
-      "byCategory": "By Category",
-      "daily": "Daily",
-      "description": "Track and analyze the true cost of your subscriptions",
-      "essential": "Essential",
-      "essentialCost": "Essential",
+      "addSubscription": "ምዝገባ ያክሉ",
+      "amount": "መጠን",
+      "breakdown": "አስፈላጊ ከአስፈላጊ ያልሆነ",
+      "byCategory": "በምድብ",
+      "daily": "ዕለታዊ",
+      "description": "ትክክለኛውን የምዝገባ ወጪ ይከታተሉ እና ይተንትኑ",
+      "essential": "አስፈላጊ",
+      "essentialCost": "አስፈላጊ",
       "frequency": {
-        "annual": "Annual",
-        "biweekly": "Bi-weekly",
-        "label": "Frequency",
-        "monthly": "Monthly",
-        "quarterly": "Quarterly",
-        "weekly": "Weekly"
+        "annual": "ዓመታዊ",
+        "biweekly": "በየ2 ሳምንት",
+        "label": "ድግግሞሽ",
+        "monthly": "ወርሃዊ",
+        "quarterly": "ሩብ ዓመታዊ",
+        "weekly": "ሳምንታዊ"
       },
-      "monthly": "Monthly",
-      "monthlyIncome": "Monthly Income",
-      "name": "Name",
-      "namePlaceholder": "e.g., Netflix, Spotify",
-      "nonEssentialCost": "Non-Essential",
-      "perYear": "/year",
-      "percentOfIncome": "% of Income",
-      "potentialSavings": "Potential Yearly Savings",
-      "potentialSavingsHelp": "If you cancelled all non-essential subscriptions",
-      "remove": "Remove subscription",
-      "showIncomePercent": "Show percentage of income",
-      "subtitle": "See where your recurring money goes",
-      "title": "Subscription Cost Calculator",
-      "totalCost": "Total Subscription Cost",
-      "yearly": "Yearly",
-      "yourSubscriptions": "Your Subscriptions"
+      "monthly": "ወርሃዊ",
+      "monthlyIncome": "ወርሃዊ ገቢ",
+      "name": "ስም",
+      "namePlaceholder": "ለምሳሌ፣ Netflix፣ Spotify",
+      "nonEssentialCost": "አስፈላጊ ያልሆነ",
+      "perYear": "/ዓመት",
+      "percentOfIncome": "ከገቢ %",
+      "potentialSavings": "ሊሆን የሚችል ዓመታዊ ቁጠባ",
+      "potentialSavingsHelp": "ሁሉንም አስፈላጊ ያልሆኑ ምዝገባዎች ቢሰርዙ",
+      "remove": "ምዝገባ ያስወግዱ",
+      "showIncomePercent": "የገቢ መቶኛ ያሳዩ",
+      "subtitle": "ተደጋጋሚ ገንዘብዎ የት እንደሚሄድ ይመልከቱ",
+      "title": "የምዝገባ ወጪ ካልኩሌተር",
+      "totalCost": "ጠቅላላ የምዝገባ ወጪ",
+      "yearly": "ዓመታዊ",
+      "yourSubscriptions": "ምዝገባዎችዎ"
     },
     "transparency": {
-      "assumptions": "Assumptions",
-      "formula": "Formula",
-      "title": "How This Works"
+      "assumptions": "ግምቶች",
+      "formula": "ቀመር",
+      "title": "እንዴት እንደሚሰራ"
     },
     "chart": {
       "year": "ዓመት {n}",
@@ -1237,147 +1238,147 @@
     "openCalculator": "ካልኩሌተር ክፈት"
   },
   "calendarExport": {
-    "addToCalendar": "Add to Calendar",
+    "addToCalendar": "ወደ ቀን መቁጠሪያ ያክሉ",
     "dialog": {
-      "cancel": "Cancel",
-      "description": "Add bill reminders to your calendar",
-      "deselectAll": "Deselect all",
-      "export": "Export {count} subscription(s)",
-      "exportMethod": "Export Method",
-      "exporting": "Exporting...",
-      "selectAll": "Select all",
-      "selectSubscriptions": "Select Subscriptions",
-      "title": "Export to Calendar"
+      "cancel": "ይሰርዙ",
+      "description": "ወደ ቀን መቁጠሪያዎ የክፍያ ማስታወሻዎች ያክሉ",
+      "deselectAll": "ሁሉንም ያላቅቁ",
+      "export": "{count} ምዝገባ(ዎች) ያውጡ",
+      "exportMethod": "የማውጫ ዘዴ",
+      "exporting": "በማውጣት ላይ...",
+      "selectAll": "ሁሉንም ይምረጡ",
+      "selectSubscriptions": "ምዝገባዎች ይምረጡ",
+      "title": "ወደ ቀን መቁጠሪያ ያውጡ"
     },
-    "downloadAllICS": "Download All as ICS",
-    "downloadICS": "Download ICS File",
-    "exportToCalendar": "Export to Calendar",
+    "downloadAllICS": "ሁሉንም ICS ያውርዱ",
+    "downloadICS": "ICS ፋይል ያውርዱ",
+    "exportToCalendar": "ወደ ቀን መቁጠሪያ ያውጡ",
     "googleCalendar": "Google Calendar",
     "outlookCalendar": "Outlook Calendar",
-    "selectSubscriptions": "Select Subscriptions..."
+    "selectSubscriptions": "ምዝገባዎች ይምረጡ..."
   },
   "categories": {
-    "cancel": "Cancel",
-    "cannotDeleteDefault": "Cannot delete default categories",
-    "categoryNameLabel": "Category Name *",
-    "categoryNamePlaceholder": "e.g., Home Expenses",
-    "colorLabel": "Color",
-    "createCategory": "Create Category",
-    "createFirstCategory": "Create Your First Category",
-    "default": "Default",
-    "delete": "Delete",
-    "deleteCategoryAria": "Delete category",
-    "deleteConfirm": "Delete \"{name}\"? This cannot be undone.",
-    "deleteFailed": "Failed to delete category",
-    "edit": "Edit",
-    "editCategory": "Edit Category",
-    "editCategoryAria": "Edit category",
-    "expense": "Expense",
-    "income": "Income",
-    "loading": "Loading categories...",
-    "nameRequired": "Category name is required",
-    "newCategory": "New Category",
-    "noCategories": "No categories found",
-    "save": "Save",
-    "saveFailed": "Failed to save category",
-    "subcategoriesLabel": "Subcategories (comma-separated)",
-    "subcategoriesPlaceholder": "e.g., Rent, Maintenance, Insurance",
-    "subtitle": "Manage your budget categories and subcategories",
-    "tipLabel": "Tip:",
-    "tipText": "Default categories cannot be edited or deleted. Create custom categories for your specific needs.",
-    "title": "Categories",
-    "typeLabel": "Type"
+    "cancel": "ይሰርዙ",
+    "cannotDeleteDefault": "ነባሪ ምድቦች ሊሰረዙ አይችሉም",
+    "categoryNameLabel": "የምድብ ስም *",
+    "categoryNamePlaceholder": "ለምሳሌ፣ የቤት ወጪዎች",
+    "colorLabel": "ቀለም",
+    "createCategory": "ምድብ ይፍጠሩ",
+    "createFirstCategory": "የመጀመሪያ ምድብዎን ይፍጠሩ",
+    "default": "ነባሪ",
+    "delete": "ይሰርዙ",
+    "deleteCategoryAria": "ምድብ ይሰርዙ",
+    "deleteConfirm": "\"{name}\" ይሰረዝ? ይህ ሊቀለበስ አይችልም።",
+    "deleteFailed": "ምድብ ለመሰረዝ አልተቻለም",
+    "edit": "ያስተካክሉ",
+    "editCategory": "ምድብ ያስተካክሉ",
+    "editCategoryAria": "ምድብ ያስተካክሉ",
+    "expense": "ወጪ",
+    "income": "ገቢ",
+    "loading": "ምድቦች በመጫን ላይ...",
+    "nameRequired": "የምድብ ስም ያስፈልጋል",
+    "newCategory": "አዲስ ምድብ",
+    "noCategories": "ምድቦች አልተገኙም",
+    "save": "ያስቀምጡ",
+    "saveFailed": "ምድብ ለማስቀመጥ አልተቻለም",
+    "subcategoriesLabel": "ንዑስ ምድቦች (በኮማ የተለዩ)",
+    "subcategoriesPlaceholder": "ለምሳሌ፣ ኪራይ፣ ጥገና፣ ኢንሹራንስ",
+    "subtitle": "የበጀት ምድቦችዎን እና ንዑስ ምድቦችዎን ያስተዳድሩ",
+    "tipLabel": "ምክር:",
+    "tipText": "ነባሪ ምድቦች ሊስተካከሉ ወይም ሊሰረዙ አይችሉም። ለልዩ ፍላጎቶችዎ ብጁ ምድቦች ይፍጠሩ።",
+    "title": "ምድቦች",
+    "typeLabel": "ዓይነት"
   },
   "chatbot": {
     "buttons": {
-      "clearHistory": "Clear chat history",
-      "exportConversation": "Export conversation",
-      "send": "Send"
+      "clearHistory": "የቻት ታሪክ ያጽዱ",
+      "exportConversation": "ውይይት ያውጡ",
+      "send": "ይላኩ"
     },
     "disabled": {
-      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
-      "enableButton": "Enable Chatbot",
-      "title": "Chatbot Disabled"
+      "description": "ለመጀመር በቅንብሮች → ግላዊነት → የበጀት ቻትቦት ውስጥ ያንቁ።",
+      "enableButton": "ቻትቦት ያንቁ",
+      "title": "ቻትቦት ተሰናክሏል"
     },
     "emptyState": {
-      "description": "Ask me anything about your finances. Here are some examples:",
+      "description": "ስለ ፋይናንስዎ ማንኛውንም ነገር ይጠይቁኝ። ለምሳሌ:",
       "examples": {
-        "balance": "What's my total account balance?",
-        "budget": "Am I over budget in any categories?",
-        "groceries": "Show me my recent grocery purchases",
-        "spending": "How much did I spend this month?"
+        "balance": "ጠቅላላ የሂሳብ ቀሪዬ ምን ያህል ነው?",
+        "budget": "በማንኛውም ምድብ ከበጀት ያለፍኩ?",
+        "groceries": "የቅርብ ምግብ ግዢዎቼን ያሳዩኝ",
+        "spending": "በዚህ ወር ምን ያህል አውጥቻለሁ?"
       },
-      "title": "Start a Conversation"
+      "title": "ውይይት ይጀምሩ"
     },
     "header": {
-      "subtitle": "Ask me about your finances",
-      "title": "Budget Assistant"
+      "subtitle": "ስለ ፋይናንስዎ ይጠይቁኝ",
+      "title": "የበጀት ረዳት"
     },
     "input": {
-      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training.",
-      "placeholder": "Ask about your finances..."
+      "disclaimer": "በOpenAI GPT-4 ይሰራል። ውሂብዎ በደህንነት ይሰራል እና ለማሰልጠን አይጠቀምም።",
+      "placeholder": "ስለ ፋይናንስዎ ይጠይቁ..."
     },
     "messages": {
-      "dataAccessed": "Data accessed:",
-      "error": "Error",
-      "thinking": "Thinking..."
+      "dataAccessed": "የተገባ ውሂብ:",
+      "error": "ስህተት",
+      "thinking": "በማሰብ ላይ..."
     }
   },
   "chatbotHelp": {
     "tabs": {
-      "actions": "Actions",
-      "budget": "Budget",
-      "income": "Income",
-      "spending": "Spending",
-      "trends": "Trends"
+      "actions": "ድርጊቶች",
+      "budget": "በጀት",
+      "income": "ገቢ",
+      "spending": "ወጪ",
+      "trends": "አዝማሚያዎች"
     }
   },
   "chatbotOptIn": {
     "buttons": {
-      "decline": "No Thanks",
-      "enable": "Enable Chatbot"
+      "decline": "አይ አመሰግናለሁ",
+      "enable": "ቻትቦት ያንቁ"
     },
     "capabilities": {
-      "actions": "Optionally perform actions like adding transactions or creating budgets",
-      "answer": "Answer questions about your transactions, budgets, and spending patterns",
-      "insights": "Provide insights and recommendations based on your data",
-      "search": "Search your financial data using natural language",
-      "title": "What the Chatbot Can Do"
+      "actions": "ግብይቶችን ማከል ወይም በጀቶችን መፍጠር ያሉ ድርጊቶችን ያከናውኑ",
+      "answer": "ስለ ግብይቶችዎ፣ በጀቶችዎ እና ወጪ ንድፎችዎ ጥያቄዎችን ይመልሱ",
+      "insights": "በውሂብዎ ላይ ተመስርቶ ግንዛቤዎችን እና ምክሮችን ይስጡ",
+      "search": "በተፈጥሮ ቋንቋ ፋይናንስ ውሂብዎን ይፈልጉ",
+      "title": "ቻትቦቱ ምን ሊያደርግ ይችላል"
     },
-    "closeDialog": "Close chatbot opt-in dialog",
+    "closeDialog": "የቻትቦት ማንቃት ንግግር ይዝጉ",
     "controls": {
       "dataAccess": {
         "fullAccess": {
-          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data",
-          "title": "Full Access"
+          "description": "ቻትቦቱ ግብይቶችን ማከል፣ በጀቶችን መፍጠር እና ውሂብዎን መለወጥ ያሉ ድርጊቶችን ማከናወን ይችላል",
+          "title": "ሙሉ ተደራሽነት"
         },
-        "label": "What can the chatbot do with your data?",
+        "label": "ቻትቦቱ በውሂብዎ ምን ሊያደርግ ይችላል?",
         "readOnly": {
-          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets",
-          "title": "Read-Only (Recommended)"
+          "description": "ቻትቦቱ ውሂብዎን ማየት እና ጥያቄዎችን መመለስ ይችላል፣ ግን ግብይቶችን/በጀቶችን ማከል፣ ማስተካከል ወይም መሰረዝ አይችልም",
+          "title": "ማንበብ ብቻ (የሚመከር)"
         }
       },
       "retention": {
-        "days30": "30 days",
-        "days7": "7 days (Recommended)",
-        "forever": "Keep forever",
-        "label": "How long should we keep your conversations?",
-        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
+        "days30": "30 ቀናት",
+        "days7": "7 ቀናት (የሚመከር)",
+        "forever": "ለዘላለም ያስቀምጡ",
+        "label": "ውይይቶችዎ ለምን ያህል ጊዜ ይቆዩ?",
+        "note": "ውይይቶች በአሳሽዎ ውስጥ ይቀመጣሉ። በቅንብሮች → ግላዊነት ውስጥ በማንኛውም ጊዜ ሊሰርዟቸው ይችላሉ።"
       },
-      "title": "Privacy Controls"
+      "title": "የግላዊነት ቁጥጥሮች"
     },
     "gdpr": {
-      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+      "notice": "<strong>መብቶችዎ:</strong> ቻትቦቱን በማንቃት ፋይናንስ ውሂብዎን በOpenAI API በኩል ለማስኬድ ይፈቅዳሉ። በቅንብሮች → ግላዊነት ውስጥ ቻትቦቱን በማሰናከል ፈቃድዎን በማንኛውም ጊዜ ማውጣት ይችላሉ።"
     },
     "privacy": {
-      "dataSent": "Financial data is sent to the API to answer your questions",
-      "disable": "You can disable the chatbot anytime in Settings → Privacy",
-      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
-      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
-      "title": "Privacy & Data Usage"
+      "dataSent": "ጥያቄዎችዎን ለመመለስ ፋይናንስ ውሂብ ወደ API ይላካል",
+      "disable": "ቻትቦቱን በማንኛውም ጊዜ በቅንብሮች → ግላዊነት ውስጥ ማሰናከል ይችላሉ",
+      "noTraining": "OpenAI የAPI ውሂብን ሞዴሎችን ለማሰልጠን አይጠቀምም",
+      "processedBy": "ውይይቶችዎ በOpenAI GPT-4 API ይሰራሉ",
+      "title": "ግላዊነት እና የውሂብ አጠቃቀም"
     },
-    "subtitle": "AI-powered financial assistant",
-    "title": "Enable Budget Chatbot?"
+    "subtitle": "በAI የተጎላበተ የፋይናንስ ረዳት",
+    "title": "የበጀት ቻትቦት ያንቁ?"
   },
   "columnMapper": {
     "amount": "Amount",
@@ -1409,40 +1410,41 @@
     "useSavedMapping": "Use Saved Mapping"
   },
   "combobox": {
-    "noResults": "No results found.",
-    "search": "Search...",
-    "select": "Select..."
+    "noResults": "ምንም ውጤት አልተገኘም",
+    "search": "ይፈልጉ...",
+    "select": "Select...",
+    "placeholder": "ይምረጡ..."
   },
   "commandPalette": {
     "commands": {
-      "addTransaction": "Add Transaction",
-      "budgets": "Budgets",
-      "categories": "Categories",
-      "darkTheme": "Dark Theme",
-      "dashboard": "Dashboard",
-      "exportData": "Export Data",
-      "futurePlans": "Future Plans",
-      "highContrastTheme": "High-Contrast Theme",
-      "importCsv": "Import CSV",
-      "investments": "Investments",
-      "lightTheme": "Light Theme",
-      "loans": "Loans",
-      "newBudget": "New Budget",
-      "reports": "Reports",
-      "retirement": "Retirement",
-      "scanReceipt": "Scan Receipt",
-      "settings": "Settings",
-      "transactions": "Transactions"
+      "addTransaction": "ግብይት ያክሉ",
+      "budgets": "በጀቶች",
+      "categories": "ምድቦች",
+      "darkTheme": "ጨለማ ገጽታ",
+      "dashboard": "ዳሽቦርድ",
+      "exportData": "ውሂብ ያውጡ",
+      "futurePlans": "ለወደፊት ዕቅዶች",
+      "highContrastTheme": "ከፍተኛ ንፅፅር ገጽታ",
+      "importCsv": "CSV ያስገቡ",
+      "investments": "ኢንቨስትመንቶች",
+      "lightTheme": "ብርሃን ገጽታ",
+      "loans": "ብድሮች",
+      "newBudget": "አዲስ በጀት",
+      "reports": "ሪፖርቶች",
+      "retirement": "ጡረታ",
+      "scanReceipt": "ደረሰኝ ይቃኙ",
+      "settings": "ቅንብሮች",
+      "transactions": "ግብይቶች"
     },
     "groups": {
-      "appearance": "Appearance",
-      "quickActions": "Quick Actions",
-      "tools": "Tools & Settings",
-      "tracking": "Tracking & Analysis",
-      "wealth": "Wealth & Planning"
+      "appearance": "መልክ",
+      "quickActions": "ፈጣን ድርጊቶች",
+      "tools": "መሳሪያዎች እና ቅንብሮች",
+      "tracking": "ክትትል እና ትንተና",
+      "wealth": "ሀብት እና ዕቅድ"
     },
-    "noResults": "No results found.",
-    "placeholder": "Type a command or search..."
+    "noResults": "ምንም ውጤት አልተገኘም።",
+    "placeholder": "ትዕዛዝ ይተይቡ ወይም ይፈልጉ..."
   },
   "common": {
     "cancel": "ይቅርታ",
@@ -1465,168 +1467,168 @@
   "dashboard": {
     "widgets": {
       "accountBalances": {
-        "addAccount": "Add Account",
-        "allTransactions": "All Transactions",
-        "imported": "Imported",
-        "netWorth": "Net Worth",
-        "noAccounts": "No accounts added yet",
-        "title": "Account Balances",
-        "viewAll": "View All"
+        "addAccount": "ሂሳብ ያክሉ",
+        "allTransactions": "ሁሉም ግብይቶች",
+        "imported": "የገቡ",
+        "netWorth": "ጠቅላላ ንብረት",
+        "noAccounts": "ገና ሂሳቦች አልተጨመሩም",
+        "title": "የሂሳብ ቀሪዎች",
+        "viewAll": "ሁሉንም ይመልከቱ"
       },
       "budgetProgress": {
-        "createBudget": "Create Budget",
-        "noBudgets": "No budgets set",
-        "overBudget": "Over budget by {amount}",
-        "remaining": "Remaining",
-        "spent": "Spent",
-        "title": "Budget Progress",
-        "viewAll": "View All Budgets"
+        "createBudget": "በጀት ይፍጠሩ",
+        "noBudgets": "በጀቶች አልተቀመጡም",
+        "overBudget": "ከበጀት በ{amount} ያለፈ",
+        "remaining": "ቀሪ",
+        "spent": "የወጣ",
+        "title": "የበጀት ሂደት",
+        "viewAll": "ሁሉንም በጀቶች ይመልከቱ"
       },
       "eventBudget": {
-        "noEvents": "No active events",
-        "title": "Event Budgets",
-        "viewAll": "View All"
+        "noEvents": "ንቁ ዝግጅቶች የሉም",
+        "title": "የዝግጅት በጀቶች",
+        "viewAll": "ሁሉንም ይመልከቱ"
       },
       "incomeVsExpenses": {
-        "addTransactions": "Add Transactions",
-        "expenses": "Expenses",
-        "income": "Income",
-        "net": "Net",
-        "noData": "No transactions yet",
-        "thisMonth": "This Month",
-        "title": "Income vs Expenses"
+        "addTransactions": "ግብይቶች ያክሉ",
+        "expenses": "ወጪዎች",
+        "income": "ገቢ",
+        "net": "ልዩነት",
+        "noData": "ገና ግብይቶች የሉም",
+        "thisMonth": "በዚህ ወር",
+        "title": "ገቢ ከወጪ"
       },
       "monthlyTrends": {
-        "expenses": "Expenses",
-        "income": "Income",
-        "lastSixMonths": "Last 6 Months",
-        "needMoreData": "Add transactions for 2+ months to see trends",
-        "notEnoughData": "Not enough history",
-        "title": "Monthly Trends"
+        "expenses": "ወጪዎች",
+        "income": "ገቢ",
+        "lastSixMonths": "ያለፉት 6 ወራት",
+        "needMoreData": "አዝማሚያዎችን ለማየት ከ2+ ወራት ግብይቶች ያክሉ",
+        "notEnoughData": "በቂ ታሪክ የለም",
+        "title": "ወርሃዊ አዝማሚያዎች"
       },
       "netWorthMini": {
-        "assets": "Assets",
-        "liabilities": "Liabilities",
-        "title": "Net Worth",
-        "viewDetails": "View Details"
+        "assets": "ንብረቶች",
+        "liabilities": "ዕዳዎች",
+        "title": "ጠቅላላ ንብረት",
+        "viewDetails": "ዝርዝር ይመልከቱ"
       },
       "recentTransactions": {
-        "addTransaction": "Add Transaction",
-        "noTransactions": "No transactions yet",
-        "title": "Recent Transactions",
-        "uncategorized": "Uncategorized",
-        "viewAll": "View All"
+        "addTransaction": "ግብይት ያክሉ",
+        "noTransactions": "ገና ግብይቶች የሉም",
+        "title": "የቅርብ ግብይቶች",
+        "uncategorized": "ያልተመደቡ",
+        "viewAll": "ሁሉንም ይመልከቱ"
       },
       "safeToSpend": {
-        "caution": "Watch spending",
-        "createBudget": "Create Budget",
-        "dailyBudget": "Daily budget",
-        "danger": "Over budget",
-        "daysRemaining": "{days} days left",
-        "noBudgets": "No budgets set up yet",
-        "noData": "No budgets set up yet",
-        "overBudget": "{amount} over budget",
-        "perCategory": "Per category",
-        "remaining": "{amount} remaining",
-        "safe": "On track",
-        "title": "Safe to Spend",
-        "totalSafe": "Total safe to spend",
-        "viewAll": "View All"
+        "caution": "ወጪን ይጠንቀቁ",
+        "createBudget": "በጀት ይፍጠሩ",
+        "dailyBudget": "የዕለት በጀት",
+        "danger": "ከበጀት ያለፈ",
+        "daysRemaining": "{days} ቀናት ቀርተዋል",
+        "noBudgets": "ገና በጀቶች አልተቀመጡም",
+        "noData": "ገና በጀቶች አልተቀመጡም",
+        "overBudget": "{amount} ከበጀት ያለፈ",
+        "perCategory": "በእያንዳንዱ ምድብ",
+        "remaining": "{amount} ቀሪ",
+        "safe": "በመንገድ ላይ",
+        "title": "ለማውጣት ደህንነቱ የተጠበቀ",
+        "totalSafe": "ለማውጣት ደህንነቱ የተጠበቀ ጠቅላላ",
+        "viewAll": "ሁሉንም ይመልከቱ"
       },
       "spendingByCategory": {
-        "addTransactions": "Add Transactions",
-        "moreCategories": "+{count} more categories",
-        "noData": "No spending tracked yet",
-        "thisMonth": "This Month",
-        "title": "Spending by Category",
-        "total": "Total",
-        "uncategorized": "Uncategorized"
+        "addTransactions": "ግብይቶች ያክሉ",
+        "moreCategories": "+{count} ተጨማሪ ምድቦች",
+        "noData": "ገና ወጪ አልተከታተለም",
+        "thisMonth": "በዚህ ወር",
+        "title": "በምድብ ወጪ",
+        "total": "ጠቅላላ",
+        "uncategorized": "ያልተመደቡ"
       },
       "streaks": {
-        "badges": "badges",
-        "dayStreak": "day streak",
-        "points": "points",
-        "title": "Streaks & Badges"
+        "badges": "ባጆች",
+        "dayStreak": "ተከታታይ ቀናት",
+        "points": "ነጥቦች",
+        "title": "ተከታታይ ቀናት እና ባጆች"
       },
       "upcomingBills": {
-        "addSubscription": "Add Subscription",
-        "dueIn": "Due in {days} days",
-        "dueToday": "Due today",
-        "dueTomorrow": "Due tomorrow",
-        "noBills": "No upcoming bills",
-        "title": "Upcoming Bills",
-        "viewAll": "View All"
+        "addSubscription": "ምዝገባ ያክሉ",
+        "dueIn": "በ{days} ቀናት ውስጥ የሚከፈል",
+        "dueToday": "ዛሬ የሚከፈል",
+        "dueTomorrow": "ነገ የሚከፈል",
+        "noBills": "መጪ ክፍያዎች የሉም",
+        "title": "መጪ ክፍያዎች",
+        "viewAll": "ሁሉንም ይመልከቱ"
       },
       "weeklyRecap": {
-        "title": "Weekly Recap",
-        "viewFull": "Full Review",
-        "vsLastWeek": "vs last week"
+        "title": "ሳምንታዊ ማጠቃለያ",
+        "viewFull": "ሙሉ ግምገማ",
+        "vsLastWeek": "ካለፈው ሳምንት ጋር"
       }
     }
   },
   "dashboardCustomizer": {
-    "alwaysVisible": "Always visible",
-    "ariaLabel": "Customize dashboard layout",
-    "button": "Customize",
-    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
-    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
-    "reorderTitle": "Reorder Widgets",
-    "resetButton": "Reset to Defaults",
-    "title": "Customize Dashboard",
-    "toggleVisibility": "Toggle {name} visibility",
-    "widgetVisibility": "Widget Visibility",
-    "widgetsVisible": "{visible} of {total} widgets visible"
+    "alwaysVisible": "ሁልጊዜ ይታያል",
+    "ariaLabel": "የዳሽቦርድ አቀማመጥ ያስተካክሉ",
+    "button": "ያስተካክሉ",
+    "description": "የዳሽቦርድ ዊጀቶችን ያሳዩ ወይም ይደብቁ። ዊጀቶችን ዳሽቦርድ ላይ ለማስቀመጥ ይጎትቱ።",
+    "reorderDescription": "የዊጀት ቅደም ተከተል ለመለወጥ ዊጀቶችን በቀጥታ ዳሽቦርድዎ ላይ ጎትተው ያስቀምጡ። የእያንዳንዱን ዊጀት ካርድ የመጎተቻ እጀታ (⋮⋮) ለመያዝ አይጥዎን ወይም ንኪዎን ይጠቀሙ።",
+    "reorderTitle": "ዊጀቶችን ዳግም ያስተካክሉ",
+    "resetButton": "ወደ ነባሪ ይመልሱ",
+    "title": "ዳሽቦርድ ያስተካክሉ",
+    "toggleVisibility": "የ{name} ታይነት ቀያይር",
+    "widgetVisibility": "የዊጀት ታይነት",
+    "widgetsVisible": "{visible} ከ{total} ዊጀቶች ይታያሉ"
   },
   "debtAnalysis": {
     "cards": {
       "avgRate": {
-        "subtitle": "Weighted average",
-        "title": "Avg Interest Rate"
+        "subtitle": "ክብደት ያለው አማካይ",
+        "title": "አማካይ ወለድ መጠን"
       },
       "debtFreeDate": {
-        "subtitle": "Estimated payoff",
-        "title": "Debt-Free Date"
+        "subtitle": "ግምታዊ ክፍያ",
+        "title": "ከዕዳ ነፃ ቀን"
       },
       "monthlyPayment": {
-        "subtitle": "Total monthly obligations",
-        "title": "Monthly Payment"
+        "subtitle": "ጠቅላላ ወርሃዊ ግዴታዎች",
+        "title": "ወርሃዊ ክፍያ"
       },
       "totalDebt": {
-        "subtitle": "Across {count} active loans",
-        "title": "Total Debt"
+        "subtitle": "በ{count} ንቁ ብድሮች",
+        "title": "ጠቅላላ ዕዳ"
       }
     },
     "charts": {
       "byType": {
-        "description": "Distribution of debt across loan types",
-        "title": "Debt by Type"
+        "description": "በብድር ዓይነቶች የዕዳ ስርጭት",
+        "title": "በዓይነት ዕዳ"
       },
       "projection": {
-        "description": "Expected debt reduction over the next year",
-        "expectedReduction": "Expected reduction: {amount} over 12 months",
-        "title": "12-Month Payoff Projection"
+        "description": "በሚቀጥሉት ዓመት ውስጥ የሚጠበቅ የዕዳ ቅነሳ",
+        "expectedReduction": "በ12 ወራት ውስጥ የሚጠበቅ ቅነሳ: {amount}",
+        "title": "የ12 ወር ክፍያ ትንበያ"
       }
     },
     "comparison": {
-      "description": "Side-by-side comparison of your active loans",
+      "description": "የንቁ ብድሮችዎ ጎን ለጎን ንጽጽር",
       "headers": {
-        "balance": "Balance",
-        "interestRate": "Interest Rate",
-        "loan": "Loan",
-        "monthlyPayment": "Monthly Payment",
-        "percentOfTotal": "% of Total Debt"
+        "balance": "ቀሪ",
+        "interestRate": "የወለድ መጠን",
+        "loan": "ብድር",
+        "monthlyPayment": "ወርሃዊ ክፍያ",
+        "percentOfTotal": "ከጠቅላላ ዕዳ %"
       },
-      "title": "Loan Comparison",
-      "total": "Total"
+      "title": "የብድር ንጽጽር",
+      "total": "ጠቅላላ"
     },
     "empty": {
-      "addFirstLoan": "Add Your First Loan",
-      "description": "You don't have any active loans. Add a loan to see debt analytics.",
-      "title": "No Debt to Analyze"
+      "addFirstLoan": "የመጀመሪያ ብድርዎን ያክሉ",
+      "description": "ንቁ ብድሮች የሉዎትም። የዕዳ ትንተና ለማየት ብድር ያክሉ።",
+      "title": "ለመተንተን ዕዳ የለም"
     },
-    "subtitle": "Comprehensive view of your loans and obligations",
-    "title": "Debt Analysis",
-    "viewAllLoans": "View All Loans"
+    "subtitle": "የብድሮችዎ እና ግዴታዎችዎ ሁሉን አቀፍ እይታ",
+    "title": "የዕዳ ትንተና",
+    "viewAllLoans": "ሁሉንም ብድሮች ይመልከቱ"
   },
   "debtOverview": {
     "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
@@ -1795,99 +1797,102 @@
     "confirmAction": "እርምጃን ያረጋግጡ"
   },
   "draggableWidget": {
-    "dragToReorder": "Drag to reorder widget"
+    "dragToReorder": "ዊጀትን ለማስተካከል ይጎትቱ"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
-    "yearsAndMonths": "{years}y {months}m"
+    "months": "{count, plural, =1 {1 ወር} other {# ወራት}}",
+    "years": "{count, plural, =1 {1 ዓመት} other {# ዓመታት}}",
+    "yearsAndMonths": "{years}ዓ {months}ወ",
+    "hours": "{count} ሰዓቶች",
+    "minutes": "{count} ደቂቃዎች",
+    "seconds": "{count} ሰከንዶች"
   },
   "emptyStates": {
     "budgets": {
-      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
-      "heading": "No Budgets Created",
-      "primaryCta": "Create Your First Budget"
+      "description": "በተለያዩ ምድቦች ወጪን ለመከታተል እና ፋይናንስ ግቦችዎን ለማሳካት በጀቶች ይፍጠሩ።",
+      "heading": "በጀቶች አልተፈጠሩም",
+      "primaryCta": "የመጀመሪያ በጀትዎን ይፍጠሩ"
     },
     "categories": {
-      "description": "Create custom categories to organize your transactions beyond the default ones.",
-      "heading": "No Custom Categories",
-      "primaryCta": "Add Category"
+      "description": "ግብይቶችዎን ከነባሪዎቹ ባሻገር ለማደራጀት ብጁ ምድቦች ይፍጠሩ።",
+      "heading": "ብጁ ምድቦች የሉም",
+      "primaryCta": "ምድብ ያክሉ"
     },
     "dashboard": {
-      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
-      "heading": "Welcome to Your Budget App!",
-      "primaryCta": "Import CSV",
-      "secondaryCta": "Add Transaction"
+      "description": "የባንክ ግብይቶችዎን በማስገባት ወይም ሂሳቦችን በእጅ በማከል ይጀምሩ።",
+      "heading": "ወደ Budget App እንኳን ደህና መጡ!",
+      "primaryCta": "CSV ያስገቡ",
+      "secondaryCta": "ግብይት ያክሉ"
     },
     "futurePlans": {
-      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
-      "heading": "No Future Plans",
-      "primaryCta": "Create a Goal"
+      "description": "እንደ ቤት መግዛት፣ ለትምህርት ማጠራቀም ወይም ለእረፍት ማቀድ ያሉ ፋይናንስ ግቦችን ያስቀምጡ።",
+      "heading": "ለወደፊት ዕቅዶች የሉም",
+      "primaryCta": "ግብ ይፍጠሩ"
     },
     "investments": {
-      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
-      "heading": "No Investments Tracked",
-      "primaryCta": "Add Investment Account"
+      "description": "የኢንቨስትመንት ሂሳቦችዎን እና ይዞታዎችዎን ይከታተሉ።",
+      "heading": "ኢንቨስትመንቶች አልተከታተሉም",
+      "primaryCta": "የኢንቨስትመንት ሂሳብ ያክሉ"
     },
     "loans": {
-      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
-      "heading": "No Loans Tracked",
-      "primaryCta": "Add Your First Loan"
+      "description": "ብድሮችዎን፣ ሞርጌጆችዎን እና ዕዳዎችዎን ይከታተሉ።",
+      "heading": "ብድሮች አልተከታተሉም",
+      "primaryCta": "የመጀመሪያ ብድርዎን ያክሉ"
     },
     "reports": {
-      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
-      "heading": "No Data to Report",
-      "primaryCta": "Add Transactions",
-      "secondaryCta": "Import CSV"
+      "description": "ስለ ወጪ ንድፎችዎ ጠቃሚ ሪፖርቶችን ለማመንጨት ግብይቶች እና በጀቶች ያክሉ።",
+      "heading": "ሪፖርት ለማድረግ ውሂብ የለም",
+      "primaryCta": "ግብይቶች ያክሉ",
+      "secondaryCta": "CSV ያስገቡ"
     },
     "retirement": {
-      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
-      "heading": "No Retirement Plans",
-      "primaryCta": "Start Planning"
+      "description": "ሂሳቦችን በመከታተል፣ ፍላጎቶችን በመገመት እና የጡረታ ጊዜዎን በማሳየት ለጡረታ ያቅዱ።",
+      "heading": "የጡረታ ዕቅዶች የሉም",
+      "primaryCta": "ማቀድ ይጀምሩ"
     },
     "transactions": {
-      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
-      "heading": "No Transactions Yet",
-      "primaryCta": "Add Transaction",
-      "secondaryCta": "Import CSV"
+      "description": "የመጀመሪያ ግብይትዎን በማከል ወጪዎን መከታተል ይጀምሩ። በእጅ ማከል ወይም ከCSV ፋይል ማስገባት ይችላሉ።",
+      "heading": "ገና ግብይቶች የሉም",
+      "primaryCta": "ግብይት ያክሉ",
+      "secondaryCta": "CSV ያስገቡ"
     }
   },
   "errorRecovery": {
-    "aiAnalysis": "AI Analysis:",
-    "closeModal": "Close modal",
+    "aiAnalysis": "የAI ትንተና:",
+    "closeModal": "መስኮት ይዝጉ",
     "footer": {
-      "close": "Close",
-      "needHelp": "Need more help?",
-      "viewGuide": "View troubleshooting guide"
+      "close": "ይዝጉ",
+      "needHelp": "ተጨማሪ እገዛ ያስፈልግዎታል?",
+      "viewGuide": "የመላ ፍለጋ መመሪያ ይመልከቱ"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
-      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
-      "optionsTitle": "Recovery Options"
+      "canRecover": "ጥሩ ዜና! ከዚህ ስህተት ለማገገም {count} {count, plural, =1 {መንገድ} other {መንገዶች}} አግኝተናል።",
+      "cannotRecover": "ማገገም አይቻልም። ፋይሉን ከባንክዎ ዳግም ያውጡ ወይም ሌላ ቅርጸት ይሞክሩ።",
+      "optionsTitle": "የማገገሚያ አማራጮች"
     },
-    "subtitle": "Don't worry! We can help you fix this.",
+    "subtitle": "አይጨነቁ! ይህን ለማስተካከል እንረዳዎታለን።",
     "suggestions": {
-      "autoFix": "AUTO-FIX",
-      "autoFixButton": "Auto-Fix",
-      "confidence": "{percent}% confidence",
-      "fixing": "Fixing...",
-      "learnMore": "Learn More",
-      "technicalDetails": "Technical Details"
+      "autoFix": "ራስ-ሰር ጠገና",
+      "autoFixButton": "ራስ-ሰር ጠግን",
+      "confidence": "{percent}% እምነት",
+      "fixing": "በማስተካከል ላይ...",
+      "learnMore": "ተጨማሪ ይወቁ",
+      "technicalDetails": "ቴክኒካዊ ዝርዝሮች"
     },
     "summary": {
-      "category": "Category: {category}",
-      "title": "Error Summary"
+      "category": "ምድብ: {category}",
+      "title": "የስህተት ማጠቃለያ"
     },
     "technical": {
-      "canRecover": "Can Recover:",
-      "errorCategory": "Error Category:",
-      "no": "No",
-      "severity": "Severity:",
-      "suggestions": "Suggestions:",
-      "title": "Advanced Technical Details",
-      "yes": "Yes"
+      "canRecover": "ማገገም ይቻላል:",
+      "errorCategory": "የስህተት ምድብ:",
+      "no": "አይ",
+      "severity": "ክብደት:",
+      "suggestions": "ጥቆማዎች:",
+      "title": "ከፍተኛ ቴክኒካዊ ዝርዝሮች",
+      "yes": "አዎ"
     },
-    "title": "Import Failed"
+    "title": "ማስገባት አልተሳካም"
   },
   "export": {
     "allDataDeleted": "All data has been deleted. The page will now refresh.",
@@ -1974,81 +1979,81 @@
   },
   "exportDialog": {
     "buttons": {
-      "cancel": "Cancel",
-      "done": "Done!",
-      "download": "Download",
-      "export": "Export Data"
+      "cancel": "ይሰርዙ",
+      "done": "ተከናውኗል!",
+      "download": "ያውርዱ",
+      "export": "ውሂብ ያውጡ"
     },
     "complete": {
-      "download": "Your file is ready to download",
-      "success": "Export complete! Check your downloads folder."
+      "download": "ፋይልዎ ለማውረድ ዝግጁ ነው",
+      "success": "ማውጣት ተጠናቋል! የውረዶች አቃፊዎን ይመልከቱ።"
     },
     "dataSummary": {
-      "accounts": "Accounts",
-      "estimatedSize": "Est. Size",
-      "title": "Data Summary",
-      "transactions": "Transactions"
+      "accounts": "ሂሳቦች",
+      "estimatedSize": "ግምታዊ መጠን",
+      "title": "የውሂብ ማጠቃለያ",
+      "transactions": "ግብይቶች"
     },
     "exporting": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Exporting..."
+      "pleaseWait": "እባክዎ ይጠብቁ፣ ትንሽ ጊዜ ሊወስድ ይችላል",
+      "title": "በማውጣት ላይ..."
     },
     "format": {
       "budget": {
-        "description": "Complete backup including all data",
-        "label": ".budget file"
+        "description": "ሁሉንም ውሂብ ያካተተ ሙሉ ምትኬ",
+        "label": ".budget ፋይል"
       },
       "csv": {
-        "description": "Spreadsheet-compatible format",
-        "label": "CSV file"
+        "description": "ከስፕሬድሺት ጋር ተኳኋኝ ቅርጸት",
+        "label": "CSV ፋይል"
       },
       "json": {
-        "description": "Developer-friendly format",
-        "label": "JSON file"
+        "description": "ለገንቢዎች ተስማሚ ቅርጸት",
+        "label": "JSON ፋይል"
       },
-      "label": "Export Format"
+      "label": "የውጤት ቅርጸት"
     },
     "options": {
       "encrypt": {
-        "description": "Protect your data with AES-256 encryption",
-        "label": "Encrypt with Password"
+        "description": "ውሂብዎን በAES-256 ምስጠራ ይጠብቁ",
+        "label": "በይለፍ ቃል ያመስጥሩ"
       },
       "includeReceipts": {
-        "description": "Attach receipt images (increases file size)",
-        "label": "Include Receipts"
+        "description": "የደረሰኝ ምስሎች ያያይዙ (የፋይል መጠን ይጨምራል)",
+        "label": "ደረሰኞችን ያካትቱ"
       }
     },
     "password": {
-      "confirm": "Confirm Password",
-      "confirmPlaceholder": "Confirm password",
-      "hint": "Password Hint (Optional)",
-      "hintNote": "This hint will be stored unencrypted in the file",
-      "hintPlaceholder": "A hint to help you remember",
-      "label": "Password",
-      "minLength": "Password must be at least 8 characters",
-      "mismatch": "Passwords do not match",
-      "placeholder": "Enter password (min 8 characters)",
-      "required": "Password is required for encryption"
+      "confirm": "የይለፍ ቃል ያረጋግጡ",
+      "confirmPlaceholder": "የይለፍ ቃል ያረጋግጡ",
+      "hint": "የይለፍ ቃል ፍንጭ (አማራጭ)",
+      "hintNote": "ይህ ፍንጭ ባልተመሰጠረ ሁኔታ በፋይል ውስጥ ይቀመጣል",
+      "hintPlaceholder": "ለማስታወስ የሚረዳ ፍንጭ",
+      "label": "የይለፍ ቃል",
+      "minLength": "የይለፍ ቃል ቢያንስ 8 ቁምፊዎች መሆን አለበት",
+      "mismatch": "የይለፍ ቃሎች አይገጣጠሙም",
+      "placeholder": "የይለፍ ቃል ያስገቡ (ቢያንስ 8 ቁምፊዎች)",
+      "required": "ለምስጢር የይለፍ ቃል ያስፈልጋል"
     },
-    "subtitle": "Download your budget data",
-    "title": "Export Data"
+    "subtitle": "የበጀት ውሂብዎን ያውርዱ",
+    "title": "ውሂብ ያውጡ"
   },
   "filters": {
-    "account": "Account",
-    "allAccounts": "All accounts",
-    "allCategories": "All categories",
-    "allTypes": "All types",
-    "apply": "Apply filters",
-    "category": "Category",
-    "clearFilters": "Clear filters",
-    "dateRange": "Date range",
-    "expense": "Expense",
-    "income": "Income",
-    "search": "Search transactions...",
-    "type": "Type"
+    "account": "ሂሳብ",
+    "allAccounts": "ሁሉም ሂሳቦች",
+    "allCategories": "ሁሉም ምድቦች",
+    "allTypes": "ሁሉም ዓይነቶች",
+    "apply": "ማጣሪያዎች ያስተግብሩ",
+    "category": "ምድብ",
+    "clearFilters": "ማጣሪያዎች ያጽዱ",
+    "dateRange": "የቀን ክልል",
+    "expense": "ወጪ",
+    "income": "ገቢ",
+    "search": "ግብይቶች ይፈልጉ...",
+    "type": "ዓይነት"
   },
   "footer": {
-    "copyright": "© {year} {brandName}",
+    "copyright": "© {year} Budget App. መብቱ በህግ የተጠበቀ ነው።",
     "links": {
       "login": "ይግቡ",
       "settings": "ቅንብሮች",
@@ -2098,14 +2103,14 @@
     "title": "Friday Review"
   },
   "healthScore": {
-    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "ariaLabel": "የፋይናንስ ጤና ነጥብ: ከ100 ውስጥ {score}። {interpretation}",
     "emptyState": {
-      "line1": "Add transactions to see your",
-      "line2": "Financial Health Score"
+      "line1": "የእርስዎን ለማየት ግብይቶች ያክሉ",
+      "line2": "የፋይናንስ ጤና ነጥብ"
     },
-    "grade": "Grade: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health",
+    "grade": "ደረጃ: {grade}",
+    "missingFactors": "{count, plural, =1 {1 ምክንያት ይጎድላል} other {# ምክንያቶች ይጎድላሉ}}",
+    "title": "የፋይናንስ ጤና",
     "history": {
       "title": "የውጤት ታሪክ",
       "monthsOfData": "{count} {count, plural, =1 {ወር} other {ወራት}} ዳታ",
@@ -2153,165 +2158,165 @@
     "title": "Choose an Icon"
   },
   "import": {
-    "added": "added",
-    "allTransactionsRemoved": "All transactions were removed during validation. Please try importing a different file.",
-    "autoDetect": "Auto-detect ({locale})",
-    "couldNotParseCSV": "Could not parse CSV file. Please check the file format.",
-    "detectedFormat": "Detected Format:",
-    "dismiss": "Dismiss",
-    "duplicateSingular": "duplicate",
-    "duplicatesPlural": "duplicates",
-    "exportDebugData": "Export Debug Data",
-    "formatInfoAriaLabel": "More information about CSV and OFX file formats",
-    "importCancelledValidation": "Import cancelled due to validation issues. Please review your file and try again.",
-    "importError": "Import Error",
-    "importedOn": "Imported on",
-    "invalidBankConfig": "Invalid bank configuration. Please try selecting a different bank.",
-    "invalidOFXFile": "Invalid OFX file:\n{errors}",
-    "langArabic": "Arabic",
-    "langChineseSimplified": "Chinese (Simplified)",
-    "langChineseTraditional": "Chinese (Traditional)",
-    "langDutch": "Dutch",
-    "langEnglish": "English",
-    "langFrench": "French",
-    "langGerman": "German",
-    "langHindi": "Hindi",
-    "langItalian": "Italian",
-    "langJapanese": "Japanese",
-    "langKorean": "Korean",
-    "langPolish": "Polish",
-    "langPortuguese": "Portuguese",
-    "langRussian": "Russian",
-    "langSpanish": "Spanish",
-    "langTurkish": "Turkish",
-    "largePdfTip": "💡 For very large statements, consider requesting a CSV export from your bank for faster processing.",
-    "largePdfWarning": "⚠️ Large PDF detected ({pages} pages). Processing may take longer and use significant memory.",
-    "lowConfidenceDetection": "Low confidence format detection. {suggestions}",
-    "lowOcrConfidence": "⚠️ Low OCR confidence ({percent}%). This may be a scanned/image-based PDF.",
-    "noDataAfterMapping": "No data found in CSV file after applying custom mapping.",
-    "noDataInCSV": "No data found in CSV file. The file may be empty or incorrectly formatted.",
-    "noTransactionsParsed": "No transactions could be parsed from this file.\n\nPossible causes:\n• The file format may not be recognized\n• The date or amount columns may be empty\n• The file may contain only headers\n\nTry selecting a different bank format or contact support.",
-    "ocrLanguage": "OCR Language:",
-    "pageCount": "{count} pages",
-    "partialImport": "Partial Import",
-    "percentConfident": "{percent}% confident",
-    "recentImports": "Recent Imports",
-    "recentImportsSubtitle": "View your import history and verify successful uploads",
-    "reviewTransactionsForAccuracy": "💡 Please carefully review all transactions for accuracy.",
-    "selectAccountFirst": "Please select an account before importing transactions. Go to the Accounts page to create an account first.",
-    "skipped": "skipped",
-    "subtitle": "Upload CSV, OFX, QFX, or PDF files from BMO, Home Trust, TD, Chase, and 15+ other banks",
-    "success": "Success",
-    "tipCheckConsole": "Check browser console for detailed OCR logs",
-    "tipEnsureTextPDF": "Ensure PDF is text-based (not a scanned image)",
-    "tipExportDebug": "Export debug data (button above) for support",
-    "tipTryCSV": "Try exporting as CSV instead of PDF from your bank",
-    "title": "Import Transactions",
-    "transactionSingular": "transaction",
-    "transactionsLabel": "Transactions",
-    "transactionsPlural": "transactions",
-    "troubleshootingTips": "💡 Troubleshooting tips:",
-    "unableToDetectFormat": "Unable to detect file format. Please try a different file.",
-    "unsupportedFileFormat": "Unsupported file format: {format}. Please use CSV, OFX, QFX, QIF, MT940, CAMT.053, or PDF files.",
-    "unsupportedFormat": "Unsupported file format: {format}"
+    "added": "ተጨምሯል",
+    "allTransactionsRemoved": "ሁሉም ግብይቶች በማረጋገጫ ወቅት ተወግደዋል። ሌላ ፋይል ይሞክሩ።",
+    "autoDetect": "ራስ-ሰር ({locale})",
+    "couldNotParseCSV": "CSV ፋይል ለመተንተን አልተቻለም።",
+    "detectedFormat": "የተለየ ቅርጸት:",
+    "dismiss": "ያሰናብቱ",
+    "duplicateSingular": "ድርብ",
+    "duplicatesPlural": "ድርቦች",
+    "exportDebugData": "Debug ውሂብ ያውጡ",
+    "formatInfoAriaLabel": "ስለ CSV እና OFX ፋይል ቅርጸቶች ተጨማሪ መረጃ",
+    "importCancelledValidation": "ማስገባት በማረጋገጫ ችግሮች ተሰርዟል።",
+    "importError": "ማስገባት ስህተት",
+    "importedOn": "የገባበት ቀን",
+    "invalidBankConfig": "ልክ ያልሆነ የባንክ ቅንብር። ሌላ ባንክ ይሞክሩ።",
+    "invalidOFXFile": "ልክ ያልሆነ OFX ፋይል:\n{errors}",
+    "langArabic": "ዓረብኛ",
+    "langChineseSimplified": "ቻይንኛ (ቀለል ያለ)",
+    "langChineseTraditional": "ቻይንኛ (ባህላዊ)",
+    "langDutch": "ደች",
+    "langEnglish": "እንግሊዝኛ",
+    "langFrench": "ፈረንሳይኛ",
+    "langGerman": "ጀርመንኛ",
+    "langHindi": "ሂንዲ",
+    "langItalian": "ጣሊያንኛ",
+    "langJapanese": "ጃፓንኛ",
+    "langKorean": "ኮሪያኛ",
+    "langPolish": "ፖሊሽ",
+    "langPortuguese": "ፖርቱጊዝ",
+    "langRussian": "ሩሲያኛ",
+    "langSpanish": "ስፓኒሽ",
+    "langTurkish": "ቱርክ",
+    "largePdfTip": "ለትልልቅ መግለጫዎች ለፈጣን ማስኬድ ከባንክዎ CSV ማውጫ ይጠይቁ።",
+    "largePdfWarning": "ትልቅ PDF ተገኝቷል ({pages} ገጾች)። ማስኬድ ረዘም ሊል ይችላል።",
+    "lowConfidenceDetection": "ዝቅተኛ እምነት ቅርጸት ለይቶ ማወቂያ። {suggestions}",
+    "lowOcrConfidence": "ዝቅተኛ OCR እምነት ({percent}%)። ይህ የተቃኘ PDF ሊሆን ይችላል።",
+    "noDataAfterMapping": "ብጁ ማዛመጃ ከተተገበረ በኋላ ውሂብ አልተገኘም።",
+    "noDataInCSV": "በCSV ፋይል ውስጥ ውሂብ አልተገኘም።",
+    "noTransactionsParsed": "ከዚህ ፋይል ምንም ግብይቶች ሊተነተኑ አልቻሉም።",
+    "ocrLanguage": "OCR ቋንቋ:",
+    "pageCount": "{count} ገጾች",
+    "partialImport": "ከፊል ማስገባት",
+    "percentConfident": "{percent}% እምነት",
+    "recentImports": "የቅርብ ማስገባቶች",
+    "recentImportsSubtitle": "ማስገባቶችዎን ይመልከቱ እና ስኬታማ ስቀላዎችን ያረጋግጡ",
+    "reviewTransactionsForAccuracy": "ሁሉንም ግብይቶች ለትክክለኛነት በጥንቃቄ ይገምግሙ።",
+    "selectAccountFirst": "ግብይቶችን ከማስገባትዎ በፊት ሂሳብ ይምረጡ።",
+    "skipped": "ተዘልሏል",
+    "subtitle": "ከBMO፣ Home Trust፣ TD፣ Chase እና ከ15+ ሌሎች ባንኮች CSV፣ OFX፣ QFX ወይም PDF ፋይሎች ይስቀሉ",
+    "success": "ስኬት",
+    "tipCheckConsole": "ዝርዝር OCR መዝገቦችን ለማየት ኮንሶል ያረጋግጡ",
+    "tipEnsureTextPDF": "PDF ጽሁፍ ላይ የተመሰረተ መሆኑን ያረጋግጡ",
+    "tipExportDebug": "ለድጋፍ debug ውሂብ ያውጡ",
+    "tipTryCSV": "ከባንክዎ PDF ፋንታ CSV ለማውጣት ይሞክሩ",
+    "title": "ግብይቶች ያስገቡ",
+    "transactionSingular": "ግብይት",
+    "transactionsLabel": "ግብይቶች",
+    "transactionsPlural": "ግብይቶች",
+    "troubleshootingTips": "የመላ ፍለጋ ምክሮች:",
+    "unableToDetectFormat": "የፋይል ቅርጸት ለመለየት አልተቻለም። ሌላ ፋይል ይሞክሩ።",
+    "unsupportedFileFormat": "ያልተደገፈ ፋይል ቅርጸት: {format}። CSV፣ OFX፣ QFX፣ QIF፣ MT940፣ CAMT.053 ወይም PDF ይጠቀሙ።",
+    "unsupportedFormat": "ያልተደገፈ ፋይል ቅርጸት: {format}"
   },
   "importDialog": {
     "buttons": {
-      "back": "Back",
-      "cancel": "Cancel",
-      "done": "Done",
-      "import": "Import Data"
+      "back": "ተመለስ",
+      "cancel": "ይሰርዙ",
+      "done": "ተከናውኗል",
+      "import": "ውሂብ ያስገቡ"
     },
     "complete": {
-      "itemsImported": "{count} items imported successfully",
-      "success": "Import Complete!",
-      "withIssues": "Import Completed with Issues"
+      "itemsImported": "{count} ንጥሎች በተሳካ ሁኔታ ገብተዋል",
+      "success": "ማስገባት ተጠናቋል!",
+      "withIssues": "ማስገባት ከችግሮች ጋር ተጠናቋል"
     },
     "conflicts": {
-      "existing": "{count} existing",
-      "handleLabel": "Handle Conflicts",
+      "existing": "{count} ነባር",
+      "handleLabel": "ግጭቶችን ይያዙ",
       "overwrite": {
-        "description": "Replace with imported",
-        "label": "Overwrite"
+        "description": "በገቡት ይተኩ",
+        "label": "ይተኩ"
       },
       "rename": {
-        "description": "Import as new entries",
-        "label": "Create new"
+        "description": "እንደ አዲስ ያስገቡ",
+        "label": "አዲስ ይፍጠሩ"
       },
       "skip": {
-        "description": "Keep current data",
-        "label": "Skip existing"
+        "description": "ነባር ውሂብ ያስቀሩ",
+        "label": "ነባሮቹን ይዝለሉ"
       },
-      "title": "Conflicts Found"
+      "title": "ግጭቶች ተገኝተዋል"
     },
     "encryption": {
-      "decrypt": "Decrypt & Continue",
-      "encrypted": "This file is encrypted",
-      "enterPassword": "Enter password",
-      "hint": "Hint: {hint}",
-      "password": "Password"
+      "decrypt": "ይፍቱ እና ይቀጥሉ",
+      "encrypted": "ይህ ፋይል ተመስጥሯል",
+      "enterPassword": "የይለፍ ቃል ያስገቡ",
+      "hint": "ፍንጭ: {hint}",
+      "password": "የይለፍ ቃል"
     },
     "importing": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Importing your data..."
+      "pleaseWait": "እባክዎ ይጠብቁ፣ ትንሽ ጊዜ ሊወስድ ይችላል",
+      "title": "ውሂብዎ በመግባት ላይ..."
     },
     "preview": {
-      "dataToImport": "Data to Import",
-      "exported": "Exported",
-      "fileInfo": "File Information",
-      "version": "Version"
+      "dataToImport": "የሚገቡ ውሂቦች",
+      "exported": "ወጪ ተደርጓል",
+      "fileInfo": "የፋይል መረጃ",
+      "version": "ስሪት"
     },
     "selectFile": {
-      "dragDrop": "or drag and drop here",
-      "label": "Click to select a .budget file"
+      "dragDrop": "ወይም እዚህ ጎትተው ያስቀምጡ",
+      "label": ".budget ፋይል ለመምረጥ ጠቅ ያድርጉ"
     },
-    "subtitle": "Restore from .budget file",
-    "title": "Import Data"
+    "subtitle": "ከ.budget ፋይል ያስመልሱ",
+    "title": "ውሂብ ያስገቡ"
   },
   "investmentAccountModal": {
     "buttons": {
-      "cancel": "Cancel",
-      "create": "Create Account",
-      "saving": "Saving...",
-      "update": "Update Account"
+      "cancel": "ይሰርዙ",
+      "create": "ሂሳብ ይፍጠሩ",
+      "saving": "በማስቀመጥ ላይ...",
+      "update": "ሂሳብ ያዘምኑ"
     },
-    "closeModal": "Close modal",
+    "closeModal": "መስኮት ይዝጉ",
     "errors": {
-      "saveFailed": "Failed to save account"
+      "saveFailed": "ሂሳብ ለማስቀመጥ አልተቻለም"
     },
     "fields": {
       "accountNumber": {
-        "label": "Account Number (Optional)",
-        "placeholder": "e.g., Last 4 digits: 1234"
+        "label": "የሂሳብ ቁጥር (አማራጭ)",
+        "placeholder": "ለምሳሌ፣ የመጨረሻ 4 ቁጥሮች: 1234"
       },
       "institution": {
-        "label": "Financial Institution (Optional)",
-        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
+        "label": "ፋይናንስ ተቋም (አማራጭ)",
+        "placeholder": "ለምሳሌ፣ Questrade፣ Wealthsimple"
       },
       "name": {
-        "label": "Account Name",
-        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
+        "label": "የሂሳብ ስም",
+        "placeholder": "ለምሳሌ፣ RRSP፣ TFSA ቁጠባ፣ የኩባንያ ባለአክሲዮን"
       },
       "type": {
         "descriptions": {
-          "Company shares": "Employee stock purchase or stock options",
-          "Non-registered": "Taxable investment account",
-          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
-          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
+          "Company shares": "የሰራተኛ ባለአክሲዮን ግዢ ወይም አክሲዮን አማራጮች",
+          "Non-registered": "ግብር የሚከፈልበት ኢንቨስትመንት ሂሳብ",
+          "RRSP": "RRSP - ግብር የተላለፈ ዕድገት",
+          "TFSA": "TFSA - ከግብር ነፃ ዕድገት እና ማውጣት"
         },
-        "label": "Account Type"
+        "label": "የሂሳብ ዓይነት"
       }
     },
     "title": {
-      "add": "Add Investment Account",
-      "edit": "Edit Investment Account"
+      "add": "የኢንቨስትመንት ሂሳብ ያክሉ",
+      "edit": "የኢንቨስትመንት ሂሳብ ያስተካክሉ"
     },
     "validation": {
-      "nameRequired": "Please enter an account name"
+      "nameRequired": "እባክዎ የሂሳብ ስም ያስገቡ"
     }
   },
   "investmentCharts": {
-    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "emptyState": "ለማሳየት ይዞታዎች የሉም። ቻርቶችን ለማየት ይዞታዎች ያክሉ።",
     "legend": {
       "gain": "Gain",
       "loss": "Loss"
@@ -2326,15 +2331,30 @@
       "total": "Total"
     },
     "titles": {
-      "accountTypeAllocation": "Allocation by Account Type",
-      "gainLoss": "Gain/Loss by Holding",
-      "performanceSummary": "Performance Summary",
-      "portfolioAllocation": "Portfolio Allocation by Holding"
+      "accountTypeAllocation": "በሂሳብ ዓይነት ምደባ",
+      "gainLoss": "በይዞታ ትርፍ/ኪሳራ",
+      "performanceSummary": "የአፈጻጸም ማጠቃለያ",
+      "portfolioAllocation": "በይዞታ የፖርትፎሊዮ ምደባ"
     },
     "tooltip": {
       "costBasis": "Cost Basis",
       "currentValue": "Current Value",
       "percentOfPortfolio": "{percent}% of portfolio"
+    },
+    "labels": {
+      "gain": "ትርፍ",
+      "loss": "ኪሳራ",
+      "account": "ሂሳብ",
+      "holding": "ይዞታ",
+      "value": "ዋጋ",
+      "allocation": "ምደባ",
+      "currentValue": "አሁን ያለው ዋጋ",
+      "totalGainLoss": "ጠቅላላ ትርፍ/ኪሳራ",
+      "costBasis": "የወጪ መሰረት",
+      "totalReturn": "ጠቅላላ ምላሽ",
+      "numHoldings": "የይዞታ ብዛት",
+      "topPerformer": "ምርጥ አፈጻጸም",
+      "worstPerformer": "ዝቅተኛ አፈጻጸም"
     }
   },
   "investments": {
@@ -2408,57 +2428,57 @@
     "value": "Value"
   },
   "lanSync": {
-    "description": "Sync your budget data across devices on your local network",
+    "description": "የበጀት ውሂብዎን በአካባቢ ኔትወርክዎ ላይ ባሉ መሳሪያዎች ያመሳስሉ",
     "device": {
-      "connect": "Connect",
-      "connected": "Connected",
-      "disconnect": "Disconnect",
-      "removeDevice": "Remove Device",
-      "sync": "Sync",
-      "syncing": "Syncing..."
+      "connect": "ያገናኙ",
+      "connected": "ተገናኝቷል",
+      "disconnect": "ያላቅቁ",
+      "removeDevice": "መሳሪያ ያስወግዱ",
+      "sync": "ያመሳስሉ",
+      "syncing": "በማመሳሰል ላይ..."
     },
-    "disabled": "Disabled",
-    "enabled": "Enabled",
+    "disabled": "ተሰናክሏል",
+    "enabled": "ነቅቷል",
     "howItWorks": {
       "step1": {
-        "description": "Scan a QR code or enter connection details to pair devices on the same network",
-        "title": "Pair Devices"
+        "description": "በተመሳሳይ ኔትወርክ ላይ ያሉ መሳሪያዎችን ለማጣመር QR ኮድ ይቃኙ ወይም ዝርዝሮችን ያስገቡ",
+        "title": "መሳሪያዎች ያጣምሩ"
       },
       "step2": {
-        "description": "Data is encrypted end-to-end and syncs directly between devices - no cloud required",
-        "title": "Sync Securely"
+        "description": "ውሂብ ከጫፍ ወደ ጫፍ ተመስጥሮ በመሳሪያዎች መካከል ቀጥታ ይመሳሰላል - ደመና አያስፈልግም",
+        "title": "በደህንነት ያመሳስሉ"
       },
       "step3": {
-        "description": "Changes sync automatically when devices are connected on the same network",
-        "title": "Automatic Updates"
+        "description": "መሳሪያዎች በተመሳሳይ ኔትወርክ ላይ ሲገናኙ ለውጦች ራስ-ሰር ይመሳሰላሉ",
+        "title": "ራስ-ሰር ዝማኔዎች"
       },
-      "title": "How LAN Sync Works"
+      "title": "LAN ማመሳሰል እንዴት ይሰራል"
     },
     "pairedDevices": {
-      "addDevice": "Add Device",
-      "addFirstDevice": "Add Your First Device",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
-      "emptyDescription": "Pair a device to start syncing your budget data",
-      "emptyTitle": "No devices paired",
-      "noDevices": "No devices paired yet",
-      "title": "Paired Devices"
+      "addDevice": "መሳሪያ ያክሉ",
+      "addFirstDevice": "የመጀመሪያ መሳሪያዎን ያክሉ",
+      "deviceCount": "{count, plural, =1 {1 መሳሪያ ተጣምሯል} other {# መሳሪያዎች ተጣምረዋል}}",
+      "emptyDescription": "የበጀት ውሂብዎን ማመሳሰል ለመጀመር መሳሪያ ያጣምሩ",
+      "emptyTitle": "መሳሪያዎች አልተጣመሩም",
+      "noDevices": "ገና መሳሪያዎች አልተጣመሩም",
+      "title": "የተጣመሩ መሳሪያዎች"
     },
     "removeDialog": {
-      "cancel": "Cancel",
-      "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
-      "remove": "Remove",
-      "title": "Remove Device"
+      "cancel": "ይሰርዙ",
+      "description": "\"{deviceName}\"ን ለማስወገድ እርግጠኛ ነዎት? ውሂብ ለማመሳሰል ዳግም ማጣመር ያስፈልጋል።",
+      "remove": "ያስወግዱ",
+      "title": "መሳሪያ ያስወግዱ"
     },
-    "syncAll": "Sync All",
+    "syncAll": "ሁሉንም ያመሳስሉ",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
-      "justNow": "Just now",
-      "lastSync": "Last sync: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
-      "neverSynced": "Never synced"
+      "daysAgo": "{count, plural, =1 {ከ1 ቀን በፊት} other {ከ# ቀናት በፊት}}",
+      "hoursAgo": "{count, plural, =1 {ከ1 ሰዓት በፊት} other {ከ# ሰዓቶች በፊት}}",
+      "justNow": "አሁን",
+      "lastSync": "የመጨረሻ ማመሳሰል: {time}",
+      "minutesAgo": "{count, plural, =1 {ከ1 ደቂቃ በፊት} other {ከ# ደቂቃዎች በፊት}}",
+      "neverSynced": "በጭራሽ አልተመሳሰለም"
     },
-    "title": "LAN Sync"
+    "title": "LAN ማመሳሰል"
   },
   "landing": {
     "accessibility": {
@@ -2616,22 +2636,22 @@
         "viewPricing": "ወደ ወደፊት ይቀበሉ."
       },
       "demo": {
-        "cloudStorage": "Cloud storage",
-        "dining": "Dining",
-        "expenses": "Expenses",
-        "foodToday": "Food • Today",
-        "groceries": "Groceries",
-        "groceryStore": "Grocery Store",
-        "income": "Income",
-        "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
-        "netWorth": "Net worth",
+        "cloudStorage": "የደመና ማከማቻ",
+        "dining": "ምግብ ቤት",
+        "expenses": "ወጪዎች",
+        "foodToday": "ምግብ • ዛሬ",
+        "groceries": "ምግብ ግዢ",
+        "groceryStore": "ምግብ ሱቅ",
+        "income": "ገቢ",
+        "incomeYesterday": "ገቢ • ትላንት",
+        "monthly": "ወርሃዊ",
+        "netWorth": "ጠቅላላ ንብረት",
         "netflix": "Netflix",
-        "salary": "Salary",
-        "shopping": "Shopping",
+        "salary": "ደመወዝ",
+        "shopping": "ግዢ",
         "spotify": "Spotify",
-        "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "subscriptionOct24": "ምዝገባ • ጥቅ 24",
+        "yearly": "ዓመታዊ"
       },
       "modes": {
         "budgets": "በጀት",
@@ -3097,7 +3117,10 @@
       "trackingAnalysis": "Tracking & Analysis",
       "wealthPlanning": "Wealth & Planning"
     },
-    "title": "More"
+    "title": "ተጨማሪ",
+    "description": "ተጨማሪ ባህሪያት እና ማስተካከያዎች",
+    "settings": "ቅንብሮች",
+    "help": "እገዛ"
   },
   "nav": {
     "about": "ስለ",
@@ -3115,102 +3138,102 @@
   },
   "notificationSettings": {
     "emailNotifications": {
-      "description": "Receive notifications via email",
-      "emailAddress": "Email Address",
-      "invalidEmail": "Please enter a valid email address",
-      "sendTest": "Send Test",
-      "testEmail": "Test Email",
-      "testEmailDescription": "Send a test email to verify your settings",
-      "testEmailFailed": "Failed to send",
-      "testEmailSent": "Email sent!",
-      "title": "Email Notifications",
-      "types": "Email notification types"
+      "description": "ማሳወቂያዎችን በኢሜል ይቀበሉ",
+      "emailAddress": "ኢሜል አድራሻ",
+      "invalidEmail": "እባክዎ ትክክለኛ ኢሜል አድራሻ ያስገቡ",
+      "sendTest": "ሙከራ ይላኩ",
+      "testEmail": "ሙከራ ኢሜል",
+      "testEmailDescription": "ቅንብሮችዎን ለማረጋገጥ ሙከራ ኢሜል ይላኩ",
+      "testEmailFailed": "ለመላክ አልተቻለም",
+      "testEmailSent": "ኢሜል ተልኳል!",
+      "title": "የኢሜል ማሳወቂያዎች",
+      "types": "የኢሜል ማሳወቂያ ዓይነቶች"
     },
     "infoBox": {
-      "emailExplanation": "Email notifications are sent via our secure email service and require a valid email address.",
-      "pushExplanation": "Push notifications require browser permission and work even when the app is closed.",
-      "storedLocally": "Notification settings are stored locally on your device."
+      "emailExplanation": "የኢሜል ማሳወቂያዎች በደህንነቱ የተጠበቀ ኢሜል አገልግሎት ይላካሉ።",
+      "pushExplanation": "Push ማሳወቂያዎች የአሳሽ ፈቃድ ያስፈልጋቸዋል እና መተግበሪያው ሲዘጋም ይሰራሉ።",
+      "storedLocally": "የማሳወቂያ ቅንብሮች በመሳሪያዎ ላይ ይቀመጣሉ።"
     },
     "masterToggle": {
-      "description": "Turn all notifications on or off",
-      "title": "Enable Notifications"
+      "description": "ሁሉንም ማሳወቂያዎች ያብሩ ወይም ያጥፉ",
+      "title": "ማሳወቂያዎች ያንቁ"
     },
-    "notAvailable": "Notification settings are not available.",
+    "notAvailable": "የማሳወቂያ ቅንብሮች አይገኙም።",
     "notificationTypes": {
       "billReminders": {
-        "description": "Get notified before subscriptions are due",
-        "title": "Bill Reminders"
+        "description": "ምዝገባዎች ከመክፈላቸው በፊት ያሳውቁ",
+        "title": "የክፍያ ማስታወሻዎች"
       },
       "budgetAlerts": {
-        "description": "Alerts when approaching budget limits",
-        "title": "Budget Alerts"
+        "description": "ከበጀት ገደብ ሲቃረቡ ማስጠንቀቂያዎች",
+        "title": "የበጀት ማስጠንቀቂያዎች"
       },
-      "description": "Choose which notifications you want to receive",
+      "description": "የትኞቹን ማሳወቂያዎች መቀበል እንደሚፈልጉ ይምረጡ",
       "goalMilestones": {
-        "description": "Celebrate when you hit savings milestones",
-        "title": "Goal Milestones"
+        "description": "የቁጠባ ምዕራፎች ሲደርሱ ያክብሩ",
+        "title": "የግብ ምዕራፎች"
       },
-      "title": "Notification Types"
+      "title": "የማሳወቂያ ዓይነቶች"
     },
     "pushPermission": {
-      "deniedHint": "Enable in browser settings",
-      "description": "Receive notifications even when the app is closed",
-      "enable": "Enable Push Notifications",
-      "notSupported": "Not supported in this browser",
+      "deniedHint": "በአሳሽ ቅንብሮች ውስጥ ያንቁ",
+      "description": "መተግበሪያው ሲዘጋም ማሳወቂያዎች ይቀበሉ",
+      "enable": "Push ማሳወቂያዎች ያንቁ",
+      "notSupported": "በዚህ አሳሽ አይደገፍም",
       "states": {
-        "default": "Not set",
-        "denied": "Blocked",
-        "granted": "Enabled",
-        "unsupported": "Unsupported"
+        "default": "አልተቀመጠም",
+        "denied": "ታግዷል",
+        "granted": "ነቅቷል",
+        "unsupported": "አይደገፍም"
       },
-      "title": "Push Notifications"
+      "title": "Push ማሳወቂያዎች"
     },
     "quietHours": {
-      "description": "No notifications during this time window",
-      "end": "End time",
-      "start": "Start time",
-      "title": "Quiet Hours"
+      "description": "በዚህ ጊዜ ውስጥ ማሳወቂያዎች አይኖሩም",
+      "end": "የመጨረሻ ሰዓት",
+      "start": "የመጀመሪያ ሰዓት",
+      "title": "ጸጥታ ሰዓቶች"
     },
     "reminderDays": {
-      "daysBeforeDue": "days before due date",
-      "description": "How many days before a bill is due to remind you",
-      "title": "Default Reminder"
+      "daysBeforeDue": "ቀናት ከመክፈያ ቀን በፊት",
+      "description": "ክፍያ ከመድረሱ ስንት ቀናት በፊት ማስታወስ",
+      "title": "ነባሪ ማስታወሻ"
     },
     "testNotification": {
-      "button": "Send Test",
-      "description": "Send a test notification to verify your settings",
-      "title": "Test Notification"
+      "button": "ሙከራ ይላኩ",
+      "description": "ቅንብሮችዎን ለማረጋገጥ ሙከራ ማሳወቂያ ይላኩ",
+      "title": "ሙከራ ማሳወቂያ"
     },
-    "title": "Notifications"
+    "title": "ማሳወቂያዎች"
   },
   "notifications": {
-    "clearAll": "Clear all",
-    "dismiss": "Dismiss",
-    "empty": "No notifications",
-    "emptyAll": "You're all caught up!",
-    "emptySnoozed": "No snoozed notifications",
-    "emptyUnread": "No unread notifications",
-    "markAllRead": "Mark all read",
-    "snooze": "Snooze",
+    "clearAll": "ሁሉንም ያጽዱ",
+    "dismiss": "ያሰናብቱ",
+    "empty": "ማሳወቂያዎች የሉም",
+    "emptyAll": "ሁሉንም ተከታትለዋል!",
+    "emptySnoozed": "የተዘገዩ ማሳወቂያዎች የሉም",
+    "emptyUnread": "ያልተነበቡ ማሳወቂያዎች የሉም",
+    "markAllRead": "ሁሉንም ተነብቧል ያድርጉ",
+    "snooze": "ያዘግዩ",
     "snoozeOptions": {
-      "1day": "1 day",
-      "1hour": "1 hour",
-      "1week": "1 week",
-      "3days": "3 days",
-      "3hours": "3 hours"
+      "1day": "1 ቀን",
+      "1hour": "1 ሰዓት",
+      "1week": "1 ሳምንት",
+      "3days": "3 ቀናት",
+      "3hours": "3 ሰዓቶች"
     },
-    "snoozedUntil": "Snoozed for {time}",
+    "snoozedUntil": "ለ{time} ተዘግይቷል",
     "tabs": {
-      "all": "All",
-      "snoozed": "Snoozed",
-      "unread": "Unread"
+      "all": "ሁሉም",
+      "snoozed": "የተዘገዩ",
+      "unread": "ያልተነበቡ"
     },
-    "title": "Notifications",
+    "title": "ማሳወቂያዎች",
     "types": {
-      "bill_reminder": "Bill Reminder",
-      "budget_alert": "Budget Alert",
-      "goal_milestone": "Goal Milestone",
-      "system": "System"
+      "bill_reminder": "የክፍያ ማስታወሻ",
+      "budget_alert": "የበጀት ማስጠንቀቂያ",
+      "goal_milestone": "የግብ ምዕራፍ",
+      "system": "ስርዓት"
     }
   },
   "ocr": {
@@ -3398,20 +3421,20 @@
     }
   },
   "overspendingAlerts": {
-    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
-    "percentOfBudget": "{percent}% of budget",
+    "exceededWarning": "በዚህ ፍጥነት ይህን ወር በጀትዎን በ{amount} ያልፋሉ።",
+    "percentOfBudget": "ከበጀት {percent}%",
     "progress": {
-      "label": "Current progress"
+      "label": "ወቅታዊ ሂደት"
     },
     "stats": {
-      "budget": "Budget",
-      "daysLeft": "Days Left",
-      "projectedTotal": "Projected Total",
-      "spentSoFar": "Spent So Far"
+      "budget": "በጀት",
+      "daysLeft": "ቀሪ ቀናት",
+      "projectedTotal": "የተተነበየ ጠቅላላ",
+      "spentSoFar": "እስካሁን የወጣ"
     },
     "tip": {
-      "label": "Tip:",
-      "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
+      "label": "ምክር:",
+      "reduceSpending": "ከበጀት ውስጥ ለመቆየት ዕለታዊ ወጪን ወደ {amount} ይቀንሱ።"
     }
   },
   "pairingDialog": {
@@ -3716,26 +3739,26 @@
   },
   "predictiveSpendingChart": {
     "legend": {
-      "actual": "Actual",
-      "confidenceInterval": "Confidence Interval",
-      "predicted": "Predicted"
+      "actual": "ትክክለኛ",
+      "confidenceInterval": "የእምነት ክልል",
+      "predicted": "የተተነበየ"
     },
-    "noData": "No data available for predictions",
-    "predictionUnavailable": "Prediction Unavailable",
+    "noData": "ለትንበያ የሚገኝ ውሂብ የለም",
+    "predictionUnavailable": "ትንበያ አይገኝም",
     "stats": {
-      "avgConfidence": "Avg Confidence",
-      "nextMonth": "Next Month",
-      "threeMonthAvg": "3-Month Avg"
+      "avgConfidence": "አማካይ እምነት",
+      "nextMonth": "የሚቀጥለው ወር",
+      "threeMonthAvg": "የ3 ወር አማካይ"
     },
     "table": {
-      "confidence": "Confidence",
-      "month": "Month",
-      "predicted": "Predicted",
-      "range": "Range",
-      "title": "Monthly Predictions"
+      "confidence": "እምነት",
+      "month": "ወር",
+      "predicted": "የተተነበየ",
+      "range": "ክልል",
+      "title": "ወርሃዊ ትንበያዎች"
     },
-    "title": "Spending Forecast: {category}",
-    "trainingModel": "Training model and generating predictions..."
+    "title": "የወጪ ትንበያ: {category}",
+    "trainingModel": "ሞዴል በማሰልጠን እና ትንበያዎችን በማመንጨት ላይ..."
   },
   "privacyPanel": {
     "active": "Active",
@@ -3855,27 +3878,27 @@
     "deleteButton": "መገለጫ ሰርዝ"
   },
   "pullToRefresh": {
-    "pull": "Pull to refresh",
-    "release": "Release to refresh"
+    "pull": "ለማደስ ይጎትቱ",
+    "release": "ለማደስ ይልቀቁ"
   },
   "pwaInstall": {
     "buttons": {
-      "install": "Install",
-      "notNow": "Not now"
+      "install": "ይጫኑ",
+      "notNow": "አሁን አይደለም"
     },
-    "close": "Close install prompt",
-    "description": "Add to your home screen for quick access and offline use",
+    "close": "የመጫኛ ጥያቄ ይዝጉ",
+    "description": "ለፈጣን ተደራሽነት እና ከመስመር ውጭ አጠቃቀም ወደ ዋና ማያ ገጽዎ ያክሉ",
     "features": {
-      "fastSecure": "Fast & secure",
-      "noAppStore": "No app store needed",
-      "offline": "Works offline"
+      "fastSecure": "ፈጣን እና ደህንነቱ የተጠበቀ",
+      "noAppStore": "የመተግበሪያ ማከማቻ አያስፈልግም",
+      "offline": "ከመስመር ውጭ ይሰራል"
     },
-    "iosAddToHome": "\"Add to Home Screen\"",
-    "iosForFullExperience": "for the full app experience with faster loading.",
-    "iosTap": "Tap",
-    "iosThen": "then",
-    "iosTitle": "Install Budget App",
-    "title": "Install Budget App"
+    "iosAddToHome": "\"ወደ ዋና ማያ ገጽ ያክሉ\"",
+    "iosForFullExperience": "ፈጣን ጭነት ላለው ሙሉ የመተግበሪያ ተሞክሮ።",
+    "iosTap": "ይጫኑ",
+    "iosThen": "ከዚያ",
+    "iosTitle": "Budget App ይጫኑ",
+    "title": "Budget App ይጫኑ"
   },
   "qrScanner": {
     "allowCameraAccess": "Please allow camera access when prompted",
@@ -3906,38 +3929,38 @@
   },
   "quickCategorize": {
     "buttons": {
-      "apply": "Apply Category",
-      "cancel": "Cancel",
-      "save": "Save"
+      "apply": "ምድብ ያስተግብሩ",
+      "cancel": "ይሰርዙ",
+      "save": "ያስቀምጡ"
     },
-    "clickToSelect": "Click a category to select",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
-    "general": "General",
-    "noResults": "No categories found",
-    "pressEnter": "Press ↵ Enter",
-    "saving": "Saving...",
-    "searchPlaceholder": "Search categories...",
-    "title": "Quick Categorize"
+    "clickToSelect": "ለመምረጥ ምድብ ጠቅ ያድርጉ",
+    "description": "ለ{count, plural, =1 {ይህ ግብይት} other {# ግብይቶች}} ምድብ ይምረጡ",
+    "general": "አጠቃላይ",
+    "noResults": "ምድቦች አልተገኙም",
+    "pressEnter": "↵ Enter ይጫኑ",
+    "saving": "በማስቀመጥ ላይ...",
+    "searchPlaceholder": "ምድቦች ይፈልጉ...",
+    "title": "ፈጣን ምድብ"
   },
   "quickFilters": {
-    "all": "All",
-    "categories": "Categories",
-    "clearFilters": "Clear Filters",
-    "moreCategories": "+{count} more",
+    "all": "ሁሉም",
+    "categories": "ምድቦች",
+    "clearFilters": "ማጣሪያዎች ያጽዱ",
+    "moreCategories": "+{count} ተጨማሪ",
     "presets": {
-      "last30": "Last 30 Days",
-      "last90": "Last 90 Days",
-      "thisMonth": "This Month",
-      "thisYear": "This Year"
+      "last30": "ያለፉት 30 ቀናት",
+      "last90": "ያለፉት 90 ቀናት",
+      "thisMonth": "ይህ ወር",
+      "thisYear": "ይህ ዓመት"
     },
-    "timePeriod": "Time Period"
+    "timePeriod": "የጊዜ ወቅት"
   },
   "quickStats": {
-    "balance": "Total Balance",
-    "expenses": "Expenses",
-    "income": "Income",
-    "savingsRate": "Savings Rate",
-    "savingsRateDescription": "Percentage of income saved this month"
+    "balance": "ጠቅላላ ቀሪ",
+    "expenses": "ወጪዎች",
+    "income": "ገቢ",
+    "savingsRate": "የቁጠባ መጠን",
+    "savingsRateDescription": "በዚህ ወር ከገቢ የተቆጠበ መቶኛ"
   },
   "receiptThumbnail": {
     "close": "Close",
@@ -3954,65 +3977,65 @@
   },
   "receiptUpload": {
     "buttons": {
-      "attachReceipt": "Attach Receipt",
-      "chooseDifferent": "Choose Different",
-      "extractData": "Extract Data",
-      "extracting": "Extracting..."
+      "attachReceipt": "ደረሰኝ ያያይዙ",
+      "chooseDifferent": "ሌላ ይምረጡ",
+      "extractData": "ውሂብ ያውጡ",
+      "extracting": "በማውጣት ላይ..."
     },
     "camera": {
-      "takePhoto": "Take Photo with Camera",
-      "useDevice": "Use your device camera to capture receipt"
+      "takePhoto": "በካሜራ ፎቶ ያንሱ",
+      "useDevice": "ደረሰኝ ለመያዝ የመሳሪያዎ ካሜራ ይጠቀሙ"
     },
-    "cameraInputLabel": "Camera capture input",
+    "cameraInputLabel": "ካሜራ ይያዙ",
     "dropzone": {
-      "browseFiles": "or <link>browse files</link>",
-      "dragDrop": "Drag & drop receipt here",
-      "dropHere": "Drop the receipt here",
-      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+      "browseFiles": "ወይም <link>ፋይሎች ያስሱ</link>",
+      "dragDrop": "ደረሰኝ ጎትተው ያስቀምጡ",
+      "dropHere": "ደረሰኙን እዚህ ያስቀምጡ",
+      "supportedFormats": "JPG, PNG, PDF ይደገፋል • ከፍተኛ {size}MB"
     },
     "errors": {
-      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
-      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
-      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
-      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
-      "rejected": "File was rejected. Please try again",
-      "tooLarge": "File is too large. Maximum size is {size}MB"
+      "couldNotExtract": "ከደረሰኝ ውሂብ ማውጣት አልተቻለም። እባክዎ በእጅ ያስገቡ።",
+      "extractionFailed": "ውሂብ ማውጣት አልተቻለም። እባክዎ እንደገና ይሞክሩ ወይም በእጅ ያስገቡ።",
+      "invalidType": "ልክ ያልሆነ ፋይል ዓይነት። JPG፣ PNG እና PDF ፋይሎች ብቻ ይፈቀዳሉ",
+      "ocrImagesOnly": "OCR ለምስል ፋይሎች (JPG, PNG) ብቻ ይደገፋል",
+      "rejected": "ፋይሉ ውድቅ ተደርጓል። እባክዎ እንደገና ይሞክሩ",
+      "tooLarge": "ፋይሉ በጣም ትልቅ ነው። ከፍተኛ መጠን {size}MB ነው"
     },
     "extracted": {
-      "amount": "Amount:",
-      "confidence": "Confidence: {percent}%",
-      "date": "Date:",
-      "merchant": "Merchant:",
-      "title": "Data Extracted"
+      "amount": "መጠን:",
+      "confidence": "እምነት: {percent}%",
+      "date": "ቀን:",
+      "merchant": "ነጋዴ:",
+      "title": "ውሂብ ተወስዷል"
     },
     "pdf": {
-      "noPreview": "Preview not available",
-      "title": "PDF Receipt"
+      "noPreview": "ቅድመ-እይታ አይገኝም",
+      "title": "PDF ደረሰኝ"
     },
-    "receiptPreview": "Receipt preview",
-    "removeFile": "Remove file"
+    "receiptPreview": "የደረሰኝ ቅድመ-እይታ",
+    "removeFile": "ፋይል ያስወግዱ"
   },
   "recurringTransactions": {
-    "confidence": "{percent}% confidence",
-    "estimatedMonthly": "Estimated Monthly",
+    "confidence": "{percent}% እምነት",
+    "estimatedMonthly": "ግምታዊ ወርሃዊ",
     "frequency": {
-      "biweekly": "Bi-weekly",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "biweekly": "በየ2 ሳምንት",
+      "monthly": "ወርሃዊ",
+      "quarterly": "ሩብ ዓመታዊ",
+      "weekly": "ሳምንታዊ"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
-    "next": "Next: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "inDays": "{count, plural, =0 {(ዛሬ)} =1 {(በ1 ቀን)} other {(በ# ቀናት)}}",
+    "next": "ቀጣይ: {date}",
+    "occurrences": "{count, plural, =1 {1 ክስተት ተገኝቷል} other {# ክስተቶች ተገኝተዋል}}",
     "perPeriod": {
-      "month": "per month",
-      "quarter": "per quarter",
-      "twoWeeks": "per 2 weeks",
-      "week": "per week"
+      "month": "በወር",
+      "quarter": "በሩብ ዓመት",
+      "twoWeeks": "በ2 ሳምንት",
+      "week": "በሳምንት"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
-    "subtitle": "Detected subscriptions and bills",
-    "title": "Recurring Transactions"
+    "showingPatterns": "{count, plural, =1 {1 ተደጋጋሚ ግብይት ንድፍ ይታያል} other {# ተደጋጋሚ ግብይት ንድፎች ይታያሉ}}",
+    "subtitle": "የተለዩ ምዝገባዎች እና ክፍያዎች",
+    "title": "ተደጋጋሚ ግብይቶች"
   },
   "reports": {
     "addTransactionsToSeeFlow": "Add income and expense transactions to see your money flow",
@@ -4049,106 +4072,106 @@
     "transactions": "Transactions"
   },
   "settings": {
-    "aboutBudgetFiles": "About .budget Files",
-    "accountDeleteFailed": "Failed to delete account",
-    "accountName": "Account Name",
-    "accountNamePlaceholder": "e.g., BMO Checking",
-    "accountSaveFailed": "Failed to save account",
-    "accountType": "Account Type",
-    "addAccount": "Add Account",
-    "addAccountsToStart": "Add your bank accounts to get started",
-    "addCategory": "Add Category",
-    "addFirstAccount": "Add Your First Account",
-    "addFirstCategory": "Add Your First Category",
-    "addFirstCategoryToOrganize": "Add your first category to organize transactions",
-    "archiveCategory": "Archive category",
-    "archiveCategoryConfirm": "Archive this category? You can restore it later.",
-    "archiveCategoryWithTransactions": "This category has {count} transaction(s). Archive it? Transactions will be preserved but the category will be hidden.",
-    "archiveFailed": "Failed to archive category",
-    "archived": "Archived",
-    "archivedCategoriesAppearHere": "Archived categories will appear here",
-    "balance": "Balance",
-    "budgetFileInfo1": "Your data is stored in a portable JSON format that can be opened by any text editor",
-    "budgetFileInfo2": "Optional password protection uses industry-standard AES-256 encryption",
-    "budgetFileInfo3": "Files include a checksum to detect corruption or tampering",
-    "budgetFileInfo4": "Receipt images can be included in the export (increases file size)",
-    "cancel": "Cancel",
-    "categoriesSubtitle": "Organize your transactions with custom categories • Drag to reorder",
-    "categoriesTitle": "Categories",
-    "categoryName": "Category Name",
-    "categoryNamePlaceholder": "e.g., Entertainment, Groceries, Salary",
-    "categorySaveFailed": "Failed to save category",
-    "checking": "Checking",
-    "color": "Color",
-    "createCategoryDescription": "Create a new category for organizing transactions",
-    "creditCard": "Credit Card",
-    "currency": "Currency",
-    "dataManagement": "Data Management",
-    "dataManagementSubtitle": "Export and import your budget data",
-    "default": "Default",
-    "deleteAccountConfirm": "Delete this account? Transactions will NOT be deleted.",
-    "dragToReorder": "Drag to reorder",
-    "editAccount": "Edit Account",
-    "editCategory": "Edit category",
-    "experimental": "Experimental",
-    "exportData": "Export Data",
-    "exportDataDescription": "Download all your budget data as a .budget file. Includes transactions, accounts, categories, and settings.",
-    "hideArchived": "Hide Archived",
-    "icon": "Icon",
-    "importData": "Import Data",
-    "importDataDescription": "Restore your data from a .budget file. You can choose to merge with existing data or replace it.",
-    "institution": "Institution",
-    "institutionPlaceholder": "e.g., BMO, Home Trust",
-    "loading": "Loading settings...",
-    "noAccountsYet": "No Accounts Yet",
-    "noArchivedCategories": "No Archived Categories",
-    "noCategoriesYet": "No Categories Yet",
-    "quickPresets": "Quick Presets:",
-    "reorderFailed": "Failed to reorder categories",
-    "savings": "Savings",
-    "selectSection": "Select settings section",
-    "showArchived": "Show Archived",
-    "subcategories": "subcategories",
-    "subcategoriesOptional": "Subcategories (Optional)",
-    "subcategoriesPlaceholder": "e.g., Movies, Games, Events",
-    "subcategoriesTip": "Separate with commas, e.g. \"Movies, Streaming, Concerts\"",
-    "subtitle": "Manage your accounts and categories",
-    "tabAccessibility": "Accessibility",
-    "tabAccounts": "Accounts",
-    "tabCategories": "Categories",
-    "tabData": "Data",
-    "tabDevTools": "Developer Tools",
-    "tabLocale": "Locale & Formatting",
-    "tabNotifications": "Notifications",
-    "tabPrivacy": "Privacy & AI",
-    "tabProfiles": "Profiles",
-    "tapToChangeIcon": "Tap to change icon",
-    "tapToChooseColor": "Tap to choose a custom color",
-    "tipLabel": "Tip:",
-    "title": "Settings",
-    "toggleWebmcp": "Toggle WebMCP AI Agent Tools",
-    "transaction": "transaction",
-    "transactions": "transactions",
-    "type": "Type",
-    "unarchiveCategory": "Unarchive category",
-    "unarchiveFailed": "Failed to unarchive category",
-    "updateAccount": "Update Account",
-    "updateCategory": "Update Category",
-    "updateCategoryDetails": "Update category details",
-    "webmcpDescription": "Allow browser AI agents to interact with your budget data. Requires Chrome 146+ with the WebMCP flag enabled.",
-    "webmcpNotSupported": "Your browser does not support WebMCP yet. Enable chrome://flags/#webmcp-for-testing in Chrome 146 Canary.",
-    "webmcpTitle": "WebMCP AI Agent Tools",
-    "webmcpToolsDescription": "When enabled, 9 tools are exposed to browser AI agents: search transactions, get budget summary, spending by category, account balances, list categories, get subscriptions, add transaction, categorize transaction, and set budget limit. Encryption fields and bank identification data are never shared.",
-    "yourAccounts": "Your Accounts"
+    "aboutBudgetFiles": "ስለ .budget ፋይሎች",
+    "accountDeleteFailed": "ሂሳብ ለመሰረዝ አልተቻለም",
+    "accountName": "የሂሳብ ስም",
+    "accountNamePlaceholder": "ለምሳሌ፣ BMO Checking",
+    "accountSaveFailed": "ሂሳብ ለማስቀመጥ አልተቻለም",
+    "accountType": "የሂሳብ ዓይነት",
+    "addAccount": "ሂሳብ ያክሉ",
+    "addAccountsToStart": "ለመጀመር ባንክ ሂሳቦችዎን ያክሉ",
+    "addCategory": "ምድብ ያክሉ",
+    "addFirstAccount": "የመጀመሪያ ሂሳብዎን ያክሉ",
+    "addFirstCategory": "የመጀመሪያ ምድብዎን ያክሉ",
+    "addFirstCategoryToOrganize": "ግብይቶችን ለማደራጀት የመጀመሪያ ምድብዎን ያክሉ",
+    "archiveCategory": "ምድብ ወደ ማህደር",
+    "archiveCategoryConfirm": "ይህ ምድብ ማህደር ይደረግ? በኋላ ማስመለስ ይችላሉ።",
+    "archiveCategoryWithTransactions": "ይህ ምድብ {count} ግብይት(ቶች) አለው። ወደ ማህደር ይደርጉ? ግብይቶች ይጠበቃሉ።",
+    "archiveFailed": "ወደ ማህደር ማድረግ አልተቻለም",
+    "archived": "ማህደር",
+    "archivedCategoriesAppearHere": "የተመዘገቡ ምድቦች እዚህ ይታያሉ",
+    "balance": "ቀሪ",
+    "budgetFileInfo1": "ውሂብዎ በማንኛውም ጽሁፍ አርታኢ ሊከፈት በሚችል ተንቀሳቃሽ JSON ቅርጸት ይቀመጣል",
+    "budgetFileInfo2": "አማራጭ የይለፍ ቃል ጥበቃ AES-256 ምስጢር ይጠቀማል",
+    "budgetFileInfo3": "ፋይሎች ብልሽት ለመለየት checksum ያካትታሉ",
+    "budgetFileInfo4": "የደረሰኝ ምስሎች ወደ ውጤቱ ሊካተቱ ይችላሉ",
+    "cancel": "ይሰርዙ",
+    "categoriesSubtitle": "ግብይቶችዎን በብጁ ምድቦች ያደራጁ • ለማስተካከል ይጎትቱ",
+    "categoriesTitle": "ምድቦች",
+    "categoryName": "የምድብ ስም",
+    "categoryNamePlaceholder": "ለምሳሌ፣ መዝናኛ፣ ምግብ ግዢ፣ ደመወዝ",
+    "categorySaveFailed": "ምድብ ለማስቀመጥ አልተቻለም",
+    "checking": "ቼኪንግ",
+    "color": "ቀለም",
+    "createCategoryDescription": "ግብይቶችን ለማደራጀት አዲስ ምድብ ይፍጠሩ",
+    "creditCard": "ክሬዲት ካርድ",
+    "currency": "ምንዛሬ",
+    "dataManagement": "ውሂብ አስተዳደር",
+    "dataManagementSubtitle": "የበጀት ውሂብዎን ያውጡ እና ያስገቡ",
+    "default": "ነባሪ",
+    "deleteAccountConfirm": "ይህ ሂሳብ ይሰረዝ? ግብይቶች አይሰረዙም።",
+    "dragToReorder": "ለማስተካከል ይጎትቱ",
+    "editAccount": "ሂሳብ ያስተካክሉ",
+    "editCategory": "ምድብ ያስተካክሉ",
+    "experimental": "ሙከራ",
+    "exportData": "ውሂብ ያውጡ",
+    "exportDataDescription": "ሁሉንም የበጀት ውሂብዎን እንደ .budget ፋይል ያውርዱ።",
+    "hideArchived": "ማህደር ይደብቁ",
+    "icon": "አዶ",
+    "importData": "ውሂብ ያስገቡ",
+    "importDataDescription": "ከ.budget ፋይል ውሂብዎን ያስመልሱ።",
+    "institution": "ተቋም",
+    "institutionPlaceholder": "ለምሳሌ፣ BMO፣ Home Trust",
+    "loading": "ቅንብሮች በመጫን ላይ...",
+    "noAccountsYet": "ገና ሂሳቦች የሉም",
+    "noArchivedCategories": "የተመዘገቡ ምድቦች የሉም",
+    "noCategoriesYet": "ገና ምድቦች የሉም",
+    "quickPresets": "ፈጣን ቅንብሮች:",
+    "reorderFailed": "ምድቦችን ዳግም ማስተካከል አልተቻለም",
+    "savings": "ቁጠባ",
+    "selectSection": "የቅንብሮች ክፍል ይምረጡ",
+    "showArchived": "ማህደር ያሳዩ",
+    "subcategories": "ንዑስ ምድቦች",
+    "subcategoriesOptional": "ንዑስ ምድቦች (አማራጭ)",
+    "subcategoriesPlaceholder": "ለምሳሌ፣ ፊልሞች፣ ጨዋታዎች፣ ዝግጅቶች",
+    "subcategoriesTip": "በኮማ ይለያዩ፣ ለምሳሌ \"ፊልሞች, ዥረት, ኮንሰርቶች\"",
+    "subtitle": "ሂሳቦችዎን እና ምድቦችዎን ያስተዳድሩ",
+    "tabAccessibility": "ተደራሽነት",
+    "tabAccounts": "ሂሳቦች",
+    "tabCategories": "ምድቦች",
+    "tabData": "ውሂብ",
+    "tabDevTools": "ገንቢ መሳሪያዎች",
+    "tabLocale": "ቋንቋ እና ቅርጸት",
+    "tabNotifications": "ማሳወቂያዎች",
+    "tabPrivacy": "ግላዊነት እና AI",
+    "tabProfiles": "መገለጫዎች",
+    "tapToChangeIcon": "አዶ ለመቀየር ይንኩ",
+    "tapToChooseColor": "ብጁ ቀለም ለመምረጥ ይንኩ",
+    "tipLabel": "ምክር:",
+    "title": "ቅንብሮች",
+    "toggleWebmcp": "WebMCP AI ወኪል መሳሪያዎች ቀያይር",
+    "transaction": "ግብይት",
+    "transactions": "ግብይቶች",
+    "type": "ዓይነት",
+    "unarchiveCategory": "ምድብ ከማህደር ያውጡ",
+    "unarchiveFailed": "ከማህደር ማውጣት አልተቻለም",
+    "updateAccount": "ሂሳብ ያዘምኑ",
+    "updateCategory": "ምድብ ያዘምኑ",
+    "updateCategoryDetails": "የምድብ ዝርዝሮች ያዘምኑ",
+    "webmcpDescription": "የአሳሽ AI ወኪሎች ከበጀት ውሂብዎ ጋር እንዲገናኙ ይፍቀዱ።",
+    "webmcpNotSupported": "አሳሽዎ ገና WebMCPን አይደግፍም።",
+    "webmcpTitle": "WebMCP AI ወኪል መሳሪያዎች",
+    "webmcpToolsDescription": "ሲነቃ፣ 9 መሳሪያዎች ለአሳሽ AI ወኪሎች ይገለጣሉ። ምስጢር መስኮች እና የባንክ መለያ ውሂብ በጭራሽ አይጋሩም።",
+    "yourAccounts": "ሂሳቦችዎ"
   },
   "shortcutsModal": {
-    "close": "Close shortcuts help",
+    "close": "የቁልፎች እገዛ ይዝጉ",
     "proTip": {
-      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
-      "title": "💡 Pro Tip"
+      "description": "የቁልፍ ሰሌዳ ቁልፎች በማንኛውም ገጽ ላይ ይሰራሉ ከቅጾች ውስጥ ሲተይቡ በስተቀር። ይህን እገዛ ለማየት በማንኛውም ጊዜ {key} ይጫኑ።",
+      "title": "💡 ፕሮ ምክር"
     },
-    "subtitle": "Power-user productivity tips",
-    "title": "Keyboard Shortcuts"
+    "subtitle": "የኃይል ተጠቃሚ ምርታማነት ምክሮች",
+    "title": "የቁልፍ ሰሌዳ ቁልፎች"
   },
   "sidebar": {
     "actions": {
@@ -4245,70 +4268,70 @@
   },
   "simplefinSettings": {
     "connectedAccounts": {
-      "description": "Manage your linked bank accounts",
-      "title": "Connected Accounts"
+      "description": "የተገናኙ ባንክ ሂሳቦችዎን ያስተዳድሩ",
+      "title": "የተገናኙ ሂሳቦች"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
-      "connectButton": "Connect Bank Account",
-      "connected": "Connected",
-      "description": "Connect your bank accounts to automatically import transactions",
-      "notConnected": "Not Connected",
-      "notConnectedDesc": "Connect your bank accounts to start importing transactions",
-      "title": "SimpleFIN Connection"
+      "accountsLinked": "{count, plural, =1 {1 ሂሳብ ተገናኝቷል} other {# ሂሳቦች ተገናኝተዋል}}",
+      "connectButton": "የባንክ ሂሳብ ያገናኙ",
+      "connected": "ተገናኝቷል",
+      "description": "ግብይቶችን ራስ-ሰር ለማስገባት የባንክ ሂሳቦችዎን ያገናኙ",
+      "notConnected": "አልተገናኘም",
+      "notConnectedDesc": "ግብይቶች ማስገባት ለመጀመር የባንክ ሂሳቦችዎን ያገናኙ",
+      "title": "SimpleFIN ግንኙነት"
     },
     "disconnect": {
-      "button": "Disconnect",
-      "cancel": "Cancel",
-      "confirm": "Disconnect",
-      "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
-      "dialogTitle": "Disconnect SimpleFIN?"
+      "button": "ያላቅቁ",
+      "cancel": "ይሰርዙ",
+      "confirm": "ያላቅቁ",
+      "dialogDescription": "ይህ ከባንክ ሂሳቦችዎ ጋር ያለውን ግንኙነት ያስወግዳል። ነባር ግብይቶች አይሰረዙም።",
+      "dialogTitle": "SimpleFIN ያላቅቁ?"
     },
     "help": {
-      "bridgeDashboard": "SimpleFIN Bridge Dashboard",
-      "protocolDocs": "SimpleFIN Protocol Documentation",
-      "title": "Need Help?"
+      "bridgeDashboard": "SimpleFIN Bridge ዳሽቦርድ",
+      "protocolDocs": "SimpleFIN ፕሮቶኮል ሰነዶች",
+      "title": "እገዛ ያስፈልጋል?"
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
-      "lastSynced": "Last synced: {time}",
-      "lessThanHour": "Less than an hour ago",
-      "never": "Never",
-      "syncNow": "Sync Now",
-      "syncing": "Syncing..."
+      "hoursAgo": "{hours, plural, =1 {ከ1 ሰዓት በፊት} other {ከ# ሰዓቶች በፊት}}",
+      "lastSynced": "ለመጨረሻ ጊዜ የተመሳሰለ: {time}",
+      "lessThanHour": "ከ1 ሰዓት ባነሰ በፊት",
+      "never": "በጭራሽ",
+      "syncNow": "አሁን ያመሳስሉ",
+      "syncing": "በማመሳሰል ላይ..."
     },
     "syncSettings": {
       "autoCategorize": {
-        "description": "Automatically categorize imported transactions using AI",
-        "label": "Auto-Categorize"
+        "description": "AI በመጠቀም የገቡ ግብይቶችን ራስ-ሰር ይመድቡ",
+        "label": "ራስ-ሰር ምድብ"
       },
       "autoSync": {
-        "description": "Automatically sync transactions on a schedule",
-        "label": "Automatic Sync"
+        "description": "ግብይቶችን በመርሃ ግብር ራስ-ሰር ያመሳስሉ",
+        "label": "ራስ-ሰር ማመሳሰል"
       },
-      "description": "Configure how and when transactions are synced",
+      "description": "ግብይቶች እንዴት እና መቼ እንደሚመሳሰሉ ያዋቅሩ",
       "frequency": {
-        "every12Hours": "Every 12 hours",
-        "every2Days": "Every 2 days",
-        "every6Hours": "Every 6 hours",
-        "hint": "SimpleFIN allows up to 24 requests per day. Daily sync is recommended.",
-        "label": "Sync Frequency",
-        "onceDaily": "Once daily"
+        "every12Hours": "በየ12 ሰዓቱ",
+        "every2Days": "በየ2 ቀኑ",
+        "every6Hours": "በየ6 ሰዓቱ",
+        "hint": "SimpleFIN በቀን እስከ 24 ጥያቄዎች ይፈቅዳል። ዕለታዊ ማመሳሰል ይመከራል።",
+        "label": "የማመሳሰል ድግግሞሽ",
+        "onceDaily": "በቀን አንድ ጊዜ"
       },
       "notifications": {
-        "description": "Show notification when sync completes",
-        "label": "Sync Notifications"
+        "description": "ማመሳሰል ሲጠናቀቅ ማሳወቂያ ያሳዩ",
+        "label": "የማመሳሰያ ማሳወቂያዎች"
       },
       "pendingTransactions": {
-        "description": "Include transactions that haven't posted yet",
-        "label": "Import Pending Transactions"
+        "description": "ገና ያልተለጠፉ ግብይቶችን ያካትቱ",
+        "label": "የሚጠበቁ ግብይቶች ያስገቡ"
       },
-      "title": "Sync Settings",
+      "title": "የማመሳሰያ ቅንብሮች",
       "transactionHistory": {
-        "days": "{count} days",
-        "hint": "How many days of transaction history to fetch (max 60 days per SimpleFIN)",
-        "label": "Transaction History"
+        "days": "{count} ቀናት",
+        "hint": "ስንት ቀናት የግብይት ታሪክ ማምጣት (ከፍተኛ 60 ቀናት)",
+        "label": "የግብይት ታሪክ"
       }
     }
   },
@@ -4351,61 +4374,61 @@
     "warningsLabel": "Warnings:"
   },
   "spendingTrendChart": {
-    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "forecastFooter": "ትንበያ የተመሰረተው ባለፉት {months} ወራት ቀጥተኛ ሪግሬሽን ላይ ነው",
     "legend": {
-      "actualSpending": "Actual Spending",
-      "projected": "Projected"
+      "actualSpending": "ትክክለኛ ወጪ",
+      "projected": "የተተነበየ"
     },
-    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "notEnoughData": "አዝማሚያዎችን ለማመንጨት በቂ ውሂብ የለም። ቢያንስ ለ2 ወራት ግብይቶች ያክሉ።",
     "stats": {
-      "avgMonthly": "Avg Monthly",
-      "lastMonth": "Last Month",
-      "projected": "Projected"
+      "avgMonthly": "አማካይ ወርሃዊ",
+      "lastMonth": "ያለፈው ወር",
+      "projected": "የተተነበየ"
     },
-    "title": "Spending Trends & Forecast"
+    "title": "የወጪ አዝማሚያዎች እና ትንበያ"
   },
   "splitTransaction": {
-    "addSplit": "Add Split ({current}/{max})",
-    "amount": "Amount",
+    "addSplit": "ክፍፍል ያክሉ ({current}/{max})",
+    "amount": "መጠን",
     "buttons": {
-      "cancel": "Cancel",
-      "save": "Save Split",
-      "saving": "Saving..."
+      "cancel": "ይሰርዙ",
+      "save": "ክፍፍል ያስቀምጡ",
+      "saving": "በማስቀመጥ ላይ..."
     },
-    "category": "Category",
-    "closeModal": "Close modal",
-    "date": "Date:",
-    "distributeEvenly": "Distribute Evenly",
+    "category": "ምድብ",
+    "closeModal": "መስኮት ይዝጉ",
+    "date": "ቀን:",
+    "distributeEvenly": "በእኩል ያከፋፍሉ",
     "errors": {
-      "saveFailed": "Failed to save split transaction"
+      "saveFailed": "የክፍፍል ግብይት ለማስቀመጥ አልተቻለም"
     },
     "help": {
-      "step1": "Enter the amount for each category (must total ${amount})",
-      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
-      "step3": "Add up to 5 splits per transaction",
-      "step4": "The original transaction will be hidden and replaced with split items",
-      "title": "How to split transactions:"
+      "step1": "ለእያንዳንዱ ምድብ መጠን ያስገቡ (ድምሩ ${amount} መሆን አለበት)",
+      "step2": "በሁሉም ምድቦች እኩል ለመከፋፈል \"በእኩል ያከፋፍሉ\" ይጠቀሙ",
+      "step3": "በአንድ ግብይት እስከ 5 ክፍፍሎች ያክሉ",
+      "step4": "ዋናው ግብይት ይደበቃል እና በክፍፍል ንጥሎች ይተካል",
+      "title": "ግብይቶችን እንዴት ይከፋፍላሉ:"
     },
-    "maxSplitsReached": "Maximum 5 splits allowed",
-    "minSplitsRequired": "Minimum 2 splits required",
-    "none": "None",
-    "notes": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Business expense, Personal use",
-    "originalAmount": "Original Amount:",
-    "removeThisSplit": "Remove this split",
-    "selectCategory": "Select category...",
-    "splitsCount": "Splits ({current}/{max})",
-    "subcategory": "Subcategory",
-    "title": "Split Transaction",
+    "maxSplitsReached": "ከፍተኛ 5 ክፍፍሎች ይፈቀዳሉ",
+    "minSplitsRequired": "ቢያንስ 2 ክፍፍሎች ያስፈልጋሉ",
+    "none": "ምንም",
+    "notes": "ማስታወሻ (አማራጭ)",
+    "notesPlaceholder": "ለምሳሌ፣ የንግድ ወጪ፣ የግል አጠቃቀም",
+    "originalAmount": "ዋና መጠን:",
+    "removeThisSplit": "ይህን ክፍፍል ያስወግዱ",
+    "selectCategory": "ምድብ ይምረጡ...",
+    "splitsCount": "ክፍፍሎች ({current}/{max})",
+    "subcategory": "ንዑስ ምድብ",
+    "title": "ግብይት ይከፋፍሉ",
     "validation": {
-      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
-      "amountsMustMatch": "Split amounts must equal the original transaction amount",
-      "categoryRequired": "All splits must have a category",
-      "matchesOriginal": "✓ Matches original",
-      "overBy": "Over by ${amount}",
-      "readyToSave": "Split amounts match the original transaction. Ready to save!",
-      "total": "Total:",
-      "underBy": "Under by ${amount}"
+      "adjustAmounts": "ከዋናው ግብይት መጠን ጋር እንዲገጣጠም የክፍፍል መጠኖችን ያስተካክሉ።",
+      "amountsMustMatch": "የክፍፍል መጠኖች ከዋናው ግብይት መጠን ጋር መገጣጠም አለባቸው",
+      "categoryRequired": "ሁሉም ክፍፍሎች ምድብ ሊኖራቸው ይገባል",
+      "matchesOriginal": "✓ ከዋናው ጋር ይገጣጠማል",
+      "overBy": "በ${amount} ያለፈ",
+      "readyToSave": "የክፍፍል መጠኖች ከዋናው ግብይት ጋር ይገጣጠማሉ። ለማስቀመጥ ዝግጁ!",
+      "total": "ጠቅላላ:",
+      "underBy": "በ${amount} ያነሰ"
     }
   },
   "splits": {
@@ -4494,64 +4517,64 @@
   },
   "subscriptionCard": {
     "badges": {
-      "aiVerified": "AI Verified",
-      "cancelled": "Cancelled",
-      "paused": "Paused",
-      "trial": "Trial"
+      "aiVerified": "AI ያረጋገጠ",
+      "cancelled": "ተሰርዟል",
+      "paused": "ቆሟል",
+      "trial": "ሙከራ"
     },
     "buttons": {
-      "claimManage": "Claim & Manage",
-      "edit": "Edit",
-      "transactions": "Transactions"
+      "claimManage": "ያረጋግጡ እና ያስተዳድሩ",
+      "edit": "ያስተካክሉ",
+      "transactions": "ግብይቶች"
     },
     "confidence": {
-      "high": "High",
-      "label": "Detection Confidence",
-      "low": "Low",
-      "medium": "Medium"
+      "high": "ከፍተኛ",
+      "label": "የመለየት እምነት",
+      "low": "ዝቅተኛ",
+      "medium": "መካከለኛ"
     },
     "details": {
-      "charges": "{count} charges",
-      "daysBefore": "{count} days before",
-      "firstCharge": "First Charge",
-      "lastCharge": "Last Charge",
-      "occurrences": "Occurrences",
-      "payment": "Payment",
-      "reminder": "Reminder"
+      "charges": "{count} ክፍያዎች",
+      "daysBefore": "ከ{count} ቀናት በፊት",
+      "firstCharge": "የመጀመሪያ ክፍያ",
+      "lastCharge": "የመጨረሻ ክፍያ",
+      "occurrences": "ክስተቶች",
+      "payment": "ክፍያ",
+      "reminder": "ማስታወሻ"
     },
     "interval": {
-      "annual": "Annual",
-      "bi-weekly": "Bi-weekly",
-      "irregular": "Irregular",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "annual": "ዓመታዊ",
+      "bi-weekly": "በየ2 ሳምንት",
+      "irregular": "መደበኛ ያልሆነ",
+      "monthly": "ወርሃዊ",
+      "quarterly": "ሩብ ዓመታዊ",
+      "weekly": "ሳምንታዊ"
     },
-    "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
+    "lowConfidenceWarning": "ይህ ምዝገባ በዝቅተኛ እምነት ተለይቷል። በእጅ ለማረጋገጥ እና ለማስተዳደር ያረጋግጡ።",
     "menu": {
-      "cancelSubscription": "Cancel Subscription",
-      "claimManage": "Claim & Manage",
-      "delete": "Delete",
-      "edit": "Edit",
-      "notSubscription": "Not a Subscription",
-      "pause": "Pause",
-      "resume": "Resume",
-      "viewTransactions": "View Transactions"
+      "cancelSubscription": "ምዝገባ ይሰርዙ",
+      "claimManage": "ያረጋግጡ እና ያስተዳድሩ",
+      "delete": "ይሰርዙ",
+      "edit": "ያስተካክሉ",
+      "notSubscription": "ምዝገባ አይደለም",
+      "pause": "ያቁሙ",
+      "resume": "ቀጥሉ",
+      "viewTransactions": "ግብይቶች ይመልከቱ"
     },
     "source": {
-      "auto-detected": "Auto-detected",
-      "manual": "Manual",
-      "merged": "Tracked"
+      "auto-detected": "ራስ-ሰር የተለየ",
+      "manual": "በእጅ",
+      "merged": "የተከታተለ"
     },
     "stats": {
-      "amount": "Amount",
-      "annualCost": "Annual Cost",
-      "frequency": "Frequency",
-      "nextCharge": "Next Charge",
-      "totalSpent": "Total Spent"
+      "amount": "መጠን",
+      "annualCost": "ዓመታዊ ወጪ",
+      "frequency": "ድግግሞሽ",
+      "nextCharge": "ቀጣይ ክፍያ",
+      "totalSpent": "ጠቅላላ ወጪ"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {በሙከራ ውስጥ 1 ቀን ቀርቷል} other {በሙከራ ውስጥ # ቀናት ቀርተዋል}}"
     },
     "reminderToggle": {
       "disableReminder": "ማስታወሻ አጥፋ",
@@ -4584,6 +4607,27 @@
       "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
       "highCostTitle": "High-cost subscriptions",
       "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+    },
+    "title": "የምዝገባ ወጪ ትንተና",
+    "noData": "ገና ምዝገባዎች አልተጨመሩም",
+    "addSubscription": "ምዝገባ ያክሉ",
+    "monthlyBreakdown": "ወርሃዊ ዝርዝር",
+    "totalMonthly": "ጠቅላላ ወርሃዊ",
+    "totalAnnual": "ጠቅላላ ዓመታዊ",
+    "activeSubscriptions": "ንቁ ምዝገባዎች",
+    "avgPerSubscription": "በአንድ ምዝገባ አማካይ",
+    "subscriptionShare": "የምዝገባ ድርሻ",
+    "costTrend": "የወጪ አዝማሚያ",
+    "last6Months": "ያለፉት 6 ወራት",
+    "newThisMonth": "በዚህ ወር አዲስ",
+    "cancelled": "የተሰረዙ",
+    "priceIncrease": "ዋጋ ጨምሯል",
+    "category": {
+      "entertainment": "መዝናኛ",
+      "productivity": "ምርታማነት",
+      "utilities": "መገልገያዎች",
+      "health": "ጤና",
+      "other": "ሌሎች"
     }
   },
   "subscriptionModal": {
@@ -4749,242 +4793,242 @@
   },
   "transactionModal": {
     "account": {
-      "label": "Account"
+      "label": "ሂሳብ"
     },
     "advancedOptions": {
-      "available": "{count} available",
-      "label": "Advanced Options"
+      "available": "{count} ይገኛሉ",
+      "label": "ተጨማሪ አማራጮች"
     },
     "amount": {
-      "label": "Amount",
+      "label": "መጠን",
       "placeholder": "0.00",
-      "validationError": "Please enter a valid amount"
+      "validationError": "እባክዎ ትክክለኛ መጠን ያስገቡ"
     },
     "buttons": {
-      "add": "Add Transaction",
-      "adding": "Adding...",
-      "cancel": "Cancel",
-      "update": "Update Transaction",
-      "updating": "Updating..."
+      "add": "ግብይት ያክሉ",
+      "adding": "በማከል ላይ...",
+      "cancel": "ይሰርዙ",
+      "update": "ግብይት ያዘምኑ",
+      "updating": "በማዘመን ላይ..."
     },
     "category": {
-      "aiCategorizing": "AI categorizing...",
-      "create": "Create",
-      "createNew": "+ Create New Category",
-      "label": "Category",
-      "lastUsed": "Using last: {category}",
-      "namePlaceholder": "Category name...",
-      "selectPlaceholder": "Select category...",
-      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+      "aiCategorizing": "AI እየመደበ ነው...",
+      "create": "ይፍጠሩ",
+      "createNew": "+ አዲስ ምድብ ይፍጠሩ",
+      "label": "ምድብ",
+      "lastUsed": "የመጨረሻ: {category}",
+      "namePlaceholder": "የምድብ ስም...",
+      "selectPlaceholder": "ምድብ ይምረጡ...",
+      "subcategoriesPlaceholder": "ንዑስ ምድቦች (አማራጭ፣ በኮማ የተለዩ)"
     },
-    "closeModal": "Close modal",
+    "closeModal": "መስኮት ይዝጉ",
     "createCategory": {
-      "created": "Category \"{name}\" created!",
-      "failed": "Failed to create category",
-      "nameRequired": "Category name is required"
+      "created": "ምድብ \"{name}\" ተፈጥሯል!",
+      "failed": "ምድብ ለመፍጠር አልተቻለም",
+      "nameRequired": "የምድብ ስም ያስፈልጋል"
     },
     "date": {
-      "label": "Date"
+      "label": "ቀን"
     },
     "description": {
-      "label": "Description",
-      "placeholder": "e.g., Grocery shopping at Sobeys"
+      "label": "ገለጻ",
+      "placeholder": "ለምሳሌ፣ በሱቅ ግብይት"
     },
     "learned": {
-      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
-      "title": "Learned!"
+      "description": "ከ3 ተመሳሳይ ማስተካከያዎች በኋላ ከዚህ ነጋዴ የሚመጡ ግብይቶች በራስ-ሰር ይመደባሉ።",
+      "title": "ተምሯል!"
     },
     "notes": {
-      "label": "Notes",
-      "placeholder": "Add any additional notes..."
+      "label": "ማስታወሻዎች",
+      "placeholder": "ተጨማሪ ማስታወሻዎች ያክሉ..."
     },
     "receipts": {
-      "addNew": "Add New Receipt",
-      "deleteConfirm": "Are you sure you want to delete this receipt?",
-      "deleteFailed": "Failed to delete receipt",
-      "deleteReceipt": "Delete receipt",
-      "existing": "Existing receipts ({count})",
-      "label": "Receipt Attachments",
-      "newFile": "New: {filename}",
-      "remove": "Remove",
-      "viewFull": "View full receipt"
+      "addNew": "አዲስ ደረሰኝ ያክሉ",
+      "deleteConfirm": "ይህን ደረሰኝ ለመሰረዝ እርግጠኛ ነዎት?",
+      "deleteFailed": "ደረሰኝ ለመሰረዝ አልተቻለም",
+      "deleteReceipt": "ደረሰኝ ይሰርዙ",
+      "existing": "ነባር ደረሰኞች ({count})",
+      "label": "የደረሰኝ አባሪዎች",
+      "newFile": "አዲስ: {filename}",
+      "remove": "ያስወግዱ",
+      "viewFull": "ሙሉ ደረሰኝ ይመልከቱ"
     },
     "subcategory": {
-      "label": "Subcategory",
-      "none": "None",
-      "selectPlaceholder": "Select subcategory..."
+      "label": "ንዑስ ምድብ",
+      "none": "ምንም",
+      "selectPlaceholder": "ንዑስ ምድብ ይምረጡ..."
     },
     "tags": {
-      "label": "Tags (comma-separated)",
-      "placeholder": "e.g., groceries, weekly, essential"
+      "label": "መለያዎች (በኮማ የተለዩ)",
+      "placeholder": "ለምሳሌ፣ ምግብ፣ ሳምንታዊ፣ አስፈላጊ"
     },
     "title": {
-      "add": "Add Transaction",
-      "edit": "Edit Transaction"
+      "add": "ግብይት ያክሉ",
+      "edit": "ግብይት ያስተካክሉ"
     },
     "type": {
-      "expense": "Expense",
-      "income": "Income",
-      "label": "Type"
+      "expense": "ወጪ",
+      "income": "ገቢ",
+      "label": "ዓይነት"
     }
   },
   "transactionSearch": {
-    "amountRangeLabel": "Amount range",
-    "clearRecent": "Clear",
-    "filterName": "Filter name",
-    "noResults": "No transactions found",
-    "noResultsDescription": "Try a different search or adjust your filters",
-    "noTransactionsYet": "No transactions yet",
-    "placeholder": "Search transactions...",
-    "placeholderExtended": "Try 'coffee last week' or 'amount:>50'",
-    "recentSearchLabel": "Recent search",
-    "recentSearches": "Recent Searches",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
-    "save": "Save",
-    "saveFilter": "Save Filter",
-    "savedFilters": "Saved Filters",
-    "searchFilterLabel": "Search filter",
-    "searchTipAmount": "Use <code>$50-100</code> for amount ranges",
-    "searchTipChars": "Type 3+ characters to search transactions",
-    "searchTipNL": "Try <code>coffee last week</code> for natural language",
-    "searchTipsIntro": "Search Tips:",
-    "searchingFor": "Searching for: {query}",
+    "amountRangeLabel": "የመጠን ክልል",
+    "clearRecent": "ያጽዱ",
+    "filterName": "የማጣሪያ ስም",
+    "noResults": "ግብይቶች አልተገኙም",
+    "noResultsDescription": "ሌላ ፍለጋ ይሞክሩ ወይም ማጣሪያዎችዎን ያስተካክሉ",
+    "noTransactionsYet": "ገና ግብይቶች የሉም",
+    "placeholder": "ግብይቶች ይፈልጉ...",
+    "placeholderExtended": "'ቡና ባለፈው ሳምንት' ወይም 'amount:>50' ይሞክሩ",
+    "recentSearchLabel": "የቅርብ ፍለጋ",
+    "recentSearches": "የቅርብ ፍለጋዎች",
+    "resultCount": "{count} {count, plural, =1 {ውጤት} other {ውጤቶች}}",
+    "save": "ያስቀምጡ",
+    "saveFilter": "ማጣሪያ ያስቀምጡ",
+    "savedFilters": "የተቀመጡ ማጣሪያዎች",
+    "searchFilterLabel": "ፍለጋ ማጣሪያ",
+    "searchTipAmount": "ለመጠን ክልሎች <code>$50-100</code> ይጠቀሙ",
+    "searchTipChars": "ግብይቶችን ለመፈለግ 3+ ቁምፊዎች ይተይቡ",
+    "searchTipNL": "ለተፈጥሮ ቋንቋ <code>coffee last week</code> ይሞክሩ",
+    "searchTipsIntro": "የፍለጋ ምክሮች:",
+    "searchingFor": "ለ: {query} ፈልጎ",
     "suggestions": {
-      "amounts": "Amount Ranges",
-      "categories": "Categories",
-      "merchants": "Merchants",
-      "recent": "Recent"
+      "amounts": "የመጠን ክልሎች",
+      "categories": "ምድቦች",
+      "merchants": "ነጋዴዎች",
+      "recent": "የቅርብ"
     },
-    "suggestionsHeading": "Suggestions",
+    "suggestionsHeading": "ጥቆማዎች",
     "tips": {
-      "amount": "Amount: '$50-100' or 'amount:>50'",
-      "category": "Category: 'groceries' or 'category:food'",
-      "date": "Date: 'last week', 'this month', 'date:last30'",
-      "fuzzy": "Typo-tolerant: 'starbukcs' finds 'Starbucks'",
-      "title": "Search Tips",
-      "type": "Type: 'type:income' or 'type:expense'"
+      "amount": "መጠን: '$50-100' ወይም 'amount:>50'",
+      "category": "ምድብ: 'ምግብ ግዢ' ወይም 'category:food'",
+      "date": "ቀን: 'ባለፈው ሳምንት'፣ 'ይህ ወር'፣ 'date:last30'",
+      "fuzzy": "ስህተት-ታጋሽ: 'starbukcs' 'Starbucks' ያገኛል",
+      "title": "የፍለጋ ምክሮች",
+      "type": "ዓይነት: 'type:income' ወይም 'type:expense'"
     },
-    "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
-    "viewAllResults": "View all {count} results",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "transactionCount": "{count} {count, plural, =1 {ግብይት} other {ግብይቶች}}",
+    "usedTimes": "{count} {count, plural, =1 {ጊዜ} other {ጊዜያት}} ጥቅም ላይ ውሏል",
+    "viewAllResults": "ሁሉንም {count} ውጤቶች ይመልከቱ",
+    "resultsFound": "{count} {count, plural, =1 {ውጤት} other {ውጤቶች}} ተገኝቷል",
+    "suggestionsAvailable": "{count} {count, plural, =1 {ጥቆማ} other {ጥቆማዎች}} ይገኛሉ"
   },
   "transactionTable": {
     "actions": {
-      "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
-      "split": "Split"
+      "attachReceipt": "ደረሰኝ ያያይዙ",
+      "delete": "ይሰርዙ",
+      "edit": "ያስተካክሉ",
+      "split": "ይከፋፍሉ"
     },
-    "emptyState": "No transactions to display",
+    "emptyState": "ለማሳየት ግብይቶች የሉም",
     "headers": {
-      "account": "Account",
-      "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
-      "date": "Date",
-      "description": "Description"
+      "account": "ሂሳብ",
+      "actions": "ድርጊቶች",
+      "amount": "መጠን",
+      "category": "ምድብ",
+      "date": "ቀን",
+      "description": "ገለጻ"
     }
   },
   "transactions": {
-    "actions": "Actions",
-    "addTransaction": "Add Transaction",
-    "allAccounts": "All Accounts",
-    "allCategories": "All Categories",
-    "allSplitItemsRemoved": "All split items will be removed",
-    "amount": "Amount",
-    "applyToSelected": "Apply to Selected",
-    "balance": "Balance",
-    "balanceTooltip": "Starting balance: {startingBalance} + Net change: {netChange}",
-    "bulkCategorizeDescription": "Apply \"{category}{subcategory, select, other { - {subcategory}}}\" to {count} transaction(s)?",
-    "bulkCategorizeSuccess": "Successfully categorized {count} transaction(s)",
-    "bulkCategorizeTitle": "Bulk Categorize Transactions",
-    "bulkCategorized": "Categorized {count} transactions as {category}{subcategory, select, other { - {subcategory}}}",
-    "bulkCategoryLabel": "Category: {category}{subcategory, select, other { - {subcategory}}}",
-    "categoriesAndNotesLost": "Categories and notes from splits will be lost",
-    "categorize": "Categorize",
-    "categorizedAs": "Categorized as {category}{subcategory, select, other { - {subcategory}}}",
-    "category": "Category",
-    "clearFilters": "Clear Filters",
-    "currentBalance": "Current Balance",
-    "date": "Date",
-    "delete": "Delete",
-    "deleteCannotBeUndone": "This action cannot be undone.",
-    "deleteImpactAmount": "{amount} {type} from {date}",
-    "deleteImpactCategory": "Category: {category}{subcategory, select, other { - {subcategory}}}",
-    "deleteImpactDescription": "Description: \"{description}\"",
-    "deleteImpactNotes": "Notes: \"{notes}\"",
-    "deleteImpactSplit": "(This is a split transaction)",
-    "deleteTransaction": "Delete transaction",
-    "deleteTransactionTitle": "Delete Transaction",
-    "description": "Description",
-    "edit": "Edit",
-    "editTransaction": "Edit transaction",
-    "existingCategoriesReplaced": "Any existing categories will be replaced",
-    "expenseLabel": "Expense",
-    "failedToBulkCategorize": "Failed to bulk categorize transactions",
-    "failedToCategorize": "Failed to categorize transactions",
-    "failedToCategorizeSingle": "Failed to categorize transaction",
-    "failedToDelete": "Failed to delete transaction",
-    "failedToSave": "Failed to save transaction",
-    "failedToUnsplit": "Failed to unsplit transaction",
-    "filterByAccount": "Filter by Account",
-    "filterByCategory": "Filter by Category",
-    "filterByCategoryHelp": "Show only transactions from specific categories. You can select multiple categories at once using bulk actions.",
-    "filterByCategoryInfo": "More information about filtering by category",
-    "foundMatchingTransactions": "✓ Found {count} matching \"{vendor}\" transactions ({time}s)",
-    "fromDate": "From Date",
-    "importCSV": "Import CSV",
-    "incomeLabel": "Income",
-    "lastSplitItemRestore": "This is the last split item. Restore the original transaction?",
-    "negative": "Negative",
-    "newestFirst": "Newest First",
-    "noMatchingTransactions": "No other \"{vendor}\" transactions found ({time}s)",
-    "noTransactionsDescription": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
-    "noTransactionsYet": "No Transactions Yet",
-    "oldestFirst": "Oldest First",
-    "originalTransactionRestored": "The original transaction will be restored",
-    "pleaseSelectCategory": "Please select a category",
-    "pleaseSelectTransactions": "Please select transactions to categorize",
-    "positive": "Positive",
-    "quickCategorize": "Quick Categorize",
-    "receipt": "Receipt",
-    "restoreOriginal": "Restore Original",
-    "restoreOriginalDescription": "This will restore the original unsplit transaction and remove all split items.",
-    "restoreOriginalTitle": "Restore Original Transaction",
-    "searchPlaceholder": "Try 'coffee last week' or 'amount:>50'...",
-    "searchTransactions": "Search Transactions",
-    "searchTransactionsHelp": "Fuzzy search by description, merchant, category, notes, or amount. Try 'coffee last week' or '$50-100'.",
-    "searchTransactionsInfo": "More information about searching transactions",
-    "searchingVendorTransactions": "🔍 Searching for other \"{vendor}\" transactions...",
-    "selectAllVisible": "Select all visible transactions",
-    "setStartingBalance": "Set account starting balance →",
-    "showAll": "Show All",
-    "showingTransactionsFor": "Showing transactions for",
-    "sortByAmount": "Sort by Amount",
-    "sortByDate": "Sort by Date",
-    "split": "Split",
-    "splitTransaction": "Split transaction",
-    "splitTransactionsHelp": "Divide a single purchase across multiple categories. Example: Grocery store visit ($100) → Groceries ($80) + Household ($20). Click the Split button on any transaction to divide it.",
-    "splitTransactionsLabel": "Split Transactions",
-    "thisWillUpdate": "This will update:",
-    "title": "Transactions",
-    "toDate": "To Date",
-    "totalExpenses": "Total Expenses",
-    "totalIncome": "Total Income",
-    "transactionCount": "{count, plural, one {1 transaction} other {# transactions}}",
-    "transactionDeleted": "Transaction deleted successfully",
-    "transactionFeaturesInfo": "More information about transaction features",
-    "transactionSaved": "Transaction saved successfully",
-    "transactionUnsplit": "Transaction unsplit successfully",
-    "uncategorized": "Uncategorized",
-    "unsplit": "Unsplit",
-    "unsplitTransaction": "Unsplit transaction",
-    "usingBasicMatching": "Using basic matching for {vendor} transactions",
-    "vendorMatchingFailed": "Vendor matching failed. Transaction was saved, but matches could not be loaded.",
-    "whatWillHappen": "What will happen:",
-    "youWillLose": "You will lose:"
+    "actions": "ድርጊቶች",
+    "addTransaction": "ግብይት ያክሉ",
+    "allAccounts": "ሁሉም ሂሳቦች",
+    "allCategories": "ሁሉም ምድቦች",
+    "allSplitItemsRemoved": "ሁሉም ክፍፍል ንጥሎች ይወገዳሉ",
+    "amount": "መጠን",
+    "applyToSelected": "ለተመረጡ ያስተግብሩ",
+    "balance": "ቀሪ",
+    "balanceTooltip": "የመነሻ ቀሪ: {startingBalance} + ንጹህ ለውጥ: {netChange}",
+    "bulkCategorizeDescription": "\"{category}{subcategory, select, other { - {subcategory}}}\" ለ{count} ግብይት(ቶች) ይተገበር?",
+    "bulkCategorizeSuccess": "{count} ግብይት(ቶች) በተሳካ ሁኔታ ተመድበዋል",
+    "bulkCategorizeTitle": "ግብይቶች በጅምላ ምድብ",
+    "bulkCategorized": "{count} ግብይቶች እንደ {category}{subcategory, select, other { - {subcategory}}} ተመድበዋል",
+    "bulkCategoryLabel": "ምድብ: {category}{subcategory, select, other { - {subcategory}}}",
+    "categoriesAndNotesLost": "ከክፍፍሎች ምድቦች እና ማስታወሻዎች ይጠፋሉ",
+    "categorize": "ምድብ ያድርጉ",
+    "categorizedAs": "እንደ {category}{subcategory, select, other { - {subcategory}}} ተመድቧል",
+    "category": "ምድብ",
+    "clearFilters": "ማጣሪያዎች ያጽዱ",
+    "currentBalance": "ወቅታዊ ቀሪ",
+    "date": "ቀን",
+    "delete": "ይሰርዙ",
+    "deleteCannotBeUndone": "ይህ እርምጃ ሊቀለበስ አይችልም።",
+    "deleteImpactAmount": "ከ{date} {amount} {type}",
+    "deleteImpactCategory": "ምድብ: {category}{subcategory, select, other { - {subcategory}}}",
+    "deleteImpactDescription": "ገለጻ: \"{description}\"",
+    "deleteImpactNotes": "ማስታወሻ: \"{notes}\"",
+    "deleteImpactSplit": "(ይህ ክፍፍል ግብይት ነው)",
+    "deleteTransaction": "ግብይት ይሰርዙ",
+    "deleteTransactionTitle": "ግብይት ይሰርዙ",
+    "description": "ገለጻ",
+    "edit": "ያስተካክሉ",
+    "editTransaction": "ግብይት ያስተካክሉ",
+    "existingCategoriesReplaced": "ነባር ምድቦች ይተካሉ",
+    "expenseLabel": "ወጪ",
+    "failedToBulkCategorize": "በጅምላ ለመመደብ አልተቻለም",
+    "failedToCategorize": "ለመመደብ አልተቻለም",
+    "failedToCategorizeSingle": "ግብይት ለመመደብ አልተቻለም",
+    "failedToDelete": "ለመሰረዝ አልተቻለም",
+    "failedToSave": "ግብይት ለማስቀመጥ አልተቻለም",
+    "failedToUnsplit": "ክፍፍል ለማስወገድ አልተቻለም",
+    "filterByAccount": "በሂሳብ ያጣሩ",
+    "filterByCategory": "በምድብ ያጣሩ",
+    "filterByCategoryHelp": "ከተወሰኑ ምድቦች ብቻ ግብይቶች ያሳዩ።",
+    "filterByCategoryInfo": "ስለ በምድብ ማጣራት ተጨማሪ መረጃ",
+    "foundMatchingTransactions": "✓ {count} ተመሳሳይ \"{vendor}\" ግብይቶች ተገኝተዋል ({time}ሰ)",
+    "fromDate": "ከቀን",
+    "importCSV": "CSV ያስገቡ",
+    "incomeLabel": "ገቢ",
+    "lastSplitItemRestore": "ይህ የመጨረሻው ክፍፍል ንጥል ነው። ዋናውን ያስመልሱ?",
+    "negative": "አሉታዊ",
+    "newestFirst": "አዲሱ መጀመሪያ",
+    "noMatchingTransactions": "ሌሎች \"{vendor}\" ግብይቶች አልተገኙም ({time}ሰ)",
+    "noTransactionsDescription": "የመጀመሪያ ግብይትዎን በማከል ወጪዎን መከታተል ይጀምሩ።",
+    "noTransactionsYet": "ገና ግብይቶች የሉም",
+    "oldestFirst": "አሮጌው መጀመሪያ",
+    "originalTransactionRestored": "ዋናው ግብይት ይመለሳል",
+    "pleaseSelectCategory": "እባክዎ ምድብ ይምረጡ",
+    "pleaseSelectTransactions": "ለመመደብ ግብይቶች ይምረጡ",
+    "positive": "አዎንታዊ",
+    "quickCategorize": "ፈጣን ምደባ",
+    "receipt": "ደረሰኝ",
+    "restoreOriginal": "ዋና ያስመልሱ",
+    "restoreOriginalDescription": "ይህ ዋናውን ያልተከፋፈለ ግብይት ያስመልሳል እና ሁሉንም ክፍፍል ንጥሎች ያስወግዳል።",
+    "restoreOriginalTitle": "ዋና ግብይት ያስመልሱ",
+    "searchPlaceholder": "'coffee last week' ወይም 'amount:>50' ይሞክሩ...",
+    "searchTransactions": "ግብይቶች ይፈልጉ",
+    "searchTransactionsHelp": "በገለጻ፣ ነጋዴ፣ ምድብ፣ ማስታወሻ ወይም መጠን ይፈልጉ።",
+    "searchTransactionsInfo": "ስለ ግብይቶች ፍለጋ ተጨማሪ መረጃ",
+    "searchingVendorTransactions": "ሌሎች \"{vendor}\" ግብይቶች በመፈለግ...",
+    "selectAllVisible": "ሁሉንም ታዩ ግብይቶች ይምረጡ",
+    "setStartingBalance": "የሂሳብ መነሻ ቀሪ ያስቀምጡ →",
+    "showAll": "ሁሉንም ያሳዩ",
+    "showingTransactionsFor": "ለ ግብይቶች ይታያሉ",
+    "sortByAmount": "በመጠን ያስተካክሉ",
+    "sortByDate": "በቀን ያስተካክሉ",
+    "split": "ክፍፍል",
+    "splitTransaction": "ግብይት ይከፋፍሉ",
+    "splitTransactionsHelp": "አንድ ግዢ በብዙ ምድቦች ይከፋፍሉ።",
+    "splitTransactionsLabel": "ክፍፍል ግብይቶች",
+    "thisWillUpdate": "የሚዘምነው:",
+    "title": "ግብይቶች",
+    "toDate": "እስከ ቀን",
+    "totalExpenses": "ጠቅላላ ወጪ",
+    "totalIncome": "ጠቅላላ ገቢ",
+    "transactionCount": "{count, plural, one {1 ግብይት} other {# ግብይቶች}}",
+    "transactionDeleted": "ግብይት ተሰርዟል",
+    "transactionFeaturesInfo": "ስለ ግብይት ባህሪያት ተጨማሪ መረጃ",
+    "transactionSaved": "ግብይት ተቀምጧል",
+    "transactionUnsplit": "ግብይት ክፍፍል ተወግዷል",
+    "uncategorized": "ያልተመደበ",
+    "unsplit": "ክፍፍል ያስወግዱ",
+    "unsplitTransaction": "ግብይት ክፍፍል ያስወግዱ",
+    "usingBasicMatching": "ለ{vendor} ግብይቶች መሰረታዊ ማዛመድ ይጠቀማል",
+    "vendorMatchingFailed": "የነጋዴ ማዛመድ አልተሳካም።",
+    "whatWillHappen": "ምን ይከሰታል:",
+    "youWillLose": "የሚያጡት:"
   },
   "trialBanner": {
     "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
@@ -4998,29 +5042,29 @@
     "viewPricing": "View pricing"
   },
   "validationWarnings": {
-    "aiAnalysis": "AI Analysis:",
-    "amount": "Amount:",
-    "cancelImport": "Cancel Import",
-    "closeModal": "Close modal",
-    "confidence": "{percent}% confidence",
-    "continueWithAll": "Continue with All",
-    "criticalIssues": "Critical Issues",
-    "date": "Date:",
-    "description": "Description:",
-    "hideDetails": "Hide Transaction Details",
-    "ignoreAllContinue": "Ignore All & Continue",
-    "informational": "Informational",
-    "issuesDetected": "Issues Detected",
-    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
-    "marked": "Marked",
-    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
-    "remove": "Remove",
-    "removeAndContinue": "Remove {count} & Continue",
-    "suggestion": "Suggestion:",
-    "title": "Transaction Validation Results",
-    "transactionNumber": "Transaction #{number}",
-    "viewDetails": "View Transaction Details",
-    "warnings": "Warnings"
+    "aiAnalysis": "የAI ትንተና:",
+    "amount": "መጠን:",
+    "cancelImport": "ማስገባት ይሰርዙ",
+    "closeModal": "መስኮት ይዝጉ",
+    "confidence": "{percent}% እምነት",
+    "continueWithAll": "ከሁሉም ጋር ይቀጥሉ",
+    "criticalIssues": "ወሳኝ ችግሮች",
+    "date": "ቀን:",
+    "description": "ገለጻ:",
+    "hideDetails": "የግብይት ዝርዝሮች ይደብቁ",
+    "ignoreAllContinue": "ሁሉንም ችላ ይበሉ እና ይቀጥሉ",
+    "informational": "መረጃዊ",
+    "issuesDetected": "ችግሮች ተገኝተዋል",
+    "issuesFound": "ትኩረትዎን የሚፈልጉ {count, plural, =1 {1 ችግር} other {# ችግሮች}} ተገኝተዋል",
+    "marked": "ተምርቷል",
+    "removalNote": "{count, plural, =1 {1 ግብይት} other {# ግብይቶች}} ከቀጠሉ ከማስገባቱ ይወገዳሉ።",
+    "remove": "ያስወግዱ",
+    "removeAndContinue": "{count} ያስወግዱ እና ይቀጥሉ",
+    "suggestion": "ጥቆማ:",
+    "title": "የግብይት ማረጋገጫ ውጤቶች",
+    "transactionNumber": "ግብይት #{number}",
+    "viewDetails": "የግብይት ዝርዝሮች ይመልከቱ",
+    "warnings": "ማስጠንቀቂያዎች"
   },
   "vaultSetup": {
     "aes256Description": "Your data is encrypted with AES-256 encryption",
@@ -5063,8 +5107,8 @@
       "title": "የበጀት ዕድገት"
     },
     "eventBudget": {
-      "description": "Track spending for events and projects",
-      "title": "Event Budgets"
+      "description": "ለዝግጅቶች እና ፕሮጀክቶች ወጪን ይከታተሉ",
+      "title": "የዝግጅት በጀቶች"
     },
     "incomeVsExpenses": {
       "description": "በጊዜ ወቅት የምንዛሬ እና ወጪዎች ይነጻ",
@@ -5075,163 +5119,163 @@
       "title": "ወርሃዊ ዝንባሌዎች"
     },
     "netWorthMini": {
-      "description": "Quick view of your total net worth",
-      "title": "Net Worth"
+      "description": "የጠቅላላ ንብረትዎ ፈጣን እይታ",
+      "title": "ጠቅላላ ንብረት"
     },
     "recentTransactions": {
       "description": "የወቅታዊ ገንዘብ እንቅስቃሴዎች አጭር እይታ",
       "title": "የቅርብ ግብይቶች"
     },
     "safeToSpend": {
-      "description": "See how much you can safely spend per category",
-      "title": "Safe to Spend"
+      "description": "በእያንዳንዱ ምድብ ምን ያህል ደህንነቱ በተጠበቀ ሁኔታ ማውጣት እንደሚችሉ ይመልከቱ",
+      "title": "ለማውጣት ደህንነቱ የተጠበቀ"
     },
     "spendingByCategory": {
       "description": "የገንዘብዎ ወደ የሚሄደው ይመለከቱ በተመለከተ እንደሚያሳይ",
       "title": "በክፍል የተገኘ ገንዘብ"
     },
     "streaks": {
-      "description": "Track your engagement streaks and achievements",
-      "title": "Streaks & Badges"
+      "description": "የተሳትፎ ተከታታይ ቀናትዎን እና ስኬቶችዎን ይከታተሉ",
+      "title": "ተከታታይ ቀናት እና ባጆች"
     },
     "upcomingBills": {
       "description": "በቢል ማስታወቂያዎች አንድ እንደሚያሳይ አይወድቁ",
       "title": "ወደ መጨረሻ የሚመጡ ቢል"
     },
     "weeklyRecap": {
-      "description": "Summary of your weekly spending patterns",
-      "title": "Weekly Recap"
+      "description": "የሳምንታዊ ወጪ ንድፍዎ ማጠቃለያ",
+      "title": "ሳምንታዊ ማጠቃለያ"
     }
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
-      "createNew": "Create New",
-      "description": "Map YNAB categories to your existing categories or create new ones.",
-      "mapToExisting": "Map to Existing",
-      "selectCategory": "Select category...",
-      "skip": "Skip",
-      "title": "Category Mapping",
-      "willCreate": "Will create:"
+      "category": "{count, plural, =1 {1 ምድብ} other {# ምድቦች}}",
+      "createNew": "አዲስ ይፍጠሩ",
+      "description": "YNAB ምድቦችን ከነባር ምድቦችዎ ጋር ያዛምዱ ወይም አዲስ ይፍጠሩ።",
+      "mapToExisting": "ከነባር ጋር ያዛምዱ",
+      "selectCategory": "ምድብ ይምረጡ...",
+      "skip": "ይዝለሉ",
+      "title": "የምድብ ማዛመድ",
+      "willCreate": "ይፈጠራል:"
     },
     "completeStep": {
-      "errors": "Errors",
-      "importAnother": "Import Another",
-      "success": "Import Complete!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
-      "viewTransactions": "View Transactions",
-      "whatNext": "What would you like to do next?",
-      "withIssues": "Import Completed with Issues"
+      "errors": "ስህተቶች",
+      "importAnother": "ሌላ ያስገቡ",
+      "success": "ማስገባት ተጠናቋል!",
+      "successMessage": "{count, plural, =1 {1 ንጥል ገብቷል} other {# ንጥሎች ገብተዋል}} ከYNAB በተሳካ ሁኔታ።",
+      "viewTransactions": "ግብይቶች ይመልከቱ",
+      "whatNext": "በመቀጥል ምን ማድረግ ይፈልጋሉ?",
+      "withIssues": "ማስገባት ከችግሮች ጋር ተጠናቋል"
     },
     "footer": {
-      "back": "Back",
-      "done": "Done",
-      "next": "Next",
-      "startImport": "Start Import"
+      "back": "ተመለስ",
+      "done": "ተከናውኗል",
+      "next": "ቀጣይ",
+      "startImport": "ማስገባት ይጀምሩ"
     },
     "header": {
-      "closeLabel": "Close wizard",
-      "subtitle": "Migrate your budget data seamlessly",
-      "title": "Import from YNAB"
+      "closeLabel": "አዋቂ ይዝጉ",
+      "subtitle": "የበጀት ውሂብዎን ያለችግር ያዛውሩ",
+      "title": "ከYNAB ያስገቡ"
     },
     "importingStep": {
-      "finishing": "Finishing up...",
-      "importingAccounts": "Importing accounts...",
-      "importingBudgets": "Importing budgets...",
-      "importingCategories": "Importing categories...",
-      "importingTransactions": "Importing transactions...",
-      "title": "Importing your YNAB data..."
+      "finishing": "በማጠናቀቅ ላይ...",
+      "importingAccounts": "ሂሳቦች በመግባት ላይ...",
+      "importingBudgets": "በጀቶች በመግባት ላይ...",
+      "importingCategories": "ምድቦች በመግባት ላይ...",
+      "importingTransactions": "ግብይቶች በመግባት ላይ...",
+      "title": "YNAB ውሂብዎ በመግባት ላይ..."
     },
     "optionsStep": {
       "accountOptions": {
-        "includeClosedAccounts": "Include closed accounts",
-        "includeOffBudgetAccounts": "Include off-budget accounts",
-        "title": "Account Options"
+        "includeClosedAccounts": "የተዘጉ ሂሳቦችን ያካትቱ",
+        "includeOffBudgetAccounts": "ከበጀት ውጭ ሂሳቦችን ያካትቱ",
+        "title": "የሂሳብ አማራጮች"
       },
       "budgetOptions": {
-        "importGoals": "Import savings goals as future purchases",
-        "title": "Budget Options"
+        "importGoals": "የቁጠባ ግቦችን እንደ ለወደፊት ግዢዎች ያስገቡ",
+        "title": "የበጀት አማራጮች"
       },
       "hiddenCategories": {
-        "archive": "Archive",
-        "archiveDesc": "Import as archived (recommended)",
-        "description": "How to handle YNAB categories marked as hidden?",
-        "import": "Import",
-        "importDesc": "Import as active categories",
-        "skip": "Skip",
-        "skipDesc": "Don't import hidden categories",
-        "title": "Hidden Categories"
+        "archive": "ማህደር",
+        "archiveDesc": "እንደ ማህደር ያስገቡ (የሚመከር)",
+        "description": "ድብቅ YNAB ምድቦችን እንዴት ማስተናገድ?",
+        "import": "ያስገቡ",
+        "importDesc": "እንደ ንቁ ምድቦች ያስገቡ",
+        "skip": "ይዝለሉ",
+        "skipDesc": "ድብቅ ምድቦችን አያስገቡ",
+        "title": "ድብቅ ምድቦች"
       }
     },
     "previewStep": {
-      "accounts": "Accounts",
-      "allocations": "{count} allocations",
-      "budgetMonths": "Budget Months",
-      "categories": "Categories",
-      "dateRange": "Transaction Date Range",
-      "description": "Review the data that will be imported.",
-      "duplicates": "{count} duplicates",
-      "new": "{count} new",
-      "newMapped": "{created} new, {mapped} mapped",
-      "preparingPreview": "Preparing preview...",
-      "title": "Import Preview",
-      "transactions": "Transactions",
-      "warnings": "Warnings"
+      "accounts": "ሂሳቦች",
+      "allocations": "{count} ምደባዎች",
+      "budgetMonths": "የበጀት ወራት",
+      "categories": "ምድቦች",
+      "dateRange": "የግብይት ቀን ክልል",
+      "description": "የሚገባውን ውሂብ ይገምግሙ።",
+      "duplicates": "{count} ድርብ",
+      "new": "{count} አዲስ",
+      "newMapped": "{created} አዲስ፣ {mapped} ተዛምደዋል",
+      "preparingPreview": "ቅድመ-እይታ በማዘጋጀት ላይ...",
+      "title": "ቅድመ-እይታ ያስገቡ",
+      "transactions": "ግብይቶች",
+      "warnings": "ማስጠንቀቂያዎች"
     },
     "steps": {
       "categories": {
-        "description": "Map to existing categories",
-        "title": "Categories"
+        "description": "ከነባር ምድቦች ጋር ያዛምዱ",
+        "title": "ምድቦች"
       },
       "complete": {
-        "description": "Migration finished",
-        "title": "Complete"
+        "description": "ፍልሰት ተጠናቋል",
+        "title": "ተጠናቋል"
       },
       "importing": {
-        "description": "Processing your data",
-        "title": "Importing"
+        "description": "ውሂብዎ በመስራት ላይ",
+        "title": "በማስገባት ላይ"
       },
       "options": {
-        "description": "Configure import settings",
-        "title": "Options"
+        "description": "የማስገባት ቅንብሮች ያዋቅሩ",
+        "title": "አማራጮች"
       },
       "preview": {
-        "description": "Review before import",
-        "title": "Preview"
+        "description": "ከማስገባት በፊት ይገምግሙ",
+        "title": "ቅድመ-እይታ"
       },
       "upload": {
-        "description": "Select YNAB export file",
-        "title": "Upload"
+        "description": "YNAB ማውጫ ፋይል ይምረጡ",
+        "title": "ስቀሉ"
       }
     },
     "uploadStep": {
-      "accounts": "Accounts",
-      "categories": "Categories",
-      "clickToSelect": "Click to select a file",
-      "dragAndDrop": "or drag and drop here",
-      "fileSummary": "File Summary",
-      "format": "Format",
-      "formatApiExport": "YNAB API Export",
-      "formatApiExportDesc": "JSON from nYNAB",
-      "formatCsv": "CSV Export",
-      "formatCsvDesc": "From YNAB web app",
+      "accounts": "ሂሳቦች",
+      "categories": "ምድቦች",
+      "clickToSelect": "ፋይል ለመምረጥ ጠቅ ያድርጉ",
+      "dragAndDrop": "ወይም እዚህ ጎትተው ያስቀምጡ",
+      "fileSummary": "የፋይል ማጠቃለያ",
+      "format": "ቅርጸት",
+      "formatApiExport": "YNAB API ማውጫ",
+      "formatApiExportDesc": "ከnYNAB JSON",
+      "formatCsv": "CSV ማውጫ",
+      "formatCsvDesc": "ከYNAB ድር መተግበሪያ",
       "formatYfull": "Budget.yfull / Budget.ynab4",
-      "formatYfullDesc": "YNAB4 desktop export",
-      "parsing": "Parsing file...",
-      "supportedFormats": "Supported Formats",
-      "transactions": "Transactions"
+      "formatYfullDesc": "YNAB4 ዴስክቶፕ ማውጫ",
+      "parsing": "ፋይል በመተንተን ላይ...",
+      "supportedFormats": "የሚደገፉ ቅርጸቶች",
+      "transactions": "ግብይቶች"
     },
     "errors": {
-      "parseFailed": "Failed to parse YNAB file",
-      "previewFailed": "Failed to generate preview",
-      "accountImportFailed": "Account import failed: {details}",
-      "categoryImportFailed": "Category import failed: {details}",
-      "transactionImportFailed": "Transaction import failed: {details}",
-      "unknownError": "Unknown error",
-      "budgetImportFailed": "Budget import failed: {details}"
+      "parseFailed": "YNAB ፋይል ለመተንተን አልተቻለም",
+      "previewFailed": "ቅድመ-እይታ ለማመንጨት አልተቻለም",
+      "accountImportFailed": "ሂሳብ ማስገባት አልተሳካም: {details}",
+      "categoryImportFailed": "ምድብ ማስገባት አልተሳካም: {details}",
+      "transactionImportFailed": "ግብይት ማስገባት አልተሳካም: {details}",
+      "unknownError": "ያልታወቀ ስህተት",
+      "budgetImportFailed": "በጀት ማስገባት አልተሳካም: {details}"
     },
-    "importSuccess": "YNAB data imported successfully!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importSuccess": "YNAB ውሂብ በተሳካ ሁኔታ ገብቷል!",
+    "importWithErrors": "ማስገባት ከ{count, plural, =1 {1 ስህተት} other {# ስህተቶች}} ጋር ተጠናቋል"
   },
   "balanceReconciliation": {
     "title": "ማስመጣት ተጠናቀቀ!",

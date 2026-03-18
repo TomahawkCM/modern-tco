@@ -1,50 +1,50 @@
 {
   "accessibilitySettings": {
     "fontSize": {
-      "default": "Default",
-      "description": "Adjust the base text size for better readability",
-      "extraLarge": "Extra Large",
-      "large": "Large",
-      "title": "Font Size"
+      "default": "លំនាំដើម",
+      "description": "កែតម្រូវទំហំអក្សរសម្រាប់ភាពងាយអាន",
+      "extraLarge": "ធំបន្ថែម",
+      "large": "ធំ",
+      "title": "ទំហំអក្សរ"
     },
     "infoBox": {
-      "savedAutomatically": "Settings are saved automatically and persist across sessions",
-      "seniorsOptimization": "Seniors Mode provides one-click accessibility optimization",
-      "storedLocally": "Your preferences are stored locally and never sent to servers",
-      "syncAcrossTabs": "Changes sync across all open tabs in real-time",
-      "title": "About Accessibility Settings"
+      "savedAutomatically": "ការកំណត់ត្រូវបានរក្សាទុកដោយស្វ័យប្រវត្តិ",
+      "seniorsOptimization": "របៀបមនុស្សចាស់ផ្ដល់ការបង្កើនភាពងាយស្រួលមួយចុច",
+      "storedLocally": "ចំណូលចិត្តរបស់អ្នកត្រូវបានរក្សាទុកក្នុងឧបករណ៍",
+      "syncAcrossTabs": "ការផ្លាស់ប្ដូរធ្វើសមកាលកម្មក្នុង tab ដែលបើកទាំងអស់",
+      "title": "អំពីការកំណត់ភាពងាយស្រួល"
     },
     "presets": {
-      "full": "Full",
-      "fullDesc": "Maximum accessibility",
-      "mild": "Mild",
-      "mildDesc": "Slightly enhanced",
-      "moderate": "Moderate",
-      "moderateDesc": "Recommended for most",
-      "off": "Off",
-      "offDesc": "Standard interface",
-      "title": "Quick Presets:"
+      "full": "ពេញ",
+      "fullDesc": "ភាពងាយស្រួលអតិបរមា",
+      "mild": "ស្រាល",
+      "mildDesc": "ការបង្កើនបន្តិច",
+      "moderate": "មធ្យម",
+      "moderateDesc": "ណែនាំសម្រាប់ភាគច្រើន",
+      "off": "បិទ",
+      "offDesc": "ចំណុចប្រទាក់ស្តង់ដារ",
+      "title": "កំណត់រហ័ស:"
     },
     "reducedMotion": {
-      "description": "Minimize animations and transitions for a calmer experience. Helpful for users with vestibular disorders or motion sensitivity.",
-      "title": "Reduced Motion",
-      "toggleLabel": "Toggle reduced motion mode"
+      "description": "កាត់បន្ថយចលន និងការផ្លាស់ប្ដូរសម្រាប់បទពិសោធន៍ស្ងប់ស្ងាត់",
+      "title": "ការកាត់បន្ថយចលនា",
+      "toggleLabel": "បិទបើករបៀបកាត់បន្ថយចលនា"
     },
     "seniorsMode": {
-      "description": "One-click accessibility enhancement with larger text, bigger touch targets, and simplified interface",
-      "title": "Seniors Mode"
+      "description": "ការបង្កើនភាពងាយស្រួលមួយចុចជាមួយអក្សរធំ គោលដៅប៉ះធំ និងចំណុចប្រទាក់សាមញ្ញ",
+      "title": "របៀបមនុស្សចាស់"
     },
     "themeMode": {
-      "auto": "Auto",
-      "autoDesc": "Match system",
-      "dark": "Dark",
-      "darkDesc": "Easy on eyes",
-      "description": "Choose your preferred color scheme for the budget app",
-      "highContrast": "High Contrast",
-      "highContrastDesc": "Maximum visibility",
-      "light": "Light",
-      "lightDesc": "Bright and clear",
-      "title": "Theme Mode"
+      "auto": "ស្វ័យប្រវត្តិ",
+      "autoDesc": "ផ្គូផ្គងប្រព័ន្ធ",
+      "dark": "ងងឹត",
+      "darkDesc": "ងាយស្រួលសម្រាប់ភ្នែក",
+      "description": "ជ្រើសរើសគ្រោងពណ៌ដែលអ្នកចូលចិត្ត",
+      "highContrast": "កម្រិតខ្ពស់",
+      "highContrastDesc": "ភាពមើលឃើញអតិបរមា",
+      "light": "ភ្លឺ",
+      "lightDesc": "ភ្លឺ និង ច្បាស់",
+      "title": "របៀបរចនាប័ទ្ម"
     }
   },
   "accessibilityToggle": {
@@ -63,34 +63,34 @@
   },
   "accessibleChart": {
     "buttons": {
-      "chart": "Chart",
-      "showChart": "Show chart view",
-      "showTable": "Show data table view",
-      "table": "Table"
+      "chart": "តារាង",
+      "showChart": "បង្ហាញទិដ្ឋភាពតារាង",
+      "showTable": "បង្ហាញទិដ្ឋភាពតារាងទិន្នន័យ",
+      "table": "តារាងទិន្នន័យ"
     },
-    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support.",
-    "chartTypeDescription": "This is a {chartType} chart with {dataPoints} data points.",
+    "chartDescription": "{description}។ បង្ហាញចំណុចទិន្នន័យ {dataPoints}។ {dataList}។ ចុចប៊ូតុង តារាងទិន្នន័យ ដើម្បីមើលទិន្នន័យក្នុងទម្រង់តារាងជាមួយការគាំទ្រការរុករកក្ដារចុច។",
+    "chartTypeDescription": "នេះជាតារាង {chartType} ដែលមានចំណុចទិន្នន័យ {dataPoints}។",
     "footer": {
-      "average": "Average:",
-      "total": "Total:"
+      "average": "មធ្យម:",
+      "total": "សរុប:"
     },
     "keyboardNav": {
-      "srOnly": "Use arrow keys to navigate between rows. Press Tab to navigate to the next element.",
-      "visual": "Use ← → or ↑ ↓ keys to navigate • Home/End to jump to start/end"
+      "srOnly": "ប្រើគ្រាប់ចុចព្រួញដើម្បីរុករកក្នុងជួរដេក។ ចុច Tab ដើម្បីរុករកទៅធាតុបន្ទាប់។",
+      "visual": "ប្រើ ← → ឬ ↑ ↓ ដើម្បីរុករក • Home/End ដើម្បីទៅដើម/ចុង"
     },
     "summary": {
-      "average": "Average: {value}.",
-      "highest": "Highest value: {label} at {value}.",
-      "lowest": "Lowest value: {label} at {value}.",
-      "total": "Total: {value}."
+      "average": "មធ្យម: {value}។",
+      "highest": "តម្លៃខ្ពស់បំផុត: {label} នៅ {value}។",
+      "lowest": "តម្លៃទាបបំផុត: {label} នៅ {value}។",
+      "total": "សរុប: {value}។"
     },
-    "switchedToChart": "Switched to chart view",
-    "switchedToTable": "Switched to table view",
+    "switchedToChart": "បានប្ដូរទៅទិដ្ឋភាពតារាង",
+    "switchedToTable": "បានប្ដូរទៅទិដ្ឋភាពតារាងទិន្នន័យ",
     "tableHeaders": {
-      "additionalInfo": "Additional Info",
-      "category": "Category",
-      "period": "Period",
-      "value": "Value"
+      "additionalInfo": "ព័ត៌មានបន្ថែម",
+      "category": "ប្រភេទ",
+      "period": "រយៈពេល",
+      "value": "តម្លៃ"
     }
   },
   "actions": {
@@ -225,40 +225,40 @@
     "whenColumn": "When"
   },
   "aiColumnMapper": {
-    "analyzing": "Analyzing CSV structure with AI...",
+    "analyzing": "កំពុងវិភាគរចនាសម្ព័ន្ធ CSV ជាមួយ AI...",
     "buttons": {
-      "apply": "Apply Mappings & Import",
-      "cancel": "Cancel"
+      "apply": "អនុវត្តការផ្គូផ្គង និង នាំចូល",
+      "cancel": "បោះបង់"
     },
-    "closeModal": "Close modal",
-    "columnMappings": "Column Mappings",
+    "closeModal": "បិទបង្អួច",
+    "columnMappings": "ការផ្គូផ្គងជួរឈរ",
     "columnTypes": {
-      "amount": "Amount",
-      "balance": "Balance",
-      "credit": "Credit",
-      "date": "Date",
-      "debit": "Debit",
-      "description": "Description",
-      "ignore": "Ignore"
+      "amount": "ចំនួនទឹកប្រាក់",
+      "balance": "សមតុល្យ",
+      "credit": "ឥណទាន",
+      "date": "កាលបរិច្ឆេទ",
+      "debit": "ឥណពន្ធ",
+      "description": "ការពិពណ៌នា",
+      "ignore": "មិនអើពើ"
     },
     "confidence": {
-      "analyzed": "AI analyzed {columnCount} columns and {rowCount} sample rows",
-      "title": "Detection Confidence"
+      "analyzed": "AI បានវិភាគ {columnCount} ជួរឈរ និង {rowCount} ជួរដេកគំរូ",
+      "title": "ទំនុកចិត្តក្នុងការរកឃើញ"
     },
     "preview": {
-      "amount": "Amount",
-      "date": "Date",
-      "description": "Description",
-      "title": "Transaction Preview"
+      "amount": "ចំនួនទឹកប្រាក់",
+      "date": "កាលបរិច្ឆេទ",
+      "description": "ការពិពណ៌នា",
+      "title": "ពិនិត្យប្រតិបត្តិការ"
     },
-    "samples": "Samples:",
+    "samples": "គំរូ:",
     "saveConfig": {
-      "hint": "Next time you import from this bank, mappings will be automatic",
-      "label": "Save this bank configuration for future imports",
-      "placeholder": "Enter bank name (e.g., My Local Credit Union)"
+      "hint": "នៅពេលក្រោយអ្នកនាំចូលពីធនាគារនេះ ការផ្គូផ្គងនឹងធ្វើដោយស្វ័យប្រវត្តិ",
+      "label": "រក្សាទុកការកំណត់ធនាគារនេះសម្រាប់ការនាំចូលនាពេលខាងមុខ",
+      "placeholder": "បញ្ចូលឈ្មោះធនាគារ (ឧ. សហជីពឥណទានក្នុងស្រុក)"
     },
-    "subtitle": "Review AI-detected columns and adjust if needed",
-    "title": "AI Column Mapping Wizard"
+    "subtitle": "ពិនិត្យជួរឈរដែល AI រកឃើញ និងកែតម្រូវបើចាំបាច់",
+    "title": "អ្នកជំនួយការផែនទីជួរឈរ AI"
   },
   "amortizationChart": {
     "balanceDescription": "Your balance decreases over time as you make payments",
@@ -467,8 +467,8 @@
     "backToHome": "ត្រឡប់ទៅទំព័រដើម"
   },
   "bottomSheet": {
-    "close": "Close",
-    "dragToClose": "Drag down to close"
+    "close": "បិទ",
+    "dragToClose": "អូសចុះក្រោមដើម្បីបិទ"
   },
   "breadcrumb": {
     "budgetAnalyzer": "Budget Analyzer",
@@ -489,717 +489,717 @@
   },
   "budget": {
     "accounts": {
-      "accountCreated": "Account created",
-      "accountDeleted": "Account deleted",
-      "accountNameLabel": "Account Name *",
-      "accountNamePlaceholder": "e.g., BMO Chequing",
+      "accountCreated": "បានបង្កើតគណនី",
+      "accountDeleted": "បានលុបគណនី",
+      "accountNameLabel": "ឈ្មោះគណនី *",
+      "accountNamePlaceholder": "ឧ. BMO Chequing",
       "accountType": {
-        "checking": "Checking",
-        "credit": "Credit Card",
-        "savings": "Savings"
+        "checking": "គណនីចរន្ត",
+        "credit": "កាតឥណទាន",
+        "savings": "គណនីសន្សំ"
       },
-      "accountTypeLabel": "Account Type",
-      "accountUpdated": "Account updated",
-      "addAccount": "Add Account",
-      "addFirstAccount": "Add Your First Account",
-      "allTransactionsCleared": "All transactions cleared. You can now re-import your statements.",
-      "assignCount": "Assign {count, plural, one {# Transaction} other {# Transactions}}",
-      "assignModalDescription": "{count, plural, one {# transaction needs} other {# transactions need}} to be assigned to an account.",
-      "assignTransactions": "Assign Transactions",
-      "assignTransactionsNow": "Assign Transactions Now",
-      "assignedTransactions": "Assigned {count} transactions to {name}",
-      "assigning": "Assigning...",
-      "balanceExplanation": "This is added to your transaction totals to show your current balance",
-      "cancel": "Cancel",
-      "chooseAccount": "Choose an account...",
-      "clearAllConfirm": "Clear All Transactions",
-      "clearAllDescription": "This will permanently delete ALL transactions from the database. Your accounts and their starting balances will be preserved. You can then re-import your bank statements fresh. This action cannot be undone.",
-      "clearAllTitle": "Clear All Transactions",
-      "clearAllTransactions": "Clear all transactions and start fresh",
-      "clickToView": "Click to view",
-      "create": "Create",
-      "createdAccount": "Created account: {names}",
-      "current": "Current",
-      "dataManagement": "Data Management",
-      "delete": "Delete",
-      "deleteAccountDescription": "Are you sure you want to delete \"{name}\"? This will not delete associated transactions.",
-      "deleteAccountTitle": "Delete Account",
-      "dismissReminder": "Dismiss reminder",
-      "edit": "Edit",
-      "editAccount": "Edit Account",
-      "enterBankBalance": "Enter your current bank balance to ensure accurate account totals.",
-      "failedToAssign": "Failed to assign transactions",
-      "failedToClear": "Failed to clear transactions",
-      "failedToDelete": "Failed to delete account",
-      "failedToLoad": "Failed to load accounts",
-      "failedToMigrate": "Failed to migrate transactions",
-      "failedToSave": "Failed to save account",
-      "failedToUpdateBalance": "Failed to update account balance",
-      "institutionLabel": "Institution",
-      "institutionPlaceholder": "e.g., BMO, TD, RBC",
-      "loading": "Loading accounts...",
-      "migratedTransactions": "Migrated {count} transactions to accounts",
-      "nameRequired": "Account name is required",
-      "noAccountsDescription": "Add your bank accounts to track starting balances and get accurate totals.",
-      "noAccountsYet": "No accounts yet",
-      "reminderDismissed": "Reminder dismissed",
-      "selectTargetAccount": "Select target account:",
-      "setBalanceNow": "Set Balance Now",
-      "setStartingBalanceFor": "Set starting balance for {name}",
-      "starting": "Starting",
-      "startingBalanceHint": "Enter your account balance BEFORE the first imported transaction",
-      "startingBalanceLabel": "Starting Balance",
-      "startingBalanceSetTo": "Starting balance set to {amount}",
-      "subtitle": "Manage your bank accounts and starting balances",
-      "title": "Accounts",
-      "totalStartingBalance": "Total Starting Balance",
-      "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
-      "unassignedClickToAssign": "Click below to automatically assign them to your accounts.",
-      "unassignedCreateFirst": "Create an account first, then they will be automatically assigned.",
-      "unassignedDescription": "These transactions were imported before accounts were set up.",
-      "unassignedTitle": "{count, plural, one {# transaction needs} other {# transactions need}} account assignment",
-      "update": "Update"
+      "accountTypeLabel": "ប្រភេទគណនី",
+      "accountUpdated": "បានធ្វើបច្ចុប្បន្នភាពគណនី",
+      "addAccount": "បន្ថែមគណនី",
+      "addFirstAccount": "បន្ថែមគណនីដំបូង",
+      "allTransactionsCleared": "បានសម្អាតប្រតិបត្តិការទាំងអស់។ អ្នកអាចនាំចូលឡើងវិញ។",
+      "assignCount": "កំណត់ {count, plural, one {# ប្រតិបត្តិការ} other {# ប្រតិបត្តិការ}}",
+      "assignModalDescription": "{count, plural, one {# ប្រតិបត្តិការត្រូវ} other {# ប្រតិបត្តិការត្រូវ}}បានកំណត់ទៅគណនី។",
+      "assignTransactions": "កំណត់ប្រតិបត្តិការ",
+      "assignTransactionsNow": "កំណត់ប្រតិបត្តិការឥឡូវ",
+      "assignedTransactions": "បានកំណត់ {count} ប្រតិបត្តិការទៅ {name}",
+      "assigning": "កំពុងកំណត់...",
+      "balanceExplanation": "នេះត្រូវបានបន្ថែមទៅសរុបប្រតិបត្តិការរបស់អ្នកដើម្បីបង្ហាញសមតុល្យបច្ចុប្បន្ន",
+      "cancel": "បោះបង់",
+      "chooseAccount": "ជ្រើសរើសគណនី...",
+      "clearAllConfirm": "សម្អាតប្រតិបត្តិការទាំងអស់",
+      "clearAllDescription": "នេះនឹងលុបប្រតិបត្តិការទាំងអស់ជាអចិន្ត្រៃយ៍។ គណនី និង សមតុល្យចាប់ផ្ដើមនឹងត្រូវបានរក្សាទុក។ អ្នកអាចនាំចូលឡើងវិញ។ សកម្មភាពនេះមិនអាចត្រឡប់វិញបាន។",
+      "clearAllTitle": "សម្អាតប្រតិបត្តិការទាំងអស់",
+      "clearAllTransactions": "សម្អាតប្រតិបត្តិការទាំងអស់ និង ចាប់ផ្ដើមថ្មី",
+      "clickToView": "ចុចដើម្បីមើល",
+      "create": "បង្កើត",
+      "createdAccount": "បានបង្កើតគណនី: {names}",
+      "current": "បច្ចុប្បន្ន",
+      "dataManagement": "ការគ្រប់គ្រងទិន្នន័យ",
+      "delete": "លុប",
+      "deleteAccountDescription": "តើអ្នកប្រាកដថាចង់លុប \"{name}\" មែនទេ? នេះនឹងមិនលុបប្រតិបត្តិការដែលពាក់ព័ន្ធទេ។",
+      "deleteAccountTitle": "លុបគណនី",
+      "dismissReminder": "បដិសេធការរំលឹក",
+      "edit": "កែប្រែ",
+      "editAccount": "កែប្រែគណនី",
+      "enterBankBalance": "បញ្ចូលសមតុល្យធនាគារបច្ចុប្បន្នដើម្បីធានាសរុបគណនីត្រឹមត្រូវ។",
+      "failedToAssign": "មិនអាចកំណត់ប្រតិបត្តិការបាន",
+      "failedToClear": "មិនអាចសម្អាតប្រតិបត្តិការបាន",
+      "failedToDelete": "មិនអាចលុបគណនីបាន",
+      "failedToLoad": "មិនអាចផ្ទុកគណនីបាន",
+      "failedToMigrate": "មិនអាចផ្ទេរប្រតិបត្តិការបាន",
+      "failedToSave": "មិនអាចរក្សាទុកគណនីបាន",
+      "failedToUpdateBalance": "មិនអាចធ្វើបច្ចុប្បន្នភាពសមតុល្យគណនីបាន",
+      "institutionLabel": "គ្រឹះស្ថាន",
+      "institutionPlaceholder": "ឧ. BMO, TD, RBC",
+      "loading": "កំពុងផ្ទុកគណនី...",
+      "migratedTransactions": "បានផ្ទេរ {count} ប្រតិបត្តិការទៅគណនី",
+      "nameRequired": "ត្រូវការឈ្មោះគណនី",
+      "noAccountsDescription": "បន្ថែមគណនីធនាគារដើម្បីតាមដានសមតុល្យចាប់ផ្ដើម និងទទួលសរុបត្រឹមត្រូវ។",
+      "noAccountsYet": "មិនទាន់មានគណនីទេ",
+      "reminderDismissed": "បានបដិសេធការរំលឹក",
+      "selectTargetAccount": "ជ្រើសរើសគណនីគោលដៅ:",
+      "setBalanceNow": "កំណត់សមតុល្យឥឡូវ",
+      "setStartingBalanceFor": "កំណត់សមតុល្យចាប់ផ្ដើមសម្រាប់ {name}",
+      "starting": "ចាប់ផ្ដើម",
+      "startingBalanceHint": "បញ្ចូលសមតុល្យគណនីរបស់អ្នកមុនប្រតិបត្តិការនាំចូលដំបូង",
+      "startingBalanceLabel": "សមតុល្យចាប់ផ្ដើម",
+      "startingBalanceSetTo": "សមតុល្យចាប់ផ្ដើមបានកំណត់ទៅ {amount}",
+      "subtitle": "គ្រប់គ្រងគណនីធនាគារ និង សមតុល្យចាប់ផ្ដើម",
+      "title": "គណនី",
+      "totalStartingBalance": "សមតុល្យចាប់ផ្ដើមសរុប",
+      "transactionCount": "{count, plural, one {# ប្រតិបត្តិការ} other {# ប្រតិបត្តិការ}}",
+      "unassignedClickToAssign": "ចុចខាងក្រោមដើម្បីកំណត់ដោយស្វ័យប្រវត្តិ។",
+      "unassignedCreateFirst": "បង្កើតគណនីមុនសិន បន្ទាប់មកវានឹងត្រូវបានកំណត់ដោយស្វ័យប្រវត្តិ។",
+      "unassignedDescription": "ប្រតិបត្តិការទាំងនេះត្រូវបាននាំចូលមុនពេលគណនីត្រូវបានកំណត់។",
+      "unassignedTitle": "{count, plural, one {# ប្រតិបត្តិការត្រូវការ} other {# ប្រតិបត្តិការត្រូវការ}} ការកំណត់គណនី",
+      "update": "ធ្វើបច្ចុប្បន្នភាព"
     },
     "budgets": {
-      "addBudget": "Add Budget",
-      "amountLabel": "Amount",
-      "annual": "Annual",
-      "budgetAlerts": "⚠️ Budget Alerts",
-      "budgetDeleted": "Budget deleted successfully",
-      "cancel": "Cancel",
-      "categoryLabel": "Category",
-      "createFirstBudget": "Create First Budget",
-      "currentProgress": "Current progress: {percentage}% spent ({spent})",
-      "currentlyOverBudget": "Currently {amount} over budget",
-      "deleteBudget": "Delete budget",
-      "deleteBudgetConfirm": "Delete Budget",
-      "deleteBudgetDescription": "This will remove the budget limit for this category. Transactions will not be deleted.",
-      "deleteBudgetTitle": "Delete Budget",
-      "editBudget": "Edit budget",
-      "enterValidAmount": "Please enter a valid amount",
-      "failedToDelete": "Failed to delete budget",
-      "failedToSave": "Failed to save budget",
-      "helpTooltip": "Set spending limits for each category. Track your progress with color-coded alerts: Green = On Track, Yellow = Warning (80%), Red = Over Budget (100%).",
-      "helpTooltipAriaLabel": "More information about budgets",
-      "loading": "Loading budgets...",
-      "monthly": "Monthly",
-      "noBudgetsDescription": "Create a budget to track your spending limits and goals.",
-      "noBudgetsSet": "No budgets set",
-      "of": "of",
-      "overBudgetThisMonth": "{amount} over budget this month",
-      "overallProgress": "Overall Progress",
-      "periodHelpTooltip": "Monthly budgets reset each month. Annual budgets divide the total across 12 months. Example: $1,200 annual = $100 per month.",
-      "periodHelpTooltipAriaLabel": "More information about budget periods",
-      "periodLabel": "Period",
-      "progressHelpTooltip": "Budget Progress: Green (On Track) = 0-79% spent. Yellow (Warning) = 80-99% spent. Red (Over) = 100%+ spent. Colors update automatically as you spend.",
-      "progressHelpTooltipAriaLabel": "More information about budget progress and alert thresholds",
-      "remaining": "Remaining",
-      "remainingBudget": "{amount} remaining budget",
-      "remainingThisMonth": "{amount} remaining this month",
-      "rolloverDisabled": "Budget resets each month regardless of spending",
-      "rolloverEnabled": "Leftover funds will be added to next month's budget",
-      "rolloverHelpTooltip": "What is budget rollover? When enabled, any unspent money from this budget carries over to the next month. Example: Budget: $500/month, Spent: $400, Leftover: $100, Next month starts with: $600 ($500 + $100 leftover)",
-      "rolloverHelpTooltipAriaLabel": "More information about budget rollover",
-      "rolloverLabel": "Carry over unused budget to next month",
-      "saveBudget": "Save Budget",
-      "setBudget": "+ Set Budget",
-      "statusOnTrack": "✓ On Track",
-      "statusOver": "✖ Over",
-      "statusWarning": "⚠ Warning",
-      "title": "Budgets",
-      "totalBudgeted": "Total Budgeted",
-      "totalExpenses": "Total expenses",
-      "totalSpent": "Total Spent",
-      "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
-      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transaction will become unbudgeted} other {# transactions will become unbudgeted}}",
-      "youWillLose": "You will lose:"
+      "addBudget": "បន្ថែមថវិកា",
+      "amountLabel": "ចំនួនទឹកប្រាក់",
+      "annual": "ប្រចាំឆ្នាំ",
+      "budgetAlerts": "⚠️ ការជូនដំណឹងថវិកា",
+      "budgetDeleted": "បានលុបថវិកាដោយជោគជ័យ",
+      "cancel": "បោះបង់",
+      "categoryLabel": "ប្រភេទ",
+      "createFirstBudget": "បង្កើតថវិកាដំបូង",
+      "currentProgress": "វឌ្ឍនភាពបច្ចុប្បន្ន: {percentage}% បានចំណាយ ({spent})",
+      "currentlyOverBudget": "បច្ចុប្បន្នលើស {amount}",
+      "deleteBudget": "លុបថវិកា",
+      "deleteBudgetConfirm": "លុបថវិកា",
+      "deleteBudgetDescription": "នេះនឹងដកកម្រិតថវិកាសម្រាប់ប្រភេទនេះ។ ប្រតិបត្តិការនឹងមិនត្រូវបានលុបទេ។",
+      "deleteBudgetTitle": "លុបថវិកា",
+      "editBudget": "កែប្រែថវិកា",
+      "enterValidAmount": "សូមបញ្ចូលចំនួនទឹកប្រាក់ត្រឹមត្រូវ",
+      "failedToDelete": "មិនអាចលុបថវិកាបាន",
+      "failedToSave": "មិនអាចរក្សាទុកថវិកាបាន",
+      "helpTooltip": "កំណត់ដែនកម្រិតចំណាយសម្រាប់ប្រភេទនីមួយៗ។ តាមដានវឌ្ឍនភាពជាមួយការជូនដំណឹងពណ៌: បៃតង = ស្ថិតក្នុងគោលដៅ, លឿង = ព្រមាន (80%), ក្រហម = លើសថវិកា (100%)។",
+      "helpTooltipAriaLabel": "ព័ត៌មានបន្ថែមអំពីថវិកា",
+      "loading": "កំពុងផ្ទុកថវិកា...",
+      "monthly": "ប្រចាំខែ",
+      "noBudgetsDescription": "បង្កើតថវិកាដើម្បីតាមដានកម្រិតចំណាយ និង គោលដៅ។",
+      "noBudgetsSet": "មិនមានថវិកាកំណត់",
+      "of": "នៃ",
+      "overBudgetThisMonth": "{amount} លើសថវិកាក្នុងខែនេះ",
+      "overallProgress": "វឌ្ឍនភាពសរុប",
+      "periodHelpTooltip": "ថវិកាប្រចាំខែកំណត់ឡើងវិញរៀងរាល់ខែ។ ថវិកាប្រចាំឆ្នាំចែកសរុបក្នុង 12 ខែ។",
+      "periodHelpTooltipAriaLabel": "ព័ត៌មានបន្ថែមអំពីរយៈពេលថវិកា",
+      "periodLabel": "រយៈពេល",
+      "progressHelpTooltip": "វឌ្ឍនភាពថវិកា: បៃតង (ស្ថិតក្នុងគោលដៅ) = 0-79% បានចំណាយ។ លឿង (ព្រមាន) = 80-99%។ ក្រហម (លើស) = 100%+។",
+      "progressHelpTooltipAriaLabel": "ព័ត៌មានបន្ថែមអំពីវឌ្ឍនភាពថវិកា",
+      "remaining": "នៅសល់",
+      "remainingBudget": "{amount} ថវិកានៅសល់",
+      "remainingThisMonth": "{amount} នៅសល់ក្នុងខែនេះ",
+      "rolloverDisabled": "ថវិកាកំណត់ឡើងវិញរៀងរាល់ខែ",
+      "rolloverEnabled": "មូលនិធីដែលនៅសល់នឹងត្រូវបន្ថែមទៅថវិកាខែបន្ទាប់",
+      "rolloverHelpTooltip": "ការផ្ទេរថវិកាគឺជាអ្វី? ពេលបើក ប្រាក់មិនបានចំណាយពីថវិកានេះផ្ទេរទៅខែបន្ទាប់។",
+      "rolloverHelpTooltipAriaLabel": "ព័ត៌មានបន្ថែមអំពីការផ្ទេរថវិកា",
+      "rolloverLabel": "ផ្ទេរថវិកាដែលមិនបានប្រើទៅខែបន្ទាប់",
+      "saveBudget": "រក្សាទុកថវិកា",
+      "setBudget": "+ កំណត់ថវិកា",
+      "statusOnTrack": "✓ ស្ថិតក្នុងគោលដៅ",
+      "statusOver": "✖ លើស",
+      "statusWarning": "⚠ ព្រមាន",
+      "title": "ថវិកា",
+      "totalBudgeted": "សរុបថវិកា",
+      "totalExpenses": "ចំណាយសរុប",
+      "totalSpent": "បានចំណាយសរុប",
+      "transactionCount": "{count, plural, one {# ប្រតិបត្តិការ} other {# ប្រតិបត្តិការ}}",
+      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# ប្រតិបត្តិការនឹងគ្មានថវិកា} other {# ប្រតិបត្តិការនឹងគ្មានថវិកា}}",
+      "youWillLose": "អ្នកនឹងបាត់:"
     },
     "events": {
       "_note": "Already internationalized in client.tsx using budget.events namespace",
-      "active": "Active",
-      "completed": "Completed",
-      "createEvent": "Create Event",
+      "active": "សកម្ម",
+      "completed": "បានបញ្ចប់",
+      "createEvent": "បង្កើតព្រឹត្តិការណ៍",
       "daysLeft": "{count} days left",
-      "noEvents": "No active events",
+      "noEvents": "មិនមានព្រឹត្តិការណ៍សកម្ម",
       "noEventsDescription": "Create an event budget to track spending for weddings, holidays, and more",
-      "planning": "Planning",
-      "progress": "Progress",
-      "remaining": "Remaining",
-      "suggestedTemplates": "Suggested Templates",
-      "tagTransaction": "Tag to event",
-      "title": "Event Budgets",
-      "untagTransaction": "Remove from event"
+      "planning": "កំពុងរៀបចំ",
+      "progress": "វឌ្ឍនភាព",
+      "remaining": "នៅសល់",
+      "suggestedTemplates": "គំរូដែលណែនាំ",
+      "tagTransaction": "ដាក់ស្លាកទៅព្រឹត្តិការណ៍",
+      "title": "ថវិកាព្រឹត្តិការណ៍",
+      "untagTransaction": "ដកចេញពីព្រឹត្តិការណ៍"
     },
     "gamification": {
-      "achievementUnlocked": "Achievement Unlocked!",
-      "badges": "Badges",
-      "currentStreak": "Current streak",
-      "longestStreak": "Best: {count} days",
-      "noAchievements": "Complete actions to earn badges",
-      "points": "Points",
-      "streaks": "Streaks",
-      "totalPoints": "Total Points"
+      "achievementUnlocked": "បានដោះសោសមិទ្ធផល!",
+      "badges": "ស្លាកសញ្ញា",
+      "currentStreak": "ស៊េរីបច្ចុប្បន្ន",
+      "longestStreak": "ល្អបំផុត: {count} ថ្ងៃ",
+      "noAchievements": "បំពេញសកម្មភាពដើម្បីទទួលស្លាកសញ្ញា",
+      "points": "ពិន្ទុ",
+      "streaks": "ស៊េរី",
+      "totalPoints": "ពិន្ទុសរុប"
     },
     "merchantRules": {
-      "applied": "Applied {count} times",
-      "category": "Category",
-      "createRule": "Always categorize {merchant} as {category}?",
-      "deleteRule": "Delete Rule",
-      "description": "Auto-categorize transactions by merchant",
-      "merchant": "Merchant",
-      "no": "No, just this time",
-      "noRules": "No merchant rules yet",
-      "noRulesDescription": "Rules are created when you re-categorize transactions",
-      "ruleCreated": "Rule created",
-      "title": "Merchant Rules",
-      "yes": "Yes, always"
+      "applied": "បានអនុវត្ត {count} ដង",
+      "category": "ប្រភេទ",
+      "createRule": "តែងតែចាត់ {merchant} ជា {category}?",
+      "deleteRule": "លុបវិធាន",
+      "description": "ចាត់ប្រភេទប្រតិបត្តិការដោយស្វ័យប្រវត្តិតាមអ្នកលក់",
+      "merchant": "អ្នកលក់",
+      "no": "ទេ គ្រាន់តែពេលនេះ",
+      "noRules": "មិនទាន់មានវិធានអ្នកលក់ទេ",
+      "noRulesDescription": "វិធានត្រូវបានបង្កើតពេលអ្នកកែប្រភេទប្រតិបត្តិការ",
+      "ruleCreated": "បានបង្កើតវិធាន",
+      "title": "វិធានអ្នកលក់",
+      "yes": "បាទ/ចាស តែងតែ"
     },
     "netWorth": {
       "_note": "Already internationalized in client.tsx using budget.netWorth namespace",
-      "assetBreakdown": "Asset Breakdown",
-      "cashChecking": "Cash & Checking",
-      "creditCards": "Credit Cards",
+      "assetBreakdown": "ការបែងចែកទ្រព្យសកម្ម",
+      "cashChecking": "សាច់ប្រាក់ និង គណនីចរន្ត",
+      "creditCards": "កាតឥណទាន",
       "history": "Historical Snapshots",
-      "investments": "Investments",
-      "liabilityBreakdown": "Liability Breakdown",
-      "loans": "Loans",
+      "investments": "ការវិនិយោគ",
+      "liabilityBreakdown": "ការបែងចែកបំណុល",
+      "loans": "ប្រាក់កម្ចី",
       "milestoneReached": "Milestone reached: {amount}!",
-      "mortgage": "Mortgage",
+      "mortgage": "ប្រាក់បញ្ចាំ",
       "noLiabilities": "No liabilities — great job!",
-      "property": "Property",
-      "savings": "Savings",
-      "title": "Net Worth",
-      "totalAssets": "Total Assets",
-      "totalLiabilities": "Total Liabilities",
-      "totalNetWorth": "Total Net Worth",
-      "trend": "Trend"
+      "property": "អចលនទ្រព្យ",
+      "savings": "ការសន្សំ",
+      "title": "ទ្រព្យសម្បត្តិសុទ្ធ",
+      "totalAssets": "ទ្រព្យសកម្មសរុប",
+      "totalLiabilities": "បំណុលសរុប",
+      "totalNetWorth": "ទ្រព្យសម្បត្តិសុទ្ធសរុប",
+      "trend": "និន្នាការ"
     },
     "privacy": {
-      "disabled": "Financial values are visible",
-      "enabled": "Financial values are hidden",
+      "disabled": "តម្លៃហិរញ្ញវត្ថុអាចមើលឃើញ",
+      "enabled": "តម្លៃហិរញ្ញវត្ថុត្រូវបានលាក់",
       "shortcut": "Cmd+Shift+P",
-      "tapToReveal": "Tap to reveal",
-      "toggle": "Privacy Mode"
+      "tapToReveal": "ចុចដើម្បីបង្ហាញ",
+      "toggle": "របៀបឯកជន"
     },
     "property": {
-      "addProperty": "Add Property",
-      "annualAppreciation": "Annual Appreciation",
-      "annualROI": "Annual ROI",
-      "appreciation": "Appreciation",
-      "backToProperties": "Back to Properties",
-      "currentBalance": "Current Balance",
-      "currentValue": "Current Value",
-      "equity": "Equity",
-      "interestRate": "Interest Rate",
-      "lender": "Lender",
-      "loanDetails": "Loan Details",
-      "monthlyIncome": "Monthly Income",
-      "monthlyPayment": "Monthly Payment",
-      "monthlyROI": "Monthly ROI",
-      "mortgageBalance": "Mortgage Balance",
-      "noProperties": "No properties tracked",
-      "noPropertiesDescription": "Add your first property to track equity and appreciation",
-      "notFound": "Property not found",
-      "notes": "Notes",
-      "occupancyRate": "Occupancy Rate",
-      "propertyTax": "Property Tax",
-      "purchasePrice": "Purchase Price",
-      "rentalROI": "Rental ROI",
-      "title": "Properties",
-      "totalAppreciation": "Total Appreciation",
-      "totalProperties": "Total Properties",
-      "totalValue": "Total Value"
+      "addProperty": "បន្ថែមអចលនទ្រព្យ",
+      "annualAppreciation": "ការកើនតម្លៃប្រចាំឆ្នាំ",
+      "annualROI": "ROI ប្រចាំឆ្នាំ",
+      "appreciation": "ការកើនតម្លៃ",
+      "backToProperties": "ថយក្រោយទៅអចលនទ្រព្យ",
+      "currentBalance": "សមតុល្យបច្ចុប្បន្ន",
+      "currentValue": "តម្លៃបច្ចុប្បន្ន",
+      "equity": "សមធម៌",
+      "interestRate": "អត្រាការប្រាក់",
+      "lender": "អ្នកផ្ដល់កម្ចី",
+      "loanDetails": "ព័ត៌មានលម្អិតកម្ចី",
+      "monthlyIncome": "ចំណូលប្រចាំខែ",
+      "monthlyPayment": "ការទូទាត់ប្រចាំខែ",
+      "monthlyROI": "ROI ប្រចាំខែ",
+      "mortgageBalance": "សមតុល្យប្រាក់បញ្ចាំ",
+      "noProperties": "មិនមានអចលនទ្រព្យតាមដាន",
+      "noPropertiesDescription": "បន្ថែមអចលនទ្រព្យដំបូងដើម្បីតាមដានសមធម៌ និងការកើនតម្លៃ",
+      "notFound": "រកមិនឃើញអចលនទ្រព្យ",
+      "notes": "កំណត់សម្គាល់",
+      "occupancyRate": "អត្រាកាន់កាប់",
+      "propertyTax": "ពន្ធអចលនទ្រព្យ",
+      "purchasePrice": "តម្លៃទិញ",
+      "rentalROI": "ROI ជួល",
+      "title": "អចលនទ្រព្យ",
+      "totalAppreciation": "ការកើនតម្លៃសរុប",
+      "totalProperties": "អចលនទ្រព្យសរុប",
+      "totalValue": "តម្លៃសរុប"
     },
     "refunds": {
-      "autoMatched": "Auto-matched refund",
-      "expectRefund": "Expect Refund",
-      "expectRefundDescription": "Mark this transaction as expecting a refund",
-      "expectedAmount": "Expected amount",
-      "expectedDate": "Expected by",
-      "expecting": "Expecting refund",
-      "gross": "Gross",
-      "grossVsNet": "Gross vs Net",
-      "markExpecting": "Expect Refund",
-      "net": "Net",
-      "notes": "Notes",
-      "notesPlaceholder": "Any additional details about this refund...",
-      "partial": "Partial refund",
-      "received": "Refund received",
-      "refundsTotal": "Refunds",
-      "submitting": "Submitting...",
-      "title": "Refund Tracking"
+      "autoMatched": "ប្រាក់សងផ្គូផ្គងស្វ័យប្រវត្តិ",
+      "expectRefund": "រំពឹងប្រាក់សង",
+      "expectRefundDescription": "សម្គាល់ប្រតិបត្តិការនេះថាកំពុងរំពឹងប្រាក់សង",
+      "expectedAmount": "ចំនួនរំពឹង",
+      "expectedDate": "រំពឹងត្រឹម",
+      "expecting": "កំពុងរង់ចាំប្រាក់សង",
+      "gross": "សរុប",
+      "grossVsNet": "សរុប ទល់នឹង សុទ្ធ",
+      "markExpecting": "រំពឹងប្រាក់សង",
+      "net": "សុទ្ធ",
+      "notes": "កំណត់សម្គាល់",
+      "notesPlaceholder": "ព័ត៌មានបន្ថែមអំពីប្រាក់សងនេះ...",
+      "partial": "ប្រាក់សងផ្នែកខ្លះ",
+      "received": "បានទទួលប្រាក់សង",
+      "refundsTotal": "ប្រាក់សង",
+      "submitting": "កំពុងដាក់ស្នើ...",
+      "title": "ការតាមដានប្រាក់សង"
     },
     "review": {
-      "allDone": "All caught up!",
-      "allDoneDescription": "No more transactions to review",
-      "approve": "Approve",
-      "approveKey": "Approve (→/A)",
-      "noDescription": "No description",
-      "progress": "{reviewed} of {total} reviewed",
-      "skip": "Skip",
-      "skipKey": "Skip (←/F)",
-      "subtitle": "Categorize your uncategorized transactions",
-      "swipeLeft": "Swipe left to skip",
-      "swipeRight": "Swipe right to approve",
-      "title": "Review Transactions"
+      "allDone": "បានពិនិត្យទាំងអស់!",
+      "allDoneDescription": "មិនមានប្រតិបត្តិការដើម្បីពិនិត្យទៀតទេ",
+      "approve": "យល់ព្រម",
+      "approveKey": "យល់ព្រម (→/A)",
+      "noDescription": "គ្មានការពិពណ៌នា",
+      "progress": "{reviewed} នៃ {total} បានពិនិត្យ",
+      "skip": "រំលង",
+      "skipKey": "រំលង (←/F)",
+      "subtitle": "ចាត់ប្រភេទប្រតិបត្តិការដែលមិនមានប្រភេទ",
+      "swipeLeft": "អូសឆ្វេងដើម្បីរំលង",
+      "swipeRight": "អូសស្ដាំដើម្បីយល់ព្រម",
+      "title": "ពិនិត្យប្រតិបត្តិការ"
     },
     "rollover": {
-      "disabled": "Rollover disabled",
-      "effective": "Effective budget",
-      "enabled": "Rollover enabled",
-      "includesRollover": "Includes {amount} rollover",
-      "negativeRollover": "Overspend of {amount} carried forward",
-      "title": "Budget Rollover",
-      "toggle": "Enable rollover for this category"
+      "disabled": "ការផ្ទេរបានបិទ",
+      "effective": "ថវិកាមានប្រសិទ្ធភាព",
+      "enabled": "ការផ្ទេរបានបើក",
+      "includesRollover": "រួមបញ្ចូលការផ្ទេរ {amount}",
+      "negativeRollover": "ការចំណាយលើស {amount} បានផ្ទេរ",
+      "title": "ការផ្ទេរថវិកា",
+      "toggle": "បើកការផ្ទេរសម្រាប់ប្រភេទនេះ"
     },
     "safeToSpend": {
-      "caution": "Watch Spending",
-      "dailyBudget": "Daily Budget",
-      "danger": "Over Budget",
-      "daysLeft": "{count} days left this month",
-      "noData": "Set up budgets to see safe-to-spend amounts",
-      "perCategory": "By Category",
-      "remaining": "remaining",
-      "safe": "On Track",
-      "title": "Safe to Spend",
-      "totalSafe": "Total Safe to Spend"
+      "caution": "ប្រយ័ត្នការចំណាយ",
+      "dailyBudget": "ថវិកាប្រចាំថ្ងៃ",
+      "danger": "លើសថវិកា",
+      "daysLeft": "{count} ថ្ងៃនៅសល់ក្នុងខែនេះ",
+      "noData": "កំណត់ថវិកាដើម្បីមើលចំនួនសុវត្ថិភាពក្នុងការចំណាយ",
+      "perCategory": "តាមប្រភេទ",
+      "remaining": "នៅសល់",
+      "safe": "ស្ថិតក្នុងគោលដៅ",
+      "title": "សុវត្ថិភាពក្នុងការចំណាយ",
+      "totalSafe": "សរុបសុវត្ថិភាពក្នុងការចំណាយ"
     },
     "scenarios": {
       "_note": "Already internationalized in client.tsx using budget.scenarios namespace",
-      "after": "After",
+      "after": "ក្រោយ",
       "amountLabel": "Amount",
-      "annualSavings": "Annual Savings",
-      "before": "Before",
-      "healthScore": "Health Score",
+      "annualSavings": "ការសន្សំប្រចាំឆ្នាំ",
+      "before": "មុន",
+      "healthScore": "ពិន្ទុសុខភាព",
       "impact": "Impact",
-      "monthlyCashFlow": "Monthly Cash Flow",
+      "monthlyCashFlow": "លំហូរសាច់ប្រាក់ប្រចាំខែ",
       "run": "Run Scenario",
       "subtitle": "Model financial changes and see their impact",
-      "title": "What-If Scenarios",
+      "title": "សេណារីយ៉ូ What-If",
       "types": {
         "addExpense": {
           "description": "See the impact of a new recurring expense",
-          "title": "Add Expense"
+          "title": "បន្ថែមចំណាយ"
         },
         "cancelSubscription": {
           "description": "See savings from canceling a recurring charge",
-          "title": "Cancel Subscription"
+          "title": "លុបចោលការជាវ"
         },
         "changeIncome": {
           "description": "Model an income increase or decrease",
-          "title": "Change Income"
+          "title": "ផ្លាស់ប្ដូរចំណូល"
         },
         "increaseSavings": {
           "description": "See goal timeline acceleration",
-          "title": "Increase Savings"
+          "title": "បង្កើនការសន្សំ"
         },
         "payOffDebt": {
           "description": "Calculate interest savings from early payoff",
-          "title": "Pay Off Debt"
+          "title": "សងបំណុល"
         }
       }
     },
     "templates": {
-      "backToSchool": "Back to School",
-      "categories": "Categories",
-      "holidaySeason": "Holiday Season",
-      "homeImprovement": "Home Improvement",
-      "preview": "Preview",
-      "summerTravel": "Summer Travel",
-      "taxSeason": "Tax Season",
-      "title": "Budget Templates",
-      "useTemplate": "Use Template",
-      "weddingEvent": "Wedding / Event"
+      "backToSchool": "ត្រឡប់ទៅសាលា",
+      "categories": "ប្រភេទ",
+      "holidaySeason": "រដូវបុណ្យ",
+      "homeImprovement": "ការកែលម្អផ្ទះ",
+      "preview": "ពិនិត្យមើល",
+      "summerTravel": "ការធ្វើដំណើររដូវក្ដៅ",
+      "taxSeason": "រដូវពន្ធ",
+      "title": "គំរូថវិកា",
+      "useTemplate": "ប្រើគំរូ",
+      "weddingEvent": "អាពាហ៍ពិពាហ៍ / ព្រឹត្តិការណ៍"
     },
     "weeklyRecap": {
-      "dismissed": "Dismissed for this week",
-      "lastWeek": "Last week",
-      "thisWeek": "This week",
-      "title": "Weekly Recap",
-      "topCategories": "Top Categories",
-      "viewFullReview": "View Full Review"
+      "dismissed": "បានបដិសេធសម្រាប់សប្ដាហ៍នេះ",
+      "lastWeek": "សប្ដាហ៍មុន",
+      "thisWeek": "សប្ដាហ៍នេះ",
+      "title": "សង្ខេបប្រចាំសប្ដាហ៍",
+      "topCategories": "ប្រភេទកំពូល",
+      "viewFullReview": "មើលការពិនិត្យពេញ"
     }
   },
   "bulkActions": {
-    "applyTo": "Apply to {count}",
-    "categorize": "Categorize",
-    "clearSelection": "Clear selection",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
-    "delete": "Delete",
-    "deleteWarning": "This action cannot be undone.",
-    "export": "Export",
-    "noSubcategory": "No subcategory",
-    "selectAll": "Select all",
-    "selectCategory": "Select category...",
-    "selected": "{count} selected"
+    "applyTo": "អនុវត្តចំពោះ {count}",
+    "categorize": "ចាត់ប្រភេទ",
+    "clearSelection": "សម្អាតការជ្រើសរើស",
+    "confirmDelete": "លុប {count, plural, =1 {ប្រតិបត្តិការ 1} other {ប្រតិបត្តិការ #}}?",
+    "delete": "លុប",
+    "deleteWarning": "សកម្មភាពនេះមិនអាចត្រឡប់វិញបាន។",
+    "export": "នាំចេញ",
+    "noSubcategory": "គ្មានប្រភេទរង",
+    "selectAll": "ជ្រើសរើសទាំងអស់",
+    "selectCategory": "ជ្រើសរើសប្រភេទ...",
+    "selected": "{count} បានជ្រើសរើស"
   },
   "calculators": {
     "budgetAnalyzer": {
-      "actual": "Actual",
-      "balanced": "Your Budget is Balanced!",
-      "description": "Analyze your spending against the popular budgeting rule",
-      "enterSpending": "Enter your monthly spending by category:",
-      "exceeding": "Exceeding",
-      "inputTitle": "Your Monthly Finances",
-      "monthlyIncome": "Monthly Net Income",
-      "monthlyIncomeHelp": "Your take-home pay after taxes",
-      "needs": "Needs",
-      "needsAdjustment": "Adjustments Recommended",
-      "needsDescription": "Housing, utilities, groceries, insurance, minimum debt payments",
-      "needsExamples": "rent, utilities, groceries",
-      "over": "Over",
-      "ruleExplanation": "The 50/30/20 Rule",
-      "savings": "Savings",
-      "savingsDescription": "Emergency fund, investments, retirement, extra debt payments",
-      "savingsExamples": "savings, investments, extra debt",
-      "subtitle": "See how your budget measures up",
-      "target": "Target",
-      "title": "50/30/20 Budget Analyzer",
-      "under": "On Track",
-      "variance": "Variance",
-      "wants": "Wants",
-      "wantsDescription": "Dining out, entertainment, shopping, subscriptions",
-      "wantsExamples": "dining, entertainment, shopping"
+      "actual": "ពិត",
+      "balanced": "ថវិការបស់អ្នកមានតុល្យភាព!",
+      "description": "វិភាគការចំណាយរបស់អ្នកធៀបនឹងវិធានថវិកាពេញនិយម",
+      "enterSpending": "បញ្ចូលការចំណាយប្រចាំខែតាមប្រភេទ:",
+      "exceeding": "កំពុងលើស",
+      "inputTitle": "ហិរញ្ញវត្ថុប្រចាំខែរបស់អ្នក",
+      "monthlyIncome": "ចំណូលសុទ្ធប្រចាំខែ",
+      "monthlyIncomeHelp": "ប្រាក់ខែបន្ទាប់ពីពន្ធ",
+      "needs": "តម្រូវការ",
+      "needsAdjustment": "ណែនាំឱ្យកែតម្រូវ",
+      "needsDescription": "លំនៅដ្ឋាន ប្រើប្រាស់ គ្រឿងទេស ធានារ៉ាប់រង",
+      "needsExamples": "ការជួល ប្រើប្រាស់ គ្រឿងទេស",
+      "over": "លើស",
+      "ruleExplanation": "វិធាន 50/30/20",
+      "savings": "ការសន្សំ",
+      "savingsDescription": "មូលនិធិសង្គ្រោះបន្ទាន់ ការវិនិយោគ ចូលនិវត្តន៍",
+      "savingsExamples": "ការសន្សំ ការវិនិយោគ បំណុលបន្ថែម",
+      "subtitle": "មើលថាថវិការបស់អ្នកស្ថិតនៅកម្រិតណា",
+      "target": "គោលដៅ",
+      "title": "ម៉ាស៊ីនវិភាគថវិកា 50/30/20",
+      "under": "ស្ថិតក្នុងគោលដៅ",
+      "variance": "ភាពខុសគ្នា",
+      "wants": "ចង់បាន",
+      "wantsDescription": "ភោជនីយដ្ឋាន កម្សាន្ត ការដើរទិញដើរទស្សនា",
+      "wantsExamples": "ភោជនីយដ្ឋាន កម្សាន្ត ការដើរទិញ"
     },
     "common": {
-      "back": "Back to calculators",
-      "calculate": "Calculate",
-      "months": "months",
-      "reset": "Reset",
-      "save": "Save Plan",
-      "years": "years"
+      "back": "ថយក្រោយទៅម៉ាស៊ីនគិតលេខ",
+      "calculate": "គណនា",
+      "months": "ខែ",
+      "reset": "កំណត់ឡើងវិញ",
+      "save": "រក្សាទុកផែនការ",
+      "years": "ឆ្នាំ"
     },
     "compoundInterest": {
-      "annualRate": "Annual Interest Rate (%)",
-      "annualRateHelp": "Savings: 4-5%, Bonds: 5-6%, Stocks: 7-10%",
-      "assumptionCompounding": "Compounding",
-      "assumptionReinvest": "All interest reinvested",
-      "assumptionTiming": "Contributions at end of each period",
-      "chartTitle": "Growth Over Time",
-      "compoundingFrequency": "Compounding Frequency",
-      "description": "See how your money grows with the power of compound interest",
-      "effectiveRate": "Effective Annual Rate",
-      "finalBalance": "Final Balance",
-      "formulaExplanation": "FV = Future Value, PV = Present Value, r = annual rate, n = compounds per year, t = years, PMT = periodic payment",
+      "annualRate": "អត្រាការប្រាក់ប្រចាំឆ្នាំ (%)",
+      "annualRateHelp": "គណនីសន្សំ: 4-5%, មូលបត្រ: 5-6%, ភាគហ៊ុន: 7-10%",
+      "assumptionCompounding": "ការប្រាក់សមាស",
+      "assumptionReinvest": "ការប្រាក់ទាំងអស់ត្រូវបានវិនិយោគឡើងវិញ",
+      "assumptionTiming": "ការសន្សំនៅចុងរយៈពេលនីមួយៗ",
+      "chartTitle": "កំណើនក្នុងរយៈពេល",
+      "compoundingFrequency": "ភាពញឹកញាប់ការប្រាក់សមាស",
+      "description": "មើលពីរបៀបដែលប្រាក់របស់អ្នកលូតលាស់ដោយអំណាចនៃការប្រាក់សមាស",
+      "effectiveRate": "អត្រាមានប្រសិទ្ធភាពប្រចាំឆ្នាំ",
+      "finalBalance": "សមតុល្យចុងក្រោយ",
+      "formulaExplanation": "FV = តម្លៃអនាគត, PV = តម្លៃបច្ចុប្បន្ន, r = អត្រាប្រចាំឆ្នាំ, n = ការប្រាក់សមាសក្នុងមួយឆ្នាំ, t = ឆ្នាំ, PMT = ការទូទាត់តាមកាល",
       "formulaText": "FV = PV(1+r/n)^(nt) + PMT[((1+r/n)^(nt)-1)/(r/n)]",
       "frequency": {
-        "annually": "Annually (1/yr)",
-        "daily": "Daily (365/yr)",
-        "monthly": "Monthly (12/yr)",
-        "quarterly": "Quarterly (4/yr)",
-        "semiannually": "Semi-annually (2/yr)",
-        "weekly": "Weekly (52/yr)"
+        "annually": "ប្រចាំឆ្នាំ (1/ឆ្នាំ)",
+        "daily": "ប្រចាំថ្ងៃ (365/ឆ្នាំ)",
+        "monthly": "ប្រចាំខែ (12/ឆ្នាំ)",
+        "quarterly": "ប្រចាំត្រីមាស (4/ឆ្នាំ)",
+        "semiannually": "ពាក់កណ្ដាលឆ្នាំ (2/ឆ្នាំ)",
+        "weekly": "ប្រចាំសប្ដាហ៍ (52/ឆ្នាំ)"
       },
-      "initialDeposit": "Initial Deposit",
-      "inputTitle": "Investment Details",
-      "interestEarned": "Interest Earned",
-      "monthlyContribution": "Monthly Contribution",
-      "resultTitle": "Your Investment Growth",
-      "subtitle": "Watch your money grow over time",
-      "title": "Compound Interest Calculator",
-      "totalContributions": "Total Contributions",
-      "years": "Investment Period (Years)"
+      "initialDeposit": "ប្រាក់បញ្ញើដំបូង",
+      "inputTitle": "ព័ត៌មានវិនិយោគ",
+      "interestEarned": "ការប្រាក់ដែលទទួលបាន",
+      "monthlyContribution": "ការសន្សំប្រចាំខែ",
+      "resultTitle": "កំណើនវិនិយោគរបស់អ្នក",
+      "subtitle": "មើលប្រាក់របស់អ្នកលូតលាស់ក្នុងរយៈពេល",
+      "title": "ម៉ាស៊ីនគិតលេខការប្រាក់សមាស",
+      "totalContributions": "ការសន្សំសរុប",
+      "years": "រយៈពេលវិនិយោគ (ឆ្នាំ)"
     },
     "debtPayoff": {
-      "addDebt": "Add Debt",
+      "addDebt": "បន្ថែមបំណុល",
       "apr": "APR (%)",
-      "avalanche": "Avalanche Strategy",
-      "avalancheDescription": "Pay highest interest first to save the most money",
-      "balance": "Balance",
-      "debtName": "Name",
-      "debtNamePlaceholder": "Debt {number}",
-      "description": "Compare snowball vs avalanche strategies to pay off debt faster",
-      "extraMonthlyPayment": "Extra Monthly Payment",
-      "extraMonthlyPaymentHelp": "Additional amount you can pay beyond minimums each month",
-      "minimumPayment": "Min Payment",
-      "month": "Month",
-      "morePsychological": "Motivational wins",
-      "payment": "Payment",
-      "paymentSchedule": "Payment Schedule",
-      "payoffDate": "Payoff Time",
-      "recommended": "Recommended",
-      "remaining": "Remaining",
-      "removeDebt": "Remove debt",
-      "savingsDescription": "You'll save {amount} in interest and be debt-free {months} months sooner with the avalanche method",
-      "savingsTitle": "Interest Savings with Avalanche",
-      "snowball": "Snowball Strategy",
-      "snowballDescription": "Pay smallest balance first for quick wins and motivation",
-      "subtitle": "Find the fastest path to debt freedom",
-      "title": "Debt Payoff Calculator",
-      "totalInterest": "Total Interest",
-      "yourDebts": "Your Debts"
+      "avalanche": "យុទ្ធសាស្ត្រ Avalanche",
+      "avalancheDescription": "សងការប្រាក់ខ្ពស់បំផុតមុនដើម្បីសន្សំប្រាក់ច្រើនបំផុត",
+      "balance": "សមតុល្យ",
+      "debtName": "ឈ្មោះ",
+      "debtNamePlaceholder": "បំណុល {number}",
+      "description": "ប្រៀបធៀបយុទ្ធសាស្ត្រ snowball ទល់នឹង avalanche",
+      "extraMonthlyPayment": "ការទូទាត់បន្ថែមប្រចាំខែ",
+      "extraMonthlyPaymentHelp": "ចំនួនបន្ថែមដែលអ្នកអាចបង់លើសពីអប្បបរមា",
+      "minimumPayment": "ការទូទាត់អប្បបរមា",
+      "month": "ខែ",
+      "morePsychological": "ជ័យជម្នះជំរុញកម្លាំង",
+      "payment": "ការទូទាត់",
+      "paymentSchedule": "កាលវិភាគទូទាត់",
+      "payoffDate": "ពេលវេលាសង",
+      "recommended": "ណែនាំ",
+      "remaining": "នៅសល់",
+      "removeDebt": "ដកបំណុលចេញ",
+      "savingsDescription": "អ្នកនឹងសន្សំ {amount} ក្នុងការប្រាក់ និង រួចពីបំណុល {months} ខែមុនជាមួយវិធី avalanche",
+      "savingsTitle": "ការសន្សំការប្រាក់ជាមួយ Avalanche",
+      "snowball": "យុទ្ធសាស្ត្រ Snowball",
+      "snowballDescription": "សងសមតុល្យតូចបំផុតមុនសម្រាប់ជ័យជម្នះរហ័ស",
+      "subtitle": "រកផ្លូវលឿនបំផុតទៅសេរីភាពពីបំណុល",
+      "title": "ម៉ាស៊ីនគិតលេខសងបំណុល",
+      "totalInterest": "ការប្រាក់សរុប",
+      "yourDebts": "បំណុលរបស់អ្នក"
     },
     "emergencyFund": {
-      "amountNeeded": "You need {amount} more to reach your goal",
-      "completionDate": "Estimated Completion",
-      "currentSavings": "Current Emergency Savings",
-      "description": "Calculate how much you need for financial security and track your progress",
-      "goalMet": "Goal Achieved!",
-      "goalProgress": "Building Your Safety Net",
-      "inputTitle": "Your Information",
-      "monthlyContribution": "Monthly Savings Amount",
-      "monthlyContributionHelp": "How much you can save towards your emergency fund each month",
-      "monthlyExpenses": "Monthly Expenses",
-      "monthlyExpensesHelp": "Include rent, utilities, groceries, insurance, and other essential costs",
-      "monthsToGoal": "Months to Reach Goal",
-      "progress": "Current Progress",
-      "resultsTitle": "Your Results",
-      "subtitle": "Build your financial safety net",
-      "targetAmount": "Target Emergency Fund",
-      "targetMonths": "Target Months of Coverage",
-      "targetMonthsHelp": "Experts recommend {months} months for most situations",
-      "tip1": "Keep your emergency fund in a high-yield savings account for easy access and better returns",
-      "tip2": "Automate your contributions by setting up automatic transfers on payday",
-      "tip3": "Start small if needed - even saving a little consistently adds up over time",
-      "tipsTitle": "Tips for Building Your Emergency Fund",
-      "title": "Emergency Fund Calculator"
+      "amountNeeded": "អ្នកត្រូវការ {amount} ទៀតដើម្បីឈានដល់គោលដៅ",
+      "completionDate": "កាលបរិច្ឆេទបញ្ចប់ប៉ាន់ស្មាន",
+      "currentSavings": "ការសន្សំបន្ទាន់បច្ចុប្បន្ន",
+      "description": "គណនាចំនួនដែលអ្នកត្រូវការសម្រាប់សុវត្ថិភាពហិរញ្ញវត្ថុ និង តាមដានវឌ្ឍនភាព",
+      "goalMet": "សម្រេចគោលដៅ!",
+      "goalProgress": "កំពុងបង្កើតបណ្ដាញសុវត្ថិភាព",
+      "inputTitle": "ព័ត៌មានរបស់អ្នក",
+      "monthlyContribution": "ចំនួនសន្សំប្រចាំខែ",
+      "monthlyContributionHelp": "ចំនួនដែលអ្នកអាចសន្សំប្រចាំខែ",
+      "monthlyExpenses": "ចំណាយប្រចាំខែ",
+      "monthlyExpensesHelp": "រួមបញ្ចូលការជួល ប្រើប្រាស់ គ្រឿងទេស ធានារ៉ាប់រង និង ថ្លៃចាំបាច់ផ្សេងទៀត",
+      "monthsToGoal": "ខែដើម្បីឈានដល់គោលដៅ",
+      "progress": "វឌ្ឍនភាពបច្ចុប្បន្ន",
+      "resultsTitle": "លទ្ធផលរបស់អ្នក",
+      "subtitle": "បង្កើតបណ្ដាញសុវត្ថិភាពហិរញ្ញវត្ថុ",
+      "targetAmount": "មូលនិធិសង្គ្រោះបន្ទាន់គោលដៅ",
+      "targetMonths": "ខែគោលដៅនៃការគ្របដណ្ដប់",
+      "targetMonthsHelp": "អ្នកជំនាញណែនាំ {months} ខែសម្រាប់ស្ថានភាពភាគច្រើន",
+      "tip1": "រក្សាមូលនិធិក្នុងគណនីសន្សំអត្រាខ្ពស់សម្រាប់ការចូលប្រើងាយ",
+      "tip2": "ធ្វើការសន្សំដោយស្វ័យប្រវត្តិដោយកំណត់ការផ្ទេរស្វ័យប្រវត្តិ",
+      "tip3": "ចាប់ផ្ដើមតូចបើចាំបាច់ - ការសន្សំតិចៗជាប់ជានិច្ចក៏កើនឡើងផងដែរ",
+      "tipsTitle": "គន្លឹះសម្រាប់បង្កើតមូលនិធិសង្គ្រោះបន្ទាន់",
+      "title": "ម៉ាស៊ីនគិតលេខមូលនិធិសង្គ្រោះបន្ទាន់"
     },
     "hub": {
-      "accuracyDescription": "Using financial-grade arithmetic to avoid floating-point errors in all calculations.",
-      "accuracyTitle": "Precise Calculations",
-      "infoTitle": "About These Calculators",
-      "privacyDescription": "All calculations happen on your device. Your financial data never leaves your browser.",
-      "privacyTitle": "100% Private",
-      "sectionCore": "Core Calculators",
-      "sectionPlanning": "Financial Planning",
-      "sectionTools": "Tools & Links",
-      "subtitle": "Tools to help you plan and analyze your finances",
-      "title": "Financial Calculators"
+      "accuracyDescription": "ប្រើគណិតវិទ្យាថ្នាក់ហិរញ្ញវត្ថុដើម្បីចៀសវាងកំហុសចំណុចអណ្ដែត។",
+      "accuracyTitle": "ការគណនាច្បាស់លាស់",
+      "infoTitle": "អំពីម៉ាស៊ីនគិតលេខទាំងនេះ",
+      "privacyDescription": "ការគណនាទាំងអស់កើតឡើងនៅលើឧបករណ៍របស់អ្នក។ ទិន្នន័យរបស់អ្នកមិនដែលចាកចេញពីកម្មវិធីរុករក។",
+      "privacyTitle": "100% ឯកជន",
+      "sectionCore": "ម៉ាស៊ីនគិតលេខស្នូល",
+      "sectionPlanning": "ផែនការហិរញ្ញវត្ថុ",
+      "sectionTools": "ឧបករណ៍ និង តំណ",
+      "subtitle": "ឧបករណ៍ជួយអ្នករៀបចំ និង វិភាគហិរញ្ញវត្ថុ",
+      "title": "ម៉ាស៊ីនគិតលេខហិរញ្ញវត្ថុ"
     },
     "inflation": {
-      "assumptionCompound": "Inflation compounds annually",
-      "assumptionConstant": "Constant annual inflation rate",
-      "chartNominal": "Nominal Value (unchanged)",
-      "chartReal": "Real Purchasing Power",
-      "chartTitle": "Purchasing Power Over Time",
-      "currentAmount": "Current Amount",
-      "description": "See how inflation erodes your purchasing power over time",
-      "formulaExplanation": "Shows how much your money will actually buy in the future, adjusted for rising prices",
+      "assumptionCompound": "អតិផរណាសមាសប្រចាំឆ្នាំ",
+      "assumptionConstant": "អត្រាអតិផរណាថេរប្រចាំឆ្នាំ",
+      "chartNominal": "តម្លៃនាម (មិនផ្លាស់ប្ដូរ)",
+      "chartReal": "អំណាចទិញពិត",
+      "chartTitle": "អំណាចទិញក្នុងរយៈពេល",
+      "currentAmount": "ចំនួនបច្ចុប្បន្ន",
+      "description": "មើលពីរបៀបដែលអតិផរណាកាត់បន្ថយអំណាចទិញ",
+      "formulaExplanation": "បង្ហាញពីចំនួនដែលប្រាក់របស់អ្នកពិតជាទិញបានក្នុងអនាគត",
       "formulaText": "Real Value = Nominal Value / (1 + inflation)^years",
-      "heroDescription": "Your {amount} will have the buying power of {futureAmount} in {years} years",
-      "heroTitle": "Purchasing Power Impact",
-      "inflationRate": "Annual Inflation Rate (%)",
-      "inflationRateHelp": "US historical average: ~3%",
-      "inputTitle": "Calculate Impact",
-      "powerLost": "Purchasing Power Lost",
-      "powerRemaining": "Purchasing Power Remaining",
-      "presetAverage": "Average (3%)",
-      "presetHigh": "High (5%)",
-      "presetLow": "Low (2%)",
-      "presets": "Presets",
-      "purchasingPower": "Future Purchasing Power",
-      "resultTitle": "Detailed Breakdown",
-      "subtitle": "Understand the real cost of inflation",
-      "tableLost": "Value Lost",
-      "tableNominal": "Nominal Value",
-      "tableReal": "Real Value",
-      "tableTitle": "Year-by-Year Breakdown",
-      "tableYear": "Year",
-      "timeHorizon": "Time Horizon (Years)",
-      "title": "Inflation Impact Calculator"
+      "heroDescription": "ចំនួន {amount} របស់អ្នកនឹងមានអំណាចទិញ {futureAmount} ក្នុង {years} ឆ្នាំ",
+      "heroTitle": "ផលប៉ះពាល់អំណាចទិញ",
+      "inflationRate": "អត្រាអតិផរណាប្រចាំឆ្នាំ (%)",
+      "inflationRateHelp": "មធ្យមប្រវត្តិសាស្ត្រ: ~3%",
+      "inputTitle": "គណនាផលប៉ះពាល់",
+      "powerLost": "អំណាចទិញបាត់បង់",
+      "powerRemaining": "អំណាចទិញនៅសល់",
+      "presetAverage": "មធ្យម (3%)",
+      "presetHigh": "ខ្ពស់ (5%)",
+      "presetLow": "ទាប (2%)",
+      "presets": "កំណត់ជាមុន",
+      "purchasingPower": "អំណាចទិញអនាគត",
+      "resultTitle": "ការបែងចែកលម្អិត",
+      "subtitle": "យល់ដឹងពីថ្លៃពិតនៃអតិផរណា",
+      "tableLost": "តម្លៃបាត់បង់",
+      "tableNominal": "តម្លៃនាម",
+      "tableReal": "តម្លៃពិត",
+      "tableTitle": "ការបែងចែកតាមឆ្នាំ",
+      "tableYear": "ឆ្នាំ",
+      "timeHorizon": "បន្ទាត់ពេលវេលា (ឆ្នាំ)",
+      "title": "ម៉ាស៊ីនគិតលេខផលប៉ះពាល់អតិផរណា"
     },
     "loanTracker": {
-      "description": "Track all your loans, payments, and payoff progress",
-      "title": "Loan Tracker"
+      "description": "តាមដានប្រាក់កម្ចី ការទូទាត់ និង វឌ្ឍនភាពសង",
+      "title": "ការតាមដានកម្ចី"
     },
     "monteCarlo": {
-      "assumptionInflation": "Inflation adjustment",
-      "assumptionInflationApplied": "Applied to withdrawals (compounding)",
-      "assumptionInflationNone": "Not applied in accumulation mode",
-      "assumptionPRNG": "Random number generator",
-      "assumptionPRNGValue": "Seeded PRNG (Mulberry32) — deterministic",
-      "assumptionReturns": "Return distribution",
-      "assumptionReturnsValue": "Normal distribution (Box-Muller)",
-      "assumptionVolatility": "Volatility (std dev)",
-      "badgeCaution": "Needs Review",
-      "badgeRisk": "High Risk",
-      "badgeStrong": "Strong Plan",
-      "chartTitle": "Percentile Bands Over Time",
-      "description": "Stress-test your financial plan with probabilistic modeling",
-      "expectedReturn": "Expected Annual Return (%)",
-      "expectedReturnHelp": "Stocks: 7-10%, Bonds: 3-5%, Balanced: 5-7%",
-      "formulaExplanation": "Each month draws a random return from a normal distribution. Contributions are added, inflation-adjusted withdrawals subtracted. Repeated across N simulations.",
+      "assumptionInflation": "ការកែតម្រូវអតិផរណា",
+      "assumptionInflationApplied": "អនុវត្តទៅការដកប្រាក់ (សមាស)",
+      "assumptionInflationNone": "មិនអនុវត្តក្នុងរបៀបប្រមូល",
+      "assumptionPRNG": "ម៉ាស៊ីនបង្កើតលេខចៃដន្យ",
+      "assumptionPRNGValue": "PRNG មានគ្រាប់ពូជ (Mulberry32) — កំណត់",
+      "assumptionReturns": "ការបែងចែកផលចំណេញ",
+      "assumptionReturnsValue": "ការបែងចែកធម្មតា (Box-Muller)",
+      "assumptionVolatility": "ភាពប្រែប្រួល (គម្លាតស្ដង់ដារ)",
+      "badgeCaution": "ត្រូវពិនិត្យឡើងវិញ",
+      "badgeRisk": "ហានិភ័យខ្ពស់",
+      "badgeStrong": "ផែនការរឹងមាំ",
+      "chartTitle": "បន្ទះភាគរយក្នុងរយៈពេល",
+      "description": "សាកល្បងផែនការហិរញ្ញវត្ថុជាមួយគំរូប្រូបាបូលីតេ",
+      "expectedReturn": "ផលចំណេញប្រចាំឆ្នាំរំពឹង (%)",
+      "expectedReturnHelp": "ភាគហ៊ុន: 7-10%, មូលបត្រ: 3-5%, តុល្យភាព: 5-7%",
+      "formulaExplanation": "រៀងរាល់ខែដកផលចំណេញចៃដន្យពីការបែងចែកធម្មតា។ ការសន្សំត្រូវបានបន្ថែម ការដកប្រាក់កែតម្រូវអតិផរណាត្រូវបានដក។",
       "formulaText": "Monthly return = Normal(μ/12, σ/√12); Balance_t = Balance_(t-1) × (1 + r_t) + C - W",
-      "heroTitle": "Simulation Results",
-      "inflationRate": "Inflation Rate (%)",
-      "initialBalance": "Starting Portfolio Balance",
-      "inputTitle": "Simulation Parameters",
-      "medianFinal": "Median Final Balance",
-      "modeAccumulation": "Saving (Accumulation)",
-      "modeWithdrawal": "Spending (Withdrawal)",
-      "monthlyContribution": "Monthly Contribution",
-      "monthlyWithdrawal": "Monthly Withdrawal",
-      "p10Final": "Worst Case (10th %ile)",
-      "p90Final": "Best Case (90th %ile)",
-      "resultsTitle": "Outcome Distribution",
-      "scenarioMode": "Scenario Mode",
-      "simulations": "Number of Simulations",
-      "simulationsHelp": "More simulations = more accurate percentiles, but slower",
-      "subtitle": "Run thousands of market simulations to see how your plan holds up",
-      "successRateDescription": "{total} simulations run, {failures} ran out of money",
-      "successRateLabel": "Success Rate",
-      "timeHorizon": "Time Horizon (Years)",
-      "title": "Monte Carlo Simulator",
-      "totalSimulations": "Simulations Run",
-      "volatility": "Annual Volatility / Std Dev (%)",
-      "volatilityHelp": "S&P 500 historical: ~15%. Higher = wider outcome range."
+      "heroTitle": "លទ្ធផលការក្លែងធ្វើ",
+      "inflationRate": "អត្រាអតិផរណា (%)",
+      "initialBalance": "សមតុល្យផលប័ត្រចាប់ផ្ដើម",
+      "inputTitle": "ប៉ារ៉ាម៉ែត្រការក្លែងធ្វើ",
+      "medianFinal": "សមតុល្យចុងក្រោយមធ្យមតម្លៃ",
+      "modeAccumulation": "សន្សំ (ប្រមូល)",
+      "modeWithdrawal": "ចំណាយ (ដកប្រាក់)",
+      "monthlyContribution": "ការសន្សំប្រចាំខែ",
+      "monthlyWithdrawal": "ការដកប្រាក់ប្រចាំខែ",
+      "p10Final": "ករណីអាក្រក់បំផុត (10%)",
+      "p90Final": "ករណីល្អបំផុត (90%)",
+      "resultsTitle": "ការបែងចែកលទ្ធផល",
+      "scenarioMode": "របៀបសេណារីយ៉ូ",
+      "simulations": "ចំនួនការក្លែងធ្វើ",
+      "simulationsHelp": "ការក្លែងធ្វើច្រើន = ភាគរយច្បាស់ជាង ប៉ុន្តែយឺតជាង",
+      "subtitle": "ដំណើរការការក្លែងធ្វើទីផ្សាររាប់ពាន់ដើម្បីមើលពីរបៀបដែលផែនការរបស់អ្នកដំណើរការ",
+      "successRateDescription": "បានដំណើរការ {total} ការក្លែងធ្វើ, {failures} អស់ប្រាក់",
+      "successRateLabel": "អត្រាជោគជ័យ",
+      "timeHorizon": "បន្ទាត់ពេលវេលា (ឆ្នាំ)",
+      "title": "ម៉ាស៊ីនក្លែងធ្វើ Monte Carlo",
+      "totalSimulations": "ការក្លែងធ្វើបានដំណើរការ",
+      "volatility": "ភាពប្រែប្រួល / គម្លាតស្ដង់ដារ (%)",
+      "volatilityHelp": "S&P 500 ប្រវត្តិសាស្ត្រ: ~15%។ ខ្ពស់ = ជួរលទ្ធផលធំជាង។"
     },
     "mortgage": {
-      "affordabilityTitle": "Your Affordability",
-      "annualIncome": "Annual Gross Income",
-      "annualRate": "Interest Rate (%)",
-      "annualRateHelp": "Current average: 6-7% for 30-year fixed",
-      "assumptionFixedRate": "Fixed interest rate for full term",
-      "assumptionNoEscrow": "Does not include taxes, insurance, or HOA",
-      "description": "Calculate payments or find out how much home you can afford",
-      "downPayment": "Down Payment",
-      "downPaymentAmount": "Down Payment",
-      "downPaymentPercent": "Down Payment (%)",
-      "dtiRatio": "Debt-to-Income Ratio",
-      "extraPayment": "Extra Monthly Payment",
-      "extraPaymentHelp": "Additional payment applied to principal each month",
-      "formulaExplanation": "M = Monthly payment, P = Principal, i = Monthly interest rate, n = Total number of payments",
+      "affordabilityTitle": "សមត្ថភាពទិញរបស់អ្នក",
+      "annualIncome": "ចំណូលសរុបប្រចាំឆ្នាំ",
+      "annualRate": "អត្រាការប្រាក់ (%)",
+      "annualRateHelp": "មធ្យមបច្ចុប្បន្ន: 6-7% សម្រាប់ 30 ឆ្នាំ",
+      "assumptionFixedRate": "អត្រាការប្រាក់ថេរសម្រាប់រយៈពេលពេញ",
+      "assumptionNoEscrow": "មិនរួមបញ្ចូលពន្ធ ធានារ៉ាប់រង ឬ HOA",
+      "description": "គណនាការទូទាត់ ឬស្វែងយល់ថាអ្នកអាចទិញផ្ទះតម្លៃប៉ុន្មាន",
+      "downPayment": "ប្រាក់បង់មុន",
+      "downPaymentAmount": "ប្រាក់បង់មុន",
+      "downPaymentPercent": "ប្រាក់បង់មុន (%)",
+      "dtiRatio": "អនុបាតបំណុលទៅចំណូល",
+      "extraPayment": "ការទូទាត់បន្ថែមប្រចាំខែ",
+      "extraPaymentHelp": "ការទូទាត់បន្ថែមអនុវត្តទៅប្រាក់ដើមរៀងរាល់ខែ",
+      "formulaExplanation": "M = ការទូទាត់ប្រចាំខែ, P = ប្រាក់ដើម, i = អត្រាការប្រាក់ប្រចាំខែ, n = ចំនួនការទូទាត់សរុប",
       "formulaText": "M = P[i(1+i)^n] / [(1+i)^n - 1]",
-      "hideFullSchedule": "Hide Full Schedule",
-      "homePrice": "Home Price",
-      "inputTitle": "Loan Details",
-      "loanAmount": "Loan Amount",
-      "maxDTI": "Maximum DTI Ratio (%)",
-      "maxHomePrice": "Maximum Home Price",
-      "maxLoanAmount": "Maximum Loan Amount",
-      "modeAffordability": "What Can I Afford?",
-      "modePayment": "Calculate Payment",
-      "monthlyDebts": "Monthly Debt Payments",
-      "monthlyDebtsHelp": "Car loans, student loans, credit cards, etc.",
-      "monthlyPayment": "Monthly Payment",
-      "payoffMonths": "Payoff Time",
-      "resultTitle": "Payment Summary",
-      "scheduleBalance": "Balance",
-      "scheduleInterest": "Interest",
-      "scheduleMonth": "Month",
-      "schedulePayment": "Payment",
-      "schedulePrincipal": "Principal",
-      "scheduleTitle": "Amortization Schedule",
-      "showFullSchedule": "Show Full Schedule",
-      "subtitle": "Plan your home purchase with confidence",
-      "term": "Loan Term",
-      "term15": "15 Years",
-      "term30": "30 Years",
-      "title": "Mortgage Calculator",
-      "totalCost": "Total Cost of Loan",
-      "totalInterest": "Total Interest Paid"
+      "hideFullSchedule": "លាក់កាលវិភាគពេញ",
+      "homePrice": "តម្លៃផ្ទះ",
+      "inputTitle": "ព័ត៌មានកម្ចី",
+      "loanAmount": "ចំនួនកម្ចី",
+      "maxDTI": "អនុបាត DTI អតិបរមា (%)",
+      "maxHomePrice": "តម្លៃផ្ទះអតិបរមា",
+      "maxLoanAmount": "ចំនួនកម្ចីអតិបរមា",
+      "modeAffordability": "ខ្ញុំអាចទិញបានប៉ុន្មាន?",
+      "modePayment": "គណនាការទូទាត់",
+      "monthlyDebts": "ការទូទាត់បំណុលប្រចាំខែ",
+      "monthlyDebtsHelp": "កម្ចីរថយន្ត កម្ចីសិស្ស កាតឥណទាន ល។",
+      "monthlyPayment": "ការទូទាត់ប្រចាំខែ",
+      "payoffMonths": "ពេលវេលាសង",
+      "resultTitle": "សង្ខេបការទូទាត់",
+      "scheduleBalance": "សមតុល្យ",
+      "scheduleInterest": "ការប្រាក់",
+      "scheduleMonth": "ខែ",
+      "schedulePayment": "ការទូទាត់",
+      "schedulePrincipal": "ប្រាក់ដើម",
+      "scheduleTitle": "កាលវិភាគរំលោះ",
+      "showFullSchedule": "បង្ហាញកាលវិភាគពេញ",
+      "subtitle": "រៀបចំការទិញផ្ទះដោយមានទំនុកចិត្ត",
+      "term": "រយៈពេលកម្ចី",
+      "term15": "15 ឆ្នាំ",
+      "term30": "30 ឆ្នាំ",
+      "title": "ម៉ាស៊ីនគិតលេខប្រាក់បញ្ចាំ",
+      "totalCost": "ថ្លៃសរុបនៃកម្ចី",
+      "totalInterest": "ការប្រាក់សរុបបានបង់"
     },
     "netWorth": {
-      "description": "View your complete financial picture with assets and liabilities",
-      "title": "Net Worth"
+      "description": "មើលរូបភាពហិរញ្ញវត្ថុពេញលេញជាមួយទ្រព្យសកម្ម និង បំណុល",
+      "title": "ទ្រព្យសម្បត្តិសុទ្ធ"
     },
     "property": {
-      "description": "Track property values, vehicles, and other assets",
-      "title": "Property & Assets"
+      "description": "តាមដានតម្លៃអចលនទ្រព្យ រថយន្ត និង ទ្រព្យសកម្មផ org គ្នា",
+      "title": "អចលនទ្រព្យ និង ទ្រព្យសម្បត្តិ"
     },
     "retirement": {
-      "advancedTitle": "Advanced Settings",
-      "assumptionInflation": "Inflation rate",
-      "assumptionPostReturn": "Post-retirement return",
-      "assumptionPreReturn": "Pre-retirement return",
-      "assumptionSS": "Social Security included from age {age}",
-      "balanceAtRetirement": "Balance at Retirement",
-      "chartAccumulation": "Accumulation Phase",
-      "chartTitle": "Portfolio Balance Over Time",
-      "chartWithdrawal": "Withdrawal Phase",
-      "currentAge": "Current Age",
-      "currentSavings": "Current Retirement Savings",
-      "description": "Plan your retirement with a comprehensive savings and withdrawal projection",
-      "desiredIncome": "Desired Monthly Income (today's dollars)",
-      "desiredIncomeHelp": "How much you want to spend monthly in retirement, in today's dollars",
-      "formulaExplanation": "Two-phase simulation: grow savings until retirement, then draw down with inflation-adjusted withdrawals",
+      "advancedTitle": "ការកំណត់កម្រិតខ្ពស់",
+      "assumptionInflation": "អត្រាអតិផរណា",
+      "assumptionPostReturn": "ផលចំណេញក្រោយចូលនិវត្តន៍",
+      "assumptionPreReturn": "ផលចំណេញមុនចូលនិវត្តន៍",
+      "assumptionSS": "សន្ដិសុខសង្គមរួមបញ្ចូលពីអាយុ {age}",
+      "balanceAtRetirement": "សមតុល្យនៅពេលចូលនិវត្តន៍",
+      "chartAccumulation": "ដំណាក់កាលប្រមូល",
+      "chartTitle": "សមតុល្យផលប័ត្រក្នុងរយៈពេល",
+      "chartWithdrawal": "ដំណាក់កាលដកប្រាក់",
+      "currentAge": "អាយុបច្ចុប្បន្ន",
+      "currentSavings": "ការសន្សំចូលនិវត្តន៍បច្ចុប្បន្ន",
+      "description": "រៀបចំផែនការចូលនិវត្តន៍ជាមួយការព្យាករណ៍សន្សំ និង ដកប្រាក់",
+      "desiredIncome": "ចំណូលប្រចាំខែដែលចង់បាន (ប្រាក់ថ្ងៃនេះ)",
+      "desiredIncomeHelp": "ចំនួនដែលអ្នកចង់ចំណាយប្រចាំខែក្នុងការចូលនិវត្តន៍",
+      "formulaExplanation": "ការក្លែងធ្វើពីរដំណាក់កាល: លូតលាស់ការសន្សំរហូតដល់ចូលនិវត្តន៍ បន្ទាប់មកដកប្រាក់ដែលកែតម្រូវតាមអតិផរណា",
       "formulaText": "Accumulation: FV = PV(1+r)^n + PMT[((1+r)^n-1)/r] | Withdrawal: Balance_n = Balance_(n-1)(1+r) - W",
-      "heroInsufficient": "Your savings may run out at age {age}",
-      "heroInsufficientBadge": "Action Needed",
-      "heroNeutralBadge": "Close",
-      "heroSufficient": "Your savings will last {years} years in retirement",
-      "heroSufficientBadge": "On Track",
-      "inflationRate": "Inflation Rate (%)",
-      "inputTitle": "Your Details",
-      "lifeExpectancy": "Life Expectancy",
-      "monthlyContribution": "Monthly Contribution",
-      "monthlyWithdrawal": "Monthly Withdrawal (at retirement)",
-      "postRetirementReturn": "Post-Retirement Return (%)",
-      "postRetirementReturnHelp": "Expected annual return while withdrawing (conservative ~4-5%)",
-      "preRetirementReturn": "Pre-Retirement Return (%)",
-      "preRetirementReturnHelp": "Expected annual return while saving (stocks avg ~7-10%)",
-      "resultTitle": "Retirement Projection",
-      "retirementAge": "Retirement Age",
-      "shortfall": "Shortfall at Life Expectancy",
-      "socialSecurity": "Social Security / Pension (monthly)",
-      "socialSecurityAge": "Social Security Start Age",
-      "subtitle": "Secure your financial future",
-      "surplus": "Surplus at Life Expectancy",
-      "title": "Retirement Planner",
-      "yearsMoneyLasts": "Years Money Lasts"
+      "heroInsufficient": "ការសន្សំរបស់អ្នកអាចអស់នៅអាយុ {age}",
+      "heroInsufficientBadge": "ត្រូវការសកម្មភាព",
+      "heroNeutralBadge": "ជិត",
+      "heroSufficient": "ការសន្សំរបស់អ្នកនឹងមានរយៈពេល {years} ឆ្នាំក្នុងការចូលនិវត្តន៍",
+      "heroSufficientBadge": "ស្ថិតក្នុងគោលដៅ",
+      "inflationRate": "អត្រាអតិផរណា (%)",
+      "inputTitle": "ព័ត៌មានរបស់អ្នក",
+      "lifeExpectancy": "អាយុវែងរំពឹង",
+      "monthlyContribution": "ការសន្សំប្រចាំខែ",
+      "monthlyWithdrawal": "ការដកប្រចាំខែ (នៅពេលចូលនិវត្តន៍)",
+      "postRetirementReturn": "ផលចំណេញក្រោយចូលនិវត្តន៍ (%)",
+      "postRetirementReturnHelp": "ផលចំណេញប្រចាំឆ្នាំរំពឹងពេលកំពុងដកប្រាក់",
+      "preRetirementReturn": "ផលចំណេញមុនចូលនិវត្តន៍ (%)",
+      "preRetirementReturnHelp": "ផលចំណេញប្រចាំឆ្នាំរំពឹងពេលកំពុងសន្សំ",
+      "resultTitle": "ការព្យាករណ៍ចូលនិវត្តន៍",
+      "retirementAge": "អាយុចូលនិវត្តន៍",
+      "shortfall": "កង្វះនៅអាយុវែងរំពឹង",
+      "socialSecurity": "សន្ដិសុខសង្គម / សោធន (ប្រចាំខែ)",
+      "socialSecurityAge": "អាយុចាប់ផ្ដើមសន្ដិសុខសង្គម",
+      "subtitle": "ធានាអនាគតហិរញ្ញវត្ថុរបស់អ្នក",
+      "surplus": "សល់នៅអាយុវែងរំពឹង",
+      "title": "ម៉ាស៊ីនរៀបចំផែនការចូលនិវត្តន៍",
+      "yearsMoneyLasts": "ឆ្នាំដែលប្រាក់មានរយៈពេល"
     },
     "savingsGoal": {
-      "currentSavings": "Current Savings",
-      "description": "Plan your savings with compound interest projections",
-      "expectedReturn": "Expected Annual Return (%)",
-      "expectedReturnHelp": "High-yield savings: 4-5%, Investments: 6-8%",
-      "goalAmount": "Goal Amount",
-      "inMonths": "In {months} months",
-      "inputTitle": "Goal Details",
-      "interestEarned": "Interest Earned",
-      "modeHowMuch": "How much should I save monthly?",
-      "modeWhen": "When will I reach my goal?",
-      "monthlyContribution": "Monthly Contribution",
-      "perMonth": "per month",
-      "progress": "Current Progress",
-      "projectedAmount": "Projected Total",
-      "projectionTitle": "Savings Projection",
-      "resultHowMuchTitle": "Monthly Savings Needed",
-      "resultWhenTitle": "You'll Reach Your Goal",
-      "subtitle": "Reach your financial goals faster",
-      "targetDate": "Target Date",
-      "timelineTitle": "Growth Timeline",
-      "title": "Savings Goal Calculator",
-      "totalContributions": "Total Contributions"
+      "currentSavings": "ការសន្សំបច្ចុប្បន្ន",
+      "description": "រៀបចំការសន្សំជាមួយការព្យាករណ៍ការប្រាក់សមាស",
+      "expectedReturn": "ផលចំណេញប្រចាំឆ្នាំរំពឹង (%)",
+      "expectedReturnHelp": "គណនីសន្សំអត្រាខ្ពស់: 4-5%, ការវិនិយោគ: 6-8%",
+      "goalAmount": "ចំនួនគោលដៅ",
+      "inMonths": "ក្នុង {months} ខែ",
+      "inputTitle": "ព័ត៌មានគោលដៅ",
+      "interestEarned": "ការប្រាក់ដែលទទួលបាន",
+      "modeHowMuch": "ខ្ញុំគួរសន្សំប៉ុន្មានប្រចាំខែ?",
+      "modeWhen": "ពេលណាខ្ញុំនឹងឈានដល់គោលដៅ?",
+      "monthlyContribution": "ការសន្សំប្រចាំខែ",
+      "perMonth": "ក្នុងមួយខែ",
+      "progress": "វឌ្ឍនភាពបច្ចុប្បន្ន",
+      "projectedAmount": "សរុបព្យាករណ៍",
+      "projectionTitle": "ការព្យាករណ៍ការសន្សំ",
+      "resultHowMuchTitle": "ការសន្សំប្រចាំខែត្រូវការ",
+      "resultWhenTitle": "អ្នកនឹងឈានដល់គោលដៅ",
+      "subtitle": "សម្រេចគោលដៅហិរញ្ញវត្ថុលឿនជាង",
+      "targetDate": "កាលបរិច្ឆេទគោលដៅ",
+      "timelineTitle": "បន្ទាត់ពេលវេលាកំណើន",
+      "title": "ម៉ាស៊ីនគិតលេខគោលដៅសន្សំ",
+      "totalContributions": "ការសន្សំសរុប"
     },
     "subscriptionCost": {
-      "addSubscription": "Add Subscription",
-      "amount": "Amount",
-      "breakdown": "Essential vs Non-Essential",
-      "byCategory": "By Category",
-      "daily": "Daily",
-      "description": "Track and analyze the true cost of your subscriptions",
-      "essential": "Essential",
-      "essentialCost": "Essential",
+      "addSubscription": "បន្ថែមការជាវ",
+      "amount": "ចំនួនទឹកប្រាក់",
+      "breakdown": "ចាំបាច់ ទល់នឹង មិនចាំបាច់",
+      "byCategory": "តាមប្រភេទ",
+      "daily": "ប្រចាំថ្ងៃ",
+      "description": "តាមដាន និង វិភាគថ្លៃពិតនៃការជាវ",
+      "essential": "ចាំបាច់",
+      "essentialCost": "ចាំបាច់",
       "frequency": {
-        "annual": "Annual",
-        "biweekly": "Bi-weekly",
-        "label": "Frequency",
-        "monthly": "Monthly",
-        "quarterly": "Quarterly",
-        "weekly": "Weekly"
+        "annual": "ប្រចាំឆ្នាំ",
+        "biweekly": "រៀងរាល់ពីរសប្ដាហ៍",
+        "label": "ភាពញឹកញាប់",
+        "monthly": "ប្រចាំខែ",
+        "quarterly": "ប្រចាំត្រីមាស",
+        "weekly": "ប្រចាំសប្ដាហ៍"
       },
-      "monthly": "Monthly",
-      "monthlyIncome": "Monthly Income",
-      "name": "Name",
-      "namePlaceholder": "e.g., Netflix, Spotify",
-      "nonEssentialCost": "Non-Essential",
-      "perYear": "/year",
-      "percentOfIncome": "% of Income",
-      "potentialSavings": "Potential Yearly Savings",
-      "potentialSavingsHelp": "If you cancelled all non-essential subscriptions",
-      "remove": "Remove subscription",
-      "showIncomePercent": "Show percentage of income",
-      "subtitle": "See where your recurring money goes",
-      "title": "Subscription Cost Calculator",
-      "totalCost": "Total Subscription Cost",
-      "yearly": "Yearly",
-      "yourSubscriptions": "Your Subscriptions"
+      "monthly": "ប្រចាំខែ",
+      "monthlyIncome": "ចំណូលប្រចាំខែ",
+      "name": "ឈ្មោះ",
+      "namePlaceholder": "ឧ. Netflix, Spotify",
+      "nonEssentialCost": "មិនចាំបាច់",
+      "perYear": "/ឆ្នាំ",
+      "percentOfIncome": "% នៃចំណូល",
+      "potentialSavings": "ការសន្សំសក្ដានុពលប្រចាំឆ្នាំ",
+      "potentialSavingsHelp": "បើអ្នកលុបចោលការជាវមិនចាំបាច់ទាំងអស់",
+      "remove": "ដកការជាវចេញ",
+      "showIncomePercent": "បង្ហាញភាគរយនៃចំណូល",
+      "subtitle": "មើលថាប្រាក់ដដែលៗរបស់អ្នកទៅណា",
+      "title": "ម៉ាស៊ីនគិតលេខថ្លៃការជាវ",
+      "totalCost": "ថ្លៃការជាវសរុប",
+      "yearly": "ប្រចាំឆ្នាំ",
+      "yourSubscriptions": "ការជាវរបស់អ្នក"
     },
     "transparency": {
-      "assumptions": "Assumptions",
-      "formula": "Formula",
-      "title": "How This Works"
+      "assumptions": "ការសន្មត",
+      "formula": "រូបមន្ត",
+      "title": "របៀបដំណើរការ"
     },
     "chart": {
       "year": "ឆ្នាំ {n}",
@@ -1237,24 +1237,24 @@
     "openCalculator": "បើកម៉ាស៊ីនគិតលេខ"
   },
   "calendarExport": {
-    "addToCalendar": "Add to Calendar",
+    "addToCalendar": "បន្ថែមទៅប្រតិទិន",
     "dialog": {
-      "cancel": "Cancel",
-      "description": "Add bill reminders to your calendar",
-      "deselectAll": "Deselect all",
-      "export": "Export {count} subscription(s)",
-      "exportMethod": "Export Method",
-      "exporting": "Exporting...",
-      "selectAll": "Select all",
-      "selectSubscriptions": "Select Subscriptions",
-      "title": "Export to Calendar"
+      "cancel": "បោះបង់",
+      "description": "បន្ថែមការរំលឹកវិក្កយបត្រទៅប្រតិទិន",
+      "deselectAll": "មិនជ្រើសទាំងអស់",
+      "export": "នាំចេញ {count} ការជាវ",
+      "exportMethod": "វិធីនាំចេញ",
+      "exporting": "កំពុងនាំចេញ...",
+      "selectAll": "ជ្រើសរើសទាំងអស់",
+      "selectSubscriptions": "ជ្រើសរើសការជាវ",
+      "title": "នាំចេញទៅប្រតិទិន"
     },
-    "downloadAllICS": "Download All as ICS",
-    "downloadICS": "Download ICS File",
-    "exportToCalendar": "Export to Calendar",
+    "downloadAllICS": "ទាញយកទាំងអស់ជា ICS",
+    "downloadICS": "ទាញយកឯកសារ ICS",
+    "exportToCalendar": "នាំចេញទៅប្រតិទិន",
     "googleCalendar": "Google Calendar",
     "outlookCalendar": "Outlook Calendar",
-    "selectSubscriptions": "Select Subscriptions..."
+    "selectSubscriptions": "ជ្រើសរើសការជាវ..."
   },
   "categories": {
     "cancel": "Cancel",
@@ -1290,94 +1290,94 @@
   },
   "chatbot": {
     "buttons": {
-      "clearHistory": "Clear chat history",
-      "exportConversation": "Export conversation",
-      "send": "Send"
+      "clearHistory": "សម្អាតប្រវត្តិជជែក",
+      "exportConversation": "នាំចេញការសន្ទនា",
+      "send": "ផ្ញើ"
     },
     "disabled": {
-      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
-      "enableButton": "Enable Chatbot",
-      "title": "Chatbot Disabled"
+      "description": "បើក chatbot ក្នុង ការកំណត់ → ភាពឯកជន → Chatbot ថវិកា ដើម្បីចាប់ផ្ដើម។",
+      "enableButton": "បើក Chatbot",
+      "title": "Chatbot បានបិទ"
     },
     "emptyState": {
-      "description": "Ask me anything about your finances. Here are some examples:",
+      "description": "សួរខ្ញុំអ្វីក៏បានអំពីហិរញ្ញវត្ថុរបស់អ្នក។ នេះជាឧទាហរណ៍មួយចំនួន:",
       "examples": {
-        "balance": "What's my total account balance?",
-        "budget": "Am I over budget in any categories?",
-        "groceries": "Show me my recent grocery purchases",
-        "spending": "How much did I spend this month?"
+        "balance": "តើសមតុល្យគណនីសរុបរបស់ខ្ញុំប៉ុន្មាន?",
+        "budget": "តើខ្ញុំលើសថវិកាក្នុងប្រភេទណា?",
+        "groceries": "បង្ហាញខ្ញុំនូវការទិញគ្រឿងទេសថ្មីៗ",
+        "spending": "ខ្ញុំបានចំណាយប៉ុន្មានក្នុងខែនេះ?"
       },
-      "title": "Start a Conversation"
+      "title": "ចាប់ផ្ដើមការសន្ទនា"
     },
     "header": {
-      "subtitle": "Ask me about your finances",
-      "title": "Budget Assistant"
+      "subtitle": "សួរខ្ញុំអំពីហិរញ្ញវត្ថុរបស់អ្នក",
+      "title": "ជំនួយការថវិកា"
     },
     "input": {
-      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training.",
-      "placeholder": "Ask about your finances..."
+      "disclaimer": "ដំណើរការដោយ OpenAI GPT-4។ ទិន្នន័យរបស់អ្នកត្រូវបានដំណើរការដោយសុវត្ថិភាព និងមិនត្រូវបានប្រើសម្រាប់ការបណ្ដុះ។",
+      "placeholder": "សួរអំពីហិរញ្ញវត្ថុរបស់អ្នក..."
     },
     "messages": {
-      "dataAccessed": "Data accessed:",
-      "error": "Error",
-      "thinking": "Thinking..."
+      "dataAccessed": "ទិន្នន័យដែលបានចូលប្រើ:",
+      "error": "កំហុស",
+      "thinking": "កំពុងគិត..."
     }
   },
   "chatbotHelp": {
     "tabs": {
-      "actions": "Actions",
-      "budget": "Budget",
-      "income": "Income",
-      "spending": "Spending",
-      "trends": "Trends"
+      "actions": "សកម្មភាព",
+      "budget": "ថវិកា",
+      "income": "ចំណូល",
+      "spending": "ការចំណាយ",
+      "trends": "និន្នាការ"
     }
   },
   "chatbotOptIn": {
     "buttons": {
-      "decline": "No Thanks",
-      "enable": "Enable Chatbot"
+      "decline": "អត់ អរគុណ",
+      "enable": "បើក Chatbot"
     },
     "capabilities": {
-      "actions": "Optionally perform actions like adding transactions or creating budgets",
-      "answer": "Answer questions about your transactions, budgets, and spending patterns",
-      "insights": "Provide insights and recommendations based on your data",
-      "search": "Search your financial data using natural language",
-      "title": "What the Chatbot Can Do"
+      "actions": "ជម្រើសអាចអនុវត្តសកម្មភាពដូចជាបន្ថែមប្រតិបត្តិការ ឬបង្កើតថវិកា",
+      "answer": "ឆ្លើយសំណួរអំពីប្រតិបត្តិការ ថវិកា និងគំរូចំណាយរបស់អ្នក",
+      "insights": "ផ្ដល់ការយល់ដឹង និងអនុសាសន៍ផ្អែកលើទិន្នន័យរបស់អ្នក",
+      "search": "ស្វែងរកទិន្នន័យហិរញ្ញវត្ថុរបស់អ្នកដោយប្រើភាសាធម្មជាតិ",
+      "title": "Chatbot អាចធ្វើអ្វីបាន"
     },
-    "closeDialog": "Close chatbot opt-in dialog",
+    "closeDialog": "បិទបង្អួចជម្រើស chatbot",
     "controls": {
       "dataAccess": {
         "fullAccess": {
-          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data",
-          "title": "Full Access"
+          "description": "Chatbot អាចអនុវត្តសកម្មភាពដូចជាបន្ថែមប្រតិបត្តិការ បង្កើតថវិកា និងធ្វើការផ្លាស់ប្ដូរទិន្នន័យរបស់អ្នក",
+          "title": "ការចូលប្រើពេញ"
         },
-        "label": "What can the chatbot do with your data?",
+        "label": "Chatbot អាចធ្វើអ្វីជាមួយទិន្នន័យរបស់អ្នក?",
         "readOnly": {
-          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets",
-          "title": "Read-Only (Recommended)"
+          "description": "Chatbot អាចមើលទិន្នន័យរបស់អ្នក និងឆ្លើយសំណួរ ប៉ុន្តែមិនអាចបន្ថែម កែប្រែ ឬលុបប្រតិបត្តិការ/ថវិកា",
+          "title": "អានតែប៉ុណ្ណោះ (ណែនាំ)"
         }
       },
       "retention": {
-        "days30": "30 days",
-        "days7": "7 days (Recommended)",
-        "forever": "Keep forever",
-        "label": "How long should we keep your conversations?",
-        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
+        "days30": "30 ថ្ងៃ",
+        "days7": "7 ថ្ងៃ (ណែនាំ)",
+        "forever": "រក្សាទុកជារៀងរហូត",
+        "label": "រក្សាការសន្ទនាយូរប៉ុន្មាន?",
+        "note": "ការសន្ទនាត្រូវបានរក្សាទុកក្នុងកម្មវិធីរុករករបស់អ្នក។ អ្នកអាចលុបវានៅពេលណាក៏បានក្នុង ការកំណត់ → ភាពឯកជន។"
       },
-      "title": "Privacy Controls"
+      "title": "ការគ្រប់គ្រងភាពឯកជន"
     },
     "gdpr": {
-      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+      "notice": "<strong>សិទ្ធិរបស់អ្នក:</strong> ដោយបើក chatbot អ្នកយល់ព្រមឱ្យដំណើរការទិន្នន័យហិរញ្ញវត្ថុរបស់អ្នកតាមរយៈ API របស់ OpenAI។ អ្នកអាចដកការយល់ព្រមនៅពេលណាក៏បានដោយបិទ chatbot ក្នុង ការកំណត់ → ភាពឯកជន។ ទិន្នន័យរបស់អ្នកត្រូវបានដំណើរការស្របតាមគោលការណ៍ភាពឯកជន និង GDPR។ អ្នកមានសិទ្ធិចូលប្រើ លុប និងនាំចេញប្រវត្តិការសន្ទនារបស់អ្នកនៅពេលណាក៏បាន។"
     },
     "privacy": {
-      "dataSent": "Financial data is sent to the API to answer your questions",
-      "disable": "You can disable the chatbot anytime in Settings → Privacy",
-      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
-      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
-      "title": "Privacy & Data Usage"
+      "dataSent": "ទិន្នន័យហិរញ្ញវត្ថុត្រូវបានផ្ញើទៅ API ដើម្បីឆ្លើយសំណួររបស់អ្នក",
+      "disable": "អ្នកអាចបិទ chatbot នៅពេលណាក៏បានក្នុង ការកំណត់ → ភាពឯកជន",
+      "noTraining": "OpenAI មិនប្រើទិន្នន័យ API ដើម្បីបណ្ដុះគំរូ (តាមគោលការណ៍របស់ពួកគេ)",
+      "processedBy": "ការសន្ទនារបស់អ្នកត្រូវបានដំណើរការដោយ API របស់ OpenAI GPT-4",
+      "title": "ភាពឯកជន និង ការប្រើប្រាស់ទិន្នន័យ"
     },
-    "subtitle": "AI-powered financial assistant",
-    "title": "Enable Budget Chatbot?"
+    "subtitle": "ជំនួយការហិរញ្ញវត្ថុដំណើរការដោយ AI",
+    "title": "បើកប្រើ Chatbot ថវិកា?"
   },
   "columnMapper": {
     "amount": "Amount",
@@ -1409,40 +1409,40 @@
     "useSavedMapping": "Use Saved Mapping"
   },
   "combobox": {
-    "noResults": "No results found.",
-    "search": "Search...",
-    "select": "Select..."
+    "noResults": "រកមិនឃើញលទ្ធផល។",
+    "search": "ស្វែងរក...",
+    "select": "ជ្រើសរើស..."
   },
   "commandPalette": {
     "commands": {
-      "addTransaction": "Add Transaction",
-      "budgets": "Budgets",
-      "categories": "Categories",
-      "darkTheme": "Dark Theme",
-      "dashboard": "Dashboard",
-      "exportData": "Export Data",
-      "futurePlans": "Future Plans",
-      "highContrastTheme": "High-Contrast Theme",
-      "importCsv": "Import CSV",
-      "investments": "Investments",
-      "lightTheme": "Light Theme",
-      "loans": "Loans",
-      "newBudget": "New Budget",
-      "reports": "Reports",
-      "retirement": "Retirement",
-      "scanReceipt": "Scan Receipt",
-      "settings": "Settings",
-      "transactions": "Transactions"
+      "addTransaction": "បន្ថែមប្រតិបត្តិការ",
+      "budgets": "ថវិកា",
+      "categories": "ប្រភេទ",
+      "darkTheme": "រចនាប័ទ្មងងឹត",
+      "dashboard": "ផ្ទាំងគ្រប់គ្រង",
+      "exportData": "នាំចេញទិន្នន័យ",
+      "futurePlans": "ផែនការអនាគត",
+      "highContrastTheme": "រចនាប័ទ្មកម្រិតខ្ពស់",
+      "importCsv": "នាំចូល CSV",
+      "investments": "ការវិនិយោគ",
+      "lightTheme": "រចនាប័ទ្មភ្លឺ",
+      "loans": "ប្រាក់កម្ចី",
+      "newBudget": "ថវិកាថ្មី",
+      "reports": "របាយការណ៍",
+      "retirement": "ចូលនិវត្តន៍",
+      "scanReceipt": "ស្កេនបង្កាន់ដៃ",
+      "settings": "ការកំណត់",
+      "transactions": "ប្រតិបត្តិការ"
     },
     "groups": {
-      "appearance": "Appearance",
-      "quickActions": "Quick Actions",
-      "tools": "Tools & Settings",
-      "tracking": "Tracking & Analysis",
-      "wealth": "Wealth & Planning"
+      "appearance": "រូបរាង",
+      "quickActions": "សកម្មភាពរហ័ស",
+      "tools": "ឧបករណ៍ និង ការកំណត់",
+      "tracking": "ការតាមដាន និង វិភាគ",
+      "wealth": "ទ្រព្យសម្បត្តិ និង ផែនការ"
     },
-    "noResults": "No results found.",
-    "placeholder": "Type a command or search..."
+    "noResults": "រកមិនឃើញលទ្ធផល។",
+    "placeholder": "វាយពាក្យបញ្ជា ឬស្វែងរក..."
   },
   "common": {
     "cancel": "បោះបង់",
@@ -1465,168 +1465,168 @@
   "dashboard": {
     "widgets": {
       "accountBalances": {
-        "addAccount": "Add Account",
-        "allTransactions": "All Transactions",
-        "imported": "Imported",
-        "netWorth": "Net Worth",
-        "noAccounts": "No accounts added yet",
-        "title": "Account Balances",
-        "viewAll": "View All"
+        "addAccount": "បន្ថែមគណនី",
+        "allTransactions": "ប្រតិបត្តិការទាំងអស់",
+        "imported": "នាំចូលរួច",
+        "netWorth": "ទ្រព្យសម្បត្តិសុទ្ធ",
+        "noAccounts": "មិនទាន់មានគណនីទេ",
+        "title": "សមតុល្យគណនី",
+        "viewAll": "មើលទាំងអស់"
       },
       "budgetProgress": {
-        "createBudget": "Create Budget",
-        "noBudgets": "No budgets set",
-        "overBudget": "Over budget by {amount}",
-        "remaining": "Remaining",
-        "spent": "Spent",
-        "title": "Budget Progress",
-        "viewAll": "View All Budgets"
+        "createBudget": "បង្កើតថវិកា",
+        "noBudgets": "មិនទាន់កំណត់ថវិកាទេ",
+        "overBudget": "លើសថវិកា {amount}",
+        "remaining": "នៅសល់",
+        "spent": "បានចំណាយ",
+        "title": "វឌ្ឍនភាពថវិកា",
+        "viewAll": "មើលថវិកាទាំងអស់"
       },
       "eventBudget": {
-        "noEvents": "No active events",
-        "title": "Event Budgets",
-        "viewAll": "View All"
+        "noEvents": "មិនមានព្រឹត្តិការណ៍សកម្ម",
+        "title": "ថវិកាព្រឹត្តិការណ៍",
+        "viewAll": "មើលទាំងអស់"
       },
       "incomeVsExpenses": {
-        "addTransactions": "Add Transactions",
-        "expenses": "Expenses",
-        "income": "Income",
-        "net": "Net",
-        "noData": "No transactions yet",
-        "thisMonth": "This Month",
-        "title": "Income vs Expenses"
+        "addTransactions": "បន្ថែមប្រតិបត្តិការ",
+        "expenses": "ចំណាយ",
+        "income": "ចំណូល",
+        "net": "សុទ្ធ",
+        "noData": "មិនទាន់មានប្រតិបត្តិការទេ",
+        "thisMonth": "ខែនេះ",
+        "title": "ចំណូល ធៀបនឹង ចំណាយ"
       },
       "monthlyTrends": {
-        "expenses": "Expenses",
-        "income": "Income",
-        "lastSixMonths": "Last 6 Months",
-        "needMoreData": "Add transactions for 2+ months to see trends",
-        "notEnoughData": "Not enough history",
-        "title": "Monthly Trends"
+        "expenses": "ចំណាយ",
+        "income": "ចំណូល",
+        "lastSixMonths": "6 ខែចុងក្រោយ",
+        "needMoreData": "បន្ថែមប្រតិបត្តិការ 2+ ខែ ដើម្បីមើលនិន្នាការ",
+        "notEnoughData": "មិនមានប្រវត្តិគ្រប់គ្រាន់",
+        "title": "និន្នាការប្រចាំខែ"
       },
       "netWorthMini": {
-        "assets": "Assets",
-        "liabilities": "Liabilities",
-        "title": "Net Worth",
-        "viewDetails": "View Details"
+        "assets": "ទ្រព្យសកម្ម",
+        "liabilities": "បំណុល",
+        "title": "ទ្រព្យសម្បត្តិសុទ្ធ",
+        "viewDetails": "មើលព័ត៌មានលម្អិត"
       },
       "recentTransactions": {
-        "addTransaction": "Add Transaction",
-        "noTransactions": "No transactions yet",
-        "title": "Recent Transactions",
-        "uncategorized": "Uncategorized",
-        "viewAll": "View All"
+        "addTransaction": "បន្ថែមប្រតិបត្តិការ",
+        "noTransactions": "មិនទាន់មានប្រតិបត្តិការទេ",
+        "title": "ប្រតិបត្តិការថ្មីៗ",
+        "uncategorized": "មិនមានប្រភេទ",
+        "viewAll": "មើលទាំងអស់"
       },
       "safeToSpend": {
-        "caution": "Watch spending",
-        "createBudget": "Create Budget",
-        "dailyBudget": "Daily budget",
-        "danger": "Over budget",
-        "daysRemaining": "{days} days left",
-        "noBudgets": "No budgets set up yet",
-        "noData": "No budgets set up yet",
-        "overBudget": "{amount} over budget",
-        "perCategory": "Per category",
-        "remaining": "{amount} remaining",
-        "safe": "On track",
-        "title": "Safe to Spend",
-        "totalSafe": "Total safe to spend",
-        "viewAll": "View All"
+        "caution": "ប្រយ័ត្នការចំណាយ",
+        "createBudget": "បង្កើតថវិកា",
+        "dailyBudget": "ថវិកាប្រចាំថ្ងៃ",
+        "danger": "លើសថវិកា",
+        "daysRemaining": "{days} ថ្ងៃនៅសល់",
+        "noBudgets": "មិនទាន់កំណត់ថវិកាទេ",
+        "noData": "មិនទាន់កំណត់ថវិកាទេ",
+        "overBudget": "{amount} លើសថវិកា",
+        "perCategory": "តាមប្រភេទ",
+        "remaining": "{amount} នៅសល់",
+        "safe": "ស្ថិតក្នុងគោលដៅ",
+        "title": "សុវត្ថិភាពក្នុងការចំណាយ",
+        "totalSafe": "សរុបសុវត្ថិភាពក្នុងការចំណាយ",
+        "viewAll": "មើលទាំងអស់"
       },
       "spendingByCategory": {
-        "addTransactions": "Add Transactions",
-        "moreCategories": "+{count} more categories",
-        "noData": "No spending tracked yet",
-        "thisMonth": "This Month",
-        "title": "Spending by Category",
-        "total": "Total",
-        "uncategorized": "Uncategorized"
+        "addTransactions": "បន្ថែមប្រតិបត្តិការ",
+        "moreCategories": "+{count} ប្រភេទផ្សេងទៀត",
+        "noData": "មិនទាន់មានការចំណាយទេ",
+        "thisMonth": "ខែនេះ",
+        "title": "ការចំណាយតាមប្រភេទ",
+        "total": "សរុប",
+        "uncategorized": "មិនមានប្រភេទ"
       },
       "streaks": {
-        "badges": "badges",
-        "dayStreak": "day streak",
-        "points": "points",
-        "title": "Streaks & Badges"
+        "badges": "ស្លាកសញ្ញា",
+        "dayStreak": "ស៊េរីប្រចាំថ្ងៃ",
+        "points": "ពិន្ទុ",
+        "title": "ស៊េរី និង ស្លាកសញ្ញា"
       },
       "upcomingBills": {
-        "addSubscription": "Add Subscription",
-        "dueIn": "Due in {days} days",
-        "dueToday": "Due today",
-        "dueTomorrow": "Due tomorrow",
-        "noBills": "No upcoming bills",
-        "title": "Upcoming Bills",
-        "viewAll": "View All"
+        "addSubscription": "បន្ថែមការជាវ",
+        "dueIn": "ផុតកំណត់ក្នុង {days} ថ្ងៃ",
+        "dueToday": "ផុតកំណត់ថ្ងៃនេះ",
+        "dueTomorrow": "ផុតកំណត់ថ្ងៃស្អែក",
+        "noBills": "មិនមានវិក្កយបត្រនាពេលខាងមុខ",
+        "title": "វិក្កយបត្រនាពេលខាងមុខ",
+        "viewAll": "មើលទាំងអស់"
       },
       "weeklyRecap": {
-        "title": "Weekly Recap",
-        "viewFull": "Full Review",
-        "vsLastWeek": "vs last week"
+        "title": "សង្ខេបប្រចាំសប្ដាហ៍",
+        "viewFull": "ពិនិត្យពេញលេញ",
+        "vsLastWeek": "ធៀបនឹងសប្ដាហ៍មុន"
       }
     }
   },
   "dashboardCustomizer": {
-    "alwaysVisible": "Always visible",
-    "ariaLabel": "Customize dashboard layout",
-    "button": "Customize",
-    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
-    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
-    "reorderTitle": "Reorder Widgets",
-    "resetButton": "Reset to Defaults",
-    "title": "Customize Dashboard",
-    "toggleVisibility": "Toggle {name} visibility",
-    "widgetVisibility": "Widget Visibility",
-    "widgetsVisible": "{visible} of {total} widgets visible"
+    "alwaysVisible": "អាចមើលឃើញជានិច្ច",
+    "ariaLabel": "ប្ដូរតាមបំណងប្លង់ផ្ទាំងគ្រប់គ្រង",
+    "button": "ប្ដូរតាមបំណង",
+    "description": "បង្ហាញ ឬលាក់វិដជេតផ្ទាំងគ្រប់គ្រង។ អូសវិដជេតនៅលើផ្ទាំងគ្រប់គ្រងដើម្បីរៀបចំលំដាប់ឡើងវិញ។",
+    "reorderDescription": "ដើម្បីផ្លាស់ប្ដូរលំដាប់វិដជេត សូមអូស និងទម្លាក់វិដជេតដោយផ្ទាល់នៅលើផ្ទាំងគ្រប់គ្រង។ ប្រើកណ្ដុរ ឬការប៉ះដើម្បីចាប់ចំណុចអូស (⋮⋮) នៅលើកាតវិដជេតនីមួយៗ។",
+    "reorderTitle": "រៀបចំវិដជេតឡើងវិញ",
+    "resetButton": "កំណត់ឡើងវិញតាមលំនាំដើម",
+    "title": "ប្ដូរតាមបំណងផ្ទាំងគ្រប់គ្រង",
+    "toggleVisibility": "បិទបើកភាពមើលឃើញ {name}",
+    "widgetVisibility": "ភាពមើលឃើញវិដជេត",
+    "widgetsVisible": "{visible} នៃ {total} វិដជេតអាចមើលឃើញ"
   },
   "debtAnalysis": {
     "cards": {
       "avgRate": {
-        "subtitle": "Weighted average",
-        "title": "Avg Interest Rate"
+        "subtitle": "មធ្យមទម្ងន់",
+        "title": "អត្រាការប្រាក់មធ្យម"
       },
       "debtFreeDate": {
-        "subtitle": "Estimated payoff",
-        "title": "Debt-Free Date"
+        "subtitle": "ការសងប៉ាន់ស្មាន",
+        "title": "កាលបរិច្ឆេទរួចពីបំណុល"
       },
       "monthlyPayment": {
-        "subtitle": "Total monthly obligations",
-        "title": "Monthly Payment"
+        "subtitle": "កាតព្វកិច្ចប្រចាំខែសរុប",
+        "title": "ការទូទាត់ប្រចាំខែ"
       },
       "totalDebt": {
-        "subtitle": "Across {count} active loans",
-        "title": "Total Debt"
+        "subtitle": "ក្នុង {count} ប្រាក់កម្ចីសកម្ម",
+        "title": "បំណុលសរុប"
       }
     },
     "charts": {
       "byType": {
-        "description": "Distribution of debt across loan types",
-        "title": "Debt by Type"
+        "description": "ការបែងចែកបំណុលតាមប្រភេទកម្ចី",
+        "title": "បំណុលតាមប្រភេទ"
       },
       "projection": {
-        "description": "Expected debt reduction over the next year",
-        "expectedReduction": "Expected reduction: {amount} over 12 months",
-        "title": "12-Month Payoff Projection"
+        "description": "ការថយចុះបំណុលដែលរំពឹងក្នុងឆ្នាំបន្ទាប់",
+        "expectedReduction": "ការថយចុះរំពឹង: {amount} ក្នុង 12 ខែ",
+        "title": "ការព្យាករណ៍ការសង 12 ខែ"
       }
     },
     "comparison": {
-      "description": "Side-by-side comparison of your active loans",
+      "description": "ការប្រៀបធៀបស្រដៀងគ្នានៃប្រាក់កម្ចីសកម្មរបស់អ្នក",
       "headers": {
-        "balance": "Balance",
-        "interestRate": "Interest Rate",
-        "loan": "Loan",
-        "monthlyPayment": "Monthly Payment",
-        "percentOfTotal": "% of Total Debt"
+        "balance": "សមតុល្យ",
+        "interestRate": "អត្រាការប្រាក់",
+        "loan": "ប្រាក់កម្ចី",
+        "monthlyPayment": "ការទូទាត់ប្រចាំខែ",
+        "percentOfTotal": "% នៃបំណុលសរុប"
       },
-      "title": "Loan Comparison",
-      "total": "Total"
+      "title": "ការប្រៀបធៀបប្រាក់កម្ចី",
+      "total": "សរុប"
     },
     "empty": {
-      "addFirstLoan": "Add Your First Loan",
-      "description": "You don't have any active loans. Add a loan to see debt analytics.",
-      "title": "No Debt to Analyze"
+      "addFirstLoan": "បន្ថែមប្រាក់កម្ចីដំបូង",
+      "description": "អ្នកមិនមានប្រាក់កម្ចីសកម្មទេ។ បន្ថែមប្រាក់កម្ចីដើម្បីមើលការវិភាគបំណុល។",
+      "title": "មិនមានបំណុលដើម្បីវិភាគ"
     },
-    "subtitle": "Comprehensive view of your loans and obligations",
-    "title": "Debt Analysis",
-    "viewAllLoans": "View All Loans"
+    "subtitle": "ទិដ្ឋភាពទូលំទូលាយនៃប្រាក់កម្ចី និងកាតព្វកិច្ចរបស់អ្នក",
+    "title": "ការវិភាគបំណុល",
+    "viewAllLoans": "មើលប្រាក់កម្ចីទាំងអស់"
   },
   "debtOverview": {
     "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
@@ -1795,7 +1795,7 @@
     "confirmAction": "បញ្ជាក់សកម្មភាព"
   },
   "draggableWidget": {
-    "dragToReorder": "Drag to reorder widget"
+    "dragToReorder": "អូសដើម្បីរៀបចំវិដជេតឡើងវិញ"
   },
   "duration": {
     "months": "{count, plural, =1 {1 month} other {# months}}",
@@ -1804,90 +1804,90 @@
   },
   "emptyStates": {
     "budgets": {
-      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
-      "heading": "No Budgets Created",
-      "primaryCta": "Create Your First Budget"
+      "description": "បង្កើតថវិកាដើម្បីតាមដានការចំណាយក្នុងប្រភេទផ្សេងៗ និង សម្រេចគោលដៅហិរញ្ញវត្ថុ។",
+      "heading": "មិនទាន់បង្កើតថវិកាទេ",
+      "primaryCta": "បង្កើតថវិកាដំបូង"
     },
     "categories": {
-      "description": "Create custom categories to organize your transactions beyond the default ones.",
-      "heading": "No Custom Categories",
-      "primaryCta": "Add Category"
+      "description": "បង្កើតប្រភេទផ្ទាល់ខ្លួនដើម្បីរៀបចំប្រតិបត្តិការលើសពីប្រភេទលំនាំដើម។",
+      "heading": "មិនមានប្រភេទផ្ទាល់ខ្លួន",
+      "primaryCta": "បន្ថែមប្រភេទ"
     },
     "dashboard": {
-      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
-      "heading": "Welcome to Your Budget App!",
-      "primaryCta": "Import CSV",
-      "secondaryCta": "Add Transaction"
+      "description": "ចាប់ផ្ដើមដោយនាំចូលប្រតិបត្តិការធនាគាររបស់អ្នក ឬបន្ថែមគណនីដោយដៃដើម្បីមើលទិដ្ឋភាពហិរញ្ញវត្ថុរបស់អ្នក។",
+      "heading": "សូមស្វាគមន៍មកកាន់កម្មវិធីថវិកា!",
+      "primaryCta": "នាំចូល CSV",
+      "secondaryCta": "បន្ថែមប្រតិបត្តិការ"
     },
     "futurePlans": {
-      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
-      "heading": "No Future Plans",
-      "primaryCta": "Create a Goal"
+      "description": "កំណត់គោលដៅហិរញ្ញវត្ថុដូចជាទិញផ្ទះ សន្សំសម្រាប់ការអប់រំ ឬរៀបចំវិស្សមកាល។",
+      "heading": "មិនមានផែនការអនាគត",
+      "primaryCta": "បង្កើតគោលដៅ"
     },
     "investments": {
-      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
-      "heading": "No Investments Tracked",
-      "primaryCta": "Add Investment Account"
+      "description": "តាមដានគណនីវិនិយោគ និងភាគហ៊ុនដើម្បីត្រួតពិនិត្យលទ្ធផលផលប័ត្រ និងទ្រព្យសម្បត្តិសុទ្ធ។",
+      "heading": "មិនទាន់មានការវិនិយោគតាមដានទេ",
+      "primaryCta": "បន្ថែមគណនីវិនិយោគ"
     },
     "loans": {
-      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
-      "heading": "No Loans Tracked",
-      "primaryCta": "Add Your First Loan"
+      "description": "តាមដានប្រាក់កម្ចី ប្រាក់បញ្ចាំ និងបំណុលដើម្បីមើលវឌ្ឍនភាពការសង និងរៀបចំការទូទាត់។",
+      "heading": "មិនទាន់មានប្រាក់កម្ចីតាមដានទេ",
+      "primaryCta": "បន្ថែមប្រាក់កម្ចីដំបូង"
     },
     "reports": {
-      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
-      "heading": "No Data to Report",
-      "primaryCta": "Add Transactions",
-      "secondaryCta": "Import CSV"
+      "description": "បន្ថែមប្រតិបត្តិការ និងថវិកាដើម្បីបង្កើតរបាយការណ៍ល្អៗអំពីគំរូចំណាយ និងនិន្នាការ។",
+      "heading": "មិនមានទិន្នន័យដើម្បីរាយការណ៍",
+      "primaryCta": "បន្ថែមប្រតិបត្តិការ",
+      "secondaryCta": "នាំចូល CSV"
     },
     "retirement": {
-      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
-      "heading": "No Retirement Plans",
-      "primaryCta": "Start Planning"
+      "description": "រៀបចំផែនការចូលនិវត្តន៍ដោយតាមដានគណនី ប៉ាន់ស្មានតម្រូវការ និងមើលបន្ទាត់ពេលវេលាចូលនិវត្តន៍។",
+      "heading": "មិនមានផែនការចូលនិវត្តន៍",
+      "primaryCta": "ចាប់ផ្ដើមរៀបចំផែនការ"
     },
     "transactions": {
-      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
-      "heading": "No Transactions Yet",
-      "primaryCta": "Add Transaction",
-      "secondaryCta": "Import CSV"
+      "description": "ចាប់ផ្ដើមតាមដានការចំណាយរបស់អ្នកដោយបន្ថែមប្រតិបត្តិការដំបូង។ អ្នកអាចបន្ថែមដោយដៃ ឬនាំចូលពីឯកសារ CSV។",
+      "heading": "មិនទាន់មានប្រតិបត្តិការទេ",
+      "primaryCta": "បន្ថែមប្រតិបត្តិការ",
+      "secondaryCta": "នាំចូល CSV"
     }
   },
   "errorRecovery": {
-    "aiAnalysis": "AI Analysis:",
-    "closeModal": "Close modal",
+    "aiAnalysis": "ការវិភាគ AI:",
+    "closeModal": "បិទបង្អួច",
     "footer": {
-      "close": "Close",
-      "needHelp": "Need more help?",
-      "viewGuide": "View troubleshooting guide"
+      "close": "បិទ",
+      "needHelp": "ត្រូវការជំនួយបន្ថែម?",
+      "viewGuide": "មើលមគ្គុទេសក៍ដោះស្រាយបញ្ហា"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
-      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
-      "optionsTitle": "Recovery Options"
+      "canRecover": "ដំណឹងល្អ! យើងរកឃើញ {count} {count, plural, =1 {វិធី} other {វិធី}} ដើម្បីស្ដារពីកំហុសនេះ។",
+      "cannotRecover": "មិនអាចស្ដារបាន។ អ្នកត្រូវនាំចេញឯកសារម្ដងទៀតពីធនាគារ ឬសាកល្បងទម្រង់ផ្សេង។",
+      "optionsTitle": "ជម្រើសស្ដារ"
     },
-    "subtitle": "Don't worry! We can help you fix this.",
+    "subtitle": "កុំបារម្ភ! យើងអាចជួយអ្នកជួសជុល។",
     "suggestions": {
-      "autoFix": "AUTO-FIX",
-      "autoFixButton": "Auto-Fix",
-      "confidence": "{percent}% confidence",
-      "fixing": "Fixing...",
-      "learnMore": "Learn More",
-      "technicalDetails": "Technical Details"
+      "autoFix": "ជួសជុលស្វ័យប្រវត្តិ",
+      "autoFixButton": "ជួសជុលស្វ័យប្រវត្តិ",
+      "confidence": "{percent}% ទំនុកចិត្ត",
+      "fixing": "កំពុងជួសជុល...",
+      "learnMore": "ស្វែងយល់បន្ថែម",
+      "technicalDetails": "ព័ត៌មានបច្ចេកទេស"
     },
     "summary": {
-      "category": "Category: {category}",
-      "title": "Error Summary"
+      "category": "ប្រភេទ: {category}",
+      "title": "សង្ខេបកំហុស"
     },
     "technical": {
-      "canRecover": "Can Recover:",
-      "errorCategory": "Error Category:",
-      "no": "No",
-      "severity": "Severity:",
-      "suggestions": "Suggestions:",
-      "title": "Advanced Technical Details",
-      "yes": "Yes"
+      "canRecover": "អាចស្ដារបាន:",
+      "errorCategory": "ប្រភេទកំហុស:",
+      "no": "ទេ",
+      "severity": "ភាពធ្ងន់ធ្ងរ:",
+      "suggestions": "សំណើ:",
+      "title": "ព័ត៌មានបច្ចេកទេសលម្អិត",
+      "yes": "បាទ/ចាស"
     },
-    "title": "Import Failed"
+    "title": "ការនាំចូលបរាជ័យ"
   },
   "export": {
     "allDataDeleted": "All data has been deleted. The page will now refresh.",
@@ -1974,78 +1974,78 @@
   },
   "exportDialog": {
     "buttons": {
-      "cancel": "Cancel",
-      "done": "Done!",
-      "download": "Download",
-      "export": "Export Data"
+      "cancel": "បោះបង់",
+      "done": "រួចរាល់!",
+      "download": "ទាញយក",
+      "export": "នាំចេញទិន្នន័យ"
     },
     "complete": {
-      "download": "Your file is ready to download",
-      "success": "Export complete! Check your downloads folder."
+      "download": "ឯកសាររបស់អ្នកត្រៀមរួចដើម្បីទាញយក",
+      "success": "ការនាំចេញបានបញ្ចប់! ពិនិត្យថតទាញយករបស់អ្នក។"
     },
     "dataSummary": {
-      "accounts": "Accounts",
-      "estimatedSize": "Est. Size",
-      "title": "Data Summary",
-      "transactions": "Transactions"
+      "accounts": "គណនី",
+      "estimatedSize": "ទំហំប៉ាន់ស្មាន",
+      "title": "សង្ខេបទិន្នន័យ",
+      "transactions": "ប្រតិបត្តិការ"
     },
     "exporting": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Exporting..."
+      "pleaseWait": "សូមរង់ចាំ នេះអាចចំណាយពេលមួយចណ៍",
+      "title": "កំពុងនាំចេញ..."
     },
     "format": {
       "budget": {
-        "description": "Complete backup including all data",
-        "label": ".budget file"
+        "description": "ការបម្រុងទុកពេញលេញរួមទាំងទិន្នន័យទាំងអស់",
+        "label": "ឯកសារ .budget"
       },
       "csv": {
-        "description": "Spreadsheet-compatible format",
-        "label": "CSV file"
+        "description": "ទម្រង់ឆបគ្នាជាមួយសៀវភៅបញ្ជី",
+        "label": "ឯកសារ CSV"
       },
       "json": {
-        "description": "Developer-friendly format",
-        "label": "JSON file"
+        "description": "ទម្រង់ងាយស្រួលសម្រាប់អ្នកអភិវឌ្ឍន៍",
+        "label": "ឯកសារ JSON"
       },
-      "label": "Export Format"
+      "label": "ទម្រង់នាំចេញ"
     },
     "options": {
       "encrypt": {
-        "description": "Protect your data with AES-256 encryption",
-        "label": "Encrypt with Password"
+        "description": "ការពារទិន្នន័យរបស់អ្នកដោយការអ៊ិនគ្រីប AES-256",
+        "label": "អ៊ិនគ្រីបដោយពាក្យសម្ងាត់"
       },
       "includeReceipts": {
-        "description": "Attach receipt images (increases file size)",
-        "label": "Include Receipts"
+        "description": "ភ្ជាប់រូបភាពបង្កាន់ដៃ (បង្កើនទំហំឯកសារ)",
+        "label": "រួមបញ្ចូលបង្កាន់ដៃ"
       }
     },
     "password": {
-      "confirm": "Confirm Password",
-      "confirmPlaceholder": "Confirm password",
-      "hint": "Password Hint (Optional)",
-      "hintNote": "This hint will be stored unencrypted in the file",
-      "hintPlaceholder": "A hint to help you remember",
-      "label": "Password",
-      "minLength": "Password must be at least 8 characters",
-      "mismatch": "Passwords do not match",
-      "placeholder": "Enter password (min 8 characters)",
-      "required": "Password is required for encryption"
+      "confirm": "បញ្ជាក់ពាក្យសម្ងាត់",
+      "confirmPlaceholder": "បញ្ជាក់ពាក្យសម្ងាត់",
+      "hint": "ពាក្យណែនាំពាក្យសម្ងាត់ (ជម្រើស)",
+      "hintNote": "ពាក្យណែនាំនេះនឹងត្រូវបានរក្សាទុកដោយមិនអ៊ិនគ្រីបក្នុងឯកសារ",
+      "hintPlaceholder": "ពាក្យណែនាំដើម្បីជួយអ្នកចាំ",
+      "label": "ពាក្យសម្ងាត់",
+      "minLength": "ពាក្យសម្ងាត់ត្រូវមានយ៉ាងហោចណាស់ 8 តួអក្សរ",
+      "mismatch": "ពាក្យសម្ងាត់មិនត្រូវគ្នា",
+      "placeholder": "បញ្ចូលពាក្យសម្ងាត់ (អប្បបរមា 8 តួអក្សរ)",
+      "required": "ត្រូវការពាក្យសម្ងាត់សម្រាប់ការអ៊ិនគ្រីប"
     },
-    "subtitle": "Download your budget data",
-    "title": "Export Data"
+    "subtitle": "ទាញយកទិន្នន័យថវិការបស់អ្នក",
+    "title": "នាំចេញទិន្នន័យ"
   },
   "filters": {
-    "account": "Account",
-    "allAccounts": "All accounts",
-    "allCategories": "All categories",
-    "allTypes": "All types",
-    "apply": "Apply filters",
-    "category": "Category",
-    "clearFilters": "Clear filters",
-    "dateRange": "Date range",
-    "expense": "Expense",
-    "income": "Income",
-    "search": "Search transactions...",
-    "type": "Type"
+    "account": "គណនី",
+    "allAccounts": "គណនីទាំងអស់",
+    "allCategories": "ប្រភេទទាំងអស់",
+    "allTypes": "ប្រភេទទាំងអស់",
+    "apply": "អនុវត្តតម្រង",
+    "category": "ប្រភេទ",
+    "clearFilters": "សម្អាតតម្រង",
+    "dateRange": "ជួរកាលបរិច្ឆេទ",
+    "expense": "ចំណាយ",
+    "income": "ចំណូល",
+    "search": "ស្វែងរកប្រតិបត្តិការ...",
+    "type": "ប្រភេទ"
   },
   "footer": {
     "copyright": "© {year} {brandName}",
@@ -2098,14 +2098,14 @@
     "title": "Friday Review"
   },
   "healthScore": {
-    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "ariaLabel": "ពិន្ទុសុខភាពហិរញ្ញវត្ថុ: {score} ក្នុង 100។ {interpretation}",
     "emptyState": {
-      "line1": "Add transactions to see your",
-      "line2": "Financial Health Score"
+      "line1": "បន្ថែមប្រតិបត្តិការដើម្បីមើល",
+      "line2": "ពិន្ទុសុខភាពហិរញ្ញវត្ថុ"
     },
-    "grade": "Grade: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health",
+    "grade": "ថ្នាក់: {grade}",
+    "missingFactors": "{count, plural, =1 {កត្តា 1 បាត់} other {កត្តា # បាត់}}",
+    "title": "សុខភាពហិរញ្ញវត្ថុ",
     "history": {
       "title": "ប្រវត្តិពិន្ទុ",
       "monthsOfData": "{count} {count, plural, =1 {ខែ} other {ខែ}} នៃទិន្នន័យ",
@@ -2217,124 +2217,124 @@
   },
   "importDialog": {
     "buttons": {
-      "back": "Back",
-      "cancel": "Cancel",
-      "done": "Done",
-      "import": "Import Data"
+      "back": "ថយក្រោយ",
+      "cancel": "បោះបង់",
+      "done": "រួចរាល់",
+      "import": "នាំចូលទិន្នន័យ"
     },
     "complete": {
-      "itemsImported": "{count} items imported successfully",
-      "success": "Import Complete!",
-      "withIssues": "Import Completed with Issues"
+      "itemsImported": "បាននាំចូល {count} ធាតុដោយជោគជ័យ",
+      "success": "ការនាំចូលបានបញ្ចប់!",
+      "withIssues": "ការនាំចូលបានបញ្ចប់ជាមួយបញ្ហា"
     },
     "conflicts": {
-      "existing": "{count} existing",
-      "handleLabel": "Handle Conflicts",
+      "existing": "{count} មានស្រាប់",
+      "handleLabel": "ដោះស្រាយជម្លោះ",
       "overwrite": {
-        "description": "Replace with imported",
-        "label": "Overwrite"
+        "description": "ជំនួសដោយដែលបាននាំចូល",
+        "label": "សរសេរជាន់លើ"
       },
       "rename": {
-        "description": "Import as new entries",
-        "label": "Create new"
+        "description": "នាំចូលជាធាតុថ្មី",
+        "label": "បង្កើតថ្មី"
       },
       "skip": {
-        "description": "Keep current data",
-        "label": "Skip existing"
+        "description": "រក្សាទិន្នន័យបច្ចុប្បន្ន",
+        "label": "រំលងដែលមានស្រាប់"
       },
-      "title": "Conflicts Found"
+      "title": "រកឃើញជម្លោះ"
     },
     "encryption": {
-      "decrypt": "Decrypt & Continue",
-      "encrypted": "This file is encrypted",
-      "enterPassword": "Enter password",
-      "hint": "Hint: {hint}",
-      "password": "Password"
+      "decrypt": "ឌិគ្រីប និង បន្ត",
+      "encrypted": "ឯកសារនេះត្រូវបានអ៊ិនគ្រីប",
+      "enterPassword": "បញ្ចូលពាក្យសម្ងាត់",
+      "hint": "ពាក្យណែនាំ: {hint}",
+      "password": "ពាក្យសម្ងាត់"
     },
     "importing": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Importing your data..."
+      "pleaseWait": "សូមរង់ចាំ នេះអាចចំណាយពេលមួយចណ៍",
+      "title": "កំពុងនាំចូលទិន្នន័យរបស់អ្នក..."
     },
     "preview": {
-      "dataToImport": "Data to Import",
-      "exported": "Exported",
-      "fileInfo": "File Information",
-      "version": "Version"
+      "dataToImport": "ទិន្នន័យត្រូវនាំចូល",
+      "exported": "បាននាំចេញ",
+      "fileInfo": "ព័ត៌មានឯកសារ",
+      "version": "កំណែ"
     },
     "selectFile": {
-      "dragDrop": "or drag and drop here",
-      "label": "Click to select a .budget file"
+      "dragDrop": "ឬអូស និងទម្លាក់ទីនេះ",
+      "label": "ចុចដើម្បីជ្រើសរើសឯកសារ .budget"
     },
-    "subtitle": "Restore from .budget file",
-    "title": "Import Data"
+    "subtitle": "ស្ដារពីឯកសារ .budget",
+    "title": "នាំចូលទិន្នន័យ"
   },
   "investmentAccountModal": {
     "buttons": {
-      "cancel": "Cancel",
-      "create": "Create Account",
-      "saving": "Saving...",
-      "update": "Update Account"
+      "cancel": "បោះបង់",
+      "create": "បង្កើតគណនី",
+      "saving": "កំពុងរក្សាទុក...",
+      "update": "ធ្វើបច្ចុប្បន្នភាពគណនី"
     },
-    "closeModal": "Close modal",
+    "closeModal": "បិទបង្អួច",
     "errors": {
-      "saveFailed": "Failed to save account"
+      "saveFailed": "មិនអាចរក្សាទុកគណនីបាន"
     },
     "fields": {
       "accountNumber": {
-        "label": "Account Number (Optional)",
-        "placeholder": "e.g., Last 4 digits: 1234"
+        "label": "លេខគណនី (ជម្រើស)",
+        "placeholder": "ឧ. លេខ 4 ខ្ទង់ចុងក្រោយ: 1234"
       },
       "institution": {
-        "label": "Financial Institution (Optional)",
-        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
+        "label": "គ្រឹះស្ថានហិរញ្ញវត្ថុ (ជម្រើស)",
+        "placeholder": "ឧ. Questrade, Wealthsimple, TD Direct"
       },
       "name": {
-        "label": "Account Name",
-        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
+        "label": "ឈ្មោះគណនី",
+        "placeholder": "ឧ. RRSP របស់ខ្ញុំ, TFSA, ភាគហ៊ុនក្រុមហ៊ុន"
       },
       "type": {
         "descriptions": {
-          "Company shares": "Employee stock purchase or stock options",
-          "Non-registered": "Taxable investment account",
-          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
-          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
+          "Company shares": "ការទិញភាគហ៊ុនបុគ្គលិក ឬជម្រើសភាគហ៊ុន",
+          "Non-registered": "គណនីវិនិយោគជាប់ពន្ធ",
+          "RRSP": "គម្រោងសន្សំចូលនិវត្តន៍ចុះបញ្ជី - ការលូតលាស់បន្ថែមពន្ធ",
+          "TFSA": "គណនីសន្សំមិនជាប់ពន្ធ - ការលូតលាស់ និងការដកមិនជាប់ពន្ធ"
         },
-        "label": "Account Type"
+        "label": "ប្រភេទគណនី"
       }
     },
     "title": {
-      "add": "Add Investment Account",
-      "edit": "Edit Investment Account"
+      "add": "បន្ថែមគណនីវិនិយោគ",
+      "edit": "កែប្រែគណនីវិនិយោគ"
     },
     "validation": {
-      "nameRequired": "Please enter an account name"
+      "nameRequired": "សូមបញ្ចូលឈ្មោះគណនី"
     }
   },
   "investmentCharts": {
-    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "emptyState": "មិនមានភាគហ៊ុនដើម្បីបង្ហាញ។ បន្ថែមភាគហ៊ុនដើម្បីមើលតារាង។",
     "legend": {
-      "gain": "Gain",
-      "loss": "Loss"
+      "gain": "ចំណេញ",
+      "loss": "ខាត"
     },
     "tableHeaders": {
-      "allocation": "Allocation",
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "gainLoss": "Gain/Loss",
-      "percentReturn": "% Return",
-      "symbol": "Symbol",
-      "total": "Total"
+      "allocation": "ការបែងចែក",
+      "costBasis": "តម្លៃទិញ",
+      "currentValue": "តម្លៃបច្ចុប្បន្ន",
+      "gainLoss": "ចំណេញ/ខាត",
+      "percentReturn": "% ផលចំណេញ",
+      "symbol": "និមិត្តសញ្ញា",
+      "total": "សរុប"
     },
     "titles": {
-      "accountTypeAllocation": "Allocation by Account Type",
-      "gainLoss": "Gain/Loss by Holding",
-      "performanceSummary": "Performance Summary",
-      "portfolioAllocation": "Portfolio Allocation by Holding"
+      "accountTypeAllocation": "ការបែងចែកតាមប្រភេទគណនី",
+      "gainLoss": "ចំណេញ/ខាត តាមភាគហ៊ុន",
+      "performanceSummary": "សង្ខេបលទ្ធផល",
+      "portfolioAllocation": "ការបែងចែកផលប័ត្រតាមភាគហ៊ុន"
     },
     "tooltip": {
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "percentOfPortfolio": "{percent}% of portfolio"
+      "costBasis": "តម្លៃទិញ",
+      "currentValue": "តម្លៃបច្ចុប្បន្ន",
+      "percentOfPortfolio": "{percent}% នៃផលប័ត្រ"
     }
   },
   "investments": {
@@ -2408,57 +2408,57 @@
     "value": "Value"
   },
   "lanSync": {
-    "description": "Sync your budget data across devices on your local network",
+    "description": "ធ្វើសមកាលកម្មទិន្នន័យថវិការបស់អ្នកក្នុងឧបករណ៍នៅលើបណ្ដាញក្នុងស្រុក",
     "device": {
-      "connect": "Connect",
-      "connected": "Connected",
-      "disconnect": "Disconnect",
-      "removeDevice": "Remove Device",
-      "sync": "Sync",
-      "syncing": "Syncing..."
+      "connect": "ភ្ជាប់",
+      "connected": "បានភ្ជាប់",
+      "disconnect": "ផ្ដាច់",
+      "removeDevice": "ដកឧបករណ៍ចេញ",
+      "sync": "ធ្វើសមកាលកម្ម",
+      "syncing": "កំពុងធ្វើសមកាលកម្ម..."
     },
-    "disabled": "Disabled",
-    "enabled": "Enabled",
+    "disabled": "បិទ",
+    "enabled": "បើក",
     "howItWorks": {
       "step1": {
-        "description": "Scan a QR code or enter connection details to pair devices on the same network",
-        "title": "Pair Devices"
+        "description": "ស្កេនកូដ QR ឬបញ្ចូលព័ត៌មានភ្ជាប់ដើម្បីភ្ជាប់គូឧបករណ៍នៅលើបណ្ដាញតែមួយ",
+        "title": "ភ្ជាប់គូឧបករណ៍"
       },
       "step2": {
-        "description": "Data is encrypted end-to-end and syncs directly between devices - no cloud required",
-        "title": "Sync Securely"
+        "description": "ទិន្នន័យត្រូវបានអ៊ិនគ្រីបពីដើមដល់ចុង និងធ្វើសមកាលកម្មដោយផ្ទាល់រវាងឧបករណ៍ - មិនចាំបាច់ពពក",
+        "title": "ធ្វើសមកាលកម្មដោយសុវត្ថិភាព"
       },
       "step3": {
-        "description": "Changes sync automatically when devices are connected on the same network",
-        "title": "Automatic Updates"
+        "description": "ការផ្លាស់ប្ដូរធ្វើសមកាលកម្មស្វ័យប្រវត្តិនៅពេលឧបករណ៍ភ្ជាប់នៅលើបណ្ដាញតែមួយ",
+        "title": "ការធ្វើបច្ចុប្បន្នភាពស្វ័យប្រវត្តិ"
       },
-      "title": "How LAN Sync Works"
+      "title": "របៀបដំណើរការធ្វើសមកាលកម្ម LAN"
     },
     "pairedDevices": {
-      "addDevice": "Add Device",
-      "addFirstDevice": "Add Your First Device",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
-      "emptyDescription": "Pair a device to start syncing your budget data",
-      "emptyTitle": "No devices paired",
-      "noDevices": "No devices paired yet",
-      "title": "Paired Devices"
+      "addDevice": "បន្ថែមឧបករណ៍",
+      "addFirstDevice": "បន្ថែមឧបករណ៍ដំបូង",
+      "deviceCount": "{count, plural, =1 {ឧបករណ៍ 1 បានភ្ជាប់គូ} other {ឧបករណ៍ # បានភ្ជាប់គូ}}",
+      "emptyDescription": "ភ្ជាប់គូឧបករណ៍ដើម្បីចាប់ផ្ដើមធ្វើសមកាលកម្មទិន្នន័យថវិកា",
+      "emptyTitle": "មិនមានឧបករណ៍ភ្ជាប់គូ",
+      "noDevices": "មិនទាន់មានឧបករណ៍ភ្ជាប់គូទេ",
+      "title": "ឧបករណ៍ដែលបានភ្ជាប់គូ"
     },
     "removeDialog": {
-      "cancel": "Cancel",
-      "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
-      "remove": "Remove",
-      "title": "Remove Device"
+      "cancel": "បោះបង់",
+      "description": "តើអ្នកប្រាកដថាចង់ដកឧបករណ៍ \"{deviceName}\" ចេញមែនទេ? នេះនឹងផ្ដាច់ឧបករណ៍ ហើយអ្នកត្រូវភ្ជាប់ម្ដងទៀតដើម្បីធ្វើសមកាលកម្មទិន្នន័យ។",
+      "remove": "ដកចេញ",
+      "title": "ដកឧបករណ៍ចេញ"
     },
-    "syncAll": "Sync All",
+    "syncAll": "ធ្វើសមកាលកម្មទាំងអស់",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
-      "justNow": "Just now",
-      "lastSync": "Last sync: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
-      "neverSynced": "Never synced"
+      "daysAgo": "{count, plural, =1 {1 ថ្ងៃមុន} other {# ថ្ងៃមុន}}",
+      "hoursAgo": "{count, plural, =1 {1 ម៉ោងមុន} other {# ម៉ោងមុន}}",
+      "justNow": "ឥឡូវនេះ",
+      "lastSync": "សមកាលកម្មចុងក្រោយ: {time}",
+      "minutesAgo": "{count, plural, =1 {1 នាទីមុន} other {# នាទីមុន}}",
+      "neverSynced": "មិនទាន់ធ្វើសមកាលកម្មទេ"
     },
-    "title": "LAN Sync"
+    "title": "ធ្វើសមកាលកម្ម LAN"
   },
   "landing": {
     "accessibility": {
@@ -2616,22 +2616,22 @@
         "viewPricing": "មើលតម្លៃ"
       },
       "demo": {
-        "cloudStorage": "Cloud storage",
-        "dining": "Dining",
-        "expenses": "Expenses",
-        "foodToday": "Food • Today",
-        "groceries": "Groceries",
-        "groceryStore": "Grocery Store",
-        "income": "Income",
-        "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
-        "netWorth": "Net worth",
+        "cloudStorage": "កន្លែងផ្ទុកពពក",
+        "dining": "ភោជនីយដ្ឋាន",
+        "expenses": "ចំណាយ",
+        "foodToday": "អាហារ • ថ្ងៃនេះ",
+        "groceries": "គ្រឿងទេស",
+        "groceryStore": "ហាងគ្រឿងទេស",
+        "income": "ចំណូល",
+        "incomeYesterday": "ចំណូល • ម្សិលមិញ",
+        "monthly": "ប្រចាំខែ",
+        "netWorth": "ទ្រព្យសម្បត្តិសុទ្ធ",
         "netflix": "Netflix",
-        "salary": "Salary",
-        "shopping": "Shopping",
+        "salary": "ប្រាក់ខែ",
+        "shopping": "ការដើរទិញដើរទស្សនា",
         "spotify": "Spotify",
-        "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "subscriptionOct24": "ការជាវ • ១០/២៤",
+        "yearly": "ប្រចាំឆ្នាំ"
       },
       "modes": {
         "budgets": "ថវិកា",
@@ -3093,11 +3093,11 @@
   },
   "morePage": {
     "groups": {
-      "toolsSettings": "Tools & Settings",
-      "trackingAnalysis": "Tracking & Analysis",
-      "wealthPlanning": "Wealth & Planning"
+      "toolsSettings": "ឧបករណ៍ និង ការកំណត់",
+      "trackingAnalysis": "ការតាមដាន និង វិភាគ",
+      "wealthPlanning": "ទ្រព្យសម្បត្តិ និង ផែនការ"
     },
-    "title": "More"
+    "title": "ច្រើនទៀត"
   },
   "nav": {
     "about": "អំពី",
@@ -3115,102 +3115,102 @@
   },
   "notificationSettings": {
     "emailNotifications": {
-      "description": "Receive notifications via email",
-      "emailAddress": "Email Address",
-      "invalidEmail": "Please enter a valid email address",
-      "sendTest": "Send Test",
-      "testEmail": "Test Email",
-      "testEmailDescription": "Send a test email to verify your settings",
-      "testEmailFailed": "Failed to send",
-      "testEmailSent": "Email sent!",
-      "title": "Email Notifications",
-      "types": "Email notification types"
+      "description": "ទទួលការជូនដំណឹងតាមអ៊ីមែល",
+      "emailAddress": "អាសយដ្ឋានអ៊ីមែល",
+      "invalidEmail": "សូមបញ្ចូលអាសយដ្ឋានអ៊ីមែលត្រឹមត្រូវ",
+      "sendTest": "ផ្ញើសាកល្បង",
+      "testEmail": "សាកល្បងអ៊ីមែល",
+      "testEmailDescription": "ផ្ញើអ៊ីមែលសាកល្បងដើម្បីផ្ទៀងផ្ទាត់ការកំណត់",
+      "testEmailFailed": "មិនអាចផ្ញើបាន",
+      "testEmailSent": "បានផ្ញើអ៊ីមែល!",
+      "title": "ការជូនដំណឹងអ៊ីមែល",
+      "types": "ប្រភេទការជូនដំណឹងអ៊ីមែល"
     },
     "infoBox": {
-      "emailExplanation": "Email notifications are sent via our secure email service and require a valid email address.",
-      "pushExplanation": "Push notifications require browser permission and work even when the app is closed.",
-      "storedLocally": "Notification settings are stored locally on your device."
+      "emailExplanation": "ការជូនដំណឹងអ៊ីមែលត្រូវបានផ្ញើតាមរយៈសេវាអ៊ីមែលសុវត្ថិភាព និងត្រូវការអាសយដ្ឋានអ៊ីមែលត្រឹមត្រូវ។",
+      "pushExplanation": "ការជូនដំណឹង Push ត្រូវការការអនុញ្ញាតកម្មវិធីរុករក ហើយដំណើរការសូម្បីតែពេលកម្មវិធីបានបិទ។",
+      "storedLocally": "ការកំណត់ការជូនដំណឹងត្រូវបានរក្សាទុកក្នុងឧបករណ៍របស់អ្នក។"
     },
     "masterToggle": {
-      "description": "Turn all notifications on or off",
-      "title": "Enable Notifications"
+      "description": "បើក ឬបិទការជូនដំណឹងទាំងអស់",
+      "title": "បើកការជូនដំណឹង"
     },
-    "notAvailable": "Notification settings are not available.",
+    "notAvailable": "ការកំណត់ការជូនដំណឹងមិនអាចប្រើបាន។",
     "notificationTypes": {
       "billReminders": {
-        "description": "Get notified before subscriptions are due",
-        "title": "Bill Reminders"
+        "description": "ទទួលការជូនដំណឹងមុនពេលការជាវផុតកំណត់",
+        "title": "ការរំលឹកវិក្កយបត្រ"
       },
       "budgetAlerts": {
-        "description": "Alerts when approaching budget limits",
-        "title": "Budget Alerts"
+        "description": "ការជូនដំណឹងពេលជិតដល់កម្រិតថវិកា",
+        "title": "ការជូនដំណឹងថវិកា"
       },
-      "description": "Choose which notifications you want to receive",
+      "description": "ជ្រើសរើសការជូនដំណឹងណាដែលអ្នកចង់ទទួល",
       "goalMilestones": {
-        "description": "Celebrate when you hit savings milestones",
-        "title": "Goal Milestones"
+        "description": "អបអរសាទរពេលអ្នកឈានដល់ដំណាក់កាលសន្សំ",
+        "title": "ដំណាក់កាលគោលដៅ"
       },
-      "title": "Notification Types"
+      "title": "ប្រភេទការជូនដំណឹង"
     },
     "pushPermission": {
-      "deniedHint": "Enable in browser settings",
-      "description": "Receive notifications even when the app is closed",
-      "enable": "Enable Push Notifications",
-      "notSupported": "Not supported in this browser",
+      "deniedHint": "បើកក្នុងការកំណត់កម្មវិធីរុករក",
+      "description": "ទទួលការជូនដំណឹងសូម្បីតែពេលកម្មវិធីបានបិទ",
+      "enable": "បើកការជូនដំណឹង Push",
+      "notSupported": "មិនគាំទ្រក្នុងកម្មវិធីរុករកនេះ",
       "states": {
-        "default": "Not set",
-        "denied": "Blocked",
-        "granted": "Enabled",
-        "unsupported": "Unsupported"
+        "default": "មិនបានកំណត់",
+        "denied": "ត្រូវបានរារាំង",
+        "granted": "បើក",
+        "unsupported": "មិនគាំទ្រ"
       },
-      "title": "Push Notifications"
+      "title": "ការជូនដំណឹង Push"
     },
     "quietHours": {
-      "description": "No notifications during this time window",
-      "end": "End time",
-      "start": "Start time",
-      "title": "Quiet Hours"
+      "description": "មិនមានការជូនដំណឹងក្នុងរយៈពេលនេះ",
+      "end": "ម៉ោងបញ្ចប់",
+      "start": "ម៉ោងចាប់ផ្ដើម",
+      "title": "ម៉ោងស្ងៀម"
     },
     "reminderDays": {
-      "daysBeforeDue": "days before due date",
-      "description": "How many days before a bill is due to remind you",
-      "title": "Default Reminder"
+      "daysBeforeDue": "ថ្ងៃមុនផុតកំណត់",
+      "description": "រំលឹកមុនប៉ុន្មានថ្ងៃមុនផុតកំណត់វិក្កយបត្រ",
+      "title": "ការរំលឹកលំនាំដើម"
     },
     "testNotification": {
-      "button": "Send Test",
-      "description": "Send a test notification to verify your settings",
-      "title": "Test Notification"
+      "button": "ផ្ញើសាកល្បង",
+      "description": "ផ្ញើការជូនដំណឹងសាកល្បងដើម្បីផ្ទៀងផ្ទាត់ការកំណត់",
+      "title": "សាកល្បងការជូនដំណឹង"
     },
-    "title": "Notifications"
+    "title": "ការជូនដំណឹង"
   },
   "notifications": {
-    "clearAll": "Clear all",
-    "dismiss": "Dismiss",
-    "empty": "No notifications",
-    "emptyAll": "You're all caught up!",
-    "emptySnoozed": "No snoozed notifications",
-    "emptyUnread": "No unread notifications",
-    "markAllRead": "Mark all read",
-    "snooze": "Snooze",
+    "clearAll": "សម្អាតទាំងអស់",
+    "dismiss": "បដិសេធ",
+    "empty": "មិនមានការជូនដំណឹង",
+    "emptyAll": "អ្នកបានមើលទាំងអស់ហើយ!",
+    "emptySnoozed": "មិនមានការជូនដំណឹងដែលបានផ្អាក",
+    "emptyUnread": "មិនមានការជូនដំណឹងដែលមិនទាន់អាន",
+    "markAllRead": "សម្គាល់ទាំងអស់ថាបានអាន",
+    "snooze": "ផ្អាក",
     "snoozeOptions": {
-      "1day": "1 day",
-      "1hour": "1 hour",
-      "1week": "1 week",
-      "3days": "3 days",
-      "3hours": "3 hours"
+      "1day": "1 ថ្ងៃ",
+      "1hour": "1 ម៉ោង",
+      "1week": "1 សប្ដាហ៍",
+      "3days": "3 ថ្ងៃ",
+      "3hours": "3 ម៉ោង"
     },
-    "snoozedUntil": "Snoozed for {time}",
+    "snoozedUntil": "បានផ្អាករយៈពេល {time}",
     "tabs": {
-      "all": "All",
-      "snoozed": "Snoozed",
-      "unread": "Unread"
+      "all": "ទាំងអស់",
+      "snoozed": "បានផ្អាក",
+      "unread": "មិនទាន់អាន"
     },
-    "title": "Notifications",
+    "title": "ការជូនដំណឹង",
     "types": {
-      "bill_reminder": "Bill Reminder",
-      "budget_alert": "Budget Alert",
-      "goal_milestone": "Goal Milestone",
-      "system": "System"
+      "bill_reminder": "ការរំលឹកវិក្កយបត្រ",
+      "budget_alert": "ការជូនដំណឹងថវិកា",
+      "goal_milestone": "ដំណាក់កាលគោលដៅ",
+      "system": "ប្រព័ន្ធ"
     }
   },
   "ocr": {
@@ -3398,20 +3398,20 @@
     }
   },
   "overspendingAlerts": {
-    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
-    "percentOfBudget": "{percent}% of budget",
+    "exceededWarning": "ក្នុងអត្រានេះ អ្នកនឹងលើសថវិកា {amount} ក្នុងខែនេះ។",
+    "percentOfBudget": "{percent}% នៃថវិកា",
     "progress": {
-      "label": "Current progress"
+      "label": "វឌ្ឍនភាពបច្ចុប្បន្ន"
     },
     "stats": {
-      "budget": "Budget",
-      "daysLeft": "Days Left",
-      "projectedTotal": "Projected Total",
-      "spentSoFar": "Spent So Far"
+      "budget": "ថវិកា",
+      "daysLeft": "ថ្ងៃនៅសល់",
+      "projectedTotal": "សរុបព្យាករណ៍",
+      "spentSoFar": "បានចំណាយរហូតមក"
     },
     "tip": {
-      "label": "Tip:",
-      "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
+      "label": "គន្លឹះ:",
+      "reduceSpending": "កាត់បន្ថយការចំណាយប្រចាំថ្ងៃមកត្រឹម {amount} ដើម្បីស្ថិតក្នុងថវិកា។"
     }
   },
   "pairingDialog": {
@@ -3716,26 +3716,26 @@
   },
   "predictiveSpendingChart": {
     "legend": {
-      "actual": "Actual",
-      "confidenceInterval": "Confidence Interval",
-      "predicted": "Predicted"
+      "actual": "ពិត",
+      "confidenceInterval": "ចន្លោះទំនុកចិត្ត",
+      "predicted": "ព្យាករណ៍"
     },
-    "noData": "No data available for predictions",
-    "predictionUnavailable": "Prediction Unavailable",
+    "noData": "មិនមានទិន្នន័យសម្រាប់ការព្យាករណ៍",
+    "predictionUnavailable": "មិនអាចព្យាករណ៍បាន",
     "stats": {
-      "avgConfidence": "Avg Confidence",
-      "nextMonth": "Next Month",
-      "threeMonthAvg": "3-Month Avg"
+      "avgConfidence": "ទំនុកចិត្តមធ្យម",
+      "nextMonth": "ខែក្រោយ",
+      "threeMonthAvg": "មធ្យម 3 ខែ"
     },
     "table": {
-      "confidence": "Confidence",
-      "month": "Month",
-      "predicted": "Predicted",
-      "range": "Range",
-      "title": "Monthly Predictions"
+      "confidence": "ទំនុកចិត្ត",
+      "month": "ខែ",
+      "predicted": "ព្យាករណ៍",
+      "range": "ជួរ",
+      "title": "ការព្យាករណ៍ប្រចាំខែ"
     },
-    "title": "Spending Forecast: {category}",
-    "trainingModel": "Training model and generating predictions..."
+    "title": "ការព្យាករណ៍ចំណាយ: {category}",
+    "trainingModel": "កំពុងបណ្ដុះគំរូ និង បង្កើតការព្យាករណ៍..."
   },
   "privacyPanel": {
     "active": "Active",
@@ -3855,27 +3855,27 @@
     "deleteButton": "លុបប្រវត្តិរូប"
   },
   "pullToRefresh": {
-    "pull": "Pull to refresh",
-    "release": "Release to refresh"
+    "pull": "អូសដើម្បីផ្ទុកឡើងវិញ",
+    "release": "ដោះដើម្បីផ្ទុកឡើងវិញ"
   },
   "pwaInstall": {
     "buttons": {
-      "install": "Install",
-      "notNow": "Not now"
+      "install": "ដំឡើង",
+      "notNow": "មិនមែនឥឡូវ"
     },
-    "close": "Close install prompt",
-    "description": "Add to your home screen for quick access and offline use",
+    "close": "បិទការជម្រុញដំឡើង",
+    "description": "បន្ថែមទៅអេក្រង់ដើមរបស់អ្នកសម្រាប់ការចូលប្រើរហ័ស និងប្រើប្រាស់ក្រៅបណ្ដាញ",
     "features": {
-      "fastSecure": "Fast & secure",
-      "noAppStore": "No app store needed",
-      "offline": "Works offline"
+      "fastSecure": "រហ័ស និង សុវត្ថិភាព",
+      "noAppStore": "មិនចាំបាច់ហាងកម្មវិធី",
+      "offline": "ដំណើរការក្រៅបណ្ដាញ"
     },
-    "iosAddToHome": "\"Add to Home Screen\"",
-    "iosForFullExperience": "for the full app experience with faster loading.",
-    "iosTap": "Tap",
-    "iosThen": "then",
-    "iosTitle": "Install Budget App",
-    "title": "Install Budget App"
+    "iosAddToHome": "\"បន្ថែមទៅអេក្រង់ដើម\"",
+    "iosForFullExperience": "សម្រាប់បទពិសោធន៍កម្មវិធីពេញលេញជាមួយការផ្ទុកលឿនជាង។",
+    "iosTap": "ចុច",
+    "iosThen": "បន្ទាប់មក",
+    "iosTitle": "ដំឡើងកម្មវិធីថវិកា",
+    "title": "ដំឡើងកម្មវិធីថវិកា"
   },
   "qrScanner": {
     "allowCameraAccess": "Please allow camera access when prompted",
@@ -3906,38 +3906,38 @@
   },
   "quickCategorize": {
     "buttons": {
-      "apply": "Apply Category",
-      "cancel": "Cancel",
-      "save": "Save"
+      "apply": "អនុវត្តប្រភេទ",
+      "cancel": "បោះបង់",
+      "save": "រក្សាទុក"
     },
-    "clickToSelect": "Click a category to select",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
-    "general": "General",
-    "noResults": "No categories found",
-    "pressEnter": "Press ↵ Enter",
-    "saving": "Saving...",
-    "searchPlaceholder": "Search categories...",
-    "title": "Quick Categorize"
+    "clickToSelect": "ចុចប្រភេទដើម្បីជ្រើសរើស",
+    "description": "ជ្រើសរើសប្រភេទសម្រាប់ {count, plural, =1 {ប្រតិបត្តិការនេះ} other {ប្រតិបត្តិការ #}}",
+    "general": "ទូទៅ",
+    "noResults": "រកមិនឃើញប្រភេទ",
+    "pressEnter": "ចុច ↵ Enter",
+    "saving": "កំពុងរក្សាទុក...",
+    "searchPlaceholder": "ស្វែងរកប្រភេទ...",
+    "title": "ចាត់ប្រភេទរហ័ស"
   },
   "quickFilters": {
-    "all": "All",
-    "categories": "Categories",
-    "clearFilters": "Clear Filters",
-    "moreCategories": "+{count} more",
+    "all": "ទាំងអស់",
+    "categories": "ប្រភេទ",
+    "clearFilters": "សម្អាតតម្រង",
+    "moreCategories": "+{count} ច្រើនទៀត",
     "presets": {
-      "last30": "Last 30 Days",
-      "last90": "Last 90 Days",
-      "thisMonth": "This Month",
-      "thisYear": "This Year"
+      "last30": "30 ថ្ងៃចុងក្រោយ",
+      "last90": "90 ថ្ងៃចុងក្រោយ",
+      "thisMonth": "ខែនេះ",
+      "thisYear": "ឆ្នាំនេះ"
     },
-    "timePeriod": "Time Period"
+    "timePeriod": "រយៈពេល"
   },
   "quickStats": {
-    "balance": "Total Balance",
-    "expenses": "Expenses",
-    "income": "Income",
-    "savingsRate": "Savings Rate",
-    "savingsRateDescription": "Percentage of income saved this month"
+    "balance": "សមតុល្យសរុប",
+    "expenses": "ចំណាយ",
+    "income": "ចំណូល",
+    "savingsRate": "អត្រាសន្សំ",
+    "savingsRateDescription": "ភាគរយនៃចំណូលដែលបានសន្សំក្នុងខែនេះ"
   },
   "receiptThumbnail": {
     "close": "Close",
@@ -3954,65 +3954,65 @@
   },
   "receiptUpload": {
     "buttons": {
-      "attachReceipt": "Attach Receipt",
-      "chooseDifferent": "Choose Different",
-      "extractData": "Extract Data",
-      "extracting": "Extracting..."
+      "attachReceipt": "ភ្ជាប់បង្កាន់ដៃ",
+      "chooseDifferent": "ជ្រើសរើសផ្សេង",
+      "extractData": "ស្រង់ទិន្នន័យ",
+      "extracting": "កំពុងស្រង់..."
     },
     "camera": {
-      "takePhoto": "Take Photo with Camera",
-      "useDevice": "Use your device camera to capture receipt"
+      "takePhoto": "ថតរូបភាពដោយកាមេរ៉ា",
+      "useDevice": "ប្រើកាមេរ៉ាឧបករណ៍របស់អ្នកដើម្បីថតបង្កាន់ដៃ"
     },
-    "cameraInputLabel": "Camera capture input",
+    "cameraInputLabel": "ការចាប់រូបភាពកាមេរ៉ា",
     "dropzone": {
-      "browseFiles": "or <link>browse files</link>",
-      "dragDrop": "Drag & drop receipt here",
-      "dropHere": "Drop the receipt here",
-      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+      "browseFiles": "ឬ <link>រុករកឯកសារ</link>",
+      "dragDrop": "អូស និង ទម្លាក់បង្កាន់ដៃទីនេះ",
+      "dropHere": "ទម្លាក់បង្កាន់ដៃទីនេះ",
+      "supportedFormats": "គាំទ្រ JPG, PNG, PDF • អតិបរមា {size}MB"
     },
     "errors": {
-      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
-      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
-      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
-      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
-      "rejected": "File was rejected. Please try again",
-      "tooLarge": "File is too large. Maximum size is {size}MB"
+      "couldNotExtract": "មិនអាចស្រង់ទិន្នន័យពីបង្កាន់ដៃ។ សូមបញ្ចូលដោយដៃ។",
+      "extractionFailed": "មិនអាចស្រង់ទិន្នន័យបាន។ សូមព្យាយាមម្ដងទៀត ឬបញ្ចូលដោយដៃ។",
+      "invalidType": "ប្រភេទឯកសារមិនត្រឹមត្រូវ។ មានតែ JPG, PNG និង PDF ប៉ុណ្ណោះ",
+      "ocrImagesOnly": "OCR គាំទ្រតែឯកសាររូបភាព (JPG, PNG)",
+      "rejected": "ឯកសារត្រូវបានបដិសេធ។ សូមព្យាយាមម្ដងទៀត",
+      "tooLarge": "ឯកសារធំពេក។ ទំហំអតិបរមាគឺ {size}MB"
     },
     "extracted": {
-      "amount": "Amount:",
-      "confidence": "Confidence: {percent}%",
-      "date": "Date:",
-      "merchant": "Merchant:",
-      "title": "Data Extracted"
+      "amount": "ចំនួនទឹកប្រាក់:",
+      "confidence": "ទំនុកចិត្ត: {percent}%",
+      "date": "កាលបរិច្ឆេទ:",
+      "merchant": "អ្នកលក់:",
+      "title": "បានស្រង់ទិន្នន័យ"
     },
     "pdf": {
-      "noPreview": "Preview not available",
-      "title": "PDF Receipt"
+      "noPreview": "មិនអាចពិនិត្យមើលបាន",
+      "title": "បង្កាន់ដៃ PDF"
     },
-    "receiptPreview": "Receipt preview",
-    "removeFile": "Remove file"
+    "receiptPreview": "ពិនិត្យបង្កាន់ដៃ",
+    "removeFile": "ដកឯកសារចេញ"
   },
   "recurringTransactions": {
-    "confidence": "{percent}% confidence",
-    "estimatedMonthly": "Estimated Monthly",
+    "confidence": "{percent}% ទំនុកចិត្ត",
+    "estimatedMonthly": "ប៉ាន់ស្មានប្រចាំខែ",
     "frequency": {
-      "biweekly": "Bi-weekly",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "biweekly": "រៀងរាល់ពីរសប្ដាហ៍",
+      "monthly": "ប្រចាំខែ",
+      "quarterly": "ប្រចាំត្រីមាស",
+      "weekly": "ប្រចាំសប្ដាហ៍"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
-    "next": "Next: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "inDays": "{count, plural, =0 {(ថ្ងៃនេះ)} =1 {(ក្នុង 1 ថ្ងៃ)} other {(ក្នុង # ថ្ងៃ)}}",
+    "next": "បន្ទាប់: {date}",
+    "occurrences": "{count, plural, =1 {បានរកឃើញ 1 ដង} other {បានរកឃើញ # ដង}}",
     "perPeriod": {
-      "month": "per month",
-      "quarter": "per quarter",
-      "twoWeeks": "per 2 weeks",
-      "week": "per week"
+      "month": "ក្នុងមួយខែ",
+      "quarter": "ក្នុងមួយត្រីមាស",
+      "twoWeeks": "ក្នុងមួយ 2 សប្ដាហ៍",
+      "week": "ក្នុងមួយសប្ដាហ៍"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
-    "subtitle": "Detected subscriptions and bills",
-    "title": "Recurring Transactions"
+    "showingPatterns": "{count, plural, =1 {បង្ហាញ 1 គំរូប្រតិបត្តិការដដែលៗ} other {បង្ហាញ # គំរូប្រតិបត្តិការដដែលៗ}}",
+    "subtitle": "ការជាវ និង វិក្កយបត្រដែលបានរកឃើញ",
+    "title": "ប្រតិបត្តិការដដែលៗ"
   },
   "reports": {
     "addTransactionsToSeeFlow": "Add income and expense transactions to see your money flow",
@@ -4142,13 +4142,13 @@
     "yourAccounts": "Your Accounts"
   },
   "shortcutsModal": {
-    "close": "Close shortcuts help",
+    "close": "បិទជំនួយផ្លូវកាត់",
     "proTip": {
-      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
-      "title": "💡 Pro Tip"
+      "description": "ផ្លូវកាត់ក្ដារចុចដំណើរការនៅលើទំព័រណាមួយលើកលែងតែពេលវាយក្នុងទម្រង់។ ចុច {key} ពេលណាក៏បានដើម្បីមើលជំនួយនេះ។",
+      "title": "💡 គន្លឹះ"
     },
-    "subtitle": "Power-user productivity tips",
-    "title": "Keyboard Shortcuts"
+    "subtitle": "គន្លឹះផលិតភាពសម្រាប់អ្នកប្រើប្រាស់ជំនាញ",
+    "title": "ផ្លូវកាត់ក្ដារចុច"
   },
   "sidebar": {
     "actions": {
@@ -4245,167 +4245,167 @@
   },
   "simplefinSettings": {
     "connectedAccounts": {
-      "description": "Manage your linked bank accounts",
-      "title": "Connected Accounts"
+      "description": "គ្រប់គ្រងគណនីធនាគារដែលបានភ្ជាប់",
+      "title": "គណនីដែលបានភ្ជាប់"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
-      "connectButton": "Connect Bank Account",
-      "connected": "Connected",
-      "description": "Connect your bank accounts to automatically import transactions",
-      "notConnected": "Not Connected",
-      "notConnectedDesc": "Connect your bank accounts to start importing transactions",
-      "title": "SimpleFIN Connection"
+      "accountsLinked": "{count, plural, =1 {គណនី 1 បានភ្ជាប់} other {គណនី # បានភ្ជាប់}}",
+      "connectButton": "ភ្ជាប់គណនីធនាគារ",
+      "connected": "បានភ្ជាប់",
+      "description": "ភ្ជាប់គណនីធនាគារដើម្បីនាំចូលប្រតិបត្តិការដោយស្វ័យប្រវត្តិ",
+      "notConnected": "មិនបានភ្ជាប់",
+      "notConnectedDesc": "ភ្ជាប់គណនីធនាគារដើម្បីចាប់ផ្ដើមនាំចូលប្រតិបត្តិការ",
+      "title": "ការភ្ជាប់ SimpleFIN"
     },
     "disconnect": {
-      "button": "Disconnect",
-      "cancel": "Cancel",
-      "confirm": "Disconnect",
-      "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
-      "dialogTitle": "Disconnect SimpleFIN?"
+      "button": "ផ្ដាច់",
+      "cancel": "បោះបង់",
+      "confirm": "ផ្ដាច់",
+      "dialogDescription": "នេះនឹងដកការភ្ជាប់ទៅគណនីធនាគារ។ ប្រតិបត្តិការដែលមានស្រាប់នឹងមិនត្រូវបានលុបទេ។",
+      "dialogTitle": "ផ្ដាច់ SimpleFIN?"
     },
     "help": {
-      "bridgeDashboard": "SimpleFIN Bridge Dashboard",
-      "protocolDocs": "SimpleFIN Protocol Documentation",
-      "title": "Need Help?"
+      "bridgeDashboard": "ផ្ទាំងគ្រប់គ្រង SimpleFIN Bridge",
+      "protocolDocs": "ឯកសារពិធីការ SimpleFIN",
+      "title": "ត្រូវការជំនួយ?"
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
-      "lastSynced": "Last synced: {time}",
-      "lessThanHour": "Less than an hour ago",
-      "never": "Never",
-      "syncNow": "Sync Now",
-      "syncing": "Syncing..."
+      "hoursAgo": "{hours, plural, =1 {1 ម៉ោងមុន} other {# ម៉ោងមុន}}",
+      "lastSynced": "សមកាលកម្មចុងក្រោយ: {time}",
+      "lessThanHour": "តិចជាងមួយម៉ោងមុន",
+      "never": "មិនដែល",
+      "syncNow": "ធ្វើសមកាលកម្មឥឡូវ",
+      "syncing": "កំពុងធ្វើសមកាលកម្ម..."
     },
     "syncSettings": {
       "autoCategorize": {
-        "description": "Automatically categorize imported transactions using AI",
-        "label": "Auto-Categorize"
+        "description": "ចាត់ប្រភេទប្រតិបត្តិការដែលនាំចូលដោយស្វ័យប្រវត្តិដោយប្រើ AI",
+        "label": "ចាត់ប្រភេទស្វ័យប្រវត្តិ"
       },
       "autoSync": {
-        "description": "Automatically sync transactions on a schedule",
-        "label": "Automatic Sync"
+        "description": "ធ្វើសមកាលកម្មប្រតិបត្តិការដោយស្វ័យប្រវត្តិតាមកាលវិភាគ",
+        "label": "សមកាលកម្មស្វ័យប្រវត្តិ"
       },
-      "description": "Configure how and when transactions are synced",
+      "description": "កំណត់វិធី និង ពេលវេលាធ្វើសមកាលកម្មប្រតិបត្តិការ",
       "frequency": {
-        "every12Hours": "Every 12 hours",
-        "every2Days": "Every 2 days",
-        "every6Hours": "Every 6 hours",
-        "hint": "SimpleFIN allows up to 24 requests per day. Daily sync is recommended.",
-        "label": "Sync Frequency",
-        "onceDaily": "Once daily"
+        "every12Hours": "រៀងរាល់ 12 ម៉ោង",
+        "every2Days": "រៀងរាល់ 2 ថ្ងៃ",
+        "every6Hours": "រៀងរាល់ 6 ម៉ោង",
+        "hint": "SimpleFIN អនុញ្ញាតរហូតដល់ 24 សំណើក្នុងមួយថ្ងៃ។ សមកាលកម្មប្រចាំថ្ងៃត្រូវបានណែនាំ។",
+        "label": "ភាពញឹកញាប់សមកាលកម្ម",
+        "onceDaily": "មួយថ្ងៃម្ដង"
       },
       "notifications": {
-        "description": "Show notification when sync completes",
-        "label": "Sync Notifications"
+        "description": "បង្ហាញការជូនដំណឹងពេលសមកាលកម្មបានបញ្ចប់",
+        "label": "ការជូនដំណឹងសមកាលកម្ម"
       },
       "pendingTransactions": {
-        "description": "Include transactions that haven't posted yet",
-        "label": "Import Pending Transactions"
+        "description": "រួមបញ្ចូលប្រតិបត្តិការដែលមិនទាន់បានបញ្ចប់",
+        "label": "នាំចូលប្រតិបត្តិការរង់ចាំ"
       },
-      "title": "Sync Settings",
+      "title": "ការកំណត់សមកាលកម្ម",
       "transactionHistory": {
-        "days": "{count} days",
-        "hint": "How many days of transaction history to fetch (max 60 days per SimpleFIN)",
-        "label": "Transaction History"
+        "days": "{count} ថ្ងៃ",
+        "hint": "ប្រវត្តិប្រតិបត្តិការប៉ុន្មានថ្ងៃត្រូវទៅយក (អតិបរមា 60 ថ្ងៃ)",
+        "label": "ប្រវត្តិប្រតិបត្តិការ"
       }
     }
   },
   "simplefinStatus": {
-    "active": "Active",
-    "asOf": "as of {date}",
-    "cancel": "Cancel",
-    "connected": "Connected",
-    "connecting": "Connecting...",
-    "disconnected": "Disconnected",
-    "dismiss": "Dismiss",
-    "error": "Error",
-    "errorsLabel": "Errors:",
-    "expired": "Expired",
-    "hoursAgo": "{hours}h ago",
-    "imported": "Imported",
-    "justNow": "just now",
-    "lastSynced": "Last synced: {time}",
-    "minutesAgo": "{minutes}m ago",
-    "neverSynced": "Never synced",
-    "noBankAccounts": "No bank accounts connected",
-    "pause": "Pause",
-    "paused": "Paused",
-    "processing": "Processing: {account}",
-    "resume": "Resume",
-    "skippedDuplicates": "Skipped (duplicates)",
+    "active": "សកម្ម",
+    "asOf": "គិតត្រឹម {date}",
+    "cancel": "បោះបង់",
+    "connected": "បានភ្ជាប់",
+    "connecting": "កំពុងភ្ជាប់...",
+    "disconnected": "ផ្ដាច់",
+    "dismiss": "បដិសេធ",
+    "error": "កំហុស",
+    "errorsLabel": "កំហុស:",
+    "expired": "ផុតកំណត់",
+    "hoursAgo": "{hours}ម៉ មុន",
+    "imported": "បាននាំចូល",
+    "justNow": "ឥឡូវនេះ",
+    "lastSynced": "សមកាលកម្មចុងក្រោយ: {time}",
+    "minutesAgo": "{minutes}ន មុន",
+    "neverSynced": "មិនទាន់ធ្វើសមកាលកម្មទេ",
+    "noBankAccounts": "មិនមានគណនីធនាគារភ្ជាប់",
+    "pause": "ផ្អាក",
+    "paused": "ផ្អាក",
+    "processing": "កំពុងដំណើរការ: {account}",
+    "resume": "បន្ត",
+    "skippedDuplicates": "បានរំលង (ស្ទួន)",
     "statusLabel": "SimpleFIN: {status}",
-    "sync": "Sync",
-    "syncComplete": "Sync Complete",
-    "syncCompletedWithErrors": "Sync Completed with Errors",
-    "syncFailed": "Sync Failed",
-    "syncSuccessful": "Sync Successful",
-    "syncedDaysAgo": "Synced {days}d ago",
-    "syncedHoursAgo": "Synced {hours}h ago",
-    "syncedJustNow": "Synced just now",
-    "syncedYesterday": "Synced yesterday",
-    "syncing": "Syncing...",
-    "transactionsCount": "({count} transactions)",
-    "unlink": "Unlink",
-    "warningsLabel": "Warnings:"
+    "sync": "ធ្វើសមកាលកម្ម",
+    "syncComplete": "ការធ្វើសមកាលកម្មបានបញ្ចប់",
+    "syncCompletedWithErrors": "ការធ្វើសមកាលកម្មបានបញ្ចប់ជាមួយកំហុស",
+    "syncFailed": "ការធ្វើសមកាលកម្មបរាជ័យ",
+    "syncSuccessful": "ការធ្វើសមកាលកម្មបានជោគជ័យ",
+    "syncedDaysAgo": "បានធ្វើសមកាលកម្ម {days}ថ មុន",
+    "syncedHoursAgo": "បានធ្វើសមកាលកម្ម {hours}ម៉ មុន",
+    "syncedJustNow": "បានធ្វើសមកាលកម្មឥឡូវ",
+    "syncedYesterday": "បានធ្វើសមកាលកម្មម្សិលមិញ",
+    "syncing": "កំពុងធ្វើសមកាលកម្ម...",
+    "transactionsCount": "({count} ប្រតិបត្តិការ)",
+    "unlink": "ផ្ដាច់",
+    "warningsLabel": "ការព្រមាន:"
   },
   "spendingTrendChart": {
-    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "forecastFooter": "ការព្យាករណ៍ផ្អែកលើការវិភាគត្រឡប់ត្រង់នៃ {months} ខែចុងក្រោយ",
     "legend": {
-      "actualSpending": "Actual Spending",
-      "projected": "Projected"
+      "actualSpending": "ការចំណាយពិត",
+      "projected": "ព្យាករណ៍"
     },
-    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "notEnoughData": "មិនមានទិន្នន័យគ្រប់គ្រាន់ដើម្បីបង្កើតនិន្នាការ។ បន្ថែមប្រតិបត្តិការយ៉ាងហោចណាស់ 2 ខែ។",
     "stats": {
-      "avgMonthly": "Avg Monthly",
-      "lastMonth": "Last Month",
-      "projected": "Projected"
+      "avgMonthly": "មធ្យមប្រចាំខែ",
+      "lastMonth": "ខែមុន",
+      "projected": "ព្យាករណ៍"
     },
-    "title": "Spending Trends & Forecast"
+    "title": "និន្នាការចំណាយ និង ការព្យាករណ៍"
   },
   "splitTransaction": {
-    "addSplit": "Add Split ({current}/{max})",
-    "amount": "Amount",
+    "addSplit": "បន្ថែមការបំបែក ({current}/{max})",
+    "amount": "ចំនួនទឹកប្រាក់",
     "buttons": {
-      "cancel": "Cancel",
-      "save": "Save Split",
-      "saving": "Saving..."
+      "cancel": "បោះបង់",
+      "save": "រក្សាទុកការបំបែក",
+      "saving": "កំពុងរក្សាទុក..."
     },
-    "category": "Category",
-    "closeModal": "Close modal",
-    "date": "Date:",
-    "distributeEvenly": "Distribute Evenly",
+    "category": "ប្រភេទ",
+    "closeModal": "បិទបង្អួច",
+    "date": "កាលបរិច្ឆេទ:",
+    "distributeEvenly": "ចែកស្មើ",
     "errors": {
-      "saveFailed": "Failed to save split transaction"
+      "saveFailed": "មិនអាចរក្សាទុកប្រតិបត្តិការបំបែកបាន"
     },
     "help": {
-      "step1": "Enter the amount for each category (must total ${amount})",
-      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
-      "step3": "Add up to 5 splits per transaction",
-      "step4": "The original transaction will be hidden and replaced with split items",
-      "title": "How to split transactions:"
+      "step1": "បញ្ចូលចំនួនសម្រាប់ប្រភេទនីមួយៗ (ត្រូវសរុប ${amount})",
+      "step2": "ប្រើ \"ចែកស្មើ\" ដើម្បីចែកស្មើគ្នាក្នុងប្រភេទទាំងអស់",
+      "step3": "បន្ថែមរហូតដល់ 5 ការបំបែកក្នុងប្រតិបត្តិការមួយ",
+      "step4": "ប្រតិបត្តិការដើមនឹងត្រូវបានលាក់ និង ជំនួសដោយធាតុបំបែក",
+      "title": "របៀបបំបែកប្រតិបត្តិការ:"
     },
-    "maxSplitsReached": "Maximum 5 splits allowed",
-    "minSplitsRequired": "Minimum 2 splits required",
-    "none": "None",
-    "notes": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Business expense, Personal use",
-    "originalAmount": "Original Amount:",
-    "removeThisSplit": "Remove this split",
-    "selectCategory": "Select category...",
-    "splitsCount": "Splits ({current}/{max})",
-    "subcategory": "Subcategory",
-    "title": "Split Transaction",
+    "maxSplitsReached": "អតិបរមា 5 ការបំបែក",
+    "minSplitsRequired": "អប្បបរមា 2 ការបំបែកត្រូវការ",
+    "none": "គ្មាន",
+    "notes": "កំណត់សម្គាល់ (ជម្រើស)",
+    "notesPlaceholder": "ឧ. ការចំណាយអាជីវកម្ម, ប្រើប្រាស់ផ្ទាល់ខ្លួន",
+    "originalAmount": "ចំនួនទឹកប្រាក់ដើម:",
+    "removeThisSplit": "ដកការបំបែកនេះចេញ",
+    "selectCategory": "ជ្រើសរើសប្រភេទ...",
+    "splitsCount": "ការបំបែក ({current}/{max})",
+    "subcategory": "ប្រភេទរង",
+    "title": "បំបែកប្រតិបត្តិការ",
     "validation": {
-      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
-      "amountsMustMatch": "Split amounts must equal the original transaction amount",
-      "categoryRequired": "All splits must have a category",
-      "matchesOriginal": "✓ Matches original",
-      "overBy": "Over by ${amount}",
-      "readyToSave": "Split amounts match the original transaction. Ready to save!",
-      "total": "Total:",
-      "underBy": "Under by ${amount}"
+      "adjustAmounts": "កែតម្រូវចំនួនបំបែកដើម្បីត្រូវគ្នានឹងចំនួនប្រតិបត្តិការដើម។",
+      "amountsMustMatch": "ចំនួនបំបែកត្រូវស្មើនឹងចំនួនប្រតិបត្តិការដើម",
+      "categoryRequired": "ការបំបែកទាំងអស់ត្រូវមានប្រភេទ",
+      "matchesOriginal": "✓ ត្រូវគ្នានឹងដើម",
+      "overBy": "លើស ${amount}",
+      "readyToSave": "ចំនួនបំបែកត្រូវគ្នានឹងប្រតិបត្តិការដើម។ រួចរាល់ដើម្បីរក្សាទុក!",
+      "total": "សរុប:",
+      "underBy": "ថយ ${amount}"
     }
   },
   "splits": {
@@ -4494,64 +4494,64 @@
   },
   "subscriptionCard": {
     "badges": {
-      "aiVerified": "AI Verified",
-      "cancelled": "Cancelled",
-      "paused": "Paused",
-      "trial": "Trial"
+      "aiVerified": "AI បានផ្ទៀងផ្ទាត់",
+      "cancelled": "បានលុបចោល",
+      "paused": "ផ្អាក",
+      "trial": "សាកល្បង"
     },
     "buttons": {
-      "claimManage": "Claim & Manage",
-      "edit": "Edit",
-      "transactions": "Transactions"
+      "claimManage": "ទាមទារ និង គ្រប់គ្រង",
+      "edit": "កែប្រែ",
+      "transactions": "ប្រតិបត្តិការ"
     },
     "confidence": {
-      "high": "High",
-      "label": "Detection Confidence",
-      "low": "Low",
-      "medium": "Medium"
+      "high": "ខ្ពស់",
+      "label": "ទំនុកចិត្តក្នុងការរកឃើញ",
+      "low": "ទាប",
+      "medium": "មធ្យម"
     },
     "details": {
-      "charges": "{count} charges",
-      "daysBefore": "{count} days before",
-      "firstCharge": "First Charge",
-      "lastCharge": "Last Charge",
-      "occurrences": "Occurrences",
-      "payment": "Payment",
-      "reminder": "Reminder"
+      "charges": "{count} ការគិតថ្លៃ",
+      "daysBefore": "{count} ថ្ងៃមុន",
+      "firstCharge": "ការគិតថ្លៃដំបូង",
+      "lastCharge": "ការគិតថ្លៃចុងក្រោយ",
+      "occurrences": "ចំនួនដង",
+      "payment": "ការទូទាត់",
+      "reminder": "ការរំលឹក"
     },
     "interval": {
-      "annual": "Annual",
-      "bi-weekly": "Bi-weekly",
-      "irregular": "Irregular",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "annual": "ប្រចាំឆ្នាំ",
+      "bi-weekly": "រៀងរាល់ពីរសប្ដាហ៍",
+      "irregular": "មិនទៀងទាត់",
+      "monthly": "ប្រចាំខែ",
+      "quarterly": "ប្រចាំត្រីមាស",
+      "weekly": "ប្រចាំសប្ដាហ៍"
     },
-    "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
+    "lowConfidenceWarning": "ការជាវនេះត្រូវបានរកឃើញជាមួយទំនុកចិត្តទាប។ ទាមទារវាដើម្បីផ្ទៀងផ្ទាត់ និងគ្រប់គ្រងដោយដៃ។",
     "menu": {
-      "cancelSubscription": "Cancel Subscription",
-      "claimManage": "Claim & Manage",
-      "delete": "Delete",
-      "edit": "Edit",
-      "notSubscription": "Not a Subscription",
-      "pause": "Pause",
-      "resume": "Resume",
-      "viewTransactions": "View Transactions"
+      "cancelSubscription": "លុបចោលការជាវ",
+      "claimManage": "ទាមទារ និង គ្រប់គ្រង",
+      "delete": "លុប",
+      "edit": "កែប្រែ",
+      "notSubscription": "មិនមែនការជាវ",
+      "pause": "ផ្អាក",
+      "resume": "បន្ត",
+      "viewTransactions": "មើលប្រតិបត្តិការ"
     },
     "source": {
-      "auto-detected": "Auto-detected",
-      "manual": "Manual",
-      "merged": "Tracked"
+      "auto-detected": "រកឃើញស្វ័យប្រវត្តិ",
+      "manual": "ដោយដៃ",
+      "merged": "តាមដាន"
     },
     "stats": {
-      "amount": "Amount",
-      "annualCost": "Annual Cost",
-      "frequency": "Frequency",
-      "nextCharge": "Next Charge",
-      "totalSpent": "Total Spent"
+      "amount": "ចំនួនទឹកប្រាក់",
+      "annualCost": "ថ្លៃប្រចាំឆ្នាំ",
+      "frequency": "ភាពញឹកញាប់",
+      "nextCharge": "ការគិតថ្លៃបន្ទាប់",
+      "totalSpent": "ចំណាយសរុប"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {នៅសល់ 1 ថ្ងៃក្នុងការសាកល្បង} other {នៅសល់ # ថ្ងៃក្នុងការសាកល្បង}}"
     },
     "reminderToggle": {
       "disableReminder": "បិទការរំលឹក",
@@ -4560,30 +4560,30 @@
     }
   },
   "subscriptionCostChart": {
-    "emptyState": "No active subscriptions to analyze",
-    "loadingChart": "Loading chart...",
-    "moreCharges": "+{count} more charges",
-    "perMonth": "/month",
+    "emptyState": "មិនមានការជាវសកម្មដើម្បីវិភាគ",
+    "loadingChart": "កំពុងផ្ទុកតារាង...",
+    "moreCharges": "+{count} ការគិតថ្លៃផ្សេងទៀត",
+    "perMonth": "/ខែ",
     "sections": {
-      "costByCategory": "Cost by Category",
-      "potentialSavings": "Potential Savings",
-      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+      "costByCategory": "ថ្លៃតាមប្រភេទ",
+      "potentialSavings": "ការសន្សំសក្ដានុពល",
+      "upcomingCharges": "ការគិតថ្លៃនាពេលខាងមុខ (30 ថ្ងៃបន្ទាប់)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
-      "annualCost": "Annual Cost",
-      "monthlyCost": "Monthly Cost",
-      "next30Days": "Next 30 Days",
-      "projectedYearly": "Projected yearly spend",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "activeSubscriptions": "{count, plural, =1 {ការជាវសកម្ម 1} other {ការជាវសកម្ម #}}",
+      "annualCost": "ថ្លៃប្រចាំឆ្នាំ",
+      "monthlyCost": "ថ្លៃប្រចាំខែ",
+      "next30Days": "30 ថ្ងៃបន្ទាប់",
+      "projectedYearly": "ការចំណាយប្រចាំឆ្នាំដែលព្យាករណ៍",
+      "upcomingCharges": "{count, plural, =1 {ការគិតថ្លៃនាពេលខាងមុខ 1} other {ការគិតថ្លៃនាពេលខាងមុខ #}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "ការជាវដែលអាចបានលុបចោល",
+      "inactiveDescription": "{count, plural, =1 {ការជាវ 1 មិនបាន} other {ការជាវ # មិនបាន}}គិតថ្លៃថ្មីៗ។ ផ្ទៀងផ្ទាត់ថាពួកវាពិតជាបានលុបចោល។",
+      "trialsTitle": "ការសាកល្បងនឹងផុតកំណត់ឆាប់ៗ",
+      "trialsDescription": "{count, plural, =1 {ការសាកល្បង 1} other {ការសាកល្បង #}} ផុតកំណត់ក្នុង 7 ថ្ងៃបន្ទាប់។ លុបចោលប្រសិនបើអ្នកមិនប្រើ។",
+      "highCostTitle": "ការជាវថ្លៃខ្ពស់",
+      "highCostDescription": "ការជាវទាំងនេះតំណាងឲ្យផ្នែកធំនៃការចំណាយរបស់អ្នក។ ពិចារណាថាតើអ្នកទទួលបានតម្លៃពេញលេញឬអត់។"
     }
   },
   "subscriptionModal": {
@@ -4749,83 +4749,83 @@
   },
   "transactionModal": {
     "account": {
-      "label": "Account"
+      "label": "គណនី"
     },
     "advancedOptions": {
-      "available": "{count} available",
-      "label": "Advanced Options"
+      "available": "{count} អាចប្រើបាន",
+      "label": "ជម្រើសកម្រិតខ្ពស់"
     },
     "amount": {
-      "label": "Amount",
+      "label": "ចំនួនទឹកប្រាក់",
       "placeholder": "0.00",
-      "validationError": "Please enter a valid amount"
+      "validationError": "សូមបញ្ចូលចំនួនទឹកប្រាក់ត្រឹមត្រូវ"
     },
     "buttons": {
-      "add": "Add Transaction",
-      "adding": "Adding...",
-      "cancel": "Cancel",
-      "update": "Update Transaction",
-      "updating": "Updating..."
+      "add": "បន្ថែមប្រតិបត្តិការ",
+      "adding": "កំពុងបន្ថែម...",
+      "cancel": "បោះបង់",
+      "update": "ធ្វើបច្ចុប្បន្នភាពប្រតិបត្តិការ",
+      "updating": "កំពុងធ្វើបច្ចុប្បន្នភាព..."
     },
     "category": {
-      "aiCategorizing": "AI categorizing...",
-      "create": "Create",
-      "createNew": "+ Create New Category",
-      "label": "Category",
-      "lastUsed": "Using last: {category}",
-      "namePlaceholder": "Category name...",
-      "selectPlaceholder": "Select category...",
-      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+      "aiCategorizing": "AI កំពុងចាត់ប្រភេទ...",
+      "create": "បង្កើត",
+      "createNew": "+ បង្កើតប្រភេទថ្មី",
+      "label": "ប្រភេទ",
+      "lastUsed": "ប្រើចុងក្រោយ: {category}",
+      "namePlaceholder": "ឈ្មោះប្រភេទ...",
+      "selectPlaceholder": "ជ្រើសរើសប្រភេទ...",
+      "subcategoriesPlaceholder": "ប្រភេទរង (ជម្រើស ដាក់សញ្ញាក្បៀស)"
     },
-    "closeModal": "Close modal",
+    "closeModal": "បិទបង្អួច",
     "createCategory": {
-      "created": "Category \"{name}\" created!",
-      "failed": "Failed to create category",
-      "nameRequired": "Category name is required"
+      "created": "បានបង្កើតប្រភេទ \"{name}\"!",
+      "failed": "មិនអាចបង្កើតប្រភេទបាន",
+      "nameRequired": "ត្រូវការឈ្មោះប្រភេទ"
     },
     "date": {
-      "label": "Date"
+      "label": "កាលបរិច្ឆេទ"
     },
     "description": {
-      "label": "Description",
-      "placeholder": "e.g., Grocery shopping at Sobeys"
+      "label": "ការពិពណ៌នា",
+      "placeholder": "ឧ. ទិញគ្រឿងទេស​នៅ Sobeys"
     },
     "learned": {
-      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
-      "title": "Learned!"
+      "description": "បន្ទាប់ពីកែតម្រូវស្រដៀងគ្នា 3 ដង ប្រតិបត្តិការនាពេលខាងមុខពីអ្នកលក់នេះនឹងចាត់ប្រភេទដោយស្វ័យប្រវត្តិ។",
+      "title": "បានរៀន!"
     },
     "notes": {
-      "label": "Notes",
-      "placeholder": "Add any additional notes..."
+      "label": "កំណត់សម្គាល់",
+      "placeholder": "បន្ថែមកំណត់សម្គាល់បន្ថែម..."
     },
     "receipts": {
-      "addNew": "Add New Receipt",
-      "deleteConfirm": "Are you sure you want to delete this receipt?",
-      "deleteFailed": "Failed to delete receipt",
-      "deleteReceipt": "Delete receipt",
-      "existing": "Existing receipts ({count})",
-      "label": "Receipt Attachments",
-      "newFile": "New: {filename}",
-      "remove": "Remove",
-      "viewFull": "View full receipt"
+      "addNew": "បន្ថែមបង្កាន់ដៃថ្មី",
+      "deleteConfirm": "តើអ្នកប្រាកដថាចង់លុបបង្កាន់ដៃនេះមែនទេ?",
+      "deleteFailed": "មិនអាចលុបបង្កាន់ដៃបាន",
+      "deleteReceipt": "លុបបង្កាន់ដៃ",
+      "existing": "បង្កាន់ដៃដែលមានស្រាប់ ({count})",
+      "label": "ឯកសារភ្ជាប់បង្កាន់ដៃ",
+      "newFile": "ថ្មី: {filename}",
+      "remove": "ដកចេញ",
+      "viewFull": "មើលបង្កាន់ដៃពេញ"
     },
     "subcategory": {
-      "label": "Subcategory",
-      "none": "None",
-      "selectPlaceholder": "Select subcategory..."
+      "label": "ប្រភេទរង",
+      "none": "គ្មាន",
+      "selectPlaceholder": "ជ្រើសរើសប្រភេទរង..."
     },
     "tags": {
-      "label": "Tags (comma-separated)",
-      "placeholder": "e.g., groceries, weekly, essential"
+      "label": "ស្លាក (ដាក់សញ្ញាក្បៀស)",
+      "placeholder": "ឧ. គ្រឿងទេស, ប្រចាំសប្ដាហ៍, ចាំបាច់"
     },
     "title": {
-      "add": "Add Transaction",
-      "edit": "Edit Transaction"
+      "add": "បន្ថែមប្រតិបត្តិការ",
+      "edit": "កែប្រែប្រតិបត្តិការ"
     },
     "type": {
-      "expense": "Expense",
-      "income": "Income",
-      "label": "Type"
+      "expense": "ចំណាយ",
+      "income": "ចំណូល",
+      "label": "ប្រភេទ"
     }
   },
   "transactionSearch": {
@@ -4872,19 +4872,19 @@
   },
   "transactionTable": {
     "actions": {
-      "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
-      "split": "Split"
+      "attachReceipt": "ភ្ជាប់បង្កាន់ដៃ",
+      "delete": "លុប",
+      "edit": "កែប្រែ",
+      "split": "បំបែក"
     },
-    "emptyState": "No transactions to display",
+    "emptyState": "មិនមានប្រតិបត្តិការដើម្បីបង្ហាញ",
     "headers": {
-      "account": "Account",
-      "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
-      "date": "Date",
-      "description": "Description"
+      "account": "គណនី",
+      "actions": "សកម្មភាព",
+      "amount": "ចំនួនទឹកប្រាក់",
+      "category": "ប្រភេទ",
+      "date": "កាលបរិច្ឆេទ",
+      "description": "ការពិពណ៌នា"
     }
   },
   "transactions": {
@@ -5063,8 +5063,8 @@
       "title": "ការរីកចម្រើនថវិកា"
     },
     "eventBudget": {
-      "description": "Track spending for events and projects",
-      "title": "Event Budgets"
+      "description": "តាមដានការចំណាយសម្រាប់ព្រឹត្តិការណ៍ និងគម្រោង",
+      "title": "ថវិកាព្រឹត្តិការណ៍"
     },
     "incomeVsExpenses": {
       "description": "ប្រៀបធៀបចំណូលនិងចំណាយរបស់អ្នកក្នុងពេលវេលា",
@@ -5075,163 +5075,163 @@
       "title": "និន្នាការប្រចាំខែ"
     },
     "netWorthMini": {
-      "description": "Quick view of your total net worth",
-      "title": "Net Worth"
+      "description": "ទិដ្ឋភាពរហ័សនៃទ្រព្យសម្បត្តិសុទ្ធសរុបរបស់អ្នក",
+      "title": "ទ្រព្យសម្បត្តិសុទ្ធ"
     },
     "recentTransactions": {
       "description": "មើលឃើញយ៉ាងឆាប់រហ័សនៃសកម្មភាពហិរញ្ញវត្ថុថ្មីៗរបស់អ្នក",
       "title": "ប្រតិបត្តិការ​ថ្មីៗ"
     },
     "safeToSpend": {
-      "description": "See how much you can safely spend per category",
-      "title": "Safe to Spend"
+      "description": "មើលថាអ្នកអាចចំណាយប៉ុន្មានដោយសុវត្ថិភាពតាមប្រភេទ",
+      "title": "សុវត្ថិភាពក្នុងការចំណាយ"
     },
     "spendingByCategory": {
       "description": "មើលថា​ប្រាក់​របស់អ្នកទៅណាមួយជាមួយការបំបែកវិជ្ជមាន",
       "title": "ចំណាយតាមប្រភេទ"
     },
     "streaks": {
-      "description": "Track your engagement streaks and achievements",
-      "title": "Streaks & Badges"
+      "description": "តាមដានស៊េរីការចូលរួម និងសមិទ្ធផលរបស់អ្នក",
+      "title": "ស៊េរី និង ស្លាកសញ្ញា"
     },
     "upcomingBills": {
       "description": "កុំឱ្យខកខានការទូទាត់ជាមួយការចងចាំវិក្កយបត្រ",
       "title": "វិក្កយបត្រដែលនឹងមកដល់"
     },
     "weeklyRecap": {
-      "description": "Summary of your weekly spending patterns",
-      "title": "Weekly Recap"
+      "description": "សង្ខេបគំរូចំណាយប្រចាំសប្ដាហ៍របស់អ្នក",
+      "title": "សង្ខេបប្រចាំសប្ដាហ៍"
     }
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
-      "createNew": "Create New",
-      "description": "Map YNAB categories to your existing categories or create new ones.",
-      "mapToExisting": "Map to Existing",
-      "selectCategory": "Select category...",
-      "skip": "Skip",
-      "title": "Category Mapping",
-      "willCreate": "Will create:"
+      "category": "{count, plural, =1 {ប្រភេទ 1} other {ប្រភេទ #}}",
+      "createNew": "បង្កើតថ្មី",
+      "description": "ផ្គូផ្គងប្រភេទ YNAB ទៅប្រភេទដែលមានស្រាប់ ឬបង្កើតថ្មី។",
+      "mapToExisting": "ផ្គូផ្គងទៅដែលមានស្រាប់",
+      "selectCategory": "ជ្រើសរើសប្រភេទ...",
+      "skip": "រំលង",
+      "title": "ការផ្គូផ្គងប្រភេទ",
+      "willCreate": "នឹងបង្កើត:"
     },
     "completeStep": {
-      "errors": "Errors",
-      "importAnother": "Import Another",
-      "success": "Import Complete!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
-      "viewTransactions": "View Transactions",
-      "whatNext": "What would you like to do next?",
-      "withIssues": "Import Completed with Issues"
+      "errors": "កំហុស",
+      "importAnother": "នាំចូលមួយទៀត",
+      "success": "ការនាំចូលបានបញ្ចប់!",
+      "successMessage": "{count, plural, =1 {បាននាំចូល 1 ធាតុ} other {បាននាំចូល # ធាតុ}} ដោយជោគជ័យពី YNAB។",
+      "viewTransactions": "មើលប្រតិបត្តិការ",
+      "whatNext": "អ្នកចង់ធ្វើអ្វីបន្ទាប់?",
+      "withIssues": "ការនាំចូលបានបញ្ចប់ជាមួយបញ្ហា"
     },
     "footer": {
-      "back": "Back",
-      "done": "Done",
-      "next": "Next",
-      "startImport": "Start Import"
+      "back": "ថយក្រោយ",
+      "done": "រួចរាល់",
+      "next": "បន្ទាប់",
+      "startImport": "ចាប់ផ្ដើមនាំចូល"
     },
     "header": {
-      "closeLabel": "Close wizard",
-      "subtitle": "Migrate your budget data seamlessly",
-      "title": "Import from YNAB"
+      "closeLabel": "បិទអ្នកជំនួយការ",
+      "subtitle": "ផ្ទេរទិន្នន័យថវិការបស់អ្នកដោយគ្មានបញ្ហា",
+      "title": "នាំចូលពី YNAB"
     },
     "importingStep": {
-      "finishing": "Finishing up...",
-      "importingAccounts": "Importing accounts...",
-      "importingBudgets": "Importing budgets...",
-      "importingCategories": "Importing categories...",
-      "importingTransactions": "Importing transactions...",
-      "title": "Importing your YNAB data..."
+      "finishing": "កំពុងបញ្ចប់...",
+      "importingAccounts": "កំពុងនាំចូលគណនី...",
+      "importingBudgets": "កំពុងនាំចូលថវិកា...",
+      "importingCategories": "កំពុងនាំចូលប្រភេទ...",
+      "importingTransactions": "កំពុងនាំចូលប្រតិបត្តិការ...",
+      "title": "កំពុងនាំចូលទិន្នន័យ YNAB..."
     },
     "optionsStep": {
       "accountOptions": {
-        "includeClosedAccounts": "Include closed accounts",
-        "includeOffBudgetAccounts": "Include off-budget accounts",
-        "title": "Account Options"
+        "includeClosedAccounts": "រួមបញ្ចូលគណនីដែលបានបិទ",
+        "includeOffBudgetAccounts": "រួមបញ្ចូលគណនីក្រៅថវិកា",
+        "title": "ជម្រើសគណនី"
       },
       "budgetOptions": {
-        "importGoals": "Import savings goals as future purchases",
-        "title": "Budget Options"
+        "importGoals": "នាំចូលគោលដៅសន្សំជាការទិញអនាគត",
+        "title": "ជម្រើសថវិកា"
       },
       "hiddenCategories": {
-        "archive": "Archive",
-        "archiveDesc": "Import as archived (recommended)",
-        "description": "How to handle YNAB categories marked as hidden?",
-        "import": "Import",
-        "importDesc": "Import as active categories",
-        "skip": "Skip",
-        "skipDesc": "Don't import hidden categories",
-        "title": "Hidden Categories"
+        "archive": "ទុកក្នុងប័ណ្ណសារ",
+        "archiveDesc": "នាំចូលជាប័ណ្ណសារ (ណែនាំ)",
+        "description": "ដោះស្រាយប្រភេទ YNAB ដែលបានសម្គាល់ជាលាក់យ៉ាងដូចម្ដេច?",
+        "import": "នាំចូល",
+        "importDesc": "នាំចូលជាប្រភេទសកម្ម",
+        "skip": "រំលង",
+        "skipDesc": "មិននាំចូលប្រភេទដែលបានលាក់",
+        "title": "ប្រភេទដែលបានលាក់"
       }
     },
     "previewStep": {
-      "accounts": "Accounts",
-      "allocations": "{count} allocations",
-      "budgetMonths": "Budget Months",
-      "categories": "Categories",
-      "dateRange": "Transaction Date Range",
-      "description": "Review the data that will be imported.",
-      "duplicates": "{count} duplicates",
-      "new": "{count} new",
-      "newMapped": "{created} new, {mapped} mapped",
-      "preparingPreview": "Preparing preview...",
-      "title": "Import Preview",
-      "transactions": "Transactions",
-      "warnings": "Warnings"
+      "accounts": "គណនី",
+      "allocations": "{count} ការបែងចែក",
+      "budgetMonths": "ខែថវិកា",
+      "categories": "ប្រភេទ",
+      "dateRange": "ជួរកាលបរិច្ឆេទប្រតិបត្តិការ",
+      "description": "ពិនិត្យទិន្នន័យដែលនឹងត្រូវបាននាំចូល។",
+      "duplicates": "{count} ស្ទួន",
+      "new": "{count} ថ្មី",
+      "newMapped": "{created} ថ្មី, {mapped} ផ្គូផ្គង",
+      "preparingPreview": "កំពុងរៀបចំការពិនិត្យ...",
+      "title": "ពិនិត្យការនាំចូល",
+      "transactions": "ប្រតិបត្តិការ",
+      "warnings": "ការព្រមាន"
     },
     "steps": {
       "categories": {
-        "description": "Map to existing categories",
-        "title": "Categories"
+        "description": "ផ្គូផ្គងទៅប្រភេទដែលមានស្រាប់",
+        "title": "ប្រភេទ"
       },
       "complete": {
-        "description": "Migration finished",
-        "title": "Complete"
+        "description": "ការផ្ទេរបានបញ្ចប់",
+        "title": "បានបញ្ចប់"
       },
       "importing": {
-        "description": "Processing your data",
-        "title": "Importing"
+        "description": "កំពុងដំណើរការទិន្នន័យរបស់អ្នក",
+        "title": "កំពុងនាំចូល"
       },
       "options": {
-        "description": "Configure import settings",
-        "title": "Options"
+        "description": "កំណត់ការកំណត់នាំចូល",
+        "title": "ជម្រើស"
       },
       "preview": {
-        "description": "Review before import",
-        "title": "Preview"
+        "description": "ពិនិត្យមុនពេលនាំចូល",
+        "title": "ពិនិត្យមើល"
       },
       "upload": {
-        "description": "Select YNAB export file",
-        "title": "Upload"
+        "description": "ជ្រើសរើសឯកសារនាំចេញ YNAB",
+        "title": "ផ្ទុកឡើង"
       }
     },
     "uploadStep": {
-      "accounts": "Accounts",
-      "categories": "Categories",
-      "clickToSelect": "Click to select a file",
-      "dragAndDrop": "or drag and drop here",
-      "fileSummary": "File Summary",
-      "format": "Format",
-      "formatApiExport": "YNAB API Export",
-      "formatApiExportDesc": "JSON from nYNAB",
-      "formatCsv": "CSV Export",
-      "formatCsvDesc": "From YNAB web app",
+      "accounts": "គណនី",
+      "categories": "ប្រភេទ",
+      "clickToSelect": "ចុចដើម្បីជ្រើសរើសឯកសារ",
+      "dragAndDrop": "ឬអូស និង ទម្លាក់ទីនេះ",
+      "fileSummary": "សង្ខេបឯកសារ",
+      "format": "ទម្រង់",
+      "formatApiExport": "នាំចេញ YNAB API",
+      "formatApiExportDesc": "JSON ពី nYNAB",
+      "formatCsv": "នាំចេញ CSV",
+      "formatCsvDesc": "ពីកម្មវិធីបណ្ដាញ YNAB",
       "formatYfull": "Budget.yfull / Budget.ynab4",
-      "formatYfullDesc": "YNAB4 desktop export",
-      "parsing": "Parsing file...",
-      "supportedFormats": "Supported Formats",
-      "transactions": "Transactions"
+      "formatYfullDesc": "នាំចេញ YNAB4 desktop",
+      "parsing": "កំពុងញែកឯកសារ...",
+      "supportedFormats": "ទម្រង់ដែលគាំទ្រ",
+      "transactions": "ប្រតិបត្តិការ"
     },
     "errors": {
-      "parseFailed": "Failed to parse YNAB file",
-      "previewFailed": "Failed to generate preview",
-      "accountImportFailed": "Account import failed: {details}",
-      "categoryImportFailed": "Category import failed: {details}",
-      "transactionImportFailed": "Transaction import failed: {details}",
-      "unknownError": "Unknown error",
-      "budgetImportFailed": "Budget import failed: {details}"
+      "parseFailed": "មិនអាចញែកឯកសារ YNAB បាន",
+      "previewFailed": "មិនអាចបង្កើតការពិនិត្យបាន",
+      "accountImportFailed": "ការនាំចូលគណនីបរាជ័យ: {details}",
+      "categoryImportFailed": "ការនាំចូលប្រភេទបរាជ័យ: {details}",
+      "transactionImportFailed": "ការនាំចូលប្រតិបត្តិការបរាជ័យ: {details}",
+      "unknownError": "កំហុសមិនស្គាល់",
+      "budgetImportFailed": "ការនាំចូលថវិកាបរាជ័យ: {details}"
     },
-    "importSuccess": "YNAB data imported successfully!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importSuccess": "បាននាំចូលទិន្នន័យ YNAB ដោយជោគជ័យ!",
+    "importWithErrors": "ការនាំចូលបានបញ្ចប់ជាមួយ {count, plural, =1 {កំហុស 1} other {កំហុស #}}"
   },
   "balanceReconciliation": {
     "title": "ការនាំចូលបានបញ្ចប់!",

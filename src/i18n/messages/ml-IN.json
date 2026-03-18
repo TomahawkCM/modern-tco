@@ -1,96 +1,96 @@
 {
   "accessibilitySettings": {
     "fontSize": {
-      "default": "Default",
-      "description": "Adjust the base text size for better readability",
-      "extraLarge": "Extra Large",
-      "large": "Large",
-      "title": "Font Size"
+      "default": "ഡിഫോൾട്ട്",
+      "description": "മികച്ച വായനാക്ഷമതയ്ക്കായി അടിസ്ഥാന ടെക്‌സ്റ്റ് വലുപ്പം ക്രമീകരിക്കുക",
+      "extraLarge": "വളരെ വലുത്",
+      "large": "വലുത്",
+      "title": "ഫോണ്ട് വലുപ്പം"
     },
     "infoBox": {
-      "savedAutomatically": "Settings are saved automatically and persist across sessions",
-      "seniorsOptimization": "Seniors Mode provides one-click accessibility optimization",
-      "storedLocally": "Your preferences are stored locally and never sent to servers",
-      "syncAcrossTabs": "Changes sync across all open tabs in real-time",
-      "title": "About Accessibility Settings"
+      "savedAutomatically": "ക്രമീകരണങ്ങൾ സ്വയമേവ സേവ് ചെയ്യുകയും സെഷനുകളിലുടനീളം നിലനിൽക്കുകയും ചെയ്യുന്നു",
+      "seniorsOptimization": "സീനിയേഴ്‌സ് മോഡ് ഒറ്റ-ക്ലിക്ക് പ്രവേശനക്ഷമതാ ഒപ്റ്റിമൈസേഷൻ നൽകുന്നു",
+      "storedLocally": "നിങ്ങളുടെ മുൻഗണനകൾ ലോക്കലായി സൂക്ഷിക്കുകയും സെർവറുകളിലേക്ക് ഒരിക്കലും അയയ്ക്കുകയും ചെയ്യുന്നില്ല",
+      "syncAcrossTabs": "മാറ്റങ്ങൾ എല്ലാ തുറന്ന ടാബുകളിലും തത്സമയം സിങ്ക് ചെയ്യുന്നു",
+      "title": "പ്രവേശനക്ഷമതാ ക്രമീകരണങ്ങളെക്കുറിച്ച്"
     },
     "presets": {
-      "full": "Full",
-      "fullDesc": "Maximum accessibility",
-      "mild": "Mild",
-      "mildDesc": "Slightly enhanced",
-      "moderate": "Moderate",
-      "moderateDesc": "Recommended for most",
-      "off": "Off",
-      "offDesc": "Standard interface",
-      "title": "Quick Presets:"
+      "full": "ഫുൾ",
+      "fullDesc": "പരമാവധി പ്രവേശനക്ഷമത",
+      "mild": "മൈൽഡ്",
+      "mildDesc": "ചെറുതായി മെച്ചപ്പെടുത്തിയത്",
+      "moderate": "മോഡറേറ്റ്",
+      "moderateDesc": "മിക്കവർക്കും ശുപാർശ ചെയ്യുന്നു",
+      "off": "ഓഫ്",
+      "offDesc": "സ്റ്റാൻഡേർഡ് ഇന്റർഫേസ്",
+      "title": "ദ്രുത പ്രീസെറ്റുകൾ:"
     },
     "reducedMotion": {
-      "description": "Minimize animations and transitions for a calmer experience. Helpful for users with vestibular disorders or motion sensitivity.",
-      "title": "Reduced Motion",
-      "toggleLabel": "Toggle reduced motion mode"
+      "description": "ശാന്തമായ അനുഭവത്തിനായി ആനിമേഷനുകളും ട്രാൻസിഷനുകളും കുറയ്ക്കുക. വെസ്റ്റിബുലാർ ഡിസോർഡറുകളോ ചലന സംവേദനക്ഷമതയോ ഉള്ള ഉപയോക്താക്കൾക്ക് സഹായകരം.",
+      "title": "കുറഞ്ഞ ചലനം",
+      "toggleLabel": "കുറഞ്ഞ ചലന മോഡ് ടോഗിൾ ചെയ്യുക"
     },
     "seniorsMode": {
-      "description": "One-click accessibility enhancement with larger text, bigger touch targets, and simplified interface",
-      "title": "Seniors Mode"
+      "description": "വലിയ ടെക്‌സ്റ്റ്, വലിയ ടച്ച് ടാർഗറ്റുകൾ, ലളിതമാക്കിയ ഇന്റർഫേസ് എന്നിവയോടെ ഒറ്റ-ക്ലിക്ക് പ്രവേശനക്ഷമത മെച്ചപ്പെടുത്തൽ",
+      "title": "സീനിയേഴ്‌സ് മോഡ്"
     },
     "themeMode": {
-      "auto": "Auto",
-      "autoDesc": "Match system",
-      "dark": "Dark",
-      "darkDesc": "Easy on eyes",
-      "description": "Choose your preferred color scheme for the budget app",
-      "highContrast": "High Contrast",
-      "highContrastDesc": "Maximum visibility",
-      "light": "Light",
-      "lightDesc": "Bright and clear",
-      "title": "Theme Mode"
+      "auto": "ഓട്ടോ",
+      "autoDesc": "സിസ്റ്റവുമായി പൊരുത്തപ്പെടുക",
+      "dark": "ഡാർക്ക്",
+      "darkDesc": "കണ്ണുകൾക്ക് സുഖം",
+      "description": "ബജറ്റ് ആപ്പിനായി നിങ്ങൾ ഇഷ്ടപ്പെടുന്ന കളർ സ്കീം തിരഞ്ഞെടുക്കുക",
+      "highContrast": "ഉയർന്ന കോൺട്രാസ്റ്റ്",
+      "highContrastDesc": "പരമാവധി ദൃശ്യത",
+      "light": "ലൈറ്റ്",
+      "lightDesc": "തെളിച്ചവും വ്യക്തവും",
+      "title": "തീം മോഡ്"
     }
   },
   "accessibilityToggle": {
-    "featuresActive": "Accessibility features active",
-    "highContrast": "High Contrast",
-    "highContrastDescription": "Enhanced color contrast",
-    "largeTextMode": "Large Text Mode",
-    "largeTextModeDescription": "Bigger text & touch targets",
-    "reduceMotion": "Reduce Motion",
-    "reduceMotionDescription": "Minimize animations",
-    "sizeLarge": "Large",
-    "sizeNormal": "Normal",
-    "sizeXLarge": "X-Large",
-    "textSize": "Text Size",
-    "title": "Accessibility"
+    "featuresActive": "പ്രവേശനക്ഷമതാ ഫീച്ചറുകൾ സജീവമാണ്",
+    "highContrast": "ഉയർന്ന കോൺട്രാസ്റ്റ്",
+    "highContrastDescription": "മെച്ചപ്പെടുത്തിയ കളർ കോൺട്രാസ്റ്റ്",
+    "largeTextMode": "വലിയ ടെക്‌സ്റ്റ് മോഡ്",
+    "largeTextModeDescription": "വലിയ ടെക്‌സ്റ്റ് & ടച്ച് ടാർഗറ്റുകൾ",
+    "reduceMotion": "ചലനം കുറയ്ക്കുക",
+    "reduceMotionDescription": "ആനിമേഷനുകൾ കുറയ്ക്കുക",
+    "sizeLarge": "വലുത്",
+    "sizeNormal": "സാധാരണ",
+    "sizeXLarge": "X-വലുത്",
+    "textSize": "ടെക്‌സ്റ്റ് വലുപ്പം",
+    "title": "പ്രവേശനക്ഷമത"
   },
   "accessibleChart": {
     "buttons": {
-      "chart": "Chart",
-      "showChart": "Show chart view",
-      "showTable": "Show data table view",
-      "table": "Table"
+      "chart": "ചാർട്ട്",
+      "showChart": "ചാർട്ട് കാഴ്ച കാണിക്കുക",
+      "showTable": "ഡാറ്റ ടേബിൾ കാഴ്ച കാണിക്കുക",
+      "table": "ടേബിൾ"
     },
-    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support.",
-    "chartTypeDescription": "This is a {chartType} chart with {dataPoints} data points.",
+    "chartDescription": "{description}. {dataPoints} ഡാറ്റ പോയിന്റുകൾ കാണിക്കുന്നു. {dataList}. കീബോർഡ് നാവിഗേഷൻ പിന്തുണയോടെ ടേബിൾ ഫോർമാറ്റിൽ ഡാറ്റ കാണാൻ ടേബിൾ ബട്ടൺ അമർത്തുക.",
+    "chartTypeDescription": "ഇത് {dataPoints} ഡാറ്റ പോയിന്റുകളുള്ള ഒരു {chartType} ചാർട്ട് ആണ്.",
     "footer": {
-      "average": "Average:",
-      "total": "Total:"
+      "average": "ശരാശരി:",
+      "total": "ആകെ:"
     },
     "keyboardNav": {
-      "srOnly": "Use arrow keys to navigate between rows. Press Tab to navigate to the next element.",
-      "visual": "Use ← → or ↑ ↓ keys to navigate • Home/End to jump to start/end"
+      "srOnly": "വരികൾക്കിടയിൽ നാവിഗേറ്റ് ചെയ്യാൻ ആരോ കീകൾ ഉപയോഗിക്കുക. അടുത്ത ഘടകത്തിലേക്ക് നാവിഗേറ്റ് ചെയ്യാൻ Tab അമർത്തുക.",
+      "visual": "നാവിഗേറ്റ് ചെയ്യാൻ ← → അല്ലെങ്കിൽ ↑ ↓ കീകൾ ഉപയോഗിക്കുക • തുടക്കം/അവസാനം എത്താൻ Home/End"
     },
     "summary": {
-      "average": "Average: {value}.",
-      "highest": "Highest value: {label} at {value}.",
-      "lowest": "Lowest value: {label} at {value}.",
-      "total": "Total: {value}."
+      "average": "ശരാശരി: {value}.",
+      "highest": "ഏറ്റവും ഉയർന്ന മൂല്യം: {label} - {value}.",
+      "lowest": "ഏറ്റവും കുറഞ്ഞ മൂല്യം: {label} - {value}.",
+      "total": "ആകെ: {value}."
     },
-    "switchedToChart": "Switched to chart view",
-    "switchedToTable": "Switched to table view",
+    "switchedToChart": "ചാർട്ട് കാഴ്ചയിലേക്ക് മാറി",
+    "switchedToTable": "ടേബിൾ കാഴ്ചയിലേക്ക് മാറി",
     "tableHeaders": {
-      "additionalInfo": "Additional Info",
-      "category": "Category",
-      "period": "Period",
-      "value": "Value"
+      "additionalInfo": "അധിക വിവരങ്ങൾ",
+      "category": "വിഭാഗം",
+      "period": "കാലഘട്ടം",
+      "value": "മൂല്യം"
     }
   },
   "actions": {
@@ -225,40 +225,40 @@
     "whenColumn": "When"
   },
   "aiColumnMapper": {
-    "analyzing": "Analyzing CSV structure with AI...",
+    "analyzing": "AI ഉപയോഗിച്ച് CSV ഘടന വിശകലനം ചെയ്യുന്നു...",
     "buttons": {
-      "apply": "Apply Mappings & Import",
-      "cancel": "Cancel"
+      "apply": "മാപ്പിംഗുകൾ പ്രയോഗിച്ച് ഇമ്പോർട്ട് ചെയ്യുക",
+      "cancel": "റദ്ദാക്കുക"
     },
-    "closeModal": "Close modal",
-    "columnMappings": "Column Mappings",
+    "closeModal": "മോഡൽ അടയ്ക്കുക",
+    "columnMappings": "കോളം മാപ്പിംഗുകൾ",
     "columnTypes": {
-      "amount": "Amount",
-      "balance": "Balance",
-      "credit": "Credit",
-      "date": "Date",
-      "debit": "Debit",
-      "description": "Description",
-      "ignore": "Ignore"
+      "amount": "തുക",
+      "balance": "ബാലൻസ്",
+      "credit": "ക്രെഡിറ്റ്",
+      "date": "തീയതി",
+      "debit": "ഡെബിറ്റ്",
+      "description": "വിവരണം",
+      "ignore": "അവഗണിക്കുക"
     },
     "confidence": {
-      "analyzed": "AI analyzed {columnCount} columns and {rowCount} sample rows",
-      "title": "Detection Confidence"
+      "analyzed": "AI {columnCount} കോളങ്ങളും {rowCount} സാമ്പിൾ വരികളും വിശകലനം ചെയ്തു",
+      "title": "കണ്ടെത്തൽ ആത്മവിശ്വാസം"
     },
     "preview": {
-      "amount": "Amount",
-      "date": "Date",
-      "description": "Description",
-      "title": "Transaction Preview"
+      "amount": "തുക",
+      "date": "തീയതി",
+      "description": "വിവരണം",
+      "title": "ഇടപാട് പ്രിവ്യൂ"
     },
-    "samples": "Samples:",
+    "samples": "സാമ്പിളുകൾ:",
     "saveConfig": {
-      "hint": "Next time you import from this bank, mappings will be automatic",
-      "label": "Save this bank configuration for future imports",
-      "placeholder": "Enter bank name (e.g., My Local Credit Union)"
+      "hint": "അടുത്ത തവണ ഈ ബാങ്കിൽ നിന്ന് ഇമ്പോർട്ട് ചെയ്യുമ്പോൾ, മാപ്പിംഗുകൾ സ്വയമേവ ആയിരിക്കും",
+      "label": "ഭാവി ഇമ്പോർട്ടുകൾക്കായി ഈ ബാങ്ക് കോൺഫിഗറേഷൻ സേവ് ചെയ്യുക",
+      "placeholder": "ബാങ്ക് പേര് നൽകുക (ഉദാ: എന്റെ ലോക്കൽ ക്രെഡിറ്റ് യൂണിയൻ)"
     },
-    "subtitle": "Review AI-detected columns and adjust if needed",
-    "title": "AI Column Mapping Wizard"
+    "subtitle": "AI കണ്ടെത്തിയ കോളങ്ങൾ അവലോകനം ചെയ്ത് ആവശ്യമെങ്കിൽ ക്രമീകരിക്കുക",
+    "title": "AI കോളം മാപ്പിംഗ് വിസാർഡ്"
   },
   "amortizationChart": {
     "balanceDescription": "Your balance decreases over time as you make payments",
@@ -467,8 +467,9 @@
     "backToHome": "ഹോമിലേക്ക് മടങ്ങുക"
   },
   "bottomSheet": {
-    "close": "Close",
-    "dragToClose": "Drag down to close"
+    "close": "അടയ്ക്കുക",
+    "dragToClose": "Drag down to close",
+    "dragHandle": "ഡ്രാഗ് ഹാൻഡിൽ"
   },
   "breadcrumb": {
     "budgetAnalyzer": "Budget Analyzer",
@@ -489,717 +490,717 @@
   },
   "budget": {
     "accounts": {
-      "accountCreated": "Account created",
-      "accountDeleted": "Account deleted",
-      "accountNameLabel": "Account Name *",
-      "accountNamePlaceholder": "e.g., BMO Chequing",
+      "accountCreated": "അക്കൗണ്ട് സൃഷ്ടിച്ചു",
+      "accountDeleted": "അക്കൗണ്ട് ഇല്ലാതാക്കി",
+      "accountNameLabel": "അക്കൗണ്ട് പേര് *",
+      "accountNamePlaceholder": "ഉദാ: BMO ചെക്കിംഗ്",
       "accountType": {
-        "checking": "Checking",
-        "credit": "Credit Card",
-        "savings": "Savings"
+        "checking": "ചെക്കിംഗ്",
+        "credit": "ക്രെഡിറ്റ് കാർഡ്",
+        "savings": "സേവിംഗ്സ്"
       },
-      "accountTypeLabel": "Account Type",
-      "accountUpdated": "Account updated",
-      "addAccount": "Add Account",
-      "addFirstAccount": "Add Your First Account",
-      "allTransactionsCleared": "All transactions cleared. You can now re-import your statements.",
-      "assignCount": "Assign {count, plural, one {# Transaction} other {# Transactions}}",
-      "assignModalDescription": "{count, plural, one {# transaction needs} other {# transactions need}} to be assigned to an account.",
-      "assignTransactions": "Assign Transactions",
-      "assignTransactionsNow": "Assign Transactions Now",
-      "assignedTransactions": "Assigned {count} transactions to {name}",
-      "assigning": "Assigning...",
-      "balanceExplanation": "This is added to your transaction totals to show your current balance",
-      "cancel": "Cancel",
-      "chooseAccount": "Choose an account...",
-      "clearAllConfirm": "Clear All Transactions",
-      "clearAllDescription": "This will permanently delete ALL transactions from the database. Your accounts and their starting balances will be preserved. You can then re-import your bank statements fresh. This action cannot be undone.",
-      "clearAllTitle": "Clear All Transactions",
-      "clearAllTransactions": "Clear all transactions and start fresh",
-      "clickToView": "Click to view",
-      "create": "Create",
-      "createdAccount": "Created account: {names}",
-      "current": "Current",
-      "dataManagement": "Data Management",
-      "delete": "Delete",
-      "deleteAccountDescription": "Are you sure you want to delete \"{name}\"? This will not delete associated transactions.",
-      "deleteAccountTitle": "Delete Account",
-      "dismissReminder": "Dismiss reminder",
-      "edit": "Edit",
-      "editAccount": "Edit Account",
-      "enterBankBalance": "Enter your current bank balance to ensure accurate account totals.",
-      "failedToAssign": "Failed to assign transactions",
-      "failedToClear": "Failed to clear transactions",
-      "failedToDelete": "Failed to delete account",
-      "failedToLoad": "Failed to load accounts",
-      "failedToMigrate": "Failed to migrate transactions",
-      "failedToSave": "Failed to save account",
-      "failedToUpdateBalance": "Failed to update account balance",
-      "institutionLabel": "Institution",
-      "institutionPlaceholder": "e.g., BMO, TD, RBC",
-      "loading": "Loading accounts...",
-      "migratedTransactions": "Migrated {count} transactions to accounts",
-      "nameRequired": "Account name is required",
-      "noAccountsDescription": "Add your bank accounts to track starting balances and get accurate totals.",
-      "noAccountsYet": "No accounts yet",
-      "reminderDismissed": "Reminder dismissed",
-      "selectTargetAccount": "Select target account:",
-      "setBalanceNow": "Set Balance Now",
-      "setStartingBalanceFor": "Set starting balance for {name}",
-      "starting": "Starting",
-      "startingBalanceHint": "Enter your account balance BEFORE the first imported transaction",
-      "startingBalanceLabel": "Starting Balance",
-      "startingBalanceSetTo": "Starting balance set to {amount}",
-      "subtitle": "Manage your bank accounts and starting balances",
-      "title": "Accounts",
-      "totalStartingBalance": "Total Starting Balance",
-      "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
-      "unassignedClickToAssign": "Click below to automatically assign them to your accounts.",
-      "unassignedCreateFirst": "Create an account first, then they will be automatically assigned.",
-      "unassignedDescription": "These transactions were imported before accounts were set up.",
-      "unassignedTitle": "{count, plural, one {# transaction needs} other {# transactions need}} account assignment",
-      "update": "Update"
+      "accountTypeLabel": "അക്കൗണ്ട് തരം",
+      "accountUpdated": "അക്കൗണ്ട് അപ്‌ഡേറ്റ് ചെയ്തു",
+      "addAccount": "അക്കൗണ്ട് ചേർക്കുക",
+      "addFirstAccount": "ആദ്യ അക്കൗണ്ട് ചേർക്കുക",
+      "allTransactionsCleared": "എല്ലാ ഇടപാടുകളും മായ്ച്ചു. ഇപ്പോൾ സ്റ്റേറ്റ്‌മെന്റുകൾ പുതുതായി ഇമ്പോർട്ട് ചെയ്യാം.",
+      "assignCount": "{count, plural, one {# ഇടപാട്} other {# ഇടപാടുകൾ}} നിയമിക്കുക",
+      "assignModalDescription": "{count, plural, one {# ഇടപാട്} other {# ഇടപാടുകൾ}} ഒരു അക്കൗണ്ടിലേക്ക് നിയമിക്കേണ്ടതുണ്ട്.",
+      "assignTransactions": "ഇടപാടുകൾ നിയമിക്കുക",
+      "assignTransactionsNow": "ഇടപാടുകൾ ഇപ്പോൾ നിയമിക്കുക",
+      "assignedTransactions": "{name}-ലേക്ക് {count} ഇടപാടുകൾ നിയമിച്ചു",
+      "assigning": "നിയമിക്കുന്നു...",
+      "balanceExplanation": "നിലവിലെ ബാലൻസ് കാണിക്കാൻ ഇത് ഇടപാട് ആകെയിലേക്ക് ചേർക്കുന്നു",
+      "cancel": "റദ്ദാക്കുക",
+      "chooseAccount": "ഒരു അക്കൗണ്ട് തിരഞ്ഞെടുക്കുക...",
+      "clearAllConfirm": "എല്ലാ ഇടപാടുകളും മായ്ക്കുക",
+      "clearAllDescription": "ഇത് ഡാറ്റാബേസിൽ നിന്ന് എല്ലാ ഇടപാടുകളും ശാശ്വതമായി ഇല്ലാതാക്കും. അക്കൗണ്ടുകളും ആരംഭ ബാലൻസുകളും നിലനിർത്തും. തുടർന്ന് ബാങ്ക് സ്റ്റേറ്റ്‌മെന്റുകൾ പുതുതായി ഇമ്പോർട്ട് ചെയ്യാം. ഈ പ്രവർത്തനം പഴയപടിയാക്കാനാകില്ല.",
+      "clearAllTitle": "എല്ലാ ഇടപാടുകളും മായ്ക്കുക",
+      "clearAllTransactions": "എല്ലാ ഇടപാടുകളും മായ്ച്ച് പുതുതായി ആരംഭിക്കുക",
+      "clickToView": "കാണാൻ ക്ലിക്ക് ചെയ്യുക",
+      "create": "സൃഷ്ടിക്കുക",
+      "createdAccount": "അക്കൗണ്ട് സൃഷ്ടിച്ചു: {names}",
+      "current": "നിലവിലെ",
+      "dataManagement": "ഡാറ്റ മാനേജ്‌മെന്റ്",
+      "delete": "ഇല്ലാതാക്കുക",
+      "deleteAccountDescription": "\"{name}\" ഇല്ലാതാക്കണമെന്ന് ഉറപ്പാണോ? ബന്ധപ്പെട്ട ഇടപാടുകൾ ഇല്ലാതാക്കില്ല.",
+      "deleteAccountTitle": "അക്കൗണ്ട് ഇല്ലാതാക്കുക",
+      "dismissReminder": "ഓർമ്മപ്പെടുത്തൽ ഒഴിവാക്കുക",
+      "edit": "എഡിറ്റ്",
+      "editAccount": "അക്കൗണ്ട് എഡിറ്റ്",
+      "enterBankBalance": "കൃത്യമായ അക്കൗണ്ട് ആകെ ഉറപ്പാക്കാൻ നിലവിലെ ബാങ്ക് ബാലൻസ് നൽകുക.",
+      "failedToAssign": "ഇടപാടുകൾ നിയമിക്കുന്നതിൽ പരാജയപ്പെട്ടു",
+      "failedToClear": "ഇടപാടുകൾ മായ്ക്കുന്നതിൽ പരാജയപ്പെട്ടു",
+      "failedToDelete": "അക്കൗണ്ട് ഇല്ലാതാക്കുന്നതിൽ പരാജയപ്പെട്ടു",
+      "failedToLoad": "അക്കൗണ്ടുകൾ ലോഡ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു",
+      "failedToMigrate": "ഇടപാടുകൾ മൈഗ്രേറ്റ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു",
+      "failedToSave": "അക്കൗണ്ട് സേവ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു",
+      "failedToUpdateBalance": "അക്കൗണ്ട് ബാലൻസ് അപ്‌ഡേറ്റ് പരാജയപ്പെട്ടു",
+      "institutionLabel": "സ്ഥാപനം",
+      "institutionPlaceholder": "ഉദാ: BMO, TD, RBC",
+      "loading": "അക്കൗണ്ടുകൾ ലോഡ് ചെയ്യുന്നു...",
+      "migratedTransactions": "അക്കൗണ്ടുകളിലേക്ക് {count} ഇടപാടുകൾ മൈഗ്രേറ്റ് ചെയ്തു",
+      "nameRequired": "അക്കൗണ്ട് പേര് ആവശ്യമാണ്",
+      "noAccountsDescription": "ആരംഭ ബാലൻസുകൾ ട്രാക്ക് ചെയ്യാനും കൃത്യമായ ആകെ ലഭിക്കാനും ബാങ്ക് അക്കൗണ്ടുകൾ ചേർക്കുക.",
+      "noAccountsYet": "ഇതുവരെ അക്കൗണ്ടുകളൊന്നുമില്ല",
+      "reminderDismissed": "ഓർമ്മപ്പെടുത്തൽ ഒഴിവാക്കി",
+      "selectTargetAccount": "ലക്ഷ്യ അക്കൗണ്ട് തിരഞ്ഞെടുക്കുക:",
+      "setBalanceNow": "ഇപ്പോൾ ബാലൻസ് സജ്ജമാക്കുക",
+      "setStartingBalanceFor": "{name}-ന് ആരംഭ ബാലൻസ് സജ്ജമാക്കുക",
+      "starting": "ആരംഭം",
+      "startingBalanceHint": "ആദ്യ ഇമ്പോർട്ട് ചെയ്ത ഇടപാടിന് മുമ്പുള്ള അക്കൗണ്ട് ബാലൻസ് നൽകുക",
+      "startingBalanceLabel": "ആരംഭ ബാലൻസ്",
+      "startingBalanceSetTo": "ആരംഭ ബാലൻസ് {amount} ആയി സജ്ജമാക്കി",
+      "subtitle": "ബാങ്ക് അക്കൗണ്ടുകളും ആരംഭ ബാലൻസുകളും നിയന്ത്രിക്കുക",
+      "title": "അക്കൗണ്ടുകൾ",
+      "totalStartingBalance": "ആകെ ആരംഭ ബാലൻസ്",
+      "transactionCount": "{count, plural, one {# ഇടപാട്} other {# ഇടപാടുകൾ}}",
+      "unassignedClickToAssign": "സ്വയമേവ നിയമിക്കാൻ താഴെ ക്ലിക്ക് ചെയ്യുക.",
+      "unassignedCreateFirst": "ആദ്യം ഒരു അക്കൗണ്ട് സൃഷ്ടിക്കുക, തുടർന്ന് സ്വയമേവ നിയമിക്കും.",
+      "unassignedDescription": "അക്കൗണ്ടുകൾ സജ്ജമാക്കുന്നതിന് മുമ്പ് ഈ ഇടപാടുകൾ ഇമ്പോർട്ട് ചെയ്തതാണ്.",
+      "unassignedTitle": "{count, plural, one {# ഇടപാടിന്} other {# ഇടപാടുകൾക്ക്}} അക്കൗണ്ട് നിയമനം ആവശ്യമാണ്",
+      "update": "അപ്‌ഡേറ്റ്"
     },
     "budgets": {
-      "addBudget": "Add Budget",
-      "amountLabel": "Amount",
-      "annual": "Annual",
-      "budgetAlerts": "⚠️ Budget Alerts",
-      "budgetDeleted": "Budget deleted successfully",
-      "cancel": "Cancel",
-      "categoryLabel": "Category",
-      "createFirstBudget": "Create First Budget",
-      "currentProgress": "Current progress: {percentage}% spent ({spent})",
-      "currentlyOverBudget": "Currently {amount} over budget",
-      "deleteBudget": "Delete budget",
-      "deleteBudgetConfirm": "Delete Budget",
-      "deleteBudgetDescription": "This will remove the budget limit for this category. Transactions will not be deleted.",
-      "deleteBudgetTitle": "Delete Budget",
-      "editBudget": "Edit budget",
-      "enterValidAmount": "Please enter a valid amount",
-      "failedToDelete": "Failed to delete budget",
-      "failedToSave": "Failed to save budget",
-      "helpTooltip": "Set spending limits for each category. Track your progress with color-coded alerts: Green = On Track, Yellow = Warning (80%), Red = Over Budget (100%).",
-      "helpTooltipAriaLabel": "More information about budgets",
-      "loading": "Loading budgets...",
-      "monthly": "Monthly",
-      "noBudgetsDescription": "Create a budget to track your spending limits and goals.",
-      "noBudgetsSet": "No budgets set",
-      "of": "of",
-      "overBudgetThisMonth": "{amount} over budget this month",
-      "overallProgress": "Overall Progress",
-      "periodHelpTooltip": "Monthly budgets reset each month. Annual budgets divide the total across 12 months. Example: $1,200 annual = $100 per month.",
-      "periodHelpTooltipAriaLabel": "More information about budget periods",
-      "periodLabel": "Period",
-      "progressHelpTooltip": "Budget Progress: Green (On Track) = 0-79% spent. Yellow (Warning) = 80-99% spent. Red (Over) = 100%+ spent. Colors update automatically as you spend.",
-      "progressHelpTooltipAriaLabel": "More information about budget progress and alert thresholds",
-      "remaining": "Remaining",
-      "remainingBudget": "{amount} remaining budget",
-      "remainingThisMonth": "{amount} remaining this month",
-      "rolloverDisabled": "Budget resets each month regardless of spending",
-      "rolloverEnabled": "Leftover funds will be added to next month's budget",
-      "rolloverHelpTooltip": "What is budget rollover? When enabled, any unspent money from this budget carries over to the next month. Example: Budget: $500/month, Spent: $400, Leftover: $100, Next month starts with: $600 ($500 + $100 leftover)",
-      "rolloverHelpTooltipAriaLabel": "More information about budget rollover",
-      "rolloverLabel": "Carry over unused budget to next month",
-      "saveBudget": "Save Budget",
-      "setBudget": "+ Set Budget",
-      "statusOnTrack": "✓ On Track",
-      "statusOver": "✖ Over",
-      "statusWarning": "⚠ Warning",
-      "title": "Budgets",
-      "totalBudgeted": "Total Budgeted",
-      "totalExpenses": "Total expenses",
-      "totalSpent": "Total Spent",
-      "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
-      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transaction will become unbudgeted} other {# transactions will become unbudgeted}}",
-      "youWillLose": "You will lose:"
+      "addBudget": "ബജറ്റ് ചേർക്കുക",
+      "amountLabel": "തുക",
+      "annual": "വാർഷികം",
+      "budgetAlerts": "⚠️ ബജറ്റ് അലേർട്ടുകൾ",
+      "budgetDeleted": "ബജറ്റ് വിജയകരമായി ഇല്ലാതാക്കി",
+      "cancel": "റദ്ദാക്കുക",
+      "categoryLabel": "വിഭാഗം",
+      "createFirstBudget": "ആദ്യ ബജറ്റ് സൃഷ്ടിക്കുക",
+      "currentProgress": "നിലവിലെ പുരോഗതി: {percentage}% ചെലവഴിച്ചു ({spent})",
+      "currentlyOverBudget": "നിലവിൽ {amount} ബജറ്റ് കവിഞ്ഞു",
+      "deleteBudget": "ബജറ്റ് ഇല്ലാതാക്കുക",
+      "deleteBudgetConfirm": "ബജറ്റ് ഇല്ലാതാക്കുക",
+      "deleteBudgetDescription": "ഇത് ഈ വിഭാഗത്തിന്റെ ബജറ്റ് പരിധി നീക്കം ചെയ്യും. ഇടപാടുകൾ ഇല്ലാതാക്കില്ല.",
+      "deleteBudgetTitle": "ബജറ്റ് ഇല്ലാതാക്കുക",
+      "editBudget": "ബജറ്റ് എഡിറ്റ്",
+      "enterValidAmount": "ദയവായി സാധുവായ ഒരു തുക നൽകുക",
+      "failedToDelete": "ബജറ്റ് ഇല്ലാതാക്കുന്നതിൽ പരാജയപ്പെട്ടു",
+      "failedToSave": "ബജറ്റ് സേവ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു",
+      "helpTooltip": "ഓരോ വിഭാഗത്തിനും ചെലവ് പരിധി സജ്ജമാക്കുക. കളർ-കോഡഡ് അലേർട്ടുകൾ ഉപയോഗിച്ച് പുരോഗതി ട്രാക്ക് ചെയ്യുക: പച്ച = ശരിയായ ദിശയിൽ, മഞ്ഞ = മുന്നറിയിപ്പ് (80%), ചുവപ്പ് = ബജറ്റ് കവിഞ്ഞു (100%).",
+      "helpTooltipAriaLabel": "ബജറ്റുകളെക്കുറിച്ചുള്ള കൂടുതൽ വിവരങ്ങൾ",
+      "loading": "ബജറ്റുകൾ ലോഡ് ചെയ്യുന്നു...",
+      "monthly": "പ്രതിമാസം",
+      "noBudgetsDescription": "ചെലവ് പരിധികളും ലക്ഷ്യങ്ങളും ട്രാക്ക് ചെയ്യാൻ ഒരു ബജറ്റ് സൃഷ്ടിക്കുക.",
+      "noBudgetsSet": "ബജറ്റുകളൊന്നും സജ്ജമാക്കിയിട്ടില്ല",
+      "of": "ന്റെ",
+      "overBudgetThisMonth": "ഈ മാസം {amount} ബജറ്റ് കവിഞ്ഞു",
+      "overallProgress": "മൊത്തം പുരോഗതി",
+      "periodHelpTooltip": "പ്രതിമാസ ബജറ്റുകൾ ഓരോ മാസവും റീസെറ്റ് ചെയ്യുന്നു. വാർഷിക ബജറ്റുകൾ ആകെ 12 മാസത്തിലായി വിഭജിക്കുന്നു. ഉദാ: $1,200 വാർഷികം = പ്രതിമാസം $100.",
+      "periodHelpTooltipAriaLabel": "ബജറ്റ് കാലഘട്ടങ്ങളെക്കുറിച്ചുള്ള കൂടുതൽ വിവരങ്ങൾ",
+      "periodLabel": "കാലഘട്ടം",
+      "progressHelpTooltip": "ബജറ്റ് പുരോഗതി: പച്ച (ശരിയായ ദിശയിൽ) = 0-79% ചെലവഴിച്ചു. മഞ്ഞ (മുന്നറിയിപ്പ്) = 80-99% ചെലവഴിച്ചു. ചുവപ്പ് (കവിഞ്ഞു) = 100%+ ചെലവഴിച്ചു.",
+      "progressHelpTooltipAriaLabel": "ബജറ്റ് പുരോഗതിയെയും അലേർട്ട് പരിധികളെയും കുറിച്ചുള്ള കൂടുതൽ വിവരങ്ങൾ",
+      "remaining": "ശേഷിക്കുന്നത്",
+      "remainingBudget": "{amount} ശേഷിക്കുന്ന ബജറ്റ്",
+      "remainingThisMonth": "ഈ മാസം {amount} ശേഷിക്കുന്നു",
+      "rolloverDisabled": "ചെലവ് പരിഗണിക്കാതെ ബജറ്റ് ഓരോ മാസവും റീസെറ്റ് ചെയ്യും",
+      "rolloverEnabled": "ശേഷിക്കുന്ന ഫണ്ടുകൾ അടുത്ത മാസത്തെ ബജറ്റിലേക്ക് ചേർക്കും",
+      "rolloverHelpTooltip": "ബജറ്റ് റോളോവർ എന്താണ്? പ്രവർത്തനക്ഷമമാക്കുമ്പോൾ, ഈ ബജറ്റിൽ ചെലവഴിക്കാത്ത പണം അടുത്ത മാസത്തിലേക്ക് കൊണ്ടുപോകും. ഉദാ: ബജറ്റ്: $500/മാസം, ചെലവഴിച്ചത്: $400, ശേഷിച്ചത്: $100, അടുത്ത മാസം: $600 ($500 + $100)",
+      "rolloverHelpTooltipAriaLabel": "ബജറ്റ് റോളോവറിനെക്കുറിച്ചുള്ള കൂടുതൽ വിവരങ്ങൾ",
+      "rolloverLabel": "ഉപയോഗിക്കാത്ത ബജറ്റ് അടുത്ത മാസത്തിലേക്ക് കൊണ്ടുപോകുക",
+      "saveBudget": "ബജറ്റ് സേവ് ചെയ്യുക",
+      "setBudget": "+ ബജറ്റ് സജ്ജമാക്കുക",
+      "statusOnTrack": "✓ ശരിയായ ദിശയിൽ",
+      "statusOver": "✖ കവിഞ്ഞു",
+      "statusWarning": "⚠ മുന്നറിയിപ്പ്",
+      "title": "ബജറ്റുകൾ",
+      "totalBudgeted": "ആകെ ബജറ്റ് ചെയ്തത്",
+      "totalExpenses": "ആകെ ചെലവുകൾ",
+      "totalSpent": "ആകെ ചെലവഴിച്ചത്",
+      "transactionCount": "{count, plural, one {# ഇടപാട്} other {# ഇടപാടുകൾ}}",
+      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# ഇടപാട് ബജറ്റില്ലാതാകും} other {# ഇടപാടുകൾ ബജറ്റില്ലാതാകും}}",
+      "youWillLose": "നിങ്ങൾക്ക് നഷ്ടമാകും:"
     },
     "events": {
-      "_note": "Already internationalized in client.tsx using budget.events namespace",
-      "active": "Active",
-      "completed": "Completed",
-      "createEvent": "Create Event",
+      "_note": "ക്ലയന്റ്.tsx-ൽ budget.events നെയിംസ്‌പേസ് ഉപയോഗിച്ച് ഇതിനകം ഇന്റർനാഷണലൈസ് ചെയ്തു",
+      "active": "സജീവം",
+      "completed": "പൂർത്തിയായി",
+      "createEvent": "ഇവന്റ് സൃഷ്ടിക്കുക",
       "daysLeft": "{count} days left",
-      "noEvents": "No active events",
+      "noEvents": "സജീവ ഇവന്റുകളൊന്നുമില്ല",
       "noEventsDescription": "Create an event budget to track spending for weddings, holidays, and more",
-      "planning": "Planning",
-      "progress": "Progress",
-      "remaining": "Remaining",
-      "suggestedTemplates": "Suggested Templates",
-      "tagTransaction": "Tag to event",
-      "title": "Event Budgets",
-      "untagTransaction": "Remove from event"
+      "planning": "ആസൂത്രണം",
+      "progress": "പുരോഗതി",
+      "remaining": "ശേഷിക്കുന്നത്",
+      "suggestedTemplates": "നിർദ്ദേശിച്ച ടെംപ്ലേറ്റുകൾ",
+      "tagTransaction": "ഇവന്റിലേക്ക് ടാഗ് ചെയ്യുക",
+      "title": "ഇവന്റ് ബജറ്റുകൾ",
+      "untagTransaction": "ഇവന്റിൽ നിന്ന് നീക്കം ചെയ്യുക"
     },
     "gamification": {
-      "achievementUnlocked": "Achievement Unlocked!",
-      "badges": "Badges",
-      "currentStreak": "Current streak",
-      "longestStreak": "Best: {count} days",
-      "noAchievements": "Complete actions to earn badges",
-      "points": "Points",
-      "streaks": "Streaks",
-      "totalPoints": "Total Points"
+      "achievementUnlocked": "നേട്ടം അൺലോക്ക് ചെയ്തു!",
+      "badges": "ബാഡ്ജുകൾ",
+      "currentStreak": "നിലവിലെ സ്ട്രീക്ക്",
+      "longestStreak": "മികച്ചത്: {count} ദിവസം",
+      "noAchievements": "ബാഡ്ജുകൾ നേടാൻ പ്രവർത്തനങ്ങൾ പൂർത്തിയാക്കുക",
+      "points": "പോയിന്റുകൾ",
+      "streaks": "സ്ട്രീക്കുകൾ",
+      "totalPoints": "ആകെ പോയിന്റുകൾ"
     },
     "merchantRules": {
-      "applied": "Applied {count} times",
-      "category": "Category",
-      "createRule": "Always categorize {merchant} as {category}?",
-      "deleteRule": "Delete Rule",
-      "description": "Auto-categorize transactions by merchant",
-      "merchant": "Merchant",
-      "no": "No, just this time",
-      "noRules": "No merchant rules yet",
-      "noRulesDescription": "Rules are created when you re-categorize transactions",
-      "ruleCreated": "Rule created",
-      "title": "Merchant Rules",
-      "yes": "Yes, always"
+      "applied": "{count} തവണ പ്രയോഗിച്ചു",
+      "category": "വിഭാഗം",
+      "createRule": "{merchant}-നെ എല്ലായ്‌പ്പോഴും {category} ആയി വർഗ്ഗീകരിക്കണോ?",
+      "deleteRule": "നിയമം ഇല്ലാതാക്കുക",
+      "description": "വ്യാപാരി അനുസരിച്ച് ഇടപാടുകൾ ഓട്ടോ-വർഗ്ഗീകരിക്കുക",
+      "merchant": "വ്യാപാരി",
+      "no": "ഇല്ല, ഈ തവണ മാത്രം",
+      "noRules": "വ്യാപാരി നിയമങ്ങളൊന്നുമില്ല",
+      "noRulesDescription": "ഇടപാടുകൾ പുനർവർഗ്ഗീകരിക്കുമ്പോൾ നിയമങ്ങൾ സൃഷ്ടിക്കുന്നു",
+      "ruleCreated": "നിയമം സൃഷ്ടിച്ചു",
+      "title": "വ്യാപാരി നിയമങ്ങൾ",
+      "yes": "അതെ, എല്ലായ്‌പ്പോഴും"
     },
     "netWorth": {
-      "_note": "Already internationalized in client.tsx using budget.netWorth namespace",
-      "assetBreakdown": "Asset Breakdown",
-      "cashChecking": "Cash & Checking",
-      "creditCards": "Credit Cards",
+      "_note": "ക്ലയന്റ്.tsx-ൽ budget.netWorth നെയിംസ്‌പേസ് ഉപയോഗിച്ച് ഇതിനകം ഇന്റർനാഷണലൈസ് ചെയ്തു",
+      "assetBreakdown": "ആസ്തി വിശകലനം",
+      "cashChecking": "ക്യാഷ് & ചെക്കിംഗ്",
+      "creditCards": "ക്രെഡിറ്റ് കാർഡുകൾ",
       "history": "Historical Snapshots",
-      "investments": "Investments",
-      "liabilityBreakdown": "Liability Breakdown",
-      "loans": "Loans",
+      "investments": "നിക്ഷേപങ്ങൾ",
+      "liabilityBreakdown": "ബാധ്യതാ വിശകലനം",
+      "loans": "ലോണുകൾ",
       "milestoneReached": "Milestone reached: {amount}!",
-      "mortgage": "Mortgage",
+      "mortgage": "മോർട്ട്‌ഗേജ്",
       "noLiabilities": "No liabilities — great job!",
-      "property": "Property",
-      "savings": "Savings",
-      "title": "Net Worth",
-      "totalAssets": "Total Assets",
-      "totalLiabilities": "Total Liabilities",
-      "totalNetWorth": "Total Net Worth",
-      "trend": "Trend"
+      "property": "സ്വത്ത്",
+      "savings": "സേവിംഗ്സ്",
+      "title": "മൊത്തം ആസ്തി",
+      "totalAssets": "ആകെ ആസ്തികൾ",
+      "totalLiabilities": "ആകെ ബാധ്യതകൾ",
+      "totalNetWorth": "ആകെ മൊത്തം ആസ്തി",
+      "trend": "പ്രവണത"
     },
     "privacy": {
-      "disabled": "Financial values are visible",
-      "enabled": "Financial values are hidden",
+      "disabled": "സാമ്പത്തിക മൂല്യങ്ങൾ ദൃശ്യമാണ്",
+      "enabled": "സാമ്പത്തിക മൂല്യങ്ങൾ മറഞ്ഞിരിക്കുന്നു",
       "shortcut": "Cmd+Shift+P",
-      "tapToReveal": "Tap to reveal",
-      "toggle": "Privacy Mode"
+      "tapToReveal": "വെളിപ്പെടുത്താൻ ടാപ്പ് ചെയ്യുക",
+      "toggle": "സ്വകാര്യതാ മോഡ്"
     },
     "property": {
-      "addProperty": "Add Property",
-      "annualAppreciation": "Annual Appreciation",
-      "annualROI": "Annual ROI",
-      "appreciation": "Appreciation",
-      "backToProperties": "Back to Properties",
-      "currentBalance": "Current Balance",
-      "currentValue": "Current Value",
-      "equity": "Equity",
-      "interestRate": "Interest Rate",
-      "lender": "Lender",
-      "loanDetails": "Loan Details",
-      "monthlyIncome": "Monthly Income",
-      "monthlyPayment": "Monthly Payment",
-      "monthlyROI": "Monthly ROI",
-      "mortgageBalance": "Mortgage Balance",
-      "noProperties": "No properties tracked",
-      "noPropertiesDescription": "Add your first property to track equity and appreciation",
-      "notFound": "Property not found",
-      "notes": "Notes",
-      "occupancyRate": "Occupancy Rate",
-      "propertyTax": "Property Tax",
-      "purchasePrice": "Purchase Price",
-      "rentalROI": "Rental ROI",
-      "title": "Properties",
-      "totalAppreciation": "Total Appreciation",
-      "totalProperties": "Total Properties",
-      "totalValue": "Total Value"
+      "addProperty": "സ്വത്ത് ചേർക്കുക",
+      "annualAppreciation": "വാർഷിക മൂല്യവർധന",
+      "annualROI": "വാർഷിക ROI",
+      "appreciation": "മൂല്യവർധന",
+      "backToProperties": "സ്വത്തുക്കളിലേക്ക് മടങ്ങുക",
+      "currentBalance": "നിലവിലെ ബാലൻസ്",
+      "currentValue": "നിലവിലെ മൂല്യം",
+      "equity": "ഇക്വിറ്റി",
+      "interestRate": "പലിശ നിരക്ക്",
+      "lender": "കടം കൊടുക്കുന്നയാൾ",
+      "loanDetails": "ലോൺ വിശദാംശങ്ങൾ",
+      "monthlyIncome": "പ്രതിമാസ വരുമാനം",
+      "monthlyPayment": "പ്രതിമാസ പേയ്‌മെന്റ്",
+      "monthlyROI": "പ്രതിമാസ ROI",
+      "mortgageBalance": "മോർട്ട്‌ഗേജ് ബാലൻസ്",
+      "noProperties": "സ്വത്തുക്കളൊന്നും ട്രാക്ക് ചെയ്തിട്ടില്ല",
+      "noPropertiesDescription": "ഇക്വിറ്റിയും മൂല്യവർധനയും ട്രാക്ക് ചെയ്യാൻ ആദ്യ സ്വത്ത് ചേർക്കുക",
+      "notFound": "സ്വത്ത് കണ്ടെത്തിയില്ല",
+      "notes": "കുറിപ്പുകൾ",
+      "occupancyRate": "ഒക്യുപ്പൻസി നിരക്ക്",
+      "propertyTax": "സ്വത്ത് നികുതി",
+      "purchasePrice": "വാങ്ങൽ വില",
+      "rentalROI": "വാടക ROI",
+      "title": "സ്വത്തുക്കൾ",
+      "totalAppreciation": "ആകെ മൂല്യവർധന",
+      "totalProperties": "ആകെ സ്വത്തുക്കൾ",
+      "totalValue": "ആകെ മൂല്യം"
     },
     "refunds": {
-      "autoMatched": "Auto-matched refund",
-      "expectRefund": "Expect Refund",
-      "expectRefundDescription": "Mark this transaction as expecting a refund",
-      "expectedAmount": "Expected amount",
-      "expectedDate": "Expected by",
-      "expecting": "Expecting refund",
-      "gross": "Gross",
-      "grossVsNet": "Gross vs Net",
-      "markExpecting": "Expect Refund",
-      "net": "Net",
-      "notes": "Notes",
-      "notesPlaceholder": "Any additional details about this refund...",
-      "partial": "Partial refund",
-      "received": "Refund received",
-      "refundsTotal": "Refunds",
-      "submitting": "Submitting...",
-      "title": "Refund Tracking"
+      "autoMatched": "ഓട്ടോ-മാച്ച് ചെയ്ത റീഫണ്ട്",
+      "expectRefund": "റീഫണ്ട് പ്രതീക്ഷിക്കുക",
+      "expectRefundDescription": "ഈ ഇടപാടിന് റീഫണ്ട് പ്രതീക്ഷിക്കുന്നതായി അടയാളപ്പെടുത്തുക",
+      "expectedAmount": "പ്രതീക്ഷിത തുക",
+      "expectedDate": "പ്രതീക്ഷിത തീയതി",
+      "expecting": "റീഫണ്ട് പ്രതീക്ഷിക്കുന്നു",
+      "gross": "ഗ്രോസ്",
+      "grossVsNet": "ഗ്രോസ് vs നെറ്റ്",
+      "markExpecting": "റീഫണ്ട് പ്രതീക്ഷിക്കുക",
+      "net": "നെറ്റ്",
+      "notes": "കുറിപ്പുകൾ",
+      "notesPlaceholder": "ഈ റീഫണ്ടിനെക്കുറിച്ചുള്ള അധിക വിശദാംശങ്ങൾ...",
+      "partial": "ഭാഗിക റീഫണ്ട്",
+      "received": "റീഫണ്ട് ലഭിച്ചു",
+      "refundsTotal": "റീഫണ്ടുകൾ",
+      "submitting": "സമർപ്പിക്കുന്നു...",
+      "title": "റീഫണ്ട് ട്രാക്കിംഗ്"
     },
     "review": {
-      "allDone": "All caught up!",
-      "allDoneDescription": "No more transactions to review",
-      "approve": "Approve",
-      "approveKey": "Approve (→/A)",
-      "noDescription": "No description",
-      "progress": "{reviewed} of {total} reviewed",
-      "skip": "Skip",
-      "skipKey": "Skip (←/F)",
-      "subtitle": "Categorize your uncategorized transactions",
-      "swipeLeft": "Swipe left to skip",
-      "swipeRight": "Swipe right to approve",
-      "title": "Review Transactions"
+      "allDone": "എല്ലാം പൂർത്തിയായി!",
+      "allDoneDescription": "അവലോകനം ചെയ്യാൻ ഇനി ഇടപാടുകളൊന്നുമില്ല",
+      "approve": "അംഗീകരിക്കുക",
+      "approveKey": "അംഗീകരിക്കുക (→/A)",
+      "noDescription": "വിവരണമില്ല",
+      "progress": "{total}-ൽ {reviewed} അവലോകനം ചെയ്തു",
+      "skip": "ഒഴിവാക്കുക",
+      "skipKey": "ഒഴിവാക്കുക (←/F)",
+      "subtitle": "വർഗ്ഗീകരിക്കാത്ത ഇടപാടുകൾ വർഗ്ഗീകരിക്കുക",
+      "swipeLeft": "ഒഴിവാക്കാൻ ഇടത്തേക്ക് സ്വൈപ്പ് ചെയ്യുക",
+      "swipeRight": "അംഗീകരിക്കാൻ വലത്തേക്ക് സ്വൈപ്പ് ചെയ്യുക",
+      "title": "ഇടപാടുകൾ അവലോകനം ചെയ്യുക"
     },
     "rollover": {
-      "disabled": "Rollover disabled",
-      "effective": "Effective budget",
-      "enabled": "Rollover enabled",
-      "includesRollover": "Includes {amount} rollover",
-      "negativeRollover": "Overspend of {amount} carried forward",
-      "title": "Budget Rollover",
-      "toggle": "Enable rollover for this category"
+      "disabled": "റോളോവർ പ്രവർത്തനരഹിതമാണ്",
+      "effective": "ഫലപ്രദ ബജറ്റ്",
+      "enabled": "റോളോവർ പ്രവർത്തനക്ഷമമാണ്",
+      "includesRollover": "{amount} റോളോവർ ഉൾപ്പെടുന്നു",
+      "negativeRollover": "{amount} അധിക ചെലവ് മുന്നോട്ട് കൊണ്ടുപോയി",
+      "title": "ബജറ്റ് റോളോവർ",
+      "toggle": "ഈ വിഭാഗത്തിന് റോളോവർ പ്രവർത്തനക്ഷമമാക്കുക"
     },
     "safeToSpend": {
-      "caution": "Watch Spending",
-      "dailyBudget": "Daily Budget",
-      "danger": "Over Budget",
-      "daysLeft": "{count} days left this month",
-      "noData": "Set up budgets to see safe-to-spend amounts",
-      "perCategory": "By Category",
-      "remaining": "remaining",
-      "safe": "On Track",
-      "title": "Safe to Spend",
-      "totalSafe": "Total Safe to Spend"
+      "caution": "ചെലവ് ശ്രദ്ധിക്കുക",
+      "dailyBudget": "ദൈനംദിന ബജറ്റ്",
+      "danger": "ബജറ്റ് കവിഞ്ഞു",
+      "daysLeft": "ഈ മാസം {count} ദിവസം ശേഷിക്കുന്നു",
+      "noData": "സുരക്ഷിതമായി ചെലവഴിക്കാവുന്ന തുകകൾ കാണാൻ ബജറ്റുകൾ സജ്ജമാക്കുക",
+      "perCategory": "വിഭാഗം അനുസരിച്ച്",
+      "remaining": "ശേഷിക്കുന്നു",
+      "safe": "ശരിയായ ദിശയിൽ",
+      "title": "സുരക്ഷിതമായി ചെലവഴിക്കാവുന്നത്",
+      "totalSafe": "ആകെ സുരക്ഷിതമായി ചെലവഴിക്കാവുന്നത്"
     },
     "scenarios": {
-      "_note": "Already internationalized in client.tsx using budget.scenarios namespace",
-      "after": "After",
+      "_note": "ക്ലയന്റ്.tsx-ൽ budget.scenarios നെയിംസ്‌പേസ് ഉപയോഗിച്ച് ഇതിനകം ഇന്റർനാഷണലൈസ് ചെയ്തു",
+      "after": "ശേഷം",
       "amountLabel": "Amount",
-      "annualSavings": "Annual Savings",
-      "before": "Before",
-      "healthScore": "Health Score",
+      "annualSavings": "വാർഷിക ലാഭം",
+      "before": "മുമ്പ്",
+      "healthScore": "ആരോഗ്യ സ്കോർ",
       "impact": "Impact",
-      "monthlyCashFlow": "Monthly Cash Flow",
+      "monthlyCashFlow": "പ്രതിമാസ ക്യാഷ് ഫ്ലോ",
       "run": "Run Scenario",
       "subtitle": "Model financial changes and see their impact",
-      "title": "What-If Scenarios",
+      "title": "എന്താണെങ്കിൽ സിനാരിയോകൾ",
       "types": {
         "addExpense": {
           "description": "See the impact of a new recurring expense",
-          "title": "Add Expense"
+          "title": "ചെലവ് ചേർക്കുക"
         },
         "cancelSubscription": {
           "description": "See savings from canceling a recurring charge",
-          "title": "Cancel Subscription"
+          "title": "സബ്‌സ്ക്രിപ്ഷൻ റദ്ദാക്കുക"
         },
         "changeIncome": {
           "description": "Model an income increase or decrease",
-          "title": "Change Income"
+          "title": "വരുമാനം മാറ്റുക"
         },
         "increaseSavings": {
           "description": "See goal timeline acceleration",
-          "title": "Increase Savings"
+          "title": "ലാഭം വർധിപ്പിക്കുക"
         },
         "payOffDebt": {
           "description": "Calculate interest savings from early payoff",
-          "title": "Pay Off Debt"
+          "title": "കടം തീർക്കുക"
         }
       }
     },
     "templates": {
-      "backToSchool": "Back to School",
-      "categories": "Categories",
-      "holidaySeason": "Holiday Season",
-      "homeImprovement": "Home Improvement",
-      "preview": "Preview",
-      "summerTravel": "Summer Travel",
-      "taxSeason": "Tax Season",
-      "title": "Budget Templates",
-      "useTemplate": "Use Template",
-      "weddingEvent": "Wedding / Event"
+      "backToSchool": "സ്കൂളിലേക്ക് മടങ്ങൽ",
+      "categories": "വിഭാഗങ്ങൾ",
+      "holidaySeason": "അവധിക്കാലം",
+      "homeImprovement": "വീട് നവീകരണം",
+      "preview": "പ്രിവ്യൂ",
+      "summerTravel": "വേനൽ യാത്ര",
+      "taxSeason": "ടാക്സ് സീസൺ",
+      "title": "ബജറ്റ് ടെംപ്ലേറ്റുകൾ",
+      "useTemplate": "ടെംപ്ലേറ്റ് ഉപയോഗിക്കുക",
+      "weddingEvent": "വിവാഹം / ഇവന്റ്"
     },
     "weeklyRecap": {
-      "dismissed": "Dismissed for this week",
-      "lastWeek": "Last week",
-      "thisWeek": "This week",
-      "title": "Weekly Recap",
-      "topCategories": "Top Categories",
-      "viewFullReview": "View Full Review"
+      "dismissed": "ഈ ആഴ്ചയിൽ ഒഴിവാക്കി",
+      "lastWeek": "കഴിഞ്ഞ ആഴ്ച",
+      "thisWeek": "ഈ ആഴ്ച",
+      "title": "ആഴ്ചയിലെ സംഗ്രഹം",
+      "topCategories": "ടോപ്പ് വിഭാഗങ്ങൾ",
+      "viewFullReview": "പൂർണ്ണ അവലോകനം കാണുക"
     }
   },
   "bulkActions": {
-    "applyTo": "Apply to {count}",
-    "categorize": "Categorize",
-    "clearSelection": "Clear selection",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
-    "delete": "Delete",
-    "deleteWarning": "This action cannot be undone.",
-    "export": "Export",
-    "noSubcategory": "No subcategory",
-    "selectAll": "Select all",
-    "selectCategory": "Select category...",
-    "selected": "{count} selected"
+    "applyTo": "{count}-ൽ പ്രയോഗിക്കുക",
+    "categorize": "വർഗ്ഗീകരിക്കുക",
+    "clearSelection": "തിരഞ്ഞെടുപ്പ് മായ്ക്കുക",
+    "confirmDelete": "{count, plural, =1 {1 ഇടപാട്} other {# ഇടപാടുകൾ}} ഇല്ലാതാക്കണോ?",
+    "delete": "ഇല്ലാതാക്കുക",
+    "deleteWarning": "ഈ പ്രവർത്തനം പഴയപടിയാക്കാനാകില്ല.",
+    "export": "എക്‌സ്‌പോർട്ട്",
+    "noSubcategory": "ഉപവിഭാഗമില്ല",
+    "selectAll": "എല്ലാം തിരഞ്ഞെടുക്കുക",
+    "selectCategory": "വിഭാഗം തിരഞ്ഞെടുക്കുക...",
+    "selected": "{count} തിരഞ്ഞെടുത്തു"
   },
   "calculators": {
     "budgetAnalyzer": {
-      "actual": "Actual",
-      "balanced": "Your Budget is Balanced!",
-      "description": "Analyze your spending against the popular budgeting rule",
-      "enterSpending": "Enter your monthly spending by category:",
-      "exceeding": "Exceeding",
-      "inputTitle": "Your Monthly Finances",
-      "monthlyIncome": "Monthly Net Income",
-      "monthlyIncomeHelp": "Your take-home pay after taxes",
-      "needs": "Needs",
-      "needsAdjustment": "Adjustments Recommended",
-      "needsDescription": "Housing, utilities, groceries, insurance, minimum debt payments",
-      "needsExamples": "rent, utilities, groceries",
-      "over": "Over",
-      "ruleExplanation": "The 50/30/20 Rule",
-      "savings": "Savings",
-      "savingsDescription": "Emergency fund, investments, retirement, extra debt payments",
-      "savingsExamples": "savings, investments, extra debt",
-      "subtitle": "See how your budget measures up",
-      "target": "Target",
-      "title": "50/30/20 Budget Analyzer",
-      "under": "On Track",
-      "variance": "Variance",
-      "wants": "Wants",
-      "wantsDescription": "Dining out, entertainment, shopping, subscriptions",
-      "wantsExamples": "dining, entertainment, shopping"
+      "actual": "യഥാർത്ഥം",
+      "balanced": "നിങ്ങളുടെ ബജറ്റ് സന്തുലിതമാണ്!",
+      "description": "ജനപ്രിയ ബജറ്റിംഗ് നിയമത്തിന് എതിരായി നിങ്ങളുടെ ചെലവ് വിശകലനം ചെയ്യുക",
+      "enterSpending": "വിഭാഗം അനുസരിച്ച് പ്രതിമാസ ചെലവ് നൽകുക:",
+      "exceeding": "കവിയുന്നു",
+      "inputTitle": "നിങ്ങളുടെ പ്രതിമാസ സാമ്പത്തികം",
+      "monthlyIncome": "പ്രതിമാസ അറ്റ വരുമാനം",
+      "monthlyIncomeHelp": "നികുതിക്ക് ശേഷമുള്ള നിങ്ങളുടെ ടേക്ക്-ഹോം ശമ്പളം",
+      "needs": "ആവശ്യങ്ങൾ",
+      "needsAdjustment": "ക്രമീകരണങ്ങൾ ശുപാർശ ചെയ്യുന്നു",
+      "needsDescription": "പാർപ്പിടം, യൂട്ടിലിറ്റികൾ, പലചരക്ക്, ഇൻഷുറൻസ്, കുറഞ്ഞ കട പേയ്‌മെന്റുകൾ",
+      "needsExamples": "വാടക, യൂട്ടിലിറ്റികൾ, പലചരക്ക്",
+      "over": "അധികം",
+      "ruleExplanation": "50/30/20 നിയമം",
+      "savings": "സേവിംഗ്സ്",
+      "savingsDescription": "എമർജൻസി ഫണ്ട്, നിക്ഷേപങ്ങൾ, വിരമിക്കൽ, അധിക കട പേയ്‌മെന്റുകൾ",
+      "savingsExamples": "സേവിംഗ്സ്, നിക്ഷേപങ്ങൾ, അധിക കടം",
+      "subtitle": "നിങ്ങളുടെ ബജറ്റ് എങ്ങനെ അളക്കുന്നുവെന്ന് കാണുക",
+      "target": "ലക്ഷ്യം",
+      "title": "50/30/20 ബജറ്റ് വിശകലനി",
+      "under": "ശരിയായ ദിശയിൽ",
+      "variance": "വ്യത്യാസം",
+      "wants": "ആഗ്രഹങ്ങൾ",
+      "wantsDescription": "പുറത്ത് ഭക്ഷണം, വിനോദം, ഷോപ്പിംഗ്, സബ്‌സ്ക്രിപ്ഷനുകൾ",
+      "wantsExamples": "ഭക്ഷണം, വിനോദം, ഷോപ്പിംഗ്"
     },
     "common": {
-      "back": "Back to calculators",
-      "calculate": "Calculate",
-      "months": "months",
-      "reset": "Reset",
-      "save": "Save Plan",
-      "years": "years"
+      "back": "കാൽക്കുലേറ്ററുകളിലേക്ക് മടങ്ങുക",
+      "calculate": "കണക്കുകൂട്ടുക",
+      "months": "മാസങ്ങൾ",
+      "reset": "റീസെറ്റ്",
+      "save": "പ്ലാൻ സേവ് ചെയ്യുക",
+      "years": "വർഷങ്ങൾ"
     },
     "compoundInterest": {
-      "annualRate": "Annual Interest Rate (%)",
-      "annualRateHelp": "Savings: 4-5%, Bonds: 5-6%, Stocks: 7-10%",
-      "assumptionCompounding": "Compounding",
-      "assumptionReinvest": "All interest reinvested",
-      "assumptionTiming": "Contributions at end of each period",
-      "chartTitle": "Growth Over Time",
-      "compoundingFrequency": "Compounding Frequency",
-      "description": "See how your money grows with the power of compound interest",
-      "effectiveRate": "Effective Annual Rate",
-      "finalBalance": "Final Balance",
-      "formulaExplanation": "FV = Future Value, PV = Present Value, r = annual rate, n = compounds per year, t = years, PMT = periodic payment",
+      "annualRate": "വാർഷിക പലിശ നിരക്ക് (%)",
+      "annualRateHelp": "സേവിംഗ്സ്: 4-5%, ബോണ്ടുകൾ: 5-6%, ഷെയറുകൾ: 7-10%",
+      "assumptionCompounding": "കോമ്പൗണ്ടിംഗ്",
+      "assumptionReinvest": "എല്ലാ പലിശയും പുനർനിക്ഷേപം",
+      "assumptionTiming": "ഓരോ കാലഘട്ടത്തിന്റെയും അവസാനം കോൺട്രിബ്യൂഷനുകൾ",
+      "chartTitle": "കാലക്രമത്തിലുള്ള വളർച്ച",
+      "compoundingFrequency": "കോമ്പൗണ്ടിംഗ് ആവൃത്തി",
+      "description": "കോമ്പൗണ്ട് ഇന്ററസ്റ്റിന്റെ ശക്തിയാൽ നിങ്ങളുടെ പണം എങ്ങനെ വളരുന്നുവെന്ന് കാണുക",
+      "effectiveRate": "ഫലപ്രദ വാർഷിക നിരക്ക്",
+      "finalBalance": "അന്തിമ ബാലൻസ്",
+      "formulaExplanation": "FV = ഭാവി മൂല്യം, PV = ഇന്നത്തെ മൂല്യം, r = വാർഷിക നിരക്ക്, n = വർഷം കോമ്പൗണ്ടുകൾ, t = വർഷങ്ങൾ, PMT = ആവർത്തന പേയ്‌മെന്റ്",
       "formulaText": "FV = PV(1+r/n)^(nt) + PMT[((1+r/n)^(nt)-1)/(r/n)]",
       "frequency": {
-        "annually": "Annually (1/yr)",
-        "daily": "Daily (365/yr)",
-        "monthly": "Monthly (12/yr)",
-        "quarterly": "Quarterly (4/yr)",
-        "semiannually": "Semi-annually (2/yr)",
-        "weekly": "Weekly (52/yr)"
+        "annually": "വാർഷികം (1/വർഷം)",
+        "daily": "ദൈനംദിനം (365/വർഷം)",
+        "monthly": "പ്രതിമാസം (12/വർഷം)",
+        "quarterly": "ത്രൈമാസികം (4/വർഷം)",
+        "semiannually": "അർദ്ധ-വാർഷികം (2/വർഷം)",
+        "weekly": "ആഴ്ചയിൽ (52/വർഷം)"
       },
-      "initialDeposit": "Initial Deposit",
-      "inputTitle": "Investment Details",
-      "interestEarned": "Interest Earned",
-      "monthlyContribution": "Monthly Contribution",
-      "resultTitle": "Your Investment Growth",
-      "subtitle": "Watch your money grow over time",
-      "title": "Compound Interest Calculator",
-      "totalContributions": "Total Contributions",
-      "years": "Investment Period (Years)"
+      "initialDeposit": "പ്രാരംഭ നിക്ഷേപം",
+      "inputTitle": "നിക്ഷേപ വിശദാംശങ്ങൾ",
+      "interestEarned": "ലഭിച്ച പലിശ",
+      "monthlyContribution": "പ്രതിമാസ കോൺട്രിബ്യൂഷൻ",
+      "resultTitle": "നിങ്ങളുടെ നിക്ഷേപ വളർച്ച",
+      "subtitle": "കാലക്രമേണ നിങ്ങളുടെ പണം വളരുന്നത് കാണുക",
+      "title": "കോമ്പൗണ്ട് ഇന്ററസ്റ്റ് കാൽക്കുലേറ്റർ",
+      "totalContributions": "ആകെ കോൺട്രിബ്യൂഷനുകൾ",
+      "years": "നിക്ഷേപ കാലാവധി (വർഷങ്ങൾ)"
     },
     "debtPayoff": {
-      "addDebt": "Add Debt",
+      "addDebt": "കടം ചേർക്കുക",
       "apr": "APR (%)",
-      "avalanche": "Avalanche Strategy",
-      "avalancheDescription": "Pay highest interest first to save the most money",
-      "balance": "Balance",
-      "debtName": "Name",
-      "debtNamePlaceholder": "Debt {number}",
-      "description": "Compare snowball vs avalanche strategies to pay off debt faster",
-      "extraMonthlyPayment": "Extra Monthly Payment",
-      "extraMonthlyPaymentHelp": "Additional amount you can pay beyond minimums each month",
-      "minimumPayment": "Min Payment",
-      "month": "Month",
-      "morePsychological": "Motivational wins",
-      "payment": "Payment",
-      "paymentSchedule": "Payment Schedule",
-      "payoffDate": "Payoff Time",
-      "recommended": "Recommended",
-      "remaining": "Remaining",
-      "removeDebt": "Remove debt",
-      "savingsDescription": "You'll save {amount} in interest and be debt-free {months} months sooner with the avalanche method",
-      "savingsTitle": "Interest Savings with Avalanche",
-      "snowball": "Snowball Strategy",
-      "snowballDescription": "Pay smallest balance first for quick wins and motivation",
-      "subtitle": "Find the fastest path to debt freedom",
-      "title": "Debt Payoff Calculator",
-      "totalInterest": "Total Interest",
-      "yourDebts": "Your Debts"
+      "avalanche": "അവലാഞ്ച് തന്ത്രം",
+      "avalancheDescription": "ഏറ്റവും കൂടുതൽ പണം ലാഭിക്കാൻ ഉയർന്ന പലിശ ആദ്യം അടയ്ക്കുക",
+      "balance": "ബാലൻസ്",
+      "debtName": "പേര്",
+      "debtNamePlaceholder": "കടം {number}",
+      "description": "കടം വേഗത്തിൽ തിരിച്ചടയ്ക്കാൻ സ്നോബോൾ vs അവലാഞ്ച് തന്ത്രങ്ങൾ താരതമ്യം ചെയ്യുക",
+      "extraMonthlyPayment": "അധിക പ്രതിമാസ പേയ്‌മെന്റ്",
+      "extraMonthlyPaymentHelp": "ഓരോ മാസവും കുറഞ്ഞ തുകയ്ക്കപ്പുറം നിങ്ങൾക്ക് അടയ്ക്കാവുന്ന അധിക തുക",
+      "minimumPayment": "കുറഞ്ഞ പേയ്‌മെന്റ്",
+      "month": "മാസം",
+      "morePsychological": "പ്രേരണാദായക വിജയങ്ങൾ",
+      "payment": "പേയ്‌മെന്റ്",
+      "paymentSchedule": "പേയ്‌മെന്റ് ഷെഡ്യൂൾ",
+      "payoffDate": "തിരിച്ചടവ് സമയം",
+      "recommended": "ശുപാർശ ചെയ്യുന്നു",
+      "remaining": "ശേഷിക്കുന്നത്",
+      "removeDebt": "കടം നീക്കം ചെയ്യുക",
+      "savingsDescription": "അവലാഞ്ച് രീതിയിലൂടെ {amount} പലിശ ലാഭിക്കുകയും {months} മാസം നേരത്തെ കടമുക്തമാകുകയും ചെയ്യും",
+      "savingsTitle": "അവലാഞ്ചിലൂടെ പലിശ ലാഭം",
+      "snowball": "സ്നോബോൾ തന്ത്രം",
+      "snowballDescription": "ദ്രുത വിജയങ്ങൾക്കും പ്രേരണയ്ക്കും ചെറിയ ബാലൻസ് ആദ്യം അടയ്ക്കുക",
+      "subtitle": "കടമുക്തിയിലേക്കുള്ള ഏറ്റവും വേഗത്തിലുള്ള വഴി കണ്ടെത്തുക",
+      "title": "കട തിരിച്ചടവ് കാൽക്കുലേറ്റർ",
+      "totalInterest": "ആകെ പലിശ",
+      "yourDebts": "നിങ്ങളുടെ കടങ്ങൾ"
     },
     "emergencyFund": {
-      "amountNeeded": "You need {amount} more to reach your goal",
-      "completionDate": "Estimated Completion",
-      "currentSavings": "Current Emergency Savings",
-      "description": "Calculate how much you need for financial security and track your progress",
-      "goalMet": "Goal Achieved!",
-      "goalProgress": "Building Your Safety Net",
-      "inputTitle": "Your Information",
-      "monthlyContribution": "Monthly Savings Amount",
-      "monthlyContributionHelp": "How much you can save towards your emergency fund each month",
-      "monthlyExpenses": "Monthly Expenses",
-      "monthlyExpensesHelp": "Include rent, utilities, groceries, insurance, and other essential costs",
-      "monthsToGoal": "Months to Reach Goal",
-      "progress": "Current Progress",
-      "resultsTitle": "Your Results",
-      "subtitle": "Build your financial safety net",
-      "targetAmount": "Target Emergency Fund",
-      "targetMonths": "Target Months of Coverage",
-      "targetMonthsHelp": "Experts recommend {months} months for most situations",
-      "tip1": "Keep your emergency fund in a high-yield savings account for easy access and better returns",
-      "tip2": "Automate your contributions by setting up automatic transfers on payday",
-      "tip3": "Start small if needed - even saving a little consistently adds up over time",
-      "tipsTitle": "Tips for Building Your Emergency Fund",
-      "title": "Emergency Fund Calculator"
+      "amountNeeded": "ലക്ഷ്യത്തിലെത്താൻ {amount} കൂടി ആവശ്യമാണ്",
+      "completionDate": "കണക്കാക്കിയ പൂർത്തീകരണം",
+      "currentSavings": "നിലവിലെ എമർജൻസി സേവിംഗ്സ്",
+      "description": "സാമ്പത്തിക സുരക്ഷിതത്വത്തിന് എത്ര ആവശ്യമാണെന്ന് കണക്കുകൂട്ടുക, പുരോഗതി ട്രാക്ക് ചെയ്യുക",
+      "goalMet": "ലക്ഷ്യം നേടി!",
+      "goalProgress": "നിങ്ങളുടെ സുരക്ഷാ വല നിർമ്മിക്കുന്നു",
+      "inputTitle": "നിങ്ങളുടെ വിവരങ്ങൾ",
+      "monthlyContribution": "പ്രതിമാസ ലാഭ തുക",
+      "monthlyContributionHelp": "ഓരോ മാസവും എമർജൻസി ഫണ്ടിലേക്ക് എത്ര ലാഭിക്കാം",
+      "monthlyExpenses": "പ്രതിമാസ ചെലവുകൾ",
+      "monthlyExpensesHelp": "വാടക, യൂട്ടിലിറ്റികൾ, പലചരക്ക്, ഇൻഷുറൻസ്, മറ്റ് അനിവാര്യ ചെലവുകൾ ഉൾപ്പെടുത്തുക",
+      "monthsToGoal": "ലക്ഷ്യത്തിലെത്താൻ മാസങ്ങൾ",
+      "progress": "നിലവിലെ പുരോഗതി",
+      "resultsTitle": "നിങ്ങളുടെ ഫലങ്ങൾ",
+      "subtitle": "നിങ്ങളുടെ സാമ്പത്തിക സുരക്ഷാ വല നിർമ്മിക്കുക",
+      "targetAmount": "ലക്ഷ്യ എമർജൻസി ഫണ്ട്",
+      "targetMonths": "ലക്ഷ്യ കവറേജ് മാസങ്ങൾ",
+      "targetMonthsHelp": "മിക്ക സാഹചര്യങ്ങൾക്കും വിദഗ്ധർ {months} മാസം ശുപാർശ ചെയ്യുന്നു",
+      "tip1": "എളുപ്പത്തിൽ ആക്‌സസ് ചെയ്യാനും മികച്ച വരുമാനത്തിനും ഹൈ-യീൽഡ് സേവിംഗ്സ് അക്കൗണ്ടിൽ എമർജൻസി ഫണ്ട് സൂക്ഷിക്കുക",
+      "tip2": "ശമ്പള ദിവസം ഓട്ടോമാറ്റിക് ട്രാൻസ്ഫറുകൾ സജ്ജമാക്കി കോൺട്രിബ്യൂഷനുകൾ ഓട്ടോമേറ്റ് ചെയ്യുക",
+      "tip3": "ആവശ്യമെങ്കിൽ ചെറുതായി ആരംഭിക്കുക - ക്രമമായി ലാഭിക്കുന്നത് കാലക്രമേണ വർധിക്കും",
+      "tipsTitle": "എമർജൻസി ഫണ്ട് നിർമ്മിക്കാനുള്ള നുറുങ്ങുകൾ",
+      "title": "എമർജൻസി ഫണ്ട് കാൽക്കുലേറ്റർ"
     },
     "hub": {
-      "accuracyDescription": "Using financial-grade arithmetic to avoid floating-point errors in all calculations.",
-      "accuracyTitle": "Precise Calculations",
-      "infoTitle": "About These Calculators",
-      "privacyDescription": "All calculations happen on your device. Your financial data never leaves your browser.",
-      "privacyTitle": "100% Private",
-      "sectionCore": "Core Calculators",
-      "sectionPlanning": "Financial Planning",
-      "sectionTools": "Tools & Links",
-      "subtitle": "Tools to help you plan and analyze your finances",
-      "title": "Financial Calculators"
+      "accuracyDescription": "എല്ലാ കണക്കുകൂട്ടലുകളിലും ഫ്ലോട്ടിംഗ്-പോയിന്റ് പിശകുകൾ ഒഴിവാക്കാൻ സാമ്പത്തിക-ഗ്രേഡ് ഗണിതം ഉപയോഗിക്കുന്നു.",
+      "accuracyTitle": "കൃത്യമായ കണക്കുകൂട്ടലുകൾ",
+      "infoTitle": "ഈ കാൽക്കുലേറ്ററുകളെക്കുറിച്ച്",
+      "privacyDescription": "എല്ലാ കണക്കുകൂട്ടലുകളും നിങ്ങളുടെ ഉപകരണത്തിൽ നടക്കുന്നു. നിങ്ങളുടെ സാമ്പത്തിക ഡാറ്റ ഒരിക്കലും ബ്രൗസർ വിടുന്നില്ല.",
+      "privacyTitle": "100% സ്വകാര്യം",
+      "sectionCore": "അടിസ്ഥാന കാൽക്കുലേറ്ററുകൾ",
+      "sectionPlanning": "സാമ്പത്തിക ആസൂത്രണം",
+      "sectionTools": "ടൂളുകളും ലിങ്കുകളും",
+      "subtitle": "നിങ്ങളുടെ സാമ്പത്തികം ആസൂത്രണം ചെയ്യാനും വിശകലനം ചെയ്യാനും ഉള്ള ടൂളുകൾ",
+      "title": "സാമ്പത്തിക കാൽക്കുലേറ്ററുകൾ"
     },
     "inflation": {
-      "assumptionCompound": "Inflation compounds annually",
-      "assumptionConstant": "Constant annual inflation rate",
-      "chartNominal": "Nominal Value (unchanged)",
-      "chartReal": "Real Purchasing Power",
-      "chartTitle": "Purchasing Power Over Time",
-      "currentAmount": "Current Amount",
-      "description": "See how inflation erodes your purchasing power over time",
-      "formulaExplanation": "Shows how much your money will actually buy in the future, adjusted for rising prices",
-      "formulaText": "Real Value = Nominal Value / (1 + inflation)^years",
-      "heroDescription": "Your {amount} will have the buying power of {futureAmount} in {years} years",
-      "heroTitle": "Purchasing Power Impact",
-      "inflationRate": "Annual Inflation Rate (%)",
-      "inflationRateHelp": "US historical average: ~3%",
-      "inputTitle": "Calculate Impact",
-      "powerLost": "Purchasing Power Lost",
-      "powerRemaining": "Purchasing Power Remaining",
-      "presetAverage": "Average (3%)",
-      "presetHigh": "High (5%)",
-      "presetLow": "Low (2%)",
-      "presets": "Presets",
-      "purchasingPower": "Future Purchasing Power",
-      "resultTitle": "Detailed Breakdown",
-      "subtitle": "Understand the real cost of inflation",
-      "tableLost": "Value Lost",
-      "tableNominal": "Nominal Value",
-      "tableReal": "Real Value",
-      "tableTitle": "Year-by-Year Breakdown",
-      "tableYear": "Year",
-      "timeHorizon": "Time Horizon (Years)",
-      "title": "Inflation Impact Calculator"
+      "assumptionCompound": "പണപ്പെരുപ്പം വാർഷികമായി കോമ്പൗണ്ട് ചെയ്യുന്നു",
+      "assumptionConstant": "സ്ഥിരമായ വാർഷിക പണപ്പെരുപ്പ നിരക്ക്",
+      "chartNominal": "നാമമാത്ര മൂല്യം (മാറ്റമില്ല)",
+      "chartReal": "യഥാർത്ഥ വാങ്ങൽ ശേഷി",
+      "chartTitle": "കാലക്രമത്തിലുള്ള വാങ്ങൽ ശേഷി",
+      "currentAmount": "നിലവിലെ തുക",
+      "description": "പണപ്പെരുപ്പം കാലക്രമേണ നിങ്ങളുടെ വാങ്ങൽ ശേഷി എങ്ങനെ ശോഷിപ്പിക്കുന്നുവെന്ന് കാണുക",
+      "formulaExplanation": "വിലക്കയറ്റത്തിന് അനുസൃതമായി ഭാവിയിൽ നിങ്ങളുടെ പണം യഥാർത്ഥത്തിൽ എത്ര വാങ്ങുമെന്ന് കാണിക്കുന്നു",
+      "formulaText": "യഥാർത്ഥ മൂല്യം = നാമമാത്ര മൂല്യം / (1 + പണപ്പെരുപ്പം)^വർഷങ്ങൾ",
+      "heroDescription": "നിങ്ങളുടെ {amount} - {years} വർഷത്തിൽ {futureAmount}-ന്റെ വാങ്ങൽ ശേഷി ഉണ്ടായിരിക്കും",
+      "heroTitle": "വാങ്ങൽ ശേഷി ആഘാതം",
+      "inflationRate": "വാർഷിക പണപ്പെരുപ്പ നിരക്ക് (%)",
+      "inflationRateHelp": "US ചരിത്ര ശരാശരി: ~3%",
+      "inputTitle": "ആഘാതം കണക്കുകൂട്ടുക",
+      "powerLost": "നഷ്ടപ്പെട്ട വാങ്ങൽ ശേഷി",
+      "powerRemaining": "ശേഷിക്കുന്ന വാങ്ങൽ ശേഷി",
+      "presetAverage": "ശരാശരി (3%)",
+      "presetHigh": "ഉയർന്നത് (5%)",
+      "presetLow": "കുറഞ്ഞത് (2%)",
+      "presets": "പ്രീസെറ്റുകൾ",
+      "purchasingPower": "ഭാവി വാങ്ങൽ ശേഷി",
+      "resultTitle": "വിശദമായ വിശകലനം",
+      "subtitle": "പണപ്പെരുപ്പത്തിന്റെ യഥാർത്ഥ ചെലവ് മനസ്സിലാക്കുക",
+      "tableLost": "നഷ്ടപ്പെട്ട മൂല്യം",
+      "tableNominal": "നാമമാത്ര മൂല്യം",
+      "tableReal": "യഥാർത്ഥ മൂല്യം",
+      "tableTitle": "വർഷം-തിരിച്ചുള്ള വിശകലനം",
+      "tableYear": "വർഷം",
+      "timeHorizon": "സമയ ചക്രവാളം (വർഷങ്ങൾ)",
+      "title": "പണപ്പെരുപ്പ ആഘാത കാൽക്കുലേറ്റർ"
     },
     "loanTracker": {
-      "description": "Track all your loans, payments, and payoff progress",
-      "title": "Loan Tracker"
+      "description": "നിങ്ങളുടെ എല്ലാ ലോണുകളും പേയ്‌മെന്റുകളും തിരിച്ചടവ് പുരോഗതിയും ട്രാക്ക് ചെയ്യുക",
+      "title": "ലോൺ ട്രാക്കർ"
     },
     "monteCarlo": {
-      "assumptionInflation": "Inflation adjustment",
-      "assumptionInflationApplied": "Applied to withdrawals (compounding)",
-      "assumptionInflationNone": "Not applied in accumulation mode",
-      "assumptionPRNG": "Random number generator",
-      "assumptionPRNGValue": "Seeded PRNG (Mulberry32) — deterministic",
-      "assumptionReturns": "Return distribution",
-      "assumptionReturnsValue": "Normal distribution (Box-Muller)",
-      "assumptionVolatility": "Volatility (std dev)",
-      "badgeCaution": "Needs Review",
-      "badgeRisk": "High Risk",
-      "badgeStrong": "Strong Plan",
-      "chartTitle": "Percentile Bands Over Time",
-      "description": "Stress-test your financial plan with probabilistic modeling",
-      "expectedReturn": "Expected Annual Return (%)",
-      "expectedReturnHelp": "Stocks: 7-10%, Bonds: 3-5%, Balanced: 5-7%",
-      "formulaExplanation": "Each month draws a random return from a normal distribution. Contributions are added, inflation-adjusted withdrawals subtracted. Repeated across N simulations.",
+      "assumptionInflation": "പണപ്പെരുപ്പ ക്രമീകരണം",
+      "assumptionInflationApplied": "പിൻവലിക്കലുകളിൽ പ്രയോഗിച്ചു (കോമ്പൗണ്ടിംഗ്)",
+      "assumptionInflationNone": "സഞ്ചയ മോഡിൽ പ്രയോഗിച്ചിട്ടില്ല",
+      "assumptionPRNG": "റാൻഡം നമ്പർ ജനറേറ്റർ",
+      "assumptionPRNGValue": "സീഡഡ് PRNG (Mulberry32) — നിർണ്ണായക",
+      "assumptionReturns": "വരുമാന വിതരണം",
+      "assumptionReturnsValue": "നോർമൽ ഡിസ്ട്രിബ്യൂഷൻ (Box-Muller)",
+      "assumptionVolatility": "ചാഞ്ചാട്ടം (std dev)",
+      "badgeCaution": "അവലോകനം ആവശ്യമാണ്",
+      "badgeRisk": "ഉയർന്ന അപകടസാധ്യത",
+      "badgeStrong": "ശക്തമായ പദ്ധതി",
+      "chartTitle": "കാലക്രമത്തിലുള്ള ശതമാന ബാൻഡുകൾ",
+      "description": "പ്രോബബിലിസ്റ്റിക് മോഡലിംഗ് ഉപയോഗിച്ച് നിങ്ങളുടെ സാമ്പത്തിക പദ്ധതി പരീക്ഷിക്കുക",
+      "expectedReturn": "പ്രതീക്ഷിത വാർഷിക വരുമാനം (%)",
+      "expectedReturnHelp": "ഷെയറുകൾ: 7-10%, ബോണ്ടുകൾ: 3-5%, സന്തുലിതം: 5-7%",
+      "formulaExplanation": "ഓരോ മാസവും നോർമൽ ഡിസ്ട്രിബ്യൂഷനിൽ നിന്ന് ഒരു റാൻഡം വരുമാനം എടുക്കുന്നു. കോൺട്രിബ്യൂഷനുകൾ ചേർക്കുന്നു, പണപ്പെരുപ്പ-ക്രമീകൃത പിൻവലിക്കലുകൾ കുറയ്ക്കുന്നു. N സിമുലേഷനുകളിലുടനീളം ആവർത്തിക്കുന്നു.",
       "formulaText": "Monthly return = Normal(μ/12, σ/√12); Balance_t = Balance_(t-1) × (1 + r_t) + C - W",
-      "heroTitle": "Simulation Results",
-      "inflationRate": "Inflation Rate (%)",
-      "initialBalance": "Starting Portfolio Balance",
-      "inputTitle": "Simulation Parameters",
-      "medianFinal": "Median Final Balance",
-      "modeAccumulation": "Saving (Accumulation)",
-      "modeWithdrawal": "Spending (Withdrawal)",
-      "monthlyContribution": "Monthly Contribution",
-      "monthlyWithdrawal": "Monthly Withdrawal",
-      "p10Final": "Worst Case (10th %ile)",
-      "p90Final": "Best Case (90th %ile)",
-      "resultsTitle": "Outcome Distribution",
-      "scenarioMode": "Scenario Mode",
-      "simulations": "Number of Simulations",
-      "simulationsHelp": "More simulations = more accurate percentiles, but slower",
-      "subtitle": "Run thousands of market simulations to see how your plan holds up",
-      "successRateDescription": "{total} simulations run, {failures} ran out of money",
-      "successRateLabel": "Success Rate",
-      "timeHorizon": "Time Horizon (Years)",
-      "title": "Monte Carlo Simulator",
-      "totalSimulations": "Simulations Run",
-      "volatility": "Annual Volatility / Std Dev (%)",
-      "volatilityHelp": "S&P 500 historical: ~15%. Higher = wider outcome range."
+      "heroTitle": "സിമുലേഷൻ ഫലങ്ങൾ",
+      "inflationRate": "പണപ്പെരുപ്പ നിരക്ക് (%)",
+      "initialBalance": "പ്രാരംഭ പോർട്ട്‌ഫോളിയോ ബാലൻസ്",
+      "inputTitle": "സിമുലേഷൻ പാരാമീറ്ററുകൾ",
+      "medianFinal": "മീഡിയൻ അന്തിമ ബാലൻസ്",
+      "modeAccumulation": "ലാഭിക്കൽ (സഞ്ചയം)",
+      "modeWithdrawal": "ചെലവഴിക്കൽ (പിൻവലിക്കൽ)",
+      "monthlyContribution": "പ്രതിമാസ കോൺട്രിബ്യൂഷൻ",
+      "monthlyWithdrawal": "പ്രതിമാസ പിൻവലിക്കൽ",
+      "p10Final": "മോശം കേസ് (10-ാം %ile)",
+      "p90Final": "മികച്ച കേസ് (90-ാം %ile)",
+      "resultsTitle": "ഫല വിതരണം",
+      "scenarioMode": "സിനാരിയോ മോഡ്",
+      "simulations": "സിമുലേഷനുകളുടെ എണ്ണം",
+      "simulationsHelp": "കൂടുതൽ സിമുലേഷനുകൾ = കൂടുതൽ കൃത്യമായ ശതമാനങ്ങൾ, പക്ഷേ മന്ദഗതി",
+      "subtitle": "നിങ്ങളുടെ പദ്ധതി എങ്ങനെ നിലനിൽക്കുന്നുവെന്ന് കാണാൻ ആയിരക്കണക്കിന് മാർക്കറ്റ് സിമുലേഷനുകൾ നടത്തുക",
+      "successRateDescription": "{total} സിമുലേഷനുകൾ നടത്തി, {failures} എണ്ണത്തിൽ പണം തീർന്നു",
+      "successRateLabel": "വിജയ നിരക്ക്",
+      "timeHorizon": "സമയ ചക്രവാളം (വർഷങ്ങൾ)",
+      "title": "മോണ്ടെ കാർലോ സിമുലേറ്റർ",
+      "totalSimulations": "നടത്തിയ സിമുലേഷനുകൾ",
+      "volatility": "വാർഷിക ചാഞ്ചാട്ടം / സ്റ്റാൻഡേർഡ് ഡീവിയേഷൻ (%)",
+      "volatilityHelp": "S&P 500 ചരിത്രപരം: ~15%. ഉയർന്നത് = വിശാലമായ ഫല ശ്രേണി."
     },
     "mortgage": {
-      "affordabilityTitle": "Your Affordability",
-      "annualIncome": "Annual Gross Income",
-      "annualRate": "Interest Rate (%)",
-      "annualRateHelp": "Current average: 6-7% for 30-year fixed",
-      "assumptionFixedRate": "Fixed interest rate for full term",
-      "assumptionNoEscrow": "Does not include taxes, insurance, or HOA",
-      "description": "Calculate payments or find out how much home you can afford",
-      "downPayment": "Down Payment",
-      "downPaymentAmount": "Down Payment",
-      "downPaymentPercent": "Down Payment (%)",
-      "dtiRatio": "Debt-to-Income Ratio",
-      "extraPayment": "Extra Monthly Payment",
-      "extraPaymentHelp": "Additional payment applied to principal each month",
-      "formulaExplanation": "M = Monthly payment, P = Principal, i = Monthly interest rate, n = Total number of payments",
+      "affordabilityTitle": "നിങ്ങളുടെ താങ്ങാനുള്ള കഴിവ്",
+      "annualIncome": "വാർഷിക മൊത്ത വരുമാനം",
+      "annualRate": "പലിശ നിരക്ക് (%)",
+      "annualRateHelp": "നിലവിലെ ശരാശരി: 30-വർഷ ഫിക്സഡിന് 6-7%",
+      "assumptionFixedRate": "മുഴുവൻ കാലാവധിക്കും ഫിക്സഡ് പലിശ നിരക്ക്",
+      "assumptionNoEscrow": "നികുതികൾ, ഇൻഷുറൻസ്, HOA എന്നിവ ഉൾപ്പെടുന്നില്ല",
+      "description": "പേയ്‌മെന്റുകൾ കണക്കുകൂട്ടുക അല്ലെങ്കിൽ എത്ര വീട് വാങ്ങാമെന്ന് കണ്ടെത്തുക",
+      "downPayment": "ഡൗൺ പേയ്‌മെന്റ്",
+      "downPaymentAmount": "ഡൗൺ പേയ്‌മെന്റ്",
+      "downPaymentPercent": "ഡൗൺ പേയ്‌മെന്റ് (%)",
+      "dtiRatio": "കടം-വരുമാന അനുപാതം",
+      "extraPayment": "അധിക പ്രതിമാസ പേയ്‌മെന്റ്",
+      "extraPaymentHelp": "ഓരോ മാസവും മുതലിലേക്ക് പ്രയോഗിക്കുന്ന അധിക പേയ്‌മെന്റ്",
+      "formulaExplanation": "M = പ്രതിമാസ പേയ്‌മെന്റ്, P = മുതൽ, i = പ്രതിമാസ പലിശ നിരക്ക്, n = ആകെ പേയ്‌മെന്റുകളുടെ എണ്ണം",
       "formulaText": "M = P[i(1+i)^n] / [(1+i)^n - 1]",
-      "hideFullSchedule": "Hide Full Schedule",
-      "homePrice": "Home Price",
-      "inputTitle": "Loan Details",
-      "loanAmount": "Loan Amount",
-      "maxDTI": "Maximum DTI Ratio (%)",
-      "maxHomePrice": "Maximum Home Price",
-      "maxLoanAmount": "Maximum Loan Amount",
-      "modeAffordability": "What Can I Afford?",
-      "modePayment": "Calculate Payment",
-      "monthlyDebts": "Monthly Debt Payments",
-      "monthlyDebtsHelp": "Car loans, student loans, credit cards, etc.",
-      "monthlyPayment": "Monthly Payment",
-      "payoffMonths": "Payoff Time",
-      "resultTitle": "Payment Summary",
-      "scheduleBalance": "Balance",
-      "scheduleInterest": "Interest",
-      "scheduleMonth": "Month",
-      "schedulePayment": "Payment",
-      "schedulePrincipal": "Principal",
-      "scheduleTitle": "Amortization Schedule",
-      "showFullSchedule": "Show Full Schedule",
-      "subtitle": "Plan your home purchase with confidence",
-      "term": "Loan Term",
-      "term15": "15 Years",
-      "term30": "30 Years",
-      "title": "Mortgage Calculator",
-      "totalCost": "Total Cost of Loan",
-      "totalInterest": "Total Interest Paid"
+      "hideFullSchedule": "പൂർണ്ണ ഷെഡ്യൂൾ മറയ്ക്കുക",
+      "homePrice": "വീടിന്റെ വില",
+      "inputTitle": "ലോൺ വിശദാംശങ്ങൾ",
+      "loanAmount": "ലോൺ തുക",
+      "maxDTI": "പരമാവധി DTI അനുപാതം (%)",
+      "maxHomePrice": "പരമാവധി വീടിന്റെ വില",
+      "maxLoanAmount": "പരമാവധി ലോൺ തുക",
+      "modeAffordability": "എനിക്ക് എന്ത് താങ്ങാനാകും?",
+      "modePayment": "പേയ്‌മെന്റ് കണക്കുകൂട്ടുക",
+      "monthlyDebts": "പ്രതിമാസ കട പേയ്‌മെന്റുകൾ",
+      "monthlyDebtsHelp": "കാർ ലോണുകൾ, വിദ്യാർത്ഥി ലോണുകൾ, ക്രെഡിറ്റ് കാർഡുകൾ മുതലായവ.",
+      "monthlyPayment": "പ്രതിമാസ പേയ്‌മെന്റ്",
+      "payoffMonths": "തിരിച്ചടവ് സമയം",
+      "resultTitle": "പേയ്‌മെന്റ് സംഗ്രഹം",
+      "scheduleBalance": "ബാലൻസ്",
+      "scheduleInterest": "പലിശ",
+      "scheduleMonth": "മാസം",
+      "schedulePayment": "പേയ്‌മെന്റ്",
+      "schedulePrincipal": "മുതൽ",
+      "scheduleTitle": "അമോർട്ടൈസേഷൻ ഷെഡ്യൂൾ",
+      "showFullSchedule": "പൂർണ്ണ ഷെഡ്യൂൾ കാണിക്കുക",
+      "subtitle": "ആത്മവിശ്വാസത്തോടെ വീട് വാങ്ങൽ ആസൂത്രണം ചെയ്യുക",
+      "term": "ലോൺ കാലാവധി",
+      "term15": "15 വർഷം",
+      "term30": "30 വർഷം",
+      "title": "മോർട്ട്‌ഗേജ് കാൽക്കുലേറ്റർ",
+      "totalCost": "ലോണിന്റെ ആകെ ചെലവ്",
+      "totalInterest": "ആകെ അടച്ച പലിശ"
     },
     "netWorth": {
-      "description": "View your complete financial picture with assets and liabilities",
-      "title": "Net Worth"
+      "description": "ആസ്തികളും ബാധ്യതകളും ഉൾപ്പെടുന്ന നിങ്ങളുടെ സമ്പൂർണ്ണ സാമ്പത്തിക ചിത്രം കാണുക",
+      "title": "മൊത്തം ആസ്തി"
     },
     "property": {
-      "description": "Track property values, vehicles, and other assets",
-      "title": "Property & Assets"
+      "description": "സ്വത്ത് മൂല്യങ്ങൾ, വാഹനങ്ങൾ, മറ്റ് ആസ്തികൾ ട്രാക്ക് ചെയ്യുക",
+      "title": "സ്വത്തും ആസ്തികളും"
     },
     "retirement": {
-      "advancedTitle": "Advanced Settings",
-      "assumptionInflation": "Inflation rate",
-      "assumptionPostReturn": "Post-retirement return",
-      "assumptionPreReturn": "Pre-retirement return",
-      "assumptionSS": "Social Security included from age {age}",
-      "balanceAtRetirement": "Balance at Retirement",
-      "chartAccumulation": "Accumulation Phase",
-      "chartTitle": "Portfolio Balance Over Time",
-      "chartWithdrawal": "Withdrawal Phase",
-      "currentAge": "Current Age",
-      "currentSavings": "Current Retirement Savings",
-      "description": "Plan your retirement with a comprehensive savings and withdrawal projection",
-      "desiredIncome": "Desired Monthly Income (today's dollars)",
-      "desiredIncomeHelp": "How much you want to spend monthly in retirement, in today's dollars",
-      "formulaExplanation": "Two-phase simulation: grow savings until retirement, then draw down with inflation-adjusted withdrawals",
-      "formulaText": "Accumulation: FV = PV(1+r)^n + PMT[((1+r)^n-1)/r] | Withdrawal: Balance_n = Balance_(n-1)(1+r) - W",
-      "heroInsufficient": "Your savings may run out at age {age}",
-      "heroInsufficientBadge": "Action Needed",
-      "heroNeutralBadge": "Close",
-      "heroSufficient": "Your savings will last {years} years in retirement",
-      "heroSufficientBadge": "On Track",
-      "inflationRate": "Inflation Rate (%)",
-      "inputTitle": "Your Details",
-      "lifeExpectancy": "Life Expectancy",
-      "monthlyContribution": "Monthly Contribution",
-      "monthlyWithdrawal": "Monthly Withdrawal (at retirement)",
-      "postRetirementReturn": "Post-Retirement Return (%)",
-      "postRetirementReturnHelp": "Expected annual return while withdrawing (conservative ~4-5%)",
-      "preRetirementReturn": "Pre-Retirement Return (%)",
-      "preRetirementReturnHelp": "Expected annual return while saving (stocks avg ~7-10%)",
-      "resultTitle": "Retirement Projection",
-      "retirementAge": "Retirement Age",
-      "shortfall": "Shortfall at Life Expectancy",
-      "socialSecurity": "Social Security / Pension (monthly)",
-      "socialSecurityAge": "Social Security Start Age",
-      "subtitle": "Secure your financial future",
-      "surplus": "Surplus at Life Expectancy",
-      "title": "Retirement Planner",
-      "yearsMoneyLasts": "Years Money Lasts"
+      "advancedTitle": "വിപുലമായ ക്രമീകരണങ്ങൾ",
+      "assumptionInflation": "പണപ്പെരുപ്പ നിരക്ക്",
+      "assumptionPostReturn": "വിരമിക്കലിന് ശേഷമുള്ള വരുമാനം",
+      "assumptionPreReturn": "വിരമിക്കലിന് മുമ്പുള്ള വരുമാനം",
+      "assumptionSS": "{age} വയസ്സ് മുതൽ സോഷ്യൽ സെക്യൂരിറ്റി ഉൾപ്പെടുത്തിയിരിക്കുന്നു",
+      "balanceAtRetirement": "വിരമിക്കുമ്പോഴുള്ള ബാലൻസ്",
+      "chartAccumulation": "സഞ്ചയ ഘട്ടം",
+      "chartTitle": "കാലക്രമത്തിലുള്ള പോർട്ട്‌ഫോളിയോ ബാലൻസ്",
+      "chartWithdrawal": "പിൻവലിക്കൽ ഘട്ടം",
+      "currentAge": "നിലവിലെ പ്രായം",
+      "currentSavings": "നിലവിലെ വിരമിക്കൽ സേവിംഗ്സ്",
+      "description": "സമഗ്ര ലാഭവും പിൻവലിക്കൽ പ്രവചനവും ഉപയോഗിച്ച് വിരമിക്കൽ ആസൂത്രണം ചെയ്യുക",
+      "desiredIncome": "ആഗ്രഹിക്കുന്ന പ്രതിമാസ വരുമാനം (ഇന്നത്തെ രൂപയിൽ)",
+      "desiredIncomeHelp": "വിരമിക്കലിൽ പ്രതിമാസം എത്ര ചെലവഴിക്കണം, ഇന്നത്തെ രൂപയിൽ",
+      "formulaExplanation": "രണ്ട്-ഘട്ട സിമുലേഷൻ: വിരമിക്കൽ വരെ സേവിംഗ്സ് വളർത്തുക, തുടർന്ന് പണപ്പെരുപ്പ-ക്രമീകൃത പിൻവലിക്കലുകളോടെ ഉപയോഗിക്കുക",
+      "formulaText": "സഞ്ചയം: FV = PV(1+r)^n + PMT[((1+r)^n-1)/r] | പിൻവലിക്കൽ: Balance_n = Balance_(n-1)(1+r) - W",
+      "heroInsufficient": "നിങ്ങളുടെ സേവിംഗ്സ് {age} വയസ്സിൽ തീർന്നേക്കാം",
+      "heroInsufficientBadge": "നടപടി ആവശ്യമാണ്",
+      "heroNeutralBadge": "അടുത്ത്",
+      "heroSufficient": "നിങ്ങളുടെ സേവിംഗ്സ് വിരമിക്കലിൽ {years} വർഷം നിലനിൽക്കും",
+      "heroSufficientBadge": "ശരിയായ ദിശയിൽ",
+      "inflationRate": "പണപ്പെരുപ്പ നിരക്ക് (%)",
+      "inputTitle": "നിങ്ങളുടെ വിശദാംശങ്ങൾ",
+      "lifeExpectancy": "ആയുർദൈർഘ്യം",
+      "monthlyContribution": "പ്രതിമാസ കോൺട്രിബ്യൂഷൻ",
+      "monthlyWithdrawal": "പ്രതിമാസ പിൻവലിക്കൽ (വിരമിക്കുമ്പോൾ)",
+      "postRetirementReturn": "വിരമിക്കലിന് ശേഷമുള്ള വരുമാനം (%)",
+      "postRetirementReturnHelp": "പിൻവലിക്കുമ്പോൾ പ്രതീക്ഷിക്കുന്ന വാർഷിക വരുമാനം (യാഥാസ്ഥിതിക ~4-5%)",
+      "preRetirementReturn": "വിരമിക്കലിന് മുമ്പുള്ള വരുമാനം (%)",
+      "preRetirementReturnHelp": "ലാഭിക്കുമ്പോൾ പ്രതീക്ഷിക്കുന്ന വാർഷിക വരുമാനം (ഷെയറുകൾ ശരാ ~7-10%)",
+      "resultTitle": "വിരമിക്കൽ പ്രവചനം",
+      "retirementAge": "വിരമിക്കൽ പ്രായം",
+      "shortfall": "ആയുർദൈർഘ്യത്തിലെ കുറവ്",
+      "socialSecurity": "സോഷ്യൽ സെക്യൂരിറ്റി / പെൻഷൻ (പ്രതിമാസം)",
+      "socialSecurityAge": "സോഷ്യൽ സെക്യൂരിറ്റി ആരംഭ പ്രായം",
+      "subtitle": "നിങ്ങളുടെ സാമ്പത്തിക ഭാവി സുരക്ഷിതമാക്കുക",
+      "surplus": "ആയുർദൈർഘ്യത്തിലെ മിച്ചം",
+      "title": "വിരമിക്കൽ പ്ലാനർ",
+      "yearsMoneyLasts": "പണം നിലനിൽക്കുന്ന വർഷങ്ങൾ"
     },
     "savingsGoal": {
-      "currentSavings": "Current Savings",
-      "description": "Plan your savings with compound interest projections",
-      "expectedReturn": "Expected Annual Return (%)",
-      "expectedReturnHelp": "High-yield savings: 4-5%, Investments: 6-8%",
-      "goalAmount": "Goal Amount",
-      "inMonths": "In {months} months",
-      "inputTitle": "Goal Details",
-      "interestEarned": "Interest Earned",
-      "modeHowMuch": "How much should I save monthly?",
-      "modeWhen": "When will I reach my goal?",
-      "monthlyContribution": "Monthly Contribution",
-      "perMonth": "per month",
-      "progress": "Current Progress",
-      "projectedAmount": "Projected Total",
-      "projectionTitle": "Savings Projection",
-      "resultHowMuchTitle": "Monthly Savings Needed",
-      "resultWhenTitle": "You'll Reach Your Goal",
-      "subtitle": "Reach your financial goals faster",
-      "targetDate": "Target Date",
-      "timelineTitle": "Growth Timeline",
-      "title": "Savings Goal Calculator",
-      "totalContributions": "Total Contributions"
+      "currentSavings": "നിലവിലെ സേവിംഗ്സ്",
+      "description": "കോമ്പൗണ്ട് ഇന്ററസ്റ്റ് പ്രവചനങ്ങളോടെ നിങ്ങളുടെ ലാഭം ആസൂത്രണം ചെയ്യുക",
+      "expectedReturn": "പ്രതീക്ഷിത വാർഷിക വരുമാനം (%)",
+      "expectedReturnHelp": "ഹൈ-യീൽഡ് സേവിംഗ്സ്: 4-5%, നിക്ഷേപങ്ങൾ: 6-8%",
+      "goalAmount": "ലക്ഷ്യ തുക",
+      "inMonths": "{months} മാസത്തിനുള്ളിൽ",
+      "inputTitle": "ലക്ഷ്യ വിശദാംശങ്ങൾ",
+      "interestEarned": "ലഭിച്ച പലിശ",
+      "modeHowMuch": "പ്രതിമാസം എത്ര ലാഭിക്കണം?",
+      "modeWhen": "എന്റെ ലക്ഷ്യത്തിലെത്തുന്നത് എപ്പോൾ?",
+      "monthlyContribution": "പ്രതിമാസ കോൺട്രിബ്യൂഷൻ",
+      "perMonth": "പ്രതിമാസം",
+      "progress": "നിലവിലെ പുരോഗതി",
+      "projectedAmount": "പ്രതീക്ഷിത ആകെ",
+      "projectionTitle": "ലാഭ പ്രവചനം",
+      "resultHowMuchTitle": "ആവശ്യമായ പ്രതിമാസ ലാഭം",
+      "resultWhenTitle": "നിങ്ങളുടെ ലക്ഷ്യത്തിലെത്തും",
+      "subtitle": "സാമ്പത്തിക ലക്ഷ്യങ്ങൾ വേഗത്തിൽ നേടുക",
+      "targetDate": "ലക്ഷ്യ തീയതി",
+      "timelineTitle": "വളർച്ചാ ടൈംലൈൻ",
+      "title": "ലാഭ ലക്ഷ്യ കാൽക്കുലേറ്റർ",
+      "totalContributions": "ആകെ കോൺട്രിബ്യൂഷനുകൾ"
     },
     "subscriptionCost": {
-      "addSubscription": "Add Subscription",
-      "amount": "Amount",
-      "breakdown": "Essential vs Non-Essential",
-      "byCategory": "By Category",
-      "daily": "Daily",
-      "description": "Track and analyze the true cost of your subscriptions",
-      "essential": "Essential",
-      "essentialCost": "Essential",
+      "addSubscription": "സബ്‌സ്ക്രിപ്ഷൻ ചേർക്കുക",
+      "amount": "തുക",
+      "breakdown": "അനിവാര്യം vs അനിവാര്യമല്ലാത്തത്",
+      "byCategory": "വിഭാഗം അനുസരിച്ച്",
+      "daily": "ദൈനംദിന",
+      "description": "നിങ്ങളുടെ സബ്‌സ്ക്രിപ്ഷനുകളുടെ യഥാർത്ഥ ചെലവ് ട്രാക്ക് ചെയ്യുകയും വിശകലനം ചെയ്യുകയും ചെയ്യുക",
+      "essential": "അനിവാര്യം",
+      "essentialCost": "അനിവാര്യം",
       "frequency": {
-        "annual": "Annual",
-        "biweekly": "Bi-weekly",
-        "label": "Frequency",
-        "monthly": "Monthly",
-        "quarterly": "Quarterly",
-        "weekly": "Weekly"
+        "annual": "വാർഷികം",
+        "biweekly": "രണ്ടാഴ്ച കൂടുമ്പോൾ",
+        "label": "ആവൃത്തി",
+        "monthly": "പ്രതിമാസം",
+        "quarterly": "ത്രൈമാസികം",
+        "weekly": "ആഴ്ചയിൽ"
       },
-      "monthly": "Monthly",
-      "monthlyIncome": "Monthly Income",
-      "name": "Name",
-      "namePlaceholder": "e.g., Netflix, Spotify",
-      "nonEssentialCost": "Non-Essential",
-      "perYear": "/year",
-      "percentOfIncome": "% of Income",
-      "potentialSavings": "Potential Yearly Savings",
-      "potentialSavingsHelp": "If you cancelled all non-essential subscriptions",
-      "remove": "Remove subscription",
-      "showIncomePercent": "Show percentage of income",
-      "subtitle": "See where your recurring money goes",
-      "title": "Subscription Cost Calculator",
-      "totalCost": "Total Subscription Cost",
-      "yearly": "Yearly",
-      "yourSubscriptions": "Your Subscriptions"
+      "monthly": "പ്രതിമാസം",
+      "monthlyIncome": "പ്രതിമാസ വരുമാനം",
+      "name": "പേര്",
+      "namePlaceholder": "ഉദാ: Netflix, Spotify",
+      "nonEssentialCost": "അനിവാര്യമല്ലാത്തത്",
+      "perYear": "/വർഷം",
+      "percentOfIncome": "വരുമാനത്തിന്റെ %",
+      "potentialSavings": "സാധ്യമായ വാർഷിക ലാഭം",
+      "potentialSavingsHelp": "അനിവാര്യമല്ലാത്ത എല്ലാ സബ്‌സ്ക്രിപ്ഷനുകളും റദ്ദാക്കിയാൽ",
+      "remove": "സബ്‌സ്ക്രിപ്ഷൻ നീക്കം ചെയ്യുക",
+      "showIncomePercent": "വരുമാനത്തിന്റെ ശതമാനം കാണിക്കുക",
+      "subtitle": "നിങ്ങളുടെ ആവർത്തന പണം എവിടെ പോകുന്നുവെന്ന് കാണുക",
+      "title": "സബ്‌സ്ക്രിപ്ഷൻ ചെലവ് കാൽക്കുലേറ്റർ",
+      "totalCost": "ആകെ സബ്‌സ്ക്രിപ്ഷൻ ചെലവ്",
+      "yearly": "വാർഷികം",
+      "yourSubscriptions": "നിങ്ങളുടെ സബ്‌സ്ക്രിപ്ഷനുകൾ"
     },
     "transparency": {
-      "assumptions": "Assumptions",
-      "formula": "Formula",
-      "title": "How This Works"
+      "assumptions": "അനുമാനങ്ങൾ",
+      "formula": "ഫോർമുല",
+      "title": "ഇത് എങ്ങനെ പ്രവർത്തിക്കുന്നു"
     },
     "chart": {
       "year": "വർഷം {n}",
@@ -1290,94 +1291,94 @@
   },
   "chatbot": {
     "buttons": {
-      "clearHistory": "Clear chat history",
-      "exportConversation": "Export conversation",
-      "send": "Send"
+      "clearHistory": "ചാറ്റ് ചരിത്രം മായ്ക്കുക",
+      "exportConversation": "സംഭാഷണം എക്‌സ്‌പോർട്ട് ചെയ്യുക",
+      "send": "അയയ്ക്കുക"
     },
     "disabled": {
-      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
-      "enableButton": "Enable Chatbot",
-      "title": "Chatbot Disabled"
+      "description": "ആരംഭിക്കാൻ ക്രമീകരണങ്ങൾ → സ്വകാര്യത → ബജറ്റ് ചാറ്റ്ബോട്ട് എന്നതിൽ ചാറ്റ്ബോട്ട് പ്രവർത്തനക്ഷമമാക്കുക.",
+      "enableButton": "ചാറ്റ്ബോട്ട് പ്രവർത്തനക്ഷമമാക്കുക",
+      "title": "ചാറ്റ്ബോട്ട് പ്രവർത്തനരഹിതമാണ്"
     },
     "emptyState": {
-      "description": "Ask me anything about your finances. Here are some examples:",
+      "description": "നിങ്ങളുടെ സാമ്പത്തികത്തെക്കുറിച്ച് എന്തും ചോദിക്കുക. ഇതാ ചില ഉദാഹരണങ്ങൾ:",
       "examples": {
-        "balance": "What's my total account balance?",
-        "budget": "Am I over budget in any categories?",
-        "groceries": "Show me my recent grocery purchases",
-        "spending": "How much did I spend this month?"
+        "balance": "എന്റെ ആകെ അക്കൗണ്ട് ബാലൻസ് എത്രയാണ്?",
+        "budget": "ഏതെങ്കിലും വിഭാഗങ്ങളിൽ ബജറ്റ് കവിഞ്ഞിട്ടുണ്ടോ?",
+        "groceries": "എന്റെ സമീപകാല പലചരക്ക് വാങ്ങലുകൾ കാണിക്കൂ",
+        "spending": "ഈ മാസം ഞാൻ എത്ര ചെലവഴിച്ചു?"
       },
-      "title": "Start a Conversation"
+      "title": "ഒരു സംഭാഷണം ആരംഭിക്കുക"
     },
     "header": {
-      "subtitle": "Ask me about your finances",
-      "title": "Budget Assistant"
+      "subtitle": "നിങ്ങളുടെ സാമ്പത്തികത്തെക്കുറിച്ച് എന്നോട് ചോദിക്കുക",
+      "title": "ബജറ്റ് അസിസ്റ്റന്റ്"
     },
     "input": {
-      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training.",
-      "placeholder": "Ask about your finances..."
+      "disclaimer": "OpenAI GPT-4 ഉപയോഗിച്ച് പ്രവർത്തിക്കുന്നു. നിങ്ങളുടെ ഡാറ്റ സുരക്ഷിതമായി പ്രോസസ്സ് ചെയ്യുകയും പരിശീലനത്തിന് ഉപയോഗിക്കാതിരിക്കുകയും ചെയ്യുന്നു.",
+      "placeholder": "നിങ്ങളുടെ സാമ്പത്തികത്തെക്കുറിച്ച് ചോദിക്കുക..."
     },
     "messages": {
-      "dataAccessed": "Data accessed:",
-      "error": "Error",
-      "thinking": "Thinking..."
+      "dataAccessed": "ആക്‌സസ് ചെയ്ത ഡാറ്റ:",
+      "error": "പിശക്",
+      "thinking": "ചിന്തിക്കുന്നു..."
     }
   },
   "chatbotHelp": {
     "tabs": {
-      "actions": "Actions",
-      "budget": "Budget",
-      "income": "Income",
-      "spending": "Spending",
-      "trends": "Trends"
+      "actions": "പ്രവർത്തനങ്ങൾ",
+      "budget": "ബജറ്റ്",
+      "income": "വരുമാനം",
+      "spending": "ചെലവ്",
+      "trends": "പ്രവണതകൾ"
     }
   },
   "chatbotOptIn": {
     "buttons": {
-      "decline": "No Thanks",
-      "enable": "Enable Chatbot"
+      "decline": "വേണ്ട, നന്ദി",
+      "enable": "ചാറ്റ്ബോട്ട് പ്രവർത്തനക്ഷമമാക്കുക"
     },
     "capabilities": {
-      "actions": "Optionally perform actions like adding transactions or creating budgets",
-      "answer": "Answer questions about your transactions, budgets, and spending patterns",
-      "insights": "Provide insights and recommendations based on your data",
-      "search": "Search your financial data using natural language",
-      "title": "What the Chatbot Can Do"
+      "actions": "ഇടപാടുകൾ ചേർക്കുക, ബജറ്റുകൾ സൃഷ്ടിക്കുക തുടങ്ങിയ പ്രവർത്തനങ്ങൾ ഓപ്ഷണലായി നിർവ്വഹിക്കുക",
+      "answer": "നിങ്ങളുടെ ഇടപാടുകൾ, ബജറ്റുകൾ, ചെലവ് രീതികൾ എന്നിവയെക്കുറിച്ചുള്ള ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകുക",
+      "insights": "നിങ്ങളുടെ ഡാറ്റ അടിസ്ഥാനമാക്കി ഉൾക്കാഴ്ചകളും ശുപാർശകളും നൽകുക",
+      "search": "സ്വാഭാവിക ഭാഷ ഉപയോഗിച്ച് നിങ്ങളുടെ സാമ്പത്തിക ഡാറ്റ തിരയുക",
+      "title": "ചാറ്റ്ബോട്ടിന് എന്ത് ചെയ്യാൻ കഴിയും"
     },
-    "closeDialog": "Close chatbot opt-in dialog",
+    "closeDialog": "ചാറ്റ്ബോട്ട് ഓപ്റ്റ്-ഇൻ ഡയലോഗ് അടയ്ക്കുക",
     "controls": {
       "dataAccess": {
         "fullAccess": {
-          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data",
-          "title": "Full Access"
+          "description": "ചാറ്റ്ബോട്ടിന് ഇടപാടുകൾ ചേർക്കൽ, ബജറ്റുകൾ സൃഷ്ടിക്കൽ, നിങ്ങളുടെ ഡാറ്റയിൽ മാറ്റങ്ങൾ വരുത്തൽ തുടങ്ങിയ പ്രവർത്തനങ്ങൾ നിർവ്വഹിക്കാൻ കഴിയും",
+          "title": "പൂർണ്ണ ആക്‌സസ്"
         },
-        "label": "What can the chatbot do with your data?",
+        "label": "ചാറ്റ്ബോട്ടിന് നിങ്ങളുടെ ഡാറ്റ ഉപയോഗിച്ച് എന്ത് ചെയ്യാൻ കഴിയും?",
         "readOnly": {
-          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets",
-          "title": "Read-Only (Recommended)"
+          "description": "ചാറ്റ്ബോട്ടിന് നിങ്ങളുടെ ഡാറ്റ കാണാനും ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകാനും കഴിയും, പക്ഷേ ഇടപാടുകൾ/ബജറ്റുകൾ ചേർക്കാനോ എഡിറ്റ് ചെയ്യാനോ ഇല്ലാതാക്കാനോ കഴിയില്ല",
+          "title": "വായന മാത്രം (ശുപാർശ ചെയ്യുന്നു)"
         }
       },
       "retention": {
-        "days30": "30 days",
-        "days7": "7 days (Recommended)",
-        "forever": "Keep forever",
-        "label": "How long should we keep your conversations?",
-        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
+        "days30": "30 ദിവസം",
+        "days7": "7 ദിവസം (ശുപാർശ ചെയ്യുന്നു)",
+        "forever": "എന്നെന്നേക്കും സൂക്ഷിക്കുക",
+        "label": "നിങ്ങളുടെ സംഭാഷണങ്ങൾ എത്ര കാലം സൂക്ഷിക്കണം?",
+        "note": "സംഭാഷണങ്ങൾ നിങ്ങളുടെ ബ്രൗസറിൽ ലോക്കലായി സൂക്ഷിക്കുന്നു. ക്രമീകരണങ്ങൾ → സ്വകാര്യത എന്നതിൽ എപ്പോഴും ഇല്ലാതാക്കാം."
       },
-      "title": "Privacy Controls"
+      "title": "സ്വകാര്യതാ നിയന്ത്രണങ്ങൾ"
     },
     "gdpr": {
-      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+      "notice": "<strong>നിങ്ങളുടെ അവകാശങ്ങൾ:</strong> ചാറ്റ്ബോട്ട് പ്രവർത്തനക്ഷമമാക്കുന്നതിലൂടെ, OpenAI-ന്റെ API വഴി നിങ്ങളുടെ സാമ്പത്തിക ഡാറ്റ പ്രോസസ്സ് ചെയ്യാൻ നിങ്ങൾ സമ്മതിക്കുന്നു. ക്രമീകരണങ്ങൾ → സ്വകാര്യത എന്നതിൽ ചാറ്റ്ബോട്ട് പ്രവർത്തനരഹിതമാക്കി എപ്പോഴും സമ്മതം പിൻവലിക്കാം. ഞങ്ങളുടെ സ്വകാര്യതാ നയത്തിനും GDPR ആവശ്യകതകൾക്കും അനുസൃതമായി നിങ്ങളുടെ ഡാറ്റ പ്രോസസ്സ് ചെയ്യുന്നു. നിങ്ങളുടെ സംഭാഷണ ചരിത്രം ആക്‌സസ് ചെയ്യാനും ഇല്ലാതാക്കാനും എക്‌സ്‌പോർട്ട് ചെയ്യാനും എപ്പോഴും അവകാശമുണ്ട്."
     },
     "privacy": {
-      "dataSent": "Financial data is sent to the API to answer your questions",
-      "disable": "You can disable the chatbot anytime in Settings → Privacy",
-      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
-      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
-      "title": "Privacy & Data Usage"
+      "dataSent": "നിങ്ങളുടെ ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകാൻ സാമ്പത്തിക ഡാറ്റ API-ലേക്ക് അയയ്ക്കുന്നു",
+      "disable": "ക്രമീകരണങ്ങൾ → സ്വകാര്യത എന്നതിൽ ചാറ്റ്ബോട്ട് എപ്പോഴും പ്രവർത്തനരഹിതമാക്കാം",
+      "noTraining": "OpenAI API ഡാറ്റ മോഡലുകൾ പരിശീലിപ്പിക്കാൻ ഉപയോഗിക്കുന്നില്ല (അവരുടെ നയമനുസരിച്ച്)",
+      "processedBy": "നിങ്ങളുടെ സംഭാഷണങ്ങൾ OpenAI-ന്റെ GPT-4 API ഉപയോഗിച്ച് പ്രോസസ്സ് ചെയ്യുന്നു",
+      "title": "സ്വകാര്യതയും ഡാറ്റ ഉപയോഗവും"
     },
-    "subtitle": "AI-powered financial assistant",
-    "title": "Enable Budget Chatbot?"
+    "subtitle": "AI-പവർഡ് സാമ്പത്തിക സഹായി",
+    "title": "ബജറ്റ് ചാറ്റ്ബോട്ട് പ്രവർത്തനക്ഷമമാക്കണോ?"
   },
   "columnMapper": {
     "amount": "Amount",
@@ -1409,40 +1410,40 @@
     "useSavedMapping": "Use Saved Mapping"
   },
   "combobox": {
-    "noResults": "No results found.",
-    "search": "Search...",
-    "select": "Select..."
+    "noResults": "ഫലങ്ങളൊന്നും കണ്ടെത്തിയില്ല.",
+    "search": "തിരയുക...",
+    "select": "തിരഞ്ഞെടുക്കുക..."
   },
   "commandPalette": {
     "commands": {
-      "addTransaction": "Add Transaction",
-      "budgets": "Budgets",
-      "categories": "Categories",
-      "darkTheme": "Dark Theme",
-      "dashboard": "Dashboard",
-      "exportData": "Export Data",
-      "futurePlans": "Future Plans",
-      "highContrastTheme": "High-Contrast Theme",
-      "importCsv": "Import CSV",
-      "investments": "Investments",
-      "lightTheme": "Light Theme",
-      "loans": "Loans",
-      "newBudget": "New Budget",
-      "reports": "Reports",
-      "retirement": "Retirement",
-      "scanReceipt": "Scan Receipt",
-      "settings": "Settings",
-      "transactions": "Transactions"
+      "addTransaction": "ഇടപാട് ചേർക്കുക",
+      "budgets": "ബജറ്റുകൾ",
+      "categories": "വിഭാഗങ്ങൾ",
+      "darkTheme": "ഡാർക്ക് തീം",
+      "dashboard": "ഡാഷ്ബോർഡ്",
+      "exportData": "ഡാറ്റ എക്‌സ്‌പോർട്ട്",
+      "futurePlans": "ഭാവി പദ്ധതികൾ",
+      "highContrastTheme": "ഉയർന്ന കോൺട്രാസ്റ്റ് തീം",
+      "importCsv": "CSV ഇമ്പോർട്ട്",
+      "investments": "നിക്ഷേപങ്ങൾ",
+      "lightTheme": "ലൈറ്റ് തീം",
+      "loans": "ലോണുകൾ",
+      "newBudget": "പുതിയ ബജറ്റ്",
+      "reports": "റിപ്പോർട്ടുകൾ",
+      "retirement": "വിരമിക്കൽ",
+      "scanReceipt": "രസീത് സ്കാൻ ചെയ്യുക",
+      "settings": "ക്രമീകരണങ്ങൾ",
+      "transactions": "ഇടപാടുകൾ"
     },
     "groups": {
-      "appearance": "Appearance",
-      "quickActions": "Quick Actions",
-      "tools": "Tools & Settings",
-      "tracking": "Tracking & Analysis",
-      "wealth": "Wealth & Planning"
+      "appearance": "ദൃശ്യരൂപം",
+      "quickActions": "ദ്രുത പ്രവർത്തനങ്ങൾ",
+      "tools": "ടൂളുകളും ക്രമീകരണങ്ങളും",
+      "tracking": "ട്രാക്കിംഗും വിശകലനവും",
+      "wealth": "സമ്പത്തും ആസൂത്രണവും"
     },
-    "noResults": "No results found.",
-    "placeholder": "Type a command or search..."
+    "noResults": "ഫലങ്ങളൊന്നും കണ്ടെത്തിയില്ല.",
+    "placeholder": "ഒരു കമാൻഡ് ടൈപ്പ് ചെയ്യുക അല്ലെങ്കിൽ തിരയുക..."
   },
   "common": {
     "cancel": "റദ്ദാക്കുക",
@@ -1465,168 +1466,168 @@
   "dashboard": {
     "widgets": {
       "accountBalances": {
-        "addAccount": "Add Account",
-        "allTransactions": "All Transactions",
-        "imported": "Imported",
-        "netWorth": "Net Worth",
-        "noAccounts": "No accounts added yet",
-        "title": "Account Balances",
-        "viewAll": "View All"
+        "addAccount": "അക്കൗണ്ട് ചേർക്കുക",
+        "allTransactions": "എല്ലാ ഇടപാടുകളും",
+        "imported": "ഇമ്പോർട്ട് ചെയ്തത്",
+        "netWorth": "മൊത്തം ആസ്തി",
+        "noAccounts": "ഇതുവരെ അക്കൗണ്ടുകളൊന്നും ചേർത്തിട്ടില്ല",
+        "title": "അക്കൗണ്ട് ബാലൻസുകൾ",
+        "viewAll": "എല്ലാം കാണുക"
       },
       "budgetProgress": {
-        "createBudget": "Create Budget",
-        "noBudgets": "No budgets set",
-        "overBudget": "Over budget by {amount}",
-        "remaining": "Remaining",
-        "spent": "Spent",
-        "title": "Budget Progress",
-        "viewAll": "View All Budgets"
+        "createBudget": "ബജറ്റ് സൃഷ്ടിക്കുക",
+        "noBudgets": "ബജറ്റുകളൊന്നും സജ്ജമാക്കിയിട്ടില്ല",
+        "overBudget": "ബജറ്റിനേക്കാൾ {amount} അധികം",
+        "remaining": "ശേഷിക്കുന്നത്",
+        "spent": "ചെലവഴിച്ചത്",
+        "title": "ബജറ്റ് പുരോഗതി",
+        "viewAll": "എല്ലാ ബജറ്റുകളും കാണുക"
       },
       "eventBudget": {
-        "noEvents": "No active events",
-        "title": "Event Budgets",
-        "viewAll": "View All"
+        "noEvents": "സജീവ ഇവന്റുകളൊന്നുമില്ല",
+        "title": "ഇവന്റ് ബജറ്റുകൾ",
+        "viewAll": "എല്ലാം കാണുക"
       },
       "incomeVsExpenses": {
-        "addTransactions": "Add Transactions",
-        "expenses": "Expenses",
-        "income": "Income",
-        "net": "Net",
-        "noData": "No transactions yet",
-        "thisMonth": "This Month",
-        "title": "Income vs Expenses"
+        "addTransactions": "ഇടപാടുകൾ ചേർക്കുക",
+        "expenses": "ചെലവുകൾ",
+        "income": "വരുമാനം",
+        "net": "അറ്റ",
+        "noData": "ഇതുവരെ ഇടപാടുകളൊന്നുമില്ല",
+        "thisMonth": "ഈ മാസം",
+        "title": "വരുമാനം vs ചെലവുകൾ"
       },
       "monthlyTrends": {
-        "expenses": "Expenses",
-        "income": "Income",
-        "lastSixMonths": "Last 6 Months",
-        "needMoreData": "Add transactions for 2+ months to see trends",
-        "notEnoughData": "Not enough history",
-        "title": "Monthly Trends"
+        "expenses": "ചെലവുകൾ",
+        "income": "വരുമാനം",
+        "lastSixMonths": "കഴിഞ്ഞ 6 മാസം",
+        "needMoreData": "പ്രവണതകൾ കാണാൻ 2+ മാസത്തെ ഇടപാടുകൾ ചേർക്കുക",
+        "notEnoughData": "മതിയായ ചരിത്രമില്ല",
+        "title": "പ്രതിമാസ പ്രവണതകൾ"
       },
       "netWorthMini": {
-        "assets": "Assets",
-        "liabilities": "Liabilities",
-        "title": "Net Worth",
-        "viewDetails": "View Details"
+        "assets": "ആസ്തികൾ",
+        "liabilities": "ബാധ്യതകൾ",
+        "title": "മൊത്തം ആസ്തി",
+        "viewDetails": "വിശദാംശങ്ങൾ കാണുക"
       },
       "recentTransactions": {
-        "addTransaction": "Add Transaction",
-        "noTransactions": "No transactions yet",
-        "title": "Recent Transactions",
-        "uncategorized": "Uncategorized",
-        "viewAll": "View All"
+        "addTransaction": "ഇടപാട് ചേർക്കുക",
+        "noTransactions": "ഇതുവരെ ഇടപാടുകളൊന്നുമില്ല",
+        "title": "സമീപകാല ഇടപാടുകൾ",
+        "uncategorized": "വർഗ്ഗീകരിക്കാത്തത്",
+        "viewAll": "എല്ലാം കാണുക"
       },
       "safeToSpend": {
-        "caution": "Watch spending",
-        "createBudget": "Create Budget",
-        "dailyBudget": "Daily budget",
-        "danger": "Over budget",
-        "daysRemaining": "{days} days left",
-        "noBudgets": "No budgets set up yet",
-        "noData": "No budgets set up yet",
-        "overBudget": "{amount} over budget",
-        "perCategory": "Per category",
-        "remaining": "{amount} remaining",
-        "safe": "On track",
-        "title": "Safe to Spend",
-        "totalSafe": "Total safe to spend",
-        "viewAll": "View All"
+        "caution": "ചെലവ് ശ്രദ്ധിക്കുക",
+        "createBudget": "ബജറ്റ് സൃഷ്ടിക്കുക",
+        "dailyBudget": "ദൈനംദിന ബജറ്റ്",
+        "danger": "ബജറ്റ് കവിഞ്ഞു",
+        "daysRemaining": "{days} ദിവസം ശേഷിക്കുന്നു",
+        "noBudgets": "ഇതുവരെ ബജറ്റുകൾ സജ്ജമാക്കിയിട്ടില്ല",
+        "noData": "ഇതുവരെ ബജറ്റുകൾ സജ്ജമാക്കിയിട്ടില്ല",
+        "overBudget": "{amount} ബജറ്റ് കവിഞ്ഞു",
+        "perCategory": "വിഭാഗം അനുസരിച്ച്",
+        "remaining": "{amount} ശേഷിക്കുന്നു",
+        "safe": "ശരിയായ ദിശയിൽ",
+        "title": "സുരക്ഷിതമായി ചെലവഴിക്കാവുന്നത്",
+        "totalSafe": "ആകെ സുരക്ഷിതമായി ചെലവഴിക്കാവുന്നത്",
+        "viewAll": "എല്ലാം കാണുക"
       },
       "spendingByCategory": {
-        "addTransactions": "Add Transactions",
-        "moreCategories": "+{count} more categories",
-        "noData": "No spending tracked yet",
-        "thisMonth": "This Month",
-        "title": "Spending by Category",
-        "total": "Total",
-        "uncategorized": "Uncategorized"
+        "addTransactions": "ഇടപാടുകൾ ചേർക്കുക",
+        "moreCategories": "+{count} കൂടുതൽ വിഭാഗങ്ങൾ",
+        "noData": "ഇതുവരെ ചെലവ് ട്രാക്ക് ചെയ്തിട്ടില്ല",
+        "thisMonth": "ഈ മാസം",
+        "title": "വിഭാഗം അനുസരിച്ചുള്ള ചെലവ്",
+        "total": "ആകെ",
+        "uncategorized": "വർഗ്ഗീകരിക്കാത്തത്"
       },
       "streaks": {
-        "badges": "badges",
-        "dayStreak": "day streak",
-        "points": "points",
-        "title": "Streaks & Badges"
+        "badges": "ബാഡ്ജുകൾ",
+        "dayStreak": "ദിവസ സ്ട്രീക്ക്",
+        "points": "പോയിന്റുകൾ",
+        "title": "സ്ട്രീക്കുകളും ബാഡ്ജുകളും"
       },
       "upcomingBills": {
-        "addSubscription": "Add Subscription",
-        "dueIn": "Due in {days} days",
-        "dueToday": "Due today",
-        "dueTomorrow": "Due tomorrow",
-        "noBills": "No upcoming bills",
-        "title": "Upcoming Bills",
-        "viewAll": "View All"
+        "addSubscription": "സബ്‌സ്ക്രിപ്ഷൻ ചേർക്കുക",
+        "dueIn": "{days} ദിവസത്തിനുള്ളിൽ അടയ്‌ക്കേണ്ടത്",
+        "dueToday": "ഇന്ന് അടയ്‌ക്കേണ്ടത്",
+        "dueTomorrow": "നാളെ അടയ്‌ക്കേണ്ടത്",
+        "noBills": "വരാനിരിക്കുന്ന ബില്ലുകളൊന്നുമില്ല",
+        "title": "വരാനിരിക്കുന്ന ബില്ലുകൾ",
+        "viewAll": "എല്ലാം കാണുക"
       },
       "weeklyRecap": {
-        "title": "Weekly Recap",
-        "viewFull": "Full Review",
-        "vsLastWeek": "vs last week"
+        "title": "ആഴ്ചയിലെ സംഗ്രഹം",
+        "viewFull": "പൂർണ്ണ അവലോകനം",
+        "vsLastWeek": "കഴിഞ്ഞ ആഴ്ചയുമായി താരതമ്യം"
       }
     }
   },
   "dashboardCustomizer": {
-    "alwaysVisible": "Always visible",
-    "ariaLabel": "Customize dashboard layout",
-    "button": "Customize",
-    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
-    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
-    "reorderTitle": "Reorder Widgets",
-    "resetButton": "Reset to Defaults",
-    "title": "Customize Dashboard",
-    "toggleVisibility": "Toggle {name} visibility",
-    "widgetVisibility": "Widget Visibility",
-    "widgetsVisible": "{visible} of {total} widgets visible"
+    "alwaysVisible": "എല്ലായ്‌പ്പോഴും ദൃശ്യമാണ്",
+    "ariaLabel": "ഡാഷ്ബോർഡ് ലേഔട്ട് ഇഷ്ടാനുസൃതമാക്കുക",
+    "button": "ഇഷ്ടാനുസൃതമാക്കുക",
+    "description": "ഡാഷ്ബോർഡ് വിജറ്റുകൾ കാണിക്കുകയോ മറയ്ക്കുകയോ ചെയ്യുക. ക്രമം മാറ്റാൻ വിജറ്റുകൾ ഡാഷ്ബോർഡിൽ ഡ്രാഗ് ചെയ്യുക.",
+    "reorderDescription": "വിജറ്റ് ക്രമം മാറ്റാൻ, ഡാഷ്ബോർഡിൽ നേരിട്ട് വിജറ്റുകൾ ഡ്രാഗ് ആൻഡ് ഡ്രോപ്പ് ചെയ്യുക. ഓരോ വിജറ്റ് കാർഡിലെയും ഡ്രാഗ് ഹാൻഡിൽ (⋮⋮) പിടിക്കാൻ മൗസ് അല്ലെങ്കിൽ ടച്ച് ഉപയോഗിക്കുക.",
+    "reorderTitle": "വിജറ്റുകൾ പുനഃക്രമീകരിക്കുക",
+    "resetButton": "ഡിഫോൾട്ടുകളിലേക്ക് പുനഃസജ്ജമാക്കുക",
+    "title": "ഡാഷ്ബോർഡ് ഇഷ്ടാനുസൃതമാക്കുക",
+    "toggleVisibility": "{name} ദൃശ്യത മാറ്റുക",
+    "widgetVisibility": "വിജറ്റ് ദൃശ്യത",
+    "widgetsVisible": "{total} വിജറ്റുകളിൽ {visible} ദൃശ്യമാണ്"
   },
   "debtAnalysis": {
     "cards": {
       "avgRate": {
-        "subtitle": "Weighted average",
-        "title": "Avg Interest Rate"
+        "subtitle": "ഭാരമുള്ള ശരാശരി",
+        "title": "ശരാശരി പലിശ നിരക്ക്"
       },
       "debtFreeDate": {
-        "subtitle": "Estimated payoff",
-        "title": "Debt-Free Date"
+        "subtitle": "കണക്കാക്കിയ തിരിച്ചടവ്",
+        "title": "കടമുക്ത തീയതി"
       },
       "monthlyPayment": {
-        "subtitle": "Total monthly obligations",
-        "title": "Monthly Payment"
+        "subtitle": "ആകെ പ്രതിമാസ ബാധ്യതകൾ",
+        "title": "പ്രതിമാസ പേയ്‌മെന്റ്"
       },
       "totalDebt": {
-        "subtitle": "Across {count} active loans",
-        "title": "Total Debt"
+        "subtitle": "{count} സജീവ ലോണുകളിലായി",
+        "title": "ആകെ കടം"
       }
     },
     "charts": {
       "byType": {
-        "description": "Distribution of debt across loan types",
-        "title": "Debt by Type"
+        "description": "ലോൺ തരങ്ങളിലുടനീളമുള്ള കട വിതരണം",
+        "title": "തരം അനുസരിച്ചുള്ള കടം"
       },
       "projection": {
-        "description": "Expected debt reduction over the next year",
-        "expectedReduction": "Expected reduction: {amount} over 12 months",
-        "title": "12-Month Payoff Projection"
+        "description": "അടുത്ത വർഷത്തിൽ പ്രതീക്ഷിക്കുന്ന കട കുറവ്",
+        "expectedReduction": "12 മാസത്തിനുള്ളിൽ പ്രതീക്ഷിത കുറവ്: {amount}",
+        "title": "12 മാസ തിരിച്ചടവ് പ്രവചനം"
       }
     },
     "comparison": {
-      "description": "Side-by-side comparison of your active loans",
+      "description": "നിങ്ങളുടെ സജീവ ലോണുകളുടെ അടുത്തടുത്ത് താരതമ്യം",
       "headers": {
-        "balance": "Balance",
-        "interestRate": "Interest Rate",
-        "loan": "Loan",
-        "monthlyPayment": "Monthly Payment",
-        "percentOfTotal": "% of Total Debt"
+        "balance": "ബാലൻസ്",
+        "interestRate": "പലിശ നിരക്ക്",
+        "loan": "ലോൺ",
+        "monthlyPayment": "പ്രതിമാസ പേയ്‌മെന്റ്",
+        "percentOfTotal": "ആകെ കടത്തിന്റെ %"
       },
-      "title": "Loan Comparison",
-      "total": "Total"
+      "title": "ലോൺ താരതമ്യം",
+      "total": "ആകെ"
     },
     "empty": {
-      "addFirstLoan": "Add Your First Loan",
-      "description": "You don't have any active loans. Add a loan to see debt analytics.",
-      "title": "No Debt to Analyze"
+      "addFirstLoan": "നിങ്ങളുടെ ആദ്യ ലോൺ ചേർക്കുക",
+      "description": "നിങ്ങൾക്ക് സജീവ ലോണുകളൊന്നുമില്ല. കട വിശകലനം കാണാൻ ഒരു ലോൺ ചേർക്കുക.",
+      "title": "വിശകലനം ചെയ്യാൻ കടമില്ല"
     },
-    "subtitle": "Comprehensive view of your loans and obligations",
-    "title": "Debt Analysis",
-    "viewAllLoans": "View All Loans"
+    "subtitle": "നിങ്ങളുടെ ലോണുകളുടെയും ബാധ്യതകളുടെയും സമഗ്ര കാഴ്ച",
+    "title": "കട വിശകലനം",
+    "viewAllLoans": "എല്ലാ ലോണുകളും കാണുക"
   },
   "debtOverview": {
     "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
@@ -1789,105 +1790,106 @@
   "dialog": {
     "cancel": "റദ്ദാക്കുക",
     "confirm": "സ്ഥിരീകരിക്കുക",
-    "finalConfirmation": "അവസാന സ്ഥിരീകരണം:",
-    "processing": "പ്രോസസിംഗ്...",
+    "finalConfirmation": "അന്തിമ സ്ഥിരീകരണം:",
+    "processing": "പ്രോസസ്സ് ചെയ്യുന്നു...",
     "typeToConfirm": "ഈ പ്രവർത്തനം സ്ഥിരീകരിക്കാൻ {text} ടൈപ്പ് ചെയ്യുക.",
     "confirmAction": "പ്രവർത്തനം സ്ഥിരീകരിക്കുക"
   },
   "draggableWidget": {
-    "dragToReorder": "Drag to reorder widget"
+    "dragToReorder": "വിജറ്റ് പുനഃക്രമീകരിക്കാൻ ഡ്രാഗ് ചെയ്യുക"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
-    "yearsAndMonths": "{years}y {months}m"
+    "months": "{count, plural, =1 {1 മാസം} other {# മാസം}}",
+    "years": "{count, plural, =1 {1 വർഷം} other {# വർഷം}}",
+    "yearsAndMonths": "{years}y {months}m",
+    "yearsMonths": "{years, plural, =1 {1 വർഷം} other {# വർഷം}} {months, plural, =1 {1 മാസം} other {# മാസം}}"
   },
   "emptyStates": {
     "budgets": {
-      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
-      "heading": "No Budgets Created",
-      "primaryCta": "Create Your First Budget"
+      "description": "വ്യത്യസ്ത വിഭാഗങ്ങളിലെ ചെലവ് ട്രാക്ക് ചെയ്യാനും സാമ്പത്തിക ലക്ഷ്യങ്ങൾ നേടാനും ബജറ്റുകൾ സൃഷ്ടിക്കുക.",
+      "heading": "ബജറ്റുകൾ സൃഷ്ടിച്ചിട്ടില്ല",
+      "primaryCta": "നിങ്ങളുടെ ആദ്യ ബജറ്റ് സൃഷ്ടിക്കുക"
     },
     "categories": {
-      "description": "Create custom categories to organize your transactions beyond the default ones.",
-      "heading": "No Custom Categories",
-      "primaryCta": "Add Category"
+      "description": "ഡിഫോൾട്ടുകൾക്കപ്പുറം നിങ്ങളുടെ ഇടപാടുകൾ ക്രമീകരിക്കാൻ ഇഷ്ടാനുസൃത വിഭാഗങ്ങൾ സൃഷ്ടിക്കുക.",
+      "heading": "ഇഷ്ടാനുസൃത വിഭാഗങ്ങളൊന്നുമില്ല",
+      "primaryCta": "വിഭാഗം ചേർക്കുക"
     },
     "dashboard": {
-      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
-      "heading": "Welcome to Your Budget App!",
-      "primaryCta": "Import CSV",
-      "secondaryCta": "Add Transaction"
+      "description": "നിങ്ങളുടെ സാമ്പത്തിക അവലോകനം കാണാൻ ബാങ്ക് ഇടപാടുകൾ ഇമ്പോർട്ട് ചെയ്തോ സ്വമേധയാ അക്കൗണ്ടുകൾ ചേർത്തോ ആരംഭിക്കുക.",
+      "heading": "നിങ്ങളുടെ ബജറ്റ് ആപ്പിലേക്ക് സ്വാഗതം!",
+      "primaryCta": "CSV ഇമ്പോർട്ട് ചെയ്യുക",
+      "secondaryCta": "ഇടപാട് ചേർക്കുക"
     },
     "futurePlans": {
-      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
-      "heading": "No Future Plans",
-      "primaryCta": "Create a Goal"
+      "description": "വീട് വാങ്ങൽ, വിദ്യാഭ്യാസത്തിനായി ലാഭിക്കൽ, അല്ലെങ്കിൽ അവധി ആസൂത്രണം പോലുള്ള സാമ്പത്തിക ലക്ഷ്യങ്ങൾ നിശ്ചയിക്കുക.",
+      "heading": "ഭാവി പദ്ധതികളൊന്നുമില്ല",
+      "primaryCta": "ഒരു ലക്ഷ്യം സൃഷ്ടിക്കുക"
     },
     "investments": {
-      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
-      "heading": "No Investments Tracked",
-      "primaryCta": "Add Investment Account"
+      "description": "പോർട്ട്‌ഫോളിയോ പ്രകടനവും മൊത്തം ആസ്തിയും നിരീക്ഷിക്കാൻ നിങ്ങളുടെ നിക്ഷേപ അക്കൗണ്ടുകളും ഹോൾഡിംഗുകളും ട്രാക്ക് ചെയ്യുക.",
+      "heading": "നിക്ഷേപങ്ങൾ ട്രാക്ക് ചെയ്തിട്ടില്ല",
+      "primaryCta": "നിക്ഷേപ അക്കൗണ്ട് ചേർക്കുക"
     },
     "loans": {
-      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
-      "heading": "No Loans Tracked",
-      "primaryCta": "Add Your First Loan"
+      "description": "തിരിച്ചടവ് പുരോഗതി ദൃശ്യവൽക്കരിക്കാനും പേയ്‌മെന്റുകൾ ആസൂത്രണം ചെയ്യാനും നിങ്ങളുടെ ലോണുകളും മോർട്ട്‌ഗേജുകളും കടങ്ങളും ട്രാക്ക് ചെയ്യുക.",
+      "heading": "ലോണുകൾ ട്രാക്ക് ചെയ്തിട്ടില്ല",
+      "primaryCta": "നിങ്ങളുടെ ആദ്യ ലോൺ ചേർക്കുക"
     },
     "reports": {
-      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
-      "heading": "No Data to Report",
-      "primaryCta": "Add Transactions",
-      "secondaryCta": "Import CSV"
+      "description": "നിങ്ങളുടെ ചെലവ് രീതികളെയും പ്രവണതകളെയും കുറിച്ച് ഉൾക്കാഴ്ചയുള്ള റിപ്പോർട്ടുകൾ സൃഷ്ടിക്കാൻ ഇടപാടുകളും ബജറ്റുകളും ചേർക്കുക.",
+      "heading": "റിപ്പോർട്ട് ചെയ്യാൻ ഡാറ്റയില്ല",
+      "primaryCta": "ഇടപാടുകൾ ചേർക്കുക",
+      "secondaryCta": "CSV ഇമ്പോർട്ട് ചെയ്യുക"
     },
     "retirement": {
-      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
-      "heading": "No Retirement Plans",
-      "primaryCta": "Start Planning"
+      "description": "അക്കൗണ്ടുകൾ ട്രാക്ക് ചെയ്തും ആവശ്യങ്ങൾ കണക്കാക്കിയും വിരമിക്കൽ ടൈംലൈൻ ദൃശ്യവൽക്കരിച്ചും വിരമിക്കലിനായി ആസൂത്രണം ചെയ്യുക.",
+      "heading": "വിരമിക്കൽ പദ്ധതികളൊന്നുമില്ല",
+      "primaryCta": "ആസൂത്രണം ആരംഭിക്കുക"
     },
     "transactions": {
-      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
-      "heading": "No Transactions Yet",
-      "primaryCta": "Add Transaction",
-      "secondaryCta": "Import CSV"
+      "description": "നിങ്ങളുടെ ആദ്യ ഇടപാട് ചേർത്ത് ചെലവ് ട്രാക്കിംഗ് ആരംഭിക്കുക. നിങ്ങൾക്ക് സ്വമേധയാ ചേർക്കുകയോ CSV ഫയലിൽ നിന്ന് ഇമ്പോർട്ട് ചെയ്യുകയോ ചെയ്യാം.",
+      "heading": "ഇതുവരെ ഇടപാടുകളൊന്നുമില്ല",
+      "primaryCta": "ഇടപാട് ചേർക്കുക",
+      "secondaryCta": "CSV ഇമ്പോർട്ട് ചെയ്യുക"
     }
   },
   "errorRecovery": {
-    "aiAnalysis": "AI Analysis:",
-    "closeModal": "Close modal",
+    "aiAnalysis": "AI വിശകലനം:",
+    "closeModal": "മോഡൽ അടയ്ക്കുക",
     "footer": {
-      "close": "Close",
-      "needHelp": "Need more help?",
-      "viewGuide": "View troubleshooting guide"
+      "close": "അടയ്ക്കുക",
+      "needHelp": "കൂടുതൽ സഹായം വേണോ?",
+      "viewGuide": "ട്രബിൾഷൂട്ടിംഗ് ഗൈഡ് കാണുക"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
-      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
-      "optionsTitle": "Recovery Options"
+      "canRecover": "നല്ല വാർത്ത! ഈ പിശകിൽ നിന്ന് വീണ്ടെടുക്കാൻ {count} {count, plural, =1 {വഴി} other {വഴികൾ}} ഞങ്ങൾ കണ്ടെത്തി.",
+      "cannotRecover": "വീണ്ടെടുക്കൽ സാധ്യമല്ല. നിങ്ങളുടെ ബാങ്കിൽ നിന്ന് ഫയൽ വീണ്ടും എക്‌സ്‌പോർട്ട് ചെയ്യുകയോ വ്യത്യസ്ത ഫോർമാറ്റ് പരീക്ഷിക്കുകയോ ചെയ്യേണ്ടതുണ്ട്.",
+      "optionsTitle": "വീണ്ടെടുക്കൽ ഓപ്ഷനുകൾ"
     },
-    "subtitle": "Don't worry! We can help you fix this.",
+    "subtitle": "വിഷമിക്കേണ്ട! ഇത് പരിഹരിക്കാൻ ഞങ്ങൾക്ക് സഹായിക്കാനാകും.",
     "suggestions": {
-      "autoFix": "AUTO-FIX",
-      "autoFixButton": "Auto-Fix",
-      "confidence": "{percent}% confidence",
-      "fixing": "Fixing...",
-      "learnMore": "Learn More",
-      "technicalDetails": "Technical Details"
+      "autoFix": "ഓട്ടോ-ഫിക്സ്",
+      "autoFixButton": "ഓട്ടോ-ഫിക്സ്",
+      "confidence": "{percent}% ആത്മവിശ്വാസം",
+      "fixing": "പരിഹരിക്കുന്നു...",
+      "learnMore": "കൂടുതൽ അറിയുക",
+      "technicalDetails": "സാങ്കേതിക വിശദാംശങ്ങൾ"
     },
     "summary": {
-      "category": "Category: {category}",
-      "title": "Error Summary"
+      "category": "വിഭാഗം: {category}",
+      "title": "പിശക് സംഗ്രഹം"
     },
     "technical": {
-      "canRecover": "Can Recover:",
-      "errorCategory": "Error Category:",
-      "no": "No",
-      "severity": "Severity:",
-      "suggestions": "Suggestions:",
-      "title": "Advanced Technical Details",
-      "yes": "Yes"
+      "canRecover": "വീണ്ടെടുക്കാനാകുമോ:",
+      "errorCategory": "പിശക് വിഭാഗം:",
+      "no": "ഇല്ല",
+      "severity": "തീവ്രത:",
+      "suggestions": "നിർദ്ദേശങ്ങൾ:",
+      "title": "വിപുലമായ സാങ്കേതിക വിശദാംശങ്ങൾ",
+      "yes": "അതെ"
     },
-    "title": "Import Failed"
+    "title": "ഇമ്പോർട്ട് പരാജയപ്പെട്ടു"
   },
   "export": {
     "allDataDeleted": "All data has been deleted. The page will now refresh.",
@@ -1974,78 +1976,78 @@
   },
   "exportDialog": {
     "buttons": {
-      "cancel": "Cancel",
-      "done": "Done!",
-      "download": "Download",
-      "export": "Export Data"
+      "cancel": "റദ്ദാക്കുക",
+      "done": "പൂർത്തിയായി!",
+      "download": "ഡൗൺലോഡ്",
+      "export": "ഡാറ്റ എക്‌സ്‌പോർട്ട്"
     },
     "complete": {
-      "download": "Your file is ready to download",
-      "success": "Export complete! Check your downloads folder."
+      "download": "നിങ്ങളുടെ ഫയൽ ഡൗൺലോഡിന് തയ്യാറാണ്",
+      "success": "എക്‌സ്‌പോർട്ട് പൂർത്തിയായി! ഡൗൺലോഡ്‌സ് ഫോൾഡർ പരിശോധിക്കുക."
     },
     "dataSummary": {
-      "accounts": "Accounts",
-      "estimatedSize": "Est. Size",
-      "title": "Data Summary",
-      "transactions": "Transactions"
+      "accounts": "അക്കൗണ്ടുകൾ",
+      "estimatedSize": "കണക്കാക്കിയ വലുപ്പം",
+      "title": "ഡാറ്റ സംഗ്രഹം",
+      "transactions": "ഇടപാടുകൾ"
     },
     "exporting": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Exporting..."
+      "pleaseWait": "ദയവായി കാത്തിരിക്കുക, ഇത് കുറച്ച് സമയമെടുത്തേക്കാം",
+      "title": "എക്‌സ്‌പോർട്ട് ചെയ്യുന്നു..."
     },
     "format": {
       "budget": {
-        "description": "Complete backup including all data",
-        "label": ".budget file"
+        "description": "എല്ലാ ഡാറ്റയും ഉൾപ്പെടുന്ന പൂർണ്ണ ബാക്കപ്പ്",
+        "label": ".budget ഫയൽ"
       },
       "csv": {
-        "description": "Spreadsheet-compatible format",
-        "label": "CSV file"
+        "description": "സ്പ്രെഡ്‌ഷീറ്റ്-അനുയോജ്യ ഫോർമാറ്റ്",
+        "label": "CSV ഫയൽ"
       },
       "json": {
-        "description": "Developer-friendly format",
-        "label": "JSON file"
+        "description": "ഡെവലപ്പർ-സൗഹൃദ ഫോർമാറ്റ്",
+        "label": "JSON ഫയൽ"
       },
-      "label": "Export Format"
+      "label": "എക്‌സ്‌പോർട്ട് ഫോർമാറ്റ്"
     },
     "options": {
       "encrypt": {
-        "description": "Protect your data with AES-256 encryption",
-        "label": "Encrypt with Password"
+        "description": "AES-256 എൻക്രിപ്ഷൻ ഉപയോഗിച്ച് നിങ്ങളുടെ ഡാറ്റ സംരക്ഷിക്കുക",
+        "label": "പാസ്‌വേഡ് ഉപയോഗിച്ച് എൻക്രിപ്റ്റ് ചെയ്യുക"
       },
       "includeReceipts": {
-        "description": "Attach receipt images (increases file size)",
-        "label": "Include Receipts"
+        "description": "രസീത് ചിത്രങ്ങൾ അറ്റാച്ച് ചെയ്യുക (ഫയൽ വലുപ്പം വർധിക്കും)",
+        "label": "രസീതുകൾ ഉൾപ്പെടുത്തുക"
       }
     },
     "password": {
-      "confirm": "Confirm Password",
-      "confirmPlaceholder": "Confirm password",
-      "hint": "Password Hint (Optional)",
-      "hintNote": "This hint will be stored unencrypted in the file",
-      "hintPlaceholder": "A hint to help you remember",
-      "label": "Password",
-      "minLength": "Password must be at least 8 characters",
-      "mismatch": "Passwords do not match",
-      "placeholder": "Enter password (min 8 characters)",
-      "required": "Password is required for encryption"
+      "confirm": "പാസ്‌വേഡ് സ്ഥിരീകരിക്കുക",
+      "confirmPlaceholder": "പാസ്‌വേഡ് സ്ഥിരീകരിക്കുക",
+      "hint": "പാസ്‌വേഡ് സൂചന (ഓപ്ഷണൽ)",
+      "hintNote": "ഈ സൂചന ഫയലിൽ എൻക്രിപ്റ്റ് ചെയ്യാതെ സൂക്ഷിക്കും",
+      "hintPlaceholder": "ഓർക്കാൻ സഹായിക്കുന്ന സൂചന",
+      "label": "പാസ്‌വേഡ്",
+      "minLength": "പാസ്‌വേഡ് കുറഞ്ഞത് 8 അക്ഷരങ്ങൾ ആയിരിക്കണം",
+      "mismatch": "പാസ്‌വേഡുകൾ പൊരുത്തപ്പെടുന്നില്ല",
+      "placeholder": "പാസ്‌വേഡ് നൽകുക (കുറഞ്ഞത് 8 അക്ഷരങ്ങൾ)",
+      "required": "എൻക്രിപ്ഷനായി പാസ്‌വേഡ് ആവശ്യമാണ്"
     },
-    "subtitle": "Download your budget data",
-    "title": "Export Data"
+    "subtitle": "നിങ്ങളുടെ ബജറ്റ് ഡാറ്റ ഡൗൺലോഡ് ചെയ്യുക",
+    "title": "ഡാറ്റ എക്‌സ്‌പോർട്ട്"
   },
   "filters": {
-    "account": "Account",
-    "allAccounts": "All accounts",
-    "allCategories": "All categories",
-    "allTypes": "All types",
-    "apply": "Apply filters",
-    "category": "Category",
-    "clearFilters": "Clear filters",
-    "dateRange": "Date range",
-    "expense": "Expense",
-    "income": "Income",
-    "search": "Search transactions...",
-    "type": "Type"
+    "account": "അക്കൗണ്ട്",
+    "allAccounts": "എല്ലാ അക്കൗണ്ടുകളും",
+    "allCategories": "എല്ലാ വിഭാഗങ്ങളും",
+    "allTypes": "എല്ലാ തരങ്ങളും",
+    "apply": "ഫിൽട്ടറുകൾ പ്രയോഗിക്കുക",
+    "category": "വിഭാഗം",
+    "clearFilters": "ഫിൽട്ടറുകൾ മായ്ക്കുക",
+    "dateRange": "തീയതി ശ്രേണി",
+    "expense": "ചെലവ്",
+    "income": "വരുമാനം",
+    "search": "ഇടപാടുകൾ തിരയുക...",
+    "type": "തരം"
   },
   "footer": {
     "copyright": "© {year} {brandName}",
@@ -2055,7 +2057,7 @@
       "signup": "പരീക്ഷണം ആരംഭിക്കുക",
       "upgrade": "അപ്ഗ്രേഡ് ചെയ്യുക"
     },
-    "tagline": "ഒരു തവണയുടെ അപ്ഗ്രേഡുമായി പ്രീമിയം ബജറ്റിംഗ്."
+    "tagline": "ഒറ്റത്തവണ അപ്‌ഗ്രേഡോടെ പ്രീമിയം ബജറ്റിംഗ്."
   },
   "fridayReview": {
     "back": "Back",
@@ -2098,14 +2100,14 @@
     "title": "Friday Review"
   },
   "healthScore": {
-    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "ariaLabel": "സാമ്പത്തിക ആരോഗ്യ സ്കോർ: 100-ൽ {score}. {interpretation}",
     "emptyState": {
-      "line1": "Add transactions to see your",
-      "line2": "Financial Health Score"
+      "line1": "നിങ്ങളുടെ കാണാൻ ഇടപാടുകൾ ചേർക്കുക",
+      "line2": "സാമ്പത്തിക ആരോഗ്യ സ്കോർ"
     },
-    "grade": "Grade: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health",
+    "grade": "ഗ്രേഡ്: {grade}",
+    "missingFactors": "{count, plural, =1 {1 ഘടകം കാണുന്നില്ല} other {# ഘടകങ്ങൾ കാണുന്നില്ല}}",
+    "title": "സാമ്പത്തിക ആരോഗ്യം",
     "history": {
       "title": "സ്കോർ ചരിത്രം",
       "monthsOfData": "{count} മാസത്തെ ഡാറ്റ",
@@ -2217,124 +2219,124 @@
   },
   "importDialog": {
     "buttons": {
-      "back": "Back",
-      "cancel": "Cancel",
-      "done": "Done",
-      "import": "Import Data"
+      "back": "പിന്നോട്ട്",
+      "cancel": "റദ്ദാക്കുക",
+      "done": "പൂർത്തിയായി",
+      "import": "ഡാറ്റ ഇമ്പോർട്ട്"
     },
     "complete": {
-      "itemsImported": "{count} items imported successfully",
-      "success": "Import Complete!",
-      "withIssues": "Import Completed with Issues"
+      "itemsImported": "{count} ഇനങ്ങൾ വിജയകരമായി ഇമ്പോർട്ട് ചെയ്തു",
+      "success": "ഇമ്പോർട്ട് പൂർത്തിയായി!",
+      "withIssues": "പ്രശ്നങ്ങളോടെ ഇമ്പോർട്ട് പൂർത്തിയായി"
     },
     "conflicts": {
-      "existing": "{count} existing",
-      "handleLabel": "Handle Conflicts",
+      "existing": "{count} നിലവിലുള്ളവ",
+      "handleLabel": "വൈരുദ്ധ്യങ്ങൾ കൈകാര്യം ചെയ്യുക",
       "overwrite": {
-        "description": "Replace with imported",
-        "label": "Overwrite"
+        "description": "ഇമ്പോർട്ട് ചെയ്തതുകൊണ്ട് മാറ്റിസ്ഥാപിക്കുക",
+        "label": "മാറ്റിയെഴുതുക"
       },
       "rename": {
-        "description": "Import as new entries",
-        "label": "Create new"
+        "description": "പുതിയ എൻട്രികളായി ഇമ്പോർട്ട് ചെയ്യുക",
+        "label": "പുതിയത് സൃഷ്ടിക്കുക"
       },
       "skip": {
-        "description": "Keep current data",
-        "label": "Skip existing"
+        "description": "നിലവിലെ ഡാറ്റ നിലനിർത്തുക",
+        "label": "നിലവിലുള്ളവ ഒഴിവാക്കുക"
       },
-      "title": "Conflicts Found"
+      "title": "വൈരുദ്ധ്യങ്ങൾ കണ്ടെത്തി"
     },
     "encryption": {
-      "decrypt": "Decrypt & Continue",
-      "encrypted": "This file is encrypted",
-      "enterPassword": "Enter password",
-      "hint": "Hint: {hint}",
-      "password": "Password"
+      "decrypt": "ഡീക്രിപ്റ്റ് & തുടരുക",
+      "encrypted": "ഈ ഫയൽ എൻക്രിപ്റ്റ് ചെയ്തതാണ്",
+      "enterPassword": "പാസ്‌വേഡ് നൽകുക",
+      "hint": "സൂചന: {hint}",
+      "password": "പാസ്‌വേഡ്"
     },
     "importing": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Importing your data..."
+      "pleaseWait": "ദയവായി കാത്തിരിക്കുക, ഇത് കുറച്ച് സമയമെടുത്തേക്കാം",
+      "title": "നിങ്ങളുടെ ഡാറ്റ ഇമ്പോർട്ട് ചെയ്യുന്നു..."
     },
     "preview": {
-      "dataToImport": "Data to Import",
-      "exported": "Exported",
-      "fileInfo": "File Information",
-      "version": "Version"
+      "dataToImport": "ഇമ്പോർട്ട് ചെയ്യേണ്ട ഡാറ്റ",
+      "exported": "എക്‌സ്‌പോർട്ട് ചെയ്തത്",
+      "fileInfo": "ഫയൽ വിവരങ്ങൾ",
+      "version": "പതിപ്പ്"
     },
     "selectFile": {
-      "dragDrop": "or drag and drop here",
-      "label": "Click to select a .budget file"
+      "dragDrop": "അല്ലെങ്കിൽ ഇവിടെ ഡ്രാഗ് ആൻഡ് ഡ്രോപ്പ് ചെയ്യുക",
+      "label": "ഒരു .budget ഫയൽ തിരഞ്ഞെടുക്കാൻ ക്ലിക്ക് ചെയ്യുക"
     },
-    "subtitle": "Restore from .budget file",
-    "title": "Import Data"
+    "subtitle": ".budget ഫയലിൽ നിന്ന് പുനഃസ്ഥാപിക്കുക",
+    "title": "ഡാറ്റ ഇമ്പോർട്ട്"
   },
   "investmentAccountModal": {
     "buttons": {
-      "cancel": "Cancel",
-      "create": "Create Account",
-      "saving": "Saving...",
-      "update": "Update Account"
+      "cancel": "റദ്ദാക്കുക",
+      "create": "അക്കൗണ്ട് സൃഷ്ടിക്കുക",
+      "saving": "സേവ് ചെയ്യുന്നു...",
+      "update": "അക്കൗണ്ട് അപ്‌ഡേറ്റ് ചെയ്യുക"
     },
-    "closeModal": "Close modal",
+    "closeModal": "മോഡൽ അടയ്ക്കുക",
     "errors": {
-      "saveFailed": "Failed to save account"
+      "saveFailed": "അക്കൗണ്ട് സേവ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു"
     },
     "fields": {
       "accountNumber": {
-        "label": "Account Number (Optional)",
-        "placeholder": "e.g., Last 4 digits: 1234"
+        "label": "അക്കൗണ്ട് നമ്പർ (ഓപ്ഷണൽ)",
+        "placeholder": "ഉദാ: അവസാന 4 അക്കങ്ങൾ: 1234"
       },
       "institution": {
-        "label": "Financial Institution (Optional)",
-        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
+        "label": "സാമ്പത്തിക സ്ഥാപനം (ഓപ്ഷണൽ)",
+        "placeholder": "ഉദാ: Questrade, Wealthsimple, TD Direct"
       },
       "name": {
-        "label": "Account Name",
-        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
+        "label": "അക്കൗണ്ട് പേര്",
+        "placeholder": "ഉദാ: എന്റെ RRSP, TFSA സേവിംഗ്സ്, കമ്പനി ഷെയർ"
       },
       "type": {
         "descriptions": {
-          "Company shares": "Employee stock purchase or stock options",
-          "Non-registered": "Taxable investment account",
-          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
-          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
+          "Company shares": "എംപ്ലോയി സ്റ്റോക്ക് പർച്ചേസ് അല്ലെങ്കിൽ സ്റ്റോക്ക് ഓപ്ഷനുകൾ",
+          "Non-registered": "നികുതിക്ക് വിധേയമായ നിക്ഷേപ അക്കൗണ്ട്",
+          "RRSP": "രജിസ്റ്റേഡ് റിട്ടയർമെന്റ് സേവിംഗ്സ് പ്ലാൻ - നികുതി-വിലംബിത വളർച്ച",
+          "TFSA": "ടാക്സ്-ഫ്രീ സേവിംഗ്സ് അക്കൗണ്ട് - നികുതി-രഹിത വളർച്ചയും പിൻവലിക്കലുകളും"
         },
-        "label": "Account Type"
+        "label": "അക്കൗണ്ട് തരം"
       }
     },
     "title": {
-      "add": "Add Investment Account",
-      "edit": "Edit Investment Account"
+      "add": "നിക്ഷേപ അക്കൗണ്ട് ചേർക്കുക",
+      "edit": "നിക്ഷേപ അക്കൗണ്ട് എഡിറ്റ് ചെയ്യുക"
     },
     "validation": {
-      "nameRequired": "Please enter an account name"
+      "nameRequired": "ദയവായി ഒരു അക്കൗണ്ട് പേര് നൽകുക"
     }
   },
   "investmentCharts": {
-    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "emptyState": "ദൃശ്യവൽക്കരിക്കാൻ ഹോൾഡിംഗുകളൊന്നുമില്ല. ചാർട്ടുകൾ കാണാൻ ഹോൾഡിംഗുകൾ ചേർക്കുക.",
     "legend": {
-      "gain": "Gain",
-      "loss": "Loss"
+      "gain": "ലാഭം",
+      "loss": "നഷ്ടം"
     },
     "tableHeaders": {
-      "allocation": "Allocation",
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "gainLoss": "Gain/Loss",
-      "percentReturn": "% Return",
-      "symbol": "Symbol",
-      "total": "Total"
+      "allocation": "അലോക്കേഷൻ",
+      "costBasis": "ചെലവ് അടിസ്ഥാനം",
+      "currentValue": "നിലവിലെ മൂല്യം",
+      "gainLoss": "ലാഭം/നഷ്ടം",
+      "percentReturn": "% വരുമാനം",
+      "symbol": "ചിഹ്നം",
+      "total": "ആകെ"
     },
     "titles": {
-      "accountTypeAllocation": "Allocation by Account Type",
-      "gainLoss": "Gain/Loss by Holding",
-      "performanceSummary": "Performance Summary",
-      "portfolioAllocation": "Portfolio Allocation by Holding"
+      "accountTypeAllocation": "അക്കൗണ്ട് തരം അനുസരിച്ചുള്ള അലോക്കേഷൻ",
+      "gainLoss": "ഹോൾഡിംഗ് അനുസരിച്ചുള്ള ലാഭം/നഷ്ടം",
+      "performanceSummary": "പ്രകടന സംഗ്രഹം",
+      "portfolioAllocation": "ഹോൾഡിംഗ് അനുസരിച്ചുള്ള പോർട്ട്‌ഫോളിയോ അലോക്കേഷൻ"
     },
     "tooltip": {
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "percentOfPortfolio": "{percent}% of portfolio"
+      "costBasis": "ചെലവ് അടിസ്ഥാനം",
+      "currentValue": "നിലവിലെ മൂല്യം",
+      "percentOfPortfolio": "പോർട്ട്‌ഫോളിയോയുടെ {percent}%"
     }
   },
   "investments": {
@@ -2408,71 +2410,71 @@
     "value": "Value"
   },
   "lanSync": {
-    "description": "Sync your budget data across devices on your local network",
+    "description": "നിങ്ങളുടെ ലോക്കൽ നെറ്റ്‌വർക്കിലെ ഉപകരണങ്ങളിലുടനീളം ബജറ്റ് ഡാറ്റ സിങ്ക് ചെയ്യുക",
     "device": {
-      "connect": "Connect",
-      "connected": "Connected",
-      "disconnect": "Disconnect",
-      "removeDevice": "Remove Device",
-      "sync": "Sync",
-      "syncing": "Syncing..."
+      "connect": "കണക്ട്",
+      "connected": "കണക്ട് ചെയ്തു",
+      "disconnect": "ഡിസ്‌കണക്ട്",
+      "removeDevice": "ഉപകരണം നീക്കം ചെയ്യുക",
+      "sync": "സിങ്ക്",
+      "syncing": "സിങ്ക് ചെയ്യുന്നു..."
     },
-    "disabled": "Disabled",
-    "enabled": "Enabled",
+    "disabled": "പ്രവർത്തനരഹിതമാണ്",
+    "enabled": "പ്രവർത്തനക്ഷമമാണ്",
     "howItWorks": {
       "step1": {
-        "description": "Scan a QR code or enter connection details to pair devices on the same network",
-        "title": "Pair Devices"
+        "description": "ഒരേ നെറ്റ്‌വർക്കിലെ ഉപകരണങ്ങൾ പെയർ ചെയ്യാൻ QR കോഡ് സ്കാൻ ചെയ്യുക അല്ലെങ്കിൽ കണക്ഷൻ വിശദാംശങ്ങൾ നൽകുക",
+        "title": "ഉപകരണങ്ങൾ പെയർ ചെയ്യുക"
       },
       "step2": {
-        "description": "Data is encrypted end-to-end and syncs directly between devices - no cloud required",
-        "title": "Sync Securely"
+        "description": "ഡാറ്റ എൻഡ്-ടു-എൻഡ് എൻക്രിപ്റ്റ് ചെയ്ത് ഉപകരണങ്ങൾക്കിടയിൽ നേരിട്ട് സിങ്ക് ചെയ്യുന്നു - ക്ലൗഡ് ആവശ്യമില്ല",
+        "title": "സുരക്ഷിതമായി സിങ്ക് ചെയ്യുക"
       },
       "step3": {
-        "description": "Changes sync automatically when devices are connected on the same network",
-        "title": "Automatic Updates"
+        "description": "ഒരേ നെറ്റ്‌വർക്കിൽ ഉപകരണങ്ങൾ കണക്ട് ചെയ്യുമ്പോൾ മാറ്റങ്ങൾ സ്വയമേവ സിങ്ക് ചെയ്യുന്നു",
+        "title": "ഓട്ടോമാറ്റിക് അപ്‌ഡേറ്റുകൾ"
       },
-      "title": "How LAN Sync Works"
+      "title": "LAN സിങ്ക് എങ്ങനെ പ്രവർത്തിക്കുന്നു"
     },
     "pairedDevices": {
-      "addDevice": "Add Device",
-      "addFirstDevice": "Add Your First Device",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
-      "emptyDescription": "Pair a device to start syncing your budget data",
-      "emptyTitle": "No devices paired",
-      "noDevices": "No devices paired yet",
-      "title": "Paired Devices"
+      "addDevice": "ഉപകരണം ചേർക്കുക",
+      "addFirstDevice": "നിങ്ങളുടെ ആദ്യ ഉപകരണം ചേർക്കുക",
+      "deviceCount": "{count, plural, =1 {1 ഉപകരണം പെയർ ചെയ്തു} other {# ഉപകരണങ്ങൾ പെയർ ചെയ്തു}}",
+      "emptyDescription": "നിങ്ങളുടെ ബജറ്റ് ഡാറ്റ സിങ്ക് ചെയ്യാൻ ഒരു ഉപകരണം പെയർ ചെയ്യുക",
+      "emptyTitle": "ഉപകരണങ്ങളൊന്നും പെയർ ചെയ്തിട്ടില്ല",
+      "noDevices": "ഇതുവരെ ഉപകരണങ്ങളൊന്നും പെയർ ചെയ്തിട്ടില്ല",
+      "title": "പെയർ ചെയ്ത ഉപകരണങ്ങൾ"
     },
     "removeDialog": {
-      "cancel": "Cancel",
-      "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
-      "remove": "Remove",
-      "title": "Remove Device"
+      "cancel": "റദ്ദാക്കുക",
+      "description": "\"{deviceName}\" നീക്കം ചെയ്യണമെന്ന് ഉറപ്പാണോ? ഇത് ഉപകരണം അൺപെയർ ചെയ്യും, ഡാറ്റ സിങ്ക് ചെയ്യാൻ വീണ്ടും പെയർ ചെയ്യേണ്ടതുണ്ട്.",
+      "remove": "നീക്കം ചെയ്യുക",
+      "title": "ഉപകരണം നീക്കം ചെയ്യുക"
     },
-    "syncAll": "Sync All",
+    "syncAll": "എല്ലാം സിങ്ക് ചെയ്യുക",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
-      "justNow": "Just now",
-      "lastSync": "Last sync: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
-      "neverSynced": "Never synced"
+      "daysAgo": "{count, plural, =1 {1 ദിവസം മുമ്പ്} other {# ദിവസം മുമ്പ്}}",
+      "hoursAgo": "{count, plural, =1 {1 മണിക്കൂർ മുമ്പ്} other {# മണിക്കൂർ മുമ്പ്}}",
+      "justNow": "ഇപ്പോൾ",
+      "lastSync": "അവസാന സിങ്ക്: {time}",
+      "minutesAgo": "{count, plural, =1 {1 മിനിറ്റ് മുമ്പ്} other {# മിനിറ്റ് മുമ്പ്}}",
+      "neverSynced": "ഒരിക്കലും സിങ്ക് ചെയ്തിട്ടില്ല"
     },
-    "title": "LAN Sync"
+    "title": "LAN സിങ്ക്"
   },
   "landing": {
     "accessibility": {
       "badges": {
-        "keyboardFirst": "കീബോർഡ്-മുൻഗണന",
-        "largeTouchTargets": "വലിയ ടച്ച് ലക്ഷ്യങ്ങൾ",
-        "seniorsMode": "സീനിയർ മോഡ്"
+        "keyboardFirst": "കീബോർഡ്-ആദ്യം",
+        "largeTouchTargets": "വലിയ ടച്ച് ടാർഗറ്റുകൾ",
+        "seniorsMode": "സീനിയേഴ്‌സ് മോഡ്"
       },
       "buttons": {
         "openApp": "ആപ്പ് തുറക്കുക",
-        "settings": "ലഭ്യതാ സജ്ജീകരണങ്ങൾ"
+        "settings": "പ്രവേശനക്ഷമതാ ക്രമീകരണങ്ങൾ"
       },
-      "description": "സീനിയർ മോഡ് ലളിതമായ നാവിഗേഷൻ, വലിയ ടച്ച് ലക്ഷ്യങ്ങൾ നൽകുന്നു. കീബോർഡ് ഷോർട്ട്‌കട്ടുകൾ, ഫോകസ് സ്റ്റേറ്റുകൾ, വ്യക്തമായ കോൺട്രാസ്റ്റ് എല്ലാം വേഗത്തിൽ നീങ്ങാൻ സഹായിക്കുന്നു.",
-      "title": "ഡിഫോൾട്ടായി ലഭ്യമാണ്"
+      "description": "സീനിയേഴ്‌സ് മോഡ് ലളിതമാക്കിയ നാവിഗേഷനും വലിയ ടച്ച് ടാർഗറ്റുകളും നൽകുന്നു. കീബോർഡ് കുറുക്കുവഴികൾ, ഫോക്കസ് സ്റ്റേറ്റുകൾ, വ്യക്തമായ കോൺട്രാസ്റ്റ് എന്നിവ എല്ലാവരെയും വേഗത്തിൽ നീങ്ങാൻ സഹായിക്കുന്നു.",
+      "title": "ഡിഫോൾട്ടായി ആക്‌സസിബിൾ"
     },
     "brand": {
       "name": "BudgetPro",
@@ -2480,199 +2482,199 @@
     },
     "comparison": {
       "bankConnections": {
-        "cloud": "അവശ്യമായ അഗ്ഗ്രിഗേഷൻ",
-        "feature": "ബാങ്ക് ബന്ധങ്ങൾ",
+        "cloud": "നിർബന്ധിത അഗ്രിഗേഷൻ",
+        "feature": "ബാങ്ക് കണക്ഷനുകൾ",
         "local": "CSV / മാനുവൽ മാത്രം",
-        "sync": "ഓപ്ഷണൽ (എൻക്രിപ്റ്റ് ചെയ്ത)"
+        "sync": "ഓപ്ഷണൽ (എൻക്രിപ്റ്റഡ്)"
       },
       "cost": {
-        "cloud": "$100+/വർഷം സബ്സ്ക്രിപ്ഷൻ",
-        "feature": "വില",
-        "local": "എപ്പോഴും സൗജന്യമാണ്",
-        "sync": "ഒരു തവണയുടെ അപ്ഗ്രേഡ്"
+        "cloud": "$100+/വർഷം സബ്‌സ്ക്രിപ്ഷൻ",
+        "feature": "ചെലവ്",
+        "local": "എന്നെന്നേക്കും സൗജന്യം",
+        "sync": "ഒറ്റത്തവണ അപ്‌ഗ്രേഡ്"
       },
       "dataPrivacy": {
-        "cloud": "പ്രവർത്തകരുടെ കാഴ്ചയിൽ",
+        "cloud": "ജീവനക്കാർക്ക് കാണാവുന്നത്",
         "feature": "ഡാറ്റ സ്വകാര്യത",
-        "local": "100% സ്വകാര്യ (പ്രാദേശിക)",
-        "sync": "അവസാന-തുടക്കം എൻക്രിപ്റ്റ് ചെയ്ത"
+        "local": "100% സ്വകാര്യം (ലോക്കൽ)",
+        "sync": "എൻഡ്-ടു-എൻഡ് എൻക്രിപ്റ്റഡ്"
       },
       "headers": {
         "cloud": "സാധാരണ ക്ലൗഡ് ആപ്പ്",
         "feature": "ഫീച്ചർ",
-        "local": "BudgetPro പ്രാദേശികം",
+        "local": "BudgetPro ലോക്കൽ",
         "sync": "BudgetPro സിങ്ക് (പ്രോ)"
       },
       "offlineMode": {
-        "feature": "ഓഫ്ലൈൻ മോഡ്"
+        "feature": "ഓഫ്‌ലൈൻ മോഡ്"
       },
       "storageLocation": {
         "cloud": "അവരുടെ ഡാറ്റാബേസ്",
-        "feature": "സംഭരണ സ്ഥലം",
+        "feature": "സ്റ്റോറേജ് ലൊക്കേഷൻ",
         "local": "നിങ്ങളുടെ ഉപകരണം",
-        "sync": "ശൂന്യ-ജ്ഞാനം ക്ലൗഡ്"
+        "sync": "സീറോ-നോളജ് ക്ലൗഡ്"
       }
     },
     "faq": {
       "0": {
-        "a": "അതെ. പ്രാദേശിക പ്രോട്ടോകോളിൽ, ഡാറ്റ നിങ്ങളുടെ ഉപകരണത്തിൽ നിന്ന് ഒരിക്കലും പുറത്തേക്കു പോകുന്നില്ല. അത് നിങ്ങളുടെ ബ്രൗസറിന്റെ IndexedDB-യിൽ ജീവിക്കുന്നു.",
-        "q": "എന്റെ ഡാറ്റ യാഥാർത്ഥത്തിൽ സ്വകാര്യമാണോ?"
+        "a": "അതെ. ലോക്കൽ പ്രോട്ടോക്കോളിൽ, ഡാറ്റ ഒരിക്കലും നിങ്ങളുടെ ഉപകരണം വിടുന്നില്ല. ഇത് നിങ്ങളുടെ ബ്രൗസറിലെ IndexedDB-യിൽ ഉണ്ട്.",
+        "q": "എന്റെ ഡാറ്റ ശരിക്കും സ്വകാര്യമാണോ?"
       },
       "1": {
-        "a": "നിങ്ങൾക്ക് എപ്പോഴും ഒരു പൂർണ്ണ JSON ബാക്ക് അപ് എക്സ്പോർട്ട് ചെയ്യാം. ഞങ്ങൾ സ്ഥിരമായി CSV എക്സ്പോർട്ടുകൾ ശുപാർശ ചെയ്യുന്നു.",
-        "q": "എനിക്ക് എന്റെ ഡാറ്റ ബാക്ക് അപ് എങ്ങനെ ചെയ്യാം?"
+        "a": "എപ്പോൾ വേണമെങ്കിലും പൂർണ്ണ JSON ബാക്കപ്പ് എക്‌സ്‌പോർട്ട് ചെയ്യാം. പതിവായി CSV എക്‌സ്‌പോർട്ടുകളും ഞങ്ങൾ ശുപാർശ ചെയ്യുന്നു.",
+        "q": "എന്റെ ഡാറ്റ എങ്ങനെ ബാക്കപ്പ് ചെയ്യാം?"
       },
       "2": {
-        "a": "വരുന്നു: ഉപകരണങ്ങൾക്കിടയിൽ എൻക്രിപ്റ്റ് ചെയ്ത ഡാറ്റ സിങ്ക് ചെയ്യാൻ ഒരു ഓപ്ഷണൽ സബ്സ്ക്രിപ്ഷൻ.",
+        "a": "ഉടൻ വരുന്നു: Supabase വഴി ഉപകരണങ്ങൾക്കിടയിൽ എൻക്രിപ്റ്റ് ചെയ്ത ഡാറ്റ സിങ്ക് ചെയ്യാനുള്ള ഓപ്ഷണൽ സബ്‌സ്ക്രിപ്ഷൻ.",
         "q": "'സിങ്ക്' പ്രോ എന്താണ്?"
       },
       "3": {
-        "a": "ഇല്ല. മാനുവൽ ഇമ്പോർട്ട് കൂടുതൽ സുരക്ഷിതവും, വിശ്വസനീയവുമായതാണെന്ന് ഞങ്ങൾ വിശ്വസിക്കുന്നു, കൂടാതെ മികച്ച സാമ്പത്തിക ബോധവൽക്കരണം നിർമ്മിക്കുന്നു.",
-        "q": "നിങ്ങൾ ബാങ്കുകളുമായി ബന്ധിപ്പിക്കുന്നുണ്ടോ?"
+        "a": "ഇല്ല. മാനുവൽ ഇമ്പോർട്ട് കൂടുതൽ സുരക്ഷിതവും വിശ്വസനീയവും മികച്ച സാമ്പത്തിക ബോധം വളർത്തുന്നതുമാണെന്ന് ഞങ്ങൾ വിശ്വസിക്കുന്നു.",
+        "q": "ബാങ്കുകളുമായി കണക്ട് ചെയ്യുന്നുണ്ടോ?"
       }
     },
     "faqSection": {
-      "description": "പരീക്ഷണങ്ങൾ, വില, ആക്സസ് എന്നിവയെക്കുറിച്ചുള്ള സാധാരണ ചോദ്യങ്ങൾക്ക് ലളിതമായ ഉത്തരങ്ങൾ.",
+      "description": "ട്രയലുകൾ, വിലനിർണ്ണയം, ആക്‌സസ് എന്നിവയെക്കുറിച്ചുള്ള പൊതു ചോദ്യങ്ങൾക്ക് ലളിതമായ ഉത്തരങ്ങൾ.",
       "title": "FAQ"
     },
     "features": {
       "0": {
-        "description": "ശുദ്ധമായ മൂല്യം, നാണയപ്രവാഹം, വിഭാഗം വിഭജനം. ഉടൻ ലോഡ് സമയം.",
+        "description": "മൊത്തം ആസ്തി, ക്യാഷ് ഫ്ലോ, വിഭാഗ വിശകലനം. തൽക്ഷണ ലോഡ് സമയം.",
         "href": "/budget-app",
-        "title": "പ്രാദേശിക ഡാഷ്ബോർഡ്"
+        "title": "ലോക്കൽ ഡാഷ്ബോർഡ്"
       },
       "1": {
-        "description": "BMO, ഹോം ട്രസ്റ്റ്, ഇഷ്ടാനുസൃത ഫോർമാറ്റുകൾക്കായി സ്മാർട്ട് CSV മാപ്പർ.",
+        "description": "BMO, Home Trust, ഇഷ്ടാനുസൃത ഫോർമാറ്റുകൾ എന്നിവയ്ക്കുള്ള സ്മാർട്ട് CSV മാപ്പർ.",
         "href": "/budget-app/import",
         "title": "ഇമ്പോർട്ട് വിസാർഡ്"
       },
       "2": {
-        "description": "Tesseract.js ഉപയോഗിച്ച് പ്രാദേശികമായി രസീത് സ്കാൻ ചെയ്യുക. ക്ലൗഡ് പ്രോസസിംഗ് ഇല്ല.",
+        "description": "Tesseract.js ഉപയോഗിച്ച് ലോക്കലായി രസീതുകൾ സ്കാൻ ചെയ്യുക. ക്ലൗഡ് പ്രോസസ്സിംഗ് ഇല്ല.",
         "href": "/budget-app/ocr",
         "title": "രസീത് OCR"
       },
       "3": {
-        "description": "ശൂന്യ അടിസ്ഥാനമോ അല്ലെങ്കിൽ റോളോവർ ബജറ്റിംഗ്, സൂക്ഷ്മ വിഭാഗ നിയന്ത്രണത്തോടെ.",
+        "description": "വിശദമായ വിഭാഗ നിയന്ത്രണത്തോടെ സീറോ-ബേസ്ഡ് അല്ലെങ്കിൽ റോളോവർ ബജറ്റിംഗ്.",
         "href": "/budget-app/budgets",
         "title": "വിഭാഗ ബജറ്റുകൾ"
       },
       "4": {
-        "description": "കമ്പൗണ്ട് പലിശ ദൃശ്യവത്കരണങ്ങളോടെ നിങ്ങളുടെ സ്വാതന്ത്ര്യ തീയതി പ്രോജക്ട് ചെയ്യുക.",
+        "description": "കോമ്പൗണ്ട് ഇന്ററസ്റ്റ് ദൃശ്യവൽക്കരണങ്ങളോടെ നിങ്ങളുടെ സ്വാതന്ത്ര്യ തീയതി പ്രവചിക്കുക.",
         "href": "/budget-app/planning/retirement",
-        "title": "അവസാനകാലം കാൽക്കുലേറ്റർ"
+        "title": "വിരമിക്കൽ കാൽക്കുലേറ്റർ"
       },
       "5": {
-        "description": "കൂടുതൽ സുരക്ഷയുടെ ഒരു പടിയുള്ള ക്ലയന്റ്-പക്ഷ എൻക്രിപ്ഷൻ.",
+        "description": "അധിക സുരക്ഷാ പാളിക്കായി ഓപ്ഷണൽ ക്ലയന്റ്-സൈഡ് എൻക്രിപ്ഷൻ.",
         "href": "/budget-app/settings",
-        "title": "സ്വകാര്യത ഷീൽഡ്"
+        "title": "സ്വകാര്യതാ ഷീൽഡ്"
       }
     },
     "featuresDeepDive": {
-      "cta": "സൗജന്യ പരീക്ഷണം ആരംഭിക്കുക",
-      "description": "തകർന്ന ഫോർമുലകളുമായി പോരാടുന്നത് നിർത്തുക. ഒരു ആധുനിക ആപ്പിന്റെ വേഗതയോടെ മാനുവൽ നിയന്ത്രണത്തിന്റെ ലവലവം നേടുക.",
-      "explore": "അന്വേഷിക്കുക",
-      "heading1": "സ്പ്രെഡ്ഷീറ്റ് ശക്തി.",
-      "heading2": "ആപ്പ് ലളിതത്വം."
+      "cta": "സൗജന്യ ട്രയൽ ആരംഭിക്കുക",
+      "description": "തകർന്ന ഫോർമുലകളുമായി പോരാടുന്നത് നിർത്തുക. മാനുവൽ നിയന്ത്രണത്തിന്റെ വഴക്കം ആധുനിക ആപ്പിന്റെ വേഗതയോടെ ലഭിക്കുക.",
+      "explore": "പര്യവേക്ഷിക്കുക",
+      "heading1": "സ്പ്രെഡ്‌ഷീറ്റ് ശക്തി.",
+      "heading2": "ആപ്പ് ലാളിത്യം."
     },
     "footer": {
-      "allRightsReserved": "എല്ലാ അവകാശങ്ങളും സംരക്ഷിതമാണ്.",
+      "allRightsReserved": "എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം.",
       "api": "API",
-      "changelog": "ചേഞ്ച്‌ലോഗ്",
-      "community": "സമൂഹം",
+      "changelog": "മാറ്റ ലോഗ്",
+      "community": "കമ്മ്യൂണിറ്റി",
       "cookiePolicy": "കുക്കി നയം",
       "documentation": "ഡോക്യുമെന്റേഷൻ",
       "download": "ഡൗൺലോഡ്",
-      "features": "വിശേഷതകൾ",
+      "features": "ഫീച്ചറുകൾ",
       "helpCenter": "സഹായ കേന്ദ്രം",
-      "legal": "നിയമപരമായ",
-      "pricing": "വിലക്കണക്കുകൾ",
+      "legal": "നിയമപരം",
+      "pricing": "വിലനിർണ്ണയം",
       "privacyPolicy": "സ്വകാര്യതാ നയം",
       "product": "ഉൽപ്പന്നം",
-      "resources": "സ്രോതസ്സുകൾ",
-      "termsOfService": "സേവനത്തിന്റെ നിബന്ധനകൾ"
+      "resources": "ഉറവിടങ്ങൾ",
+      "termsOfService": "സേവന നിബന്ധനകൾ"
     },
     "hero": {
-      "badge": "സ്വകാര്യത-മുന്നണിയിൽ • പ്രാദേശിക-മാത്രം • ശൂന്യ ട്രാക്കിംഗ്",
-      "finePrint": "ബാങ്ക് ക്രെഡൻഷ്യലുകൾ ആവശ്യമായില്ല. പ്രാദേശിക മോഡിന് അക്കൗണ്ട് ആവശ്യമില്ല.",
-      "headline": "നിങ്ങളുടെ ഡാറ്റ വിറ്റഴിക്കാതെ നിങ്ങളുടെ പണം നിയന്ത്രിക്കുക.",
+      "badge": "സ്വകാര്യത-ആദ്യം • ലോക്കൽ-മാത്രം • സീറോ ട്രാക്കിംഗ്",
+      "finePrint": "ബാങ്ക് ക്രെഡൻഷ്യലുകൾ ആവശ്യമില്ല. ലോക്കൽ മോഡിന് അക്കൗണ്ട് ആവശ്യമില്ല.",
+      "headline": "നിങ്ങളുടെ ഡാറ്റ വിൽക്കാതെ പണം കൈകാര്യം ചെയ്യുക.",
       "primaryCta": {
         "href": "/budget-app/auth/signup",
-        "label": "പ്രാദേശിക പ്രോട്ടോകോൾ ആരംഭിക്കുക (മുക്തം)"
+        "label": "ലോക്കൽ പ്രോട്ടോക്കോൾ ആരംഭിക്കുക (സൗജന്യം)"
       },
       "secondaryCta": {
         "href": "/budget-app/auth/login",
-        "label": "ലോഗിൻ ചെയ്യുക"
+        "label": "ലോഗിൻ"
       },
-      "subhead": "ഒരു സ്പ്രെഡ്ഷീറ്റ് ശക്തി. ഒരു ആപ്പിന്റെ ലളിതത്വം. നിങ്ങളുടെ ഡാറ്റ ഒരിക്കലും നിങ്ങളുടെ ഉപകരണത്തിൽ നിന്ന് പുറത്തേക്കു പോകില്ല എന്ന് ഉറപ്പുള്ള ഏക ബജറ്റ് ആപ്പുമായി സാമ്പത്തിക വ്യക്തത അനുഭവിക്കുക."
+      "subhead": "സ്പ്രെഡ്‌ഷീറ്റിന്റെ ശക്തി. ആപ്പിന്റെ ലാളിത്യം. നിങ്ങളുടെ ഡാറ്റ ഒരിക്കലും ഉപകരണം വിടില്ലെന്ന് ഉറപ്പുനൽകുന്ന ഏക ബജറ്റ് ആപ്പിലൂടെ സാമ്പത്തിക വ്യക്തത അനുഭവിക്കുക."
     },
     "heroSection": {
       "badges": {
-        "noSubscriptions": "സബ്സ്ക്രിപ്ഷനുകൾ ഇല്ല",
-        "offlineReady": "ഓഫ്ലൈൻ-തയ്യാറായ",
-        "seniorsMode": "സീനിയർ മോഡ്"
+        "noSubscriptions": "സബ്‌സ്ക്രിപ്ഷനുകളില്ല",
+        "offlineReady": "ഓഫ്‌ലൈൻ-റെഡി",
+        "seniorsMode": "സീനിയേഴ്‌സ് മോഡ്"
       },
       "cta": {
-        "heading": "വ്യക്തതയ്ക്കായി നിർമ്മിച്ച, കലഹത്തിനായി അല്ല.",
-        "viewPricing": "വില കാണുക"
+        "heading": "വ്യക്തതയ്ക്കായി നിർമ്മിച്ചത്, കുഴപ്പത്തിനല്ല.",
+        "viewPricing": "വിലനിർണ്ണയം കാണുക"
       },
       "demo": {
-        "cloudStorage": "Cloud storage",
-        "dining": "Dining",
-        "expenses": "Expenses",
-        "foodToday": "Food • Today",
-        "groceries": "Groceries",
-        "groceryStore": "Grocery Store",
-        "income": "Income",
-        "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
-        "netWorth": "Net worth",
+        "cloudStorage": "ക്ലൗഡ് സ്റ്റോറേജ്",
+        "dining": "ഭക്ഷണം",
+        "expenses": "ചെലവുകൾ",
+        "foodToday": "ഭക്ഷണം • ഇന്ന്",
+        "groceries": "പലചരക്ക്",
+        "groceryStore": "പലചരക്ക് സ്റ്റോർ",
+        "income": "വരുമാനം",
+        "incomeYesterday": "വരുമാനം • ഇന്നലെ",
+        "monthly": "പ്രതിമാസം",
+        "netWorth": "മൊത്തം ആസ്തി",
         "netflix": "Netflix",
-        "salary": "Salary",
-        "shopping": "Shopping",
+        "salary": "ശമ്പളം",
+        "shopping": "ഷോപ്പിംഗ്",
         "spotify": "Spotify",
-        "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "subscriptionOct24": "സബ്‌സ്ക്രിപ്ഷൻ • ഒക്ട് 24",
+        "yearly": "വാർഷികം"
       },
       "modes": {
         "budgets": "ബജറ്റുകൾ",
         "dashboard": "ഡാഷ്ബോർഡ്",
-        "subscriptions": "സബ്സ്ക്രിപ്ഷനുകൾ"
+        "subscriptions": "സബ്‌സ്ക്രിപ്ഷനുകൾ"
       },
       "preview": {
         "categoryBudgets": "വിഭാഗ ബജറ്റുകൾ",
-        "livePreview": "ജീവിതം മുൻകൂർ",
-        "recentTransactions": "സമീപകാല ലാവണ്യങ്ങൾ",
-        "recurring": "അവസാനകാലം"
+        "livePreview": "ലൈവ് പ്രിവ്യൂ",
+        "recentTransactions": "സമീപകാല ഇടപാടുകൾ",
+        "recurring": "ആവർത്തനം"
       }
     },
     "howItWorks": {
       "0": {
-        "description": "CSV-കൾ ഡ്രാഗ് & ഡ്രോപ്പ് ചെയ്യുക അല്ലെങ്കിൽ രസീത് സ്കാൻ ചെയ്യുക. AI കോളങ്ങൾ പ്രാദേശികമായി മാപ്പ് ചെയ്യുന്നു.",
-        "title": "ഇമ്പോർട്ട് ചെയ്യുക"
+        "description": "CSV-കൾ ഡ്രാഗ് & ഡ്രോപ്പ് ചെയ്യുക അല്ലെങ്കിൽ രസീതുകൾ സ്കാൻ ചെയ്യുക. AI ലോക്കലായി കോളങ്ങൾ മാപ്പ് ചെയ്യുന്നു.",
+        "title": "ഇമ്പോർട്ട്"
       },
       "1": {
-        "description": "സ്മാർട്ട് നിയമങ്ങളും ബൾക്ക് പ്രവർത്തനങ്ങളും ഉപയോഗിച്ച് വേഗത്തിലുള്ള വിഭാഗീകരണം.",
-        "title": "പരിശോധിക്കുക"
+        "description": "സ്മാർട്ട് നിയമങ്ങളും ബൾക്ക് പ്രവർത്തനങ്ങളും ഉപയോഗിച്ച് ദ്രുത വർഗ്ഗീകരണം.",
+        "title": "അവലോകനം"
       },
       "2": {
-        "description": "പ്രതിയൊരു ഡോളറിന് ഒരു ജോലി നിയോഗിക്കുക, നിങ്ങളുടെ ഭാവി ശുദ്ധമായ മൂല്യം പ്രവചിക്കുക.",
-        "title": "പ്ലാൻ"
+        "description": "ഓരോ രൂപയ്ക്കും ഒരു ജോലി നൽകുക, ഭാവി മൊത്തം ആസ്തി പ്രവചിക്കുക.",
+        "title": "ആസൂത്രണം"
       }
     },
     "howItWorksSection": {
-      "description": "നിങ്ങളെ വേഗത്തിൽ വ്യക്തതയിലേക്ക് എത്തിക്കുന്ന ഒരു പ്രവൃത്തി പ്രവാഹം, ഒരു സങ്കീർണ്ണമായ സംവിധാനത്തിൽ അടുക്കാതെ.",
-      "title": "എങ്ങനെ പ്രവർത്തിക്കുന്നു"
+      "description": "സങ്കീർണ്ണമായ സിസ്റ്റത്തിൽ ലോക്ക് ചെയ്യാതെ വ്യക്തതയിലേക്ക് വേഗത്തിൽ എത്തിക്കുന്ന ഒരു വർക്ക്‌ഫ്ലോ.",
+      "title": "ഇത് എങ്ങനെ പ്രവർത്തിക്കുന്നു"
     },
     "marquee": {
       "logos": [
         "ബജറ്റിംഗ്",
-        "സബ്സ്ക്രിപ്ഷനുകൾ",
-        "കഴിവുകൾ",
-        "OCR രസീത്",
+        "സബ്‌സ്ക്രിപ്ഷനുകൾ",
+        "ലോണുകൾ",
+        "OCR രസീതുകൾ",
         "റിപ്പോർട്ടുകൾ",
-        "പദ്ധതികൾ",
-        "ഓഫ്ലൈൻ",
-        "സീനിയർ മോഡ്"
+        "ആസൂത്രണം",
+        "ഓഫ്‌ലൈൻ",
+        "സീനിയേഴ്‌സ് മോഡ്"
       ]
     },
     "nav": {
@@ -2680,138 +2682,138 @@
     },
     "outcomes": {
       "0": {
-        "description": "ഇനിയും തകർന്ന ബന്ധങ്ങൾ അല്ലെങ്കിൽ പുനർ-അധികാരം ചക്രങ്ങൾ ഇല്ല. നിങ്ങൾ ഡാറ്റ ഇൻപുട്ട് നിയന്ത്രിക്കുന്നു.",
-        "title": "അഗ്ഗ്രിഗേറ്ററുകളുമായി പോരാടുന്നത് നിർത്തുക"
+        "description": "തകർന്ന കണക്ഷനുകളോ വീണ്ടും-ഓത്ത് ലൂപ്പുകളോ ഇല്ല. ഡാറ്റ ഇൻപുട്ട് നിങ്ങൾ നിയന്ത്രിക്കുന്നു.",
+        "title": "അഗ്രിഗേറ്ററുകളുമായുള്ള പോരാട്ടം നിർത്തുക"
       },
       "1": {
-        "description": "ഞങ്ങൾ നിങ്ങളുടെ ഡാറ്റ വിറ്റഴിക്കുന്നില്ല, കാരണം ഞങ്ങൾക്ക് അത് ഇല്ല. കാലാവധി.",
-        "title": "ഡിസൈനിൽ സ്വകാര്യത"
+        "description": "ഞങ്ങൾ നിങ്ങളുടെ ഡാറ്റ വിൽക്കുന്നില്ല, കാരണം ഞങ്ങളുടെ കൈയിൽ ഇല്ല.",
+        "title": "രൂപകൽപ്പനയാൽ സ്വകാര്യത"
       },
       "2": {
-        "description": "ഒരു സംയോജിത കാഴ്ചയിൽ വിരാമം, വായ്പാ അടവ്, സംഭരണ ലക്ഷ്യങ്ങൾ മോഡൽ ചെയ്യുക.",
-        "title": "ഭാവി-പ്രൂഫ് പ്ലാനിംഗ്"
+        "description": "ഒരു സംയോജിത കാഴ്ചയിൽ വിരമിക്കൽ, ലോൺ തിരിച്ചടവുകൾ, ലാഭ ലക്ഷ്യങ്ങൾ എന്നിവ മോഡൽ ചെയ്യുക.",
+        "title": "ഭാവി-സുരക്ഷിത ആസൂത്രണം"
       },
       "3": {
-        "description": "മറ്റു ആപ്പുകൾ മിസ്സ് ചെയ്യുന്ന നിങ്ങളുടെ വാലറ്റിൽ ആവർത്തിക്കുന്ന ഒഴുക്കുകൾ കണ്ടെത്തുക.",
-        "title": "സബ്സ്ക്രിപ്ഷൻ കില്ലർ"
+        "description": "മറ്റ് ആപ്പുകൾ നഷ്ടപ്പെടുത്തുന്ന നിങ്ങളുടെ വാലറ്റിലെ ആവർത്തന ഡ്രെയിനുകൾ കണ്ടെത്തുക.",
+        "title": "സബ്‌സ്ക്രിപ്ഷൻ കില്ലർ"
       }
     },
     "outcomesSection": {
-      "description": "ഏറ്റവും കൂടുതൽ ബജറ്റിംഗ് ആപ്പുകൾ നിങ്ങളെ ജോലി ചെയ്യാൻ നിർബന്ധിതമാക്കുന്നു. BudgetPro friction കുറയ്ക്കാൻ രൂപകൽപ്പന ചെയ്തിരിക്കുന്നു, എന്നാൽ നിങ്ങളെ നിയന്ത്രണത്തിൽ വയ്ക്കുന്നു.",
-      "title": "സ്പ്രെഡ്ഷീറ്റുകൾക്കായി അല്ല, യാഥാർത്ഥ്യ ജീവിതത്തിനായി നിർമ്മിച്ചത്"
+      "description": "മിക്ക ബജറ്റിംഗ് ആപ്പുകളും നിങ്ങളെക്കൊണ്ട് ജോലി ചെയ്യിക്കുന്നു. BudgetPro നിങ്ങളെ നിയന്ത്രണത്തിൽ നിർത്തിക്കൊണ്ട് സമ്മർദ്ദം കുറയ്ക്കാൻ രൂപകൽപ്പന ചെയ്തതാണ്.",
+      "title": "യഥാർത്ഥ ജീവിതത്തിനായി നിർമ്മിച്ചത്, സ്പ്രെഡ്‌ഷീറ്റുകൾക്കല്ല"
     },
     "preview": {
-      "balanceAmount": "₹24,500.00",
+      "balanceAmount": "$24,500.00",
       "balanceChange": "+12.5%",
-      "currencySymbol": "₹",
+      "currencySymbol": "$",
       "expenses": "ചെലവുകൾ",
-      "expensesAmount": "₹1,250.00",
+      "expensesAmount": "$1,250.00",
       "expensesChange": "-5.2%",
-      "live": "ജീവിതം",
+      "live": "ലൈവ്",
       "overview": "അവലോകനം",
       "recentTransactions": "സമീപകാല ഇടപാടുകൾ",
-      "savingsGoal": "സേവ് ചെയ്യാനുള്ള ലക്ഷ്യം",
+      "savingsGoal": "ലാഭ ലക്ഷ്യം",
       "savingsPercent": "85%",
-      "totalBalance": "മൊത്തം ബാലൻസ്",
-      "tx0Amount": "-₹124.50",
+      "totalBalance": "ആകെ ബാലൻസ്",
+      "tx0Amount": "-$124.50",
       "tx0Date": "ഇന്ന്, 2:30 PM",
-      "tx0Name": "കായിക കട",
-      "tx1Amount": "+₹4,250.00",
+      "tx0Name": "പലചരക്ക് സ്റ്റോർ",
+      "tx1Amount": "+$4,250.00",
       "tx1Date": "ഇന്നലെ, 9:00 AM",
-      "tx1Name": "ടെക് സൊല്യൂഷൻസ് ഇൻകോർപ്പറേറ്റഡ്",
-      "tx2Amount": "-₹15.99",
-      "tx2Date": "ഒക്ടോബർ 24, 2025",
-      "tx2Name": "നെറ്റ്ഫ്ലിക്‌സ് സബ്സ്ക്രിപ്ഷൻ",
-      "vsLastMonth": "കഴിഞ്ഞ മാസത്തേക്കാൾ",
-      "welcomeBack": "സ്വാഗതം, അലക്‌സ്"
+      "tx1Name": "Tech Solutions Inc.",
+      "tx2Amount": "-$15.99",
+      "tx2Date": "ഒക്ട് 24, 2025",
+      "tx2Name": "Netflix സബ്‌സ്ക്രിപ്ഷൻ",
+      "vsLastMonth": "കഴിഞ്ഞ മാസവുമായി താരതമ്യം",
+      "welcomeBack": "തിരികെ സ്വാഗതം, Alex"
     },
     "pricing": {
       "cta": {
         "href": "/budget-app/auth/signup",
-        "label": "പ്രാദേശിക പ്രോട്ടോകോൾ ആരംഭിക്കുക"
+        "label": "ലോക്കൽ പ്രോട്ടോക്കോൾ ആരംഭിക്കുക"
       },
-      "description": "ശക്തമായ പ്രാദേശിക പ്രോട്ടോകോൾ ഉപയോഗിച്ച് ആരംഭിക്കുക. നിങ്ങൾക്ക് ബഹുധ്രുവ സിങ്ക് ആവശ്യമുണ്ടെങ്കിൽ പിന്നീട് അപ്ഗ്രേഡ് ചെയ്യുക.",
-      "eyebrow": "ന്യായമായ വില",
-      "guarantee": "പ്രാദേശിക പ്രോട്ടോകോൾക്കായി ക്രെഡിറ്റ് കാർഡ് ആവശ്യമായില്ല.",
-      "priceLabel": "എപ്പോഴും സൗജന്യമാണ്",
+      "description": "ശക്തമായ ലോക്കൽ പ്രോട്ടോക്കോളിൽ ആരംഭിക്കുക. മൾട്ടി-ഡിവൈസ് സിങ്ക് ആവശ്യമെങ്കിൽ പിന്നീട് അപ്‌ഗ്രേഡ് ചെയ്യുക.",
+      "eyebrow": "ന്യായമായ വിലനിർണ്ണയം",
+      "guarantee": "ലോക്കൽ പ്രോട്ടോക്കോളിന് ക്രെഡിറ്റ് കാർഡ് ആവശ്യമില്ല.",
+      "priceLabel": "എന്നെന്നേക്കും സൗജന്യം",
       "secondary": {
         "href": "#pricing",
         "label": "പ്രോ ഫീച്ചറുകൾ കാണുക"
       },
-      "title": "പ്രാദേശികം സൗജന്യമാണ്. സിങ്ക് പ്രോ."
+      "title": "ലോക്കൽ സൗജന്യമാണ്. സിങ്ക് പ്രോ ആണ്."
     },
     "pricingSection": {
-      "features": "അനന്തമായ ലാവണ്യങ്ങൾ, അക്കൗണ്ടുകൾ, ബജറ്റുകൾ, മുഴുവൻ പ്രാദേശിക ബാക്കപ്പ് ശേഷികൾ ഉൾക്കൊള്ളുന്നു.",
-      "productDescription": "നിങ്ങളുടെ ഉപകരണത്തിൽ മുഴുവനായും പ്രവർത്തിക്കുന്ന സമ്പൂർണ്ണ ബജറ്റിംഗ് അനുഭവം.",
-      "productName": "പ്രാദേശിക പ്രോട്ടോകോൾ",
+      "features": "അൺലിമിറ്റഡ് ഇടപാടുകൾ, അക്കൗണ്ടുകൾ, ബജറ്റുകൾ, പൂർണ്ണ ലോക്കൽ ബാക്കപ്പ് കഴിവുകൾ ഉൾപ്പെടുന്നു.",
+      "productDescription": "നിങ്ങളുടെ ഉപകരണത്തിൽ പൂർണ്ണമായും പ്രവർത്തിക്കുന്ന സമ്പൂർണ്ണ ബജറ്റിംഗ് അനുഭവം.",
+      "productName": "ലോക്കൽ പ്രോട്ടോക്കോൾ",
       "recommended": "ശുപാർശ ചെയ്യുന്നു",
-      "whyChoose": "പ്രാദേശിക പ്രോട്ടോകോൾ എന്തുകൊണ്ട് തിരഞ്ഞെടുക്കണം?",
-      "whyChooseDescription": "ഞങ്ങൾ ക്ലൗഡ് ജൈന്റുകളെ എങ്ങനെ മറികടക്കുന്നു എന്ന് കാണുക."
+      "whyChoose": "ലോക്കൽ പ്രോട്ടോക്കോൾ എന്തുകൊണ്ട് തിരഞ്ഞെടുക്കണം?",
+      "whyChooseDescription": "ക്ലൗഡ് ഭീമന്മാരുമായി ഞങ്ങൾ എങ്ങനെ താരതമ്യം ചെയ്യുന്നുവെന്ന് കാണുക."
     },
     "security": {
       "buttons": {
-        "offline": "ഓഫ്ലൈൻ പിന്തുണ",
-        "privacy": "സ്വകാര്യത & സജ്ജീകരണങ്ങൾ"
+        "offline": "ഓഫ്‌ലൈൻ പിന്തുണ",
+        "privacy": "സ്വകാര്യതയും ക്രമീകരണങ്ങളും"
       },
       "cards": {
         "aiControls": {
-          "description": "AI-ശക്തമായ ഫീച്ചറുകൾ (അനോമലി കണ്ടെത്തൽ പോലുള്ള) ടോഗിൾ ചെയ്യുക, സജ്ജീകരണങ്ങളിൽ നിന്ന് ചാറ്റ്‌ബോട്ട് ആക്സസ് നിയന്ത്രിക്കുക.",
+          "description": "AI-പവർഡ് ഫീച്ചറുകൾ (അനോമലി ഡിറ്റക്ഷൻ പോലുള്ളവ) ടോഗിൾ ചെയ്യുക, ക്രമീകരണങ്ങളിൽ ചാറ്റ്ബോട്ട് ആക്‌സസ് നിയന്ത്രിക്കുക.",
           "title": "AI ഫീച്ചർ നിയന്ത്രണങ്ങൾ"
         },
         "encryption": {
-          "description": "ആപ്പ് സജീവമാക്കിയാൽ സംവേദനാത്മക ബജറ്റ് രേഖകൾ സംരക്ഷിക്കാൻ ഒരു എൻക്രിപ്ഷൻ പടിയുണ്ട്.",
+          "description": "പ്രവർത്തനക്ഷമമാക്കുമ്പോൾ സെൻസിറ്റീവ് ബജറ്റ് റെക്കോർഡുകൾ സംരക്ഷിക്കാൻ ആപ്പിൽ എൻക്രിപ്ഷൻ പാളി ഉൾപ്പെടുന്നു.",
           "title": "എൻക്രിപ്ഷൻ പിന്തുണ"
         },
         "exportDelete": {
-          "description": "നിങ്ങളുടെ ഡാറ്റയും സ്വകാര്യതാ സജ്ജീകരണങ്ങളും എക്സ്പോർട്ട് ചെയ്യുക, അല്ലെങ്കിൽ ആപ്പിൽ നിന്ന് നേരിട്ടു പ്രാദേശിക ഡാറ്റ മായ്ക്കുക.",
-          "title": "എക്സ്പോർട്ട് & മായ്ക്കുക"
+          "description": "നിങ്ങളുടെ ഡാറ്റയും സ്വകാര്യതാ ക്രമീകരണങ്ങളും എക്‌സ്‌പോർട്ട് ചെയ്യുക, അല്ലെങ്കിൽ ആപ്പിൽ നിന്ന് ലോക്കൽ ഡാറ്റ ഇല്ലാതാക്കുക.",
+          "title": "എക്‌സ്‌പോർട്ട് & ഇല്ലാതാക്കുക"
         },
         "localStorage": {
-          "description": "നിങ്ങളുടെ ബജറ്റ് ഡാറ്റ നിങ്ങളുടെ ബ്രൗസറിൽ (IndexedDB) സൂക്ഷിക്കുന്നു, അതിനാൽ ആപ്പ് വേഗത്തിൽ പ്രവർത്തിക്കുന്നു, ഓഫ്ലൈൻ ഉപയോഗിക്കാവുന്നതാണ്.",
-          "title": "പ്രാദേശിക സംഭരണം"
+          "description": "നിങ്ങളുടെ ബജറ്റ് ഡാറ്റ ബ്രൗസറിൽ (IndexedDB) സൂക്ഷിക്കുന്നു, ആപ്പ് വേഗതയേറിയതും ഓഫ്‌ലൈൻ ഉപയോഗയോഗ്യവുമാണ്.",
+          "title": "ലോക്കൽ സ്റ്റോറേജ്"
         }
       },
-      "description": "ബജറ്റ് ആപ്പ് നിങ്ങളുടെ ഡാറ്റ പ്രാദേശികമായി (ഓഫ്ലൈൻ-തയ്യാറായ) സൂക്ഷിക്കുന്നു, AI ഫീച്ചറുകൾ, എക്സ്പോർട്ട് ചെയ്യൽ, മായ്ക്കൽ എന്നിവയ്ക്കായി നിങ്ങൾക്ക് നിയന്ത്രണങ്ങൾ നൽകുന്നു.",
-      "title": "ഡിസൈനിൽ സ്വകാര്യത-മുന്നണിയിൽ"
+      "description": "ബജറ്റ് ആപ്പ് നിങ്ങളുടെ ഡാറ്റ ലോക്കലായി (ഓഫ്‌ലൈൻ-റെഡി) സൂക്ഷിക്കുകയും AI ഫീച്ചറുകൾ, എക്‌സ്‌പോർട്ട്, ഡിലീഷൻ എന്നിവയ്ക്ക് നിയന്ത്രണങ്ങൾ നൽകുകയും ചെയ്യുന്നു.",
+      "title": "രൂപകൽപ്പനയാൽ സ്വകാര്യത-ആദ്യം"
     },
     "socialProof": {
-      "description": "ബജറ്റിംഗ് സ്റ്റിക്ക് ചെയ്യുന്ന വിശദാംശങ്ങൾ: ഓൺബോർഡിംഗ്, ഷോർട്ട്‌കട്ടുകൾ, മൊബൈൽ നാവിഗേഷൻ, ഓഫ്ലൈൻ-തയ്യാറായ പ്രകടനം.",
+      "description": "ബജറ്റിംഗ് നിലനിർത്തുന്ന വിശദാംശങ്ങൾ: ഓൺബോർഡിംഗ്, കുറുക്കുവഴികൾ, മൊബൈൽ നാവിഗേഷൻ, ഓഫ്‌ലൈൻ-റെഡി പ്രകടനം.",
       "features": {
         "mobileUx": {
-          "description": "താഴെ നാവിഗേഷൻ, സ്വാധീനമുള്ള ലേഔട്ടുകൾ, പ്രാദേശികമായ അനുഭവം.",
-          "title": "മൊബൈൽ-മുൻഗണന UX"
+          "description": "നേറ്റീവ് ആയി അനുഭവപ്പെടുന്ന ബോട്ടം നാവിഗേഷനും റെസ്പോൺസിവ് ലേഔട്ടുകളും.",
+          "title": "മൊബൈൽ-ഫസ്റ്റ് UX"
         },
         "onboarding": {
-          "description": "ഒരു മാർഗനിർദ്ദേശ ടൂർ പുതിയ ഉപയോക്താക്കളെ വേഗത്തിൽ മൂല്യം നേടാൻ സഹായിക്കുന്നു.",
+          "description": "പുതിയ ഉപയോക്താക്കളെ വേഗത്തിൽ മൂല്യത്തിലെത്തിക്കാൻ ഒരു ഗൈഡഡ് ടൂർ സഹായിക്കുന്നു.",
           "title": "ഓൺബോർഡിംഗ് ടൂർ"
         },
         "pwaInstall": {
-          "description": "ഒരു ആപ്പായി ഇൻസ്റ്റാൾ ചെയ്യുക, സ്പോട്ട് ഇന്റർനെറ്റും പ്രവർത്തിക്കുമ്പോഴും തുടരുക.",
+          "description": "ഒരു ആപ്പ് പോലെ ഇൻസ്റ്റാൾ ചെയ്ത് ഇന്റർനെറ്റ് കുറവായാലും തുടരുക.",
           "title": "PWA ഇൻസ്റ്റാൾ"
         },
         "shortcuts": {
-          "description": "UI-യിൽ നിർമ്മിതമായ തിരയൽ, പ്രവർത്തന ഷോർട്ട്‌കട്ടുകൾ ഉപയോഗിച്ച് വേഗത്തിൽ നീങ്ങുക.",
-          "title": "കീബോർഡ് ഷോർട്ട്‌കട്ടുകൾ"
+          "description": "UI-യിൽ ഉൾക്കൊള്ളിച്ച തിരയലും ആക്ഷൻ കുറുക്കുവഴികളും ഉപയോഗിച്ച് വേഗത്തിൽ നീങ്ങുക.",
+          "title": "കീബോർഡ് കുറുക്കുവഴികൾ"
         }
       },
-      "title": "പ്രീമിയം പോളിഷ്, ഉൾപ്പെടുത്തിയിട്ടുണ്ട്"
+      "title": "പ്രീമിയം ഗുണമേന്മ, ഉൾക്കൊള്ളിച്ചത്"
     },
     "trust": {
       "0": {
-        "description": "ഡാറ്റ നിങ്ങളുടെ ബ്രൗസറിന്റെ IndexedDB-യിൽ നിലനിൽക്കുന്നു. ഞങ്ങൾ അതിനെ കാണാൻ കഴിയുന്നില്ല.",
+        "description": "ഡാറ്റ നിങ്ങളുടെ ബ്രൗസറിന്റെ IndexedDB-യിൽ തുടരുന്നു. ഞങ്ങൾക്ക് അത് കാണാൻ കഴിയില്ല.",
         "title": "നിങ്ങളുടെ ഉപകരണം, നിങ്ങളുടെ ഡാറ്റ"
       },
       "1": {
-        "description": "ബൾക്ക് എഡിറ്റ്, പിവോട്ട്, പ്രൊഫഷണൽ പോലെ വിശകലനം ചെയ്യുക ഫോർമുലയുടെ തലവേദനകൾ ഇല്ലാതെ.",
-        "title": "സ്പ്രെഡ്ഷീറ്റ് ശക്തി"
+        "description": "ഫോർമുല തലവേദനകളില്ലാതെ ഒരു പ്രോ-യെ പോലെ ബൾക്ക് എഡിറ്റ്, പിവറ്റ്, വിശകലനം ചെയ്യുക.",
+        "title": "സ്പ്രെഡ്‌ഷീറ്റ് ശക്തി"
       },
       "2": {
-        "description": "ശൂന്യ വൈകല്യം. ഒരു മലയുടെ κορ κορയിലോ അല്ലെങ്കിൽ ഒരു സബ്വേ ടണലിലോ പ്രവർത്തിക്കുന്നു.",
-        "title": "ഓഫ്ലൈൻ വേഗം"
+        "description": "സീറോ ലേറ്റൻസി. മലമുകളിലോ മെട്രോ തുരങ്കത്തിലോ പ്രവർത്തിക്കുന്നു.",
+        "title": "ഓഫ്‌ലൈൻ വേഗത"
       },
       "3": {
-        "description": "ഇമ്പോർട്ട് വിസാർഡ് വെള്ളിയാഴ്ച പണം അവലോകനം ഒരു സുഖകരമായ ശീലമാക്കുന്നു.",
-        "title": "മാനുവൽ രീതി"
+        "description": "ഇമ്പോർട്ട് വിസാർഡ് ഫ്രൈഡേ മണി റിവ്യൂ ഒരു സംതൃപ്തിദായക ശീലമാക്കുന്നു.",
+        "title": "മാനുവൽ ചടങ്ങുകൾ"
       }
     }
   },
@@ -3097,7 +3099,10 @@
       "trackingAnalysis": "Tracking & Analysis",
       "wealthPlanning": "Wealth & Planning"
     },
-    "title": "More"
+    "title": "കൂടുതൽ",
+    "navigation": "നാവിഗേഷൻ",
+    "settings": "ക്രമീകരണങ്ങൾ",
+    "data": "ഡാറ്റ"
   },
   "nav": {
     "about": "കുറിച്ച്",
@@ -3283,42 +3288,42 @@
     "tryAgain": "Try Again"
   },
   "onboarding": {
-    "dontShowAgain": "ഈ ടൂർ വീണ്ടും കാണിക്കരുത്",
+    "dontShowAgain": "ഈ ടൂർ ഇനി കാണിക്കരുത്",
     "navigation": {
       "getStarted": "ആരംഭിക്കുക",
       "next": "അടുത്തത്",
       "previous": "മുമ്പത്തെ",
       "startTour": "ടൂർ ആരംഭിക്കുക"
     },
-    "quickTip": "💡 വേഗത്തിലുള്ള ടിപ്പ്",
+    "quickTip": "💡 ദ്രുത നുറുങ്ങ്",
     "skipTour": "ടൂർ ഒഴിവാക്കുക",
-    "stepCounter": "പടി {current} of {total}",
+    "stepCounter": "{total}-ൽ ഘട്ടം {current}",
     "steps": {
       "budgets": {
-        "description": "വിവിധ ചെലവു വിഭാഗങ്ങൾക്ക് ബജറ്റുകൾ സൃഷ്ടിക്കുക. മാസത്തിൽ നിങ്ങളുടെ പുരോഗതി ട്രാക്ക് ചെയ്യുക, നിങ്ങളുടെ പരിധികൾക്കടുത്തു എത്തുമ്പോൾ അലർട്ടുകൾ നേടുക.",
-        "title": "🎯 നിങ്ങളുടെ ബജറ്റുകൾ സജ്ജീകരിക്കുക"
+        "description": "നിങ്ങളുടെ സാമ്പത്തിക പരിധികൾ നിർവ്വചിക്കുക. ഇഷ്ടാനുസൃത പരിധികൾ സജ്ജമാക്കുകയും ട്രാക്കിൽ തുടരാൻ തത്സമയ അറിയിപ്പുകൾ സ്വീകരിക്കുകയും ചെയ്യുക.",
+        "title": "കൃത്യമായ ബജറ്റിംഗ്"
       },
       "categorize": {
-        "description": "ലാവണ്യ വിഭാഗങ്ങൾ പരിശോധിക്കുക & ക്രമീകരിക്കുക. നിങ്ങളുടെ തിരുത്തലുകളിൽ നിന്ന് പഠിക്കുന്ന നമ്മുടെ സ്മാർട്ട് വിഭാഗീകരണം സമയം കൂടെ മെച്ചപ്പെടുന്നു. ഒരേസമയം നിരവധി ലാവണ്യങ്ങളെ വിഭാഗീകരിക്കാൻ ബൾക്ക് പ്രവർത്തനങ്ങൾ ഉപയോഗിക്കുക!",
-        "title": "🏷️ വിഭാഗീകരിക്കുക & ക്രമീകരിക്കുക"
+        "description": "ഞങ്ങളുടെ AI നിങ്ങളുടെ ശീലങ്ങളിൽ നിന്ന് പഠിക്കുന്നു. ഒരിക്കൽ വർഗ്ഗീകരിക്കുക, ഭാവിയിൽ സമാന ഇടപാടുകൾ ഞങ്ങൾ സ്വയമേവ കൈകാര്യം ചെയ്യും.",
+        "title": "സ്മാർട്ട് വർഗ്ഗീകരണം"
       },
       "import": {
-        "description": "ഒരു CSV ഫയലിൽ നിന്ന് നിങ്ങളുടെ ബാങ്ക് ലാവണ്യങ്ങൾ ഇമ്പോർട്ട് ചെയ്യുന്നതിലൂടെ ആരംഭിക്കുക. ഞങ്ങൾ BMO, ഹോം ട്രസ്റ്റ്, മറ്റ് പല ബാങ്കുകളും പിന്തുണയ്ക്കുന്നു. ആപ്പ് നിങ്ങളുടെ ലാവണ്യങ്ങൾ സ്വയം വിഭാഗീകരിക്കും!",
-        "title": "📥 നിങ്ങളുടെ ലാവണ്യങ്ങൾ ഇമ്പോർട്ട് ചെയ്യുക"
+        "description": "നിങ്ങളുടെ ഇടപാട് ചരിത്രം എളുപ്പത്തിൽ കൊണ്ടുവരുക. BMO, Home Trust എന്നിവ ഉൾപ്പെടെ പ്രമുഖ ബാങ്കുകളെ ബുദ്ധിപരമായ ഓട്ടോ-ഡിറ്റക്ഷനോടെ ഞങ്ങൾ പിന്തുണയ്ക്കുന്നു.",
+        "title": "അനായാസ ഡാറ്റ ഇമ്പോർട്ട്"
       },
       "reports": {
-        "description": "നിങ്ങളുടെ ചെലവുകളുടെ മാതൃകകൾ ദൃശ്യവത്കരിക്കുക, നിങ്ങളുടെ ശുദ്ധമായ മൂല്യം ട്രാക്ക് ചെയ്യുക, വിവരപ്രദമായ സാമ്പത്തിക തീരുമാനങ്ങൾ എടുക്കുക. ഓരോ ലാവണ്യത്തിലും നിങ്ങളുടെ ഡാഷ്ബോർഡ് സ്വയം അപ്ഡേറ്റ് ചെയ്യുന്നു!",
-        "title": "📊 റിപ്പോർട്ടുകൾ & വിവരങ്ങൾ കാണുക"
+        "description": "നിങ്ങളുടെ ഡാറ്റയുടെ ശക്തി അൺലോക്ക് ചെയ്യുക. പ്രവണതകൾ ദൃശ്യവൽക്കരിക്കുക, മൊത്തം ആസ്തി ട്രാക്ക് ചെയ്യുക, സമഗ്ര വിശകലനത്തിന്റെ പിന്തുണയോടെ തീരുമാനങ്ങൾ എടുക്കുക.",
+        "title": "ആഴത്തിലുള്ള ഉൾക്കാഴ്ചകൾ"
       },
       "welcome": {
-        "description": "നിങ്ങളുടെ കുടുംബ സാമ്പത്തിക കാര്യങ്ങൾ കൈകാര്യം ചെയ്യുന്നതിൽ സഹായിക്കാൻ ഒരു വേഗത്തിലുള്ള ടൂർ എടുക്കാം. ഇത് കൂടുതൽ സമയം എടുക്കില്ല!",
-        "title": "👋 ബജറ്റ് ആപ്പിലേക്ക് സ്വാഗതം!"
+        "description": "നിങ്ങളുടെ സമ്പത്ത് കൈകാര്യം ചെയ്യാനുള്ള മികച്ച വഴി അനുഭവിക്കുക. നിങ്ങളുടെ പുതിയ സാമ്പത്തിക കമാൻഡ് സെന്ററിലൂടെ ഒരു ചെറിയ യാത്ര നടത്താം.",
+        "title": "സാമ്പത്തിക വ്യക്തതയിലേക്ക് സ്വാഗതം"
       }
     },
     "tips": {
-      "budgets": " യാഥാർത്ഥ്യബജറ്റുകൾ സജ്ജീകരിക്കുക, നിങ്ങൾ അധിക ചെലവാക്കാൻ പോകുന്നുവെങ്കിൽ ഞങ്ങൾ നിങ്ങളെ അലർട്ട് ചെയ്യും.",
-      "categorize": "വേഗത്തിലുള്ള വിഭാഗീകരണ ബട്ടൺ ഉപയോഗിക്കുക അല്ലെങ്കിൽ ബൾക്ക് വിഭാഗീകരണത്തിന് നിരവധി ലാവണ്യങ്ങൾ തിരഞ്ഞെടുക്കുക.",
-      "import": "നിങ്ങളുടെ CSV ഫയൽ ഡ്രാഗ് & ഡ്രോപ്പ് ചെയ്യുക അല്ലെങ്കിൽ ബ്രൗസ് ചെയ്യാൻ ക്ലിക്ക് ചെയ്യുക. ഞങ്ങൾ BMO, ഹോം ട്രസ്റ്റ് ഫോർമാറ്റുകൾ സ്വയം തിരിച്ചറിയുന്നു!"
+      "budgets": "തത്സമയത്തിൽ നിങ്ങളുടെ ചെലവ് വേഗത ദൃശ്യവൽക്കരിക്കാൻ പ്രതിമാസ പരിധികൾ സജ്ജമാക്കുക.",
+      "categorize": "ബൾക്കായി വിഭാഗങ്ങൾ പ്രയോഗിക്കാൻ ഒന്നിലധികം ഇടപാടുകൾ തിരഞ്ഞെടുക്കുക — കാര്യക്ഷമതയാണ് പ്രധാനം.",
+      "import": "നിങ്ങളുടെ CSV ഫയൽ ഡ്രാഗ് & ഡ്രോപ്പ് ചെയ്യുക. ഫോർമാറ്റിംഗ് ഞങ്ങൾ സ്വയമേവ കൈകാര്യം ചെയ്യും."
     }
   },
   "onboardingPage": {
@@ -3398,20 +3403,20 @@
     }
   },
   "overspendingAlerts": {
-    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
-    "percentOfBudget": "{percent}% of budget",
+    "exceededWarning": "ഈ നിരക്കിൽ, ഈ മാസം നിങ്ങളുടെ ബജറ്റ് {amount} കവിയും.",
+    "percentOfBudget": "ബജറ്റിന്റെ {percent}%",
     "progress": {
-      "label": "Current progress"
+      "label": "നിലവിലെ പുരോഗതി"
     },
     "stats": {
-      "budget": "Budget",
-      "daysLeft": "Days Left",
-      "projectedTotal": "Projected Total",
-      "spentSoFar": "Spent So Far"
+      "budget": "ബജറ്റ്",
+      "daysLeft": "ശേഷിക്കുന്ന ദിവസങ്ങൾ",
+      "projectedTotal": "പ്രതീക്ഷിത ആകെ",
+      "spentSoFar": "ഇതുവരെ ചെലവഴിച്ചത്"
     },
     "tip": {
-      "label": "Tip:",
-      "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
+      "label": "ടിപ്പ്:",
+      "reduceSpending": "ബജറ്റിനുള്ളിൽ നിൽക്കാൻ ദൈനംദിന ചെലവ് {amount}-ലേക്ക് കുറയ്ക്കുക."
     }
   },
   "pairingDialog": {
@@ -3716,26 +3721,26 @@
   },
   "predictiveSpendingChart": {
     "legend": {
-      "actual": "Actual",
-      "confidenceInterval": "Confidence Interval",
-      "predicted": "Predicted"
+      "actual": "യഥാർത്ഥം",
+      "confidenceInterval": "ആത്മവിശ്വാസ ഇടവേള",
+      "predicted": "പ്രവചിച്ചത്"
     },
-    "noData": "No data available for predictions",
-    "predictionUnavailable": "Prediction Unavailable",
+    "noData": "പ്രവചനങ്ങൾക്ക് ഡാറ്റ ലഭ്യമല്ല",
+    "predictionUnavailable": "പ്രവചനം ലഭ്യമല്ല",
     "stats": {
-      "avgConfidence": "Avg Confidence",
-      "nextMonth": "Next Month",
-      "threeMonthAvg": "3-Month Avg"
+      "avgConfidence": "ശരാശരി ആത്മവിശ്വാസം",
+      "nextMonth": "അടുത്ത മാസം",
+      "threeMonthAvg": "3 മാസ ശരാശരി"
     },
     "table": {
-      "confidence": "Confidence",
-      "month": "Month",
-      "predicted": "Predicted",
-      "range": "Range",
-      "title": "Monthly Predictions"
+      "confidence": "ആത്മവിശ്വാസം",
+      "month": "മാസം",
+      "predicted": "പ്രവചിച്ചത്",
+      "range": "ശ്രേണി",
+      "title": "പ്രതിമാസ പ്രവചനങ്ങൾ"
     },
-    "title": "Spending Forecast: {category}",
-    "trainingModel": "Training model and generating predictions..."
+    "title": "ചെലവ് പ്രവചനം: {category}",
+    "trainingModel": "മോഡൽ പരിശീലിപ്പിക്കുകയും പ്രവചനങ്ങൾ സൃഷ്ടിക്കുകയും ചെയ്യുന്നു..."
   },
   "privacyPanel": {
     "active": "Active",
@@ -3856,26 +3861,27 @@
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
-    "release": "Release to refresh"
+    "release": "പുതുക്കാൻ വിടുക...",
+    "pulling": "പുതുക്കാൻ വലിക്കുക..."
   },
   "pwaInstall": {
     "buttons": {
-      "install": "Install",
-      "notNow": "Not now"
+      "install": "ഇൻസ്റ്റാൾ",
+      "notNow": "ഇപ്പോൾ വേണ്ട"
     },
-    "close": "Close install prompt",
-    "description": "Add to your home screen for quick access and offline use",
+    "close": "ഇൻസ്റ്റാൾ പ്രോംപ്റ്റ് അടയ്ക്കുക",
+    "description": "ദ്രുത ആക്‌സസ്സിനും ഓഫ്‌ലൈൻ ഉപയോഗത്തിനും ഹോം സ്ക്രീനിലേക്ക് ചേർക്കുക",
     "features": {
-      "fastSecure": "Fast & secure",
-      "noAppStore": "No app store needed",
-      "offline": "Works offline"
+      "fastSecure": "വേഗതയേറിയതും സുരക്ഷിതവും",
+      "noAppStore": "ആപ്പ് സ്റ്റോർ ആവശ്യമില്ല",
+      "offline": "ഓഫ്‌ലൈനിൽ പ്രവർത്തിക്കുന്നു"
     },
-    "iosAddToHome": "\"Add to Home Screen\"",
-    "iosForFullExperience": "for the full app experience with faster loading.",
-    "iosTap": "Tap",
-    "iosThen": "then",
-    "iosTitle": "Install Budget App",
-    "title": "Install Budget App"
+    "iosAddToHome": "\"ഹോം സ്ക്രീനിലേക്ക് ചേർക്കുക\"",
+    "iosForFullExperience": "വേഗത്തിൽ ലോഡ് ചെയ്യുന്ന പൂർണ്ണ ആപ്പ് അനുഭവത്തിന്.",
+    "iosTap": "ടാപ്പ് ചെയ്യുക",
+    "iosThen": "എന്നിട്ട്",
+    "iosTitle": "ബജറ്റ് ആപ്പ് ഇൻസ്റ്റാൾ ചെയ്യുക",
+    "title": "ബജറ്റ് ആപ്പ് ഇൻസ്റ്റാൾ ചെയ്യുക"
   },
   "qrScanner": {
     "allowCameraAccess": "Please allow camera access when prompted",
@@ -3906,38 +3912,40 @@
   },
   "quickCategorize": {
     "buttons": {
-      "apply": "Apply Category",
-      "cancel": "Cancel",
-      "save": "Save"
+      "apply": "വിഭാഗം പ്രയോഗിക്കുക",
+      "cancel": "റദ്ദാക്കുക",
+      "save": "സേവ്"
     },
-    "clickToSelect": "Click a category to select",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
-    "general": "General",
-    "noResults": "No categories found",
-    "pressEnter": "Press ↵ Enter",
-    "saving": "Saving...",
-    "searchPlaceholder": "Search categories...",
-    "title": "Quick Categorize"
+    "clickToSelect": "തിരഞ്ഞെടുക്കാൻ ഒരു വിഭാഗം ക്ലിക്ക് ചെയ്യുക",
+    "description": "{count, plural, =1 {ഈ ഇടപാടിന്} other {# ഇടപാടുകൾക്ക്}} ഒരു വിഭാഗം തിരഞ്ഞെടുക്കുക",
+    "general": "പൊതുവായ",
+    "noResults": "വിഭാഗങ്ങളൊന്നും കണ്ടെത്തിയില്ല",
+    "pressEnter": "↵ Enter അമർത്തുക",
+    "saving": "സേവ് ചെയ്യുന്നു...",
+    "searchPlaceholder": "വിഭാഗങ്ങൾ തിരയുക...",
+    "title": "ദ്രുത വർഗ്ഗീകരണം"
   },
   "quickFilters": {
-    "all": "All",
-    "categories": "Categories",
-    "clearFilters": "Clear Filters",
-    "moreCategories": "+{count} more",
+    "all": "എല്ലാം",
+    "categories": "വിഭാഗങ്ങൾ",
+    "clearFilters": "ഫിൽട്ടറുകൾ മായ്ക്കുക",
+    "moreCategories": "+{count} കൂടുതൽ",
     "presets": {
-      "last30": "Last 30 Days",
-      "last90": "Last 90 Days",
-      "thisMonth": "This Month",
-      "thisYear": "This Year"
+      "last30": "കഴിഞ്ഞ 30 ദിവസം",
+      "last90": "കഴിഞ്ഞ 90 ദിവസം",
+      "thisMonth": "ഈ മാസം",
+      "thisYear": "ഈ വർഷം"
     },
-    "timePeriod": "Time Period"
+    "timePeriod": "കാലഘട്ടം"
   },
   "quickStats": {
-    "balance": "Total Balance",
-    "expenses": "Expenses",
-    "income": "Income",
+    "balance": "ബാലൻസ്",
+    "expenses": "ചെലവുകൾ",
+    "income": "വരുമാനം",
     "savingsRate": "Savings Rate",
-    "savingsRateDescription": "Percentage of income saved this month"
+    "savingsRateDescription": "Percentage of income saved this month",
+    "transactions": "ഇടപാടുകൾ",
+    "period": "ഈ മാസം"
   },
   "receiptThumbnail": {
     "close": "Close",
@@ -3954,65 +3962,65 @@
   },
   "receiptUpload": {
     "buttons": {
-      "attachReceipt": "Attach Receipt",
-      "chooseDifferent": "Choose Different",
-      "extractData": "Extract Data",
-      "extracting": "Extracting..."
+      "attachReceipt": "രസീത് അറ്റാച്ച് ചെയ്യുക",
+      "chooseDifferent": "വ്യത്യസ്തം തിരഞ്ഞെടുക്കുക",
+      "extractData": "ഡാറ്റ എക്‌സ്ട്രാക്ട് ചെയ്യുക",
+      "extracting": "എക്‌സ്ട്രാക്ട് ചെയ്യുന്നു..."
     },
     "camera": {
-      "takePhoto": "Take Photo with Camera",
-      "useDevice": "Use your device camera to capture receipt"
+      "takePhoto": "ക്യാമറ ഉപയോഗിച്ച് ഫോട്ടോ എടുക്കുക",
+      "useDevice": "രസീത് ക്യാപ്ചർ ചെയ്യാൻ നിങ്ങളുടെ ഉപകരണ ക്യാമറ ഉപയോഗിക്കുക"
     },
-    "cameraInputLabel": "Camera capture input",
+    "cameraInputLabel": "ക്യാമറ ക്യാപ്ചർ ഇൻപുട്ട്",
     "dropzone": {
-      "browseFiles": "or <link>browse files</link>",
-      "dragDrop": "Drag & drop receipt here",
-      "dropHere": "Drop the receipt here",
-      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+      "browseFiles": "അല്ലെങ്കിൽ <link>ഫയലുകൾ ബ്രൗസ് ചെയ്യുക</link>",
+      "dragDrop": "രസീത് ഡ്രാഗ് & ഡ്രോപ്പ് ചെയ്യുക",
+      "dropHere": "രസീത് ഇവിടെ ഡ്രോപ്പ് ചെയ്യുക",
+      "supportedFormats": "JPG, PNG, PDF പിന്തുണയ്ക്കുന്നു • പരമാവധി {size}MB"
     },
     "errors": {
-      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
-      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
-      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
-      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
-      "rejected": "File was rejected. Please try again",
-      "tooLarge": "File is too large. Maximum size is {size}MB"
+      "couldNotExtract": "രസീതിൽ നിന്ന് ഡാറ്റ എക്‌സ്ട്രാക്ട് ചെയ്യാനായില്ല. ദയവായി സ്വമേധയാ നൽകുക.",
+      "extractionFailed": "ഡാറ്റ എക്‌സ്ട്രാക്ട് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു. ദയവായി വീണ്ടും ശ്രമിക്കുക അല്ലെങ്കിൽ സ്വമേധയാ നൽകുക.",
+      "invalidType": "അസാധുവായ ഫയൽ തരം. JPG, PNG, PDF ഫയലുകൾ മാത്രം അനുവദനീയമാണ്",
+      "ocrImagesOnly": "OCR ചിത്ര ഫയലുകൾക്ക് (JPG, PNG) മാത്രം പിന്തുണയ്ക്കുന്നു",
+      "rejected": "ഫയൽ നിരസിച്ചു. ദയവായി വീണ്ടും ശ്രമിക്കുക",
+      "tooLarge": "ഫയൽ വളരെ വലുതാണ്. പരമാവധി വലുപ്പം {size}MB"
     },
     "extracted": {
-      "amount": "Amount:",
-      "confidence": "Confidence: {percent}%",
-      "date": "Date:",
-      "merchant": "Merchant:",
-      "title": "Data Extracted"
+      "amount": "തുക:",
+      "confidence": "ആത്മവിശ്വാസം: {percent}%",
+      "date": "തീയതി:",
+      "merchant": "വ്യാപാരി:",
+      "title": "ഡാറ്റ എക്‌സ്ട്രാക്ട് ചെയ്തു"
     },
     "pdf": {
-      "noPreview": "Preview not available",
-      "title": "PDF Receipt"
+      "noPreview": "പ്രിവ്യൂ ലഭ്യമല്ല",
+      "title": "PDF രസീത്"
     },
-    "receiptPreview": "Receipt preview",
-    "removeFile": "Remove file"
+    "receiptPreview": "രസീത് പ്രിവ്യൂ",
+    "removeFile": "ഫയൽ നീക്കം ചെയ്യുക"
   },
   "recurringTransactions": {
-    "confidence": "{percent}% confidence",
-    "estimatedMonthly": "Estimated Monthly",
+    "confidence": "{percent}% ആത്മവിശ്വാസം",
+    "estimatedMonthly": "കണക്കാക്കിയ പ്രതിമാസം",
     "frequency": {
-      "biweekly": "Bi-weekly",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "biweekly": "രണ്ടാഴ്ച കൂടുമ്പോൾ",
+      "monthly": "പ്രതിമാസം",
+      "quarterly": "ത്രൈമാസികം",
+      "weekly": "ആഴ്ചയിൽ"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
-    "next": "Next: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "inDays": "{count, plural, =0 {(ഇന്ന്)} =1 {(1 ദിവസത്തിനുള്ളിൽ)} other {(# ദിവസത്തിനുള്ളിൽ)}}",
+    "next": "അടുത്തത്: {date}",
+    "occurrences": "{count, plural, =1 {1 സംഭവം കണ്ടെത്തി} other {# സംഭവങ്ങൾ കണ്ടെത്തി}}",
     "perPeriod": {
-      "month": "per month",
-      "quarter": "per quarter",
-      "twoWeeks": "per 2 weeks",
-      "week": "per week"
+      "month": "മാസത്തിൽ",
+      "quarter": "ത്രൈമാസികത്തിൽ",
+      "twoWeeks": "2 ആഴ്ചയിൽ",
+      "week": "ആഴ്ചയിൽ"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
-    "subtitle": "Detected subscriptions and bills",
-    "title": "Recurring Transactions"
+    "showingPatterns": "{count, plural, =1 {1 ആവർത്തന ഇടപാട് രീതി കാണിക്കുന്നു} other {# ആവർത്തന ഇടപാട് രീതികൾ കാണിക്കുന്നു}}",
+    "subtitle": "കണ്ടെത്തിയ സബ്‌സ്ക്രിപ്ഷനുകളും ബില്ലുകളും",
+    "title": "ആവർത്തന ഇടപാടുകൾ"
   },
   "reports": {
     "addTransactionsToSeeFlow": "Add income and expense transactions to see your money flow",
@@ -4142,21 +4150,21 @@
     "yourAccounts": "Your Accounts"
   },
   "shortcutsModal": {
-    "close": "Close shortcuts help",
+    "close": "കുറുക്കുവഴി സഹായം അടയ്ക്കുക",
     "proTip": {
-      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
-      "title": "💡 Pro Tip"
+      "description": "ഫോമുകളിൽ ടൈപ്പ് ചെയ്യുമ്പോൾ ഒഴിച്ച് ഏത് പേജിലും കീബോർഡ് കുറുക്കുവഴികൾ പ്രവർത്തിക്കും. ഈ സഹായം കാണാൻ എപ്പോഴും {key} അമർത്തുക.",
+      "title": "💡 പ്രോ ടിപ്പ്"
     },
-    "subtitle": "Power-user productivity tips",
-    "title": "Keyboard Shortcuts"
+    "subtitle": "പവർ-ഉപയോക്തൃ ഉൽപ്പാദനക്ഷമത നുറുങ്ങുകൾ",
+    "title": "കീബോർഡ് കുറുക്കുവഴികൾ"
   },
   "sidebar": {
     "actions": {
-      "backToHome": "വീട്ടിലേക്ക് മടങ്ങുക",
-      "collapseSidebar": "സൈഡ്‌ബാർ അടച്ചിടുക",
-      "expandSidebar": "സൈഡ്‌ബാർ വിപുലീകരിക്കുക",
-      "importCsv": "CSV ഇമ്പോർട്ട് ചെയ്യുക",
-      "settings": "സജ്ജീകരണങ്ങൾ",
+      "backToHome": "ഹോമിലേക്ക് മടങ്ങുക",
+      "collapseSidebar": "സൈഡ്ബാർ ചുരുക്കുക",
+      "expandSidebar": "സൈഡ്ബാർ വിപുലീകരിക്കുക",
+      "importCsv": "CSV ഇമ്പോർട്ട്",
+      "settings": "ക്രമീകരണങ്ങൾ",
       "showAllItems": "എല്ലാ ഇനങ്ങളും കാണിക്കുക",
       "showLess": "കുറച്ച് കാണിക്കുക"
     },
@@ -4165,27 +4173,27 @@
     "navigation": {
       "accounts": "അക്കൗണ്ടുകൾ",
       "budgets": "ബജറ്റുകൾ",
-      "calculators": "കണക്കുകൂട്ടികൾ",
+      "calculators": "കാൽക്കുലേറ്ററുകൾ",
       "categories": "വിഭാഗങ്ങൾ",
       "dashboard": "ഡാഷ്ബോർഡ്",
       "events": "ഇവന്റുകൾ",
       "futurePlans": "ഭാവി പദ്ധതികൾ",
-      "import": "CSV ഇറക്കുമതി",
+      "import": "CSV ഇമ്പോർട്ട്",
       "investments": "നിക്ഷേപങ്ങൾ",
-      "loans": "കഴിവുകൾ",
-      "netWorth": "നെറ്റ് വർത്തമാനം",
-      "properties": "സ്വത്തുകൾ",
+      "loans": "ലോണുകൾ",
+      "netWorth": "മൊത്തം ആസ്തി",
+      "properties": "സ്വത്തുക്കൾ",
       "reminders": "ഓർമ്മപ്പെടുത്തലുകൾ",
       "reports": "റിപ്പോർട്ടുകൾ",
-      "retirement": "അവസാനകാലം",
+      "retirement": "വിരമിക്കൽ",
       "scanReceipt": "രസീത് സ്കാൻ ചെയ്യുക",
-      "scenarios": "എന്തെങ്കിലും",
+      "scenarios": "എന്താണെങ്കിൽ",
       "settings": "ക്രമീകരണങ്ങൾ",
-      "subscriptions": "സബ്സ്ക്രിപ്ഷനുകൾ",
-      "transactions": "ലാവണ്യങ്ങൾ"
+      "subscriptions": "സബ്‌സ്ക്രിപ്ഷനുകൾ",
+      "transactions": "ഇടപാടുകൾ"
     },
     "search": "തിരയുക...",
-    "shortcuts": "ഷോർട്ട്‌കട്ടുകൾ"
+    "shortcuts": "കുറുക്കുവഴികൾ"
   },
   "simplefinConnect": {
     "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
@@ -4245,70 +4253,70 @@
   },
   "simplefinSettings": {
     "connectedAccounts": {
-      "description": "Manage your linked bank accounts",
-      "title": "Connected Accounts"
+      "description": "ലിങ്ക് ചെയ്ത ബാങ്ക് അക്കൗണ്ടുകൾ നിയന്ത്രിക്കുക",
+      "title": "കണക്ട് ചെയ്ത അക്കൗണ്ടുകൾ"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
-      "connectButton": "Connect Bank Account",
-      "connected": "Connected",
-      "description": "Connect your bank accounts to automatically import transactions",
-      "notConnected": "Not Connected",
-      "notConnectedDesc": "Connect your bank accounts to start importing transactions",
-      "title": "SimpleFIN Connection"
+      "accountsLinked": "{count, plural, =1 {1 അക്കൗണ്ട് ലിങ്ക് ചെയ്തു} other {# അക്കൗണ്ടുകൾ ലിങ്ക് ചെയ്തു}}",
+      "connectButton": "ബാങ്ക് അക്കൗണ്ട് കണക്ട് ചെയ്യുക",
+      "connected": "കണക്ട് ചെയ്തു",
+      "description": "ഇടപാടുകൾ സ്വയമേവ ഇമ്പോർട്ട് ചെയ്യാൻ ബാങ്ക് അക്കൗണ്ടുകൾ കണക്ട് ചെയ്യുക",
+      "notConnected": "കണക്ട് ചെയ്തിട്ടില്ല",
+      "notConnectedDesc": "ഇടപാടുകൾ ഇമ്പോർട്ട് ചെയ്യാൻ ബാങ്ക് അക്കൗണ്ടുകൾ കണക്ട് ചെയ്യുക",
+      "title": "SimpleFIN കണക്ഷൻ"
     },
     "disconnect": {
-      "button": "Disconnect",
-      "cancel": "Cancel",
-      "confirm": "Disconnect",
-      "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
-      "dialogTitle": "Disconnect SimpleFIN?"
+      "button": "ഡിസ്‌കണക്ട്",
+      "cancel": "റദ്ദാക്കുക",
+      "confirm": "ഡിസ്‌കണക്ട്",
+      "dialogDescription": "ഇത് ബാങ്ക് അക്കൗണ്ടുകളിലേക്കുള്ള കണക്ഷൻ നീക്കം ചെയ്യും. നിലവിലെ ഇടപാടുകൾ ഇല്ലാതാക്കില്ല, പക്ഷേ പുതിയ ഇടപാടുകൾ സ്വയമേവ സിങ്ക് ചെയ്യില്ല.",
+      "dialogTitle": "SimpleFIN ഡിസ്‌കണക്ട് ചെയ്യണോ?"
     },
     "help": {
-      "bridgeDashboard": "SimpleFIN Bridge Dashboard",
-      "protocolDocs": "SimpleFIN Protocol Documentation",
-      "title": "Need Help?"
+      "bridgeDashboard": "SimpleFIN ബ്രിഡ്ജ് ഡാഷ്ബോർഡ്",
+      "protocolDocs": "SimpleFIN പ്രോട്ടോക്കോൾ ഡോക്യുമെന്റേഷൻ",
+      "title": "സഹായം ആവശ്യമുണ്ടോ?"
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
-      "lastSynced": "Last synced: {time}",
-      "lessThanHour": "Less than an hour ago",
-      "never": "Never",
-      "syncNow": "Sync Now",
-      "syncing": "Syncing..."
+      "hoursAgo": "{hours, plural, =1 {1 മണിക്കൂർ മുമ്പ്} other {# മണിക്കൂർ മുമ്പ്}}",
+      "lastSynced": "അവസാനം സിങ്ക് ചെയ്തത്: {time}",
+      "lessThanHour": "ഒരു മണിക്കൂറിൽ കുറവ് മുമ്പ്",
+      "never": "ഒരിക്കലുമില്ല",
+      "syncNow": "ഇപ്പോൾ സിങ്ക് ചെയ്യുക",
+      "syncing": "സിങ്ക് ചെയ്യുന്നു..."
     },
     "syncSettings": {
       "autoCategorize": {
-        "description": "Automatically categorize imported transactions using AI",
-        "label": "Auto-Categorize"
+        "description": "AI ഉപയോഗിച്ച് ഇമ്പോർട്ട് ചെയ്ത ഇടപാടുകൾ സ്വയമേവ വർഗ്ഗീകരിക്കുക",
+        "label": "ഓട്ടോ-വർഗ്ഗീകരണം"
       },
       "autoSync": {
-        "description": "Automatically sync transactions on a schedule",
-        "label": "Automatic Sync"
+        "description": "ഒരു ഷെഡ്യൂൾ അനുസരിച്ച് ഇടപാടുകൾ സ്വയമേവ സിങ്ക് ചെയ്യുക",
+        "label": "ഓട്ടോമാറ്റിക് സിങ്ക്"
       },
-      "description": "Configure how and when transactions are synced",
+      "description": "ഇടപാടുകൾ എങ്ങനെയും എപ്പോഴും സിങ്ക് ചെയ്യണമെന്ന് കോൺഫിഗർ ചെയ്യുക",
       "frequency": {
-        "every12Hours": "Every 12 hours",
-        "every2Days": "Every 2 days",
-        "every6Hours": "Every 6 hours",
-        "hint": "SimpleFIN allows up to 24 requests per day. Daily sync is recommended.",
-        "label": "Sync Frequency",
-        "onceDaily": "Once daily"
+        "every12Hours": "ഓരോ 12 മണിക്കൂറിലും",
+        "every2Days": "ഓരോ 2 ദിവസവും",
+        "every6Hours": "ഓരോ 6 മണിക്കൂറിലും",
+        "hint": "SimpleFIN ദിവസം 24 അഭ്യർത്ഥനകൾ വരെ അനുവദിക്കുന്നു. ദൈനംദിന സിങ്ക് ശുപാർശ ചെയ്യുന്നു.",
+        "label": "സിങ്ക് ആവൃത്തി",
+        "onceDaily": "ദിവസത്തിൽ ഒരിക്കൽ"
       },
       "notifications": {
-        "description": "Show notification when sync completes",
-        "label": "Sync Notifications"
+        "description": "സിങ്ക് പൂർത്തിയാകുമ്പോൾ അറിയിപ്പ് കാണിക്കുക",
+        "label": "സിങ്ക് അറിയിപ്പുകൾ"
       },
       "pendingTransactions": {
-        "description": "Include transactions that haven't posted yet",
-        "label": "Import Pending Transactions"
+        "description": "ഇതുവരെ പോസ്റ്റ് ചെയ്യാത്ത ഇടപാടുകൾ ഉൾപ്പെടുത്തുക",
+        "label": "പെൻഡിംഗ് ഇടപാടുകൾ ഇമ്പോർട്ട് ചെയ്യുക"
       },
-      "title": "Sync Settings",
+      "title": "സിങ്ക് ക്രമീകരണങ്ങൾ",
       "transactionHistory": {
-        "days": "{count} days",
-        "hint": "How many days of transaction history to fetch (max 60 days per SimpleFIN)",
-        "label": "Transaction History"
+        "days": "{count} ദിവസം",
+        "hint": "എത്ര ദിവസത്തെ ഇടപാട് ചരിത്രം ലഭ്യമാക്കണം (SimpleFIN പ്രകാരം പരമാവധി 60 ദിവസം)",
+        "label": "ഇടപാട് ചരിത്രം"
       }
     }
   },
@@ -4351,61 +4359,61 @@
     "warningsLabel": "Warnings:"
   },
   "spendingTrendChart": {
-    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "forecastFooter": "കഴിഞ്ഞ {months} മാസത്തെ ലീനിയർ റിഗ്രഷൻ അടിസ്ഥാനമാക്കിയുള്ള പ്രവചനം",
     "legend": {
-      "actualSpending": "Actual Spending",
-      "projected": "Projected"
+      "actualSpending": "യഥാർത്ഥ ചെലവ്",
+      "projected": "പ്രതീക്ഷിത"
     },
-    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "notEnoughData": "പ്രവണതകൾ സൃഷ്ടിക്കാൻ മതിയായ ഡാറ്റയില്ല. കുറഞ്ഞത് 2 മാസത്തെ ഇടപാടുകൾ ചേർക്കുക.",
     "stats": {
-      "avgMonthly": "Avg Monthly",
-      "lastMonth": "Last Month",
-      "projected": "Projected"
+      "avgMonthly": "ശരാശരി പ്രതിമാസം",
+      "lastMonth": "കഴിഞ്ഞ മാസം",
+      "projected": "പ്രതീക്ഷിത"
     },
-    "title": "Spending Trends & Forecast"
+    "title": "ചെലവ് പ്രവണതകളും പ്രവചനവും"
   },
   "splitTransaction": {
-    "addSplit": "Add Split ({current}/{max})",
-    "amount": "Amount",
+    "addSplit": "വിഭജനം ചേർക്കുക ({current}/{max})",
+    "amount": "തുക",
     "buttons": {
-      "cancel": "Cancel",
-      "save": "Save Split",
-      "saving": "Saving..."
+      "cancel": "റദ്ദാക്കുക",
+      "save": "വിഭജനം സേവ് ചെയ്യുക",
+      "saving": "സേവ് ചെയ്യുന്നു..."
     },
-    "category": "Category",
-    "closeModal": "Close modal",
-    "date": "Date:",
-    "distributeEvenly": "Distribute Evenly",
+    "category": "വിഭാഗം",
+    "closeModal": "മോഡൽ അടയ്ക്കുക",
+    "date": "തീയതി:",
+    "distributeEvenly": "തുല്യമായി വിതരണം ചെയ്യുക",
     "errors": {
-      "saveFailed": "Failed to save split transaction"
+      "saveFailed": "വിഭജിത ഇടപാട് സേവ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു"
     },
     "help": {
-      "step1": "Enter the amount for each category (must total ${amount})",
-      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
-      "step3": "Add up to 5 splits per transaction",
-      "step4": "The original transaction will be hidden and replaced with split items",
-      "title": "How to split transactions:"
+      "step1": "ഓരോ വിഭാഗത്തിനും തുക നൽകുക (ആകെ ${amount} ആയിരിക്കണം)",
+      "step2": "എല്ലാ വിഭാഗങ്ങളിലും തുല്യമായി വിഭജിക്കാൻ \"തുല്യമായി വിതരണം ചെയ്യുക\" ഉപയോഗിക്കുക",
+      "step3": "ഒരു ഇടപാടിന് 5 വിഭജനങ്ങൾ വരെ ചേർക്കുക",
+      "step4": "യഥാർത്ഥ ഇടപാട് മറയ്ക്കുകയും വിഭജിത ഇനങ്ങൾ കൊണ്ട് മാറ്റിസ്ഥാപിക്കുകയും ചെയ്യും",
+      "title": "ഇടപാടുകൾ എങ്ങനെ വിഭജിക്കാം:"
     },
-    "maxSplitsReached": "Maximum 5 splits allowed",
-    "minSplitsRequired": "Minimum 2 splits required",
-    "none": "None",
-    "notes": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Business expense, Personal use",
-    "originalAmount": "Original Amount:",
-    "removeThisSplit": "Remove this split",
-    "selectCategory": "Select category...",
-    "splitsCount": "Splits ({current}/{max})",
-    "subcategory": "Subcategory",
-    "title": "Split Transaction",
+    "maxSplitsReached": "പരമാവധി 5 വിഭജനങ്ങൾ അനുവദനീയം",
+    "minSplitsRequired": "കുറഞ്ഞത് 2 വിഭജനങ്ങൾ ആവശ്യമാണ്",
+    "none": "ഒന്നുമില്ല",
+    "notes": "കുറിപ്പുകൾ (ഓപ്ഷണൽ)",
+    "notesPlaceholder": "ഉദാ: ബിസിനസ് ചെലവ്, വ്യക്തിഗത ഉപയോഗം",
+    "originalAmount": "യഥാർത്ഥ തുക:",
+    "removeThisSplit": "ഈ വിഭജനം നീക്കം ചെയ്യുക",
+    "selectCategory": "വിഭാഗം തിരഞ്ഞെടുക്കുക...",
+    "splitsCount": "വിഭജനങ്ങൾ ({current}/{max})",
+    "subcategory": "ഉപവിഭാഗം",
+    "title": "ഇടപാട് വിഭജിക്കുക",
     "validation": {
-      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
-      "amountsMustMatch": "Split amounts must equal the original transaction amount",
-      "categoryRequired": "All splits must have a category",
-      "matchesOriginal": "✓ Matches original",
-      "overBy": "Over by ${amount}",
-      "readyToSave": "Split amounts match the original transaction. Ready to save!",
-      "total": "Total:",
-      "underBy": "Under by ${amount}"
+      "adjustAmounts": "യഥാർത്ഥ ഇടപാട് തുകയുമായി പൊരുത്തപ്പെടുത്താൻ വിഭജന തുകകൾ ക്രമീകരിക്കുക.",
+      "amountsMustMatch": "വിഭജന തുകകൾ യഥാർത്ഥ ഇടപാട് തുകയ്ക്ക് തുല്യമായിരിക്കണം",
+      "categoryRequired": "എല്ലാ വിഭജനങ്ങൾക്കും ഒരു വിഭാഗം ഉണ്ടായിരിക്കണം",
+      "matchesOriginal": "✓ യഥാർത്ഥവുമായി പൊരുത്തപ്പെടുന്നു",
+      "overBy": "${amount} അധികമാണ്",
+      "readyToSave": "വിഭജന തുകകൾ യഥാർത്ഥ ഇടപാടുമായി പൊരുത്തപ്പെടുന്നു. സേവ് ചെയ്യാൻ തയ്യാറാണ്!",
+      "total": "ആകെ:",
+      "underBy": "${amount} കുറവാണ്"
     }
   },
   "splits": {
@@ -4494,96 +4502,96 @@
   },
   "subscriptionCard": {
     "badges": {
-      "aiVerified": "AI Verified",
-      "cancelled": "Cancelled",
-      "paused": "Paused",
-      "trial": "Trial"
+      "aiVerified": "AI പരിശോധിച്ചത്",
+      "cancelled": "റദ്ദാക്കി",
+      "paused": "താൽക്കാലികമായി നിർത്തി",
+      "trial": "ട്രയൽ"
     },
     "buttons": {
-      "claimManage": "Claim & Manage",
-      "edit": "Edit",
-      "transactions": "Transactions"
+      "claimManage": "ക്ലെയിം & മാനേജ് ചെയ്യുക",
+      "edit": "എഡിറ്റ്",
+      "transactions": "ഇടപാടുകൾ"
     },
     "confidence": {
-      "high": "High",
-      "label": "Detection Confidence",
-      "low": "Low",
-      "medium": "Medium"
+      "high": "ഉയർന്നത്",
+      "label": "കണ്ടെത്തൽ ആത്മവിശ്വാസം",
+      "low": "കുറഞ്ഞത്",
+      "medium": "ഇടത്തരം"
     },
     "details": {
-      "charges": "{count} charges",
-      "daysBefore": "{count} days before",
-      "firstCharge": "First Charge",
-      "lastCharge": "Last Charge",
-      "occurrences": "Occurrences",
-      "payment": "Payment",
-      "reminder": "Reminder"
+      "charges": "{count} ചാർജുകൾ",
+      "daysBefore": "{count} ദിവസം മുമ്പ്",
+      "firstCharge": "ആദ്യ ചാർജ്",
+      "lastCharge": "അവസാന ചാർജ്",
+      "occurrences": "സംഭവങ്ങൾ",
+      "payment": "പേയ്‌മെന്റ്",
+      "reminder": "ഓർമ്മപ്പെടുത്തൽ"
     },
     "interval": {
-      "annual": "Annual",
-      "bi-weekly": "Bi-weekly",
-      "irregular": "Irregular",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "annual": "വാർഷികം",
+      "bi-weekly": "രണ്ടാഴ്ച കൂടുമ്പോൾ",
+      "irregular": "ക്രമരഹിതം",
+      "monthly": "പ്രതിമാസം",
+      "quarterly": "ത്രൈമാസികം",
+      "weekly": "ആഴ്ചയിൽ"
     },
-    "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
+    "lowConfidenceWarning": "ഈ സബ്‌സ്ക്രിപ്ഷൻ കുറഞ്ഞ ആത്മവിശ്വാസത്തോടെ കണ്ടെത്തിയതാണ്. പരിശോധിക്കാനും മാനുവലായി നിയന്ത്രിക്കാനും ക്ലെയിം ചെയ്യുക.",
     "menu": {
-      "cancelSubscription": "Cancel Subscription",
-      "claimManage": "Claim & Manage",
-      "delete": "Delete",
-      "edit": "Edit",
-      "notSubscription": "Not a Subscription",
-      "pause": "Pause",
-      "resume": "Resume",
-      "viewTransactions": "View Transactions"
+      "cancelSubscription": "സബ്‌സ്ക്രിപ്ഷൻ റദ്ദാക്കുക",
+      "claimManage": "ക്ലെയിം & മാനേജ് ചെയ്യുക",
+      "delete": "ഇല്ലാതാക്കുക",
+      "edit": "എഡിറ്റ്",
+      "notSubscription": "സബ്‌സ്ക്രിപ്ഷനല്ല",
+      "pause": "താൽക്കാലികമായി നിർത്തുക",
+      "resume": "പുനരാരംഭിക്കുക",
+      "viewTransactions": "ഇടപാടുകൾ കാണുക"
     },
     "source": {
-      "auto-detected": "Auto-detected",
-      "manual": "Manual",
-      "merged": "Tracked"
+      "auto-detected": "ഓട്ടോ-ഡിറ്റക്ടഡ്",
+      "manual": "മാനുവൽ",
+      "merged": "ട്രാക്ക് ചെയ്തത്"
     },
     "stats": {
-      "amount": "Amount",
-      "annualCost": "Annual Cost",
-      "frequency": "Frequency",
-      "nextCharge": "Next Charge",
-      "totalSpent": "Total Spent"
+      "amount": "തുക",
+      "annualCost": "വാർഷിക ചെലവ്",
+      "frequency": "ആവൃത്തി",
+      "nextCharge": "അടുത്ത ചാർജ്",
+      "totalSpent": "ആകെ ചെലവഴിച്ചത്"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {ട്രയലിൽ 1 ദിവസം ശേഷിക്കുന്നു} other {ട്രയലിൽ # ദിവസം ശേഷിക്കുന്നു}}"
     },
     "reminderToggle": {
-      "disableReminder": "ഓർമ്മപ്പെടുത്തൽ ഓഫാക്കുക",
-      "enableReminder": "ഓർമ്മപ്പെടുത്തൽ ഓണാക്കുക",
+      "disableReminder": "ഓർമ്മപ്പെടുത്തൽ പ്രവർത്തനരഹിതമാക്കുക",
+      "enableReminder": "ഓർമ്മപ്പെടുത്തൽ പ്രവർത്തനക്ഷമമാക്കുക",
       "off": "ഓഫ്"
     }
   },
   "subscriptionCostChart": {
-    "emptyState": "No active subscriptions to analyze",
-    "loadingChart": "Loading chart...",
-    "moreCharges": "+{count} more charges",
-    "perMonth": "/month",
+    "emptyState": "വിശകലനം ചെയ്യാൻ സജീവ സബ്‌സ്ക്രിപ്ഷനുകളൊന്നുമില്ല",
+    "loadingChart": "ചാർട്ട് ലോഡ് ചെയ്യുന്നു...",
+    "moreCharges": "+{count} കൂടുതൽ ചാർജുകൾ",
+    "perMonth": "/മാസം",
     "sections": {
-      "costByCategory": "Cost by Category",
-      "potentialSavings": "Potential Savings",
-      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+      "costByCategory": "വിഭാഗം അനുസരിച്ചുള്ള ചെലവ്",
+      "potentialSavings": "സാധ്യമായ ലാഭം",
+      "upcomingCharges": "വരാനിരിക്കുന്ന ചാർജുകൾ (അടുത്ത 30 ദിവസം)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
-      "annualCost": "Annual Cost",
-      "monthlyCost": "Monthly Cost",
-      "next30Days": "Next 30 Days",
-      "projectedYearly": "Projected yearly spend",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "activeSubscriptions": "{count, plural, =1 {1 സജീവ സബ്‌സ്ക്രിപ്ഷൻ} other {# സജീവ സബ്‌സ്ക്രിപ്ഷനുകൾ}}",
+      "annualCost": "വാർഷിക ചെലവ്",
+      "monthlyCost": "പ്രതിമാസ ചെലവ്",
+      "next30Days": "അടുത്ത 30 ദിവസം",
+      "projectedYearly": "പ്രതീക്ഷിത വാർഷിക ചെലവ്",
+      "upcomingCharges": "{count, plural, =1 {1 വരാനിരിക്കുന്ന ചാർജ്} other {# വരാനിരിക്കുന്ന ചാർജുകൾ}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "റദ്ദാക്കപ്പെട്ടിരിക്കാവുന്ന സബ്‌സ്ക്രിപ്ഷനുകൾ",
+      "inactiveDescription": "{count, plural, =1 {1 സബ്‌സ്ക്രിപ്ഷൻ} other {# സബ്‌സ്ക്രിപ്ഷനുകൾ}} സമീപകാലത്ത് ചാർജ് ചെയ്തിട്ടില്ല. അവ യഥാർത്ഥത്തിൽ റദ്ദാക്കിയെന്ന് പരിശോധിക്കുക.",
+      "trialsTitle": "ഉടൻ അവസാനിക്കുന്ന ട്രയലുകൾ",
+      "trialsDescription": "{count, plural, =1 {1 ട്രയൽ} other {# ട്രയലുകൾ}} അടുത്ത 7 ദിവസത്തിനുള്ളിൽ അവസാനിക്കും. ഉപയോഗിക്കുന്നില്ലെങ്കിൽ റദ്ദാക്കുക.",
+      "highCostTitle": "ഉയർന്ന ചെലവുള്ള സബ്‌സ്ക്രിപ്ഷനുകൾ",
+      "highCostDescription": "ഈ സബ്‌സ്ക്രിപ്ഷനുകൾ നിങ്ങളുടെ ചെലവിന്റെ വലിയ ഭാഗമാണ്. പൂർണ്ണ മൂല്യം ലഭിക്കുന്നുണ്ടോ എന്ന് പരിഗണിക്കുക."
     }
   },
   "subscriptionModal": {
@@ -4749,83 +4757,83 @@
   },
   "transactionModal": {
     "account": {
-      "label": "Account"
+      "label": "അക്കൗണ്ട്"
     },
     "advancedOptions": {
-      "available": "{count} available",
-      "label": "Advanced Options"
+      "available": "{count} ലഭ്യം",
+      "label": "വിപുലമായ ഓപ്ഷനുകൾ"
     },
     "amount": {
-      "label": "Amount",
+      "label": "തുക",
       "placeholder": "0.00",
-      "validationError": "Please enter a valid amount"
+      "validationError": "ദയവായി സാധുവായ ഒരു തുക നൽകുക"
     },
     "buttons": {
-      "add": "Add Transaction",
-      "adding": "Adding...",
-      "cancel": "Cancel",
-      "update": "Update Transaction",
-      "updating": "Updating..."
+      "add": "ഇടപാട് ചേർക്കുക",
+      "adding": "ചേർക്കുന്നു...",
+      "cancel": "റദ്ദാക്കുക",
+      "update": "ഇടപാട് അപ്‌ഡേറ്റ് ചെയ്യുക",
+      "updating": "അപ്‌ഡേറ്റ് ചെയ്യുന്നു..."
     },
     "category": {
-      "aiCategorizing": "AI categorizing...",
-      "create": "Create",
-      "createNew": "+ Create New Category",
-      "label": "Category",
-      "lastUsed": "Using last: {category}",
-      "namePlaceholder": "Category name...",
-      "selectPlaceholder": "Select category...",
-      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+      "aiCategorizing": "AI വർഗ്ഗീകരിക്കുന്നു...",
+      "create": "സൃഷ്ടിക്കുക",
+      "createNew": "+ പുതിയ വിഭാഗം സൃഷ്ടിക്കുക",
+      "label": "വിഭാഗം",
+      "lastUsed": "അവസാനം ഉപയോഗിച്ചത്: {category}",
+      "namePlaceholder": "വിഭാഗ നാമം...",
+      "selectPlaceholder": "വിഭാഗം തിരഞ്ഞെടുക്കുക...",
+      "subcategoriesPlaceholder": "ഉപവിഭാഗങ്ങൾ (ഓപ്ഷണൽ, കോമ വേർതിരിച്ചത്)"
     },
-    "closeModal": "Close modal",
+    "closeModal": "മോഡൽ അടയ്ക്കുക",
     "createCategory": {
-      "created": "Category \"{name}\" created!",
-      "failed": "Failed to create category",
-      "nameRequired": "Category name is required"
+      "created": "\"{name}\" വിഭാഗം സൃഷ്ടിച്ചു!",
+      "failed": "വിഭാഗം സൃഷ്ടിക്കുന്നതിൽ പരാജയപ്പെട്ടു",
+      "nameRequired": "വിഭാഗ നാമം ആവശ്യമാണ്"
     },
     "date": {
-      "label": "Date"
+      "label": "തീയതി"
     },
     "description": {
-      "label": "Description",
-      "placeholder": "e.g., Grocery shopping at Sobeys"
+      "label": "വിവരണം",
+      "placeholder": "ഉദാ: Sobeys-ൽ പലചരക്ക് ഷോപ്പിംഗ്"
     },
     "learned": {
-      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
-      "title": "Learned!"
+      "description": "3 സമാന തിരുത്തലുകൾക്ക് ശേഷം, ഈ വ്യാപാരിയിൽ നിന്നുള്ള ഭാവി ഇടപാടുകൾ സ്വയമേവ വർഗ്ഗീകരിക്കും.",
+      "title": "പഠിച്ചു!"
     },
     "notes": {
-      "label": "Notes",
-      "placeholder": "Add any additional notes..."
+      "label": "കുറിപ്പുകൾ",
+      "placeholder": "അധിക കുറിപ്പുകൾ ചേർക്കുക..."
     },
     "receipts": {
-      "addNew": "Add New Receipt",
-      "deleteConfirm": "Are you sure you want to delete this receipt?",
-      "deleteFailed": "Failed to delete receipt",
-      "deleteReceipt": "Delete receipt",
-      "existing": "Existing receipts ({count})",
-      "label": "Receipt Attachments",
-      "newFile": "New: {filename}",
-      "remove": "Remove",
-      "viewFull": "View full receipt"
+      "addNew": "പുതിയ രസീത് ചേർക്കുക",
+      "deleteConfirm": "ഈ രസീത് ഇല്ലാതാക്കണമെന്ന് ഉറപ്പാണോ?",
+      "deleteFailed": "രസീത് ഇല്ലാതാക്കുന്നതിൽ പരാജയപ്പെട്ടു",
+      "deleteReceipt": "രസീത് ഇല്ലാതാക്കുക",
+      "existing": "നിലവിലുള്ള രസീതുകൾ ({count})",
+      "label": "രസീത് അറ്റാച്ച്‌മെന്റുകൾ",
+      "newFile": "പുതിയത്: {filename}",
+      "remove": "നീക്കം ചെയ്യുക",
+      "viewFull": "മുഴുവൻ രസീത് കാണുക"
     },
     "subcategory": {
-      "label": "Subcategory",
-      "none": "None",
-      "selectPlaceholder": "Select subcategory..."
+      "label": "ഉപവിഭാഗം",
+      "none": "ഒന്നുമില്ല",
+      "selectPlaceholder": "ഉപവിഭാഗം തിരഞ്ഞെടുക്കുക..."
     },
     "tags": {
-      "label": "Tags (comma-separated)",
-      "placeholder": "e.g., groceries, weekly, essential"
+      "label": "ടാഗുകൾ (കോമ വേർതിരിച്ചത്)",
+      "placeholder": "ഉദാ: പലചരക്ക്, ആഴ്ചയിലെ, അനിവാര്യം"
     },
     "title": {
-      "add": "Add Transaction",
-      "edit": "Edit Transaction"
+      "add": "ഇടപാട് ചേർക്കുക",
+      "edit": "ഇടപാട് എഡിറ്റ് ചെയ്യുക"
     },
     "type": {
-      "expense": "Expense",
-      "income": "Income",
-      "label": "Type"
+      "expense": "ചെലവ്",
+      "income": "വരുമാനം",
+      "label": "തരം"
     }
   },
   "transactionSearch": {
@@ -4872,19 +4880,19 @@
   },
   "transactionTable": {
     "actions": {
-      "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
-      "split": "Split"
+      "attachReceipt": "രസീത് അറ്റാച്ച് ചെയ്യുക",
+      "delete": "ഇല്ലാതാക്കുക",
+      "edit": "എഡിറ്റ്",
+      "split": "വിഭജിക്കുക"
     },
-    "emptyState": "No transactions to display",
+    "emptyState": "കാണിക്കാൻ ഇടപാടുകളൊന്നുമില്ല",
     "headers": {
-      "account": "Account",
-      "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
-      "date": "Date",
-      "description": "Description"
+      "account": "അക്കൗണ്ട്",
+      "actions": "പ്രവർത്തനങ്ങൾ",
+      "amount": "തുക",
+      "category": "വിഭാഗം",
+      "date": "തീയതി",
+      "description": "വിവരണം"
     }
   },
   "transactions": {
@@ -5059,179 +5067,179 @@
       "title": "അക്കൗണ്ട് ബാലൻസുകൾ"
     },
     "budgetProgress": {
-      "description": "നിങ്ങളുടെ ബജറ്റ് ലക്ഷ്യങ്ങൾക്കെതിരെ നിങ്ങൾ എങ്ങനെ മുന്നോട്ട് പോകുന്നു എന്ന് ട്രാക്ക് ചെയ്യുക",
+      "description": "നിങ്ങളുടെ ബജറ്റ് ലക്ഷ്യങ്ങളുമായി എങ്ങനെ മുന്നേറുന്നുവെന്ന് ട്രാക്ക് ചെയ്യുക",
       "title": "ബജറ്റ് പുരോഗതി"
     },
     "eventBudget": {
-      "description": "Track spending for events and projects",
-      "title": "Event Budgets"
+      "description": "ഇവന്റുകൾക്കും പ്രോജക്ടുകൾക്കുമുള്ള ചെലവ് ട്രാക്ക് ചെയ്യുക",
+      "title": "ഇവന്റ് ബജറ്റുകൾ"
     },
     "incomeVsExpenses": {
-      "description": "നിങ്ങളുടെ വരുമാനവും ചെലവുകളും കാലക്രമത്തിൽ താരതമ്യം ചെയ്യുക",
+      "description": "കാലക്രമത്തിൽ നിങ്ങളുടെ വരുമാനവും ചെലവും താരതമ്യം ചെയ്യുക",
       "title": "വരുമാനം vs ചെലവുകൾ"
     },
     "monthlyTrends": {
-      "description": "നിങ്ങളുടെ സാമ്പത്തിക മാതൃകകൾ മാസത്തിൽ മാസത്തിൽ ദൃശ്യവത്കരിക്കുക",
-      "title": "മാസിക പ്രവണതകൾ"
+      "description": "മാസം തോറുമുള്ള നിങ്ങളുടെ സാമ്പത്തിക രീതികൾ ദൃശ്യവൽക്കരിക്കുക",
+      "title": "പ്രതിമാസ പ്രവണതകൾ"
     },
     "netWorthMini": {
-      "description": "Quick view of your total net worth",
-      "title": "Net Worth"
+      "description": "നിങ്ങളുടെ ആകെ മൊത്തം ആസ്തിയുടെ ദ്രുത കാഴ്ച",
+      "title": "മൊത്തം ആസ്തി"
     },
     "recentTransactions": {
-      "description": "നിങ്ങളുടെ ഏറ്റവും പുതിയ സാമ്പത്തിക പ്രവർത്തനത്തിന്റെ വേഗത്തിലുള്ള കാഴ്ച",
-      "title": "സമീപകാല ലാവണ്യങ്ങൾ"
+      "description": "നിങ്ങളുടെ ഏറ്റവും പുതിയ സാമ്പത്തിക പ്രവർത്തനങ്ങളുടെ ദ്രുത കാഴ്ച",
+      "title": "സമീപകാല ഇടപാടുകൾ"
     },
     "safeToSpend": {
-      "description": "See how much you can safely spend per category",
-      "title": "Safe to Spend"
+      "description": "ഓരോ വിഭാഗത്തിലും എത്ര സുരക്ഷിതമായി ചെലവഴിക്കാമെന്ന് കാണുക",
+      "title": "സുരക്ഷിതമായി ചെലവഴിക്കാവുന്നത്"
     },
     "spendingByCategory": {
-      "description": "നിങ്ങളുടെ പണം എവിടെ പോകുന്നു എന്ന് ദൃശ്യ വിഭജനം കാണുക",
-      "title": "വിഭാഗം അനുസരിച്ച് ചെലവ്"
+      "description": "നിങ്ങളുടെ പണം എവിടേക്ക് പോകുന്നുവെന്ന് ദൃശ്യ വിശകലനത്തിലൂടെ കാണുക",
+      "title": "വിഭാഗം അനുസരിച്ചുള്ള ചെലവ്"
     },
     "streaks": {
-      "description": "Track your engagement streaks and achievements",
-      "title": "Streaks & Badges"
+      "description": "നിങ്ങളുടെ ഇടപാട് സ്ട്രീക്കുകളും നേട്ടങ്ങളും ട്രാക്ക് ചെയ്യുക",
+      "title": "സ്ട്രീക്കുകളും ബാഡ്ജുകളും"
     },
     "upcomingBills": {
-      "description": "ബിൽ ഓർമ്മപ്പെടുത്തലുകൾ ഉപയോഗിച്ച് ഒരു പണമടവ് നഷ്ടപ്പെടാതിരിക്കുക",
+      "description": "ബിൽ ഓർമ്മപ്പെടുത്തലുകൾ ഉപയോഗിച്ച് ഒരു പേയ്‌മെന്റും നഷ്ടപ്പെടുത്തരുത്",
       "title": "വരാനിരിക്കുന്ന ബില്ലുകൾ"
     },
     "weeklyRecap": {
-      "description": "Summary of your weekly spending patterns",
-      "title": "Weekly Recap"
+      "description": "നിങ്ങളുടെ ആഴ്ചയിലെ ചെലവ് രീതികളുടെ സംഗ്രഹം",
+      "title": "ആഴ്ചയിലെ സംഗ്രഹം"
     }
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
-      "createNew": "Create New",
-      "description": "Map YNAB categories to your existing categories or create new ones.",
-      "mapToExisting": "Map to Existing",
-      "selectCategory": "Select category...",
-      "skip": "Skip",
-      "title": "Category Mapping",
-      "willCreate": "Will create:"
+      "category": "{count, plural, =1 {1 വിഭാഗം} other {# വിഭാഗങ്ങൾ}}",
+      "createNew": "പുതിയത് സൃഷ്ടിക്കുക",
+      "description": "YNAB വിഭാഗങ്ങളെ നിങ്ങളുടെ നിലവിലുള്ള വിഭാഗങ്ങളിലേക്ക് മാപ്പ് ചെയ്യുക അല്ലെങ്കിൽ പുതിയവ സൃഷ്ടിക്കുക.",
+      "mapToExisting": "നിലവിലുള്ളതിലേക്ക് മാപ്പ് ചെയ്യുക",
+      "selectCategory": "വിഭാഗം തിരഞ്ഞെടുക്കുക...",
+      "skip": "ഒഴിവാക്കുക",
+      "title": "വിഭാഗ മാപ്പിംഗ്",
+      "willCreate": "സൃഷ്ടിക്കും:"
     },
     "completeStep": {
-      "errors": "Errors",
-      "importAnother": "Import Another",
-      "success": "Import Complete!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
-      "viewTransactions": "View Transactions",
-      "whatNext": "What would you like to do next?",
-      "withIssues": "Import Completed with Issues"
+      "errors": "പിശകുകൾ",
+      "importAnother": "മറ്റൊന്ന് ഇമ്പോർട്ട് ചെയ്യുക",
+      "success": "ഇമ്പോർട്ട് പൂർത്തിയായി!",
+      "successMessage": "YNAB-ൽ നിന്ന് {count, plural, =1 {1 ഇനം} other {# ഇനങ്ങൾ}} വിജയകരമായി ഇമ്പോർട്ട് ചെയ്തു.",
+      "viewTransactions": "ഇടപാടുകൾ കാണുക",
+      "whatNext": "അടുത്തതായി നിങ്ങൾ എന്ത് ചെയ്യാൻ ആഗ്രഹിക്കുന്നു?",
+      "withIssues": "പ്രശ്നങ്ങളോടെ ഇമ്പോർട്ട് പൂർത്തിയായി"
     },
     "footer": {
-      "back": "Back",
-      "done": "Done",
-      "next": "Next",
-      "startImport": "Start Import"
+      "back": "പിന്നോട്ട്",
+      "done": "പൂർത്തിയായി",
+      "next": "അടുത്തത്",
+      "startImport": "ഇമ്പോർട്ട് ആരംഭിക്കുക"
     },
     "header": {
-      "closeLabel": "Close wizard",
-      "subtitle": "Migrate your budget data seamlessly",
-      "title": "Import from YNAB"
+      "closeLabel": "വിസാർഡ് അടയ്ക്കുക",
+      "subtitle": "നിങ്ങളുടെ ബജറ്റ് ഡാറ്റ തടസ്സമില്ലാതെ മൈഗ്രേറ്റ് ചെയ്യുക",
+      "title": "YNAB-ൽ നിന്ന് ഇമ്പോർട്ട് ചെയ്യുക"
     },
     "importingStep": {
-      "finishing": "Finishing up...",
-      "importingAccounts": "Importing accounts...",
-      "importingBudgets": "Importing budgets...",
-      "importingCategories": "Importing categories...",
-      "importingTransactions": "Importing transactions...",
-      "title": "Importing your YNAB data..."
+      "finishing": "പൂർത്തിയാക്കുന്നു...",
+      "importingAccounts": "അക്കൗണ്ടുകൾ ഇമ്പോർട്ട് ചെയ്യുന്നു...",
+      "importingBudgets": "ബജറ്റുകൾ ഇമ്പോർട്ട് ചെയ്യുന്നു...",
+      "importingCategories": "വിഭാഗങ്ങൾ ഇമ്പോർട്ട് ചെയ്യുന്നു...",
+      "importingTransactions": "ഇടപാടുകൾ ഇമ്പോർട്ട് ചെയ്യുന്നു...",
+      "title": "നിങ്ങളുടെ YNAB ഡാറ്റ ഇമ്പോർട്ട് ചെയ്യുന്നു..."
     },
     "optionsStep": {
       "accountOptions": {
-        "includeClosedAccounts": "Include closed accounts",
-        "includeOffBudgetAccounts": "Include off-budget accounts",
-        "title": "Account Options"
+        "includeClosedAccounts": "അടച്ച അക്കൗണ്ടുകൾ ഉൾപ്പെടുത്തുക",
+        "includeOffBudgetAccounts": "ഓഫ്-ബജറ്റ് അക്കൗണ്ടുകൾ ഉൾപ്പെടുത്തുക",
+        "title": "അക്കൗണ്ട് ഓപ്ഷനുകൾ"
       },
       "budgetOptions": {
-        "importGoals": "Import savings goals as future purchases",
-        "title": "Budget Options"
+        "importGoals": "ലാഭ ലക്ഷ്യങ്ങൾ ഭാവി വാങ്ങലുകളായി ഇമ്പോർട്ട് ചെയ്യുക",
+        "title": "ബജറ്റ് ഓപ്ഷനുകൾ"
       },
       "hiddenCategories": {
-        "archive": "Archive",
-        "archiveDesc": "Import as archived (recommended)",
-        "description": "How to handle YNAB categories marked as hidden?",
-        "import": "Import",
-        "importDesc": "Import as active categories",
-        "skip": "Skip",
-        "skipDesc": "Don't import hidden categories",
-        "title": "Hidden Categories"
+        "archive": "ആർക്കൈവ്",
+        "archiveDesc": "ആർക്കൈവ് ചെയ്തതായി ഇമ്പോർട്ട് ചെയ്യുക (ശുപാർശ ചെയ്യുന്നു)",
+        "description": "മറഞ്ഞതായി അടയാളപ്പെടുത്തിയ YNAB വിഭാഗങ്ങൾ എങ്ങനെ കൈകാര്യം ചെയ്യണം?",
+        "import": "ഇമ്പോർട്ട്",
+        "importDesc": "സജീവ വിഭാഗങ്ങളായി ഇമ്പോർട്ട് ചെയ്യുക",
+        "skip": "ഒഴിവാക്കുക",
+        "skipDesc": "മറഞ്ഞ വിഭാഗങ്ങൾ ഇമ്പോർട്ട് ചെയ്യരുത്",
+        "title": "മറഞ്ഞ വിഭാഗങ്ങൾ"
       }
     },
     "previewStep": {
-      "accounts": "Accounts",
-      "allocations": "{count} allocations",
-      "budgetMonths": "Budget Months",
-      "categories": "Categories",
-      "dateRange": "Transaction Date Range",
-      "description": "Review the data that will be imported.",
-      "duplicates": "{count} duplicates",
-      "new": "{count} new",
-      "newMapped": "{created} new, {mapped} mapped",
-      "preparingPreview": "Preparing preview...",
-      "title": "Import Preview",
-      "transactions": "Transactions",
-      "warnings": "Warnings"
+      "accounts": "അക്കൗണ്ടുകൾ",
+      "allocations": "{count} അലോക്കേഷനുകൾ",
+      "budgetMonths": "ബജറ്റ് മാസങ്ങൾ",
+      "categories": "വിഭാഗങ്ങൾ",
+      "dateRange": "ഇടപാട് തീയതി ശ്രേണി",
+      "description": "ഇമ്പോർട്ട് ചെയ്യേണ്ട ഡാറ്റ അവലോകനം ചെയ്യുക.",
+      "duplicates": "{count} ഡ്യൂപ്ലിക്കേറ്റുകൾ",
+      "new": "{count} പുതിയത്",
+      "newMapped": "{created} പുതിയത്, {mapped} മാപ്പ് ചെയ്തത്",
+      "preparingPreview": "പ്രിവ്യൂ തയ്യാറാക്കുന്നു...",
+      "title": "ഇമ്പോർട്ട് പ്രിവ്യൂ",
+      "transactions": "ഇടപാടുകൾ",
+      "warnings": "മുന്നറിയിപ്പുകൾ"
     },
     "steps": {
       "categories": {
-        "description": "Map to existing categories",
-        "title": "Categories"
+        "description": "നിലവിലുള്ള വിഭാഗങ്ങളിലേക്ക് മാപ്പ് ചെയ്യുക",
+        "title": "വിഭാഗങ്ങൾ"
       },
       "complete": {
-        "description": "Migration finished",
-        "title": "Complete"
+        "description": "മൈഗ്രേഷൻ കഴിഞ്ഞു",
+        "title": "പൂർത്തിയായി"
       },
       "importing": {
-        "description": "Processing your data",
-        "title": "Importing"
+        "description": "നിങ്ങളുടെ ഡാറ്റ പ്രോസസ്സ് ചെയ്യുന്നു",
+        "title": "ഇമ്പോർട്ട് ചെയ്യുന്നു"
       },
       "options": {
-        "description": "Configure import settings",
-        "title": "Options"
+        "description": "ഇമ്പോർട്ട് ക്രമീകരണങ്ങൾ കോൺഫിഗർ ചെയ്യുക",
+        "title": "ഓപ്ഷനുകൾ"
       },
       "preview": {
-        "description": "Review before import",
-        "title": "Preview"
+        "description": "ഇമ്പോർട്ടിന് മുമ്പ് അവലോകനം ചെയ്യുക",
+        "title": "പ്രിവ്യൂ"
       },
       "upload": {
-        "description": "Select YNAB export file",
-        "title": "Upload"
+        "description": "YNAB എക്‌സ്‌പോർട്ട് ഫയൽ തിരഞ്ഞെടുക്കുക",
+        "title": "അപ്‌ലോഡ്"
       }
     },
     "uploadStep": {
-      "accounts": "Accounts",
-      "categories": "Categories",
-      "clickToSelect": "Click to select a file",
-      "dragAndDrop": "or drag and drop here",
-      "fileSummary": "File Summary",
-      "format": "Format",
-      "formatApiExport": "YNAB API Export",
-      "formatApiExportDesc": "JSON from nYNAB",
-      "formatCsv": "CSV Export",
-      "formatCsvDesc": "From YNAB web app",
+      "accounts": "അക്കൗണ്ടുകൾ",
+      "categories": "വിഭാഗങ്ങൾ",
+      "clickToSelect": "ഒരു ഫയൽ തിരഞ്ഞെടുക്കാൻ ക്ലിക്ക് ചെയ്യുക",
+      "dragAndDrop": "അല്ലെങ്കിൽ ഇവിടെ ഡ്രാഗ് ആൻഡ് ഡ്രോപ്പ് ചെയ്യുക",
+      "fileSummary": "ഫയൽ സംഗ്രഹം",
+      "format": "ഫോർമാറ്റ്",
+      "formatApiExport": "YNAB API എക്‌സ്‌പോർട്ട്",
+      "formatApiExportDesc": "nYNAB-ൽ നിന്ന് JSON",
+      "formatCsv": "CSV എക്‌സ്‌പോർട്ട്",
+      "formatCsvDesc": "YNAB വെബ് ആപ്പിൽ നിന്ന്",
       "formatYfull": "Budget.yfull / Budget.ynab4",
-      "formatYfullDesc": "YNAB4 desktop export",
-      "parsing": "Parsing file...",
-      "supportedFormats": "Supported Formats",
-      "transactions": "Transactions"
+      "formatYfullDesc": "YNAB4 ഡെസ്ക്‌ടോപ്പ് എക്‌സ്‌പോർട്ട്",
+      "parsing": "ഫയൽ പാഴ്‌സ് ചെയ്യുന്നു...",
+      "supportedFormats": "പിന്തുണയ്ക്കുന്ന ഫോർമാറ്റുകൾ",
+      "transactions": "ഇടപാടുകൾ"
     },
     "errors": {
-      "parseFailed": "Failed to parse YNAB file",
-      "previewFailed": "Failed to generate preview",
-      "accountImportFailed": "Account import failed: {details}",
-      "categoryImportFailed": "Category import failed: {details}",
-      "transactionImportFailed": "Transaction import failed: {details}",
-      "unknownError": "Unknown error",
-      "budgetImportFailed": "Budget import failed: {details}"
+      "parseFailed": "YNAB ഫയൽ പാഴ്‌സ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു",
+      "previewFailed": "പ്രിവ്യൂ സൃഷ്ടിക്കുന്നതിൽ പരാജയപ്പെട്ടു",
+      "accountImportFailed": "അക്കൗണ്ട് ഇമ്പോർട്ട് പരാജയപ്പെട്ടു: {details}",
+      "categoryImportFailed": "വിഭാഗ ഇമ്പോർട്ട് പരാജയപ്പെട്ടു: {details}",
+      "transactionImportFailed": "ഇടപാട് ഇമ്പോർട്ട് പരാജയപ്പെട്ടു: {details}",
+      "unknownError": "അജ്ഞാത പിശക്",
+      "budgetImportFailed": "ബജറ്റ് ഇമ്പോർട്ട് പരാജയപ്പെട്ടു: {details}"
     },
-    "importSuccess": "YNAB data imported successfully!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importSuccess": "YNAB ഡാറ്റ വിജയകരമായി ഇമ്പോർട്ട് ചെയ്തു!",
+    "importWithErrors": "{count, plural, =1 {1 പിശകോടെ} other {# പിശകുകളോടെ}} ഇമ്പോർട്ട് പൂർത്തിയായി"
   },
   "developerTools": {
     "title": "ഡെവലപ്പർ ടൂൾസ്",
