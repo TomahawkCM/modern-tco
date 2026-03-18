@@ -48,18 +48,18 @@
     }
   },
   "accessibilityToggle": {
-    "featuresActive": "Accessibility features active",
-    "highContrast": "High Contrast",
-    "highContrastDescription": "Enhanced color contrast",
-    "largeTextMode": "Large Text Mode",
-    "largeTextModeDescription": "Bigger text & touch targets",
-    "reduceMotion": "Reduce Motion",
-    "reduceMotionDescription": "Minimize animations",
-    "sizeLarge": "Large",
-    "sizeNormal": "Normal",
-    "sizeXLarge": "X-Large",
-    "textSize": "Text Size",
-    "title": "Accessibility"
+    "featuresActive": "ප්‍රවේශ්‍යතා විශේෂාංග සක්‍රියයි",
+    "highContrast": "ඉහළ ප්‍රතිවිරුද්ධතාව",
+    "highContrastDescription": "වැඩිදියුණු කළ වර්ණ ප්‍රතිවිරුද්ධතාව",
+    "largeTextMode": "විශාල පාඨ ආකාරය",
+    "largeTextModeDescription": "විශාල පාඨ සහ ස්පර්ශ ඉලක්ක",
+    "reduceMotion": "චලනය අඩු කරන්න",
+    "reduceMotionDescription": "සජීවිකරණ අවම කරන්න",
+    "sizeLarge": "විශාල",
+    "sizeNormal": "සාමාන්‍ය",
+    "sizeXLarge": "ඉතා විශාල",
+    "textSize": "පාඨ ප්‍රමාණය",
+    "title": "ප්‍රවේශ්‍යතාව"
   },
   "accessibleChart": {
     "buttons": {
@@ -489,335 +489,335 @@
   },
   "budget": {
     "accounts": {
-      "accountCreated": "Account created",
-      "accountDeleted": "Account deleted",
-      "accountNameLabel": "Account Name *",
-      "accountNamePlaceholder": "e.g., BMO Chequing",
+      "accountCreated": "ගිණුම සාදන ලදී",
+      "accountDeleted": "ගිණුම මකන ලදී",
+      "accountNameLabel": "ගිණුම් නම *",
+      "accountNamePlaceholder": "උදා., BMO චෙක්පත්",
       "accountType": {
-        "checking": "Checking",
-        "credit": "Credit Card",
-        "savings": "Savings"
+        "checking": "චෙක්පත් ගිණුම",
+        "credit": "ණය කාඩ්පත",
+        "savings": "ඉතිරි ගිණුම"
       },
-      "accountTypeLabel": "Account Type",
-      "accountUpdated": "Account updated",
-      "addAccount": "Add Account",
-      "addFirstAccount": "Add Your First Account",
-      "allTransactionsCleared": "All transactions cleared. You can now re-import your statements.",
-      "assignCount": "Assign {count, plural, one {# Transaction} other {# Transactions}}",
-      "assignModalDescription": "{count, plural, one {# transaction needs} other {# transactions need}} to be assigned to an account.",
-      "assignTransactions": "Assign Transactions",
+      "accountTypeLabel": "ගිණුම් වර්ගය",
+      "accountUpdated": "ගිණුම යාවත්කාලීන කරන ලදී",
+      "addAccount": "ගිණුම එක් කරන්න",
+      "addFirstAccount": "ඔබේ පළමු ගිණුම එක් කරන්න",
+      "allTransactionsCleared": "සියලු ගනුදෙනු හිස් කරන ලදී. දැන් ඔබට ප්‍රකාශ නැවත ආනයනය කළ හැක.",
+      "assignCount": "{count, plural, one {ගනුදෙනු #ක් පවරන්න} other {ගනුදෙනු #ක් පවරන්න}}",
+      "assignModalDescription": "{count, plural, one {ගනුදෙනුවක් #ට ගිණුම පැවරිය යුතුයි} other {ගනුදෙනු #කට ගිණුම පැවරිය යුතුයි}}.",
+      "assignTransactions": "ගනුදෙනු පැවරීම",
       "assignTransactionsNow": "Assign Transactions Now",
-      "assignedTransactions": "Assigned {count} transactions to {name}",
+      "assignedTransactions": "ගනුදෙනු {count}ක් {name} වෙත පවරන ලදී",
       "assigning": "Assigning...",
-      "balanceExplanation": "This is added to your transaction totals to show your current balance",
-      "cancel": "Cancel",
-      "chooseAccount": "Choose an account...",
-      "clearAllConfirm": "Clear All Transactions",
-      "clearAllDescription": "This will permanently delete ALL transactions from the database. Your accounts and their starting balances will be preserved. You can then re-import your bank statements fresh. This action cannot be undone.",
-      "clearAllTitle": "Clear All Transactions",
-      "clearAllTransactions": "Clear all transactions and start fresh",
-      "clickToView": "Click to view",
-      "create": "Create",
+      "balanceExplanation": "ඔබේ වත්මන් ශේෂය පෙන්වීමට මෙය ඔබේ ගනුදෙනු මුළු වලට එකතු වේ",
+      "cancel": "අවලංගු කරන්න",
+      "chooseAccount": "ගිණුමක් තෝරන්න...",
+      "clearAllConfirm": "සියලු ගනුදෙනු හිස් කරන්න",
+      "clearAllDescription": "මෙය දත්ත ගබඩාවෙන් සියලු ගනුදෙනු ස්ථිරවම මකා දමයි. ඔබේ ගිණුම් සහ ඒවායේ ආරම්භක ශේෂ සුරැකෙනු ඇත.",
+      "clearAllTitle": "සියලු ගනුදෙනු හිස් කරන්න",
+      "clearAllTransactions": "සියලු ගනුදෙනු හිස් කර නැවත ආරම්භ කරන්න",
+      "clickToView": "බැලීමට ක්ලික් කරන්න",
+      "create": "සාදන්න",
       "createdAccount": "Created account: {names}",
-      "current": "Current",
-      "dataManagement": "Data Management",
-      "delete": "Delete",
-      "deleteAccountDescription": "Are you sure you want to delete \"{name}\"? This will not delete associated transactions.",
-      "deleteAccountTitle": "Delete Account",
+      "current": "වත්මන්",
+      "dataManagement": "දත්ත කළමනාකරණය",
+      "delete": "මකන්න",
+      "deleteAccountDescription": "\"{name}\" මකන්නද? මෙය ආශ්‍රිත ගනුදෙනු මකන්නේ නැත.",
+      "deleteAccountTitle": "ගිණුම මකන්න",
       "dismissReminder": "Dismiss reminder",
-      "edit": "Edit",
-      "editAccount": "Edit Account",
+      "edit": "සංස්කරණය",
+      "editAccount": "ගිණුම සංස්කරණය කරන්න",
       "enterBankBalance": "Enter your current bank balance to ensure accurate account totals.",
-      "failedToAssign": "Failed to assign transactions",
-      "failedToClear": "Failed to clear transactions",
-      "failedToDelete": "Failed to delete account",
-      "failedToLoad": "Failed to load accounts",
+      "failedToAssign": "ගනුදෙනු පැවරීමට අසමත් විය",
+      "failedToClear": "ගනුදෙනු හිස් කිරීමට අසමත් විය",
+      "failedToDelete": "ගිණුම මැකීමට අසමත් විය",
+      "failedToLoad": "ගිණුම් පූරණයට අසමත් විය",
       "failedToMigrate": "Failed to migrate transactions",
-      "failedToSave": "Failed to save account",
-      "failedToUpdateBalance": "Failed to update account balance",
-      "institutionLabel": "Institution",
-      "institutionPlaceholder": "e.g., BMO, TD, RBC",
-      "loading": "Loading accounts...",
-      "migratedTransactions": "Migrated {count} transactions to accounts",
-      "nameRequired": "Account name is required",
-      "noAccountsDescription": "Add your bank accounts to track starting balances and get accurate totals.",
-      "noAccountsYet": "No accounts yet",
+      "failedToSave": "ගිණුම සුරැකීමට අසමත් විය",
+      "failedToUpdateBalance": "ගිණුම් ශේෂය යාවත්කාලීන කිරීමට අසමත් විය",
+      "institutionLabel": "ආයතනය",
+      "institutionPlaceholder": "උදා., BMO, TD, RBC",
+      "loading": "ගිණුම් පූරණය වෙමින්...",
+      "migratedTransactions": "ගනුදෙනු {count}ක් ගිණුම්වලට සංක්‍රමණය කරන ලදී",
+      "nameRequired": "ගිණුම් නම අවශ්‍යයි",
+      "noAccountsDescription": "ආරම්භක ශේෂ නිරීක්ෂණය කිරීමට සහ නිවැරදි මුළු ලබා ගැනීමට ඔබේ බැංකු ගිණුම් එක් කරන්න.",
+      "noAccountsYet": "තවම ගිණුම් නැත",
       "reminderDismissed": "Reminder dismissed",
-      "selectTargetAccount": "Select target account:",
+      "selectTargetAccount": "ඉලක්ක ගිණුම තෝරන්න:",
       "setBalanceNow": "Set Balance Now",
       "setStartingBalanceFor": "Set starting balance for {name}",
-      "starting": "Starting",
-      "startingBalanceHint": "Enter your account balance BEFORE the first imported transaction",
-      "startingBalanceLabel": "Starting Balance",
-      "startingBalanceSetTo": "Starting balance set to {amount}",
-      "subtitle": "Manage your bank accounts and starting balances",
-      "title": "Accounts",
-      "totalStartingBalance": "Total Starting Balance",
-      "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
+      "starting": "ආරම්භක",
+      "startingBalanceHint": "පළමු ආනයනය කළ ගනුදෙනුවට පෙර ඔබේ ගිණුම් ශේෂය ඇතුළත් කරන්න",
+      "startingBalanceLabel": "ආරම්භක ශේෂය",
+      "startingBalanceSetTo": "ආරම්භක ශේෂය {amount} ලෙස සකසන ලදී",
+      "subtitle": "ඔබේ බැංකු ගිණුම් සහ ආරම්භක ශේෂ කළමනාකරණය කරන්න",
+      "title": "ගිණුම්",
+      "totalStartingBalance": "මුළු ආරම්භක ශේෂය",
+      "transactionCount": "{count, plural, one {ගනුදෙනු #ක්} other {ගනුදෙනු #ක්}}",
       "unassignedClickToAssign": "Click below to automatically assign them to your accounts.",
       "unassignedCreateFirst": "Create an account first, then they will be automatically assigned.",
-      "unassignedDescription": "These transactions were imported before accounts were set up.",
-      "unassignedTitle": "{count, plural, one {# transaction needs} other {# transactions need}} account assignment",
-      "update": "Update"
+      "unassignedDescription": "මෙම ගනුදෙනු ගිණුම් සැකසීමට පෙර ආනයනය කරන ලදී.",
+      "unassignedTitle": "{count, plural, one {ගනුදෙනුවකට #ක් ගිණුම පැවරීම අවශ්‍යයි} other {ගනුදෙනු #කට ගිණුම පැවරීම අවශ්‍යයි}}",
+      "update": "යාවත්කාලීන කරන්න"
     },
     "budgets": {
-      "addBudget": "Add Budget",
-      "amountLabel": "Amount",
-      "annual": "Annual",
-      "budgetAlerts": "⚠️ Budget Alerts",
-      "budgetDeleted": "Budget deleted successfully",
-      "cancel": "Cancel",
-      "categoryLabel": "Category",
-      "createFirstBudget": "Create First Budget",
-      "currentProgress": "Current progress: {percentage}% spent ({spent})",
+      "addBudget": "අයවැය එක් කරන්න",
+      "amountLabel": "මුදල",
+      "annual": "වාර්ෂික",
+      "budgetAlerts": "⚠️ අයවැය ඇඟවීම්",
+      "budgetDeleted": "අයවැය සාර්ථකව මකන ලදී",
+      "cancel": "අවලංගු කරන්න",
+      "categoryLabel": "වර්ගය",
+      "createFirstBudget": "පළමු අයවැය සාදන්න",
+      "currentProgress": "වත්මන් ප්‍රගතිය: {percentage}% වැය කර ඇත ({spent})",
       "currentlyOverBudget": "Currently {amount} over budget",
-      "deleteBudget": "Delete budget",
-      "deleteBudgetConfirm": "Delete Budget",
-      "deleteBudgetDescription": "This will remove the budget limit for this category. Transactions will not be deleted.",
-      "deleteBudgetTitle": "Delete Budget",
-      "editBudget": "Edit budget",
-      "enterValidAmount": "Please enter a valid amount",
-      "failedToDelete": "Failed to delete budget",
-      "failedToSave": "Failed to save budget",
+      "deleteBudget": "අයවැය මකන්න",
+      "deleteBudgetConfirm": "අයවැය මකන්න",
+      "deleteBudgetDescription": "මෙය මෙම වර්ගය සඳහා අයවැය සීමාව ඉවත් කරයි. ගනුදෙනු මකනු නොලැබේ.",
+      "deleteBudgetTitle": "අයවැය මකන්න",
+      "editBudget": "අයවැය සංස්කරණය",
+      "enterValidAmount": "කරුණාකර වලංගු මුදලක් ඇතුළත් කරන්න",
+      "failedToDelete": "අයවැය මැකීමට අසමත් විය",
+      "failedToSave": "අයවැය සුරැකීමට අසමත් විය",
       "helpTooltip": "Set spending limits for each category. Track your progress with color-coded alerts: Green = On Track, Yellow = Warning (80%), Red = Over Budget (100%).",
       "helpTooltipAriaLabel": "More information about budgets",
-      "loading": "Loading budgets...",
-      "monthly": "Monthly",
-      "noBudgetsDescription": "Create a budget to track your spending limits and goals.",
-      "noBudgetsSet": "No budgets set",
-      "of": "of",
-      "overBudgetThisMonth": "{amount} over budget this month",
-      "overallProgress": "Overall Progress",
+      "loading": "අයවැය පූරණය වෙමින්...",
+      "monthly": "මාසික",
+      "noBudgetsDescription": "ඔබේ වියදම් සීමා සහ ඉලක්ක නිරීක්ෂණය කිරීමට අයවැයක් සාදන්න.",
+      "noBudgetsSet": "අයවැය සකසා නැත",
+      "of": "/",
+      "overBudgetThisMonth": "මෙම මාසයේ {amount} අයවැය ඉක්මවා ඇත",
+      "overallProgress": "සමස්ත ප්‍රගතිය",
       "periodHelpTooltip": "Monthly budgets reset each month. Annual budgets divide the total across 12 months. Example: $1,200 annual = $100 per month.",
       "periodHelpTooltipAriaLabel": "More information about budget periods",
-      "periodLabel": "Period",
+      "periodLabel": "කාලය",
       "progressHelpTooltip": "Budget Progress: Green (On Track) = 0-79% spent. Yellow (Warning) = 80-99% spent. Red (Over) = 100%+ spent. Colors update automatically as you spend.",
       "progressHelpTooltipAriaLabel": "More information about budget progress and alert thresholds",
-      "remaining": "Remaining",
+      "remaining": "ඉතිරි",
       "remainingBudget": "{amount} remaining budget",
-      "remainingThisMonth": "{amount} remaining this month",
-      "rolloverDisabled": "Budget resets each month regardless of spending",
-      "rolloverEnabled": "Leftover funds will be added to next month's budget",
+      "remainingThisMonth": "මෙම මාසයේ {amount} ඉතිරියි",
+      "rolloverDisabled": "වියදම් නොසලකා සෑම මාසයකම අයවැය යළි සකසයි",
+      "rolloverEnabled": "ඉතිරි අරමුදල් ඊළඟ මාසයේ අයවැයට එකතු වේ",
       "rolloverHelpTooltip": "What is budget rollover? When enabled, any unspent money from this budget carries over to the next month. Example: Budget: $500/month, Spent: $400, Leftover: $100, Next month starts with: $600 ($500 + $100 leftover)",
       "rolloverHelpTooltipAriaLabel": "More information about budget rollover",
-      "rolloverLabel": "Carry over unused budget to next month",
-      "saveBudget": "Save Budget",
-      "setBudget": "+ Set Budget",
-      "statusOnTrack": "✓ On Track",
-      "statusOver": "✖ Over",
-      "statusWarning": "⚠ Warning",
-      "title": "Budgets",
-      "totalBudgeted": "Total Budgeted",
-      "totalExpenses": "Total expenses",
-      "totalSpent": "Total Spent",
-      "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
+      "rolloverLabel": "භාවිතා නොකළ අයවැය ඊළඟ මාසයට ගෙන යන්න",
+      "saveBudget": "අයවැය සුරකින්න",
+      "setBudget": "+ අයවැය සකසන්න",
+      "statusOnTrack": "✓ මාවතේ",
+      "statusOver": "✖ ඉක්මවා ඇත",
+      "statusWarning": "⚠ අනතුරු ඇඟවීම",
+      "title": "අයවැය",
+      "totalBudgeted": "මුළු අයවැයගත",
+      "totalExpenses": "මුළු වියදම්",
+      "totalSpent": "මුළු වියදම්",
+      "transactionCount": "{count, plural, one {ගනුදෙනු #ක්} other {ගනුදෙනු #ක්}}",
       "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transaction will become unbudgeted} other {# transactions will become unbudgeted}}",
-      "youWillLose": "You will lose:"
+      "youWillLose": "ඔබට අහිමි වේ:"
     },
     "events": {
       "_note": "Already internationalized in client.tsx using budget.events namespace",
-      "active": "Active",
-      "completed": "Completed",
-      "createEvent": "Create Event",
-      "daysLeft": "{count} days left",
-      "noEvents": "No active events",
-      "noEventsDescription": "Create an event budget to track spending for weddings, holidays, and more",
-      "planning": "Planning",
-      "progress": "Progress",
-      "remaining": "Remaining",
-      "suggestedTemplates": "Suggested Templates",
-      "tagTransaction": "Tag to event",
-      "title": "Event Budgets",
-      "untagTransaction": "Remove from event"
+      "active": "සක්‍රිය",
+      "completed": "සම්පූර්ණයි",
+      "createEvent": "උත්සවය සාදන්න",
+      "daysLeft": "{count, plural, one {දින #ක් ඉතිරියි} other {දින #ක් ඉතිරියි}}",
+      "noEvents": "සක්‍රිය උත්සව නැත",
+      "noEventsDescription": "සාද, සංචාර, හෝ ව්‍යාපෘති සඳහා වියදම් නිරීක්ෂණය කිරීමට උත්සව අයවැයක් සාදන්න.",
+      "planning": "සැලසුම් කිරීම",
+      "progress": "ප්‍රගතිය",
+      "remaining": "ඉතිරි",
+      "suggestedTemplates": "යෝජිත අච්චු",
+      "tagTransaction": "උත්සවයට ටැග් කරන්න",
+      "title": "උත්සව අයවැය",
+      "untagTransaction": "උත්සවයෙන් ඉවත් කරන්න"
     },
     "gamification": {
-      "achievementUnlocked": "Achievement Unlocked!",
-      "badges": "Badges",
-      "currentStreak": "Current streak",
-      "longestStreak": "Best: {count} days",
-      "noAchievements": "Complete actions to earn badges",
-      "points": "Points",
-      "streaks": "Streaks",
-      "totalPoints": "Total Points"
+      "achievementUnlocked": "ජයග්‍රහණය අගුළු ඇරුණි!",
+      "badges": "නාම පුවරු",
+      "currentStreak": "වත්මන් ධාරාව",
+      "longestStreak": "හොඳම: දින {count}",
+      "noAchievements": "නාම පුවරු උපයා ගැනීමට ක්‍රියා සම්පූර්ණ කරන්න",
+      "points": "ලකුණු",
+      "streaks": "ධාරා",
+      "totalPoints": "මුළු ලකුණු"
     },
     "merchantRules": {
-      "applied": "Applied {count} times",
-      "category": "Category",
-      "createRule": "Always categorize {merchant} as {category}?",
-      "deleteRule": "Delete Rule",
-      "description": "Auto-categorize transactions by merchant",
-      "merchant": "Merchant",
-      "no": "No, just this time",
-      "noRules": "No merchant rules yet",
-      "noRulesDescription": "Rules are created when you re-categorize transactions",
-      "ruleCreated": "Rule created",
-      "title": "Merchant Rules",
-      "yes": "Yes, always"
+      "applied": "වාර {count}ක් යෙදුණි",
+      "category": "වර්ගය",
+      "createRule": "සැමවිටම {merchant} {category} ලෙස වර්ගීකරණය කරන්නද?",
+      "deleteRule": "නීතිය මකන්න",
+      "description": "වෙළෙන්දා අනුව ගනුදෙනු ස්වයංක්‍රීයව වර්ගීකරණය කරන්න",
+      "merchant": "වෙළෙන්දා",
+      "no": "නැහැ, මෙවර පමණි",
+      "noRules": "තවම වෙළෙන්දා නීති නැත",
+      "noRulesDescription": "ඔබ ගනුදෙනු නැවත වර්ගීකරණය කරන විට නීති සැදේ",
+      "ruleCreated": "නීතිය සාදන ලදී",
+      "title": "වෙළෙන්දා නීති",
+      "yes": "ඔව්, සැමවිටම"
     },
     "netWorth": {
       "_note": "Already internationalized in client.tsx using budget.netWorth namespace",
-      "assetBreakdown": "Asset Breakdown",
-      "cashChecking": "Cash & Checking",
-      "creditCards": "Credit Cards",
-      "history": "Historical Snapshots",
-      "investments": "Investments",
-      "liabilityBreakdown": "Liability Breakdown",
-      "loans": "Loans",
-      "milestoneReached": "Milestone reached: {amount}!",
-      "mortgage": "Mortgage",
-      "noLiabilities": "No liabilities — great job!",
-      "property": "Property",
-      "savings": "Savings",
-      "title": "Net Worth",
-      "totalAssets": "Total Assets",
-      "totalLiabilities": "Total Liabilities",
-      "totalNetWorth": "Total Net Worth",
-      "trend": "Trend"
+      "assetBreakdown": "වත්කම් විස්තරය",
+      "cashChecking": "මුදල් සහ චෙක්පත්",
+      "creditCards": "ණය කාඩ්",
+      "history": "ඉතිහාසය",
+      "investments": "ආයෝජන",
+      "liabilityBreakdown": "වගකීම් විස්තරය",
+      "loans": "ණය",
+      "milestoneReached": "සන්ධිස්ථානය ළඟා විය: {amount}",
+      "mortgage": "නිවාස ණය",
+      "noLiabilities": "වගකීම් වාර්තා කර නැත",
+      "property": "දේපළ",
+      "savings": "ඉතිරි කිරීම්",
+      "title": "ශුද්ධ වටිනාකම",
+      "totalAssets": "මුළු වත්කම්",
+      "totalLiabilities": "මුළු වගකීම්",
+      "totalNetWorth": "මුළු ශුද්ධ වටිනාකම",
+      "trend": "ප්‍රවණතාව"
     },
     "privacy": {
-      "disabled": "Financial values are visible",
-      "enabled": "Financial values are hidden",
+      "disabled": "මූල්‍ය අගයන් දෘශ්‍ය වේ",
+      "enabled": "මූල්‍ය අගයන් සැඟවී ඇත",
       "shortcut": "Cmd+Shift+P",
-      "tapToReveal": "Tap to reveal",
-      "toggle": "Privacy Mode"
+      "tapToReveal": "හෙළිදරව් කිරීමට තට්ටු කරන්න",
+      "toggle": "පෞද්ගලිකත්ව ආකාරය"
     },
     "property": {
-      "addProperty": "Add Property",
-      "annualAppreciation": "Annual Appreciation",
-      "annualROI": "Annual ROI",
-      "appreciation": "Appreciation",
-      "backToProperties": "Back to Properties",
-      "currentBalance": "Current Balance",
-      "currentValue": "Current Value",
-      "equity": "Equity",
-      "interestRate": "Interest Rate",
-      "lender": "Lender",
-      "loanDetails": "Loan Details",
-      "monthlyIncome": "Monthly Income",
-      "monthlyPayment": "Monthly Payment",
-      "monthlyROI": "Monthly ROI",
-      "mortgageBalance": "Mortgage Balance",
-      "noProperties": "No properties tracked",
-      "noPropertiesDescription": "Add your first property to track equity and appreciation",
-      "notFound": "Property not found",
-      "notes": "Notes",
-      "occupancyRate": "Occupancy Rate",
-      "propertyTax": "Property Tax",
-      "purchasePrice": "Purchase Price",
-      "rentalROI": "Rental ROI",
-      "title": "Properties",
-      "totalAppreciation": "Total Appreciation",
-      "totalProperties": "Total Properties",
-      "totalValue": "Total Value"
+      "addProperty": "දේපළ එක් කරන්න",
+      "annualAppreciation": "වාර්ෂික අගය වැඩිවීම",
+      "annualROI": "වාර්ෂික ROI",
+      "appreciation": "අගය වැඩිවීම",
+      "backToProperties": "දේපළ වෙත ආපසු",
+      "currentBalance": "වත්මන් ශේෂය",
+      "currentValue": "වත්මන් වටිනාකම",
+      "equity": "ප්‍රාග්ධනය",
+      "interestRate": "පොලී අනුපාතය",
+      "lender": "ණය දෙන්නා",
+      "loanDetails": "ණය විස්තර",
+      "monthlyIncome": "මාසික ආදායම",
+      "monthlyPayment": "මාසික ගෙවීම",
+      "monthlyROI": "මාසික ROI",
+      "mortgageBalance": "නිවාස ණය ශේෂය",
+      "noProperties": "දේපළ නිරීක්ෂණය කර නැත",
+      "noPropertiesDescription": "ප්‍රාග්ධනය සහ වර්ධනය නිරීක්ෂණය කිරීමට ඔබේ පළමු දේපළ එක් කරන්න",
+      "notFound": "දේපළ හමු නොවීය",
+      "notes": "සටහන්",
+      "occupancyRate": "අධිභෝජන අනුපාතය",
+      "propertyTax": "දේපළ බද්ද",
+      "purchasePrice": "මිලදී ගත් මිල",
+      "rentalROI": "කුලී ROI",
+      "title": "දේපළ",
+      "totalAppreciation": "මුළු අගය වැඩිවීම",
+      "totalProperties": "මුළු දේපළ",
+      "totalValue": "මුළු වටිනාකම"
     },
     "refunds": {
-      "autoMatched": "Auto-matched refund",
-      "expectRefund": "Expect Refund",
-      "expectRefundDescription": "Mark this transaction as expecting a refund",
-      "expectedAmount": "Expected amount",
-      "expectedDate": "Expected by",
-      "expecting": "Expecting refund",
-      "gross": "Gross",
-      "grossVsNet": "Gross vs Net",
-      "markExpecting": "Expect Refund",
-      "net": "Net",
-      "notes": "Notes",
-      "notesPlaceholder": "Any additional details about this refund...",
-      "partial": "Partial refund",
-      "received": "Refund received",
-      "refundsTotal": "Refunds",
-      "submitting": "Submitting...",
-      "title": "Refund Tracking"
+      "autoMatched": "ස්වයංක්‍රීයව ගැළපූ ආපසු මුදල්",
+      "expectRefund": "ආපසු මුදල් බලාපොරොත්තු වේ",
+      "expectRefundDescription": "මෙම ගනුදෙනුව ආපසු මුදල් බලාපොරොත්තු වන ලෙස සලකුණු කරන්න",
+      "expectedAmount": "අපේක්ෂිත මුදල",
+      "expectedDate": "අපේක්ෂිත දිනය",
+      "expecting": "ආපසු මුදල් බලාපොරොත්තු වේ",
+      "gross": "දළ",
+      "grossVsNet": "දළ එදිරිව ශුද්ධ",
+      "markExpecting": "ආපසු මුදල් බලාපොරොත්තු වේ",
+      "net": "ශුද්ධ",
+      "notes": "සටහන්",
+      "notesPlaceholder": "මෙම ආපසු මුදල් ගැන අමතර විස්තර...",
+      "partial": "අර්ධ ආපසු මුදල්",
+      "received": "ආපසු මුදල් ලැබුණි",
+      "refundsTotal": "ආපසු මුදල්",
+      "submitting": "ඉදිරිපත් කරමින්...",
+      "title": "ආපසු මුදල් නිරීක්ෂණය"
     },
     "review": {
-      "allDone": "All caught up!",
-      "allDoneDescription": "No more transactions to review",
-      "approve": "Approve",
-      "approveKey": "Approve (→/A)",
-      "noDescription": "No description",
-      "progress": "{reviewed} of {total} reviewed",
-      "skip": "Skip",
-      "skipKey": "Skip (←/F)",
-      "subtitle": "Categorize your uncategorized transactions",
-      "swipeLeft": "Swipe left to skip",
-      "swipeRight": "Swipe right to approve",
-      "title": "Review Transactions"
+      "allDone": "සියල්ල සම්පූර්ණයි!",
+      "allDoneDescription": "සමාලෝචනය කිරීමට තවත් ගනුදෙනු නැත",
+      "approve": "අනුමත කරන්න",
+      "approveKey": "අනුමත කරන්න (→/A)",
+      "noDescription": "විස්තරයක් නැත",
+      "progress": "{total} න් {reviewed} සමාලෝචනය කරන ලදී",
+      "skip": "මඟ හරින්න",
+      "skipKey": "මඟ හරින්න (←/F)",
+      "subtitle": "ඔබේ වර්ගීකරණය නොකළ ගනුදෙනු වර්ගීකරණය කරන්න",
+      "swipeLeft": "මඟ හැරීමට වමට ස්වයිප් කරන්න",
+      "swipeRight": "අනුමත කිරීමට දකුණට ස්වයිප් කරන්න",
+      "title": "ගනුදෙනු සමාලෝචනය කරන්න"
     },
     "rollover": {
-      "disabled": "Rollover disabled",
-      "effective": "Effective budget",
-      "enabled": "Rollover enabled",
-      "includesRollover": "Includes {amount} rollover",
-      "negativeRollover": "Overspend of {amount} carried forward",
-      "title": "Budget Rollover",
-      "toggle": "Enable rollover for this category"
+      "disabled": "පවරැම අක්‍රියයි",
+      "effective": "ක්‍රියාත්මක අයවැය",
+      "enabled": "පවරැම සක්‍රියයි",
+      "includesRollover": "පවරැම {amount} ඇතුළත්",
+      "negativeRollover": "අධි වියදම් {amount} ඉදිරියට ගෙන යනු ලැබේ",
+      "title": "අයවැය පවරැම",
+      "toggle": "මෙම වර්ගය සඳහා පවරැම සක්‍රිය කරන්න"
     },
     "safeToSpend": {
-      "caution": "Watch Spending",
-      "dailyBudget": "Daily Budget",
-      "danger": "Over Budget",
-      "daysLeft": "{count} days left this month",
-      "noData": "Set up budgets to see safe-to-spend amounts",
-      "perCategory": "By Category",
-      "remaining": "remaining",
-      "safe": "On Track",
-      "title": "Safe to Spend",
-      "totalSafe": "Total Safe to Spend"
+      "caution": "වියදම් නිරීක්ෂණය කරන්න",
+      "dailyBudget": "දෛනික අයවැය",
+      "danger": "අයවැය ඉක්මවා ඇත",
+      "daysLeft": "මෙම මාසයේ දින {count}ක් ඉතිරියි",
+      "noData": "ආරක්ෂිත වියදම් මුදල් බැලීමට අයවැය සකසන්න",
+      "perCategory": "වර්ගය අනුව",
+      "remaining": "ඉතිරියි",
+      "safe": "මාවතේ ගමන් කරයි",
+      "title": "වියදම් කිරීමට ආරක්ෂිතයි",
+      "totalSafe": "වියදම් කිරීමට මුළු ආරක්ෂිත මුදල"
     },
     "scenarios": {
       "_note": "Already internationalized in client.tsx using budget.scenarios namespace",
-      "after": "After",
-      "amountLabel": "Amount",
-      "annualSavings": "Annual Savings",
-      "before": "Before",
-      "healthScore": "Health Score",
-      "impact": "Impact",
-      "monthlyCashFlow": "Monthly Cash Flow",
-      "run": "Run Scenario",
-      "subtitle": "Model financial changes and see their impact",
-      "title": "What-If Scenarios",
+      "after": "පසු",
+      "amountLabel": "මුදල ඇතුළත් කරන්න",
+      "annualSavings": "වාර්ෂික ඉතිරි කිරීම්",
+      "before": "පෙර",
+      "healthScore": "සෞඛ්‍ය ලකුණු",
+      "impact": "බලපෑම් සාරාංශය",
+      "monthlyCashFlow": "මාසික මුදල් ප්‍රවාහය",
+      "run": "ක්‍රියාත්මක",
+      "subtitle": "මූල්‍ය අවස්ථා ආකෘතිකරණය කර ඔබේ අයවැයට බලපෑම බලන්න",
+      "title": "මොකද-නම් අවස්ථා",
       "types": {
         "addExpense": {
-          "description": "See the impact of a new recurring expense",
-          "title": "Add Expense"
+          "description": "නව පුනරාවර්තන වියදමක් ඔබේ අයවැයට කෙසේ බලපාන්නේදැයි බලන්න",
+          "title": "වියදමක් එක් කරන්න"
         },
         "cancelSubscription": {
-          "description": "See savings from canceling a recurring charge",
-          "title": "Cancel Subscription"
+          "description": "පුනරාවර්තන වියදමක් අවලංගු කිරීමේ බලපෑම බලන්න",
+          "title": "දායකත්වය අවලංගු කරන්න"
         },
         "changeIncome": {
-          "description": "Model an income increase or decrease",
-          "title": "Change Income"
+          "description": "වැටුප් වෙනසක් හෝ නව ආදායම් මූලාශ්‍රයක් ආකෘතිකරණය කරන්න",
+          "title": "ආදායම වෙනස් කරන්න"
         },
         "increaseSavings": {
-          "description": "See goal timeline acceleration",
-          "title": "Increase Savings"
+          "description": "සෑම මාසයකම වැඩිපුර ඉතිරි කිරීමේ බලපෑම බලන්න",
+          "title": "ඉතිරි කිරීම් වැඩි කරන්න"
         },
         "payOffDebt": {
-          "description": "Calculate interest savings from early payoff",
-          "title": "Pay Off Debt"
+          "description": "වේගවත් ණය ආපසු ගෙවීම ආකෘතිකරණය කරන්න",
+          "title": "ණය ගෙවන්න"
         }
       }
     },
     "templates": {
-      "backToSchool": "Back to School",
-      "categories": "Categories",
-      "holidaySeason": "Holiday Season",
-      "homeImprovement": "Home Improvement",
-      "preview": "Preview",
-      "summerTravel": "Summer Travel",
-      "taxSeason": "Tax Season",
-      "title": "Budget Templates",
-      "useTemplate": "Use Template",
-      "weddingEvent": "Wedding / Event"
+      "backToSchool": "පාසලට ආපසු",
+      "categories": "වර්ග",
+      "holidaySeason": "නිවාඩු කාලය",
+      "homeImprovement": "නිවාස වැඩිදියුණු කිරීම",
+      "preview": "පෙරදසුන",
+      "summerTravel": "ගිම්හාන සංචාරය",
+      "taxSeason": "බදු කාලය",
+      "title": "අයවැය අච්චු",
+      "useTemplate": "අච්චුව භාවිතා කරන්න",
+      "weddingEvent": "විවාහ / උත්සව"
     },
     "weeklyRecap": {
-      "dismissed": "Dismissed for this week",
-      "lastWeek": "Last week",
-      "thisWeek": "This week",
-      "title": "Weekly Recap",
-      "topCategories": "Top Categories",
-      "viewFullReview": "View Full Review"
+      "dismissed": "මෙම සතිය සඳහා ඉවත් කරන ලදී",
+      "lastWeek": "පසුගිය සතිය",
+      "thisWeek": "මෙම සතිය",
+      "title": "සතිපතා සාරාංශය",
+      "topCategories": "ප්‍රමුඛ වර්ග",
+      "viewFullReview": "සම්පූර්ණ සමාලෝචනය බලන්න"
     }
   },
   "bulkActions": {
@@ -1565,17 +1565,17 @@
     }
   },
   "dashboardCustomizer": {
-    "alwaysVisible": "සැමවිට දෘශ්‍යයි",
-    "ariaLabel": "පුවරු සැලැස්ම අභිරුචිකරණය කරන්න",
+    "alwaysVisible": "සැමවිටම දෘශ්‍යයි",
+    "ariaLabel": "පුවරු පිරිසැලසුම අභිරුචිකරණය කරන්න",
     "button": "අභිරුචිකරණය",
-    "description": "පුවරු විජට් පෙන්වන්න හෝ සඟවන්න. විජට් අනුපිළිවෙල වෙනස් කිරීමට ඇද දමන්න.",
+    "description": "පුවරු විජට් පෙන්වන්න හෝ සඟවන්න. ඒවා නැවත පිළිවෙළට සැකසීමට පුවරුවේ විජට් ඇදගෙන යන්න.",
     "reorderDescription": "විජට් අනුපිළිවෙල වෙනස් කිරීමට, ඔබේ පුවරුවේ විජට් සෘජුවම ඇද දමන්න. සෑම විජට් කාඩ්පතේම ඇදීමේ හැසිරවීම (⋮⋮) අල්ලා ගැනීමට ඔබේ මූසිකය හෝ ස්පර්ශය භාවිතා කරන්න.",
-    "reorderTitle": "විජට් අනුපිළිවෙල වෙනස් කරන්න",
-    "resetButton": "පෙරනිමි වලට යළි සකසන්න",
+    "reorderTitle": "විජට් නැවත පිළිවෙළට සකසන්න",
+    "resetButton": "පෙරනිමිවලට යළි සකසන්න",
     "title": "පුවරුව අභිරුචිකරණය කරන්න",
     "toggleVisibility": "{name} දෘශ්‍යතාව මාරු කරන්න",
     "widgetVisibility": "විජට් දෘශ්‍යතාව",
-    "widgetsVisible": "විජට් {total} කින් {visible} ක් දෘශ්‍යයි"
+    "widgetsVisible": "විජට් {total} න් {visible}ක් දෘශ්‍යයි"
   },
   "debtAnalysis": {
     "cards": {
@@ -1788,9 +1788,9 @@
   },
   "dialog": {
     "cancel": "අවලංගු කරන්න",
-    "confirm": "අවශ්‍යය කරන්න",
-    "finalConfirmation": "අවසන් තහවුරු කිරීම:",
-    "processing": "සංස්කරණය කරමින්...",
+    "confirm": "තහවුරු කරන්න",
+    "finalConfirmation": "අවසාන තහවුරුව:",
+    "processing": "සැකසෙමින්...",
     "typeToConfirm": "මෙම ක්‍රියාව තහවුරු කිරීමට {text} ටයිප් කරන්න.",
     "confirmAction": "ක්‍රියාව තහවුරු කරන්න"
   },
@@ -1804,20 +1804,20 @@
   },
   "emptyStates": {
     "budgets": {
-      "description": "විවිධ වර්ගවල වියදම් නිරීක්ෂණය කිරීමට සහ ඔබේ මූල්‍ය ඉලක්ක සාක්ෂාත් කර ගැනීමට අයවැය සාදන්න.",
+      "description": "විවිධ වර්ගවල වියදම් නිරීක්ෂණය කිරීමට සහ ඔබේ මූල්‍ය ඉලක්ක සපුරා ගැනීමට අයවැය සාදන්න.",
       "heading": "අයවැය සාදා නැත",
       "primaryCta": "ඔබේ පළමු අයවැය සාදන්න"
     },
     "categories": {
-      "description": "පෙරනිමි ඒවාට ඔබ්බෙන් ඔබේ ගනුදෙනු සංවිධානය කිරීමට අභිරුචි වර්ග සාදන්න.",
+      "description": "පෙරනිමි ඒවාට ඉහළින් ඔබේ ගනුදෙනු සංවිධානය කිරීමට අභිරුචි වර්ග සාදන්න.",
       "heading": "අභිරුචි වර්ග නැත",
-      "primaryCta": "වර්ගයක් එකතු කරන්න"
+      "primaryCta": "වර්ගය එක් කරන්න"
     },
     "dashboard": {
-      "description": "ඔබේ මූල්‍ය දළ විసරුව දැකීමට ඔබේ බැංකු ගනුදෙනු ආනයනය කිරීමෙන් හෝ ගිණුම් අතින් එකතු කිරීමෙන් ආරම්භ කරන්න.",
+      "description": "ඔබේ මූල්‍ය දළ විసුන බැලීමට ඔබේ බැංකු ගනුදෙනු ආනයනය කිරීම හෝ ගිණුම් අතින් එක් කිරීම මගින් ආරම්භ කරන්න.",
       "heading": "ඔබේ අයවැය යෙදුමට සාදරයෙන් පිළිගනිමු!",
-      "primaryCta": "CSV ආනයනය කරන්න",
-      "secondaryCta": "ගනුදෙනුවක් එකතු කරන්න"
+      "primaryCta": "CSV ආනයනය",
+      "secondaryCta": "ගනුදෙනුව එක් කරන්න"
     },
     "futurePlans": {
       "description": "නිවසක් මිලදී ගැනීම, අධ්‍යාපනය සඳහා ඉතිරි කිරීම, හෝ නිවාඩුවක් සැලසුම් කිරීම වැනි මූල්‍ය ඉලක්ක සකසන්න.",
@@ -1825,31 +1825,31 @@
       "primaryCta": "ඉලක්කයක් සාදන්න"
     },
     "investments": {
-      "description": "කළඹ කාර්ය සාධනය සහ ශුද්ධ වටිනාකම නිරීක්ෂණය කිරීමට ඔබේ ආයෝජන ගිණුම් සහ ආයෝජන නිරීක්ෂණය කරන්න.",
+      "description": "කලාප සමුදාය කාර්යසාධනය සහ ශුද්ධ වටිනාකම නිරීක්ෂණය කිරීමට ඔබේ ආයෝජන ගිණුම් සහ කොටස් නිරීක්ෂණය කරන්න.",
       "heading": "ආයෝජන නිරීක්ෂණය කර නැත",
-      "primaryCta": "ආයෝජන ගිණුමක් එකතු කරන්න"
+      "primaryCta": "ආයෝජන ගිණුම එක් කරන්න"
     },
     "loans": {
-      "description": "ණය ගෙවීමේ ප්‍රගතිය දෘශ්‍යමාන කිරීමට සහ ගෙවීම් සැලසුම් කිරීමට ඔබේ ණය, උකස් සහ අයිතිකම් නිරීක්ෂණය කරන්න.",
+      "description": "ගෙවීම් ප්‍රගතිය දෘශ්‍යමාන කිරීමට සහ ගෙවීම් සැලසුම් කිරීමට ඔබේ ණය, නිවාස ණය, සහ වගකීම් නිරීක්ෂණය කරන්න.",
       "heading": "ණය නිරීක්ෂණය කර නැත",
-      "primaryCta": "ඔබේ පළමු ණය එකතු කරන්න"
+      "primaryCta": "ඔබේ පළමු ණය එක් කරන්න"
     },
     "reports": {
-      "description": "ඔබේ වියදම් රටා සහ ප්‍රවණතා පිළිබඳ තීක්ෂ්ණ වාර්තා ජනනය කිරීමට ගනුදෙනු සහ අයවැය එකතු කරන්න.",
+      "description": "ඔබේ වියදම් රටා සහ ප්‍රවණතා පිළිබඳ තීක්ෂණ වාර්තා ජනනය කිරීමට ගනුදෙනු සහ අයවැය එක් කරන්න.",
       "heading": "වාර්තා කිරීමට දත්ත නැත",
-      "primaryCta": "ගනුදෙනු එකතු කරන්න",
-      "secondaryCta": "CSV ආනයනය කරන්න"
+      "primaryCta": "ගනුදෙනු එක් කරන්න",
+      "secondaryCta": "CSV ආනයනය"
     },
     "retirement": {
-      "description": "ගිණුම් නිරීක්ෂණය කිරීමෙන්, අවශ්‍යතා ඇස්තමේන්තු කිරීමෙන්, සහ ඔබේ විශ්‍රාම කාලසටහන දෘශ්‍යමාන කිරීමෙන් විශ්‍රාමය සැලසුම් කරන්න.",
+      "description": "ගිණුම් නිරීක්ෂණය කිරීමෙන්, අවශ්‍යතා ඇස්තමේන්තු කිරීමෙන්, සහ ඔබේ විශ්‍රාම කාල රේඛාව දෘශ්‍යමාන කිරීමෙන් විශ්‍රාමය සඳහා සැලසුම් කරන්න.",
       "heading": "විශ්‍රාම සැලසුම් නැත",
       "primaryCta": "සැලසුම් කිරීම ආරම්භ කරන්න"
     },
     "transactions": {
-      "description": "ඔබේ පළමු ගනුදෙනුව එකතු කිරීමෙන් වියදම් නිරීක්ෂණය ආරම්භ කරන්න. අතින් එකතු කිරීමට හෝ CSV ගොනුවකින් ආනයනය කිරීමට හැකියි.",
+      "description": "ඔබේ පළමු ගනුදෙනුව එක් කිරීමෙන් වියදම් නිරීක්ෂණය ආරම්භ කරන්න. ඔබට අතින් එක් කිරීම හෝ CSV ගොනුවකින් ආනයනය කිරීම කළ හැක.",
       "heading": "තවම ගනුදෙනු නැත",
-      "primaryCta": "ගනුදෙනුවක් එකතු කරන්න",
-      "secondaryCta": "CSV ආනයනය කරන්න"
+      "primaryCta": "ගනුදෙනුව එක් කරන්න",
+      "secondaryCta": "CSV ආනයනය"
     }
   },
   "errorRecovery": {
@@ -2050,12 +2050,12 @@
   "footer": {
     "copyright": "© {year} {brandName}",
     "links": {
-      "login": "පුරන්න",
-      "settings": "සැකසුම්",
-      "signup": "සැරසිලි ආරම්භ කරන්න",
-      "upgrade": "යාවත්කාලීන කරන්න"
+      "login": "ඇතුල් වන්න",
+      "settings": "සැකසීම්",
+      "signup": "අත්හදා බැලීම ආරම්භ කරන්න",
+      "upgrade": "උත්ශ්‍රේණි කරන්න"
     },
-    "tagline": "එකවර යාවත්කාලීන කිරීමක් සමඟ ප්‍රිමියම් බජට්."
+    "tagline": "එක්-වාර උත්ශ්‍රේණිකරණයක් සහිත උසස් අයවැය කළමනාකරණය."
   },
   "fridayReview": {
     "back": "Back",
@@ -2100,16 +2100,16 @@
   "healthScore": {
     "ariaLabel": "මූල්‍ය සෞඛ්‍ය ලකුණු: 100 න් {score}. {interpretation}",
     "emptyState": {
-      "line1": "ඔබේ මූල්‍ය සෞඛ්‍ය ලකුණු දැකීමට",
-      "line2": "ගනුදෙනු එකතු කරන්න"
+      "line1": "ඔබේ බැලීමට ගනුදෙනු එක් කරන්න",
+      "line2": "මූල්‍ය සෞඛ්‍ය ලකුණු"
     },
     "grade": "ශ්‍රේණිය: {grade}",
     "missingFactors": "{count, plural, =1 {සාධක 1ක් අඩුයි} other {සාධක #ක් අඩුයි}}",
     "title": "මූල්‍ය සෞඛ්‍යය",
     "history": {
       "title": "ලකුණු ඉතිහාසය",
-      "monthsOfData": "දත්ත {count, plural, =1 {මාසයක} other {මාස {count}ක}}",
-      "emptyTitle": "දත්ත රැස් වන විට ඔබේ ලකුණු ඉතිහාසය මෙහි දිස්වනු ඇත",
+      "monthsOfData": "දත්ත {count, plural, =1 {මාස 1ක්} other {මාස #ක්}}",
+      "emptyTitle": "දත්ත එකතු වන විට ඔබේ ලකුණු ඉතිහාසය මෙහි දිස්වනු ඇත",
       "emptySubtitle": "ඊළඟ මාසයේ නැවත පරීක්ෂා කරන්න!",
       "legendScore": "ලකුණු",
       "legendTrend": "ප්‍රවණතාව",
@@ -3291,34 +3291,34 @@
       "startTour": "සංචාරය ආරම්භ කරන්න"
     },
     "quickTip": "💡 වේගවත් උපදෙස්",
-    "skipTour": "සංචාරය අතින්",
-    "stepCounter": "පියවර {current}/{total}",
+    "skipTour": "සංචාරය මඟ හරින්න",
+    "stepCounter": "{total} න් පියවර {current}",
     "steps": {
       "budgets": {
-        "description": "විවිධ වියදම් ප්‍රවර්ග සඳහා බජට් සාදන්න. මාසය පුරා ඔබේ ප්‍රගතිය අනුගමනය කරන්න සහ ඔබේ සීමා ආසන්නයේදී අනතුරු ඇඟවීම් ලබා ගන්න.",
-        "title": "🎯 ඔබේ බජට් සකස් කරන්න"
+        "description": "ඔබේ මූල්‍ය සීමා නිර්වචනය කරන්න. අභිරුචි සීමා සකසා මාවතේ පරිපූර්ණව රැඳී සිටීමට තත්‍ය කාලීන ඇඟවීම් ලබා ගන්න.",
+        "title": "නිරවද්‍ය අයවැය කිරීම"
       },
       "categorize": {
-        "description": "ගනුදෙනු ප්‍රවර්ග සමාලෝචනය කරන්න සහ සකස් කරන්න. අපගේ ප්‍රවර්ගීකරණය ඔබේ නිවැරදි කිරීම් වලින් ඉගෙන ගනී. එකවර ගනුදෙනු ප්‍රවර්ගීකරණය කිරීමට බහු ක්‍රියා භාවිතා කරන්න!",
-        "title": "🏷️ ප්‍රවර්ගීකරණය සහ සංවිධානය කරන්න"
+        "description": "අපගේ AI ඔබේ පුරුදුවලින් ඉගෙන ගනී. එකවරක් වර්ගීකරණය කරන්න, අනාගතයේ සමාන ගනුදෙනු ස්වයංක්‍රීයව හසුරුවනු ඇත.",
+        "title": "බුද්ධිමත් වර්ගීකරණය"
       },
       "import": {
-        "description": "CSV ගොනුවකින් ඔබේ බැංකු ගනුදෙනු ආනයනය කිරීමෙන් ආරම්භ කරන්න. අපි BMO, Home Trust සහ අනෙකුත් බැංකු බොහෝ දෙනෙකුට සහය දක්වමු. යෙදුම ඔබේ ගනුදෙනු ස්වයංක්‍රීයව ප්‍රවර්ගීකරණය කරනු ඇත!",
-        "title": "📥 ඔබේ ගනුදෙනු ආනයනය කරන්න"
+        "description": "ඔබේ ගනුදෙනු ඉතිහාසය සුමට ලෙස ගෙන එන්න. BMO සහ Home Trust ඇතුළු ප්‍රධාන බැංකුවලට බුද්ධිමත් ස්වයං-හඳුනාගැනීම සමඟ සහාය වනු ඇත.",
+        "title": "පහසු දත්ත ආනයනය"
       },
       "reports": {
-        "description": "ඔබේ වියදම් රටාවන් දැක්කාම, ඔබේ නිවැරදි වටිනාකම අනුගමනය කරන්න, සහ තොරතුරු මූල්‍ය තීරණ ගන්න. ඔබේ පුවරුව සෑම ගනුදෙනුවකින්ම ස්වයංක්‍රීයව යාවත්කාලීන වේ!",
-        "title": "📊 වාර්තා සහ දෘෂ්ටිකෝණ බලන්න"
+        "description": "ඔබේ දත්තවල බලය අගුළු හරින්න. ප්‍රවණතා දෘශ්‍යමාන කරන්න, ශුද්ධ වටිනාකම නිරීක්ෂණය කරන්න, සහ විස්තීර්ණ විශ්ලේෂණ මගින් තීරණ ගන්න.",
+        "title": "ගැඹුරු තීක්ෂ්ණ බව"
       },
       "welcome": {
-        "description": "ඔබේ ගෙදර මූල්‍ය කළමනාකරණය ආරම්භ කිරීමට උදව් කිරීමට වේගවත් සංචාරයක් ගන්න. මෙය දිගු නොවේ!",
-        "title": "👋 බජට් යෙදුමට සාදරයෙන් පිළිගනිමු!"
+        "description": "ඔබේ ධනය කළමනාකරණය කිරීමේ වඩා දක්ෂ ක්‍රමයක් අත්විඳින්න. ඔබේ නව මූල්‍ය විධාන මධ්‍යස්ථානය හරහා කෙටි ගමනක් යමු.",
+        "title": "මූල්‍ය පැහැදිලි බවට සාදරයෙන් පිළිගනිමු"
       }
     },
     "tips": {
-      "budgets": "සත්‍ය බජට් සකස් කරන්න, අපි ඔබට අතිරික්ත වියදම් කිරීමට යනවා නම් ඔබට අනතුරු ඇඟවීම් ලබා දෙනු ඇත.",
-      "categorize": "වේගවත් ප්‍රවර්ගීකරණය බොත්තම භාවිතා කරන්න හෝ බහු ගනුදෙනු තෝරා බහු ප්‍රවර්ගීකරණය කරන්න.",
-      "import": "ඔබේ CSV ගොනුව ඇදීම හෝ සොයා ගැනීමට ක්ලික් කරන්න. අපි BMO සහ Home Trust ආකාර හඳුනා ගන්නෙමු!"
+      "budgets": "ඔබේ වියදම් වේගය තත්‍ය කාලීනව දෘශ්‍යමාන කිරීමට මාසික සීමා සකසන්න.",
+      "categorize": "වර්ග සමූහ ලෙස යෙදීමට බහු ගනුදෙනු තෝරන්න—කාර්යක්ෂමතාව ප්‍රධානයි.",
+      "import": "සරලවම ඔබේ CSV ගොනුව ඇදගෙන දමන්න. ආකෘතිකරණය ස්වයංක්‍රීයව හසුරුවනු ඇත."
     }
   },
   "onboardingPage": {
@@ -3716,11 +3716,11 @@
   },
   "predictiveSpendingChart": {
     "legend": {
-      "actual": "සත්‍ය",
+      "actual": "සැබෑ",
       "confidenceInterval": "විශ්වාස පරතරය",
-      "predicted": "පුරෝකථනය"
+      "predicted": "පුරෝකථිත"
     },
-    "noData": "පුරෝකථන සඳහා දත්ත නැත",
+    "noData": "පුරෝකථන සඳහා දත්ත නොමැත",
     "predictionUnavailable": "පුරෝකථනය ලබා ගත නොහැක",
     "stats": {
       "avgConfidence": "සාමාන්‍ය විශ්වාසය",
@@ -3730,7 +3730,7 @@
     "table": {
       "confidence": "විශ්වාසය",
       "month": "මාසය",
-      "predicted": "පුරෝකථනය",
+      "predicted": "පුරෝකථිත",
       "range": "පරාසය",
       "title": "මාසික පුරෝකථන"
     },
@@ -3860,18 +3860,18 @@
   },
   "pwaInstall": {
     "buttons": {
-      "install": "ස්ථාපනය කරන්න",
-      "notNow": "දැන් නොවේ"
+      "install": "ස්ථාපනය",
+      "notNow": "දැන් නැත"
     },
     "close": "ස්ථාපන විමසුම වසන්න",
-    "description": "ඉක්මන් ප්‍රවේශය සහ නොබැඳි භාවිතය සඳහා ඔබේ මුල් තිරයට එකතු කරන්න",
+    "description": "ඉක්මන් ප්‍රවේශය සහ නොබැඳි භාවිතය සඳහා ඔබේ මුල් තිරයට එක් කරන්න",
     "features": {
       "fastSecure": "වේගවත් සහ ආරක්ෂිත",
       "noAppStore": "යෙදුම් ගබඩාවක් අවශ්‍ය නැත",
       "offline": "නොබැඳිව ක්‍රියා කරයි"
     },
-    "iosAddToHome": "\"මුල් තිරයට එකතු කරන්න\"",
-    "iosForFullExperience": "වේගවත් පූරණය සමඟ සම්පූර්ණ යෙදුම් අත්දැකීම සඳහා.",
+    "iosAddToHome": "\"මුල් තිරයට එක් කරන්න\"",
+    "iosForFullExperience": "වේගවත් පූරණය සහිත සම්පූර්ණ යෙදුම් අත්දැකීම සඳහා.",
     "iosTap": "තට්ටු කරන්න",
     "iosThen": "ඉන්පසු",
     "iosTitle": "අයවැය යෙදුම ස්ථාපනය කරන්න",
@@ -4153,39 +4153,39 @@
   "sidebar": {
     "actions": {
       "backToHome": "මුල් පිටුවට ආපසු",
-      "collapseSidebar": "පැත්තේ කුඩා කරන්න",
-      "expandSidebar": "පැත්තේ විශාල කරන්න",
-      "importCsv": "CSV ආනයන කරන්න",
-      "settings": "සැකසුම්",
+      "collapseSidebar": "පැති තීරුව හකුළන්න",
+      "expandSidebar": "පැති තීරුව විශාල කරන්න",
+      "importCsv": "CSV ආනයනය",
+      "settings": "සැකසීම්",
       "showAllItems": "සියලු අයිතම පෙන්වන්න",
-      "showLess": "අඩු කරන්න"
+      "showLess": "අඩුවෙන් පෙන්වන්න"
     },
-    "appSubtitle": "ප්‍රිමියම් මූල්‍ය",
-    "appTitle": "බජට් යෙදුම",
+    "appSubtitle": "උසස් මූල්‍ය",
+    "appTitle": "අයවැය යෙදුම",
     "navigation": {
       "accounts": "ගිණුම්",
-      "budgets": "බජට්",
+      "budgets": "අයවැය",
       "calculators": "ගණක",
-      "categories": "ප්‍රවර්ග",
-      "dashboard": "ඩැෂ්බෝඩ්",
-      "events": "සිද්ධීන්",
+      "categories": "වර්ග",
+      "dashboard": "පුවරුව",
+      "events": "උත්සව",
       "futurePlans": "අනාගත සැලසුම්",
-      "import": "CSV ආයාත කරන්න",
+      "import": "CSV ආනයනය",
       "investments": "ආයෝජන",
       "loans": "ණය",
       "netWorth": "ශුද්ධ වටිනාකම",
-      "properties": "අයිතිවාසිකම්",
-      "reminders": "අමතක නොවන දේ",
+      "properties": "දේපළ",
+      "reminders": "මතක් කිරීම්",
       "reports": "වාර්තා",
-      "retirement": "අවශ්‍යතා",
-      "scanReceipt": "පිටුපස ස්කෑන් කරන්න",
-      "scenarios": "කියවීම්",
-      "settings": "සැකසුම්",
-      "subscriptions": "අභිමාන",
+      "retirement": "විශ්‍රාමය",
+      "scanReceipt": "රිසිට්පත පරිලෝකනය",
+      "scenarios": "මොකද-නම්",
+      "settings": "සැකසීම්",
+      "subscriptions": "දායකත්ව",
       "transactions": "ගනුදෙනු"
     },
     "search": "සොයන්න...",
-    "shortcuts": "කෙටි මාර්ග"
+    "shortcuts": "කෙටිමං"
   },
   "simplefinConnect": {
     "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
@@ -4351,16 +4351,16 @@
     "warningsLabel": "Warnings:"
   },
   "spendingTrendChart": {
-    "forecastFooter": "පසුගිය මාස {months} ක රේඛීය ප්‍රතිගමනය මත පදනම් වූ පුරෝකථනය",
+    "forecastFooter": "පසුගිය මාස {months} හි රේඛීය ප්‍රතිගමනය මත පදනම් වූ පුරෝකථනය",
     "legend": {
-      "actualSpending": "සත්‍ය වියදම්",
-      "projected": "පුරෝකථනය"
+      "actualSpending": "සැබෑ වියදම්",
+      "projected": "පුරෝකථිත"
     },
-    "notEnoughData": "ප්‍රවණතා ජනනය කිරීමට ප්‍රමාණවත් දත්ත නැත. අවම වශයෙන් මාස 2 ක ගනුදෙනු එකතු කරන්න.",
+    "notEnoughData": "ප්‍රවණතා ජනනය කිරීමට ප්‍රමාණවත් දත්ත නැත. අවම වශයෙන් මාස 2ක ගනුදෙනු එක් කරන්න.",
     "stats": {
       "avgMonthly": "සාමාන්‍ය මාසික",
       "lastMonth": "පසුගිය මාසය",
-      "projected": "පුරෝකථනය"
+      "projected": "පුරෝකථිත"
     },
     "title": "වියදම් ප්‍රවණතා සහ පුරෝකථනය"
   },
@@ -4711,8 +4711,8 @@
     "syncing": "Syncing..."
   },
   "tooltip": {
-    "ariaLabel": "වැඩි විස්තර",
-    "learnMore": "වැඩි විස්තර →"
+    "ariaLabel": "වැඩි තොරතුරු",
+    "learnMore": "තව දැනගන්න →"
   },
   "trainMl": {
     "confidence": "Confidence",
@@ -5055,23 +5055,23 @@
   },
   "widget": {
     "accountBalances": {
-      "description": "ඔබේ සියලු ගිණුම් වල වර්තමාන ශේෂ",
+      "description": "ඔබේ සියලු ගිණුම්වල වත්මන් ශේෂ",
       "title": "ගිණුම් ශේෂ"
     },
     "budgetProgress": {
-      "description": "ඔබේ බජට් ඉලක්ක වලට එරෙහිව ඔබ කොහොමද යන්න අනුගමනය කරන්න",
-      "title": "බජට් ප්‍රගතිය"
+      "description": "ඔබේ අයවැය ඉලක්කවලට එරෙහිව ප්‍රගතිය නිරීක්ෂණය කරන්න",
+      "title": "අයවැය ප්‍රගතිය"
     },
     "eventBudget": {
       "description": "උත්සව සහ ව්‍යාපෘති සඳහා වියදම් නිරීක්ෂණය කරන්න",
       "title": "උත්සව අයවැය"
     },
     "incomeVsExpenses": {
-      "description": "ඔබේ ආදායම් සහ වියදම් කාලය තුළ සාපේක්ෂ කරන්න",
-      "title": "ආදායම් සහ වියදම්"
+      "description": "කාලය හරහා ඔබේ ඉපැයීම් සහ වියදම් සංසන්දනය කරන්න",
+      "title": "ආදායම එදිරිව වියදම්"
     },
     "monthlyTrends": {
-      "description": "මාසයකින් මාසයකට ඔබේ මූල්‍ය රටාවන් දැක්කාම",
+      "description": "මාසයෙන් මාසය ඔබේ මූල්‍ය රටා දෘශ්‍යමාන කරන්න",
       "title": "මාසික ප්‍රවණතා"
     },
     "netWorthMini": {
@@ -5079,27 +5079,27 @@
       "title": "ශුද්ධ වටිනාකම"
     },
     "recentTransactions": {
-      "description": "ඔබේ අලුත්ම මූල්‍ය ක්‍රියාකාරකම් පිළිබඳ වේගවත් දෘශ්‍යය",
-      "title": "අලුත්ම ගනුදෙනු"
+      "description": "ඔබේ නවතම මූල්‍ය ක්‍රියාකාරකම් ඉක්මන් දසුන",
+      "title": "මෑත ගනුදෙනු"
     },
     "safeToSpend": {
-      "description": "වර්ගය අනුව ආරක්ෂිතව වියදම් කළ හැකි මුදල බලන්න",
-      "title": "වියදම් කිරීමට ආරක්ෂිත"
+      "description": "වර්ගය අනුව ඔබට ආරක්ෂිතව කොපමණ වියදම් කළ හැකිදැයි බලන්න",
+      "title": "වියදම් කිරීමට ආරක්ෂිතයි"
     },
     "spendingByCategory": {
-      "description": "ඔබේ මුදල් කොතැනට යනවාද කියා දැක්කාම",
-      "title": "ප්‍රවර්ගය අනුව වියදම්"
+      "description": "ඔබේ මුදල් යන ස්ථාන දෘශ්‍ය විස්තර මගින් බලන්න",
+      "title": "වර්ගය අනුව වියදම්"
     },
     "streaks": {
-      "description": "ඔබේ සහභාගීත්ව පෙළපත් සහ ජයග්‍රහණ නිරීක්ෂණය කරන්න",
-      "title": "පෙළපත් සහ ලාංඡන"
+      "description": "ඔබේ සහභාගිත්ව ධාරා සහ ජයග්‍රහණ නිරීක්ෂණය කරන්න",
+      "title": "ධාරා සහ නාම පුවරු"
     },
     "upcomingBills": {
-      "description": "බිල්පත් මතක තබා ගැනීමෙන් කිසිදු ගෙවීමක් අහිමි නොවන්න",
-      "title": "ආපසු පැමිණෙන බිල්පත්"
+      "description": "බිල්පත් මතක් කිරීම් මගින් කිසිම ගෙවීමක් අතපසු නොකරන්න",
+      "title": "ඉදිරි බිල්පත්"
     },
     "weeklyRecap": {
-      "description": "ඔබේ සතිපතා වියදම් රටා සාරාංශය",
+      "description": "ඔබේ සතිපතා වියදම් රටාවල සාරාංශය",
       "title": "සතිපතා සාරාංශය"
     }
   },

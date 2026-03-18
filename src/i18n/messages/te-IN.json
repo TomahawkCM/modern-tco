@@ -1,65 +1,65 @@
 {
   "accessibilitySettings": {
     "fontSize": {
-      "default": "Default",
-      "description": "Adjust the base text size for better readability",
-      "extraLarge": "Extra Large",
-      "large": "Large",
-      "title": "Font Size"
+      "default": "డిఫాల్ట్",
+      "description": "మెరుగైన చదవడానికి బేస్ టెక్స్ట్ పరిమాణం సర్దుబాటు చేయండి",
+      "extraLarge": "చాలా పెద్ద",
+      "large": "పెద్ద",
+      "title": "ఫాంట్ పరిమాణం"
     },
     "infoBox": {
-      "savedAutomatically": "Settings are saved automatically and persist across sessions",
-      "seniorsOptimization": "Seniors Mode provides one-click accessibility optimization",
-      "storedLocally": "Your preferences are stored locally and never sent to servers",
-      "syncAcrossTabs": "Changes sync across all open tabs in real-time",
-      "title": "About Accessibility Settings"
+      "savedAutomatically": "సెట్టింగ్‌లు స్వయంచాలకంగా సేవ్ అవుతాయి మరియు సెషన్‌ల మధ్య ఉంటాయి",
+      "seniorsOptimization": "సీనియర్స్ మోడ్ ఒక-క్లిక్ యాక్సెసిబిలిటీ ఆప్టిమైజేషన్ అందిస్తుంది",
+      "storedLocally": "మీ ప్రాధాన్యతలు స్థానికంగా నిల్వ చేయబడతాయి మరియు సర్వర్‌లకు ఎప్పుడూ పంపబడవు",
+      "syncAcrossTabs": "మార్పులు అన్ని తెరిచిన ట్యాబ్‌లలో రియల్-టైమ్‌లో సింక్ అవుతాయి",
+      "title": "యాక్సెసిబిలిటీ సెట్టింగ్‌ల గురించి"
     },
     "presets": {
-      "full": "Full",
-      "fullDesc": "Maximum accessibility",
-      "mild": "Mild",
-      "mildDesc": "Slightly enhanced",
-      "moderate": "Moderate",
-      "moderateDesc": "Recommended for most",
-      "off": "Off",
-      "offDesc": "Standard interface",
-      "title": "Quick Presets:"
+      "full": "పూర్తి",
+      "fullDesc": "గరిష్ట యాక్సెసిబిలిటీ",
+      "mild": "తేలిక",
+      "mildDesc": "కొంచెం మెరుగైన",
+      "moderate": "మధ్యస్థం",
+      "moderateDesc": "చాలా మందికి సిఫార్సు",
+      "off": "ఆఫ్",
+      "offDesc": "ప్రామాణిక ఇంటర్‌ఫేస్",
+      "title": "త్వరిత ప్రీసెట్‌లు:"
     },
     "reducedMotion": {
-      "description": "Minimize animations and transitions for a calmer experience. Helpful for users with vestibular disorders or motion sensitivity.",
-      "title": "Reduced Motion",
-      "toggleLabel": "Toggle reduced motion mode"
+      "description": "ప్రశాంతమైన అనుభవం కోసం యానిమేషన్‌లు మరియు ట్రాన్సిషన్‌లను తగ్గించండి.",
+      "title": "తగ్గించిన కదలిక",
+      "toggleLabel": "తగ్గించిన కదలిక మోడ్ టోగుల్ చేయండి"
     },
     "seniorsMode": {
-      "description": "One-click accessibility enhancement with larger text, bigger touch targets, and simplified interface",
-      "title": "Seniors Mode"
+      "description": "పెద్ద టెక్స్ట్, పెద్ద టచ్ లక్ష్యాలు మరియు సరళీకృత ఇంటర్‌ఫేస్‌తో ఒక-క్లిక్ యాక్సెసిబిలిటీ మెరుగుదల",
+      "title": "సీనియర్స్ మోడ్"
     },
     "themeMode": {
-      "auto": "Auto",
-      "autoDesc": "Match system",
-      "dark": "Dark",
-      "darkDesc": "Easy on eyes",
-      "description": "Choose your preferred color scheme for the budget app",
-      "highContrast": "High Contrast",
-      "highContrastDesc": "Maximum visibility",
-      "light": "Light",
-      "lightDesc": "Bright and clear",
-      "title": "Theme Mode"
+      "auto": "ఆటో",
+      "autoDesc": "సిస్టమ్‌తో సరిపోలు",
+      "dark": "డార్క్",
+      "darkDesc": "కళ్ళకు హాయి",
+      "description": "బడ్జెట్ యాప్ కోసం మీకు ఇష్టమైన రంగు పథకం ఎంచుకోండి",
+      "highContrast": "అధిక కాంట్రాస్ట్",
+      "highContrastDesc": "గరిష్ట దృశ్యమానత",
+      "light": "లైట్",
+      "lightDesc": "ప్రకాశవంతమైన మరియు స్పష్టమైన",
+      "title": "థీమ్ మోడ్"
     }
   },
   "accessibilityToggle": {
-    "featuresActive": "Accessibility features active",
-    "highContrast": "High Contrast",
-    "highContrastDescription": "Enhanced color contrast",
-    "largeTextMode": "Large Text Mode",
-    "largeTextModeDescription": "Bigger text & touch targets",
-    "reduceMotion": "Reduce Motion",
-    "reduceMotionDescription": "Minimize animations",
-    "sizeLarge": "Large",
-    "sizeNormal": "Normal",
-    "sizeXLarge": "X-Large",
-    "textSize": "Text Size",
-    "title": "Accessibility"
+    "featuresActive": "యాక్సెసిబిలిటీ ఫీచర్లు యాక్టివ్",
+    "highContrast": "అధిక కాంట్రాస్ట్",
+    "highContrastDescription": "మెరుగైన రంగు కాంట్రాస్ట్",
+    "largeTextMode": "పెద్ద టెక్స్ట్ మోడ్",
+    "largeTextModeDescription": "పెద్ద టెక్స్ట్ & టచ్ లక్ష్యాలు",
+    "reduceMotion": "కదలిక తగ్గించు",
+    "reduceMotionDescription": "యానిమేషన్‌లను తగ్గించు",
+    "sizeLarge": "పెద్ద",
+    "sizeNormal": "సాధారణం",
+    "sizeXLarge": "చాలా-పెద్ద",
+    "textSize": "టెక్స్ట్ పరిమాణం",
+    "title": "యాక్సెసిబిలిటీ"
   },
   "accessibleChart": {
     "buttons": {
@@ -225,40 +225,40 @@
     "whenColumn": "ఎప్పుడు"
   },
   "aiColumnMapper": {
-    "analyzing": "Analyzing CSV structure with AI...",
+    "analyzing": "AI తో CSV నిర్మాణం విశ్లేషిస్తోంది...",
     "buttons": {
-      "apply": "Apply Mappings & Import",
-      "cancel": "Cancel"
+      "apply": "మ్యాపింగ్‌లు వర్తింపజేసి ఇంపోర్ట్ చేయండి",
+      "cancel": "రద్దు చేయండి"
     },
-    "closeModal": "Close modal",
-    "columnMappings": "Column Mappings",
+    "closeModal": "మోడల్ మూసివేయండి",
+    "columnMappings": "కాలమ్ మ్యాపింగ్‌లు",
     "columnTypes": {
-      "amount": "Amount",
-      "balance": "Balance",
-      "credit": "Credit",
-      "date": "Date",
-      "debit": "Debit",
-      "description": "Description",
-      "ignore": "Ignore"
+      "amount": "మొత్తం",
+      "balance": "బ్యాలన్స్",
+      "credit": "క్రెడిట్",
+      "date": "తేదీ",
+      "debit": "డెబిట్",
+      "description": "వివరణ",
+      "ignore": "విస్మరించు"
     },
     "confidence": {
-      "analyzed": "AI analyzed {columnCount} columns and {rowCount} sample rows",
-      "title": "Detection Confidence"
+      "analyzed": "AI {columnCount} కాలమ్‌లు మరియు {rowCount} నమూనా అడ్డు వరుసలను విశ్లేషించింది",
+      "title": "గుర్తింపు విశ్వాసం"
     },
     "preview": {
-      "amount": "Amount",
-      "date": "Date",
-      "description": "Description",
-      "title": "Transaction Preview"
+      "amount": "మొత్తం",
+      "date": "తేదీ",
+      "description": "వివరణ",
+      "title": "లావాదేవీ ప్రివ్యూ"
     },
-    "samples": "Samples:",
+    "samples": "నమూనాలు:",
     "saveConfig": {
-      "hint": "Next time you import from this bank, mappings will be automatic",
-      "label": "Save this bank configuration for future imports",
-      "placeholder": "Enter bank name (e.g., My Local Credit Union)"
+      "hint": "తదుపరి సారి మీరు ఈ బ్యాంకు నుండి ఇంపోర్ట్ చేసినప్పుడు, మ్యాపింగ్‌లు స్వయంచాలకంగా ఉంటాయి",
+      "label": "భవిష్యత్తు ఇంపోర్ట్‌ల కోసం ఈ బ్యాంకు కాన్ఫిగరేషన్ సేవ్ చేయండి",
+      "placeholder": "బ్యాంకు పేరు నమోదు చేయండి (ఉదా., మై లోకల్ క్రెడిట్ యూనియన్)"
     },
-    "subtitle": "Review AI-detected columns and adjust if needed",
-    "title": "AI Column Mapping Wizard"
+    "subtitle": "AI గుర్తించిన కాలమ్‌లను సమీక్షించి అవసరమైతే సర్దుబాటు చేయండి",
+    "title": "AI కాలమ్ మ్యాపింగ్ విజార్డ్"
   },
   "amortizationChart": {
     "balanceDescription": "Your balance decreases over time as you make payments",
@@ -1351,59 +1351,59 @@
   },
   "chatbotHelp": {
     "tabs": {
-      "actions": "Actions",
-      "budget": "Budget",
-      "income": "Income",
-      "spending": "Spending",
-      "trends": "Trends"
+      "actions": "చర్యలు",
+      "budget": "బడ్జెట్",
+      "income": "ఆదాయం",
+      "spending": "ఖర్చు",
+      "trends": "ధోరణులు"
     }
   },
   "chatbotOptIn": {
     "buttons": {
-      "decline": "No Thanks",
-      "enable": "Enable Chatbot"
+      "decline": "వద్దు",
+      "enable": "చాట్‌బాట్ ఎనేబుల్ చేయండి"
     },
     "capabilities": {
-      "actions": "Optionally perform actions like adding transactions or creating budgets",
-      "answer": "Answer questions about your transactions, budgets, and spending patterns",
-      "insights": "Provide insights and recommendations based on your data",
-      "search": "Search your financial data using natural language",
-      "title": "What the Chatbot Can Do"
+      "actions": "లావాదేవీలు చేర్చడం లేదా బడ్జెట్లు సృష్టించడం వంటి చర్యలు ఐచ్ఛికంగా చేయడం",
+      "answer": "మీ లావాదేవీలు, బడ్జెట్లు మరియు ఖర్చు నమూనాల గురించి ప్రశ్నలకు సమాధానం ఇవ్వడం",
+      "insights": "మీ డేటా ఆధారంగా అంతర్దృష్టులు మరియు సిఫార్సులు అందించడం",
+      "search": "సహజ భాషను ఉపయోగించి మీ ఆర్థిక డేటాను వెతకడం",
+      "title": "చాట్‌బాట్ ఏమి చేయగలదు"
     },
-    "closeDialog": "Close chatbot opt-in dialog",
+    "closeDialog": "చాట్‌బాట్ ఆప్ట్-ఇన్ డైలాగ్ మూసివేయండి",
     "controls": {
       "dataAccess": {
         "fullAccess": {
-          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data",
-          "title": "Full Access"
+          "description": "చాట్‌బాట్ లావాదేవీలు చేర్చడం, బడ్జెట్లు సృష్టించడం మరియు మీ డేటాలో మార్పులు చేయడం వంటి చర్యలు చేయగలదు",
+          "title": "పూర్తి యాక్సెస్"
         },
-        "label": "What can the chatbot do with your data?",
+        "label": "చాట్‌బాట్ మీ డేటాతో ఏమి చేయగలదు?",
         "readOnly": {
-          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets",
-          "title": "Read-Only (Recommended)"
+          "description": "చాట్‌బాట్ మీ డేటాను చూడగలదు మరియు ప్రశ్నలకు సమాధానం ఇవ్వగలదు, కానీ లావాదేవీలు/బడ్జెట్లను చేర్చడం, సవరించడం లేదా తొలగించడం చేయలేదు",
+          "title": "చదవడం మాత్రమే (సిఫార్సు)"
         }
       },
       "retention": {
-        "days30": "30 days",
-        "days7": "7 days (Recommended)",
-        "forever": "Keep forever",
-        "label": "How long should we keep your conversations?",
-        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
+        "days30": "30 రోజులు",
+        "days7": "7 రోజులు (సిఫార్సు)",
+        "forever": "ఎల్లప్పుడూ ఉంచండి",
+        "label": "మీ సంభాషణలను ఎంతకాలం ఉంచాలి?",
+        "note": "సంభాషణలు మీ బ్రౌజర్‌లో స్థానికంగా నిల్వ చేయబడతాయి. మీరు సెట్టింగ్‌లు → గోప్యతలో ఎప్పుడైనా తొలగించవచ్చు."
       },
-      "title": "Privacy Controls"
+      "title": "గోప్యతా నియంత్రణలు"
     },
     "gdpr": {
-      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+      "notice": "<strong>మీ హక్కులు:</strong> చాట్‌బాట్‌ను ఎనేబుల్ చేయడం ద్వారా, మీరు OpenAI API ద్వారా మీ ఆర్థిక డేటాను ప్రాసెస్ చేయడానికి అంగీకరిస్తున్నారు."
     },
     "privacy": {
-      "dataSent": "Financial data is sent to the API to answer your questions",
-      "disable": "You can disable the chatbot anytime in Settings → Privacy",
-      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
-      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
-      "title": "Privacy & Data Usage"
+      "dataSent": "మీ ప్రశ్నలకు సమాధానం ఇవ్వడానికి ఆర్థిక డేటా API కు పంపబడుతుంది",
+      "disable": "మీరు సెట్టింగ్‌లు → గోప్యతలో ఎప్పుడైనా చాట్‌బాట్‌ను డిసేబుల్ చేయవచ్చు",
+      "noTraining": "OpenAI మోడల్‌లను శిక్షణ ఇవ్వడానికి API డేటాను ఉపయోగించదు (వారి విధానం ప్రకారం)",
+      "processedBy": "మీ సంభాషణలు OpenAI యొక్క GPT-4 API ద్వారా ప్రాసెస్ చేయబడతాయి",
+      "title": "గోప్యత & డేటా ఉపయోగం"
     },
-    "subtitle": "AI-powered financial assistant",
-    "title": "Enable Budget Chatbot?"
+    "subtitle": "AI-ఆధారిత ఆర్థిక సహాయకుడు",
+    "title": "బడ్జెట్ చాట్‌బాట్ ఎనేబుల్ చేయాలా?"
   },
   "columnMapper": {
     "amount": "Amount",
@@ -1441,34 +1441,34 @@
   },
   "commandPalette": {
     "commands": {
-      "addTransaction": "Add Transaction",
-      "budgets": "Budgets",
-      "categories": "Categories",
-      "darkTheme": "Dark Theme",
-      "dashboard": "Dashboard",
-      "exportData": "Export Data",
-      "futurePlans": "Future Plans",
-      "highContrastTheme": "High-Contrast Theme",
-      "importCsv": "Import CSV",
-      "investments": "Investments",
-      "lightTheme": "Light Theme",
-      "loans": "Loans",
-      "newBudget": "New Budget",
-      "reports": "Reports",
-      "retirement": "Retirement",
-      "scanReceipt": "Scan Receipt",
-      "settings": "Settings",
-      "transactions": "Transactions"
+      "addTransaction": "లావాదేవీ చేర్చండి",
+      "budgets": "బడ్జెట్లు",
+      "categories": "వర్గాలు",
+      "darkTheme": "డార్క్ థీమ్",
+      "dashboard": "డాష్‌బోర్డ్",
+      "exportData": "డేటా ఎక్స్‌పోర్ట్ చేయండి",
+      "futurePlans": "భవిష్యత్తు ప్రణాళికలు",
+      "highContrastTheme": "అధిక-కాంట్రాస్ట్ థీమ్",
+      "importCsv": "CSV ఇంపోర్ట్ చేయండి",
+      "investments": "పెట్టుబడులు",
+      "lightTheme": "లైట్ థీమ్",
+      "loans": "రుణాలు",
+      "newBudget": "కొత్త బడ్జెట్",
+      "reports": "నివేదికలు",
+      "retirement": "రిటైర్మెంట్",
+      "scanReceipt": "రశీదు స్కాన్ చేయండి",
+      "settings": "సెట్టింగ్‌లు",
+      "transactions": "లావాదేవీలు"
     },
     "groups": {
-      "appearance": "Appearance",
-      "quickActions": "Quick Actions",
-      "tools": "Tools & Settings",
-      "tracking": "Tracking & Analysis",
-      "wealth": "Wealth & Planning"
+      "appearance": "రూపం",
+      "quickActions": "త్వరిత చర్యలు",
+      "tools": "సాధనాలు & సెట్టింగ్‌లు",
+      "tracking": "ట్రాకింగ్ & విశ్లేషణ",
+      "wealth": "సంపద & ప్లానింగ్"
     },
-    "noResults": "No results found.",
-    "placeholder": "Type a command or search..."
+    "noResults": "ఫలితాలు కనుగొనబడలేదు.",
+    "placeholder": "కమాండ్ టైప్ చేయండి లేదా వెతకండి..."
   },
   "common": {
     "cancel": "రద్దు",
@@ -1662,53 +1662,53 @@
   "debtAnalysis": {
     "cards": {
       "avgRate": {
-        "subtitle": "Weighted average",
-        "title": "Avg Interest Rate"
+        "subtitle": "భారిత సగటు",
+        "title": "సగటు వడ్డీ రేటు"
       },
       "debtFreeDate": {
-        "subtitle": "Estimated payoff",
-        "title": "Debt-Free Date"
+        "subtitle": "అంచనా చెల్లింపు",
+        "title": "అప్పు-రహిత తేదీ"
       },
       "monthlyPayment": {
-        "subtitle": "Total monthly obligations",
-        "title": "Monthly Payment"
+        "subtitle": "మొత్తం నెలవారీ బాధ్యతలు",
+        "title": "నెలవారీ చెల్లింపు"
       },
       "totalDebt": {
-        "subtitle": "Across {count} active loans",
-        "title": "Total Debt"
+        "subtitle": "{count} యాక్టివ్ రుణాలలో",
+        "title": "మొత్తం అప్పు"
       }
     },
     "charts": {
       "byType": {
-        "description": "Distribution of debt across loan types",
-        "title": "Debt by Type"
+        "description": "రుణ రకాలలో అప్పు పంపిణీ",
+        "title": "రకం వారీగా అప్పు"
       },
       "projection": {
-        "description": "Expected debt reduction over the next year",
-        "expectedReduction": "Expected reduction: {amount} over 12 months",
-        "title": "12-Month Payoff Projection"
+        "description": "వచ్చే సంవత్సరంలో అంచనా అప్పు తగ్గింపు",
+        "expectedReduction": "అంచనా తగ్గింపు: 12 నెలల్లో {amount}",
+        "title": "12-నెలల చెల్లింపు అంచనా"
       }
     },
     "comparison": {
-      "description": "Side-by-side comparison of your active loans",
+      "description": "మీ యాక్టివ్ రుణాల పక్కపక్కన పోలిక",
       "headers": {
-        "balance": "Balance",
-        "interestRate": "Interest Rate",
-        "loan": "Loan",
-        "monthlyPayment": "Monthly Payment",
-        "percentOfTotal": "% of Total Debt"
+        "balance": "బ్యాలన్స్",
+        "interestRate": "వడ్డీ రేటు",
+        "loan": "రుణం",
+        "monthlyPayment": "నెలవారీ చెల్లింపు",
+        "percentOfTotal": "మొత్తం అప్పులో %"
       },
-      "title": "Loan Comparison",
-      "total": "Total"
+      "title": "రుణ పోలిక",
+      "total": "మొత్తం"
     },
     "empty": {
-      "addFirstLoan": "Add Your First Loan",
-      "description": "You don't have any active loans. Add a loan to see debt analytics.",
-      "title": "No Debt to Analyze"
+      "addFirstLoan": "మీ మొదటి రుణాన్ని చేర్చండి",
+      "description": "మీకు యాక్టివ్ రుణాలు లేవు. అప్పు విశ్లేషణ చూడటానికి రుణం చేర్చండి.",
+      "title": "విశ్లేషించడానికి అప్పు లేదు"
     },
-    "subtitle": "Comprehensive view of your loans and obligations",
-    "title": "Debt Analysis",
-    "viewAllLoans": "View All Loans"
+    "subtitle": "మీ రుణాలు మరియు బాధ్యతల సమగ్ర వీక్షణ",
+    "title": "అప్పు విశ్లేషణ",
+    "viewAllLoans": "అన్ని రుణాలు చూడండి"
   },
   "debtOverview": {
     "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
@@ -1935,41 +1935,41 @@
     }
   },
   "errorRecovery": {
-    "aiAnalysis": "AI Analysis:",
-    "closeModal": "Close modal",
+    "aiAnalysis": "AI విశ్లేషణ:",
+    "closeModal": "మోడల్ మూసివేయండి",
     "footer": {
-      "close": "Close",
-      "needHelp": "Need more help?",
-      "viewGuide": "View troubleshooting guide"
+      "close": "మూసివేయండి",
+      "needHelp": "మరింత సహాయం కావాలా?",
+      "viewGuide": "ట్రబుల్‌షూటింగ్ గైడ్ చూడండి"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
-      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
-      "optionsTitle": "Recovery Options"
+      "canRecover": "శుభవార్త! ఈ లోపం నుండి కోలుకోవడానికి {count} {count, plural, =1 {మార్గం} other {మార్గాలు}} కనుగొన్నాము.",
+      "cannotRecover": "రికవరీ సాధ్యం కాదు. మీరు మీ బ్యాంకు నుండి ఫైల్‌ను మళ్ళీ ఎక్స్‌పోర్ట్ చేయాలి లేదా వేరే ఫార్మాట్ ప్రయత్నించాలి.",
+      "optionsTitle": "రికవరీ ఎంపికలు"
     },
-    "subtitle": "Don't worry! We can help you fix this.",
+    "subtitle": "చింతించకండి! దీన్ని సరిచేయడంలో మేము సహాయం చేయగలము.",
     "suggestions": {
-      "autoFix": "AUTO-FIX",
-      "autoFixButton": "Auto-Fix",
-      "confidence": "{percent}% confidence",
-      "fixing": "Fixing...",
-      "learnMore": "Learn More",
-      "technicalDetails": "Technical Details"
+      "autoFix": "ఆటో-ఫిక్స్",
+      "autoFixButton": "ఆటో-ఫిక్స్",
+      "confidence": "{percent}% విశ్వాసం",
+      "fixing": "సరిచేస్తోంది...",
+      "learnMore": "మరింత తెలుసుకోండి",
+      "technicalDetails": "సాంకేతిక వివరాలు"
     },
     "summary": {
-      "category": "Category: {category}",
-      "title": "Error Summary"
+      "category": "వర్గం: {category}",
+      "title": "లోపం సారాంశం"
     },
     "technical": {
-      "canRecover": "Can Recover:",
-      "errorCategory": "Error Category:",
-      "no": "No",
-      "severity": "Severity:",
-      "suggestions": "Suggestions:",
-      "title": "Advanced Technical Details",
-      "yes": "Yes"
+      "canRecover": "కోలుకోగలరా:",
+      "errorCategory": "లోపం వర్గం:",
+      "no": "కాదు",
+      "severity": "తీవ్రత:",
+      "suggestions": "సూచనలు:",
+      "title": "అధునాతన సాంకేతిక వివరాలు",
+      "yes": "అవును"
     },
-    "title": "Import Failed"
+    "title": "ఇంపోర్ట్ విఫలమైంది"
   },
   "export": {
     "allDataDeleted": "మొత్తం డేటా తొలగించబడింది. పేజీ ఇప్పుడు రిఫ్రెష్ అవుతుంది.",
@@ -4036,43 +4036,43 @@
   },
   "receiptUpload": {
     "buttons": {
-      "attachReceipt": "Attach Receipt",
-      "chooseDifferent": "Choose Different",
-      "extractData": "Extract Data",
-      "extracting": "Extracting..."
+      "attachReceipt": "రశీదు జోడించు",
+      "chooseDifferent": "వేరేది ఎంచుకోండి",
+      "extractData": "డేటా వెలికితీయండి",
+      "extracting": "వెలికితీస్తోంది..."
     },
     "camera": {
-      "takePhoto": "Take Photo with Camera",
-      "useDevice": "Use your device camera to capture receipt"
+      "takePhoto": "కెమెరాతో ఫోటో తీయండి",
+      "useDevice": "రశీదు క్యాప్చర్ చేయడానికి మీ పరికర కెమెరా ఉపయోగించండి"
     },
-    "cameraInputLabel": "Camera capture input",
+    "cameraInputLabel": "కెమెరా క్యాప్చర్ ఇన్‌పుట్",
     "dropzone": {
-      "browseFiles": "or <link>browse files</link>",
-      "dragDrop": "Drag & drop receipt here",
-      "dropHere": "Drop the receipt here",
-      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+      "browseFiles": "లేదా <link>ఫైల్‌లు బ్రౌజ్ చేయండి</link>",
+      "dragDrop": "రశీదును ఇక్కడ డ్రాగ్ & డ్రాప్ చేయండి",
+      "dropHere": "రశీదును ఇక్కడ వదలండి",
+      "supportedFormats": "JPG, PNG, PDF మద్దతు • గరిష్టం {size}MB"
     },
     "errors": {
-      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
-      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
-      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
-      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
-      "rejected": "File was rejected. Please try again",
-      "tooLarge": "File is too large. Maximum size is {size}MB"
+      "couldNotExtract": "రశీదు నుండి డేటా వెలికితీయలేకపోయింది. దయచేసి మాన్యువల్‌గా నమోదు చేయండి.",
+      "extractionFailed": "డేటా వెలికితీయడం విఫలమైంది. దయచేసి మళ్ళీ ప్రయత్నించండి.",
+      "invalidType": "చెల్లని ఫైల్ రకం. JPG, PNG మరియు PDF ఫైల్‌లు మాత్రమే అనుమతించబడతాయి",
+      "ocrImagesOnly": "OCR ఇమేజ్ ఫైల్‌లకు మాత్రమే మద్దతు ఉంది (JPG, PNG)",
+      "rejected": "ఫైల్ తిరస్కరించబడింది. దయచేసి మళ్ళీ ప్రయత్నించండి",
+      "tooLarge": "ఫైల్ చాలా పెద్దది. గరిష్ట పరిమాణం {size}MB"
     },
     "extracted": {
-      "amount": "Amount:",
-      "confidence": "Confidence: {percent}%",
-      "date": "Date:",
-      "merchant": "Merchant:",
-      "title": "Data Extracted"
+      "amount": "మొత్తం:",
+      "confidence": "విశ్వాసం: {percent}%",
+      "date": "తేదీ:",
+      "merchant": "వ్యాపారి:",
+      "title": "డేటా వెలికితీయబడింది"
     },
     "pdf": {
-      "noPreview": "Preview not available",
-      "title": "PDF Receipt"
+      "noPreview": "ప్రివ్యూ అందుబాటులో లేదు",
+      "title": "PDF రశీదు"
     },
-    "receiptPreview": "Receipt preview",
-    "removeFile": "Remove file"
+    "receiptPreview": "రశీదు ప్రివ్యూ",
+    "removeFile": "ఫైల్ తొలగించు"
   },
   "recurringTransactions": {
     "confidence": "{percent}% confidence",
@@ -4249,13 +4249,13 @@
     "yourAccounts": "మీ ఖాతాలు"
   },
   "shortcutsModal": {
-    "close": "Close shortcuts help",
+    "close": "షార్ట్‌కట్‌ల సహాయం మూసివేయండి",
     "proTip": {
-      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
-      "title": "💡 Pro Tip"
+      "description": "ఫారమ్‌లలో టైప్ చేసేటప్పుడు మినహా ఏ పేజీలోనైనా కీబోర్డ్ షార్ట్‌కట్‌లు పని చేస్తాయి. ఈ సహాయం చూడటానికి ఎప్పుడైనా {key} నొక్కండి.",
+      "title": "💡 ప్రో టిప్"
     },
-    "subtitle": "Power-user productivity tips",
-    "title": "Keyboard Shortcuts"
+    "subtitle": "పవర్-యూజర్ ఉత్పాదకత చిట్కాలు",
+    "title": "కీబోర్డ్ షార్ట్‌కట్‌లు"
   },
   "sidebar": {
     "actions": {
@@ -4472,47 +4472,47 @@
     "title": "Spending Trends & Forecast"
   },
   "splitTransaction": {
-    "addSplit": "Add Split ({current}/{max})",
-    "amount": "Amount",
+    "addSplit": "విభజన చేర్చు ({current}/{max})",
+    "amount": "మొత్తం",
     "buttons": {
-      "cancel": "Cancel",
-      "save": "Save Split",
-      "saving": "Saving..."
+      "cancel": "రద్దు చేయండి",
+      "save": "విభజన సేవ్ చేయండి",
+      "saving": "సేవ్ అవుతోంది..."
     },
-    "category": "Category",
-    "closeModal": "Close modal",
-    "date": "Date:",
-    "distributeEvenly": "Distribute Evenly",
+    "category": "వర్గం",
+    "closeModal": "మోడల్ మూసివేయండి",
+    "date": "తేదీ:",
+    "distributeEvenly": "సమానంగా పంచండి",
     "errors": {
-      "saveFailed": "Failed to save split transaction"
+      "saveFailed": "విభజన లావాదేవీని సేవ్ చేయడం విఫలమైంది"
     },
     "help": {
-      "step1": "Enter the amount for each category (must total ${amount})",
-      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
-      "step3": "Add up to 5 splits per transaction",
-      "step4": "The original transaction will be hidden and replaced with split items",
-      "title": "How to split transactions:"
+      "step1": "ప్రతి వర్గానికి మొత్తం నమోదు చేయండి (మొత్తం ${amount} అవ్వాలి)",
+      "step2": "అన్ని వర్గాలలో సమానంగా విభజించడానికి \"సమానంగా పంచండి\" వాడండి",
+      "step3": "ప్రతి లావాదేవీకి 5 విభజనల వరకు చేర్చవచ్చు",
+      "step4": "అసలు లావాదేవీ దాచబడి విభజన అంశాలతో భర్తీ చేయబడుతుంది",
+      "title": "లావాదేవీలను ఎలా విభజించాలి:"
     },
-    "maxSplitsReached": "Maximum 5 splits allowed",
-    "minSplitsRequired": "Minimum 2 splits required",
-    "none": "None",
-    "notes": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Business expense, Personal use",
-    "originalAmount": "Original Amount:",
-    "removeThisSplit": "Remove this split",
-    "selectCategory": "Select category...",
-    "splitsCount": "Splits ({current}/{max})",
-    "subcategory": "Subcategory",
-    "title": "Split Transaction",
+    "maxSplitsReached": "గరిష్టంగా 5 విభజనలు అనుమతించబడతాయి",
+    "minSplitsRequired": "కనీసం 2 విభజనలు అవసరం",
+    "none": "ఏదీ కాదు",
+    "notes": "నోట్స్ (ఐచ్ఛికం)",
+    "notesPlaceholder": "ఉదా., వ్యాపార ఖర్చు, వ్యక్తిగత ఉపయోగం",
+    "originalAmount": "అసలు మొత్తం:",
+    "removeThisSplit": "ఈ విభజన తొలగించు",
+    "selectCategory": "వర్గం ఎంచుకోండి...",
+    "splitsCount": "విభజనలు ({current}/{max})",
+    "subcategory": "ఉప వర్గం",
+    "title": "లావాదేవీని విభజించు",
     "validation": {
-      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
-      "amountsMustMatch": "Split amounts must equal the original transaction amount",
-      "categoryRequired": "All splits must have a category",
-      "matchesOriginal": "✓ Matches original",
-      "overBy": "Over by ${amount}",
-      "readyToSave": "Split amounts match the original transaction. Ready to save!",
-      "total": "Total:",
-      "underBy": "Under by ${amount}"
+      "adjustAmounts": "అసలు లావాదేవీ మొత్తంతో సరిపోలడానికి విభజన మొత్తాలను సర్దుబాటు చేయండి.",
+      "amountsMustMatch": "విభజన మొత్తాలు అసలు లావాదేవీ మొత్తానికి సమానంగా ఉండాలి",
+      "categoryRequired": "అన్ని విభజనలకు వర్గం ఉండాలి",
+      "matchesOriginal": "✓ అసలుతో సరిపోతుంది",
+      "overBy": "${amount} అధికంగా",
+      "readyToSave": "విభజన మొత్తాలు అసలు లావాదేవీతో సరిపోతున్నాయి. సేవ్ చేయడానికి సిద్ధం!",
+      "total": "మొత్తం:",
+      "underBy": "${amount} తక్కువగా"
     }
   },
   "splits": {
@@ -4856,83 +4856,83 @@
   },
   "transactionModal": {
     "account": {
-      "label": "Account"
+      "label": "ఖాతా"
     },
     "advancedOptions": {
-      "available": "{count} available",
-      "label": "Advanced Options"
+      "available": "{count} అందుబాటులో ఉన్నాయి",
+      "label": "అధునాతన ఎంపికలు"
     },
     "amount": {
-      "label": "Amount",
+      "label": "మొత్తం",
       "placeholder": "0.00",
-      "validationError": "Please enter a valid amount"
+      "validationError": "దయచేసి చెల్లుబాటు అయ్యే మొత్తం నమోదు చేయండి"
     },
     "buttons": {
-      "add": "Add Transaction",
-      "adding": "Adding...",
-      "cancel": "Cancel",
-      "update": "Update Transaction",
-      "updating": "Updating..."
+      "add": "లావాదేవీ చేర్చండి",
+      "adding": "చేర్చుతోంది...",
+      "cancel": "రద్దు చేయండి",
+      "update": "లావాదేవీ అప్‌డేట్ చేయండి",
+      "updating": "అప్‌డేట్ అవుతోంది..."
     },
     "category": {
-      "aiCategorizing": "AI categorizing...",
-      "create": "Create",
-      "createNew": "+ Create New Category",
-      "label": "Category",
-      "lastUsed": "Using last: {category}",
-      "namePlaceholder": "Category name...",
-      "selectPlaceholder": "Select category...",
-      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+      "aiCategorizing": "AI వర్గీకరిస్తోంది...",
+      "create": "సృష్టించు",
+      "createNew": "+ కొత్త వర్గం సృష్టించండి",
+      "label": "వర్గం",
+      "lastUsed": "చివరిగా వాడినది: {category}",
+      "namePlaceholder": "వర్గం పేరు...",
+      "selectPlaceholder": "వర్గం ఎంచుకోండి...",
+      "subcategoriesPlaceholder": "ఉప వర్గాలు (ఐచ్ఛికం, కామాతో వేరు చేయబడినవి)"
     },
-    "closeModal": "Close modal",
+    "closeModal": "మోడల్ మూసివేయండి",
     "createCategory": {
-      "created": "Category \"{name}\" created!",
-      "failed": "Failed to create category",
-      "nameRequired": "Category name is required"
+      "created": "\"{name}\" వర్గం సృష్టించబడింది!",
+      "failed": "వర్గం సృష్టించడం విఫలమైంది",
+      "nameRequired": "వర్గం పేరు అవసరం"
     },
     "date": {
-      "label": "Date"
+      "label": "తేదీ"
     },
     "description": {
-      "label": "Description",
-      "placeholder": "e.g., Grocery shopping at Sobeys"
+      "label": "వివరణ",
+      "placeholder": "ఉదా., కిరాణా షాపింగ్"
     },
     "learned": {
-      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
-      "title": "Learned!"
+      "description": "3 సారూప్య సవరణల తర్వాత, ఈ వ్యాపారి నుండి భవిష్యత్తు లావాదేవీలు ఆటో-వర్గీకరించబడతాయి.",
+      "title": "నేర్చుకోబడింది!"
     },
     "notes": {
-      "label": "Notes",
-      "placeholder": "Add any additional notes..."
+      "label": "నోట్స్",
+      "placeholder": "ఏదైనా అదనపు నోట్స్ చేర్చండి..."
     },
     "receipts": {
-      "addNew": "Add New Receipt",
-      "deleteConfirm": "Are you sure you want to delete this receipt?",
-      "deleteFailed": "Failed to delete receipt",
-      "deleteReceipt": "Delete receipt",
-      "existing": "Existing receipts ({count})",
-      "label": "Receipt Attachments",
-      "newFile": "New: {filename}",
-      "remove": "Remove",
-      "viewFull": "View full receipt"
+      "addNew": "కొత్త రశీదు చేర్చండి",
+      "deleteConfirm": "మీరు ఈ రశీదును తొలగించాలనుకుంటున్నారా?",
+      "deleteFailed": "రశీదు తొలగించడం విఫలమైంది",
+      "deleteReceipt": "రశీదు తొలగించు",
+      "existing": "ఇప్పటికే ఉన్న రశీదులు ({count})",
+      "label": "రశీదు జోడింపులు",
+      "newFile": "కొత్తది: {filename}",
+      "remove": "తొలగించు",
+      "viewFull": "పూర్తి రశీదు చూడండి"
     },
     "subcategory": {
-      "label": "Subcategory",
-      "none": "None",
-      "selectPlaceholder": "Select subcategory..."
+      "label": "ఉప వర్గం",
+      "none": "ఏదీ కాదు",
+      "selectPlaceholder": "ఉప వర్గం ఎంచుకోండి..."
     },
     "tags": {
-      "label": "Tags (comma-separated)",
-      "placeholder": "e.g., groceries, weekly, essential"
+      "label": "ట్యాగ్‌లు (కామాతో వేరు చేయబడినవి)",
+      "placeholder": "ఉదా., కిరాణా, వారపు, అవసరమైన"
     },
     "title": {
-      "add": "Add Transaction",
-      "edit": "Edit Transaction"
+      "add": "లావాదేవీ చేర్చండి",
+      "edit": "లావాదేవీ సవరించు"
     },
     "type": {
-      "expense": "Expense",
-      "income": "Income",
-      "label": "Type"
+      "expense": "ఖర్చు",
+      "income": "ఆదాయం",
+      "label": "రకం"
     }
   },
   "transactionSearch": {

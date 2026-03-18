@@ -362,13 +362,13 @@
   },
   "amountFilter": {
     "clear": "அழி",
-    "maxLabel": "Maximum amount",
-    "maxPlaceholder": "Max",
-    "maxThumb": "Maximum amount",
-    "minLabel": "Minimum amount",
-    "minPlaceholder": "Min",
-    "minThumb": "Minimum amount",
-    "title": "தொகை வடிகட்டி",
+    "maxLabel": "அதிகபட்ச தொகை",
+    "maxPlaceholder": "அதிக",
+    "maxThumb": "அதிகபட்ச தொகை",
+    "minLabel": "குறைந்தபட்ச தொகை",
+    "minPlaceholder": "குறை",
+    "minThumb": "குறைந்தபட்ச தொகை",
+    "title": "தொகை வரம்பு",
     "min": "குறைந்தபட்சம்",
     "max": "அதிகபட்சம்",
     "exact": "சரியான தொகை",
@@ -387,24 +387,24 @@
     }
   },
   "apiErrors": {
-    "aiAnalysisUnavailable": "AI analysis unavailable, using pattern matching",
-    "aiApiError": "AI API error: {message}",
-    "autoDetectionUnavailable": "Auto-detection unavailable - using column order guess",
-    "emptyAiResponse": "Empty response from AI",
-    "failedToParseResponse": "Failed to parse AI response",
-    "fileMustBePdf": "File must be a PDF",
-    "fileTooLarge": "File too large. Maximum {maxSize}.",
-    "internalServerError": "Internal server error",
-    "lowConfidence": "Low confidence - please verify mappings",
-    "missingHeaders": "Missing or invalid headers",
-    "missingSampleData": "Missing or invalid sample data",
-    "noAiResponse": "No response from AI model",
-    "noApiKey": "AI API key not configured. AI extraction requires an active subscription.",
-    "noFileProvided": "No file provided",
-    "rateLimitExceeded": "Rate limit exceeded. Please try again later.",
-    "responseValidationIssues": "Response structure validation had issues",
-    "unknownError": "An unknown error occurred",
-    "verifyMappings": "Please verify all mappings before importing"
+    "aiAnalysisUnavailable": "AI பகுப்பாய்வு கிடைக்கவில்லை, வடிவமைப்பு பொருத்தத்தைப் பயன்படுத்துகிறது",
+    "aiApiError": "AI API பிழை: {message}",
+    "autoDetectionUnavailable": "தானியங்கி கண்டறிதல் கிடைக்கவில்லை - நெடுவரிசை வரிசை ஊகத்தைப் பயன்படுத்துகிறது",
+    "emptyAiResponse": "AI இலிருந்து வெற்று பதில்",
+    "failedToParseResponse": "AI பதிலை பாகுபடுத்த முடியவில்லை",
+    "fileMustBePdf": "கோப்பு PDF ஆக இருக்க வேண்டும்",
+    "fileTooLarge": "கோப்பு மிகப் பெரியது. அதிகபட்ச அளவு {maxSize}.",
+    "internalServerError": "உள் சேவையக பிழை",
+    "lowConfidence": "குறைந்த நம்பிக்கை - மேப்பிங்களை சரிபார்க்கவும்",
+    "missingHeaders": "தலைப்புகள் காணவில்லை அல்லது தவறானவை",
+    "missingSampleData": "மாதிரி தரவு காணவில்லை அல்லது தவறானது",
+    "noAiResponse": "AI மாடலிலிருந்து பதில் இல்லை",
+    "noApiKey": "AI API விசை கட்டமைக்கப்படவில்லை. AI பிரித்தெடுப்புக்கு செயலில் உள்ள சந்தா தேவை.",
+    "noFileProvided": "கோப்பு வழங்கப்படவில்லை",
+    "rateLimitExceeded": "வீத வரம்பு மீறப்பட்டது. பின்னர் மீண்டும் முயற்சிக்கவும்.",
+    "responseValidationIssues": "பதில் அமைப்பு சரிபார்ப்பில் சிக்கல்கள் இருந்தன",
+    "unknownError": "தெரியாத பிழை ஏற்பட்டது",
+    "verifyMappings": "இறக்குமதிக்கு முன் அனைத்து மேப்பிங்களையும் சரிபார்க்கவும்"
   },
   "aria": {
     "accessibilitySettings": "Accessibility settings",
@@ -617,7 +617,7 @@
   },
   "bottomSheet": {
     "close": "மூடு",
-    "dragToClose": "Drag down to close",
+    "dragToClose": "மூடுவதற்கு கீழே இழுக்கவும்",
     "dragHandle": "இழுப்பு கைப்பிடி"
   },
   "breadcrumb": {
@@ -2041,14 +2041,14 @@
     "success": "வெற்றி!"
   },
   "confidenceMeter": {
-    "autoCategorized": "Auto-categorized:",
-    "confidence": "{percent}% confidence",
-    "confident": "Confident",
-    "confirmCategorization": "Confirm this categorization to improve accuracy",
-    "learnFromThis": "Learn from this",
-    "lowConfidence": "Low Confidence",
-    "moderate": "Moderate",
-    "veryConfident": "Very Confident",
+    "autoCategorized": "தானாக வகைப்படுத்தப்பட்டது:",
+    "confidence": "{percent}% நம்பிக்கை",
+    "confident": "நம்பிக்கையாக",
+    "confirmCategorization": "துல்லியத்தை மேம்படுத்த இந்த வகைப்படுத்தலை உறுதிப்படுத்தவும்",
+    "learnFromThis": "இதிலிருந்து கற்றுக்கொள்",
+    "lowConfidence": "குறைந்த நம்பிக்கை",
+    "moderate": "நடுத்தர",
+    "veryConfident": "மிகவும் நம்பிக்கையாக",
     "title": "நம்பகத்தன்மை",
     "high": "உயர் நம்பகத்தன்மை",
     "medium": "நடுத்தர நம்பகத்தன்மை",
@@ -2226,18 +2226,18 @@
     "viewAllLoans": "அனைத்து கடன்களையும் காண்"
   },
   "debtOverview": {
-    "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
-    "activeLoansTitle": "Active Loans",
-    "addLoan": "கடன் சேர்",
+    "activeLoans": "{count, plural, =1 {1 செயலில் உள்ள கடன்} other {# செயலில் உள்ள கடன்கள்}}",
+    "activeLoansTitle": "செயலில் உள்ள கடன்கள்",
+    "addLoan": "கடனைச் சேர்",
     "avgRate": "சராசரி விகிதம்",
-    "balance": "Balance",
-    "monthlyPayment": "Monthly Payment",
-    "paidOff": "{percent}% paid off",
+    "balance": "இருப்பு",
+    "monthlyPayment": "மாதாந்திர செலுத்துதல்",
+    "paidOff": "{percent}% செலுத்தப்பட்டது",
     "title": "கடன் மேலோட்டம்",
     "totalDebt": "மொத்த கடன்",
-    "upcomingPayments": "Upcoming Payments",
-    "viewAll": "அனைத்தையும் காண்",
-    "viewMore": "{count, plural, one {View # more loan} other {View # more loans}}"
+    "upcomingPayments": "வரவிருக்கும் செலுத்துதல்கள்",
+    "viewAll": "அனைத்தையும் காண்க",
+    "viewMore": "{count, plural, =1 {மேலும் # கடனைக் காண்க} other {மேலும் # கடன்களைக் காண்க}}"
   },
   "debtPayoff": {
     "addDebt": "Add Debt",
@@ -2481,9 +2481,9 @@
     "dragToReorder": "விட்ஜெட்டை மறுவரிசைப்படுத்த இழுக்கவும்"
   },
   "duration": {
-    "months": "{count} மாதங்கள்",
+    "months": "{count, plural, =1 {1 மாதம்} other {# மாதங்கள்}}",
     "years": "{count} ஆண்டுகள்",
-    "yearsAndMonths": "{years}y {months}m",
+    "yearsAndMonths": "{years}ஆ {months}மா",
     "days": "{count} நாட்கள்",
     "hours": "{count} மணி நேரம்",
     "minutes": "{count} நிமிடங்கள்",
@@ -2708,16 +2708,45 @@
       "download": "பதிவிறக்கு",
       "export": "தரவை ஏற்றுமதி செய்"
     },
-    "complete": "ஏற்றுமதி முடிந்தது!",
+    "complete": {
+      "success": "ஏற்றுமதி முடிந்தது! உங்கள் பதிவிறக்கங்கள் கோப்புறையைச் சரிபார்க்கவும்.",
+      "download": "உங்கள் கோப்பு பதிவிறக்கத்திற்குத் தயாராக உள்ளது"
+    },
     "dataSummary": {
       "accounts": "கணக்குகள்",
       "estimatedSize": "மதிப்பிடப்பட்ட அளவு",
       "title": "தரவு சுருக்கம்",
       "transactions": "பரிவர்த்தனைகள்"
     },
-    "exporting": "ஏற்றுமதி செய்கிறது...",
-    "format": "வடிவம்",
-    "options": "ஏற்றுமதி விருப்பங்கள்",
+    "exporting": {
+      "title": "ஏற்றுமதி செய்கிறது...",
+      "pleaseWait": "சிறிது நேரம் ஆகலாம், தயவுசெய்து காத்திருக்கவும்"
+    },
+    "format": {
+      "label": "ஏற்றுமதி வடிவம்",
+      "budget": {
+        "label": ".budget கோப்பு",
+        "description": "அனைத்து தரவையும் உள்ளடக்கிய முழுமையான காப்புப்பிரதி"
+      },
+      "csv": {
+        "label": "CSV கோப்பு",
+        "description": "விரிதாள் இணக்கமான வடிவம்"
+      },
+      "json": {
+        "label": "JSON கோப்பு",
+        "description": "டெவலப்பர் நட்பு வடிவம்"
+      }
+    },
+    "options": {
+      "includeReceipts": {
+        "label": "இரசீதுகளைச் சேர்க்கவும்",
+        "description": "இரசீது படங்களை இணைக்கவும் (கோப்பு அளவு அதிகரிக்கும்)"
+      },
+      "encrypt": {
+        "label": "கடவுச்சொல்லுடன் குறியாக்கம்",
+        "description": "AES-256 குறியாக்கத்துடன் உங்கள் தரவைப் பாதுகாக்கவும்"
+      }
+    },
     "password": {
       "confirm": "கடவுச்சொல்லை உறுதிப்படுத்து",
       "confirmPlaceholder": "கடவுச்சொல்லை உறுதிப்படுத்து",
@@ -2880,16 +2909,16 @@
     "validQuantity": "Please enter a valid quantity"
   },
   "iconPicker": {
-    "clearSearch": "Clear Search",
-    "close": "ஐகான் தேர்வாளரை மூடு",
-    "currentIcon": "Current Icon",
-    "foundCount": "Found {count} icon(s)",
-    "iconsAvailable": "{count} icons available",
-    "noIconsFound": "No icons found",
-    "noIconsFoundHint": "Try a different search term or browse all icons",
-    "searchPlaceholder": "Search icons by name or category...",
-    "subtitle": "Select an icon to represent your category",
-    "title": "ஐகான் தேர்ந்தெடு"
+    "clearSearch": "தேடலை அழி",
+    "close": "மூடு",
+    "currentIcon": "தற்போதைய ஐகான்",
+    "foundCount": "{count} ஐகான்(கள்) கிடைத்தன",
+    "iconsAvailable": "{count} ஐகான்கள் கிடைக்கின்றன",
+    "noIconsFound": "ஐகான்கள் கிடைக்கவில்லை",
+    "noIconsFoundHint": "வேறு தேடல் சொல்லை முயற்சிக்கவும் அல்லது அனைத்து ஐகான்களையும் உலாவவும்",
+    "searchPlaceholder": "பெயர் அல்லது வகை மூலம் ஐகான்களைத் தேடு...",
+    "subtitle": "உங்கள் வகையைப் பிரதிநிதித்துவப்படுத்த ஐகானைத் தேர்ந்தெடுக்கவும்",
+    "title": "ஐகானைத் தேர்ந்தெடுக்கவும்"
   },
   "import": {
     "added": "added",
@@ -3014,7 +3043,11 @@
       "done": "முடிந்தது",
       "import": "தரவை இறக்குமதி செய்"
     },
-    "complete": "இறக்குமதி முடிந்தது!",
+    "complete": {
+      "success": "இறக்குமதி முடிந்தது!",
+      "itemsImported": "{count} உருப்படிகள் வெற்றிகரமாக இறக்குமதி செய்யப்பட்டன",
+      "withIssues": "சிக்கல்களுடன் இறக்குமதி முடிந்தது"
+    },
     "conflicts": {
       "existing": "{count} இருக்கும்",
       "handleLabel": "முரண்பாடுகளைக் கையாளு",
@@ -3043,8 +3076,16 @@
       "pleaseWait": "காத்திருக்கவும், இது சிறிது நேரம் ஆகலாம்",
       "title": "உங்கள் தரவை இறக்குமதி செய்கிறது..."
     },
-    "preview": "முன்னோட்டம்",
-    "selectFile": "கோப்பைத் தேர்ந்தெடு",
+    "preview": {
+      "fileInfo": "கோப்பு தகவல்",
+      "version": "பதிப்பு",
+      "exported": "ஏற்றுமதி செய்யப்பட்டது",
+      "dataToImport": "இறக்குமதி செய்ய வேண்டிய தரவு"
+    },
+    "selectFile": {
+      "label": ".budget கோப்பைத் தேர்ந்தெடுக்க கிளிக் செய்யவும்",
+      "dragDrop": "அல்லது இங்கே இழுத்து விடவும்"
+    },
     "subtitle": ".budget கோப்பிலிருந்து மீட்டமை",
     "title": "பரிவர்த்தனைகளை இறக்குமதி செய்",
     "dropzone": "கோப்பை இங்கே இழுத்து விடுங்கள் அல்லது உலாவ கிளிக் செய்யவும்",
@@ -3691,13 +3732,13 @@
     "title": "கடனுடன் இணை"
   },
   "linkedLoan": {
-    "loanPrefix": "Loan: {name}",
-    "unlink": "கடனை இணைப்பு நீக்கு",
-    "unlinkConfirm": "Unlink this transaction from the loan payment?",
-    "unlinkFailed": "Failed to unlink transaction. Please try again.",
-    "unlinkFromLoan": "Unlink from loan",
-    "viewLoan": "கடனைக் காண்",
-    "viewLoanDetails": "View loan details",
+    "loanPrefix": "கடன்: {name}",
+    "unlink": "துண்டி",
+    "unlinkConfirm": "இந்த பரிவர்த்தனையை கடன் செலுத்துதலிலிருந்து துண்டிக்கவா?",
+    "unlinkFailed": "பரிவர்த்தனையை துண்டிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.",
+    "unlinkFromLoan": "கடனிலிருந்து துண்டி",
+    "viewLoan": "கடனைக் காண்க",
+    "viewLoanDetails": "கடன் விவரங்களைக் காண்க",
     "title": "இணைக்கப்பட்ட கடன்",
     "payment": "கடன் கட்டணம்",
     "remaining": "மீதமுள்ள இருப்பு",
@@ -4015,16 +4056,16 @@
   },
   "localeSettings": {
     "currency": "நாணயம்",
-    "formatPreview": "Format Preview",
+    "formatPreview": "வடிவமைப்பு முன்னோட்டம்",
     "language": "மொழி",
-    "monday": "Monday",
-    "resetToDefaults": "Reset to Browser Defaults",
-    "saveChanges": "Save Changes",
-    "subtitle": "Configure language, region, currency, and formatting preferences",
-    "sunday": "Sunday",
-    "title": "மொழி & பிராந்தியம்",
-    "unsavedChanges": "You have unsaved changes",
-    "weekStartsOn": "Week Starts On"
+    "monday": "திங்கள்",
+    "resetToDefaults": "உலாவி இயல்புநிலைக்கு மீட்டமை",
+    "saveChanges": "மாற்றங்களைச் சேமி",
+    "subtitle": "மொழி, பிராந்தியம், நாணயம் மற்றும் வடிவமைப்பு விருப்பங்களை கட்டமைக்கவும்",
+    "sunday": "ஞாயிறு",
+    "title": "மொழி & வடிவமைப்பு",
+    "unsavedChanges": "சேமிக்கப்படாத மாற்றங்கள் உள்ளன",
+    "weekStartsOn": "வாரம் தொடங்கும் நாள்"
   },
   "manualPairing": {
     "codeHint": "6-character code shown on the host device",
@@ -4059,9 +4100,9 @@
   },
   "morePage": {
     "groups": {
-      "toolsSettings": "Tools & Settings",
-      "trackingAnalysis": "Tracking & Analysis",
-      "wealthPlanning": "Wealth & Planning"
+      "toolsSettings": "கருவிகள் & அமைப்புகள்",
+      "trackingAnalysis": "கண்காணிப்பு & பகுப்பாய்வு",
+      "wealthPlanning": "செல்வம் & திட்டமிடல்"
     },
     "title": "மேலும்",
     "sections": {
@@ -4179,32 +4220,32 @@
   },
   "notifications": {
     "clearAll": "அனைத்தையும் அழி",
-    "dismiss": "Dismiss",
-    "empty": "No notifications",
-    "emptyAll": "You're all caught up!",
-    "emptySnoozed": "No snoozed notifications",
-    "emptyUnread": "No unread notifications",
-    "markAllRead": "அனைத்தையும் படிக்கப்பட்டதாகக் குறி",
-    "snooze": "Snooze",
+    "dismiss": "நிராகரி",
+    "empty": "அறிவிப்புகள் இல்லை",
+    "emptyAll": "நீங்கள் அனைத்தையும் பார்த்துவிட்டீர்கள்!",
+    "emptySnoozed": "ஒத்திவைக்கப்பட்ட அறிவிப்புகள் இல்லை",
+    "emptyUnread": "படிக்காத அறிவிப்புகள் இல்லை",
+    "markAllRead": "அனைத்தையும் படித்ததாகக் குறி",
+    "snooze": "ஒத்திவை",
     "snoozeOptions": {
-      "1day": "1 day",
-      "1hour": "1 hour",
-      "1week": "1 week",
-      "3days": "3 days",
-      "3hours": "3 hours"
+      "1day": "1 நாள்",
+      "1hour": "1 மணி நேரம்",
+      "1week": "1 வாரம்",
+      "3days": "3 நாட்கள்",
+      "3hours": "3 மணி நேரம்"
     },
-    "snoozedUntil": "Snoozed for {time}",
+    "snoozedUntil": "{time} நேரத்திற்கு ஒத்திவைக்கப்பட்டது",
     "tabs": {
-      "all": "All",
-      "snoozed": "Snoozed",
-      "unread": "Unread"
+      "all": "அனைத்தும்",
+      "snoozed": "ஒத்திவைக்கப்பட்டவை",
+      "unread": "படிக்காதவை"
     },
     "title": "அறிவிப்புகள்",
     "types": {
-      "bill_reminder": "Bill Reminder",
-      "budget_alert": "Budget Alert",
-      "goal_milestone": "Goal Milestone",
-      "system": "System"
+      "bill_reminder": "பில் நினைவூட்டல்",
+      "budget_alert": "பட்ஜெட் எச்சரிக்கை",
+      "goal_milestone": "இலக்கு மைல்கல்",
+      "system": "கணினி"
     },
     "noNotifications": "அறிவிப்புகள் இல்லை",
     "new": "புதிய",
@@ -5062,8 +5103,8 @@
     "deleteButton": "சுயவிவரத்தை நீக்கு"
   },
   "pullToRefresh": {
-    "pull": "Pull to refresh",
-    "release": "புதுப்பிக்க விடுவிக்கவும்...",
+    "pull": "புதுப்பிக்க இழுக்கவும்",
+    "release": "புதுப்பிக்க விடுவிக்கவும்",
     "pulling": "புதுப்பிக்க இழுக்கவும்..."
   },
   "pwaInstall": {
@@ -5159,11 +5200,11 @@
     "recent": "சமீபத்திய"
   },
   "quickStats": {
-    "balance": "Total Balance",
-    "expenses": "Expenses",
-    "income": "Income",
-    "savingsRate": "Savings Rate",
-    "savingsRateDescription": "Percentage of income saved this month",
+    "balance": "மொத்த இருப்பு",
+    "expenses": "செலவுகள்",
+    "income": "வருமானம்",
+    "savingsRate": "சேமிப்பு விகிதம்",
+    "savingsRateDescription": "இந்த மாதம் சேமிக்கப்பட்ட வருமான சதவீதம்",
     "totalIncome": "மொத்த வருமானம்",
     "totalExpenses": "மொத்த செலவுகள்",
     "netSavings": "நிகர சேமிப்பு",
@@ -5630,7 +5671,13 @@
       "description": "Manage your linked bank accounts",
       "title": "Connected Accounts"
     },
-    "connection": "இணைப்பு",
+    "connection": {
+      "title": "SimpleFIN இணைப்பு",
+      "description": "பரிவர்த்தனைகளை தானாக இறக்குமதி செய்ய உங்கள் வங்கி கணக்குகளை இணைக்கவும்",
+      "connected": "இணைக்கப்பட்டது",
+      "accountsLinked": "{count, plural, =1 {1 கணக்கு இணைக்கப்பட்டது} other {# கணக்குகள் இணைக்கப்பட்டன}}",
+      "notConnected": "இணைக்கப்படவில்லை"
+    },
     "disconnect": {
       "button": "Disconnect",
       "cancel": "Cancel",
@@ -6401,12 +6448,18 @@
     "rejectSuggestion": "பரிந்துரையை நிராகரி"
   },
   "transactionModal": {
-    "account": "கணக்கு",
+    "account": {
+      "label": "கணக்கு"
+    },
     "advancedOptions": {
       "available": "{count} கிடைக்கிறது",
       "label": "மேம்பட்ட விருப்பங்கள்"
     },
-    "amount": "தொகை",
+    "amount": {
+      "label": "தொகை",
+      "placeholder": "0.00",
+      "validationError": "சரியான தொகையை உள்ளிடவும்"
+    },
     "buttons": {
       "add": "பரிவர்த்தனை சேர்",
       "adding": "சேர்க்கிறது...",
@@ -6414,20 +6467,37 @@
       "update": "பரிவர்த்தனையைப் புதுப்பி",
       "updating": "புதுப்பிக்கிறது..."
     },
-    "category": "வகை",
+    "category": {
+      "label": "வகை",
+      "aiCategorizing": "AI வகைப்படுத்துகிறது...",
+      "selectPlaceholder": "வகையைத் தேர்ந்தெடுக்கவும்...",
+      "createNew": "+ புதிய வகையை உருவாக்கு",
+      "namePlaceholder": "வகையின் பெயர்...",
+      "subcategoriesPlaceholder": "துணை வகைகள் (விருப்பமான, கமாவால் பிரிக்கப்பட்ட)",
+      "create": "உருவாக்கு",
+      "lastUsed": "கடைசியாகப் பயன்படுத்தியது: {category}"
+    },
     "closeModal": "மாடலை மூடு",
     "createCategory": {
       "created": "வகை \"{name}\" உருவாக்கப்பட்டது!",
       "failed": "வகையை உருவாக்குவதில் தோல்வி",
       "nameRequired": "வகைப் பெயர் தேவை"
     },
-    "date": "தேதி",
-    "description": "விவரம்",
+    "date": {
+      "label": "தேதி"
+    },
+    "description": {
+      "label": "விவரம்",
+      "placeholder": "எ.கா., சோபேயில் மளிகை கடை"
+    },
     "learned": {
       "description": "3 ஒத்த திருத்தங்களுக்குப் பிறகு, இந்த வணிகரிடமிருந்து வரும் எதிர்கால பரிவர்த்தனைகள் தானாக வகைப்படுத்தப்படும்.",
       "title": "கற்றுக்கொண்டோம்!"
     },
-    "notes": "குறிப்புகள்",
+    "notes": {
+      "label": "குறிப்புகள்",
+      "placeholder": "கூடுதல் குறிப்புகளைச் சேர்க்கவும்..."
+    },
     "receipts": {
       "addNew": "புதிய ரசீது சேர்",
       "deleteConfirm": "இந்த ரசீதை நிச்சயமாக நீக்க விரும்புகிறீர்களா?",
@@ -6444,7 +6514,10 @@
       "none": "இல்லை",
       "selectPlaceholder": "துணை வகையைத் தேர்ந்தெடு..."
     },
-    "tags": "குறிச்சொற்கள்",
+    "tags": {
+      "label": "குறிச்சொற்கள் (கமாவால் பிரிக்கப்பட்ட)",
+      "placeholder": "எ.கா., மளிகை, வாராந்திர, அத்தியாவசியம்"
+    },
     "title": {
       "add": "பரிவர்த்தனை சேர்",
       "edit": "பரிவர்த்தனையைத் திருத்து"
@@ -6495,44 +6568,44 @@
     "referencePlaceholder": "குறிப்பு எண்ணை உள்ளிடவும்"
   },
   "transactionSearch": {
-    "amountRangeLabel": "Amount range",
-    "clearRecent": "Clear",
-    "filterName": "Filter name",
-    "noResults": "முடிவுகள் கிடைக்கவில்லை",
-    "noResultsDescription": "Try a different search or adjust your filters",
-    "noTransactionsYet": "No transactions yet",
+    "amountRangeLabel": "தொகை வரம்பு",
+    "clearRecent": "அழி",
+    "filterName": "வடிகட்டி பெயர்",
+    "noResults": "பரிவர்த்தனைகள் கிடைக்கவில்லை",
+    "noResultsDescription": "வேறு தேடலை முயற்சிக்கவும் அல்லது உங்கள் வடிகட்டிகளை சரிசெய்யவும்",
+    "noTransactionsYet": "இன்னும் பரிவர்த்தனைகள் இல்லை",
     "placeholder": "பரிவர்த்தனைகளைத் தேடு...",
-    "placeholderExtended": "Try 'coffee last week' or 'amount:>50'",
-    "recentSearchLabel": "Recent search",
+    "placeholderExtended": "'கடந்த வாரம் காபி' அல்லது 'amount:>50' முயற்சிக்கவும்",
+    "recentSearchLabel": "சமீபத்திய தேடல்",
     "recentSearches": "சமீபத்திய தேடல்கள்",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
+    "resultCount": "{count} {count, plural, =1 {முடிவு} other {முடிவுகள்}}",
     "save": "Save",
-    "saveFilter": "Save Filter",
-    "savedFilters": "Saved Filters",
-    "searchFilterLabel": "Search filter",
-    "searchTipAmount": "Use <code>$50-100</code> for amount ranges",
-    "searchTipChars": "Type 3+ characters to search transactions",
-    "searchTipNL": "Try <code>coffee last week</code> for natural language",
-    "searchTipsIntro": "Search Tips:",
-    "searchingFor": "Searching for: {query}",
+    "saveFilter": "வடிகட்டியைச் சேமி",
+    "savedFilters": "சேமிக்கப்பட்ட வடிகட்டிகள்",
+    "searchFilterLabel": "தேடல் வடிகட்டி",
+    "searchTipAmount": "தொகை வரம்புகளுக்கு <code>$50-100</code> பயன்படுத்தவும்",
+    "searchTipChars": "பரிவர்த்தனைகளைத் தேட 3+ எழுத்துகளை தட்டச்சு செய்யவும்",
+    "searchTipNL": "இயல்பு மொழி தேடலுக்கு <code>coffee last week</code> முயற்சிக்கவும்",
+    "searchTipsIntro": "தேடல் உதவிக்குறிப்புகள்:",
+    "searchingFor": "தேடுகிறது: {query}",
     "suggestions": {
-      "amounts": "Amount Ranges",
-      "categories": "Categories",
-      "merchants": "Merchants",
-      "recent": "Recent"
+      "amounts": "தொகை வரம்புகள்",
+      "categories": "வகைகள்",
+      "merchants": "வணிகர்கள்",
+      "recent": "சமீபத்திய"
     },
-    "suggestionsHeading": "Suggestions",
+    "suggestionsHeading": "பரிந்துரைகள்",
     "tips": {
-      "amount": "Amount: '$50-100' or 'amount:>50'",
-      "category": "Category: 'groceries' or 'category:food'",
-      "date": "Date: 'last week', 'this month', 'date:last30'",
-      "fuzzy": "Typo-tolerant: 'starbukcs' finds 'Starbucks'",
-      "title": "Search Tips",
-      "type": "Type: 'type:income' or 'type:expense'"
+      "amount": "தொகை: '$50-100' அல்லது 'amount:>50'",
+      "category": "வகை: 'மளிகை' அல்லது 'category:food'",
+      "date": "தேதி: 'கடந்த வாரம்', 'இந்த மாதம்', 'date:last30'",
+      "fuzzy": "எழுத்துப்பிழை சகிப்புத்தன்மை: 'starbukcs' 'Starbucks' ஐக் கண்டுபிடிக்கும்",
+      "title": "தேடல் உதவிக்குறிப்புகள்",
+      "type": "வகை: 'type:income' அல்லது 'type:expense'"
     },
-    "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
-    "viewAllResults": "View all {count} results",
+    "transactionCount": "{count} {count, plural, =1 {பரிவர்த்தனை} other {பரிவர்த்தனைகள்}}",
+    "usedTimes": "{count} {count, plural, =1 {முறை} other {முறை}} பயன்படுத்தப்பட்டது",
+    "viewAllResults": "அனைத்து {count} முடிவுகளையும் காண்க",
     "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
     "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available",
     "clearHistory": "வரலாற்றை அழி",
@@ -6569,7 +6642,12 @@
     "quickFilters": "விரைவு வடிகட்டிகள்"
   },
   "transactionTable": {
-    "actions": "செயல்கள்",
+    "actions": {
+      "edit": "திருத்து",
+      "delete": "நீக்கு",
+      "split": "பிரி",
+      "attachReceipt": "இரசீதை இணை"
+    },
     "emptyState": "காட்ட பரிவர்த்தனைகள் இல்லை",
     "headers": {
       "account": "கணக்கு",
@@ -6774,14 +6852,14 @@
   },
   "trialBanner": {
     "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
-    "daysRemaining": "{count, plural, =1 {1 நாள் மீதம்} other {# நாட்கள் மீதம்}}",
+    "daysRemaining": "உங்கள் இலவச சோதனையில் {count} நாட்கள் மீதமுள்ளன",
     "dismiss": "நிராகரி",
-    "expired": "சோதனை காலாவதியானது",
-    "expiredDescription": "App is in read-only mode. Upgrade to continue managing your finances.",
-    "upgrade": "இப்போது மேம்படுத்து",
-    "upgradeNow": "Upgrade Now - {price}",
-    "upgradePrompt": "Upgrade now to keep full access to your budget data.",
-    "viewPricing": "View pricing",
+    "expired": "உங்கள் சோதனைக் காலம் முடிந்தது",
+    "expiredDescription": "பயன்பாடு படிக்க மட்டும் பயன்முறையில் உள்ளது. உங்கள் நிதியை நிர்வகிக்கத் தொடர மேம்படுத்தவும்.",
+    "upgrade": "மேம்படுத்து - {price}",
+    "upgradeNow": "இப்போதே மேம்படுத்தவும் - {price}",
+    "upgradePrompt": "உங்கள் பட்ஜெட் தரவுக்கான முழு அணுகலை வைத்திருக்க இப்போதே மேம்படுத்தவும்.",
+    "viewPricing": "விலையைக் காண்க",
     "title": "இலவச சோதனை",
     "features": "பிரீமியம் அம்சங்கள்",
     "learnMore": "மேலும் அறிய",
@@ -7012,9 +7090,17 @@
       "supportedFormats": "ஆதரிக்கப்படும் வடிவங்கள்",
       "transactions": "பரிவர்த்தனைகள்"
     },
-    "errors": "{count} பிழைகள்",
+    "errors": {
+      "parseFailed": "YNAB கோப்பை பாகுபடுத்த முடியவில்லை",
+      "previewFailed": "முன்னோட்டத்தை உருவாக்க முடியவில்லை",
+      "accountImportFailed": "கணக்கு இறக்குமதி தோல்வியடைந்தது: {details}",
+      "categoryImportFailed": "வகை இறக்குமதி தோல்வியடைந்தது: {details}",
+      "transactionImportFailed": "பரிவர்த்தனை இறக்குமதி தோல்வியடைந்தது: {details}",
+      "unknownError": "தெரியாத பிழை",
+      "budgetImportFailed": "பட்ஜெட் இறக்குமதி தோல்வியடைந்தது: {details}"
+    },
     "importSuccess": "இறக்குமதி வெற்றி",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}",
+    "importWithErrors": "இறக்குமதி {count, plural, =1 {1 பிழையுடன்} other {# பிழைகளுடன்}} முடிந்தது",
     "title": "YNAB இலிருந்து இடம்பெயர்",
     "description": "உங்கள் YNAB தரவை இந்த பயன்பாட்டிற்கு இடம்பெயர்க்கவும்",
     "step1Title": "YNAB ஏற்றுமதி",
