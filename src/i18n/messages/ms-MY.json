@@ -2304,7 +2304,7 @@
       "formulaExplanation": "Setiap bulan menarik pulangan rawak dari taburan normal. Sumbangan ditambah, pengeluaran diselaraskan inflasi ditolak. Diulang merentas N simulasi."
     },
     "chart": {
-      "year": "Tahun",
+      "year": "Year {n}",
       "yearLabel": "Tahun",
       "month": "Bulan {n}",
       "monthYear": "Bulan {n} (Tahun {y})",
@@ -2329,7 +2329,7 @@
       "contribution": "Sumbangan"
     },
     "scenario": {
-      "compare": "Bandingkan",
+      "compare": "Compare Scenarios ({count} saved)",
       "selectUpTo": "Pilih sehingga 3 senario untuk dibandingkan:",
       "duplicate": "Salin",
       "delete": "Padam",
@@ -3227,7 +3227,7 @@
     "nameRequired": "Nama kategori diperlukan",
     "saveFailed": "Gagal menyimpan kategori",
     "cannotDeleteDefault": "Tidak boleh padam kategori lalai",
-    "deleteConfirm": "Padam kategori ini? Transaksi yang ditetapkan akan menjadi tidak dikategorikan.",
+    "deleteConfirm": "Delete \"{name}\"? This cannot be undone.",
     "deleteFailed": "Gagal memadam kategori",
     "addCategory": "Tambah Kategori",
     "deleteCategory": "Padam Kategori",

@@ -714,7 +714,7 @@
   },
   "quickCategorize": {
     "title": "Snabbkategorisering",
-    "description": "Kategorisera okategoriserade transaktioner",
+    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
     "searchPlaceholder": "Search categories...",
     "noResults": "No categories found",
     "general": "Allmänt",
@@ -799,7 +799,7 @@
     "selectCategory": "Välj kategori",
     "none": "Ingen",
     "removeThisSplit": "Ta bort denna delning",
-    "addSplit": "Lägg till delning",
+    "addSplit": "Add Split ({current}/{max})",
     "maxSplitsReached": "Max 5 delningar tillåtna",
     "minSplitsRequired": "Minst 2 delningar krävs",
     "validation": {
@@ -2905,12 +2905,12 @@
   "trialBanner": {
     "expired": "Provperioden har utgått",
     "expiredDescription": "App is in read-only mode. Upgrade to continue managing your finances.",
-    "upgradeNow": "Uppgradera nu",
+    "upgradeNow": "Upgrade Now - {price}",
     "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
     "upgradePrompt": "Upgrade now to keep full access to your budget data.",
     "upgrade": "Upgrade - {price}",
     "dismiss": "Avfärda",
-    "daysRemaining": "{days} dagar kvar",
+    "daysRemaining": "{count} days remaining in your free trial",
     "viewPricing": "View pricing"
   },
   "validationWarnings": {
@@ -3389,7 +3389,7 @@
     "transactionFeaturesInfo": "Mer information om transaktionsfunktioner",
     "searchingVendorTransactions": "🔍 Söker efter andra \"{vendor}\"-transaktioner...",
     "foundMatchingTransactions": "✓ Hittade {count} matchande \"{vendor}\"-transaktioner ({time}s)",
-    "noMatchingTransactions": "Inga matchande transaktioner",
+    "noMatchingTransactions": "No other \"{vendor}\" transactions found ({time}s)",
     "vendorMatchingFailed": "Handlarmatchning misslyckades. Transaktionen sparades, men matchningar kunde inte laddas.",
     "failedToSave": "Kunde inte spara transaktion",
     "lastSplitItemRestore": "Detta är den sista delade posten. Återställ den ursprungliga transaktionen?",
@@ -5229,7 +5229,7 @@
     "hoursAgo": "{hours}h ago",
     "daysAgo": "{days}d ago",
     "devicesConnected": "{connected}/{total} devices connected",
-    "lastSync": "Senaste synk",
+    "lastSync": "Last sync: {time}",
     "syncing": "Synkroniserar...",
     "devices": "{connected}/{total} devices"
   },

@@ -1455,7 +1455,7 @@
   "confidenceMeter": {
     "aiPowered": "KI-unterstützt",
     "autoCategorized": "Automatisch kategorisiert:",
-    "confidence": "Konfidenz",
+    "confidence": "{percent}% confidence",
     "confident": "Sicher",
     "confirmCategorization": "Bestätigen Sie diese Kategorisierung, um die Genauigkeit zu verbessern",
     "high": "Hohe Konfidenz",
@@ -5032,7 +5032,7 @@
     "lowestFirst": "Niedrigste zuerst",
     "negative": "Negativ",
     "newestFirst": "Neueste zuerst",
-    "noMatchingTransactions": "Keine passenden Transaktionen",
+    "noMatchingTransactions": "No other \"{vendor}\" transactions found ({time}s)",
     "noTransactions": "Keine Transaktionen gefunden",
     "noTransactionsDescription": "Beginnen Sie mit der Ausgabenverfolgung, indem Sie Ihre erste Transaktion hinzufügen. Sie können manuell eingeben oder aus einer CSV-Datei importieren.",
     "noTransactionsYet": "Noch keine Transaktionen",

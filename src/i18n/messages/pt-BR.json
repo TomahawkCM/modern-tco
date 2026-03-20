@@ -1799,8 +1799,8 @@
     "dragToReorder": "Arraste para reordenar widget"
   },
   "duration": {
-    "months": "meses",
-    "years": "anos",
+    "months": "{count, plural, =1 {1 month} other {# months}}",
+    "years": "{count, plural, =1 {1 year} other {# years}}",
     "yearsAndMonths": "{years}a {months}m",
     "days": "dias"
   },

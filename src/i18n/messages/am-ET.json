@@ -2053,7 +2053,7 @@
     "type": "ዓይነት"
   },
   "footer": {
-    "copyright": "© {year} Budget App. መብቱ በህግ የተጠበቀ ነው።",
+    "copyright": "© {year} {brandName}",
     "links": {
       "login": "ይግቡ",
       "settings": "ቅንብሮች",
