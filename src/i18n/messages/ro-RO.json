@@ -313,7 +313,7 @@
     "addTransaction": "Aggiungi transazione",
     "aiChatbot": "Chatbot IA - Funzione Premium",
     "assistantTyping": "L'assistente sta scrivendo",
-    "breadcrumb": "Breadcrumb",
+    "breadcrumb": "Navigare",
     "chatMessages": "Messaggi chat",
     "clearSearch": "Cancella ricerca",
     "close": "Chiudi",
@@ -337,7 +337,7 @@
     "dismissWelcome": "Ignora banner di benvenuto",
     "dragToClose": "Trascina verso il basso per chiudere",
     "editTransaction": "Modifica transazione",
-    "home": "Home",
+    "home": "Acasă",
     "increaseTextSize": "Aumenta dimensione testo",
     "loadingChart": "Caricamento grafico...",
     "mainSidebar": "Bara laterală principală",
@@ -364,7 +364,7 @@
     "syncStatus": "Stato sincronizzazione: {status}",
     "toggleSeniorsMode": "Attiva/disattiva Modalità Anziani",
     "typeQuestion": "Digita la tua domanda",
-    "unreadNotifications": "{count, plural, =1 {1 unread notification} other {# unread notifications}}",
+    "unreadNotifications": "{count, plural, =1 {1 notificare necitită} few {# notificări necitite} other {# de notificări necitite}}",
     "welcomeBudgetApp": "Benvenuto nell'App Budget"
   },
   "auth": {
@@ -388,7 +388,7 @@
       "emailPlaceholder": "tu@esempio.com",
       "forgotPassword": "Password dimenticata?",
       "noAccount": "Non hai un account?",
-      "passwordLabel": "Password",
+      "passwordLabel": "Parolă",
       "signInButton": "Accedi",
       "startFreeTrial": "Inizia la prova gratuita",
       "subtitle": "Accedi al tuo account BudgetPro",
@@ -420,7 +420,7 @@
       "fullNameLabel": "Nome completo",
       "fullNamePlaceholder": "Mario Rossi",
       "hasAccount": "Hai già un account?",
-      "passwordLabel": "Password",
+      "passwordLabel": "Parolă",
       "passwordPlaceholder": "Crea una password sicura",
       "passwordTooShort": "La password deve contenere almeno 8 caratteri.",
       "passwordsMismatch": "Le password non corrispondono. Reinserisci la password.",
@@ -477,7 +477,7 @@
     "edit": "Modifica",
     "emergencyFund": "Fondo di emergenza",
     "futurePlans": "Piani futuri",
-    "home": "Home",
+    "home": "Acasă",
     "merchantRules": "Regole commercianti",
     "more": "Altro",
     "netWorth": "Patrimonio netto",
@@ -503,8 +503,8 @@
       "addAccount": "Aggiungi conto",
       "addFirstAccount": "Aggiungi il tuo primo conto",
       "allTransactionsCleared": "Tutte le transazioni cancellate. Puoi ora reimportare i tuoi estratti conto.",
-      "assignCount": "Assign {count, plural, one {# Transaction} other {# Transactions}}",
-      "assignModalDescription": "{count, plural, one {# transaction needs} other {# transactions need}} to be assigned to an account.",
+      "assignCount": "Atribuie {count, plural, one {# tranzacție} few {# tranzacții} other {# de tranzacții}}",
+      "assignModalDescription": "{count, plural, one {# tranzacție trebuie} few {# tranzacții trebuie} other {# de tranzacții trebuie}} atribuită unui cont.",
       "assignTransactions": "Assegna transazioni",
       "assignTransactionsNow": "Assegna transazioni ora",
       "assignedTransactions": "Assegnate {count} transazioni a {name}",
@@ -557,7 +557,7 @@
       "unassignedClickToAssign": "Clicca qui sotto per assegnarle automaticamente ai tuoi conti.",
       "unassignedCreateFirst": "Crea prima un conto, poi verranno assegnate automaticamente.",
       "unassignedDescription": "Queste transazioni sono state importate prima della configurazione dei conti.",
-      "unassignedTitle": "{count, plural, one {# transaction needs} other {# transactions need}} account assignment",
+      "unassignedTitle": "{count, plural, one {# tranzacție necesită} few {# tranzacții necesită} other {# de tranzacții necesită}} atribuirea contului",
       "update": "Aggiorna"
     },
     "budgets": {
@@ -611,7 +611,7 @@
       "totalExpenses": "Spese totali",
       "totalSpent": "Totale speso",
       "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
-      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transaction will become unbudgeted} other {# transactions will become unbudgeted}}",
+      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# tranzacție va rămâne fără buget} few {# tranzacții vor rămâne fără buget} other {# de tranzacții vor rămâne fără buget}}",
       "youWillLose": "Perderai:"
     },
     "events": {
@@ -824,7 +824,7 @@
     "applyTo": "Applica a {count}",
     "categorize": "Categorizza",
     "clearSelection": "Cancella selezione",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "confirmDelete": "Ștergeți {count, plural, =1 {1 tranzacție} few {# tranzacții} other {# de tranzacții}}?",
     "delete": "Elimina",
     "deleteWarning": "Questa azione non può essere annullata.",
     "export": "Esporta",
@@ -1419,7 +1419,7 @@
       "budgets": "Budget",
       "categories": "Categorie",
       "darkTheme": "Tema Scuro",
-      "dashboard": "Dashboard",
+      "dashboard": "Panou de control",
       "exportData": "Esporta Dati",
       "futurePlans": "Piani Futuri",
       "highContrastTheme": "Tema Alto Contrasto",
@@ -1629,7 +1629,7 @@
     "viewAllLoans": "Vedi tutti i prestiti"
   },
   "debtOverview": {
-    "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
+    "activeLoans": "{count, plural, one {# împrumut activ} few {# împrumuturi active} other {# de împrumuturi active}}",
     "activeLoansTitle": "Prestiti attivi",
     "addLoan": "Aggiungi prestito",
     "avgRate": "Tasso medio",
@@ -1640,7 +1640,7 @@
     "totalDebt": "Debito totale",
     "upcomingPayments": "Pagamenti in arrivo",
     "viewAll": "Vedi tutto",
-    "viewMore": "{count, plural, one {View # more loan} other {View # more loans}}"
+    "viewMore": "{count, plural, one {Vezi încă # împrumut} few {Vezi încă # împrumuturi} other {Vezi încă # de împrumuturi}}"
   },
   "debtPayoff": {
     "addDebt": "Aggiungi debito",
@@ -1682,7 +1682,7 @@
     "clearConfirm": "Cancellare TUTTI i dati? Questa azione non può essere annullata!",
     "clearFailed": "Cancellazione fallita: {error}",
     "clearSuccess": "Database cancellato. Aggiorna la pagina.",
-    "database": "Database",
+    "database": "Bază de date",
     "databaseInfo": "Informazioni sul database",
     "devIsolationNote": "I dati di sviluppo sono isolati dalla produzione. Testa liberamente senza influenzare gli utenti reali.",
     "development": "SVILUPPO",
@@ -1798,8 +1798,8 @@
     "dragToReorder": "Trascina per riordinare il widget"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
+    "months": "{count, plural, =1 {1 lună} few {# luni} other {# de luni}}",
+    "years": "{count, plural, =1 {1 an} few {# ani} other {# de ani}}",
     "yearsAndMonths": "{years}a {months}m"
   },
   "emptyStates": {
@@ -1861,7 +1861,7 @@
       "viewGuide": "Consulta la guida alla risoluzione dei problemi"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "canRecover": "Vești bune! Am găsit {count} {count, plural, =1 {mod} few {moduri} other {de moduri}} de a recupera din această eroare.",
       "cannotRecover": "Il ripristino non è possibile. Dovrai riesportare il file dalla tua banca o provare un formato diverso.",
       "optionsTitle": "Opzioni di ripristino"
     },
@@ -2024,7 +2024,7 @@
       "hint": "Suggerimento password (facoltativo)",
       "hintNote": "Questo suggerimento sarà archiviato non crittografato nel file",
       "hintPlaceholder": "Un suggerimento per ricordartela",
-      "label": "Password",
+      "label": "Parolă",
       "minLength": "La password deve essere di almeno 8 caratteri",
       "mismatch": "Le password non corrispondono",
       "placeholder": "Inserisci password (min. 8 caratteri)",
@@ -2104,7 +2104,7 @@
       "line2": "Punteggio di salute finanziaria"
     },
     "grade": "Voto: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
+    "missingFactors": "{count, plural, =1 {Lipsește 1 factor} few {Lipsesc # factori} other {Lipsesc # de factori}}",
     "title": "Salute finanziaria",
     "history": {
       "title": "Istoricul scorului",
@@ -2249,7 +2249,7 @@
       "encrypted": "Questo file è crittografato",
       "enterPassword": "Inserisci password",
       "hint": "Suggerimento: {hint}",
-      "password": "Password"
+      "password": "Parolă"
     },
     "importing": {
       "pleaseWait": "Attendi, potrebbe richiedere un momento",
@@ -2347,7 +2347,7 @@
       "description": "Questo eliminerà definitivamente il conto e tutti i titoli associati.",
       "impactAccount": "Conto: {name}",
       "impactHistory": "Tutta la cronologia delle transazioni",
-      "impactHoldings": "{count, plural, one {# holding} other {# holdings}}",
+      "impactHoldings": "{count, plural, one {# deținere} few {# dețineri} other {# de dețineri}}",
       "impactTitle": "Perderai:",
       "impactValue": "Valore totale: {value}",
       "title": "Elimina conto di investimento"
@@ -2374,7 +2374,7 @@
     },
     "gainLoss": "Guadagno/Perdita",
     "hideDetails": "Nascondi dettagli",
-    "holdingsCount": "{count, plural, one {# holding} other {# holdings}}",
+    "holdingsCount": "{count, plural, one {# deținere} few {# dețineri} other {# de dețineri}}",
     "loading": "Caricamento investimenti...",
     "marketDataNotice": "Avviso dati di mercato",
     "noHoldings": "Nessun titolo in questo conto ancora.",
@@ -2437,7 +2437,7 @@
     "pairedDevices": {
       "addDevice": "Aggiungi dispositivo",
       "addFirstDevice": "Aggiungi il tuo primo dispositivo",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "deviceCount": "{count, plural, =1 {1 dispozitiv asociat} few {# dispozitive asociate} other {# de dispozitive asociate}}",
       "emptyDescription": "Abbina un dispositivo per iniziare a sincronizzare i dati di budget",
       "emptyTitle": "Nessun dispositivo abbinato",
       "noDevices": "Nessun dispositivo abbinato ancora",
@@ -2451,11 +2451,11 @@
     },
     "syncAll": "Sincronizza tutto",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "daysAgo": "{count, plural, =1 {Acum 1 zi} few {Acum # zile} other {Acum # de zile}}",
+      "hoursAgo": "{count, plural, =1 {Acum 1 oră} few {Acum # ore} other {Acum # de ore}}",
       "justNow": "Proprio ora",
       "lastSync": "Ultima sincronizzazione: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "minutesAgo": "{count, plural, =1 {Acum 1 minut} few {Acum # minute} other {Acum # de minute}}",
       "neverSynced": "Mai sincronizzato"
     },
     "title": "Sincronizzazione LAN"
@@ -3421,7 +3421,7 @@
     "description": "Connetti un altro dispositivo sulla tua rete locale",
     "deviceAdded": "Dispositivo aggiunto. Connetti per completare l'abbinamento.",
     "failedToInitialize": "Impossibile inizializzare il dispositivo. Riprova.",
-    "host": "Host",
+    "host": "Gazdă",
     "ipAddressDescription": "Inserisci il tuo indirizzo IP locale per consentire ad altri dispositivi di connettersi.",
     "ipAddressRequired": "Indirizzo IP richiesto",
     "ipPlaceholder": "192.168.1.100",
@@ -3476,7 +3476,7 @@
     "savePayment": "Salva pagamento",
     "status": "Stato",
     "suggestedMatches": "Corrispondenze di transazioni suggerite",
-    "suggestedMatchesDescription": "We found {count, plural, one {# transaction} other {# transactions}} that might be loan payments",
+    "suggestedMatchesDescription": "Am găsit {count, plural, one {# tranzacție} few {# tranzacții} other {# de tranzacții}} care ar putea fi plăți ale împrumutului",
     "title": "Cronologia pagamenti",
     "uncategorized": "Non categorizzato",
     "unlinkConfirm": "Scollegare questo pagamento dalla transazione?",
@@ -3618,7 +3618,7 @@
       "payFrequencyHelp": "Con quale frequenza vieni pagato? Questo determina quando vengono generate le buste paga.",
       "payFrequencyHelpAriaLabel": "Ulteriori informazioni sulla frequenza di pagamento",
       "paycheckTimeline": "Cronologia buste paga",
-      "paychecksPlanned": "{count, plural, one {# paycheck planned} other {# paychecks planned}}",
+      "paychecksPlanned": "{count, plural, one {# salariu planificat} few {# salarii planificate} other {# de salarii planificate}}",
       "percentOfIncome": "{percent}% del reddito",
       "regeneratePaychecks": "Rigenera buste paga",
       "remainingToAllocate": "Rimanente da allocare",
@@ -3636,7 +3636,7 @@
       "scheduleSemimonthlyDesc": "1° e 15°",
       "scheduleWeekly": "Settimanale",
       "scheduleWeeklyDesc": "Ogni settimana",
-      "scheduledPaychecks": "{count, plural, one {# scheduled paycheck} other {# scheduled paychecks}}",
+      "scheduledPaychecks": "{count, plural, one {# salariu programat} few {# salarii programate} other {# de salarii programate}}",
       "setUpPaycheckPlan": "Configura piano busta paga",
       "setUpPlan": "Configura piano",
       "subtitle": "Pianifica dove va ogni euro prima di ricevere lo stipendio",
@@ -3707,7 +3707,7 @@
       "tfsaBalance": "Saldo TFSA",
       "title": "Calcolatore pensione",
       "toReachGoal": "Per raggiungere il tuo obiettivo, potresti:",
-      "workMoreYears": "Work {years, plural, one {# more year} other {# more years}}",
+      "workMoreYears": "Lucrați încă {years, plural, one {# an} few {# ani} other {# de ani}}",
       "yearAge": "{year} (età {age})",
       "yearsToRetirement": "Anni alla pensione",
       "youWillLose": "Perderai:",
@@ -3750,7 +3750,7 @@
     "chatbotDescription": "Assistente basato sull'IA che risponde a domande sulle tue transazioni, budget e schemi di spesa. Le conversazioni vengono elaborate tramite API OpenAI.",
     "chatbotPrivacyNotice": "I tuoi dati finanziari vengono inviati a OpenAI per rispondere alle domande. OpenAI non usa i dati API per addestrare modelli. Puoi disabilitarlo in qualsiasi momento.",
     "confirmDelete": "Conferma eliminazione",
-    "confirmDeleteWarning": "You are about to permanently delete {count, plural, one {# data type} other {# data types}}. Click \"Confirm Delete\" to proceed.",
+    "confirmDeleteWarning": "Sunteți pe cale să ștergeți permanent {count, plural, one {# tip de date} few {# tipuri de date} other {# de tipuri de date}}. Faceți clic pe Confirmă ștergerea pentru a continua.",
     "conversationHistory": "Cronologia conversazioni",
     "conversationStorageNotice": "Le conversazioni sono archiviate localmente nel tuo browser. Puoi eliminarle manualmente in qualsiasi momento.",
     "dataAccessPermission": "Autorizzazione accesso dati",
@@ -3806,7 +3806,7 @@
     "nothingSelected": "Nessuna selezione",
     "predictiveSpending": "Spesa predittiva",
     "predictiveSpendingDescription": "Prevedi la spesa mensile per categoria tramite analisi IA",
-    "privacy": "Privacy:",
+    "privacy": "Confidențialitate:",
     "privacyFirst": "Privacy al primo posto",
     "privacyNotice": "Tutta l'elaborazione avviene nel tuo browser. Nessun dato sulle transazioni viene caricato sui server. Le funzionalità IA sono facoltative e inviano solo descrizioni delle transazioni ripulite (senza numeri di conto, nomi o indirizzi) quando abilitate.",
     "readOnlyDescription": "Il chatbot può visualizzare i dati e rispondere alle domande ma non può modificare nulla",
@@ -3911,7 +3911,7 @@
       "save": "Salva"
     },
     "clickToSelect": "Clicca una categoria per selezionarla",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "description": "Selectați o categorie pentru {count, plural, =1 {această tranzacție} few {# tranzacții} other {# de tranzacții}}",
     "general": "Generale",
     "noResults": "Nessuna categoria trovata",
     "pressEnter": "Premi ↵ Invio",
@@ -3947,7 +3947,7 @@
     "downloadPdf": "Scarica PDF",
     "fileSize": "{size} KB",
     "pdfReceipt": "Ricevuta PDF",
-    "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
+    "receiptCount": "{count, plural, =1 {1 chitanță} few {# chitanțe} other {# de chitanțe}}",
     "unsupportedFileType": "Tipo di file non supportato",
     "uploaded": "Caricata il {date}",
     "view": "Vizualizare"
@@ -4001,16 +4001,16 @@
       "quarterly": "Trimestrale",
       "weekly": "Settimanale"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
+    "inDays": "{count, plural, =0 {(astăzi)} =1 {(în 1 zi)} few {(în # zile)} other {(în # de zile)}}",
     "next": "Prossimo: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "occurrences": "{count, plural, =1 {1 apariție detectată} few {# apariții detectate} other {# de apariții detectate}}",
     "perPeriod": {
       "month": "al mese",
       "quarter": "al trimestre",
       "twoWeeks": "ogni 2 settimane",
       "week": "alla settimana"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "showingPatterns": "{count, plural, =1 {Se afișează 1 model de tranzacții recurente} few {Se afișează # modele de tranzacții recurente} other {Se afișează # de modele de tranzacții recurente}}",
     "subtitle": "Abbonamenti e bollette rilevati",
     "title": "Transazioni ricorrenti"
   },
@@ -4188,7 +4188,7 @@
     "shortcuts": "Scurtături"
   },
   "simplefinConnect": {
-    "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
+    "accountsConnected": "{count, plural, one {# cont conectat} few {# conturi conectate} other {# de conturi conectate}}",
     "alreadyHaveToken": "Hai già un token?",
     "asOf": "aggiornato al {date}",
     "autoImportDescription": "Importa automaticamente le transazioni dai tuoi conti bancari",
@@ -4249,7 +4249,7 @@
       "title": "Conti collegati"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "accountsLinked": "{count, plural, =1 {1 cont conectat} few {# conturi conectate} other {# de conturi conectate}}",
       "connectButton": "Collega conto bancario",
       "connected": "Collegato",
       "description": "Collega i tuoi conti bancari per importare automaticamente le transazioni",
@@ -4271,7 +4271,7 @@
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "hoursAgo": "{hours, plural, =1 {Acum 1 oră} few {Acum # ore} other {Acum # de ore}}",
       "lastSynced": "Ultima sincronizzazione: {time}",
       "lessThanHour": "Meno di un'ora fa",
       "never": "Mai",
@@ -4454,7 +4454,7 @@
     "splitATransaction": "Dividi una transazione",
     "splitFlow": {
       "amountsCorrect": "Gli importi si sommano correttamente",
-      "confirmDescription": "This will create {count, plural, one {# split} other {# splits}} for this transaction. Each person's share will be tracked until settled.",
+      "confirmDescription": "Aceasta va crea {count, plural, one {# împărțire} few {# împărțiri} other {# de împărțiri}} pentru această tranzacție. Partea fiecărei persoane va fi urmărită până la decontare.",
       "confirmSplit": "Conferma divisione",
       "howToSplit": "Come dividere?",
       "modes": {
@@ -4486,7 +4486,7 @@
     "title": "Divisione spese",
     "total": "totale",
     "unknownTransaction": "Transazione sconosciuta",
-    "unsettledSplitCount": "{count, plural, one {# unsettled split} other {# unsettled splits}}",
+    "unsettledSplitCount": "{count, plural, one {# împărțire nedecontată} few {# împărțiri nedecontate} other {# de împărțiri nedecontate}}",
     "unsettledSplits": "Divisioni non saldate ({count})",
     "via": "tramite",
     "youOwe": "Devi {amount}",
@@ -4551,7 +4551,7 @@
       "totalSpent": "Totale speso"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {1 zi rămasă din perioada de probă} few {# zile rămase din perioada de probă} other {# de zile rămase din perioada de probă}}"
     },
     "reminderToggle": {
       "disableReminder": "Dezactivează mementoul",
@@ -4570,18 +4570,18 @@
       "upcomingCharges": "Prossimi addebiti (30 giorni)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "activeSubscriptions": "{count, plural, =1 {1 abonament activ} few {# abonamente active} other {# de abonamente active}}",
       "annualCost": "Costo annuale",
       "monthlyCost": "Costo mensile",
       "next30Days": "Prossimi 30 giorni",
       "projectedYearly": "Spesa annuale prevista",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "upcomingCharges": "{count, plural, =1 {1 plată viitoare} few {# plăți viitoare} other {# de plăți viitoare}}"
     },
     "suggestions": {
       "inactiveTitle": "Abbonamenti potenzialmente annullati",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
+      "inactiveDescription": "{count, plural, =1 {1 abonament nu a fost} few {# abonamente nu au fost} other {# de abonamente nu au fost}} taxate recent. Verificați dacă sunt într-adevăr anulate.",
       "trialsTitle": "Prove in scadenza",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
+      "trialsDescription": "{count, plural, =1 {1 perioadă de probă} few {# perioade de probă} other {# de perioade de probă}} se încheie în următoarele 7 zile. Anulați-le dacă nu le folosiți.",
       "highCostTitle": "Abbonamenti ad alto costo",
       "highCostDescription": "Questi abbonamenti rappresentano una parte significativa delle tue spese. Verifica se stai ricevendo il massimo valore."
     }
@@ -4839,7 +4839,7 @@
     "placeholderExtended": "Prova 'caffè settimana scorsa' o 'importo:>50'",
     "recentSearchLabel": "Ricerca recente",
     "recentSearches": "Ricerche recenti",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
+    "resultCount": "{count} {count, plural, =1 {rezultat} few {rezultate} other {de rezultate}}",
     "save": "Salva",
     "saveFilter": "Salva filtro",
     "savedFilters": "Filtri salvati",
@@ -4865,10 +4865,10 @@
       "type": "Tipo: 'tipo:entrata' o 'tipo:spesa'"
     },
     "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
+    "usedTimes": "Folosit de {count} {count, plural, =1 {dată} few {ori} other {de ori}}",
     "viewAllResults": "Vedi tutti i {count} risultati",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "resultsFound": "{count} {count, plural, =1 {rezultat găsit} few {rezultate găsite} other {de rezultate găsite}}",
+    "suggestionsAvailable": "{count} {count, plural, =1 {sugestie disponibilă} few {sugestii disponibile} other {de sugestii disponibile}}"
   },
   "transactionTable": {
     "actions": {
@@ -4987,7 +4987,7 @@
     "youWillLose": "Perderai:"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
+    "daysLeft": "{count, plural, =0 {Perioada de probă se termină astăzi!} =1 {Mai este doar 1 zi din perioada de probă} few {Mai sunt # zile din perioada de probă} other {Mai sunt # de zile din perioada de probă}}",
     "daysRemaining": "{count} giorni rimanenti nella tua prova gratuita",
     "dismiss": "Ignora",
     "expired": "La tua prova è scaduta",
@@ -5011,9 +5011,9 @@
     "ignoreAllContinue": "Ignora tutto e continua",
     "informational": "Informativo",
     "issuesDetected": "Problemi rilevati",
-    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
+    "issuesFound": "Am găsit {count, plural, =1 {1 problemă} few {# probleme} other {# de probleme}} care necesită atenția dumneavoastră",
     "marked": "Contrassegnato",
-    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
+    "removalNote": "{count, plural, =1 {1 tranzacție va fi eliminată} few {# tranzacții vor fi eliminate} other {# de tranzacții vor fi eliminate}} din import dacă continuați.",
     "remove": "Rimuovi",
     "removeAndContinue": "Rimuovi {count} e continua",
     "suggestion": "Suggerimento:",
@@ -5105,7 +5105,7 @@
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "category": "{count, plural, =1 {1 categorie} few {# categorii} other {# de categorii}}",
       "createNew": "Crea nuova",
       "description": "Mappa le categorie YNAB alle tue categorie esistenti o creane di nuove.",
       "mapToExisting": "Mappa all'esistente",
@@ -5118,7 +5118,7 @@
       "errors": "Errori",
       "importAnother": "Importa un altro",
       "success": "Importazione completata!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "successMessage": "{count, plural, =1 {1 element importat cu succes} few {# elemente importate cu succes} other {# de elemente importate cu succes}} din YNAB.",
       "viewTransactions": "Vedi transazioni",
       "whatNext": "Cosa vorresti fare dopo?",
       "withIssues": "Importazione completata con problemi"
@@ -5231,7 +5231,7 @@
       "budgetImportFailed": "Importazione budget non riuscita: {details}"
     },
     "importSuccess": "Dati YNAB importati con successo!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importWithErrors": "Import finalizat cu {count, plural, =1 {1 eroare} few {# erori} other {# de erori}}"
   },
   "balanceReconciliation": {
     "title": "Import finalizat!",

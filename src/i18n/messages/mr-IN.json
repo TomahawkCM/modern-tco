@@ -364,7 +364,7 @@
     "syncStatus": "सिंक स्थिति: {status}",
     "toggleSeniorsMode": "सीनियर मोड टॉगल करें",
     "typeQuestion": "अपना प्रश्न टाइप करें",
-    "unreadNotifications": "{count, plural, =1 {1 unread notification} other {# unread notifications}}",
+    "unreadNotifications": "{count, plural, one {# न वाचलेली सूचना} other {# न वाचलेल्या सूचना}}",
     "welcomeBudgetApp": "Budget App में आपका स्वागत है"
   },
   "auth": {
@@ -503,8 +503,8 @@
       "addAccount": "खाता जोड़ें",
       "addFirstAccount": "अपना पहला खाता जोड़ें",
       "allTransactionsCleared": "सभी लेनदेन साफ़ हो गए। अब आप अपने विवरण फिर से आयात कर सकते हैं।",
-      "assignCount": "Assign {count, plural, one {# Transaction} other {# Transactions}}",
-      "assignModalDescription": "{count, plural, one {# transaction needs} other {# transactions need}} to be assigned to an account.",
+      "assignCount": "{count, plural, one {# व्यवहार} other {# व्यवहार}} नियुक्त करा",
+      "assignModalDescription": "{count, plural, one {# व्यवहाराला} other {# व्यवहारांना}} खात्यात नियुक्त करणे आवश्यक आहे.",
       "assignTransactions": "लेनदेन असाइन करें",
       "assignTransactionsNow": "लेनदेन अभी असाइन करें",
       "assignedTransactions": "{count} लेनदेन {name} को असाइन किए गए",
@@ -557,7 +557,7 @@
       "unassignedClickToAssign": "उन्हें स्वचालित रूप से आपके खातों में असाइन करने के लिए नीचे क्लिक करें।",
       "unassignedCreateFirst": "पहले एक खाता बनाएं, फिर वे स्वचालित रूप से असाइन कर दिए जाएंगे।",
       "unassignedDescription": "ये लेन-देन खाते सेट अप करने से पहले आयात किए गए थे।",
-      "unassignedTitle": "{count, plural, one {# transaction needs} other {# transactions need}} account assignment",
+      "unassignedTitle": "{count, plural, one {# व्यवहाराला} other {# व्यवहारांना}} खाते नियुक्त करणे आवश्यक आहे",
       "update": "अद्यतन"
     },
     "budgets": {
@@ -611,7 +611,7 @@
       "totalExpenses": "कुल खर्च",
       "totalSpent": "कुल खर्च",
       "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
-      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transaction will become unbudgeted} other {# transactions will become unbudgeted}}",
+      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# व्यवहार बजेटविरहित होईल} other {# व्यवहार बजेटविरहित होतील}}",
       "youWillLose": "आप खो देंगे:"
     },
     "events": {
@@ -824,7 +824,7 @@
     "applyTo": "{count} पर लागू करें",
     "categorize": "वर्गीकृत करें",
     "clearSelection": "चयन साफ़ करें",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "confirmDelete": "{count, plural, one {# व्यवहार} other {# व्यवहार}} हटवायचे?",
     "delete": "हटाएँ",
     "deleteWarning": "यह कार्य पूर्ववत नहीं किया जा सकता।",
     "export": "निर्यात",
@@ -1629,7 +1629,7 @@
     "viewAllLoans": "सभी ऋण देखें"
   },
   "debtOverview": {
-    "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
+    "activeLoans": "{count, plural, one {# सक्रिय कर्ज} other {# सक्रिय कर्जे}}",
     "activeLoansTitle": "सक्रिय ऋण",
     "addLoan": "ऋण जोड़ें",
     "avgRate": "औसत दर",
@@ -1640,7 +1640,7 @@
     "totalDebt": "कुल ऋण",
     "upcomingPayments": "आगामी भुगतान",
     "viewAll": "सभी देखें",
-    "viewMore": "{count, plural, one {View # more loan} other {View # more loans}}"
+    "viewMore": "{count, plural, one {आणखी # कर्ज पहा} other {आणखी # कर्जे पहा}}"
   },
   "debtPayoff": {
     "addDebt": "ऋण जोड़ें",
@@ -1798,8 +1798,8 @@
     "dragToReorder": "विजेट पुनर्व्यवस्थित करने के लिए खींचें"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
+    "months": "{count, plural, one {# महिना} other {# महिने}}",
+    "years": "{count, plural, one {# वर्ष} other {# वर्षे}}",
     "yearsAndMonths": "{years} वर्ष {months} महीने"
   },
   "emptyStates": {
@@ -1861,7 +1861,7 @@
       "viewGuide": "समस्या निवारण गाइड देखें"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "canRecover": "चांगली बातमी! या त्रुटीतून सावरण्यासाठी आम्हाला {count} {count, plural, one {मार्ग} other {मार्ग}} सापडले.",
       "cannotRecover": "पुनर्प्राप्ति संभव नहीं। आपको अपने बैंक से फ़ाइल फिर से निर्यात करनी होगी या कोई अन्य प्रारूप आज़माना होगा।",
       "optionsTitle": "पुनर्प्राप्ति विकल्प"
     },
@@ -2104,7 +2104,7 @@
       "line2": "वित्तीय स्वास्थ्य स्कोर"
     },
     "grade": "ग्रेड: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
+    "missingFactors": "{count, plural, one {# घटक गहाळ} other {# घटक गहाळ}}",
     "title": "वित्तीय स्वास्थ्य",
     "history": {
       "title": "स्कोअर इतिहास",
@@ -2347,7 +2347,7 @@
       "description": "यह खाते और सभी संबंधित होल्डिंग्स को स्थायी रूप से हटा देगा।",
       "impactAccount": "खाता: {name}",
       "impactHistory": "सभी लेनदेन का इतिहास",
-      "impactHoldings": "{count, plural, one {# holding} other {# holdings}}",
+      "impactHoldings": "{count, plural, one {# होल्डिंग} other {# होल्डिंग्ज}}",
       "impactTitle": "आप खो देंगे:",
       "impactValue": "कुल मूल्य: {value}",
       "title": "निवेश खाता हटाएं"
@@ -2374,7 +2374,7 @@
     },
     "gainLoss": "लाभ / हानि",
     "hideDetails": "विवरण छुपाएँ",
-    "holdingsCount": "{count, plural, one {# holding} other {# holdings}}",
+    "holdingsCount": "{count, plural, one {# होल्डिंग} other {# होल्डिंग्ज}}",
     "loading": "निवेश लोड हो रहे हैं...",
     "marketDataNotice": "बाज़ार डेटा सूचना",
     "noHoldings": "इस खाते में अभी तक कोई होल्डिंग नहीं है।",
@@ -2437,7 +2437,7 @@
     "pairedDevices": {
       "addDevice": "डिवाइस जोड़ें",
       "addFirstDevice": "अपना पहला डिवाइस जोड़ें",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "deviceCount": "{count, plural, one {# डिव्हाइस जोडलेले} other {# डिव्हाइसेस जोडलेले}}",
       "emptyDescription": "अपना बजट डेटा सिंक करना शुरू करने के लिए एक डिवाइस पेयर करें",
       "emptyTitle": "कोई डिवाइस पेयर नहीं है",
       "noDevices": "अभी तक कोई डिवाइस पेयर नहीं किया गया है",
@@ -2451,11 +2451,11 @@
     },
     "syncAll": "सभी को सिंक करें",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "daysAgo": "{count, plural, one {# दिवसापूर्वी} other {# दिवसांपूर्वी}}",
+      "hoursAgo": "{count, plural, one {# तासापूर्वी} other {# तासांपूर्वी}}",
       "justNow": "अभी-अभी",
       "lastSync": "अंतिम सिंक: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "minutesAgo": "{count, plural, one {# मिनिटापूर्वी} other {# मिनिटांपूर्वी}}",
       "neverSynced": "कभी सिंक नहीं किया गया"
     },
     "title": "LAN सिंक"
@@ -2535,38 +2535,38 @@
       "description": "ट्रायल, किंमत, आणि प्रवेशाबद्दल सामान्य प्रश्नांचे साधे उत्तर.",
       "title": "सामान्य प्रश्न"
     },
-    "features": [
-      {
-        "title": "स्थानीय डैशबोर्ड",
-        "description": "कुल संपत्ति, नकदी प्रवाह और श्रेणी विश्लेषण। तत्काल लोड समय।",
+    "features": {
+      "0": {
+        "title": "स्थानिक डॅशबोर्ड",
+        "description": "एकूण संपत्ती, रोख प्रवाह आणि श्रेणी विभागणी. झटपट लोड वेळ.",
         "href": "/budget-app"
       },
-      {
-        "title": "आयात विज़ार्ड",
-        "description": "BMO, Home Trust और अनुकूलन योग्य कस्टम प्रारूपों के लिए स्मार्ट CSV मैपर।",
+      "1": {
+        "title": "आयात विझार्ड",
+        "description": "BMO, Home Trust आणि सानुकूलित फॉरमॅट्ससाठी स्मार्ट CSV मॅपर.",
         "href": "/budget-app/import"
       },
-      {
-        "title": "रसीद OCR",
-        "description": "Tesseract.js से स्थानीय रूप से रसीदें स्कैन करें। कोई क्लाउड प्रोसेसिंग नहीं।",
+      "2": {
+        "title": "पावती OCR",
+        "description": "Tesseract.js सह स्थानिक पातळीवर पावत्या स्कॅन करा. क्लाउड प्रक्रिया नाही.",
         "href": "/budget-app/ocr"
       },
-      {
-        "title": "श्रेणी बजट",
-        "description": "शून्य-आधारित या रोलओवर बजटिंग — विस्तृत श्रेणी नियंत्रण।",
+      "3": {
+        "title": "श्रेणी बजेट",
+        "description": "शून्य-आधारित किंवा रोलओव्हर बजेटिंग सूक्ष्म श्रेणी नियंत्रणासह.",
         "href": "/budget-app/budgets"
       },
-      {
-        "title": "सेवानिवृत्ति कैलकुलेटर",
-        "description": "चक्रवृद्धि ब्याज विज़ुअलाइज़ेशन के साथ अपनी स्वतंत्रता तिथि का अनुमान लगाएँ।",
+      "4": {
+        "title": "निवृत्ती कॅल्क्युलेटर",
+        "description": "चक्रवाढ व्याज दृश्यांसह तुमच्या स्वातंत्र्य तारखेचा अंदाज लावा.",
         "href": "/budget-app/planning/retirement"
       },
-      {
-        "title": "गोपनीयता सुरक्षा",
-        "description": "सुरक्षा की अतिरिक्त परत के लिए वैकल्पिक क्लाइंट-साइड एन्क्रिप्शन।",
+      "5": {
+        "title": "गोपनीयता कवच",
+        "description": "अतिरिक्त सुरक्षिततेसाठी वैकल्पिक क्लायंट-साइड एन्क्रिप्शन.",
         "href": "/budget-app/settings"
       }
-    ],
+    },
     "featuresDeepDive": {
       "cta": "मोफत ट्रायल सुरू करा",
       "description": "तुटलेल्या फॉर्म्युलासोबत लढाई थांबवा. आधुनिक अॅपच्या गतीसह मॅन्युअल नियंत्रणाची लवचिकता मिळवा.",
@@ -2664,7 +2664,16 @@
       "title": "हे कसे कार्य करते"
     },
     "marquee": {
-      "logos": ["बजेटिंग", "सदस्यता", "कर्ज", "OCR रसीद", "अहवाल", "योजना", "ऑफलाइन", "वरिष्ठ मोड"]
+      "logos": [
+        "बजेटिंग",
+        "सदस्यता",
+        "कर्ज",
+        "OCR रसीद",
+        "अहवाल",
+        "योजना",
+        "ऑफलाइन",
+        "वरिष्ठ मोड"
+      ]
     },
     "nav": {
       "tagline": "प्रीमियम बजेटिंग"
@@ -3467,7 +3476,7 @@
     "savePayment": "भुगतान सहेजें",
     "status": "स्थिति",
     "suggestedMatches": "सुझाए गए लेन-देन मिलान",
-    "suggestedMatchesDescription": "We found {count, plural, one {# transaction} other {# transactions}} that might be loan payments",
+    "suggestedMatchesDescription": "आम्हाला {count, plural, one {# व्यवहार} other {# व्यवहार}} सापडले जे कर्ज भरणे असू शकतात",
     "title": "भुगतान इतिहास",
     "uncategorized": "अवर्गीकृत",
     "unlinkConfirm": "इस भुगतान को लेनदेन से अनलिंक करें?",
@@ -3609,7 +3618,7 @@
       "payFrequencyHelp": "आपको कितनी बार भुगतान किया जाता है? यह निर्धारित करता है कि आपके पेचेक कब उत्पन्न होते हैं।",
       "payFrequencyHelpAriaLabel": "भुगतान आवृत्ति के बारे में अधिक जानकारी",
       "paycheckTimeline": "पेचेक समयरेखा",
-      "paychecksPlanned": "{count, plural, one {# paycheck planned} other {# paychecks planned}}",
+      "paychecksPlanned": "{count, plural, one {# पगार नियोजित} other {# पगार नियोजित}}",
       "percentOfIncome": "आय का {percent}%",
       "regeneratePaychecks": "पेचेक फिर से उत्पन्न करें",
       "remainingToAllocate": "आवंटित करने के लिए शेष",
@@ -3627,7 +3636,7 @@
       "scheduleSemimonthlyDesc": "पहली और 15वीं",
       "scheduleWeekly": "साप्ताहिक",
       "scheduleWeeklyDesc": "हर सप्ताह",
-      "scheduledPaychecks": "{count, plural, one {# scheduled paycheck} other {# scheduled paychecks}}",
+      "scheduledPaychecks": "{count, plural, one {# अनुसूचित पगार} other {# अनुसूचित पगार}}",
       "setUpPaycheckPlan": "पेचेक योजना सेट करें",
       "setUpPlan": "योजना सेट करें",
       "subtitle": "योजना बनाएं कि भुगतान मिलने से पहले हर रुपया कहां जाएगा",
@@ -3698,7 +3707,7 @@
       "tfsaBalance": "TFSA शेष",
       "title": "सेवानिवृत्ति कैलकुलेटर",
       "toReachGoal": "अपने लक्ष्य तक पहुँचने के लिए, आप कर सकते हैं:",
-      "workMoreYears": "Work {years, plural, one {# more year} other {# more years}}",
+      "workMoreYears": "{years, plural, one {आणखी # वर्ष} other {आणखी # वर्षे}} काम करा",
       "yearAge": "{year} (आयु {age})",
       "yearsToRetirement": "सेवानिवृत्ति के लिए वर्ष",
       "youWillLose": "आप खो देंगे:",
@@ -3741,7 +3750,7 @@
     "chatbotDescription": "एआई-संचालित सहायक जो आपके लेनदेन, बजट और खर्च पैटर्न के बारे में सवालों के जवाब दे सकता है। वार्तालाप को OpenAI API के माध्यम से संसाधित किया जाता है।",
     "chatbotPrivacyNotice": "सवालों के जवाब देने के लिए आपका वित्तीय डेटा OpenAI को भेजा जाता है। OpenAI मॉडल को प्रशिक्षित करने के लिए API डेटा का उपयोग नहीं करता है। आप कभी भी अक्षम कर सकते हैं।",
     "confirmDelete": "हटाने की पुष्टि करें",
-    "confirmDeleteWarning": "You are about to permanently delete {count, plural, one {# data type} other {# data types}}. Click \"Confirm Delete\" to proceed.",
+    "confirmDeleteWarning": "तुम्ही {count, plural, one {# डेटा प्रकार} other {# डेटा प्रकार}} कायमचे हटवणार आहात. पुढे जाण्यासाठी \"हटवणे पुष्टी करा\" वर क्लिक करा.",
     "conversationHistory": "वार्तालाप (चैट) इतिहास",
     "conversationStorageNotice": "वार्तालाप आपके ब्राउज़र में स्थानीय रूप से संग्रहीत होते हैं। आप उन्हें किसी भी समय मैन्युअल रूप से हटा सकते हैं।",
     "dataAccessPermission": "डेटा एक्सेस अनुमति",
@@ -3902,7 +3911,7 @@
       "save": "सहेजें"
     },
     "clickToSelect": "चुनने के लिए श्रेणी पर क्लिक करें",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "description": "{count, plural, one {या व्यवहारासाठी} other {# व्यवहारांसाठी}} एक श्रेणी निवडा",
     "general": "सामान्य",
     "noResults": "कोई श्रेणी नहीं मिली",
     "pressEnter": "↵ Enter दबाएँ",
@@ -3938,7 +3947,7 @@
     "downloadPdf": "PDF डाउनलोड करें",
     "fileSize": "{size} KB",
     "pdfReceipt": "PDF रसीद",
-    "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
+    "receiptCount": "{count, plural, one {# पावती} other {# पावत्या}}",
     "unsupportedFileType": "असमर्थित फ़ाइल प्रकार",
     "uploaded": "{date} को अपलोड किया गया",
     "view": "પહા"
@@ -3992,16 +4001,16 @@
       "quarterly": "त्रैमासिक",
       "weekly": "साप्ताहिक"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
+    "inDays": "{count, plural, =0 {(आज)} =1 {(# दिवसात)} other {(# दिवसांत)}}",
     "next": "अगला: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "occurrences": "{count, plural, one {# वेळा आढळले} other {# वेळा आढळले}}",
     "perPeriod": {
       "month": "प्रति माह",
       "quarter": "प्रति तिमाही",
       "twoWeeks": "प्रति 2 सप्ताह",
       "week": "प्रति सप्ताह"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "showingPatterns": "{count, plural, one {# आवर्ती व्यवहार नमुना दर्शवत आहे} other {# आवर्ती व्यवहार नमुने दर्शवत आहे}}",
     "subtitle": "खोजी गई सदस्यताएँ और बिल",
     "title": "आवर्ती लेन-देन"
   },
@@ -4179,7 +4188,7 @@
     "shortcuts": "शॉर्टकट"
   },
   "simplefinConnect": {
-    "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
+    "accountsConnected": "{count, plural, one {# खाते जोडलेले} other {# खाती जोडलेली}}",
     "alreadyHaveToken": "क्या आपके पास पहले से कोई टोकन है?",
     "asOf": "{date} तक",
     "autoImportDescription": "अपने बैंक खातों से लेनदेन को स्वचालित रूप से आयात करें",
@@ -4240,7 +4249,7 @@
       "title": "कनेक्टेड खाते"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "accountsLinked": "{count, plural, one {# खाते जोडलेले} other {# खाती जोडलेली}}",
       "connectButton": "बैंक खाता कनेक्ट करें",
       "connected": "कनेक्टेड",
       "description": "लेनदेन स्वचलित रूप से आयात करने के लिए अपने बैंक खाते कनेक्ट करें",
@@ -4262,7 +4271,7 @@
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "hoursAgo": "{hours, plural, one {# तासापूर्वी} other {# तासांपूर्वी}}",
       "lastSynced": "अंतिम सिंक किया गया: {time}",
       "lessThanHour": "एक घंटे से भी कम समय पहले",
       "never": "कभी नहीं",
@@ -4445,7 +4454,7 @@
     "splitATransaction": "एक लेनदेन विभाजित करें",
     "splitFlow": {
       "amountsCorrect": "राशियाँ सही ढंग से जुड़ती हैं",
-      "confirmDescription": "This will create {count, plural, one {# split} other {# splits}} for this transaction. Each person's share will be tracked until settled.",
+      "confirmDescription": "यामुळे या व्यवहारासाठी {count, plural, one {# विभाजन} other {# विभाजने}} तयार होतील. प्रत्येक व्यक्तीचा वाटा निराकरण होईपर्यंत ट्रॅक केला जाईल.",
       "confirmSplit": "विभाजन की पुष्टि करें",
       "howToSplit": "कैसे विभाजित करें?",
       "modes": {
@@ -4477,7 +4486,7 @@
     "title": "खर्च विभाजन",
     "total": "कुल",
     "unknownTransaction": "अज्ञात लेनदेन",
-    "unsettledSplitCount": "{count, plural, one {# unsettled split} other {# unsettled splits}}",
+    "unsettledSplitCount": "{count, plural, one {# अनिराकृत विभाजन} other {# अनिराकृत विभाजने}}",
     "unsettledSplits": "अनिपटे विभाजन ({count})",
     "via": "के माध्यम से",
     "youOwe": "आपका {amount} बकाया है",
@@ -4542,7 +4551,7 @@
       "totalSpent": "कुल खर्च"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, one {चाचणीत # दिवस बाकी} other {चाचणीत # दिवस बाकी}}"
     },
     "reminderToggle": {
       "disableReminder": "रिमाइंडर બંધ करा",
@@ -4561,20 +4570,20 @@
       "upcomingCharges": "आगामी शुल्क (अगले 30 दिन)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "activeSubscriptions": "{count, plural, one {# सक्रिय सदस्यता} other {# सक्रिय सदस्यता}}",
       "annualCost": "वार्षिक लागत",
       "monthlyCost": "मासिक लागत",
       "next30Days": "अगले 30 दिन",
       "projectedYearly": "अनुमानित वार्षिक खर्च",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "upcomingCharges": "{count, plural, one {# आगामी शुल्क} other {# आगामी शुल्क}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "संभाव्य रद्द केलेल्या सदस्यता",
+      "inactiveDescription": "{count, plural, one {# सदस्यतेने} other {# सदस्यतांनी}} अलीकडे शुल्क आकारले नाही. त्या खरोखर रद्द झाल्या आहेत का ते तपासा.",
+      "trialsTitle": "लवकरच संपणाऱ्या चाचण्या",
+      "trialsDescription": "{count, plural, one {# चाचणी} other {# चाचण्या}} पुढील ७ दिवसांत संपत आहेत. वापरत नसल्यास रद्द करा.",
+      "highCostTitle": "महागड्या सदस्यता",
+      "highCostDescription": "या सदस्यता तुमच्या खर्चाचा मोठा भाग दर्शवतात. तुम्हाला पूर्ण मूल्य मिळत आहे का ते विचारात घ्या."
     }
   },
   "subscriptionModal": {
@@ -4830,7 +4839,7 @@
     "placeholderExtended": "'पिछले सप्ताह कॉफी' या 'राशि:>50' आज़माएँ",
     "recentSearchLabel": "हाल की खोज",
     "recentSearches": "हाल की खोजें",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
+    "resultCount": "{count} {count, plural, one {निकाल} other {निकाल}}",
     "save": "सहेजें",
     "saveFilter": "फ़िल्टर सहेजें",
     "savedFilters": "सहेजे गए फ़िल्टर",
@@ -4856,10 +4865,10 @@
       "type": "प्रकार: 'प्रकार:आय' या 'प्रकार:व्यय'"
     },
     "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
+    "usedTimes": "{count} {count, plural, one {वेळा} other {वेळा}} वापरले",
     "viewAllResults": "सभी {count} परिणाम देखें",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "resultsFound": "{count} {count, plural, one {निकाल} other {निकाल}} सापडले",
+    "suggestionsAvailable": "{count} {count, plural, one {सूचना} other {सूचना}} उपलब्ध"
   },
   "transactionTable": {
     "actions": {
@@ -4978,7 +4987,7 @@
     "youWillLose": "आप खो देंगे:"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
+    "daysLeft": "{count, plural, =0 {तुमची चाचणी आज संपते!} =1 {तुमच्या चाचणीत फक्त # दिवस बाकी} other {तुमच्या चाचणीत # दिवस बाकी}}",
     "daysRemaining": "आपके निःशुल्क ट्रायल में {count} दिन शेष हैं",
     "dismiss": "हटाएं",
     "expired": "आपका ट्रायल समाप्त हो गया है",
@@ -5002,9 +5011,9 @@
     "ignoreAllContinue": "सभी पर ध्यान न दें और जारी रखें",
     "informational": "सूचनात्मक",
     "issuesDetected": "समस्याएँ पाई गईं",
-    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
+    "issuesFound": "आम्हाला {count, plural, one {# समस्या} other {# समस्या}} आढळल्या ज्यांवर तुमचे लक्ष हवे आहे",
     "marked": "चिह्नित",
-    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
+    "removalNote": "तुम्ही पुढे गेल्यास {count, plural, one {# व्यवहार} other {# व्यवहार}} आयातीतून काढले जातील.",
     "remove": "हटाएं",
     "removeAndContinue": "{count} को हटाएं और जारी रखें",
     "suggestion": "सुझाव:",
@@ -5096,7 +5105,7 @@
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "category": "{count, plural, one {# श्रेणी} other {# श्रेण्या}}",
       "createNew": "नया बनाएँ",
       "description": "YNAB श्रेणियों को अपनी मौजूदा श्रेणियों में मैप करें या नई बनाएँ।",
       "mapToExisting": "मौजूदा में मैप करें",
@@ -5109,7 +5118,7 @@
       "errors": "त्रुटियाँ",
       "importAnother": "एक और आयात करें",
       "success": "आयात पूर्ण!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "successMessage": "YNAB मधून {count, plural, one {# आयटम} other {# आयटम}} यशस्वीरित्या आयात केले.",
       "viewTransactions": "लेन-देन देखें",
       "whatNext": "आप आगे क्या करना चाहेंगे?",
       "withIssues": "समस्याओं के साथ आयात पूरा हुआ"
@@ -5213,16 +5222,16 @@
       "transactions": "लेन-देन"
     },
     "errors": {
-      "parseFailed": "Failed to parse YNAB file",
-      "previewFailed": "Failed to generate preview",
-      "accountImportFailed": "Account import failed: {details}",
-      "categoryImportFailed": "Category import failed: {details}",
-      "transactionImportFailed": "Transaction import failed: {details}",
-      "unknownError": "Unknown error",
-      "budgetImportFailed": "Budget import failed: {details}"
+      "parseFailed": "YNAB फाइल पार्स करण्यात अयशस्वी",
+      "previewFailed": "पूर्वावलोकन तयार करण्यात अयशस्वी",
+      "accountImportFailed": "खाते आयात अयशस्वी: {details}",
+      "categoryImportFailed": "श्रेणी आयात अयशस्वी: {details}",
+      "transactionImportFailed": "व्यवहार आयात अयशस्वी: {details}",
+      "unknownError": "अज्ञात त्रुटी",
+      "budgetImportFailed": "बजेट आयात अयशस्वी: {details}"
     },
-    "importSuccess": "YNAB data imported successfully!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importSuccess": "YNAB डेटा यशस्वीरित्या आयात झाला!",
+    "importWithErrors": "{count, plural, one {# त्रुटीसह} other {# त्रुटींसह}} आयात पूर्ण झाली"
   },
   "developerTools": {
     "title": "डेव्हलपर टूल्स",

@@ -1251,8 +1251,8 @@
     "comparison": {
       "headers": {
         "feature": "Функція",
-        "local": "BudgetPro Local",
-        "sync": "BudgetPro Sync (Pro)",
+        "local": "BudgetPro Локальний",
+        "sync": "BudgetPro Синхронізація (Pro)",
         "cloud": "Типовий хмарний додаток"
       },
       "dataPrivacy": {
@@ -1486,7 +1486,7 @@
     }
   },
   "lanSync": {
-    "title": "LAN Sync",
+    "title": "Синхронізація LAN",
     "description": "Синхронізуйте дані бюджету між пристроями у локальній мережі",
     "enabled": "Увімкнено",
     "disabled": "Вимкнено",
@@ -4050,8 +4050,8 @@
     "title": "П'ятничний огляд",
     "closeReview": "Закрити огляд",
     "goToStep": "Перейти до кроку {step}",
-    "stepProgress": "Step {current} of {total}: {title}",
-    "stepLabel": "Step {current}: {title}",
+    "stepProgress": "Крок {current} з {total}: {title}",
+    "stepLabel": "Крок {current}: {title}",
     "back": "Назад",
     "stepCounter": "{current} / {total}",
     "done": "Готово",

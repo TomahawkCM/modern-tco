@@ -313,7 +313,7 @@
     "addTransaction": "Aggiungi transazione",
     "aiChatbot": "Chatbot IA - Funzione Premium",
     "assistantTyping": "L'assistente sta scrivendo",
-    "breadcrumb": "Breadcrumb",
+    "breadcrumb": "Percorso di navigazione",
     "chatMessages": "Messaggi chat",
     "clearSearch": "Cancella ricerca",
     "close": "Chiudi",
@@ -778,23 +778,23 @@
       "title": "Scenari ipotetici",
       "types": {
         "addExpense": {
-          "description": "Vedi l'impatto di una nuova spesa ricorrente",
+          "description": "Aggiungi una nuova spesa e vedi come influisce sul tuo budget.",
           "title": "Aggiungi spesa"
         },
         "cancelSubscription": {
-          "description": "Vedi il risparmio dalla cancellazione di un addebito ricorrente",
+          "description": "Vedi come cambierebbe il tuo budget se annullassi un abbonamento.",
           "title": "Cancella abbonamento"
         },
         "changeIncome": {
-          "description": "Modella un aumento o una diminuzione del reddito",
+          "description": "Simula un cambiamento nel tuo reddito per vedere l'impatto sul budget.",
           "title": "Cambia reddito"
         },
         "increaseSavings": {
-          "description": "Vedi l'accelerazione della timeline degli obiettivi",
+          "description": "Simula un aumento dei tuoi risparmi per vedere l'impatto.",
           "title": "Aumenta risparmi"
         },
         "payOffDebt": {
-          "description": "Calcola il risparmio sugli interessi con il rimborso anticipato",
+          "description": "Vedi come ripagare un debito cambierebbe il tuo budget mensile.",
           "title": "Estingui debito"
         }
       }
@@ -906,7 +906,7 @@
       "avalanche": "Strategia Valanga",
       "avalancheDescription": "Paga prima gli interessi più alti per risparmiare di più",
       "balance": "Saldo",
-      "debtName": "Nome",
+      "debtName": "Nome debito",
       "debtNamePlaceholder": "Debito {number}",
       "description": "Confronta le strategie palla di neve vs valanga per estinguere il debito più velocemente",
       "extraMonthlyPayment": "Pagamento mensile extra",
@@ -1415,23 +1415,23 @@
   },
   "commandPalette": {
     "commands": {
-      "addTransaction": "Add Transaction",
+      "addTransaction": "Aggiungi transazione",
       "budgets": "Budgets",
-      "categories": "Categories",
-      "darkTheme": "Dark Theme",
-      "dashboard": "Dashboard",
-      "exportData": "Export Data",
-      "futurePlans": "Future Plans",
-      "highContrastTheme": "High-Contrast Theme",
-      "importCsv": "Import CSV",
-      "investments": "Investments",
-      "lightTheme": "Light Theme",
-      "loans": "Loans",
-      "newBudget": "New Budget",
-      "reports": "Reports",
-      "retirement": "Retirement",
-      "scanReceipt": "Scan Receipt",
-      "settings": "Settings",
+      "categories": "Categorie",
+      "darkTheme": "Tema scuro",
+      "dashboard": "Pannello di controllo",
+      "exportData": "Esporta dati",
+      "futurePlans": "Piani futuri",
+      "highContrastTheme": "Tema ad alto contrasto",
+      "importCsv": "Importa CSV",
+      "investments": "Investimenti",
+      "lightTheme": "Tema chiaro",
+      "loans": "Prestiti",
+      "newBudget": "Nuovo budget",
+      "reports": "Rapporti",
+      "retirement": "Pensionamento",
+      "scanReceipt": "Scansiona ricevuta",
+      "settings": "Impostazioni",
       "transactions": "Transactions"
     },
     "groups": {
@@ -2616,22 +2616,22 @@
         "viewPricing": "Visualizza prezzi"
       },
       "demo": {
-        "cloudStorage": "Cloud storage",
-        "dining": "Dining",
-        "expenses": "Expenses",
-        "foodToday": "Food • Today",
-        "groceries": "Groceries",
-        "groceryStore": "Grocery Store",
-        "income": "Income",
-        "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
-        "netWorth": "Net worth",
+        "cloudStorage": "Archiviazione cloud",
+        "dining": "Ristorazione",
+        "expenses": "Uscite",
+        "foodToday": "Cibo • Oggi",
+        "groceries": "Spesa alimentare",
+        "groceryStore": "Supermercato",
+        "income": "Entrate",
+        "incomeYesterday": "Entrate • Ieri",
+        "monthly": "Mensile",
+        "netWorth": "Patrimonio netto",
         "netflix": "Netflix",
-        "salary": "Salary",
+        "salary": "Stipendio",
         "shopping": "Shopping",
         "spotify": "Spotify",
-        "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "subscriptionOct24": "Abbonamento • Ott 24",
+        "yearly": "Annuale"
       },
       "modes": {
         "budgets": "Budget",
@@ -3115,42 +3115,42 @@
   },
   "notificationSettings": {
     "emailNotifications": {
-      "description": "Receive notifications via email",
-      "emailAddress": "Email Address",
-      "invalidEmail": "Please enter a valid email address",
-      "sendTest": "Send Test",
-      "testEmail": "Test Email",
-      "testEmailDescription": "Send a test email to verify your settings",
-      "testEmailFailed": "Failed to send",
-      "testEmailSent": "Email sent!",
-      "title": "Email Notifications",
-      "types": "Email notification types"
+      "description": "Ricevi notifiche via e-mail",
+      "emailAddress": "Indirizzo e-mail",
+      "invalidEmail": "Inserisci un indirizzo e-mail valido",
+      "sendTest": "Invia prova",
+      "testEmail": "E-mail di prova",
+      "testEmailDescription": "Invia un'e-mail di prova per verificare le impostazioni",
+      "testEmailFailed": "Invio non riuscito",
+      "testEmailSent": "E-mail inviata!",
+      "title": "Notifiche e-mail",
+      "types": "Tipi di notifica e-mail"
     },
     "infoBox": {
-      "emailExplanation": "Email notifications are sent via our secure email service and require a valid email address.",
-      "pushExplanation": "Push notifications require browser permission and work even when the app is closed.",
-      "storedLocally": "Notification settings are stored locally on your device."
+      "emailExplanation": "Le notifiche e-mail vengono inviate tramite il nostro servizio e-mail sicuro e richiedono un indirizzo e-mail valido.",
+      "pushExplanation": "Le notifiche push richiedono l'autorizzazione del browser e funzionano anche quando l'app è chiusa.",
+      "storedLocally": "Le impostazioni delle notifiche sono salvate localmente sul tuo dispositivo."
     },
     "masterToggle": {
-      "description": "Turn all notifications on or off",
-      "title": "Enable Notifications"
+      "description": "Attiva o disattiva tutte le notifiche",
+      "title": "Attiva notifiche"
     },
-    "notAvailable": "Notification settings are not available.",
+    "notAvailable": "Le impostazioni di notifica non sono disponibili.",
     "notificationTypes": {
       "billReminders": {
-        "description": "Get notified before subscriptions are due",
-        "title": "Bill Reminders"
+        "description": "Ricevi una notifica prima della scadenza degli abbonamenti",
+        "title": "Promemoria fatture"
       },
       "budgetAlerts": {
-        "description": "Alerts when approaching budget limits",
-        "title": "Budget Alerts"
+        "description": "Avvisi quando ti avvicini ai limiti del budget",
+        "title": "Avvisi budget"
       },
-      "description": "Choose which notifications you want to receive",
+      "description": "Scegli quali notifiche desideri ricevere",
       "goalMilestones": {
-        "description": "Celebrate when you hit savings milestones",
-        "title": "Goal Milestones"
+        "description": "Festeggia quando raggiungi i traguardi di risparmio",
+        "title": "Traguardi obiettivi"
       },
-      "title": "Notification Types"
+      "title": "Tipi di notifica"
     },
     "pushPermission": {
       "deniedHint": "Abilita nelle impostazioni del browser",
@@ -3527,7 +3527,7 @@
       "completedGoals": "Obiettivi completati",
       "createFirstGoal": "Crea il tuo primo obiettivo",
       "currentSavingsLabel": "Risparmio attuale",
-      "currentSavingsValue": "Risparmio attuale: {amount}",
+      "currentSavingsValue": "Risparmi attuali: {amount}",
       "delete": "Elimina",
       "deleteGoal": "Elimina obiettivo",
       "deleteGoalAriaLabel": "Elimina obiettivo",
@@ -3656,7 +3656,7 @@
       "currentAge": "Età attuale",
       "currentAgeYears": "Età attuale: {age} anni",
       "currentSavings": "Risparmio attuale",
-      "currentSavingsAmount": "Risparmio attuale: {amount}",
+      "currentSavingsAmount": "Risparmi attuali: {amount}",
       "delete": "Elimina",
       "deletePlan": "Elimina piano",
       "deleteRetirementPlan": "Elimina piano pensionistico",
@@ -4167,7 +4167,7 @@
       "budgets": "Budget",
       "calculators": "Calcolatori",
       "categories": "Categorie",
-      "dashboard": "Dashboard",
+      "dashboard": "Pannello di controllo",
       "events": "Eventi",
       "futurePlans": "Piani Futuri",
       "import": "Importa CSV",
@@ -4266,7 +4266,7 @@
     },
     "help": {
       "bridgeDashboard": "Dashboard SimpleFIN Bridge",
-      "protocolDocs": "Documentazione del protocollo SimpleFIN",
+      "protocolDocs": "Documentazione protocollo SimpleFIN",
       "title": "Hai bisogno di aiuto?"
     },
     "sync": {
@@ -4704,7 +4704,7 @@
     "lastSync": "Ultima sincronizzazione: {time}",
     "minutesAgo": "{minutes}m fa",
     "never": "Mai",
-    "offline": "Offline",
+    "offline": "Non in linea",
     "partialSync": "Sincronizzazione parziale",
     "syncError": "Errore di sincronizzazione",
     "synced": "Sincronizzato",
@@ -5047,7 +5047,7 @@
     "strengthVeryStrong": "Molto forte",
     "strengthVeryWeak": "Molto debole",
     "strengthWeak": "Debole",
-    "zeroKnowledge": "Zero conoscenza"
+    "zeroKnowledge": "Conoscenza zero"
   },
   "welcome": {
     "subtitle": "Inizia aggiungendo la tua prima transazione o importando dati dalla tua banca",
@@ -5257,7 +5257,7 @@
     "factorLabels": {
       "savingsRate": "Risparmio",
       "debtToIncome": "Debiti",
-      "budgetAdherence": "Budget",
+      "budgetAdherence": "Rispetto del budget",
       "emergencyFund": "Fondo di emergenza",
       "investmentGrowth": "Investimenti",
       "expenseStability": "Spese"

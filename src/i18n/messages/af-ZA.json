@@ -15,9 +15,9 @@
       "title": "Over toegankelijkheidsinstellingen"
     },
     "presets": {
-      "full": "Full",
+      "full": "Vol",
       "fullDesc": "Maximale toegankelijkheid",
-      "mild": "Mild",
+      "mild": "Lig",
       "mildDesc": "Licht verbeterd",
       "moderate": "Gemiddeld",
       "moderateDesc": "Aanbevolen voor de meesten",
@@ -337,7 +337,7 @@
     "dismissWelcome": "Welkomstbanner afwijzen",
     "dragToClose": "Sleep omlaag om te sluiten",
     "editTransaction": "Transactie bewerken",
-    "home": "Home",
+    "home": "Tuis",
     "increaseTextSize": "Tekstgrootte vergroten",
     "loadingChart": "Grafiek laden...",
     "mainSidebar": "Hoofsybalk",
@@ -364,7 +364,7 @@
     "syncStatus": "Synchronisatiestatus: {status}",
     "toggleSeniorsMode": "Seniorenmodus schakelen",
     "typeQuestion": "Typ je vraag",
-    "unreadNotifications": "{count, plural, =1 {1 unread notification} other {# unread notifications}}",
+    "unreadNotifications": "{count, plural, =1 {1 ongelese kennisgewing} other {# ongelese kennisgewings}}",
     "welcomeBudgetApp": "Welkom bij Budget App"
   },
   "auth": {
@@ -472,21 +472,21 @@
     "dragHandle": "Sleep om te verplaatsen"
   },
   "breadcrumb": {
-    "budgetAnalyzer": "Budget Analyzer",
-    "debtPayoffCalculator": "Debt Payoff Calculator",
-    "details": "Details",
+    "budgetAnalyzer": "Begrotingsontleder",
+    "debtPayoffCalculator": "Skuldafbetalingsafrekenaar",
+    "details": "Besonderhede",
     "edit": "Bewerken",
-    "emergencyFund": "Emergency Fund",
-    "futurePlans": "Future Plans",
-    "home": "Home",
-    "merchantRules": "Merchant Rules",
+    "emergencyFund": "Noodfonds",
+    "futurePlans": "Toekomsplanne",
+    "home": "Tuis",
+    "merchantRules": "Handelaarreëls",
     "more": "Meer",
     "netWorth": "Vermogen",
     "new": "Nieuw",
     "ocr": "OCR",
-    "retirementPlanning": "Retirement Planning",
-    "savingsGoal": "Savings Goal",
-    "subscriptionCost": "Subscription Cost"
+    "retirementPlanning": "Aftredebeplanning",
+    "savingsGoal": "Spaardoelwit",
+    "subscriptionCost": "Intekenkoste"
   },
   "budget": {
     "accounts": {
@@ -504,8 +504,8 @@
       "addAccount": "Rekening toevoegen",
       "addFirstAccount": "Voeg je eerste rekening toe",
       "allTransactionsCleared": "Alle transacties gewist. Je kunt nu je afschriften opnieuw importeren.",
-      "assignCount": "Assign {count, plural, one {# Transaction} other {# Transactions}}",
-      "assignModalDescription": "{count, plural, one {# transaction needs} other {# transactions need}} to be assigned to an account.",
+      "assignCount": "Wys {count, plural, one {# transaksie} other {# transaksies}} toe",
+      "assignModalDescription": "{count, plural, one {# transaksie moet} other {# transaksies moet}} aan 'n rekening toegewys word.",
       "assignTransactions": "Transacties toewijzen",
       "assignTransactionsNow": "Transacties nu toewijzen",
       "assignedTransactions": "{count} transacties toegewezen aan {name}",
@@ -558,7 +558,7 @@
       "unassignedClickToAssign": "Klik hieronder om ze automatisch toe te wijzen aan je rekeningen.",
       "unassignedCreateFirst": "Maak eerst een rekening aan, daarna worden ze automatisch toegewezen.",
       "unassignedDescription": "Deze transacties zijn geïmporteerd voordat rekeningen waren ingesteld.",
-      "unassignedTitle": "{count, plural, one {# transaction needs} other {# transactions need}} account assignment",
+      "unassignedTitle": "{count, plural, one {# transaksie benodig} other {# transaksies benodig}} rekeningtoewysing",
       "update": "Bijwerken"
     },
     "budgets": {
@@ -605,14 +605,14 @@
       "saveBudget": "Budget opslaan",
       "setBudget": "+ Budget instellen",
       "statusOnTrack": "✓ Op koers",
-      "statusOver": "✖ Over",
+      "statusOver": "✖ Oor",
       "statusWarning": "⚠ Waarschuwing",
       "title": "Budgetten",
       "totalBudgeted": "Totaal gebudgetteerd",
       "totalExpenses": "Totale uitgaven",
       "totalSpent": "Totaal uitgegeven",
       "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
-      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transaction will become unbudgeted} other {# transactions will become unbudgeted}}",
+      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transaksie sal onbegroot word} other {# transaksies sal onbegroot word}}",
       "youWillLose": "Je verliest:"
     },
     "events": {
@@ -623,7 +623,7 @@
       "daysLeft": "{count} days left",
       "noEvents": "Geen actieve evenementen",
       "noEventsDescription": "Create an event budget to track spending for weddings, holidays, and more",
-      "planning": "Planning",
+      "planning": "Beplanning",
       "progress": "Voortgang",
       "remaining": "Resterend",
       "suggestedTemplates": "Voorgestelde sjablonen",
@@ -825,7 +825,7 @@
     "applyTo": "Toepassen op {count}",
     "categorize": "Categoriseren",
     "clearSelection": "Selectie wissen",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "confirmDelete": "Verwyder {count, plural, =1 {1 transaksie} other {# transaksies}}?",
     "delete": "Verwijderen",
     "deleteWarning": "Deze actie kan niet ongedaan worden gemaakt.",
     "export": "Exporteren",
@@ -848,7 +848,7 @@
       "needsAdjustment": "Aanpassingen aanbevolen",
       "needsDescription": "Wonen, nutsvoorzieningen, boodschappen, verzekeringen, minimale schuldbetalingen",
       "needsExamples": "huur, nutsvoorzieningen, boodschappen",
-      "over": "Over",
+      "over": "Oor",
       "ruleExplanation": "De 50/30/20 regel",
       "savings": "Spaargeld",
       "savingsDescription": "Noodfonds, beleggingen, pensioen, extra schuldbetalingen",
@@ -1040,7 +1040,7 @@
       "successRateDescription": "{total} simulaties gedraaid, {failures} raakten door het geld heen",
       "successRateLabel": "Slagingspercentage",
       "timeHorizon": "Tijdshorizon (jaren)",
-      "title": "Monte Carlo Simulator",
+      "title": "Monte Carlo-simuleerder",
       "totalSimulations": "Gedraaide simulaties",
       "volatility": "Jaarlijkse volatiliteit / Std. afw. (%)",
       "volatilityHelp": "S&P 500 historisch: ~15%. Hoger = breder uitkomstbereik."
@@ -1238,24 +1238,24 @@
     "openCalculator": "Maak sakrekenaar oop"
   },
   "calendarExport": {
-    "addToCalendar": "Add to Calendar",
+    "addToCalendar": "Voeg by kalender",
     "dialog": {
       "cancel": "Annuleren",
-      "description": "Add bill reminders to your calendar",
-      "deselectAll": "Deselect all",
-      "export": "Export {count} subscription(s)",
-      "exportMethod": "Export Method",
+      "description": "Voeg rekeningherinnerings by jou kalender",
+      "deselectAll": "Ontkies alles",
+      "export": "Voer {count} intekening(e) uit",
+      "exportMethod": "Uitvoermetode",
       "exporting": "Exporteren...",
       "selectAll": "Alles selecteren",
-      "selectSubscriptions": "Select Subscriptions",
+      "selectSubscriptions": "Kies intekeninge",
       "title": "Exporteren naar agenda"
     },
-    "downloadAllICS": "Download All as ICS",
-    "downloadICS": "Download ICS File",
+    "downloadAllICS": "Laai alles as ICS af",
+    "downloadICS": "Laai ICS-lêer af",
     "exportToCalendar": "Exporteren naar agenda",
     "googleCalendar": "Google Calendar",
     "outlookCalendar": "Outlook Calendar",
-    "selectSubscriptions": "Select Subscriptions..."
+    "selectSubscriptions": "Kies intekeninge..."
   },
   "categories": {
     "cancel": "Annuleren",
@@ -1284,7 +1284,7 @@
     "subcategoriesLabel": "Subcategorieën (kommagescheiden)",
     "subcategoriesPlaceholder": "bijv. Huur, Onderhoud, Verzekering",
     "subtitle": "Beheer je budgetcategorieën en subcategorieën",
-    "tipLabel": "Tip:",
+    "tipLabel": "Wenk:",
     "tipText": "Standaardcategorieën kunnen niet worden bewerkt of verwijderd. Maak aangepaste categorieën aan voor je specifieke behoeften.",
     "title": "Categorieën",
     "typeLabel": "Type"
@@ -1454,14 +1454,14 @@
     "success": "Sukses!"
   },
   "confidenceMeter": {
-    "autoCategorized": "Auto-categorized:",
-    "confidence": "{percent}% confidence",
-    "confident": "Confident",
-    "confirmCategorization": "Confirm this categorization to improve accuracy",
-    "learnFromThis": "Learn from this",
-    "lowConfidence": "Low Confidence",
-    "moderate": "Moderate",
-    "veryConfident": "Very Confident"
+    "autoCategorized": "Outo-gekategoriseer:",
+    "confidence": "{percent}% vertroue",
+    "confident": "Seker",
+    "confirmCategorization": "Bevestig hierdie kategorisering om akkuraatheid te verbeter",
+    "learnFromThis": "Leer hieruit",
+    "lowConfidence": "Lae vertroue",
+    "moderate": "Matig",
+    "veryConfident": "Baie seker"
   },
   "dashboard": {
     "widgets": {
@@ -1683,10 +1683,10 @@
     "clearConfirm": "ALLE data wissen? Dit kan niet ongedaan worden gemaakt!",
     "clearFailed": "Wissen mislukt: {error}",
     "clearSuccess": "Database gewist. Ververs de pagina.",
-    "database": "Database",
+    "database": "Databasis",
     "databaseInfo": "Database-informatie",
     "devIsolationNote": "Ontwikkelingsdata is geïsoleerd van productie. Test vrij zonder echte gebruikers te beïnvloeden.",
-    "development": "DEVELOPMENT",
+    "development": "ONTWIKKELING",
     "error": "Fout",
     "exportAllData": "Alle data exporteren (back-up)",
     "exportFailed": "Export mislukt: {error}",
@@ -1710,14 +1710,14 @@
   },
   "designSystem": {
     "a11y": {
-      "focusIndicators": "Focus Indicators: 3px ring with 50% opacity on all interactive elements",
-      "fontSize": "Base Font Size: 18px for improved readability (seniors-friendly)",
-      "highContrast": "High Contrast Mode: Removes shadows, increases border thickness",
-      "keyboardNav": "Keyboard Navigation: All functionality accessible via keyboard",
-      "reducedMotion": "Reduced Motion: Automatic detection + manual toggle for vestibular disorders",
-      "semanticHtml": "Semantic HTML: Proper heading hierarchy and landmark regions",
-      "touchTargets": "Touch Targets: Minimum 48x48px (54px with spacing) for all interactive elements",
-      "wcag": "WCAG 2.2 AA Compliant: Contrast ratios >=4.5:1 for normal text, >=3:1 for large text"
+      "focusIndicators": "Fokusaanwysers: 3px ring met 50% deursigtigheid op alle interaktiewe elemente",
+      "fontSize": "Basis lettertipegrootte: 18px vir verbeterde leesbaarheid (seniorvriendlik)",
+      "highContrast": "Hoë kontrasmodus: Verwyder skaduwees, verhoog randdikte",
+      "keyboardNav": "Sleutelbordnavigasie: Alle funksionaliteit toeganklik via sleutelbord",
+      "reducedMotion": "Verminderde beweging: Outomatiese opsporing + handmatige skakelaar vir vestibulêre versteurings",
+      "semanticHtml": "Semantiese HTML: Behoorlike opskrifhiërargie en landmerkgebiede",
+      "touchTargets": "Raakteikens: Minimum 48x48px (54px met spasiëring) vir alle interaktiewe elemente",
+      "wcag": "WCAG 2.2 AA-voldoening: Kontrasverhoudings >=4.5:1 vir normale teks, >=3:1 vir groot teks"
     },
     "accessibilityControls": "Toeganklikheidsbeheer",
     "accessibilityGuidelines": "Toeganklikheidsriglyne",
@@ -1799,8 +1799,8 @@
     "dragToReorder": "Sleep om widget te herordenen"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
+    "months": "{count, plural, =1 {1 maand} other {# maande}}",
+    "years": "{count, plural, =1 {1 jaar} other {# jaar}}",
     "yearsAndMonths": "{years}j {months}m"
   },
   "emptyStates": {
@@ -1862,13 +1862,13 @@
       "viewGuide": "Probleemoplossingsgids bekijken"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "canRecover": "Goeie nuus! Ons het {count} {count, plural, =1 {manier} other {maniere}} gevind om van hierdie fout te herstel.",
       "cannotRecover": "Herstel niet mogelijk. Je moet het bestand opnieuw exporteren vanuit je bank of een ander formaat proberen.",
       "optionsTitle": "Herstelopties"
     },
     "subtitle": "Geen zorgen! We kunnen je helpen dit op te lossen.",
     "suggestions": {
-      "autoFix": "AUTO-FIX",
+      "autoFix": "OUTO-HERSTEL",
       "autoFixButton": "Auto-fix",
       "confidence": "{percent}% betrouwbaarheid",
       "fixing": "Herstellen...",
@@ -1942,7 +1942,7 @@
     "sheetBudgetsDesc": "Budget vs werkelijk vergelijking",
     "sheetCategoryAnalysis": "Categorieanalyse",
     "sheetCategoryAnalysisDesc": "Uitgaven per categorie",
-    "sheetDashboard": "Dashboard",
+    "sheetDashboard": "Kontroleskerm",
     "sheetDashboardDesc": "Samenvatting met belangrijke cijfers",
     "sheetDataDictionary": "Datawoordenboek",
     "sheetDataDictionaryDesc": "Veldverklaringen",
@@ -2105,7 +2105,7 @@
       "line2": "Financiële gezondheidsscore te zien"
     },
     "grade": "Cijfer: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
+    "missingFactors": "{count, plural, =1 {1 faktor ontbreek} other {# faktore ontbreek}}",
     "title": "Financiële gezondheid",
     "history": {
       "title": "Tellinggeskiedenis",
@@ -2120,38 +2120,38 @@
     }
   },
   "holdingModal": {
-    "addHolding": "Add Holding",
-    "canadianStockHint": "Use .TO for Canadian stocks (e.g., TD.TO, VGRO.TO)",
+    "addHolding": "Voeg belegging by",
+    "canadianStockHint": "Gebruik .TO vir Kanadese aandele (bv. TD.TO, VGRO.TO)",
     "cancel": "Annuleren",
-    "editHolding": "Edit Holding",
-    "enterSymbol": "Please enter a stock symbol",
-    "failedToSave": "Failed to save holding",
-    "notesOptional": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Part of retirement portfolio, employee stock purchase",
-    "numberOfShares": "Number of Shares",
+    "editHolding": "Wysig belegging",
+    "enterSymbol": "Voer asseblief 'n aandeelsimbool in",
+    "failedToSave": "Kon nie belegging stoor nie",
+    "notesOptional": "Notas (opsioneel)",
+    "notesPlaceholder": "bv. Deel van aftreeportefeulje, werknemeraaandelekoop",
+    "numberOfShares": "Aantal aandele",
     "pricePlaceholder": "50.00",
-    "purchaseDate": "Purchase Date",
-    "purchasePricePerShare": "Purchase Price per Share",
+    "purchaseDate": "Aankoopdatum",
+    "purchasePricePerShare": "Aankoopprys per aandeel",
     "quantityPlaceholder": "100",
-    "saving": "Saving...",
-    "stockSymbol": "Stock Symbol",
-    "symbolPlaceholder": "e.g., AAPL, VGRO.TO, TD.TO",
-    "totalInvestment": "Total Investment",
-    "updateHolding": "Update Holding",
-    "validPurchasePrice": "Please enter a valid purchase price",
-    "validQuantity": "Please enter a valid quantity"
+    "saving": "Stoor tans...",
+    "stockSymbol": "Aandeelsimbool",
+    "symbolPlaceholder": "bv. AAPL, VGRO.TO, TD.TO",
+    "totalInvestment": "Totale belegging",
+    "updateHolding": "Werk belegging op",
+    "validPurchasePrice": "Voer asseblief 'n geldige aankoopprys in",
+    "validQuantity": "Voer asseblief 'n geldige hoeveelheid in"
   },
   "iconPicker": {
-    "clearSearch": "Clear Search",
+    "clearSearch": "Vee soektog uit",
     "close": "Sluiten",
-    "currentIcon": "Current Icon",
-    "foundCount": "Found {count} icon(s)",
-    "iconsAvailable": "{count} icons available",
-    "noIconsFound": "No icons found",
-    "noIconsFoundHint": "Try a different search term or browse all icons",
-    "searchPlaceholder": "Search icons by name or category...",
-    "subtitle": "Select an icon to represent your category",
-    "title": "Choose an Icon"
+    "currentIcon": "Huidige ikoon",
+    "foundCount": "{count} ikoon/ikone gevind",
+    "iconsAvailable": "{count} ikone beskikbaar",
+    "noIconsFound": "Geen ikone gevind nie",
+    "noIconsFoundHint": "Probeer 'n ander soekterm of blaai deur alle ikone",
+    "searchPlaceholder": "Soek ikone volgens naam of kategorie...",
+    "subtitle": "Kies 'n ikoon om jou kategorie voor te stel",
+    "title": "Kies 'n ikoon"
   },
   "import": {
     "added": "toegevoegd",
@@ -2249,7 +2249,7 @@
       "decrypt": "Ontsleutelen & doorgaan",
       "encrypted": "Dit bestand is versleuteld",
       "enterPassword": "Voer wachtwoord in",
-      "hint": "Hint: {hint}",
+      "hint": "Wenk: {hint}",
       "password": "Wachtwoord"
     },
     "importing": {
@@ -2348,7 +2348,7 @@
       "description": "Dit verwijdert permanent de rekening en alle bijbehorende bezittingen.",
       "impactAccount": "Rekening: {name}",
       "impactHistory": "Alle transactiegeschiedenis",
-      "impactHoldings": "{count, plural, one {# holding} other {# holdings}}",
+      "impactHoldings": "{count, plural, one {# belegging} other {# beleggings}}",
       "impactTitle": "Je verliest:",
       "impactValue": "Totale waarde: {value}",
       "title": "Beleggingsrekening verwijderen"
@@ -2375,7 +2375,7 @@
     },
     "gainLoss": "Winst/verlies",
     "hideDetails": "Details verbergen",
-    "holdingsCount": "{count, plural, one {# holding} other {# holdings}}",
+    "holdingsCount": "{count, plural, one {# belegging} other {# beleggings}}",
     "loading": "Beleggingen laden...",
     "marketDataNotice": "Marktdata-melding",
     "noHoldings": "Nog geen bezittingen in deze rekening.",
@@ -2438,7 +2438,7 @@
     "pairedDevices": {
       "addDevice": "Apparaat toevoegen",
       "addFirstDevice": "Voeg je eerste apparaat toe",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "deviceCount": "{count, plural, =1 {1 toestel gekoppel} other {# toestelle gekoppel}}",
       "emptyDescription": "Koppel een apparaat om je budgetdata te synchroniseren",
       "emptyTitle": "Geen apparaten gekoppeld",
       "noDevices": "Nog geen apparaten gekoppeld",
@@ -2452,11 +2452,11 @@
     },
     "syncAll": "Alles synchroniseren",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "daysAgo": "{count, plural, =1 {1 dag gelede} other {# dae gelede}}",
+      "hoursAgo": "{count, plural, =1 {1 uur gelede} other {# uur gelede}}",
       "justNow": "Zojuist",
       "lastSync": "Laatst gesynchroniseerd: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "minutesAgo": "{count, plural, =1 {1 minuut gelede} other {# minute gelede}}",
       "neverSynced": "Nooit gesynchroniseerd"
     },
     "title": "LAN-synchronisatie"
@@ -2636,7 +2636,7 @@
       },
       "modes": {
         "budgets": "Begrotings",
-        "dashboard": "Dashboard",
+        "dashboard": "Kontroleskerm",
         "subscriptions": "Subskripsies"
       },
       "preview": {
@@ -2817,29 +2817,29 @@
     }
   },
   "linkToLoan": {
-    "bestMatch": "Best Match",
+    "bestMatch": "Beste passing",
     "cancel": "Annuleren",
     "extra": "Extra",
     "interest": "Rente",
-    "linkError": "Failed to link transaction. Please try again.",
-    "linkPayment": "Link Payment",
-    "linking": "Linking...",
-    "lowMatch": "Low Match",
-    "monthlyPayment": "${amount}/mo",
-    "noActiveLoans": "No active loans found",
-    "paymentBreakdown": "Payment Breakdown",
-    "possibleMatch": "Possible Match",
+    "linkError": "Kon nie transaksie koppel nie. Probeer asseblief weer.",
+    "linkPayment": "Koppel betaling",
+    "linking": "Koppel tans...",
+    "lowMatch": "Swak passing",
+    "monthlyPayment": "${amount}/md",
+    "noActiveLoans": "Geen aktiewe lenings gevind nie",
+    "paymentBreakdown": "Betalinguiteensetting",
+    "possibleMatch": "Moontlike passing",
     "principal": "Principal",
-    "title": "Link to Loan"
+    "title": "Koppel aan lening"
   },
   "linkedLoan": {
-    "loanPrefix": "Loan: {name}",
+    "loanPrefix": "Lening: {name}",
     "unlink": "Ontkoppelen",
-    "unlinkConfirm": "Unlink this transaction from the loan payment?",
-    "unlinkFailed": "Failed to unlink transaction. Please try again.",
-    "unlinkFromLoan": "Unlink from loan",
-    "viewLoan": "View loan",
-    "viewLoanDetails": "View loan details"
+    "unlinkConfirm": "Ontkoppel hierdie transaksie van die leningbetaling?",
+    "unlinkFailed": "Kon nie transaksie ontkoppel nie. Probeer asseblief weer.",
+    "unlinkFromLoan": "Ontkoppel van lening",
+    "viewLoan": "Bekyk lening",
+    "viewLoanDetails": "Bekyk leningbesonderhede"
   },
   "loanForm": {
     "autoCalculated": "Automatisch berekend: {amount}",
@@ -2914,20 +2914,20 @@
     "weeklyPaymentHint": "Wekelijks betalingsbedrag (alleen hoofdsom & rente)"
   },
   "loanPaymentSelector": {
-    "balanceAfterPayment": "Balance After Payment:",
-    "currentBalance": "Current Balance:",
-    "extraPrincipal": "Extra Principal:",
-    "interest": "Interest:",
-    "interestRate": "Interest Rate:",
-    "linkToLoanPayment": "Link to Loan Payment",
-    "loanOption": "{name} ({lender}) - {payment}/mo",
-    "nextDue": "Next Due:",
-    "noLoan": "-- No loan --",
-    "paymentBreakdown": "Payment Breakdown",
-    "paymentOverWarning": "This payment is {amount} more than the regular monthly payment. The extra will be applied to principal.",
-    "paymentUnderWarning": "This payment is {amount} less than the regular monthly payment of {monthlyPayment}.",
+    "balanceAfterPayment": "Saldo na betaling:",
+    "currentBalance": "Huidige saldo:",
+    "extraPrincipal": "Ekstra hoofsom:",
+    "interest": "Rente:",
+    "interestRate": "Rentekoers:",
+    "linkToLoanPayment": "Koppel aan leningbetaling",
+    "loanOption": "{name} ({lender}) - {payment}/md",
+    "nextDue": "Volgende verskuldig:",
+    "noLoan": "-- Geen lening --",
+    "paymentBreakdown": "Betalinguiteensetting",
+    "paymentOverWarning": "Hierdie betaling is {amount} meer as die gereelde maandelikse betaling. Die ekstra sal op die hoofsom toegepas word.",
+    "paymentUnderWarning": "Hierdie betaling is {amount} minder as die gereelde maandelikse betaling van {monthlyPayment}.",
     "principal": "Principal:",
-    "selectLoan": "Select Loan"
+    "selectLoan": "Kies lening"
   },
   "loans": {
     "acrossActiveLoans": "Over {count} actieve leningen",
@@ -3021,7 +3021,7 @@
       "overview": "Overzicht",
       "paymentHistory": "Betalingsgeschiedenis"
     },
-    "tip": "Tip",
+    "tip": "Wenk",
     "title": "Leningen",
     "tooltip": {
       "amortizationAria": "Meer informatie over aflossing en leningaflossing",
@@ -3050,16 +3050,16 @@
   },
   "localeSettings": {
     "currency": "Valuta",
-    "formatPreview": "Format Preview",
+    "formatPreview": "Formateringvoorskou",
     "language": "Taal",
     "monday": "Maandag",
-    "resetToDefaults": "Reset to Browser Defaults",
-    "saveChanges": "Save Changes",
-    "subtitle": "Configure language, region, currency, and formatting preferences",
+    "resetToDefaults": "Herstel na blaaierverstellings",
+    "saveChanges": "Stoor wysigings",
+    "subtitle": "Stel taal, streek, geldeenheid en formateringvoorkeure op",
     "sunday": "Zondag",
-    "title": "Locale & Formatting",
-    "unsavedChanges": "You have unsaved changes",
-    "weekStartsOn": "Week Starts On"
+    "title": "Taal en formatering",
+    "unsavedChanges": "Jy het ongestoorde wysigings",
+    "weekStartsOn": "Week begin op"
   },
   "manualPairing": {
     "codeHint": "6-karakter kode wat op die gasheertoestel vertoon word",
@@ -3116,48 +3116,48 @@
   },
   "notificationSettings": {
     "emailNotifications": {
-      "description": "Receive notifications via email",
-      "emailAddress": "Email Address",
-      "invalidEmail": "Please enter a valid email address",
+      "description": "Ontvang kennisgewings per e-pos",
+      "emailAddress": "E-posadres",
+      "invalidEmail": "Voer asseblief 'n geldige e-posadres in",
       "sendTest": "Test versturen",
       "testEmail": "Test-e-mail",
-      "testEmailDescription": "Send a test email to verify your settings",
+      "testEmailDescription": "Stuur 'n toets-e-pos om jou instellings te verifieer",
       "testEmailFailed": "Verzenden mislukt",
       "testEmailSent": "E-mail verzonden!",
       "title": "E-mailmeldingen",
-      "types": "Email notification types"
+      "types": "E-poskennisgewingtipes"
     },
     "infoBox": {
-      "emailExplanation": "Email notifications are sent via our secure email service and require a valid email address.",
-      "pushExplanation": "Push notifications require browser permission and work even when the app is closed.",
-      "storedLocally": "Notification settings are stored locally on your device."
+      "emailExplanation": "E-poskennisgewings word gestuur via ons veilige e-posdiens en vereis 'n geldige e-posadres.",
+      "pushExplanation": "Stootkennisgewings vereis blaaiertoestemming en werk selfs wanneer die toep gesluit is.",
+      "storedLocally": "Kennisgewinginstellings word plaaslik op jou toestel gestoor."
     },
     "masterToggle": {
-      "description": "Turn all notifications on or off",
-      "title": "Enable Notifications"
+      "description": "Skakel alle kennisgewings aan of af",
+      "title": "Aktiveer kennisgewings"
     },
-    "notAvailable": "Notification settings are not available.",
+    "notAvailable": "Kennisgewinginstellings is nie beskikbaar nie.",
     "notificationTypes": {
       "billReminders": {
-        "description": "Get notified before subscriptions are due",
+        "description": "Word in kennis gestel voor intekeninge verskuldig is",
         "title": "Rekeningherinneringen"
       },
       "budgetAlerts": {
-        "description": "Alerts when approaching budget limits",
+        "description": "Waarskuwings wanneer begrotingslimiete nader",
         "title": "Budgetwaarschuwingen"
       },
-      "description": "Choose which notifications you want to receive",
+      "description": "Kies watter kennisgewings jy wil ontvang",
       "goalMilestones": {
-        "description": "Celebrate when you hit savings milestones",
-        "title": "Goal Milestones"
+        "description": "Vier wanneer jy spaarmylpale bereik",
+        "title": "Doelwitmylpale"
       },
-      "title": "Notification Types"
+      "title": "Kennisgewingtipes"
     },
     "pushPermission": {
-      "deniedHint": "Enable in browser settings",
-      "description": "Receive notifications even when the app is closed",
-      "enable": "Enable Push Notifications",
-      "notSupported": "Not supported in this browser",
+      "deniedHint": "Aktiveer in blaaierinstellings",
+      "description": "Ontvang kennisgewings selfs wanneer die toep gesluit is",
+      "enable": "Aktiveer stootkennisgewings",
+      "notSupported": "Nie ondersteun in hierdie blaaier nie",
       "states": {
         "default": "Niet ingesteld",
         "denied": "Geblokkeerd",
@@ -3167,20 +3167,20 @@
       "title": "Push-meldingen"
     },
     "quietHours": {
-      "description": "No notifications during this time window",
+      "description": "Geen kennisgewings gedurende hierdie tydvenster nie",
       "end": "Eindtijd",
       "start": "Starttijd",
       "title": "Stille uren"
     },
     "reminderDays": {
-      "daysBeforeDue": "days before due date",
-      "description": "How many days before a bill is due to remind you",
-      "title": "Default Reminder"
+      "daysBeforeDue": "dae voor sperdatum",
+      "description": "Hoeveel dae voor 'n rekening verskuldig is om jou te herinner",
+      "title": "Verstekherinnering"
     },
     "testNotification": {
       "button": "Test versturen",
-      "description": "Send a test notification to verify your settings",
-      "title": "Test Notification"
+      "description": "Stuur 'n toetskennisgewing om jou instellings te verifieer",
+      "title": "Toetskennisgewing"
     },
     "title": "Meldingen"
   },
@@ -3196,7 +3196,7 @@
     "snoozeOptions": {
       "1day": "1 dag",
       "1hour": "1 uur",
-      "1week": "1 week",
+      "1week": "1 wk",
       "3days": "3 dagen",
       "3hours": "3 uur"
     },
@@ -3272,16 +3272,16 @@
     "viewRawOcrText": "Ruwe OCR-tekst bekijken"
   },
   "offline": {
-    "backOnline": "You're back online! Click refresh to reload the page.",
-    "connectionRestored": "Connection restored",
-    "goToDashboard": "Go to Dashboard",
-    "lostConnection": "It looks like you've lost your internet connection. The page you're trying to reach isn't available offline yet.",
-    "noConnection": "No internet connection",
-    "offlineFeatures": "Offline Features",
-    "offlineFeaturesDescription": "Once you visit a page while online, it will be available offline. All your data is stored locally on your device.",
-    "reloadPage": "Reload Page",
-    "title": "You're Offline",
-    "tryAgain": "Try Again"
+    "backOnline": "Jy is weer aanlyn! Klik herlaai om die bladsy te herlaai.",
+    "connectionRestored": "Verbinding herstel",
+    "goToDashboard": "Gaan na kontroleskerm",
+    "lostConnection": "Dit lyk of jy jou internetverbinding verloor het. Die bladsy wat jy probeer bereik is nog nie vanlyn beskikbaar nie.",
+    "noConnection": "Geen internetverbinding",
+    "offlineFeatures": "Vanlyn funksies",
+    "offlineFeaturesDescription": "Sodra jy 'n bladsy besoek terwyl jy aanlyn is, sal dit vanlyn beskikbaar wees. Al jou data word plaaslik op jou toestel gestoor.",
+    "reloadPage": "Herlaai bladsy",
+    "title": "Jy is vanlyn",
+    "tryAgain": "Probeer weer"
   },
   "onboarding": {
     "dontShowAgain": "Moet nie hierdie toer weer wys nie",
@@ -3411,33 +3411,33 @@
       "spentSoFar": "Tot nu toe uitgegeven"
     },
     "tip": {
-      "label": "Tip:",
+      "label": "Wenk:",
       "reduceSpending": "Verminder dagelijkse uitgaven tot {amount} om binnen budget te blijven."
     }
   },
   "pairingDialog": {
-    "anErrorOccurred": "An error occurred",
-    "connecting": "Connecting...",
-    "connectingToDevice": "Connecting to device...",
-    "description": "Connect to another device on your local network",
-    "deviceAdded": "Device added. Connect to complete pairing.",
-    "failedToInitialize": "Failed to initialize device. Please try again.",
-    "host": "Host",
-    "ipAddressDescription": "Enter your local IP address to allow other devices to connect.",
-    "ipAddressRequired": "IP Address Required",
+    "anErrorOccurred": "'n Fout het voorgekom",
+    "connecting": "Koppel tans...",
+    "connectingToDevice": "Koppel aan toestel...",
+    "description": "Koppel aan 'n ander toestel op jou plaaslike netwerk",
+    "deviceAdded": "Toestel bygevoeg. Koppel om koppeling te voltooi.",
+    "failedToInitialize": "Kon nie toestel inisialiseer nie. Probeer asseblief weer.",
+    "host": "Gasheer",
+    "ipAddressDescription": "Voer jou plaaslike IP-adres in om ander toestelle toe te laat om te koppel.",
+    "ipAddressRequired": "IP-adres vereis",
     "ipPlaceholder": "192.168.1.100",
     "manual": "Manual",
-    "pairingFailed": "Pairing Failed",
-    "pairingSuccessful": "Pairing successful!",
-    "pendingConnection": "Pending Connection",
-    "readyDescription": "Other devices can now scan this QR code or enter the connection details manually.",
-    "readyForConnections": "Ready for Connections",
-    "readyToConnectTo": "Ready to connect to {deviceName}",
+    "pairingFailed": "Koppeling misluk",
+    "pairingSuccessful": "Koppeling suksesvol!",
+    "pendingConnection": "Hangende verbinding",
+    "readyDescription": "Ander toestelle kan nou hierdie QR-kode skandeer of die verbindingsbesonderhede handmatig invoer.",
+    "readyForConnections": "Gereed vir verbindings",
+    "readyToConnectTo": "Gereed om aan {deviceName} te koppel",
     "scan": "Scannen",
     "set": "Instellen",
-    "title": "LAN Sync Pairing",
-    "tryAgain": "Try Again",
-    "verifyingConnection": "Verifying connection..."
+    "title": "LAN-sinchronisasiekoppeling",
+    "tryAgain": "Probeer weer",
+    "verifyingConnection": "Verifieer verbinding..."
   },
   "paymentHistoryPanel": {
     "actions": "Acties",
@@ -3477,7 +3477,7 @@
     "savePayment": "Betaling opslaan",
     "status": "Status",
     "suggestedMatches": "Voorgestelde transactieovereenkomsten",
-    "suggestedMatchesDescription": "We found {count, plural, one {# transaction} other {# transactions}} that might be loan payments",
+    "suggestedMatchesDescription": "Ons het {count, plural, one {# transaksie} other {# transaksies}} gevind wat leningbetalings kan wees",
     "title": "Betalingsgeschiedenis",
     "uncategorized": "Niet gecategoriseerd",
     "unlinkConfirm": "Deze betaling ontkoppelen van de transactie?",
@@ -3496,12 +3496,12 @@
     "defaultProfileName": "Profiel",
     "enterCurrentPinPlaceholder": "Voer huidige PIN in",
     "enterNewPinPlaceholder": "Voer nieuwe PIN in",
-    "enterPinPlaceholder": "Enter PIN",
-    "errorIncorrectPin": "Incorrect current PIN",
+    "enterPinPlaceholder": "Voer PIN in",
+    "errorIncorrectPin": "Verkeerde huidige PIN",
     "errorInvalidPin": "Ongeldige PIN",
     "errorPinMismatch": "PIN's komen niet overeen",
-    "errorSetFailed": "Failed to set PIN",
-    "errorVerificationFailed": "Verification failed",
+    "errorSetFailed": "Kon nie PIN stel nie",
+    "errorVerificationFailed": "Verifikasie het misluk",
     "newPinLabel": "Nieuwe PIN (4-6 cijfers)",
     "pinAdviceText": "Kies een PIN die makkelijk te onthouden maar moeilijk te raden is. Vermijd eenvoudige patronen zoals 1234 of herhaalde cijfers.",
     "removeConfirmation": "Weet je zeker dat je de PIN-bescherming wilt verwijderen? Dit profiel wordt toegankelijk zonder authenticatie.",
@@ -3509,11 +3509,11 @@
     "removePin": "PIN verwijderen",
     "setDescription": "Stel een PIN in om dit profiel te beschermen tegen onbevoegde toegang.",
     "setPin": "PIN instellen",
-    "tryAgainIn": "Try again in {seconds} seconds",
+    "tryAgainIn": "Probeer weer oor {seconds} sekondes",
     "unlock": "Ontgrendelen",
-    "unlockDescription": "Enter your PIN to access this profile",
-    "unlockTitle": "Unlock {name}",
-    "useDifferentProfile": "Use Different Profile",
+    "unlockDescription": "Voer jou PIN in om toegang tot hierdie profiel te kry",
+    "unlockTitle": "Ontsluit {name}",
+    "useDifferentProfile": "Gebruik ander profiel",
     "verifyAndRemove": "Verifiëren & verwijderen"
   },
   "planning": {
@@ -3619,7 +3619,7 @@
       "payFrequencyHelp": "Hoe vaak word je betaald? Dit bepaalt wanneer je salarissen worden gegenereerd.",
       "payFrequencyHelpAriaLabel": "Meer informatie over salarisfrequentie",
       "paycheckTimeline": "Salaristijdlijn",
-      "paychecksPlanned": "{count, plural, one {# paycheck planned} other {# paychecks planned}}",
+      "paychecksPlanned": "{count, plural, one {# salaris beplan} other {# salarisse beplan}}",
       "percentOfIncome": "{percent}% van inkomen",
       "regeneratePaychecks": "Salarissen opnieuw genereren",
       "remainingToAllocate": "Resterend om toe te wijzen",
@@ -3637,7 +3637,7 @@
       "scheduleSemimonthlyDesc": "1e en 15e",
       "scheduleWeekly": "Wekelijks",
       "scheduleWeeklyDesc": "Elke week",
-      "scheduledPaychecks": "{count, plural, one {# scheduled paycheck} other {# scheduled paychecks}}",
+      "scheduledPaychecks": "{count, plural, one {# geskeduleerde salaris} other {# geskeduleerde salarisse}}",
       "setUpPaycheckPlan": "Salarisplan instellen",
       "setUpPlan": "Plan instellen",
       "subtitle": "Plan waar elke euro naartoe gaat voordat je betaald wordt",
@@ -3708,7 +3708,7 @@
       "tfsaBalance": "TFSA-saldo",
       "title": "Pensioencalculator",
       "toReachGoal": "Om je doel te bereiken kun je:",
-      "workMoreYears": "Work {years, plural, one {# more year} other {# more years}}",
+      "workMoreYears": "Werk {years, plural, one {# jaar langer} other {# jaar langer}}",
       "yearAge": "{year} (Leeftijd {age})",
       "yearsToRetirement": "Jaren tot pensioen",
       "youWillLose": "Je verliest:",
@@ -3751,7 +3751,7 @@
     "chatbotDescription": "AI-aangedreven assistent die vragen kan beantwoorden over je transacties, budgetten en uitgavenpatronen. Gesprekken worden verwerkt via de OpenAI API.",
     "chatbotPrivacyNotice": "Je financiële data wordt naar OpenAI gestuurd om vragen te beantwoorden. OpenAI gebruikt geen API-data om modellen te trainen. Je kunt het altijd uitschakelen.",
     "confirmDelete": "Bevestig verwijdering",
-    "confirmDeleteWarning": "You are about to permanently delete {count, plural, one {# data type} other {# data types}}. Click \"Confirm Delete\" to proceed.",
+    "confirmDeleteWarning": "Jy is op die punt om {count, plural, one {# datatipe} other {# datatipes}} permanent te verwyder. Klik \"Bevestig verwyder\" om voort te gaan.",
     "conversationHistory": "Gespreksgeschiedenis",
     "conversationStorageNotice": "Gesprekken worden lokaal opgeslagen in je browser. Je kunt ze op elk moment handmatig verwijderen.",
     "dataAccessPermission": "Datatoegangsrechten",
@@ -3807,7 +3807,7 @@
     "nothingSelected": "Niets geselecteerd",
     "predictiveSpending": "Voorspellende uitgaven",
     "predictiveSpendingDescription": "Voorspel maandelijkse uitgaven per categorie met AI-analyse",
-    "privacy": "Privacy:",
+    "privacy": "Privaatheid:",
     "privacyFirst": "Privacy eerst",
     "privacyNotice": "Alle verwerking vindt plaats in je browser. Geen transactiedata wordt geüpload naar servers. AI-functies zijn opt-in en versturen alleen geschoonde transactiebeschrijvingen (geen rekeningnummers, namen of adressen) wanneer ingeschakeld.",
     "readOnlyDescription": "Chatbot kan data bekijken en vragen beantwoorden maar kan niets wijzigen",
@@ -3879,31 +3879,31 @@
     "title": "Budget App installeren"
   },
   "qrScanner": {
-    "allowCameraAccess": "Please allow camera access when prompted",
-    "cameraError": "Camera Error",
-    "cameraFailed": "Failed to access camera. Please try again.",
-    "cameraInUse": "Camera is in use by another application. Please close other apps using the camera.",
-    "cameraStep1": "Click the lock/info icon in your browser address bar",
-    "cameraStep2": "Find \"Camera\" in the permissions",
-    "cameraStep3": "Change it to \"Allow\"",
-    "cameraStep4": "Refresh this page",
+    "allowCameraAccess": "Laat asseblief kameratoegang toe wanneer gevra",
+    "cameraError": "Kamerafout",
+    "cameraFailed": "Kon nie toegang tot kamera kry nie. Probeer asseblief weer.",
+    "cameraInUse": "Kamera word deur 'n ander toepassing gebruik. Sluit asseblief ander toepassings wat die kamera gebruik.",
+    "cameraStep1": "Klik die slot-/inligting-ikoon in jou blaaier se adresbalk",
+    "cameraStep2": "Soek \"Kamera\" in die toestemmings",
+    "cameraStep3": "Verander dit na \"Laat toe\"",
+    "cameraStep4": "Herlaai hierdie bladsy",
     "cancel": "Annuleren",
-    "deviceFound": "Device Found!",
+    "deviceFound": "Toestel gevind!",
     "error": "Fout",
-    "howToEnableCamera": "How to enable camera access:",
-    "invalidQrFormat": "Invalid QR code format. Please scan a Budget App pairing QR code.",
-    "noCamera": "No camera found on this device.",
-    "permissionDenied": "Camera access was denied. Please allow camera access in your browser settings.",
-    "pointAtQrCode": "Point at QR Code",
-    "positionQrCode": "Position the QR code within the frame",
-    "qrExpired": "This QR code has expired. Please generate a new one on the host device.",
-    "readyToConnect": "Ready to connect to {deviceName}",
-    "scanDescription": "Scan the QR code displayed on the host device to connect",
-    "scanQrCode": "Scan QR Code",
-    "scanningForQr": "Scanning for QR code...",
-    "startCamera": "Start Camera",
-    "startingCamera": "Starting Camera...",
-    "tryAgain": "Try Again"
+    "howToEnableCamera": "Hoe om kameratoegang te aktiveer:",
+    "invalidQrFormat": "Ongeldige QR-kodeformaat. Skandeer asseblief 'n Budget App-koppelings-QR-kode.",
+    "noCamera": "Geen kamera op hierdie toestel gevind nie.",
+    "permissionDenied": "Kameratoegang is geweier. Laat asseblief kameratoegang in jou blaaierinstellings toe.",
+    "pointAtQrCode": "Rig na QR-kode",
+    "positionQrCode": "Posisioneer die QR-kode binne die raam",
+    "qrExpired": "Hierdie QR-kode het verval. Genereer asseblief 'n nuwe een op die gasheertoestel.",
+    "readyToConnect": "Gereed om aan {deviceName} te koppel",
+    "scanDescription": "Skandeer die QR-kode wat op die gasheertoestel vertoon word om te koppel",
+    "scanQrCode": "Skandeer QR-kode",
+    "scanningForQr": "Skandeer vir QR-kode...",
+    "startCamera": "Begin kamera",
+    "startingCamera": "Begin kamera...",
+    "tryAgain": "Probeer weer"
   },
   "quickCategorize": {
     "buttons": {
@@ -3912,7 +3912,7 @@
       "save": "Opslaan"
     },
     "clickToSelect": "Klik op een categorie om te selecteren",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "description": "Kies 'n kategorie vir {count, plural, =1 {hierdie transaksie} other {# transaksies}}",
     "general": "Algemeen",
     "noResults": "Geen categorieën gevonden",
     "pressEnter": "Druk op ↵ Enter",
@@ -3942,15 +3942,15 @@
   },
   "receiptThumbnail": {
     "close": "Sluiten",
-    "deleteConfirm": "Delete receipt \"{filename}\"?",
-    "deleteFailed": "Failed to delete receipt",
-    "deleteReceipt": "Delete receipt",
-    "downloadPdf": "Download PDF",
+    "deleteConfirm": "Verwyder kwitansie \"{filename}\"?",
+    "deleteFailed": "Kon nie kwitansie verwyder nie",
+    "deleteReceipt": "Verwyder kwitansie",
+    "downloadPdf": "Laai PDF af",
     "fileSize": "{size} KB",
-    "pdfReceipt": "PDF Receipt",
-    "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
-    "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}",
+    "pdfReceipt": "PDF-kwitansie",
+    "receiptCount": "{count, plural, =1 {1 kwitansie} other {# kwitansies}}",
+    "unsupportedFileType": "Nie-ondersteunde lêertipe",
+    "uploaded": "Opgelaai {date}",
     "view": "Bekyk"
   },
   "receiptUpload": {
@@ -4002,16 +4002,16 @@
       "quarterly": "Kwartaallijks",
       "weekly": "Wekelijks"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
+    "inDays": "{count, plural, =0 {(vandag)} =1 {(oor 1 dag)} other {(oor # dae)}}",
     "next": "Volgende: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "occurrences": "{count, plural, =1 {1 voorkoms opgespoor} other {# voorkomste opgespoor}}",
     "perPeriod": {
       "month": "per maand",
       "quarter": "per kwartaal",
       "twoWeeks": "per 2 weken",
-      "week": "per week"
+      "week": "weekliks"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "showingPatterns": "{count, plural, =1 {Wys 1 herhalende transaksiepatroon} other {Wys # herhalende transaksiepatrone}}",
     "subtitle": "Gedetecteerde abonnementen en rekeningen",
     "title": "Terugkerende transacties"
   },
@@ -4121,11 +4121,11 @@
     "tabDevTools": "Ontwikkelaarstools",
     "tabLocale": "Taal & opmaak",
     "tabNotifications": "Meldingen",
-    "tabPrivacy": "Privacy & AI",
+    "tabPrivacy": "Privaatheid en KI",
     "tabProfiles": "Profielen",
     "tapToChangeIcon": "Tik om icoon te wijzigen",
     "tapToChooseColor": "Tik om een aangepaste kleur te kiezen",
-    "tipLabel": "Tip:",
+    "tipLabel": "Wenk:",
     "title": "Instellingen",
     "toggleWebmcp": "WebMCP AI-agenttools schakelen",
     "transaction": "transactie",
@@ -4189,7 +4189,7 @@
     "shortcuts": "Snelkoppelinge"
   },
   "simplefinConnect": {
-    "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
+    "accountsConnected": "{count, plural, one {# rekening gekoppel} other {# rekeninge gekoppel}}",
     "alreadyHaveToken": "Heb je al een token?",
     "asOf": "per {date}",
     "autoImportDescription": "Importeer automatisch transacties van je bankrekeningen",
@@ -4250,7 +4250,7 @@
       "title": "Verbonden rekeningen"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "accountsLinked": "{count, plural, =1 {1 rekening gekoppel} other {# rekeninge gekoppel}}",
       "connectButton": "Bankrekening verbinden",
       "connected": "Verbonden",
       "description": "Verbind je bankrekeningen om automatisch transacties te importeren",
@@ -4272,7 +4272,7 @@
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "hoursAgo": "{hours, plural, =1 {1 uur gelede} other {# uur gelede}}",
       "lastSynced": "Laatst gesynchroniseerd: {time}",
       "lessThanHour": "Minder dan een uur geleden",
       "never": "Nooit",
@@ -4395,7 +4395,7 @@
     "originalAmount": "Origineel bedrag:",
     "removeThisSplit": "Deze split verwijderen",
     "selectCategory": "Selecteer categorie...",
-    "splitsCount": "Splits ({current}/{max})",
+    "splitsCount": "Verdelings ({current}/{max})",
     "subcategory": "Subcategorie",
     "title": "Transactie splitsen",
     "validation": {
@@ -4487,7 +4487,7 @@
     "title": "Uitgaven delen",
     "total": "totaal",
     "unknownTransaction": "Onbekende transactie",
-    "unsettledSplitCount": "{count, plural, one {# unsettled split} other {# unsettled splits}}",
+    "unsettledSplitCount": "{count, plural, one {# onafgehandelde verdeling} other {# onafgehandelde verdelings}}",
     "unsettledSplits": "Onafgerekende splits ({count})",
     "via": "via",
     "youOwe": "Je bent {amount} verschuldigd",
@@ -4552,7 +4552,7 @@
       "totalSpent": "Totaal uitgegeven"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {1 dag oor in proeftydperk} other {# dae oor in proeftydperk}}"
     },
     "reminderToggle": {
       "disableReminder": "Deaktiveer herinnering",
@@ -4571,18 +4571,18 @@
       "upcomingCharges": "Aankomende afschrijvingen (komende 30 dagen)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "activeSubscriptions": "{count, plural, =1 {1 aktiewe intekening} other {# aktiewe intekeninge}}",
       "annualCost": "Jaarlijkse kosten",
       "monthlyCost": "Maandelijkse kosten",
       "next30Days": "Komende 30 dagen",
       "projectedYearly": "Verwachte jaarlijkse uitgaven",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "upcomingCharges": "{count, plural, =1 {1 komende heffing} other {# komende heffings}}"
     },
     "suggestions": {
       "inactiveTitle": "Mogelijk geannuleerde abonnementen",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
+      "inactiveDescription": "{count, plural, =1 {1 intekening het nie} other {# intekeninge het nie}} onlangs gehef nie. Bevestig dat hulle werklik gekanselleer is.",
       "trialsTitle": "Proefperiodes die binnenkort aflopen",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
+      "trialsDescription": "{count, plural, =1 {1 proeftydperk} other {# proeftydperke}} eindig binne die volgende 7 dae. Kanselleer as jy dit nie gebruik nie.",
       "highCostTitle": "Dure abonnementen",
       "highCostDescription": "Deze abonnementen vormen een groot deel van je uitgaven. Overweeg of je er volledig gebruik van maakt."
     }
@@ -4624,7 +4624,7 @@
     "paymentMethodPlaceholder": "bijv. Visa eindigend op 1234",
     "remindMe": "Herinner mij",
     "reminder1Day": "1 dag",
-    "reminder1Week": "1 week",
+    "reminder1Week": "1 wk",
     "reminder2Weeks": "2 weken",
     "reminder3Days": "3 dagen",
     "reminder5Days": "5 dagen",
@@ -4697,19 +4697,19 @@
     }
   },
   "syncStatus": {
-    "daysAgo": "{days}d ago",
-    "devices": "{connected}/{total} devices",
-    "devicesConnected": "{connected}/{total} devices connected",
-    "hoursAgo": "{hours}h ago",
-    "justNow": "Just now",
-    "lastSync": "Last sync: {time}",
-    "minutesAgo": "{minutes}m ago",
-    "never": "Never",
+    "daysAgo": "{days}d gelede",
+    "devices": "{connected}/{total} toestelle",
+    "devicesConnected": "{connected}/{total} toestelle gekoppel",
+    "hoursAgo": "{hours}u gelede",
+    "justNow": "Sopas",
+    "lastSync": "Laaste sinchronisasie: {time}",
+    "minutesAgo": "{minutes}m gelede",
+    "never": "Nooit",
     "offline": "Offline",
-    "partialSync": "Partial Sync",
-    "syncError": "Sync Error",
+    "partialSync": "Gedeeltelike sinchronisasie",
+    "syncError": "Sinchronisasiefout",
     "synced": "Gesynchroniseerd",
-    "syncing": "Syncing..."
+    "syncing": "Sinchroniseer tans..."
   },
   "tooltip": {
     "ariaLabel": "Meer inligting",
@@ -4840,7 +4840,7 @@
     "placeholderExtended": "Probeer 'koffie vorige week' of 'bedrag:>50'",
     "recentSearchLabel": "Recente zoekopdracht",
     "recentSearches": "Recente zoekopdrachten",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
+    "resultCount": "{count} {count, plural, =1 {resultaat} other {resultate}}",
     "save": "Opslaan",
     "saveFilter": "Filter opslaan",
     "savedFilters": "Opgeslagen filters",
@@ -4854,7 +4854,7 @@
       "amounts": "Bedragbereiken",
       "categories": "Categorieën",
       "merchants": "Handelaren",
-      "recent": "Recent"
+      "recent": "Onlangs"
     },
     "suggestionsHeading": "Suggesties",
     "tips": {
@@ -4866,10 +4866,10 @@
       "type": "Type: 'type:inkomen' of 'type:uitgave'"
     },
     "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
+    "usedTimes": "{count} {count, plural, =1 {keer} other {keer}} gebruik",
     "viewAllResults": "Alle {count} resultaten bekijken",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "resultsFound": "{count} {count, plural, =1 {resultaat} other {resultate}} gevind",
+    "suggestionsAvailable": "{count} {count, plural, =1 {voorstel} other {voorstelle}} beskikbaar"
   },
   "transactionTable": {
     "actions": {
@@ -4988,7 +4988,7 @@
     "youWillLose": "Je verliest:"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
+    "daysLeft": "{count, plural, =0 {Jou proeftydperk eindig vandag!} =1 {Nog net 1 dag oor in jou proeftydperk} other {# dae oor in jou proeftydperk}}",
     "daysRemaining": "{count} dagen resterend in je gratis proefperiode",
     "dismiss": "Afwijzen",
     "expired": "Je proefperiode is verlopen",
@@ -5012,9 +5012,9 @@
     "ignoreAllContinue": "Alles negeren & doorgaan",
     "informational": "Informatief",
     "issuesDetected": "Problemen gedetecteerd",
-    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
+    "issuesFound": "Ons het {count, plural, =1 {1 probleem} other {# probleme}} gevind wat jou aandag vereis",
     "marked": "Gemarkeerd",
-    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
+    "removalNote": "{count, plural, =1 {1 transaksie} other {# transaksies}} sal verwyder word uit die invoer as jy voortgaan.",
     "remove": "Verwijderen",
     "removeAndContinue": "{count} verwijderen & doorgaan",
     "suggestion": "Suggestie:",
@@ -5106,7 +5106,7 @@
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "category": "{count, plural, =1 {1 kategorie} other {# kategorieë}}",
       "createNew": "Nieuwe aanmaken",
       "description": "Wijs YNAB-categorieën toe aan je bestaande categorieën of maak nieuwe aan.",
       "mapToExisting": "Toewijzen aan bestaande",
@@ -5119,7 +5119,7 @@
       "errors": "Fouten",
       "importAnother": "Nog een importeren",
       "success": "Import voltooid!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "successMessage": "{count, plural, =1 {1 item ingevoer} other {# items ingevoer}} suksesvol vanaf YNAB.",
       "viewTransactions": "Transacties bekijken",
       "whatNext": "Wat wil je nu doen?",
       "withIssues": "Import voltooid met problemen"
@@ -5232,7 +5232,7 @@
       "budgetImportFailed": "Budget importeren mislukt: {details}"
     },
     "importSuccess": "YNAB-data succesvol geïmporteerd!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importWithErrors": "Invoer voltooi met {count, plural, =1 {1 fout} other {# foute}}"
   },
   "balanceReconciliation": {
     "title": "Invoer voltooi!",

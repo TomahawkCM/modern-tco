@@ -2458,7 +2458,7 @@
       "minutesAgo": "{count, plural, other {# นาทีที่แล้ว}}",
       "neverSynced": "ไม่เคยซิงค์"
     },
-    "title": "LAN Sync"
+    "title": "ซิงค์ LAN"
   },
   "landing": {
     "accessibility": {
@@ -2500,8 +2500,8 @@
       "headers": {
         "cloud": "แอปคลาวด์ทั่วไป",
         "feature": "ฟีเจอร์",
-        "local": "BudgetPro Local",
-        "sync": "BudgetPro Sync (Pro)"
+        "local": "BudgetPro แบบออฟไลน์",
+        "sync": "BudgetPro Sync (รุ่น Pro)"
       },
       "offlineMode": {
         "feature": "โหมดออฟไลน์"
@@ -2616,22 +2616,22 @@
         "viewPricing": "ดูราคา"
       },
       "demo": {
-        "cloudStorage": "Cloud storage",
-        "dining": "Dining",
-        "expenses": "Expenses",
-        "foodToday": "Food • Today",
-        "groceries": "Groceries",
-        "groceryStore": "Grocery Store",
-        "income": "Income",
-        "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
-        "netWorth": "Net worth",
+        "cloudStorage": "พื้นที่เก็บข้อมูลคลาวด์",
+        "dining": "อาหาร",
+        "expenses": "รายจ่าย",
+        "foodToday": "อาหาร • วันนี้",
+        "groceries": "ของชำ",
+        "groceryStore": "ร้านขายของชำ",
+        "income": "รายได้",
+        "incomeYesterday": "รายได้ • เมื่อวาน",
+        "monthly": "รายเดือน",
+        "netWorth": "มูลค่าสุทธิ",
         "netflix": "Netflix",
-        "salary": "Salary",
-        "shopping": "Shopping",
+        "salary": "เงินเดือน",
+        "shopping": "ช้อปปิ้ง",
         "spotify": "Spotify",
-        "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "subscriptionOct24": "สมัครสมาชิก • 24 ต.ค.",
+        "yearly": "รายปี"
       },
       "modes": {
         "budgets": "งบประมาณ",
@@ -4229,7 +4229,7 @@
     "securePrivate": "ปลอดภัยและเป็นส่วนตัว",
     "securePrivateDescription": "SimpleFIN จะไม่เห็นข้อมูลเข้าสู่ระบบของคุณ คุณควบคุมการเข้าถึง",
     "selectAccount": "เลือกบัญชี",
-    "setupToken": "Setup Token",
+    "setupToken": "โทเค็นตั้งค่า",
     "step1Description": "สร้างหรือลงชื่อเข้าใช้บัญชี SimpleFIN ของคุณ",
     "step1Title": "ขั้นตอนที่ 1: รับ Setup Token",
     "step2Description": "วาง token จาก SimpleFIN Bridge",
@@ -4265,7 +4265,7 @@
       "dialogTitle": "ตัดการเชื่อมต่อ SimpleFIN?"
     },
     "help": {
-      "bridgeDashboard": "SimpleFIN Bridge Dashboard",
+      "bridgeDashboard": "แดชบอร์ด SimpleFIN Bridge",
       "protocolDocs": "เอกสาร SimpleFIN Protocol",
       "title": "ต้องการความช่วยเหลือ?"
     },
@@ -5047,7 +5047,7 @@
     "strengthVeryStrong": "แข็งแกร่งมาก",
     "strengthVeryWeak": "อ่อนแอมาก",
     "strengthWeak": "อ่อนแอ",
-    "zeroKnowledge": "Zero Knowledge"
+    "zeroKnowledge": "ไม่เปิดเผยข้อมูล"
   },
   "welcome": {
     "subtitle": "เริ่มต้นด้วยการเพิ่มธุรกรรมแรกของคุณหรือนำเข้าข้อมูลจากธนาคาร",
@@ -5211,9 +5211,9 @@
       "dragAndDrop": "หรือลากและวางที่นี่",
       "fileSummary": "สรุปไฟล์",
       "format": "รูปแบบ",
-      "formatApiExport": "YNAB API Export",
+      "formatApiExport": "ส่งออกผ่าน YNAB API",
       "formatApiExportDesc": "JSON จาก nYNAB",
-      "formatCsv": "CSV Export",
+      "formatCsv": "ส่งออกเป็น CSV",
       "formatCsvDesc": "จากเว็บแอป YNAB",
       "formatYfull": "Budget.yfull / Budget.ynab4",
       "formatYfullDesc": "ส่งออกจาก YNAB4 desktop",

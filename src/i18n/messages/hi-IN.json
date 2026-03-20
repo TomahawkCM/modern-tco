@@ -337,12 +337,12 @@
       "upcomingCharges": "आगामी शुल्क (अगले 30 दिन)"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "संभवतः रद्द की गई सदस्यताएँ",
+      "inactiveDescription": "{count, plural, =1 {1 सदस्यता से} other {# सदस्यताओं से}} हाल ही में शुल्क नहीं लिया गया। सत्यापित करें कि वे वास्तव में रद्द हैं।",
+      "trialsTitle": "जल्द समाप्त होने वाले परीक्षण",
+      "trialsDescription": "{count, plural, =1 {1 परीक्षण} other {# परीक्षण}} अगले 7 दिनों में समाप्त हो रहे हैं। यदि उपयोग नहीं कर रहे तो रद्द करें।",
+      "highCostTitle": "महँगी सदस्यताएँ",
+      "highCostDescription": "ये सदस्यताएँ आपके खर्च का बड़ा हिस्सा हैं। विचार करें कि क्या आपको पूरा मूल्य मिल रहा है।"
     }
   },
   "emptyStates": {
@@ -1143,38 +1143,38 @@
         "description": "अपने वॉलेट पर बार-बार होने वाले उन खर्चों को पहचानें जिन्हें अन्य ऐप मिस कर देते हैं।"
       }
     },
-    "features": [
-      {
+    "features": {
+      "0": {
         "title": "स्थानीय डैशबोर्ड",
-        "description": "कुल संपत्ति, नकदी प्रवाह और श्रेणी विश्लेषण। तत्काल लोड समय।",
+        "description": "कुल संपत्ति, नकद प्रवाह और श्रेणी विश्लेषण। तुरंत लोड।",
         "href": "/budget-app"
       },
-      {
+      "1": {
         "title": "आयात विज़ार्ड",
-        "description": "BMO, Home Trust और अनुकूलन योग्य कस्टम प्रारूपों के लिए स्मार्ट CSV मैपर।",
+        "description": "BMO, Home Trust और कस्टम फ़ॉर्मैट के लिए स्मार्ट CSV मैपर।",
         "href": "/budget-app/import"
       },
-      {
+      "2": {
         "title": "रसीद OCR",
         "description": "Tesseract.js से स्थानीय रूप से रसीदें स्कैन करें। कोई क्लाउड प्रोसेसिंग नहीं।",
         "href": "/budget-app/ocr"
       },
-      {
+      "3": {
         "title": "श्रेणी बजट",
-        "description": "शून्य-आधारित या रोलओवर बजटिंग — विस्तृत श्रेणी नियंत्रण।",
+        "description": "विस्तृत श्रेणी नियंत्रण के साथ शून्य-आधारित या रोलओवर बजटिंग।",
         "href": "/budget-app/budgets"
       },
-      {
+      "4": {
         "title": "सेवानिवृत्ति कैलकुलेटर",
-        "description": "चक्रवृद्धि ब्याज विज़ुअलाइज़ेशन के साथ अपनी स्वतंत्रता तिथि का अनुमान लगाएँ।",
+        "description": "चक्रवृद्धि ब्याज विज़ुअलाइज़ेशन से अपनी स्वतंत्रता तिथि का अनुमान लगाएँ।",
         "href": "/budget-app/planning/retirement"
       },
-      {
-        "title": "गोपनीयता सुरक्षा",
-        "description": "सुरक्षा की अतिरिक्त परत के लिए वैकल्पिक क्लाइंट-साइड एन्क्रिप्शन।",
+      "5": {
+        "title": "गोपनीयता शील्ड",
+        "description": "अतिरिक्त सुरक्षा के लिए वैकल्पिक क्लाइंट-साइड एन्क्रिप्शन।",
         "href": "/budget-app/settings"
       }
-    ],
+    },
     "howItWorks": {
       "0": {
         "title": "आयात",
@@ -1411,16 +1411,16 @@
       "recentTransactions": "हाल के लेन-देन",
       "tx0Name": "किराना स्टोर",
       "tx0Date": "आज, 2:30 PM",
-      "tx0Amount": "-$124.50",
+      "tx0Amount": "-₹124.50",
       "tx1Name": "टेक सॉल्यूशंस इंक.",
       "tx1Date": "कल, 9:00 AM",
-      "tx1Amount": "+$4,250.00",
+      "tx1Amount": "+₹4,250.00",
       "tx2Name": "Netflix सदस्यता",
       "tx2Date": "24 अक्टू, 2025",
-      "tx2Amount": "-$15.99",
-      "balanceAmount": "$24,500.00",
+      "tx2Amount": "-₹15.99",
+      "balanceAmount": "₹24,500.00",
       "balanceChange": "+12.5%",
-      "expensesAmount": "$1,250.00",
+      "expensesAmount": "₹1,250.00",
       "expensesChange": "-5.2%",
       "savingsPercent": "85%",
       "currencySymbol": "₹"
@@ -1776,8 +1776,8 @@
     "usedTimes": "{count} {count, plural, =1 {बार} other {बार}} उपयोग किया गया",
     "noTransactionsYet": "अभी तक कोई लेन-देन नहीं",
     "save": "सहेजें",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "resultsFound": "{count} {count, plural, =1 {परिणाम मिला} other {परिणाम मिले}}",
+    "suggestionsAvailable": "{count} {count, plural, =1 {सुझाव उपलब्ध} other {सुझाव उपलब्ध}}"
   },
   "mobileNav": {
     "home": "होम",
@@ -1928,16 +1928,16 @@
       "importAnother": "एक और आयात करें"
     },
     "errors": {
-      "parseFailed": "Failed to parse YNAB file",
-      "previewFailed": "Failed to generate preview",
-      "accountImportFailed": "Account import failed: {details}",
-      "categoryImportFailed": "Category import failed: {details}",
-      "transactionImportFailed": "Transaction import failed: {details}",
-      "unknownError": "Unknown error",
-      "budgetImportFailed": "Budget import failed: {details}"
+      "parseFailed": "YNAB फ़ाइल पार्स करने में विफल",
+      "previewFailed": "पूर्वावलोकन बनाने में विफल",
+      "accountImportFailed": "खाता आयात विफल: {details}",
+      "categoryImportFailed": "श्रेणी आयात विफल: {details}",
+      "transactionImportFailed": "लेनदेन आयात विफल: {details}",
+      "unknownError": "अज्ञात त्रुटि",
+      "budgetImportFailed": "बजट आयात विफल: {details}"
     },
-    "importSuccess": "YNAB data imported successfully!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importSuccess": "YNAB डेटा सफलतापूर्वक आयात हो गया!",
+    "importWithErrors": "आयात {count, plural, =1 {1 त्रुटि} other {# त्रुटियों}} के साथ पूर्ण हुआ"
   },
   "simplefinSettings": {
     "connection": {

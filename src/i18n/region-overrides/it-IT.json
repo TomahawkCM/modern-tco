@@ -1,0 +1,247 @@
+{
+  "budget": {
+    "budgets": {
+      "periodHelpTooltip": "I budget mensili si azzerano ogni mese. I budget annuali dividono il totale su 12 mesi. Esempio: 1.200 € annui = 100 € al mese.",
+      "rolloverHelpTooltip": "Cos'è il rollover del budget? Se abilitato, i fondi non spesi passano al mese successivo. Esempio: Budget: 500 €/mese, Speso: 400 €, Rimanente: 100 €, Il mese successivo inizia con: 600 € (500 € + 100 € riportati)"
+    }
+  },
+  "calculators": {
+    "inflation": {
+      "inflationRateHelp": "Media storica italiana: ~2-3%"
+    }
+  },
+  "commandPalette": {
+    "commands": {
+      "addTransaction": "Aggiungi Transazione",
+      "budgets": "Budget",
+      "categories": "Categorie",
+      "darkTheme": "Tema Scuro",
+      "exportData": "Esporta Dati",
+      "futurePlans": "Piani Futuri",
+      "highContrastTheme": "Tema Alto Contrasto",
+      "importCsv": "Importa CSV",
+      "investments": "Investimenti",
+      "lightTheme": "Tema Chiaro",
+      "loans": "Prestiti",
+      "newBudget": "Nuovo Budget",
+      "reports": "Report",
+      "retirement": "Pensione",
+      "scanReceipt": "Scansiona Ricevuta",
+      "settings": "Impostazioni",
+      "transactions": "Transazioni"
+    }
+  },
+  "landing": {
+    "comparison": {
+      "cost": {
+        "cloud": "$100+/anno Abbonamento"
+      }
+    },
+    "features": {
+      "2": {
+        "description": "Scansiona le ricevute localmente con Tesseract.js. Nessel'elaborazione nel cloud."
+      }
+    },
+    "footer": {
+      "features": "Caratteristiche"
+    },
+    "heroSection": {
+      "demo": {
+        "cloudStorage": "Archiviazione cloud",
+        "dining": "Ristoranti",
+        "expenses": "Spese",
+        "foodToday": "Alimentari • Oggi",
+        "groceries": "Spesa",
+        "groceryStore": "Supermercato",
+        "income": "Entrate",
+        "incomeYesterday": "Entrate • Ieri",
+        "monthly": "Mensile",
+        "netWorth": "Patrimonio netto",
+        "salary": "Stipendio",
+        "subscriptionOct24": "Abbonamento • 24 ott",
+        "yearly": "Annuale"
+      }
+    },
+    "howItWorks": {
+      "2": {
+        "description": "Assegna a ogni euro un compito e prevedi il tuo patrimonio netto futuro."
+      }
+    },
+    "marquee": {
+      "logos": [
+        "Budgeting",
+        "Abbonamenti",
+        "Prestiti",
+        "Ricevute OCR",
+        "Report",
+        "Pianificazione",
+        "Offline",
+        "Modalità Anziani"
+      ]
+    },
+    "preview": {
+      "balanceAmount": "€24.500,00",
+      "currencySymbol": "€",
+      "expensesAmount": "€1.250,00",
+      "tx0Amount": "-€124,50",
+      "tx0Name": "Supermercato",
+      "tx1Amount": "+€4.250,00",
+      "tx2Amount": "-€15,99"
+    }
+  },
+  "notificationSettings": {
+    "emailNotifications": {
+      "description": "Ricevi notifiche via email",
+      "emailAddress": "Indirizzo email",
+      "invalidEmail": "Inserisci un indirizzo email valido",
+      "sendTest": "Invia test",
+      "testEmail": "Email di prova",
+      "testEmailDescription": "Invia un'email di prova per verificare le impostazioni",
+      "testEmailFailed": "Invio fallito",
+      "testEmailSent": "Email inviata!",
+      "title": "Notifiche email",
+      "types": "Tipi di notifiche email"
+    },
+    "infoBox": {
+      "emailExplanation": "Le notifiche email vengono inviate tramite il nostro servizio email sicuro e richiedono un indirizzo email valido.",
+      "pushExplanation": "Le notifiche push richiedono l'autorizzazione del browser e funzionano anche quando l'app è chiusa.",
+      "storedLocally": "Le impostazioni delle notifiche sono archiviate localmente sul tuo dispositivo."
+    },
+    "masterToggle": {
+      "description": "Attiva o disattiva tutte le notifiche",
+      "title": "Abilita notifiche"
+    },
+    "notAvailable": "Le impostazioni delle notifiche non sono disponibili.",
+    "notificationTypes": {
+      "billReminders": {
+        "description": "Ricevi una notifica prima della scadenza degli abbonamenti",
+        "title": "Promemoria bollette"
+      },
+      "budgetAlerts": {
+        "description": "Avvisi quando ci si avvicina ai limiti del budget",
+        "title": "Avvisi budget"
+      },
+      "description": "Scegli quali notifiche vuoi ricevere",
+      "goalMilestones": {
+        "description": "Festeggia quando raggiungi i traguardi di risparmio",
+        "title": "Traguardi obiettivi"
+      },
+      "title": "Tipi di notifiche"
+    }
+  },
+  "planning": {
+    "paycheck": {
+      "subtitle": "Pianifica dove va ogni euro prima di ricevere lo stipendio"
+    }
+  },
+  "privacyPanel": {
+    "anomalyDetectionDescription": "Segnala schemi di spesa insoliti (es. «Il tuo acquisto Starbucks di 85 € è insolito»)"
+  },
+  "searchNaturalLanguage": {
+    "around": "circa",
+    "bill": "bolletta",
+    "bought": "acquistato",
+    "cheap": "economico",
+    "deposit": "deposito",
+    "exampleAmazonOver50": "Ordini Amazon oltre 50 €",
+    "exampleCoffeeLastWeek": "Acquisti di caffè della settimana scorsa",
+    "exampleExpensive": "Transazioni oltre 100 €",
+    "exampleStructured": "Acquisti oltre 200 € (strutturato)",
+    "expense": "spesa",
+    "expensive": "costoso",
+    "income": "entrata",
+    "large": "grande",
+    "lastMonth": "mese scorso",
+    "lastWeek": "settimana scorsa",
+    "lastYear": "anno scorso",
+    "noResults": "Nessun risultato trovato",
+    "over": "oltre",
+    "paid": "pagato",
+    "purchase": "acquisto",
+    "recently": "recentemente",
+    "refund": "rimborso",
+    "resultsCount": "{count} risultati",
+    "salary": "stipendio",
+    "searchPlaceholder": "Cerca transazioni...",
+    "searchTips": "Suggerimenti di ricerca",
+    "small": "piccolo",
+    "spent": "speso",
+    "thisMonth": "questo mese",
+    "thisWeek": "questa settimana",
+    "thisYear": "quest'anno",
+    "today": "oggi",
+    "under": "sotto",
+    "yesterday": "ieri"
+  },
+  "searchOperators": {
+    "account": "conto",
+    "amount": "importo",
+    "category": "categoria",
+    "date": "data",
+    "dateLast30": "ultimi30",
+    "dateLast7": "ultimi7",
+    "dateLastMonth": "ultimoMese",
+    "dateLastWeek": "ultimaSettimana",
+    "dateLastYear": "ultimoAnno",
+    "dateThisMonth": "questoMese",
+    "dateThisYear": "questoAnno",
+    "dateToday": "oggi",
+    "dateYesterday": "ieri",
+    "is": "è",
+    "isExpense": "spesa",
+    "isIncome": "entrata",
+    "isRecurring": "ricorrente",
+    "isSplit": "diviso",
+    "merchant": "commerciante",
+    "tag": "etichetta",
+    "type": "tipo",
+    "typeExpense": "spesa",
+    "typeIncome": "entrata"
+  },
+  "settings": {
+    "tabDevTools": "Strumenti sviluppatore",
+    "tabLocale": "Locale e formattazione",
+    "tipLabel": "Suggerimento:",
+    "unarchiveCategory": "Ripristina categoria",
+    "unarchiveFailed": "Impossibile ripristinare la categoria",
+    "webmcpDescription": "Consenti agli agenti IA del browser di interagire con i dati del budget. Richiede Chrome 146+ con il flag WebMCP abilitato.",
+    "webmcpToolsDescription": "Quando abilitati, 9 strumenti sono esposti agli agenti IA del browser: cerca transazioni, ottieni riepilogo budget, spese per categoria, saldi dei conti, elenca categorie, ottieni abbonamenti, aggiungi transazione, categorizza transazione e imposta limite budget. I campi di crittografia e i dati di identificazione bancaria non vengono mai condivisi."
+  },
+  "shortcutsModal": {
+    "close": "Chiudi aiuto scorciatoie",
+    "proTip": {
+      "description": "Le scorciatoie da tastiera funzionano su qualsiasi pagina tranne quando si digita nei moduli. Premi {key} in qualsiasi momento per vedere questa guida.",
+      "title": "💡 Suggerimento Pro"
+    },
+    "subtitle": "Suggerimenti di produttività per utenti avanzati",
+    "title": "Scorciatoie da tastiera"
+  },
+  "splits": {
+    "splitFlow": {
+      "modes": {
+        "percentage": {
+          "description": "Imposta quote percentuali per ogni persona"
+        }
+      }
+    }
+  },
+  "subscriptionCard": {
+    "badges": {
+      "aiVerified": "Verificato dall'IA"
+    },
+    "confidence": {
+      "label": "Confidenza di rilevamento"
+    }
+  },
+  "subscriptionModal": {
+    "currencySymbol": "€"
+  },
+  "transactionModal": {
+    "description": {
+      "placeholder": "es. Spesa al supermercato Esselunga"
+    }
+  },
+  "transactions": {
+    "splitTransactionsHelp": "Dividi un singolo acquisto tra più categorie. Esempio: visita al supermercato (100 €) → Spesa (80 €) + Casa (20 €). Clicca il pulsante Dividi su qualsiasi transazione per dividerla."
+  }
+}

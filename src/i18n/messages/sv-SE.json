@@ -595,7 +595,7 @@
     "createCategory": {
       "nameRequired": "Kategorinamn krävs",
       "created": "Kategori \"{name}\" skapad!",
-      "failed": "Failed to create category"
+      "failed": "Det gick inte att skapa kategori"
     }
   },
   "importDialog": {
@@ -714,17 +714,17 @@
   },
   "quickCategorize": {
     "title": "Snabbkategorisering",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
-    "searchPlaceholder": "Search categories...",
-    "noResults": "No categories found",
+    "description": "Välj en kategori för {count, plural, =1 {den här transaktionen} other {# transaktioner}}",
+    "searchPlaceholder": "Sök kategorier...",
+    "noResults": "Inga kategorier hittades",
     "general": "Allmänt",
-    "clickToSelect": "Click a category to select",
-    "pressEnter": "Press ↵ Enter",
+    "clickToSelect": "Klicka på en kategori för att välja",
+    "pressEnter": "Tryck ↵ Enter",
     "saving": "Sparar...",
     "buttons": {
       "cancel": "Avbryt",
       "save": "Spara",
-      "apply": "Apply Category"
+      "apply": "Tillämpa kategori"
     }
   },
   "bulkActions": {
@@ -732,12 +732,12 @@
     "categorize": "Kategorisera valda",
     "delete": "Radera valda",
     "export": "Exportera",
-    "clearSelection": "Clear selection",
+    "clearSelection": "Rensa urval",
     "selectAll": "Välj alla",
-    "selectCategory": "Select category...",
-    "noSubcategory": "No subcategory",
-    "applyTo": "Apply to {count}",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "selectCategory": "Välj kategori...",
+    "noSubcategory": "Ingen underkategori",
+    "applyTo": "Tillämpa på {count}",
+    "confirmDelete": "Ta bort {count, plural, =1 {1 transaktion} other {# transaktioner}}?",
     "deleteWarning": "Denna åtgärd kan inte ångras."
   },
   "transactionTable": {
@@ -749,7 +749,7 @@
       "account": "Konto",
       "actions": "Åtgärder"
     },
-    "emptyState": "No transactions to display",
+    "emptyState": "Inga transaktioner att visa",
     "actions": {
       "edit": "Redigera",
       "delete": "Radera",
@@ -763,25 +763,25 @@
     "category": "Kategori",
     "account": "Konto",
     "type": "Typ",
-    "allCategories": "All categories",
-    "allAccounts": "All accounts",
+    "allCategories": "Alla kategorier",
+    "allAccounts": "Alla konton",
     "allTypes": "Alla typer",
     "income": "Inkomst",
     "expense": "Utgift",
-    "clearFilters": "Clear filters",
+    "clearFilters": "Rensa filter",
     "apply": "Tillämpa"
   },
   "quickFilters": {
     "timePeriod": "Tidsperiod",
     "presets": {
       "thisMonth": "Denna månad",
-      "last30": "Last 30 Days",
-      "last90": "Last 90 Days",
+      "last30": "Senaste 30 dagarna",
+      "last90": "Senaste 90 dagarna",
       "thisYear": "I år"
     },
     "categories": "Kategorier",
     "all": "Alla",
-    "moreCategories": "+{count} more",
+    "moreCategories": "+{count} fler",
     "clearFilters": "Rensa filter"
   },
   "splitTransaction": {
@@ -799,7 +799,7 @@
     "selectCategory": "Välj kategori",
     "none": "Ingen",
     "removeThisSplit": "Ta bort denna delning",
-    "addSplit": "Add Split ({current}/{max})",
+    "addSplit": "Lägg till delning ({current}/{max})",
     "maxSplitsReached": "Max 5 delningar tillåtna",
     "minSplitsRequired": "Minst 2 delningar krävs",
     "validation": {
@@ -830,11 +830,11 @@
   },
   "shortcutsModal": {
     "title": "Tangentbordsgenvägar",
-    "subtitle": "Power-user productivity tips",
-    "close": "Close shortcuts help",
+    "subtitle": "Produktivitetstips för avancerade användare",
+    "close": "Stäng genvägshjälp",
     "proTip": {
       "title": "💡 Proffstips",
-      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help."
+      "description": "Tangentbordsgenvägar fungerar på alla sidor utom i formulär. Tryck {key} när som helst för att visa denna hjälp."
     }
   },
   "chatbotHelp": {
@@ -933,9 +933,9 @@
     "placeholder": "Skriv ett kommando...",
     "noResults": "Inga kommandon hittades",
     "groups": {
-      "tracking": "Tracking & Analysis",
-      "wealth": "Wealth & Planning",
-      "tools": "Tools & Settings",
+      "tracking": "Spårning och analys",
+      "wealth": "Förmögenhet och planering",
+      "tools": "Verktyg och inställningar",
       "quickActions": "Snabbåtgärder",
       "appearance": "Utseende"
     },
@@ -947,7 +947,7 @@
       "reports": "Rapporter",
       "loans": "Lån",
       "investments": "Investeringar",
-      "futurePlans": "Future Plans",
+      "futurePlans": "Framtidsplaner",
       "retirement": "Pension",
       "categories": "Kategorier",
       "importCsv": "Importera CSV",
@@ -955,9 +955,9 @@
       "settings": "Inställningar",
       "addTransaction": "Lägg till transaktion",
       "newBudget": "Ny budget",
-      "lightTheme": "Light Theme",
+      "lightTheme": "Ljust tema",
       "darkTheme": "Mörkt tema",
-      "highContrastTheme": "High-Contrast Theme"
+      "highContrastTheme": "Högkontrasttema"
     }
   },
   "receiptUpload": {
@@ -1002,39 +1002,39 @@
   },
   "errorRecovery": {
     "title": "Något gick fel",
-    "subtitle": "Don't worry! We can help you fix this.",
+    "subtitle": "Oroa dig inte! Vi kan hjälpa dig att åtgärda detta.",
     "closeModal": "Stäng modal",
     "summary": {
-      "title": "Error Summary",
-      "category": "Category: {category}"
+      "title": "Felsammanfattning",
+      "category": "Kategori: {category}"
     },
-    "aiAnalysis": "AI Analysis:",
+    "aiAnalysis": "AI-analys:",
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
-      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
-      "optionsTitle": "Recovery Options"
+      "canRecover": "Goda nyheter! Vi hittade {count} {count, plural, =1 {sätt} other {sätt}} att återställa från detta fel.",
+      "cannotRecover": "Återställning är inte möjlig. Du behöver exportera filen från din bank igen eller prova ett annat format.",
+      "optionsTitle": "Återställningsalternativ"
     },
     "suggestions": {
       "autoFix": "AUTOFIX",
-      "confidence": "{percent}% confidence",
-      "technicalDetails": "Technical Details",
+      "confidence": "{percent}% säkerhet",
+      "technicalDetails": "Tekniska detaljer",
       "fixing": "Fixar...",
       "autoFixButton": "Autofix",
       "learnMore": "Läs mer"
     },
     "technical": {
-      "title": "Advanced Technical Details",
-      "errorCategory": "Error Category:",
+      "title": "Avancerade tekniska detaljer",
+      "errorCategory": "Felkategori:",
       "severity": "Allvarlighetsgrad:",
-      "canRecover": "Can Recover:",
-      "suggestions": "Suggestions:",
+      "canRecover": "Kan återställas:",
+      "suggestions": "Förslag:",
       "yes": "Ja",
       "no": "Nej"
     },
     "footer": {
       "close": "Stäng",
-      "needHelp": "Need more help?",
-      "viewGuide": "View troubleshooting guide"
+      "needHelp": "Behöver du mer hjälp?",
+      "viewGuide": "Visa felsökningsguide"
     }
   },
   "debtAnalysis": {
@@ -1341,12 +1341,12 @@
         "groceries": "Dagligvaror",
         "dining": "Restaurang",
         "shopping": "Shopping",
-        "groceryStore": "Grocery Store",
-        "foodToday": "Food • Today",
+        "groceryStore": "Mataffären",
+        "foodToday": "Mat • Idag",
         "salary": "Lön",
-        "incomeYesterday": "Income • Yesterday",
+        "incomeYesterday": "Inkomst • Igår",
         "netflix": "Netflix",
-        "subscriptionOct24": "Subscription • Oct 24",
+        "subscriptionOct24": "Prenumeration • 24 okt",
         "spotify": "Spotify",
         "monthly": "Månadsvis",
         "cloudStorage": "Molnlagring",
@@ -1389,16 +1389,7 @@
       "tagline": "Premiumbudgetering"
     },
     "marquee": {
-      "logos": [
-        "Budgeting",
-        "Subscriptions",
-        "Loans",
-        "OCR Receipts",
-        "Reports",
-        "Planning",
-        "Offline",
-        "Seniors Mode"
-      ]
+      "logos": "Budgetering,Prenumerationer,Lån,OCR-kvitton,Rapporter,Planering,Offline,Seniorläge"
     },
     "preview": {
       "overview": "Översikt",
@@ -1445,44 +1436,44 @@
   },
   "investmentAccountModal": {
     "title": {
-      "add": "Add Investment Account",
-      "edit": "Edit Investment Account"
+      "add": "Lägg till investeringskonto",
+      "edit": "Redigera investeringskonto"
     },
     "closeModal": "Stäng modal",
     "fields": {
       "name": {
         "label": "Kontonamn",
-        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
+        "placeholder": "t.ex. Mitt ISK, Tjänstepension, Aktiedepå"
       },
       "type": {
         "label": "Kontotyp",
         "descriptions": {
-          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
-          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals",
-          "Non-registered": "Taxable investment account",
-          "Company shares": "Employee stock purchase or stock options"
+          "RRSP": "Registered Retirement Savings Plan - Skatteuppskjuten tillväxt",
+          "TFSA": "Tax-Free Savings Account - Skattefri tillväxt och uttag",
+          "Non-registered": "Skattepliktigt investeringskonto",
+          "Company shares": "Aktieköp via anställning eller aktieoptioner"
         }
       },
       "institution": {
-        "label": "Financial Institution (Optional)",
-        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
+        "label": "Finansinstitut (Valfritt)",
+        "placeholder": "t.ex. Avanza, Nordnet, SEB"
       },
       "accountNumber": {
-        "label": "Account Number (Optional)",
-        "placeholder": "e.g., Last 4 digits: 1234"
+        "label": "Kontonummer (Valfritt)",
+        "placeholder": "t.ex. Sista 4 siffror: 1234"
       }
     },
     "validation": {
-      "nameRequired": "Please enter an account name"
+      "nameRequired": "Ange ett kontonamn"
     },
     "errors": {
-      "saveFailed": "Failed to save account"
+      "saveFailed": "Det gick inte att spara kontot"
     },
     "buttons": {
       "cancel": "Avbryt",
       "saving": "Sparar...",
-      "create": "Create Account",
-      "update": "Update Account"
+      "create": "Skapa konto",
+      "update": "Uppdatera konto"
     }
   },
   "lanSync": {
@@ -1549,13 +1540,13 @@
     },
     "confidence": {
       "high": "Hög",
-      "medium": "Medium",
+      "medium": "Medel",
       "low": "Låg",
-      "label": "Detection Confidence"
+      "label": "Detektionssäkerhet"
     },
     "source": {
       "manual": "Manuell",
-      "auto-detected": "Auto-detected",
+      "auto-detected": "Automatiskt upptäckt",
       "merged": "Spårad"
     },
     "badges": {
@@ -1565,40 +1556,40 @@
       "trial": "Provperiod"
     },
     "menu": {
-      "viewTransactions": "View Transactions",
+      "viewTransactions": "Visa transaktioner",
       "edit": "Redigera",
       "resume": "Återuppta",
       "pause": "Pausa",
       "cancelSubscription": "Avbryt prenumeration",
-      "claimManage": "Claim & Manage",
-      "notSubscription": "Not a Subscription",
+      "claimManage": "Gör anspråk och hantera",
+      "notSubscription": "Inte en prenumeration",
       "delete": "Radera"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {1 dag kvar av provperioden} other {# dagar kvar av provperioden}}"
     },
     "stats": {
       "amount": "Belopp",
       "frequency": "Frekvens",
-      "nextCharge": "Next Charge",
+      "nextCharge": "Nästa debitering",
       "totalSpent": "Totalt spenderat",
       "annualCost": "Årlig kostnad"
     },
     "details": {
       "occurrences": "Förekomster",
-      "charges": "{count} charges",
-      "firstCharge": "First Charge",
+      "charges": "{count} debiteringar",
+      "firstCharge": "Första debitering",
       "lastCharge": "Senaste debitering",
       "reminder": "Påminnelse",
-      "daysBefore": "{count} days before",
+      "daysBefore": "{count} dagar före",
       "payment": "Betalning"
     },
     "buttons": {
       "transactions": "Transaktioner",
-      "claimManage": "Claim & Manage",
+      "claimManage": "Gör anspråk och hantera",
       "edit": "Redigera"
     },
-    "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
+    "lowConfidenceWarning": "Denna prenumeration upptäcktes med låg säkerhet. Gör anspråk på den för att verifiera och hantera manuellt.",
     "reminderToggle": {
       "disableReminder": "Inaktivera påminnelse",
       "enableReminder": "Aktivera påminnelse",
@@ -1606,78 +1597,78 @@
     }
   },
   "overspendingAlerts": {
-    "percentOfBudget": "{percent}% of budget",
-    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
+    "percentOfBudget": "{percent}% av budgeten",
+    "exceededWarning": "I denna takt kommer du att överskrida din budget med {amount} denna månad.",
     "stats": {
       "budget": "Budget",
-      "spentSoFar": "Spent So Far",
+      "spentSoFar": "Spenderat hittills",
       "projectedTotal": "Prognostiserad total",
       "daysLeft": "Dagar kvar"
     },
     "progress": {
-      "label": "Current progress"
+      "label": "Aktuellt framsteg"
     },
     "tip": {
       "label": "Tips:",
-      "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
+      "reduceSpending": "Minska dagliga utgifter till {amount} för att hålla budgeten."
     }
   },
   "chatbot": {
     "disabled": {
-      "title": "Chatbot Disabled",
-      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
-      "enableButton": "Enable Chatbot"
+      "title": "Chatbot inaktiverad",
+      "description": "Aktivera chatboten i Inställningar → Integritet → Budgetchatbot för att komma igång.",
+      "enableButton": "Aktivera chatbot"
     },
     "header": {
-      "title": "Budget Assistant",
-      "subtitle": "Ask me about your finances"
+      "title": "Budgetassistent",
+      "subtitle": "Fråga mig om din ekonomi"
     },
     "buttons": {
-      "exportConversation": "Export conversation",
-      "clearHistory": "Clear chat history",
+      "exportConversation": "Exportera konversation",
+      "clearHistory": "Rensa chatthistorik",
       "send": "Skicka"
     },
     "emptyState": {
-      "title": "Start a Conversation",
-      "description": "Ask me anything about your finances. Here are some examples:",
+      "title": "Starta en konversation",
+      "description": "Fråga mig vad som helst om din ekonomi. Här är några exempel:",
       "examples": {
-        "spending": "How much did I spend this month?",
-        "budget": "Am I over budget in any categories?",
-        "groceries": "Show me my recent grocery purchases",
-        "balance": "What's my total account balance?"
+        "spending": "Hur mycket spenderade jag denna månad?",
+        "budget": "Har jag överskridit budgeten i någon kategori?",
+        "groceries": "Visa mina senaste matinköp",
+        "balance": "Vad är mitt totala kontosaldo?"
       }
     },
     "messages": {
       "thinking": "Tänker...",
-      "dataAccessed": "Data accessed:",
+      "dataAccessed": "Data åtkomst:",
       "error": "Fel"
     },
     "input": {
-      "placeholder": "Ask about your finances...",
-      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training."
+      "placeholder": "Fråga om din ekonomi...",
+      "disclaimer": "Drivs av OpenAI GPT-4. Din data behandlas säkert och används inte för träning."
     }
   },
   "recurringTransactions": {
     "title": "Återkommande transaktioner",
-    "subtitle": "Detected subscriptions and bills",
-    "estimatedMonthly": "Estimated Monthly",
+    "subtitle": "Upptäckta prenumerationer och räkningar",
+    "estimatedMonthly": "Uppskattat per månad",
     "frequency": {
-      "weekly": "Weekly",
-      "biweekly": "Bi-weekly",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly"
+      "weekly": "Veckovis",
+      "biweekly": "Varannan vecka",
+      "monthly": "Månadsvis",
+      "quarterly": "Kvartalsvis"
     },
-    "next": "Next: {date}",
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
-    "confidence": "{percent}% confidence",
+    "next": "Nästa: {date}",
+    "inDays": "{count, plural, =0 {(idag)} =1 {(om 1 dag)} other {(om # dagar)}}",
+    "occurrences": "{count, plural, =1 {1 förekomst upptäckt} other {# förekomster upptäckta}}",
+    "confidence": "{percent}% säkerhet",
     "perPeriod": {
       "week": "per vecka",
-      "twoWeeks": "per 2 weeks",
+      "twoWeeks": "per 2 veckor",
       "month": "per månad",
-      "quarter": "per quarter"
+      "quarter": "per kvartal"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}"
+    "showingPatterns": "{count, plural, =1 {Visar 1 återkommande transaktionsmönster} other {Visar # återkommande transaktionsmönster}}"
   },
   "ynabMigrationWizard": {
     "steps": {
@@ -1853,7 +1844,7 @@
       "mildDesc": "Något förbättrad",
       "moderate": "Måttlig",
       "moderateDesc": "Rekommenderas för de flesta",
-      "full": "Full",
+      "full": "Fullständig",
       "fullDesc": "Maximal tillgänglighet"
     }
   },
@@ -2388,10 +2379,10 @@
     "snooze": "Snooza",
     "dismiss": "Avfärda",
     "empty": "Inga aviseringar",
-    "emptyAll": "You're all caught up!",
-    "emptyUnread": "No unread notifications",
-    "emptySnoozed": "No snoozed notifications",
-    "snoozedUntil": "Snoozed for {time}",
+    "emptyAll": "Du är i kapp!",
+    "emptyUnread": "Inga olästa aviseringar",
+    "emptySnoozed": "Inga uppskjutna aviseringar",
+    "snoozedUntil": "Uppskjuten i {time}",
     "tabs": {
       "all": "Alla",
       "unread": "Olästa",
@@ -2405,9 +2396,9 @@
       "1week": "1 vecka"
     },
     "types": {
-      "bill_reminder": "Bill Reminder",
-      "budget_alert": "Budget Alert",
-      "goal_milestone": "Goal Milestone",
+      "bill_reminder": "Räkningspåminnelse",
+      "budget_alert": "Budgetvarning",
+      "goal_milestone": "Målmilstolpe",
       "system": "System"
     }
   },
@@ -2482,22 +2473,22 @@
     }
   },
   "calendarExport": {
-    "addToCalendar": "Add to Calendar",
+    "addToCalendar": "Lägg till i kalender",
     "exportToCalendar": "Exportera till kalender",
-    "downloadICS": "Download ICS File",
-    "downloadAllICS": "Download All as ICS",
-    "selectSubscriptions": "Select Subscriptions...",
+    "downloadICS": "Ladda ner ICS-fil",
+    "downloadAllICS": "Ladda ner alla som ICS",
+    "selectSubscriptions": "Välj prenumerationer...",
     "googleCalendar": "Google Calendar",
     "outlookCalendar": "Outlook Calendar",
     "dialog": {
       "title": "Exportera till kalender",
-      "description": "Add bill reminders to your calendar",
-      "exportMethod": "Export Method",
-      "selectSubscriptions": "Select Subscriptions",
+      "description": "Lägg till räkningspåminnelser i din kalender",
+      "exportMethod": "Exportmetod",
+      "selectSubscriptions": "Välj prenumerationer",
       "selectAll": "Välj alla",
-      "deselectAll": "Deselect all",
+      "deselectAll": "Avmarkera alla",
       "cancel": "Avbryt",
-      "export": "Export {count} subscription(s)",
+      "export": "Exportera {count} prenumeration(er)",
       "exporting": "Exporterar..."
     }
   },
@@ -2515,9 +2506,9 @@
   "morePage": {
     "title": "Mer",
     "groups": {
-      "trackingAnalysis": "Tracking & Analysis",
-      "wealthPlanning": "Wealth & Planning",
-      "toolsSettings": "Tools & Settings"
+      "trackingAnalysis": "Spårning och analys",
+      "wealthPlanning": "Förmögenhet och planering",
+      "toolsSettings": "Verktyg och inställningar"
     }
   },
   "quickStats": {
@@ -2525,7 +2516,7 @@
     "income": "Inkomst",
     "expenses": "Utgifter",
     "savingsRate": "Sparränta",
-    "savingsRateDescription": "Percentage of income saved this month"
+    "savingsRateDescription": "Andel av inkomsten som sparats denna månad"
   },
   "bottomSheet": {
     "close": "Stäng",
@@ -2871,24 +2862,24 @@
     "syncing": "Synkroniserar...",
     "error": "Fel",
     "expired": "Utgången",
-    "neverSynced": "Never synced",
-    "syncedJustNow": "Synced just now",
-    "syncedHoursAgo": "Synced {hours}h ago",
-    "syncedYesterday": "Synced yesterday",
-    "syncedDaysAgo": "Synced {days}d ago",
+    "neverSynced": "Aldrig synkroniserad",
+    "syncedJustNow": "Synkroniserad just nu",
+    "syncedHoursAgo": "Synkroniserad för {hours}h sedan",
+    "syncedYesterday": "Synkroniserad igår",
+    "syncedDaysAgo": "Synkroniserad för {days}d sedan",
     "syncComplete": "Synkronisering klar",
     "syncFailed": "Synkronisering misslyckades",
     "cancel": "Avbryt",
-    "processing": "Processing: {account}",
+    "processing": "Bearbetar: {account}",
     "transactionsCount": "({count} transactions)",
     "imported": "Importerad",
-    "skippedDuplicates": "Skipped (duplicates)",
-    "syncSuccessful": "Sync Successful",
-    "syncCompletedWithErrors": "Sync Completed with Errors",
+    "skippedDuplicates": "Överhoppade (dubbletter)",
+    "syncSuccessful": "Synkronisering lyckades",
+    "syncCompletedWithErrors": "Synkronisering slutförd med fel",
     "dismiss": "Avfärda",
     "errorsLabel": "Fel:",
     "warningsLabel": "Varningar:",
-    "noBankAccounts": "No bank accounts connected",
+    "noBankAccounts": "Inga bankkonton anslutna",
     "active": "Aktiv",
     "paused": "Pausad",
     "sync": "Synkronisera",
@@ -2896,52 +2887,52 @@
     "resume": "Återuppta",
     "unlink": "Avlänka",
     "justNow": "just nu",
-    "minutesAgo": "{minutes}m ago",
-    "hoursAgo": "{hours}h ago",
-    "lastSynced": "Last synced: {time}",
+    "minutesAgo": "för {minutes}m sedan",
+    "hoursAgo": "för {hours}h sedan",
+    "lastSynced": "Senast synkroniserad: {time}",
     "statusLabel": "SimpleFIN: {status}",
-    "asOf": "as of {date}"
+    "asOf": "per {date}"
   },
   "trialBanner": {
     "expired": "Provperioden har utgått",
-    "expiredDescription": "App is in read-only mode. Upgrade to continue managing your finances.",
-    "upgradeNow": "Upgrade Now - {price}",
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
-    "upgradePrompt": "Upgrade now to keep full access to your budget data.",
-    "upgrade": "Upgrade - {price}",
+    "expiredDescription": "Appen är i skrivskyddat läge. Uppgradera för att fortsätta hantera din ekonomi.",
+    "upgradeNow": "Uppgradera nu - {price}",
+    "daysLeft": "{count, plural, =0 {Din provperiod upphör idag!} =1 {Bara 1 dag kvar av din provperiod} other {# dagar kvar av din provperiod}}",
+    "upgradePrompt": "Uppgradera nu för att behålla full åtkomst till dina budgetdata.",
+    "upgrade": "Uppgradera - {price}",
     "dismiss": "Avfärda",
-    "daysRemaining": "{count} days remaining in your free trial",
-    "viewPricing": "View pricing"
+    "daysRemaining": "{count} dagar kvar av din kostnadsfria provperiod",
+    "viewPricing": "Visa prissättning"
   },
   "validationWarnings": {
     "title": "Valideringsvarningar",
-    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
-    "criticalIssues": "Critical Issues",
+    "issuesFound": "Vi hittade {count, plural, =1 {1 problem} other {# problem}} som behöver din uppmärksamhet",
+    "criticalIssues": "Kritiska problem",
     "warnings": "Varningar",
-    "informational": "Informational",
-    "aiAnalysis": "AI Analysis:",
-    "issuesDetected": "Issues Detected",
-    "transactionNumber": "Transaction #{number}",
-    "confidence": "{percent}% confidence",
-    "suggestion": "Suggestion:",
-    "hideDetails": "Hide Transaction Details",
-    "viewDetails": "View Transaction Details",
+    "informational": "Information",
+    "aiAnalysis": "AI-analys:",
+    "issuesDetected": "Problem upptäckta",
+    "transactionNumber": "Transaktion #{number}",
+    "confidence": "{percent}% säkerhet",
+    "suggestion": "Förslag:",
+    "hideDetails": "Dölj transaktionsdetaljer",
+    "viewDetails": "Visa transaktionsdetaljer",
     "date": "Datum:",
     "amount": "Belopp:",
     "description": "Granska följande problem innan du fortsätter",
     "marked": "Markerad",
     "remove": "Ta bort",
-    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
-    "cancelImport": "Cancel Import",
-    "ignoreAllContinue": "Ignore All & Continue",
-    "removeAndContinue": "Remove {count} & Continue",
-    "continueWithAll": "Continue with All",
+    "removalNote": "{count, plural, =1 {1 transaktion} other {# transaktioner}} kommer att tas bort från importen om du fortsätter.",
+    "cancelImport": "Avbryt import",
+    "ignoreAllContinue": "Ignorera alla och fortsätt",
+    "removeAndContinue": "Ta bort {count} och fortsätt",
+    "continueWithAll": "Fortsätt med alla",
     "closeModal": "Stäng modal"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
-    "yearsAndMonths": "{years}y {months}m"
+    "months": "{count, plural, =1 {1 månad} other {# månader}}",
+    "years": "{count, plural, =1 {1 år} other {# år}}",
+    "yearsAndMonths": "{years}å {months}m"
   },
   "apiErrors": {
     "noApiKey": "AI API-nyckel ej konfigurerad. AI-extraktion kräver en aktiv prenumeration.",
@@ -3123,35 +3114,35 @@
   },
   "categories": {
     "title": "Kategorihanterare",
-    "subtitle": "Manage your budget categories and subcategories",
-    "loading": "Loading categories...",
+    "subtitle": "Hantera dina budgetkategorier och underkategorier",
+    "loading": "Laddar kategorier...",
     "newCategory": "Ny kategori",
     "editCategory": "Redigera kategori",
-    "createCategory": "Create Category",
-    "categoryNameLabel": "Category Name *",
-    "categoryNamePlaceholder": "e.g., Home Expenses",
+    "createCategory": "Skapa kategori",
+    "categoryNameLabel": "Kategorinamn *",
+    "categoryNamePlaceholder": "t.ex. Boendekostnader",
     "typeLabel": "Typ",
     "expense": "Utgift",
     "income": "Inkomst",
-    "subcategoriesLabel": "Subcategories (comma-separated)",
-    "subcategoriesPlaceholder": "e.g., Rent, Maintenance, Insurance",
+    "subcategoriesLabel": "Underkategorier (kommaseparerade)",
+    "subcategoriesPlaceholder": "t.ex. Hyra, Underhåll, Försäkring",
     "colorLabel": "Färg",
     "cancel": "Avbryt",
     "save": "Spara",
-    "noCategories": "No categories found",
-    "createFirstCategory": "Create Your First Category",
+    "noCategories": "Inga kategorier hittades",
+    "createFirstCategory": "Skapa din första kategori",
     "default": "Standardkategorier",
     "edit": "Redigera kategori",
-    "editCategoryAria": "Edit category",
+    "editCategoryAria": "Redigera kategori",
     "delete": "Radera kategori",
-    "deleteCategoryAria": "Delete category",
+    "deleteCategoryAria": "Ta bort kategori",
     "tipLabel": "Tips:",
-    "tipText": "Default categories cannot be edited or deleted. Create custom categories for your specific needs.",
-    "nameRequired": "Category name is required",
-    "saveFailed": "Failed to save category",
-    "cannotDeleteDefault": "Cannot delete default categories",
-    "deleteConfirm": "Delete \"{name}\"? This cannot be undone.",
-    "deleteFailed": "Failed to delete category"
+    "tipText": "Standardkategorier kan inte redigeras eller tas bort. Skapa anpassade kategorier för dina specifika behov.",
+    "nameRequired": "Kategorinamn krävs",
+    "saveFailed": "Det gick inte att spara kategori",
+    "cannotDeleteDefault": "Kan inte ta bort standardkategorier",
+    "deleteConfirm": "Ta bort \"{name}\"? Detta kan inte ångras.",
+    "deleteFailed": "Det gick inte att ta bort kategori"
   },
   "settings": {
     "loading": "Laddar inställningar...",
@@ -3389,7 +3380,7 @@
     "transactionFeaturesInfo": "Mer information om transaktionsfunktioner",
     "searchingVendorTransactions": "🔍 Söker efter andra \"{vendor}\"-transaktioner...",
     "foundMatchingTransactions": "✓ Hittade {count} matchande \"{vendor}\"-transaktioner ({time}s)",
-    "noMatchingTransactions": "No other \"{vendor}\" transactions found ({time}s)",
+    "noMatchingTransactions": "Inga andra \"{vendor}\"-transaktioner hittades ({time}s)",
     "vendorMatchingFailed": "Handlarmatchning misslyckades. Transaktionen sparades, men matchningar kunde inte laddas.",
     "failedToSave": "Kunde inte spara transaktion",
     "lastSplitItemRestore": "Detta är den sista delade posten. Återställ den ursprungliga transaktionen?",
@@ -3586,15 +3577,15 @@
   },
   "offline": {
     "title": "Du är offline",
-    "backOnline": "You're back online! Click refresh to reload the page.",
-    "lostConnection": "It looks like you've lost your internet connection. The page you're trying to reach isn't available offline yet.",
-    "connectionRestored": "Connection restored",
+    "backOnline": "Du är online igen! Klicka på uppdatera för att ladda om sidan.",
+    "lostConnection": "Det verkar som att du har tappat internetanslutningen. Sidan du försöker nå är inte tillgänglig offline ännu.",
+    "connectionRestored": "Anslutning återställd",
     "noConnection": "Ingen internetanslutning",
     "reloadPage": "Ladda om sidan",
     "tryAgain": "Försök igen",
-    "goToDashboard": "Go to Dashboard",
-    "offlineFeatures": "Offline Features",
-    "offlineFeaturesDescription": "Once you visit a page while online, it will be available offline. All your data is stored locally on your device."
+    "goToDashboard": "Gå till instrumentpanelen",
+    "offlineFeatures": "Offlinefunktioner",
+    "offlineFeaturesDescription": "När du har besökt en sida online blir den tillgänglig offline. All din data lagras lokalt på din enhet."
   },
   "trainMl": {
     "title": "AI-kategorisering",
@@ -3688,36 +3679,36 @@
   },
   "debtPayoff": {
     "title": "Skuldavbetalningsplan",
-    "subtitle": "Plan your path to becoming debt-free",
+    "subtitle": "Planera din väg till skuldfrihet",
     "debtOverview": "Skuldöversikt",
     "addDebt": "Lägg till skuld",
     "totalDebt": "Total skuld",
-    "weightedApr": "Weighted APR",
-    "totalMinPayments": "Total Min. Payments",
-    "noDebts": "No debts added yet. Add debts manually or import from your loans.",
-    "addManually": "Add Manually",
+    "weightedApr": "Viktat ÅR",
+    "totalMinPayments": "Totalt min. betalningar",
+    "noDebts": "Inga skulder tillagda ännu. Lägg till skulder manuellt eller importera från dina lån.",
+    "addManually": "Lägg till manuellt",
     "goToLoans": "Gå till lån",
     "results": "Resultat",
     "monthsToFreedom": "Månader till frihet",
     "totalInterestLabel": "Total ränta",
     "totalPaid": "Totalt betalt",
     "debtFreeDate": "Skuldfri datum",
-    "baselineComparison": "By using this strategy, you save {interest} in interest and pay off {months} months sooner compared to minimum payments only.",
+    "baselineComparison": "Genom att använda denna strategi sparar du {interest} i ränta och betalar av {months} månader snabbare jämfört med enbart minimibetalningar.",
     "payoffTimeline": "Avbetalningstidslinje",
     "mo": "mån",
-    "payoffChart": "Payoff Chart",
+    "payoffChart": "Avbetalningsdiagram",
     "strategyConfig": "Strategi",
-    "savedScenarios": "Saved Scenarios",
-    "saveScenarioTitle": "Save Scenario",
-    "scenarioNamePlaceholder": "e.g. Aggressive avalanche plan",
+    "savedScenarios": "Sparade scenarier",
+    "saveScenarioTitle": "Spara scenario",
+    "scenarioNamePlaceholder": "t.ex. Aggressiv lavinplan",
     "cancel": "Avbryt",
     "save": "Spara",
     "addDebtTitle": "Lägg till skuld",
     "debtName": "Namn",
-    "debtNamePlaceholder": "e.g. Credit Card, Car Loan",
+    "debtNamePlaceholder": "t.ex. Kreditkort, Billån",
     "balance": "Saldo",
     "apr": "ÅR %",
-    "minPayment": "Min. Payment"
+    "minPayment": "Min. betalning"
   },
   "loans": {
     "title": "Lån",
@@ -4045,74 +4036,74 @@
     }
   },
   "fridayReview": {
-    "loading": "Loading your weekly review...",
-    "backToDashboard": "Back to Dashboard",
+    "loading": "Laddar din veckoöversikt...",
+    "backToDashboard": "Tillbaka till instrumentpanelen",
     "title": "Veckoöversikt",
-    "closeReview": "Close review",
-    "goToStep": "Go to {step}",
-    "stepProgress": "Step {current} of {total}: {title}",
-    "stepLabel": "Step {current}: {title}",
+    "closeReview": "Stäng översikt",
+    "goToStep": "Gå till {step}",
+    "stepProgress": "Steg {current} av {total}: {title}",
+    "stepLabel": "Steg {current}: {title}",
     "back": "Tillbaka",
     "stepCounter": "Steg {current} av {total}",
     "done": "Klar",
     "continue": "Fortsätt",
-    "placeholderContent": "Step content will be implemented in subsequent tasks (F-021 through F-025).",
+    "placeholderContent": "Steginnehåll kommer att implementeras i efterföljande uppgifter (F-021 till F-025).",
     "steps": {
       "welcome": {
-        "title": "Happy Friday!",
-        "subtitle": "Let's check in on your week."
+        "title": "Glad fredag!",
+        "subtitle": "Låt oss kolla in på din vecka."
       },
       "spending": {
-        "title": "Spending Recap",
-        "subtitle": "Here's where your money went this week."
+        "title": "Utgiftsöversikt",
+        "subtitle": "Här gick dina pengar denna vecka."
       },
       "budgets": {
-        "title": "Budget Check",
-        "subtitle": "How are your budgets doing?"
+        "title": "Budgetkontroll",
+        "subtitle": "Hur går det med dina budgetar?"
       },
       "goals": {
-        "title": "Goal Progress",
-        "subtitle": "You're making progress on your goals!"
+        "title": "Målframsteg",
+        "subtitle": "Du gör framsteg mot dina mål!"
       },
       "upcoming": {
         "title": "Kommande räkningar",
-        "subtitle": "Heads up for next week."
+        "subtitle": "Observera för nästa vecka."
       },
       "celebration": {
-        "title": "Great job this week!",
-        "subtitle": "See you next Friday!"
+        "title": "Bra jobbat denna vecka!",
+        "subtitle": "Vi ses nästa fredag!"
       }
     }
   },
   "reports": {
-    "loading": "Loading reports...",
+    "loading": "Laddar rapporter...",
     "title": "Rapporter",
-    "subtitle": "Visualize your financial data",
+    "subtitle": "Visualisera din finansiella data",
     "timeRange": {
       "month": "Månad",
       "quarter": "Kvartal",
       "year": "År",
       "all": "Alla"
     },
-    "totalIncome": "Total Income",
-    "totalExpenses": "Total Expenses",
-    "netSavings": "Net Savings",
+    "totalIncome": "Total inkomst",
+    "totalExpenses": "Totala utgifter",
+    "netSavings": "Nettosparande",
     "savingsRate": "Sparränta",
     "spendingByCategory": "Utgifter per kategori",
-    "noSpendingData": "No spending data available",
-    "topCategories": "Top 5 Categories",
+    "noSpendingData": "Ingen utgiftsdata tillgänglig",
+    "topCategories": "Topp 5 kategorier",
     "noDataAvailable": "Ingen data tillgänglig",
-    "incomeVsExpenses": "Income vs Expenses (Last 6 Months)",
+    "incomeVsExpenses": "Inkomst vs Utgifter (Senaste 6 månaderna)",
     "income": "Inkomst",
     "expenses": "Utgifter",
     "net": "Netto",
-    "noTrendData": "No trend data available",
+    "noTrendData": "Ingen trenddata tillgänglig",
     "moneyFlow": "Pengaflöde",
-    "moneyFlowDescription": "Visualize how income flows to categories and savings",
-    "downloadPng": "Download as PNG",
-    "downloadSvg": "Download as SVG",
-    "addTransactionsToSeeFlow": "Add income and expense transactions to see your money flow",
-    "categoryBreakdown": "Category Breakdown",
+    "moneyFlowDescription": "Visualisera hur inkomster flödar till kategorier och sparande",
+    "downloadPng": "Ladda ner som PNG",
+    "downloadSvg": "Ladda ner som SVG",
+    "addTransactionsToSeeFlow": "Lägg till inkomst- och utgiftstransaktioner för att se ditt penningflöde",
+    "categoryBreakdown": "Kategoriuppdelning",
     "category": "Kategori",
     "amount": "Belopp",
     "percentOfTotal": "% av totalt",
@@ -4506,16 +4497,16 @@
   },
   "localeSettings": {
     "title": "Regionala inställningar",
-    "subtitle": "Configure language, region, currency, and formatting preferences",
+    "subtitle": "Konfigurera språk, region, valuta och formateringsinställningar",
     "language": "Språk",
     "currency": "Valuta",
-    "weekStartsOn": "Week Starts On",
+    "weekStartsOn": "Veckan börjar på",
     "sunday": "Söndag",
     "monday": "Måndag",
-    "formatPreview": "Format Preview",
+    "formatPreview": "Förhandsvisning av format",
     "saveChanges": "Spara ändringar",
-    "resetToDefaults": "Reset to Browser Defaults",
-    "unsavedChanges": "You have unsaved changes"
+    "resetToDefaults": "Återställ till webbläsarens standardvärden",
+    "unsavedChanges": "Du har osparade ändringar"
   },
   "accessibilityToggle": {
     "title": "Tillgänglighet",
@@ -4534,44 +4525,44 @@
   "columnMapper": {
     "title": "Kolumnmappning",
     "description": "Mappa dina filkolumner till rätt fält",
-    "savedMappingFound": "Saved mapping found for {bankName}",
-    "lastUsed": "Last used: {date}",
-    "useSavedMapping": "Use Saved Mapping",
+    "savedMappingFound": "Sparad mappning hittades för {bankName}",
+    "lastUsed": "Senast använd: {date}",
+    "useSavedMapping": "Använd sparad mappning",
     "delete": "Radera",
     "dismiss": "Avfärda",
-    "pdfPreview": "PDF Data Preview (First 5 Rows)",
-    "bankStatementFormat": "Bank Statement Format",
-    "singleAmountColumn": "Single Amount Column (e.g., BMO)",
-    "debitCreditColumns": "Debit/Credit Columns (e.g., Home Trust)",
-    "mapColumnsToFields": "Map Columns to Fields",
+    "pdfPreview": "PDF-dataförhandsgranskning (Första 5 raderna)",
+    "bankStatementFormat": "Format för kontoutdrag",
+    "singleAmountColumn": "En beloppskolumn (t.ex. BMO)",
+    "debitCreditColumns": "Debet/Kreditkolumner (t.ex. Home Trust)",
+    "mapColumnsToFields": "Mappa kolumner till fält",
     "dateColumn": "Datumkolumn",
-    "descriptionColumn": "Description Column",
+    "descriptionColumn": "Beskrivningskolumn",
     "amountColumn": "Beloppskolumn",
-    "debitColumn": "Debit Column",
-    "creditColumn": "Credit Column",
-    "selectColumn": "Select column...",
-    "columnNumber": "Column {number}",
-    "transactionPreview": "Transaction Preview (First 5)",
+    "debitColumn": "Debetkolumn",
+    "creditColumn": "Kreditkolumn",
+    "selectColumn": "Välj kolumn...",
+    "columnNumber": "Kolumn {number}",
+    "transactionPreview": "Förhandsgranskning av transaktioner (Första 5)",
     "date": "Datum",
     "descriptionHeader": "Beskrivning",
     "amount": "Belopp",
     "status": "Status",
-    "selectAllRequired": "Please select all required columns",
+    "selectAllRequired": "Välj alla obligatoriska kolumner",
     "cancel": "Avbryt",
-    "applyMapping": "Apply Mapping"
+    "applyMapping": "Tillämpa mappning"
   },
   "debtOverview": {
     "title": "Skuldöversikt",
-    "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
+    "activeLoans": "{count, plural, one {# aktivt lån} other {# aktiva lån}}",
     "viewAll": "Visa alla",
     "totalDebt": "Total skuld",
     "monthlyPayment": "Månatlig betalning",
     "avgRate": "Snitträntesats",
-    "activeLoansTitle": "Active Loans",
+    "activeLoansTitle": "Aktiva lån",
     "balance": "Saldo",
-    "paidOff": "{percent}% paid off",
-    "viewMore": "{count, plural, one {View # more loan} other {View # more loans}}",
-    "upcomingPayments": "Upcoming Payments",
+    "paidOff": "{percent}% avbetalt",
+    "viewMore": "{count, plural, one {Visa # till lån} other {Visa # fler lån}}",
+    "upcomingPayments": "Kommande betalningar",
     "addLoan": "Lägg till lån"
   },
   "loanForm": {
@@ -4722,19 +4713,19 @@
   },
   "linkToLoan": {
     "title": "Länka till lån",
-    "noActiveLoans": "No active loans found",
+    "noActiveLoans": "Inga aktiva lån hittades",
     "bestMatch": "Bästa matchning",
-    "possibleMatch": "Possible Match",
+    "possibleMatch": "Möjlig matchning",
     "lowMatch": "Låg matchning",
-    "monthlyPayment": "${amount}/mo",
-    "paymentBreakdown": "Payment Breakdown",
+    "monthlyPayment": "${amount}/mån",
+    "paymentBreakdown": "Betalningsuppdelning",
     "principal": "Kapitalbelopp",
     "interest": "Ränta",
     "extra": "Extra",
     "cancel": "Avbryt",
     "linking": "Länkar...",
-    "linkPayment": "Link Payment",
-    "linkError": "Failed to link transaction. Please try again."
+    "linkPayment": "Länka betalning",
+    "linkError": "Det gick inte att länka transaktionen. Försök igen."
   },
   "paymentHistoryPanel": {
     "title": "Betalningshistorik",
@@ -4784,14 +4775,14 @@
   },
   "iconPicker": {
     "title": "Välj en ikon",
-    "subtitle": "Select an icon to represent your category",
-    "currentIcon": "Current Icon",
-    "searchPlaceholder": "Search icons by name or category...",
-    "foundCount": "Found {count} icon(s)",
-    "noIconsFound": "No icons found",
-    "noIconsFoundHint": "Try a different search term or browse all icons",
-    "clearSearch": "Clear Search",
-    "iconsAvailable": "{count} icons available",
+    "subtitle": "Välj en ikon som representerar din kategori",
+    "currentIcon": "Nuvarande ikon",
+    "searchPlaceholder": "Sök ikoner efter namn eller kategori...",
+    "foundCount": "Hittade {count} ikon(er)",
+    "noIconsFound": "Inga ikoner hittades",
+    "noIconsFoundHint": "Prova en annan sökterm eller bläddra bland alla ikoner",
+    "clearSearch": "Rensa sökning",
+    "iconsAvailable": "{count} ikoner tillgängliga",
     "close": "Stäng"
   },
   "subscriptionModal": {
@@ -4852,27 +4843,27 @@
     "validationNextBillingRequired": "Ange nästa faktureringsdatum"
   },
   "profileDialog": {
-    "createTitle": "Create Profile",
-    "createDescription": "Add a new profile for a family member. Each profile can have its own private budgets.",
+    "createTitle": "Skapa profil",
+    "createDescription": "Lägg till en ny profil för en familjemedlem. Varje profil kan ha sina egna privata budgetar.",
     "editTitle": "Redigera profil",
-    "editDescription": "Update the profile name and avatar color.",
+    "editDescription": "Uppdatera profilnamnet och avatarfärgen.",
     "nameLabel": "Namn",
-    "namePlaceholder": "Enter profile name",
-    "protectWithPin": "Protect with PIN",
-    "pinLabel": "PIN (4-6 digits)",
+    "namePlaceholder": "Ange profilnamn",
+    "protectWithPin": "Skydda med PIN",
+    "pinLabel": "PIN (4-6 siffror)",
     "enterPinPlaceholder": "Ange PIN",
-    "confirmPinLabel": "Confirm PIN",
-    "confirmPinPlaceholder": "Confirm PIN",
-    "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
-    "defaultProfileNote": "This is the default profile and will be selected on app start.",
+    "confirmPinLabel": "Bekräfta PIN",
+    "confirmPinPlaceholder": "Bekräfta PIN",
+    "pinHelpText": "PIN skyddar åtkomsten till denna profil. Välj något minnesvärt men inte för enkelt.",
+    "defaultProfileNote": "Detta är standardprofilen och väljs automatiskt vid appstart.",
     "cancel": "Avbryt",
     "saveChanges": "Spara ändringar",
-    "errorNameRequired": "Please enter a name for the profile",
-    "errorNameTooLong": "Name must be 30 characters or less",
-    "errorInvalidPin": "Invalid PIN",
+    "errorNameRequired": "Ange ett namn för profilen",
+    "errorNameTooLong": "Namnet får vara högst 30 tecken",
+    "errorInvalidPin": "Ogiltig PIN",
     "errorPinMismatch": "PIN-koderna matchar inte",
-    "errorCreateFailed": "Failed to create profile",
-    "errorUpdateFailed": "Failed to update profile",
+    "errorCreateFailed": "Det gick inte att skapa profil",
+    "errorUpdateFailed": "Det gick inte att uppdatera profil",
     "errorDeleteFailed": "Kunde inte radera profilen",
     "deleteTitle": "Radera profil?",
     "defaultProfile": "Standardprofil",
@@ -4913,31 +4904,31 @@
     "useDifferentProfile": "Använd annan profil"
   },
   "vaultSetup": {
-    "bankGradeSecurity": "Bank-Grade Security",
-    "aes256Description": "Your data is encrypted with AES-256 encryption",
-    "chooseProtection": "Choose how you want to protect your data:",
-    "automaticProtection": "Automatic Protection",
+    "bankGradeSecurity": "Bankgradssäkerhet",
+    "aes256Description": "Din data är krypterad med AES-256-kryptering",
+    "chooseProtection": "Välj hur du vill skydda din data:",
+    "automaticProtection": "Automatiskt skydd",
     "recommended": "Rekommenderad",
-    "automaticDescription": "Your device creates a unique encryption key automatically. No password to remember - your data is protected seamlessly.",
-    "passwordProtection": "Password Protection",
-    "passwordDescription": "Create a master password to encrypt your vault. More secure if you share this device with others.",
-    "masterPassword": "Master Password",
-    "enterStrongPassword": "Enter a strong password",
+    "automaticDescription": "Din enhet skapar en unik krypteringsnyckel automatiskt. Inget lösenord att komma ihåg - din data skyddas sömlöst.",
+    "passwordProtection": "Lösenordsskydd",
+    "passwordDescription": "Skapa ett huvudlösenord för att kryptera ditt valv. Säkrare om du delar enheten med andra.",
+    "masterPassword": "Huvudlösenord",
+    "enterStrongPassword": "Ange ett starkt lösenord",
     "strengthVeryWeak": "Mycket svag",
     "strengthWeak": "Svag",
     "strengthFair": "Godkänd",
     "strengthStrong": "Stark",
     "strengthVeryStrong": "Mycket stark",
     "confirmPassword": "Bekräfta lösenord",
-    "confirmYourPassword": "Confirm your password",
-    "passwordsDoNotMatch": "Passwords do not match",
+    "confirmYourPassword": "Bekräfta ditt lösenord",
+    "passwordsDoNotMatch": "Lösenorden matchar inte",
     "important": "Viktigt",
-    "passwordWarning": "If you forget this password, your data cannot be recovered. We cannot reset it for you.",
-    "aes256Encryption": "AES-256 Encryption",
-    "zeroKnowledge": "Zero Knowledge",
-    "setupError": "Failed to set up vault. Please try again.",
-    "settingUp": "Setting Up...",
-    "enableEncryption": "Enable Encryption"
+    "passwordWarning": "Om du glömmer detta lösenord kan din data inte återställas. Vi kan inte återställa det åt dig.",
+    "aes256Encryption": "AES-256-kryptering",
+    "zeroKnowledge": "Noll kunskap",
+    "setupError": "Det gick inte att konfigurera valvet. Försök igen.",
+    "settingUp": "Konfigurerar...",
+    "enableEncryption": "Aktivera kryptering"
   },
   "activityLog": {
     "title": "Aktivitetslogg",
@@ -4973,23 +4964,23 @@
     "title": "Manuell koppling",
     "description": "Koppla transaktioner manuellt",
     "ipAddress": "IP-adress",
-    "ipRequired": "IP address is required",
-    "ipInvalid": "Invalid IP address format (e.g., 192.168.1.100)",
+    "ipRequired": "IP-adress krävs",
+    "ipInvalid": "Ogiltigt IP-adressformat (t.ex. 192.168.1.100)",
     "port": "Port",
-    "optionalDefault": "optional, default: {port}",
-    "portInvalid": "Port must be between 1 and 65535",
-    "pairingCode": "Pairing Code",
-    "codeRequired": "Pairing code is required",
-    "codeInvalid": "Pairing code must be 6 alphanumeric characters",
-    "codeHint": "6-character code shown on the host device",
-    "fixFormErrors": "Please fix the form errors",
+    "optionalDefault": "valfritt, standard: {port}",
+    "portInvalid": "Port måste vara mellan 1 och 65535",
+    "pairingCode": "Parkopplingskod",
+    "codeRequired": "Parkopplingskod krävs",
+    "codeInvalid": "Parkopplingskoden måste vara 6 alfanumeriska tecken",
+    "codeHint": "6-teckens kod som visas på värdenheten",
+    "fixFormErrors": "Åtgärda formulärfelen",
     "hideHelp": "Dölj hjälp",
-    "whereToFind": "Where do I find these?",
-    "helpTitle": "Finding Connection Details",
-    "helpStep1": "Open Budget App on the device you want to sync with",
-    "helpStep2": "Go to Settings → LAN Sync",
-    "helpStep3": "Tap \"Allow Connections\"",
-    "helpStep4": "The IP address, port, and pairing code will be displayed below the QR code",
+    "whereToFind": "Var hittar jag dessa?",
+    "helpTitle": "Hitta anslutningsdetaljer",
+    "helpStep1": "Öppna Budget App på enheten du vill synkronisera med",
+    "helpStep2": "Gå till Inställningar → LAN-synk",
+    "helpStep3": "Tryck på \"Tillåt anslutningar\"",
+    "helpStep4": "IP-adress, port och parkopplingskod visas under QR-koden",
     "connecting": "Ansluter...",
     "connect": "Anslut"
   },
@@ -5081,20 +5072,20 @@
     "deleteSelected": "Radera markerade"
   },
   "loanPaymentSelector": {
-    "linkToLoanPayment": "Link to Loan Payment",
+    "linkToLoanPayment": "Länka till lånebetalning",
     "selectLoan": "Välj lån",
-    "noLoan": "-- No loan --",
-    "loanOption": "{name} ({lender}) - {payment}/mo",
-    "paymentBreakdown": "Payment Breakdown",
-    "currentBalance": "Current Balance:",
+    "noLoan": "-- Inget lån --",
+    "loanOption": "{name} ({lender}) - {payment}/mån",
+    "paymentBreakdown": "Betalningsuppdelning",
+    "currentBalance": "Aktuellt saldo:",
     "interestRate": "Ränta:",
     "nextDue": "Nästa förfall:",
     "principal": "Kapitalbelopp:",
     "interest": "Ränta:",
-    "extraPrincipal": "Extra Principal:",
-    "balanceAfterPayment": "Balance After Payment:",
-    "paymentOverWarning": "This payment is {amount} more than the regular monthly payment. The extra will be applied to principal.",
-    "paymentUnderWarning": "This payment is {amount} less than the regular monthly payment of {monthlyPayment}."
+    "extraPrincipal": "Extra amortering:",
+    "balanceAfterPayment": "Saldo efter betalning:",
+    "paymentOverWarning": "Denna betalning är {amount} mer än den vanliga månadsbetalningen. Det extra beloppet tillämpas på amortering.",
+    "paymentUnderWarning": "Denna betalning är {amount} mindre än den vanliga månadsbetalningen på {monthlyPayment}."
   },
   "breadcrumb": {
     "home": "Hem",
@@ -5114,124 +5105,124 @@
     "more": "Mer"
   },
   "confidenceMeter": {
-    "autoCategorized": "Auto-categorized:",
-    "veryConfident": "Very Confident",
+    "autoCategorized": "Automatiskt kategoriserad:",
+    "veryConfident": "Mycket säker",
     "confident": "Säker",
     "moderate": "Måttlig",
     "lowConfidence": "Låg konfidens",
-    "learnFromThis": "Learn from this",
-    "confirmCategorization": "Confirm this categorization to improve accuracy",
-    "confidence": "{percent}% confidence"
+    "learnFromThis": "Lär av detta",
+    "confirmCategorization": "Bekräfta denna kategorisering för att förbättra träffsäkerheten",
+    "confidence": "{percent}% säkerhet"
   },
   "holdingModal": {
     "editHolding": "Redigera innehav",
     "addHolding": "Lägg till innehav",
-    "stockSymbol": "Stock Symbol",
-    "numberOfShares": "Number of Shares",
-    "purchasePricePerShare": "Purchase Price per Share",
+    "stockSymbol": "Aktiesymbol",
+    "numberOfShares": "Antal aktier",
+    "purchasePricePerShare": "Inköpspris per aktie",
     "purchaseDate": "Köpdatum",
-    "notesOptional": "Notes (Optional)",
+    "notesOptional": "Anteckningar (Valfritt)",
     "totalInvestment": "Total investering",
-    "enterSymbol": "Please enter a stock symbol",
-    "validQuantity": "Please enter a valid quantity",
-    "validPurchasePrice": "Please enter a valid purchase price",
-    "failedToSave": "Failed to save holding",
-    "symbolPlaceholder": "e.g., AAPL, VGRO.TO, TD.TO",
-    "canadianStockHint": "Use .TO for Canadian stocks (e.g., TD.TO, VGRO.TO)",
+    "enterSymbol": "Ange en aktiesymbol",
+    "validQuantity": "Ange ett giltigt antal",
+    "validPurchasePrice": "Ange ett giltigt inköpspris",
+    "failedToSave": "Det gick inte att spara innehavet",
+    "symbolPlaceholder": "t.ex. AAPL, VGRO.TO, TD.TO",
+    "canadianStockHint": "Använd .TO för kanadensiska aktier (t.ex. TD.TO, VGRO.TO)",
     "quantityPlaceholder": "100",
     "pricePlaceholder": "50,00",
-    "notesPlaceholder": "e.g., Part of retirement portfolio, employee stock purchase",
+    "notesPlaceholder": "t.ex. Del av pensionsportfölj, aktieköp via anställning",
     "cancel": "Avbryt",
     "saving": "Sparar...",
-    "updateHolding": "Update Holding"
+    "updateHolding": "Uppdatera innehav"
   },
   "linkedLoan": {
-    "unlinkConfirm": "Unlink this transaction from the loan payment?",
-    "loanPrefix": "Loan: {name}",
-    "viewLoanDetails": "View loan details",
+    "unlinkConfirm": "Avlänka denna transaktion från lånebetalningen?",
+    "loanPrefix": "Lån: {name}",
+    "viewLoanDetails": "Visa låndetaljer",
     "unlinkFromLoan": "Avlänka från lån",
     "unlink": "Avlänka",
     "viewLoan": "Visa lån",
-    "unlinkFailed": "Failed to unlink transaction. Please try again."
+    "unlinkFailed": "Det gick inte att avlänka transaktionen. Försök igen."
   },
   "receiptThumbnail": {
-    "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
-    "uploaded": "Uploaded {date}",
+    "receiptCount": "{count, plural, =1 {1 kvitto} other {# kvitton}}",
+    "uploaded": "Uppladdat {date}",
     "fileSize": "{size} KB",
     "deleteReceipt": "Radera kvitto",
     "close": "Stäng",
-    "pdfReceipt": "PDF Receipt",
-    "downloadPdf": "Download PDF",
-    "unsupportedFileType": "Unsupported file type",
-    "deleteConfirm": "Delete receipt \"{filename}\"?",
-    "deleteFailed": "Failed to delete receipt",
+    "pdfReceipt": "PDF-kvitto",
+    "downloadPdf": "Ladda ner PDF",
+    "unsupportedFileType": "Filtyp som inte stöds",
+    "deleteConfirm": "Ta bort kvittot \"{filename}\"?",
+    "deleteFailed": "Det gick inte att ta bort kvittot",
     "view": "Visa kvitto"
   },
   "qrScanner": {
-    "invalidQrFormat": "Invalid QR code format. Please scan a Budget App pairing QR code.",
-    "qrExpired": "This QR code has expired. Please generate a new one on the host device.",
-    "deviceFound": "Device Found!",
-    "readyToConnect": "Ready to connect to {deviceName}",
+    "invalidQrFormat": "Ogiltigt QR-kodformat. Skanna en Budget App-parkopplings-QR-kod.",
+    "qrExpired": "Denna QR-kod har gått ut. Generera en ny på värdenheten.",
+    "deviceFound": "Enhet hittad!",
+    "readyToConnect": "Redo att ansluta till {deviceName}",
     "cameraError": "Kunde inte komma åt kameran",
     "error": "Fel",
-    "howToEnableCamera": "How to enable camera access:",
-    "cameraStep1": "Click the lock/info icon in your browser address bar",
-    "cameraStep2": "Find \"Camera\" in the permissions",
-    "cameraStep3": "Change it to \"Allow\"",
-    "cameraStep4": "Refresh this page",
+    "howToEnableCamera": "Så här aktiverar du kameraåtkomst:",
+    "cameraStep1": "Klicka på lås-/infoikonen i webbläsarens adressfält",
+    "cameraStep2": "Hitta \"Kamera\" i behörigheterna",
+    "cameraStep3": "Ändra till \"Tillåt\"",
+    "cameraStep4": "Uppdatera sidan",
     "tryAgain": "Försök igen",
     "scanQrCode": "Skanna QR-kod",
-    "scanDescription": "Scan the QR code displayed on the host device to connect",
-    "startCamera": "Start Camera",
-    "startingCamera": "Starting Camera...",
-    "pointAtQrCode": "Point at QR Code",
-    "allowCameraAccess": "Please allow camera access when prompted",
-    "positionQrCode": "Position the QR code within the frame",
-    "scanningForQr": "Scanning for QR code...",
+    "scanDescription": "Skanna QR-koden som visas på värdenheten för att ansluta",
+    "startCamera": "Starta kamera",
+    "startingCamera": "Startar kamera...",
+    "pointAtQrCode": "Rikta mot QR-koden",
+    "allowCameraAccess": "Tillåt kameraåtkomst när du uppmanas",
+    "positionQrCode": "Placera QR-koden inom ramen",
+    "scanningForQr": "Söker efter QR-kod...",
     "cancel": "Avbryt",
-    "permissionDenied": "Camera access was denied. Please allow camera access in your browser settings.",
-    "noCamera": "No camera found on this device.",
-    "cameraInUse": "Camera is in use by another application. Please close other apps using the camera.",
-    "cameraFailed": "Failed to access camera. Please try again."
+    "permissionDenied": "Kameraåtkomst nekades. Tillåt kameraåtkomst i webbläsarens inställningar.",
+    "noCamera": "Ingen kamera hittades på denna enhet.",
+    "cameraInUse": "Kameran används av en annan app. Stäng andra appar som använder kameran.",
+    "cameraFailed": "Det gick inte att komma åt kameran. Försök igen."
   },
   "pairingDialog": {
-    "connectingToDevice": "Connecting to device...",
-    "deviceAdded": "Device added. Connect to complete pairing.",
-    "failedToInitialize": "Failed to initialize device. Please try again.",
+    "connectingToDevice": "Ansluter till enhet...",
+    "deviceAdded": "Enhet tillagd. Anslut för att slutföra parkopplingen.",
+    "failedToInitialize": "Det gick inte att initiera enheten. Försök igen.",
     "title": "Enhetskoppling",
-    "description": "Connect to another device on your local network",
+    "description": "Anslut till en annan enhet i ditt lokala nätverk",
     "scan": "Skanna",
     "manual": "Manuell",
     "host": "Värd",
     "connecting": "Ansluter...",
-    "verifyingConnection": "Verifying connection...",
-    "pairingSuccessful": "Pairing successful!",
-    "pairingFailed": "Pairing Failed",
+    "verifyingConnection": "Verifierar anslutning...",
+    "pairingSuccessful": "Parkoppling lyckades!",
+    "pairingFailed": "Parkoppling misslyckades",
     "anErrorOccurred": "Ett fel inträffade",
     "tryAgain": "Försök igen",
-    "ipAddressRequired": "IP Address Required",
-    "ipAddressDescription": "Enter your local IP address to allow other devices to connect.",
+    "ipAddressRequired": "IP-adress krävs",
+    "ipAddressDescription": "Ange din lokala IP-adress för att tillåta andra enheter att ansluta.",
     "ipPlaceholder": "192.168.1.100",
     "set": "Ställ in",
-    "readyForConnections": "Ready for Connections",
-    "readyDescription": "Other devices can now scan this QR code or enter the connection details manually.",
-    "readyToConnectTo": "Ready to connect to {deviceName}",
-    "pendingConnection": "Pending Connection"
+    "readyForConnections": "Redo för anslutningar",
+    "readyDescription": "Andra enheter kan nu skanna denna QR-kod eller ange anslutningsdetaljer manuellt.",
+    "readyToConnectTo": "Redo att ansluta till {deviceName}",
+    "pendingConnection": "Väntande anslutning"
   },
   "syncStatus": {
     "synced": "Synkroniserad",
-    "partialSync": "Partial Sync",
+    "partialSync": "Delvis synkronisering",
     "syncError": "Synkfel",
     "offline": "Offline",
     "never": "Aldrig",
     "justNow": "Just nu",
-    "minutesAgo": "{minutes}m ago",
-    "hoursAgo": "{hours}h ago",
-    "daysAgo": "{days}d ago",
-    "devicesConnected": "{connected}/{total} devices connected",
-    "lastSync": "Last sync: {time}",
+    "minutesAgo": "för {minutes}m sedan",
+    "hoursAgo": "för {hours}h sedan",
+    "daysAgo": "för {days}d sedan",
+    "devicesConnected": "{connected}/{total} enheter anslutna",
+    "lastSync": "Senaste synk: {time}",
     "syncing": "Synkroniserar...",
-    "devices": "{connected}/{total} devices"
+    "devices": "{connected}/{total} enheter"
   },
   "balanceReconciliation": {
     "title": "Import klar!",

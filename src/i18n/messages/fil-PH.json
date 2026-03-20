@@ -364,7 +364,7 @@
     "syncStatus": "Status segerak: {status}",
     "toggleSeniorsMode": "Togol Mod Warga Emas",
     "typeQuestion": "Taip soalan anda",
-    "unreadNotifications": "{count, plural, =1 {1 unread notification} other {# unread notifications}}",
+    "unreadNotifications": "{count, plural, =1 {1 hindi pa nabasang notification} other {# hindi pa nabasang notification}}",
     "welcomeBudgetApp": "Selamat datang ke Aplikasi Bajet"
   },
   "auth": {
@@ -474,7 +474,7 @@
     "budgetAnalyzer": "Penganalisis Bajet",
     "debtPayoffCalculator": "Kalkulator Bayar Hutang",
     "details": "Butiran",
-    "edit": "Edit",
+    "edit": "I-edit",
     "emergencyFund": "Dana Kecemasan",
     "futurePlans": "Rancangan Masa Depan",
     "home": "Utama",
@@ -503,8 +503,8 @@
       "addAccount": "Tambah Akaun",
       "addFirstAccount": "Tambah Akaun Pertama Anda",
       "allTransactionsCleared": "Semua transaksi dibersihkan. Anda kini boleh mengimport semula penyata anda.",
-      "assignCount": "Assign {count, plural, one {# Transaction} other {# Transactions}}",
-      "assignModalDescription": "{count, plural, one {# transaction needs} other {# transactions need}} to be assigned to an account.",
+      "assignCount": "Italaga ang {count, plural, one {# Transaksyon} other {# Transaksyon}}",
+      "assignModalDescription": "{count, plural, one {# transaksyon ang kailangan} other {# transaksyon ang kailangan}} itatalaga sa isang account.",
       "assignTransactions": "Tugaskan Transaksi",
       "assignTransactionsNow": "Tugaskan Transaksi Sekarang",
       "assignedTransactions": "Ditugaskan {count} transaksi ke {name}",
@@ -525,7 +525,7 @@
       "deleteAccountDescription": "Adakah anda pasti ingin memadam \"{name}\"? Ini tidak akan memadam transaksi yang berkaitan.",
       "deleteAccountTitle": "Padam Akaun",
       "dismissReminder": "Tutup peringatan",
-      "edit": "Edit",
+      "edit": "I-edit",
       "editAccount": "Edit Akaun",
       "enterBankBalance": "Masukkan baki bank semasa anda untuk memastikan jumlah akaun yang tepat.",
       "failedToAssign": "Gagal menugaskan transaksi",
@@ -557,7 +557,7 @@
       "unassignedClickToAssign": "Klik di bawah untuk menugaskan secara automatik ke akaun anda.",
       "unassignedCreateFirst": "Buat akaun dahulu, kemudian ia akan ditugaskan secara automatik.",
       "unassignedDescription": "Transaksi ini diimport sebelum akaun ditetapkan.",
-      "unassignedTitle": "{count, plural, one {# transaction needs} other {# transactions need}} account assignment",
+      "unassignedTitle": "{count, plural, one {# transaksyon ang nangangailangan} other {# transaksyon ang nangangailangan}} ng pagtatalaga ng account",
       "update": "Kemas Kini"
     },
     "budgets": {
@@ -588,18 +588,18 @@
       "of": "daripada",
       "overBudgetThisMonth": "{amount} melebihi bajet bulan ini",
       "overallProgress": "Kemajuan Keseluruhan",
-      "periodHelpTooltip": "Monthly budgets reset each month. Annual budgets divide the total across 12 months. Example: $1,200 annual = $100 per month.",
-      "periodHelpTooltipAriaLabel": "More information about budget periods",
+      "periodHelpTooltip": "Ang mga buwanang budget ay nire-reset bawat buwan. Ang taunang budget ay hinahati sa 12 buwan. Halimbawa: $1,200 taon-taon = $100 bawat buwan.",
+      "periodHelpTooltipAriaLabel": "Karagdagang impormasyon tungkol sa mga panahon ng budget",
       "periodLabel": "Tempoh",
       "progressHelpTooltip": "Kemajuan Bajet: Hijau (Dalam Landasan) = 0-79% dibelanjakan. Kuning (Amaran) = 80-99% dibelanjakan. Merah (Melebihi) = 100%+ dibelanjakan. Warna dikemas kini secara automatik semasa anda berbelanja.",
-      "progressHelpTooltipAriaLabel": "More information about budget progress and alert thresholds",
+      "progressHelpTooltipAriaLabel": "Karagdagang impormasyon tungkol sa progreso ng budget at mga threshold ng alerto",
       "remaining": "Baki",
       "remainingBudget": "{amount} baki bajet",
       "remainingThisMonth": "{amount} baki bulan ini",
       "rolloverDisabled": "Bajet ditetapkan semula setiap bulan tanpa mengira perbelanjaan",
       "rolloverEnabled": "Dana yang tidak dibelanjakan akan ditambah ke bajet bulan depan",
-      "rolloverHelpTooltip": "What is budget rollover? When enabled, any unspent money from this budget carries over to the next month. Example: Budget: $500/month, Spent: $400, Leftover: $100, Next month starts with: $600 ($500 + $100 leftover)",
-      "rolloverHelpTooltipAriaLabel": "More information about budget rollover",
+      "rolloverHelpTooltip": "Ano ang budget rollover? Kapag naka-enable, ang anumang hindi nagastong pera mula sa budget na ito ay dadalhin sa susunod na buwan. Halimbawa: Budget: $500/buwan, Ginastos: $400, Natira: $100, Susunod na buwan ay magsisimula sa: $600 ($500 + $100 na natira)",
+      "rolloverHelpTooltipAriaLabel": "Karagdagang impormasyon tungkol sa budget rollover",
       "rolloverLabel": "Bawa baki bajet yang tidak digunakan ke bulan depan",
       "saveBudget": "Simpan Bajet",
       "setBudget": "+ Tetapkan Bajet",
@@ -611,7 +611,7 @@
       "totalExpenses": "Jumlah perbelanjaan",
       "totalSpent": "Jumlah Dibelanjakan",
       "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
-      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transaction will become unbudgeted} other {# transactions will become unbudgeted}}",
+      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transaksyon ang magiging walang budget} other {# transaksyon ang magiging walang budget}}",
       "youWillLose": "Anda akan kehilangan:"
     },
     "events": {
@@ -824,7 +824,7 @@
     "applyTo": "Terapkan kepada {count}",
     "categorize": "Kategorikan",
     "clearSelection": "Kosongkan pilihan",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "confirmDelete": "Burahin ang {count, plural, =1 {1 transaksyon} other {# transaksyon}}?",
     "delete": "Padam",
     "deleteWarning": "Tindakan ini tidak boleh dibuat asal.",
     "export": "Eksport",
@@ -1262,8 +1262,8 @@
       "export": "Eksport {count} langganan",
       "exportMethod": "Kaedah Eksport",
       "exporting": "Mengeksport...",
-      "selectAll": "Select all",
-      "selectSubscriptions": "Select Subscriptions",
+      "selectAll": "Piliin lahat",
+      "selectSubscriptions": "Pumili ng mga Subscription",
       "title": "Eksport ke Kalendar"
     },
     "downloadAllICS": "Muat Turun Semua sebagai ICS",
@@ -1271,7 +1271,7 @@
     "exportToCalendar": "Eksport ke Kalendar",
     "googleCalendar": "Google Calendar",
     "outlookCalendar": "Outlook Calendar",
-    "selectSubscriptions": "Select Subscriptions...",
+    "selectSubscriptions": "Pumili ng mga Subscription...",
     "title": "Eksport Kalendar",
     "description": "Eksport bayaran berulang ke kalendar anda",
     "exportICS": "Eksport .ics",
@@ -1287,29 +1287,29 @@
     "cancel": "Batal",
     "cannotDeleteDefault": "Tidak boleh padam kategori lalai",
     "categoryNameLabel": "Nama Kategori *",
-    "categoryNamePlaceholder": "e.g., Home Expenses",
+    "categoryNamePlaceholder": "hal., Gastusin sa Bahay",
     "colorLabel": "Warna",
     "createCategory": "Cipta Kategori",
     "createFirstCategory": "Cipta Kategori Pertama Anda",
     "default": "Lalai",
     "delete": "Padam",
     "deleteCategoryAria": "Padam kategori",
-    "deleteConfirm": "Delete \"{name}\"? This cannot be undone.",
+    "deleteConfirm": "Burahin ang \"{name}\"? Hindi na ito maibabalik.",
     "deleteFailed": "Gagal memadam kategori",
     "edit": "Sunting",
     "editCategory": "Edit Kategori",
     "editCategoryAria": "Sunting kategori",
     "expense": "Perbelanjaan",
     "income": "Pendapatan",
-    "loading": "Loading categories...",
+    "loading": "Nilo-load ang mga kategorya...",
     "nameRequired": "Nama kategori diperlukan",
-    "newCategory": "New Category",
+    "newCategory": "Bagong Kategorya",
     "noCategories": "Tiada kategori ditemui",
     "save": "Simpan",
     "saveFailed": "Gagal menyimpan kategori",
     "subcategoriesLabel": "Subkategori (dipisahkan koma)",
-    "subcategoriesPlaceholder": "e.g., Rent, Maintenance, Insurance",
-    "subtitle": "Manage your budget categories and subcategories",
+    "subcategoriesPlaceholder": "hal., Upa, Maintenance, Insurance",
+    "subtitle": "Pamahalaan ang iyong mga kategorya at sub-kategorya ng budget",
     "tipLabel": "Petua:",
     "tipText": "Kategori lalai tidak boleh disunting atau dipadam. Cipta kategori tersuai untuk keperluan khusus anda.",
     "title": "Kategori",
@@ -1420,7 +1420,7 @@
       "title": "Kawalan Privasi"
     },
     "gdpr": {
-      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+      "notice": "<strong>Ang Iyong mga Karapatan:</strong> Sa pag-enable ng chatbot, pumapayag ka sa pagproseso ng iyong financial data sa pamamagitan ng API ng OpenAI. Maaari mong bawiin ang pahintulot anumang oras sa pamamagitan ng pag-disable ng chatbot sa Settings → Privacy. Ang iyong data ay pinoproseso alinsunod sa aming Privacy Policy at mga kinakailangan ng GDPR. May karapatan kang i-access, burahin, at i-export ang iyong kasaysayan ng pag-uusap anumang oras."
     },
     "privacy": {
       "dataSent": "Data kewangan dihantar ke API untuk menjawab soalan anda",
@@ -1682,7 +1682,7 @@
     "viewAllLoans": "Lihat Semua Pinjaman"
   },
   "debtOverview": {
-    "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
+    "activeLoans": "{count, plural, one {# aktibong utang} other {# aktibong utang}}",
     "activeLoansTitle": "Pinjaman Aktif",
     "addLoan": "Tambah Pinjaman",
     "avgRate": "Kadar Purata",
@@ -1693,7 +1693,7 @@
     "totalDebt": "Jumlah Hutang",
     "upcomingPayments": "Bayaran Akan Datang",
     "viewAll": "Lihat Semua",
-    "viewMore": "{count, plural, one {View # more loan} other {View # more loans}}"
+    "viewMore": "{count, plural, one {Tingnan ang # pang utang} other {Tingnan ang # pang utang}}"
   },
   "debtPayoff": {
     "addDebt": "Tambah Hutang",
@@ -1705,28 +1705,28 @@
     "cancel": "Batal",
     "debtFreeDate": "Tarikh Bebas Hutang",
     "debtName": "Nama",
-    "debtNamePlaceholder": "e.g. Credit Card, Car Loan",
+    "debtNamePlaceholder": "hal., Credit Card, Car Loan",
     "debtOverview": "Gambaran Hutang",
     "goToLoans": "Pergi ke Pinjaman",
-    "minPayment": "Min. Payment",
+    "minPayment": "Min. na Bayad",
     "mo": "bln",
-    "monthsToFreedom": "Months to Freedom",
+    "monthsToFreedom": "Buwan Hanggang Kalayaan",
     "noDebts": "Tiada hutang dijumpai. Tambah pinjaman untuk memulakan perancangan.",
-    "payoffChart": "Payoff Chart",
-    "payoffTimeline": "Payoff Timeline",
-    "results": "Results",
+    "payoffChart": "Tsart ng Pagbabayad",
+    "payoffTimeline": "Timeline ng Pagbabayad",
+    "results": "Mga Resulta",
     "save": "Simpan",
-    "saveScenarioTitle": "Save Scenario",
-    "savedScenarios": "Saved Scenarios",
-    "scenarioNamePlaceholder": "e.g. Aggressive avalanche plan",
-    "strategyConfig": "Strategy",
+    "saveScenarioTitle": "I-save ang Senaryo",
+    "savedScenarios": "Mga Naka-save na Senaryo",
+    "scenarioNamePlaceholder": "hal., Agresibong plano ng avalanche",
+    "strategyConfig": "Estratehiya",
     "subtitle": "Rancang strategi pembayaran hutang anda",
     "title": "Bayar Hutang",
     "totalDebt": "Jumlah Hutang",
     "totalInterestLabel": "Jumlah Faedah",
-    "totalMinPayments": "Total Min. Payments",
-    "totalPaid": "Total Paid",
-    "weightedApr": "Weighted APR",
+    "totalMinPayments": "Kabuuang Min. na Bayad",
+    "totalPaid": "Kabuuang Binayaran",
+    "weightedApr": "Timbang na APR",
     "monthlyPayment": "Bayaran Bulanan",
     "payoffDate": "Tarikh Bebas Hutang",
     "totalInterest": "Jumlah Faedah",
@@ -1883,9 +1883,9 @@
     "dragToReorder": "Seret untuk menyusun semula widget"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
-    "yearsAndMonths": "{years}y {months}m"
+    "months": "{count, plural, =1 {1 buwan} other {# buwan}}",
+    "years": "{count, plural, =1 {1 taon} other {# taon}}",
+    "yearsAndMonths": "{years}t {months}b"
   },
   "emptyStates": {
     "budgets": {
@@ -1901,7 +1901,7 @@
     "dashboard": {
       "description": "Mulakan dengan mengimport transaksi bank anda atau menambah akaun secara manual untuk melihat gambaran kewangan anda.",
       "heading": "Selamat Datang ke Aplikasi Bajet Anda!",
-      "primaryCta": "Import CSV",
+      "primaryCta": "Mag-import ng CSV",
       "secondaryCta": "Tambah Transaksi"
     },
     "futurePlans": {
@@ -1923,7 +1923,7 @@
       "description": "Tambah transaksi dan bajet untuk menjana laporan mendalam tentang corak dan trend perbelanjaan anda.",
       "heading": "Tiada Data untuk Dilaporkan",
       "primaryCta": "Tambah Transaksi",
-      "secondaryCta": "Import CSV"
+      "secondaryCta": "Mag-import ng CSV"
     },
     "retirement": {
       "description": "Rancang persaraan dengan menjejak akaun, menganggar keperluan, dan memvisualisasikan garis masa persaraan anda.",
@@ -1934,7 +1934,7 @@
       "description": "Mula menjejak perbelanjaan anda dengan menambah transaksi pertama. Anda boleh menambah secara manual atau import dari fail CSV.",
       "heading": "Tiada Transaksi Lagi",
       "primaryCta": "Tambah Transaksi",
-      "secondaryCta": "Import CSV"
+      "secondaryCta": "Mag-import ng CSV"
     }
   },
   "errorRecovery": {
@@ -1946,7 +1946,7 @@
       "viewGuide": "Lihat panduan penyelesaian masalah"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "canRecover": "Magandang balita! Nakahanap kami ng {count} {count, plural, =1 {paraan} other {paraan}} para mabawi ang error na ito.",
       "cannotRecover": "Pemulihan tidak mungkin. Anda perlu mengeksport semula fail dari bank anda atau cuba format yang berbeza.",
       "optionsTitle": "Pilihan Pemulihan"
     },
@@ -2010,8 +2010,8 @@
     "failedToImport": "Gagal mengimport data. Sila semak format fail.",
     "fullBackupDescription": "Eksport semua data anda sebagai sandaran JSON yang boleh dipulihkan",
     "fullBackupTitle": "Sandaran Penuh (JSON)",
-    "importData": "Import Data",
-    "importJson": "Import JSON",
+    "importData": "Mag-import ng Data",
+    "importJson": "Mag-import ng JSON",
     "importing": "Mengimport...",
     "invalidBackupFormat": "Format fail sandaran tidak sah",
     "options": "Mga Opsyon",
@@ -2038,7 +2038,7 @@
     "sheetLoansDesc": "Hutang dengan jadual pelunasan",
     "sheetMonthlySummary": "Buwanang Buod",
     "sheetMonthlySummaryDesc": "Pangkalahatang-tanaw buwan-buwan",
-    "sheetNetWorth": "Net Worth",
+    "sheetNetWorth": "Kabuuang Halaga ng Ari-arian",
     "sheetNetWorthDesc": "Aset vs liabiliti",
     "sheetSubscriptions": "Mga Subscription",
     "sheetSubscriptionsDesc": "Pagsubaybay sa mga umuulit na gastos",
@@ -2238,7 +2238,7 @@
       "line2": "Skor Kesihatan Kewangan anda"
     },
     "grade": "Gred: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
+    "missingFactors": "{count, plural, =1 {1 salik na nawawala} other {# salik na nawawala}}",
     "title": "Kesihatan Kewangan",
     "history": {
       "title": "Kasaysayan ng Iskor",
@@ -2543,7 +2543,7 @@
       "description": "Ini akan memadam akaun dan semua pegangan yang berkaitan secara kekal.",
       "impactAccount": "Akaun: {name}",
       "impactHistory": "Semua sejarah transaksi",
-      "impactHoldings": "{count, plural, one {# holding} other {# holdings}}",
+      "impactHoldings": "{count, plural, one {# hawak} other {# hawak}}",
       "impactTitle": "Anda akan kehilangan:",
       "impactValue": "Jumlah nilai: {value}",
       "title": "Padam Akaun Pelaburan"
@@ -2570,8 +2570,8 @@
     },
     "gainLoss": "Keuntungan/Kerugian",
     "hideDetails": "Sembunyikan Butiran",
-    "holdingsCount": "{count, plural, one {# holding} other {# holdings}}",
-    "loading": "Loading investments...",
+    "holdingsCount": "{count, plural, one {# hawak} other {# hawak}}",
+    "loading": "Nilo-load ang mga investment...",
     "marketDataNotice": "Notis Data Pasaran",
     "noHoldings": "Tiada pegangan dalam akaun ini.",
     "portfolioAnalysis": "Analisis Portfolio",
@@ -2579,10 +2579,10 @@
     "pricesUpdated": "Harga pasaran dikemas kini {time}",
     "refresh": "Muat Semula",
     "refreshPrices": "Muat Semula Harga",
-    "refreshPricesTitle": "Refresh market prices",
+    "refreshPricesTitle": "I-refresh ang mga presyo sa market",
     "return": "Pulangan",
     "showDetails": "Tunjukkan Butiran",
-    "subtitle": "Track your RRSP, TFSA, and investment accounts",
+    "subtitle": "Subaybayan ang iyong RRSP, TFSA, at mga investment account",
     "table": {
       "actions": "Tindakan",
       "currentPrice": "Harga Semasa",
@@ -2659,7 +2659,7 @@
     "pairedDevices": {
       "addDevice": "Tambah Peranti",
       "addFirstDevice": "Tambah Peranti Pertama Anda",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "deviceCount": "{count, plural, =1 {1 device ang naka-pair} other {# device ang naka-pair}}",
       "emptyDescription": "Gandingkan peranti untuk mula menyegerakkan data bajet anda",
       "emptyTitle": "Tiada peranti digandingkan",
       "noDevices": "Tiada peranti digandingkan lagi",
@@ -2673,11 +2673,11 @@
     },
     "syncAll": "Selaraskan Semua",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "daysAgo": "{count, plural, =1 {1 araw ang nakalipas} other {# araw ang nakalipas}}",
+      "hoursAgo": "{count, plural, =1 {1 oras ang nakalipas} other {# oras ang nakalipas}}",
       "justNow": "Baru sahaja",
       "lastSync": "Segerak terakhir: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "minutesAgo": "{count, plural, =1 {1 minuto ang nakalipas} other {# minuto ang nakalipas}}",
       "neverSynced": "Tidak pernah diselaraskan"
     },
     "title": "Penyegerakan LAN"
@@ -3213,7 +3213,7 @@
     "paysDownYourLoan": "Binabayaran ang iyong utang",
     "perMonth": "Bawat buwan",
     "percentPaidOff": "{percent}% na nabayaran",
-    "pmi": "PMI (Private Mortgage Insurance)",
+    "pmi": "PMI (Seguro sa Mortgage)",
     "principalAndInterestOnly": "Prinsipal at interes lamang",
     "propertyTax": "Buwis sa Ari-arian",
     "scrollToSeeMore": "Mag-scroll pababa para makita pa",
@@ -3242,7 +3242,7 @@
       "overview": "Pangkalahatang-tanaw",
       "paymentHistory": "Kasaysayan ng Bayad"
     },
-    "tip": "Tip",
+    "tip": "Payo",
     "title": "Pinjaman",
     "tooltip": {
       "amortizationAria": "Karagdagang impormasyon tungkol sa amortisasyon at pagbabayad ng utang",
@@ -3339,9 +3339,9 @@
   },
   "morePage": {
     "groups": {
-      "toolsSettings": "Tools & Settings",
-      "trackingAnalysis": "Tracking & Analysis",
-      "wealthPlanning": "Wealth & Planning"
+      "toolsSettings": "Mga Kasangkapan at Setting",
+      "trackingAnalysis": "Pagsubaybay at Pagsusuri",
+      "wealthPlanning": "Kayamanan at Pagpaplano"
     },
     "title": "Lagi",
     "accounts": "Akaun",
@@ -3374,12 +3374,12 @@
   },
   "notificationSettings": {
     "emailNotifications": {
-      "description": "Receive notifications via email",
+      "description": "Makatanggap ng notification sa pamamagitan ng email",
       "emailAddress": "Alamat E-mel",
-      "invalidEmail": "Please enter a valid email address",
+      "invalidEmail": "Mangyaring maglagay ng valid na email address",
       "sendTest": "Hantar Ujian",
-      "testEmail": "Test Email",
-      "testEmailDescription": "Send a test email to verify your settings",
+      "testEmail": "Subukan ang Email",
+      "testEmailDescription": "Magpadala ng test email para i-verify ang iyong mga setting",
       "testEmailFailed": "Gagal menghantar",
       "testEmailSent": "E-mel dihantar!",
       "title": "Pemberitahuan E-mel",
@@ -3387,14 +3387,14 @@
     },
     "infoBox": {
       "emailExplanation": "Pemberitahuan e-mel dihantar melalui perkhidmatan e-mel selamat kami dan memerlukan alamat e-mel yang sah.",
-      "pushExplanation": "Push notifications require browser permission and work even when the app is closed.",
-      "storedLocally": "Notification settings are stored locally on your device."
+      "pushExplanation": "Ang push notification ay nangangailangan ng pahintulot ng browser at gumagana kahit sarado ang app.",
+      "storedLocally": "Ang mga setting ng notification ay naka-imbak sa iyong device."
     },
     "masterToggle": {
-      "description": "Turn all notifications on or off",
+      "description": "I-on o i-off ang lahat ng notification",
       "title": "Dayakan Pemberitahuan"
     },
-    "notAvailable": "Notification settings are not available.",
+    "notAvailable": "Hindi available ang mga setting ng notification.",
     "notificationTypes": {
       "billReminders": {
         "description": "Dapatkan pemberitahuan sebelum langganan perlu dibayar",
@@ -3409,36 +3409,36 @@
         "description": "Raikan apabila anda mencapai pencapaian simpanan",
         "title": "Pencapaian Sasaran"
       },
-      "title": "Notification Types"
+      "title": "Mga Uri ng Notification"
     },
     "pushPermission": {
       "deniedHint": "Dayakan dalam tetapan pelayar",
-      "description": "Receive notifications even when the app is closed",
+      "description": "Makatanggap ng mga notification kahit sarado ang app",
       "enable": "Dayakan Pemberitahuan Tolak",
-      "notSupported": "Not supported in this browser",
+      "notSupported": "Hindi suportado sa browser na ito",
       "states": {
-        "default": "Not set",
+        "default": "Hindi pa nakatakda",
         "denied": "Disekat",
         "granted": "Didayakan",
-        "unsupported": "Unsupported"
+        "unsupported": "Hindi suportado"
       },
-      "title": "Push Notifications"
+      "title": "Push Notification"
     },
     "quietHours": {
-      "description": "No notifications during this time window",
+      "description": "Walang notification sa panahong ito",
       "end": "Masa tamat",
-      "start": "Start time",
-      "title": "Quiet Hours"
+      "start": "Oras ng simula",
+      "title": "Tahimik na Oras"
     },
     "reminderDays": {
-      "daysBeforeDue": "days before due date",
+      "daysBeforeDue": "araw bago ang takdang petsa",
       "description": "Berapa hari sebelum bil perlu dibayar untuk mengingatkan anda",
       "title": "Peringatan Lalai"
     },
     "testNotification": {
       "button": "Hantar Ujian",
-      "description": "Send a test notification to verify your settings",
-      "title": "Test Notification"
+      "description": "Magpadala ng test notification para i-verify ang iyong mga setting",
+      "title": "Subukan ang Notification"
     },
     "title": "Tetapan Pemberitahuan",
     "subtitle": "Urus pemberitahuan anda",
@@ -3564,16 +3564,16 @@
     "enhanceHint": "Tingkatkan kontras imej untuk OCR yang lebih baik"
   },
   "offline": {
-    "backOnline": "You're back online! Click refresh to reload the page.",
+    "backOnline": "Online ka na ulit! I-click ang refresh para i-reload ang page.",
     "connectionRestored": "Sambungan dipulihkan",
     "goToDashboard": "Pergi ke Papan Pemuka",
     "lostConnection": "Nampaknya anda telah kehilangan sambungan internet. Halaman yang anda cuba capai belum tersedia secara luar talian.",
-    "noConnection": "No internet connection",
-    "offlineFeatures": "Offline Features",
-    "offlineFeaturesDescription": "Once you visit a page while online, it will be available offline. All your data is stored locally on your device.",
-    "reloadPage": "Reload Page",
+    "noConnection": "Walang koneksyon sa internet",
+    "offlineFeatures": "Mga Offline Feature",
+    "offlineFeaturesDescription": "Kapag nabisita mo ang isang page habang online, magiging available ito offline. Ang lahat ng iyong data ay naka-imbak sa iyong device.",
+    "reloadPage": "I-reload ang Page",
     "title": "Mod Luar Talian",
-    "tryAgain": "Try Again",
+    "tryAgain": "Subukan Muli",
     "youAreOffline": "Anda sedang luar talian",
     "offlineDescription": "Sesetengah ciri mungkin tidak tersedia sementara luar talian. Data anda selamat dan akan diselaraskan apabila anda kembali dalam talian.",
     "goBack": "Kembali",
@@ -3792,7 +3792,7 @@
     "savePayment": "Simpan Bayaran",
     "status": "Status",
     "suggestedMatches": "Padanan Transaksi yang Dicadangkan",
-    "suggestedMatchesDescription": "We found {count, plural, one {# transaction} other {# transactions}} that might be loan payments",
+    "suggestedMatchesDescription": "Nakahanap kami ng {count, plural, one {# transaksyon} other {# transaksyon}} na maaaring bayad sa utang",
     "title": "Sejarah Bayaran",
     "uncategorized": "Tidak Dikategorikan",
     "unlinkConfirm": "Nyahpaut bayaran ini dari transaksi?",
@@ -3852,7 +3852,7 @@
       "descriptionLabel": "Keterangan",
       "descriptionPlaceholder": "Apa yang anda jimatkan?",
       "descriptionValue": "Keterangan: {description}",
-      "edit": "Edit",
+      "edit": "I-edit",
       "editGoal": "Edit Matlamat",
       "editGoalAriaLabel": "Edit matlamat",
       "emptyDescription": "Mulakan perancangan untuk pembelian masa depan anda dengan mencipta matlamat simpanan pertama anda. Jejak kemajuan anda dan kekal mengikut sasaran.",
@@ -3934,7 +3934,7 @@
       "payFrequencyHelp": "Seberapa kerap anda dibayar? Ini menentukan bila gaji anda dijana.",
       "payFrequencyHelpAriaLabel": "Maklumat lanjut tentang kekerapan gaji",
       "paycheckTimeline": "Garis Masa Gaji",
-      "paychecksPlanned": "{count, plural, one {# paycheck planned} other {# paychecks planned}}",
+      "paychecksPlanned": "{count, plural, one {# nakaplanong sahod} other {# nakaplanong sahod}}",
       "percentOfIncome": "{percent}% pendapatan",
       "regeneratePaychecks": "Jana Semula Gaji",
       "remainingToAllocate": "Baki untuk diperuntukkan",
@@ -3952,7 +3952,7 @@
       "scheduleSemimonthlyDesc": "1hb dan 15hb",
       "scheduleWeekly": "Mingguan",
       "scheduleWeeklyDesc": "Setiap minggu",
-      "scheduledPaychecks": "{count, plural, one {# scheduled paycheck} other {# scheduled paychecks}}",
+      "scheduledPaychecks": "{count, plural, one {# naka-schedule na sahod} other {# naka-schedule na sahod}}",
       "setUpPaycheckPlan": "Sediakan Pelan Gaji",
       "setUpPlan": "Sediakan Pelan",
       "subtitle": "Rancang ke mana setiap ringgit pergi sebelum anda dibayar",
@@ -4023,7 +4023,7 @@
       "tfsaBalance": "Baki TFSA",
       "title": "Kalkulator Persaraan",
       "toReachGoal": "Untuk mencapai matlamat anda, anda boleh:",
-      "workMoreYears": "Work {years, plural, one {# more year} other {# more years}}",
+      "workMoreYears": "Magtrabaho ng {years, plural, one {# taon pa} other {# taon pa}}",
       "yearAge": "{year} (Umur {age})",
       "yearsToRetirement": "Tahun ke Persaraan",
       "youWillLose": "Anda akan kehilangan:",
@@ -4116,7 +4116,7 @@
     "chatbotDescription": "Pembantu berkuasa AI yang boleh menjawab soalan tentang transaksi, bajet, dan corak perbelanjaan anda. Perbualan diproses melalui OpenAI API.",
     "chatbotPrivacyNotice": "Data kewangan anda dihantar ke OpenAI untuk menjawab soalan. OpenAI tidak menggunakan data API untuk melatih model. Anda boleh melumpuhkan pada bila-bila masa.",
     "confirmDelete": "Sahkan Padam",
-    "confirmDeleteWarning": "You are about to permanently delete {count, plural, one {# data type} other {# data types}}. Click \"Confirm Delete\" to proceed.",
+    "confirmDeleteWarning": "Permanente mong buburahin ang {count, plural, one {# uri ng data} other {# uri ng data}}. I-click ang \"Kumpirmahin ang Pagbura\" para magpatuloy.",
     "conversationHistory": "Sejarah Perbualan",
     "conversationStorageNotice": "Perbualan disimpan secara tempatan dalam pelayar anda. Anda boleh memadamnya secara manual bila-bila masa.",
     "dataAccessPermission": "Kebenaran Akses Data",
@@ -4221,8 +4221,8 @@
     "deleteButton": "Burahin ang profile"
   },
   "pullToRefresh": {
-    "pull": "Pull to refresh",
-    "release": "Release to refresh",
+    "pull": "Hilahin para i-refresh",
+    "release": "Bitawan para i-refresh",
     "pullToRefresh": "Tarik untuk muat semula",
     "releaseToRefresh": "Lepaskan untuk muat semula",
     "refreshing": "Memuat semula..."
@@ -4280,7 +4280,7 @@
       "save": "Simpan"
     },
     "clickToSelect": "Klik kategori untuk memilih",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "description": "Pumili ng kategorya para sa {count, plural, =1 {transaksyong ito} other {# transaksyon}}",
     "general": "Umum",
     "noResults": "Tiada kategori dijumpai",
     "pressEnter": "Tekan ↵ Enter",
@@ -4302,11 +4302,11 @@
     "timePeriod": "Tempoh Masa"
   },
   "quickStats": {
-    "balance": "Total Balance",
+    "balance": "Kabuuang Balanse",
     "expenses": "Perbelanjaan",
     "income": "Pendapatan",
-    "savingsRate": "Savings Rate",
-    "savingsRateDescription": "Percentage of income saved this month",
+    "savingsRate": "Rate ng Pag-iipon",
+    "savingsRateDescription": "Porsyento ng kita na naipon ngayong buwan",
     "totalBalance": "Jumlah Baki",
     "monthlySpending": "Perbelanjaan Bulanan",
     "monthlySavings": "Simpanan Bulanan",
@@ -4323,7 +4323,7 @@
     "downloadPdf": "Muat Turun PDF",
     "fileSize": "{size} KB",
     "pdfReceipt": "Resit PDF",
-    "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
+    "receiptCount": "{count, plural, =1 {1 resibo} other {# resibo}}",
     "unsupportedFileType": "Jenis fail tidak disokong",
     "uploaded": "Dimuat naik {date}",
     "view": "Tingnan"
@@ -4377,16 +4377,16 @@
       "quarterly": "Suku Tahunan",
       "weekly": "Mingguan"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
+    "inDays": "{count, plural, =0 {(ngayon)} =1 {(sa 1 araw)} other {(sa # araw)}}",
     "next": "Seterusnya: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "occurrences": "{count, plural, =1 {1 pangyayari ang na-detect} other {# pangyayari ang na-detect}}",
     "perPeriod": {
       "month": "setiap bulan",
       "quarter": "setiap suku tahun",
       "twoWeeks": "setiap 2 minggu",
       "week": "setiap minggu"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "showingPatterns": "{count, plural, =1 {Nagpapakita ng 1 pattern ng paulit-ulit na transaksyon} other {Nagpapakita ng # pattern ng paulit-ulit na transaksyon}}",
     "subtitle": "Langganan dan bil yang dikesan",
     "title": "Transaksi Berulang"
   },
@@ -4455,7 +4455,7 @@
     "aboutBudgetFiles": "Tentang Fail .budget",
     "accountDeleteFailed": "Gagal memadam akaun",
     "accountName": "Nama Akaun",
-    "accountNamePlaceholder": "e.g., BMO Checking",
+    "accountNamePlaceholder": "hal., BMO Checking",
     "accountSaveFailed": "Gagal menyimpan akaun",
     "accountType": "Jenis Akaun",
     "addAccount": "Tambah Akaun",
@@ -4479,7 +4479,7 @@
     "categoriesSubtitle": "Ayusin ang iyong mga transaksyon gamit ang mga custom na kategorya • I-drag para ayusin ang pagkakasunod",
     "categoriesTitle": "Kategori",
     "categoryName": "Nama Kategori",
-    "categoryNamePlaceholder": "e.g., Entertainment, Groceries, Salary",
+    "categoryNamePlaceholder": "hal., Aliwan, Groceries, Sahod",
     "categorySaveFailed": "Gagal menyimpan kategori",
     "checking": "Semakan",
     "color": "Warna",
@@ -4498,10 +4498,10 @@
     "exportDataDescription": "Muat turun semua data bajet anda sebagai fail .budget. Termasuk transaksi, akaun, kategori, dan tetapan.",
     "hideArchived": "Sembunyikan Arkib",
     "icon": "Ikon",
-    "importData": "Import Data",
+    "importData": "Mag-import ng Data",
     "importDataDescription": "I-restore ang iyong data mula sa .budget file. Maaari kang pumili na pagsamahin sa kasalukuyang data o palitan ito.",
     "institution": "Institusi",
-    "institutionPlaceholder": "e.g., BMO, Home Trust",
+    "institutionPlaceholder": "hal., BMO, Home Trust",
     "loading": "Nilo-load ang mga setting...",
     "noAccountsYet": "Wala Pang Mga Account",
     "noArchivedCategories": "Walang Mga Naka-archive na Kategorya",
@@ -4519,7 +4519,7 @@
     "tabAccessibility": "Kebolehcapaian",
     "tabAccounts": "Akaun",
     "tabCategories": "Kategori",
-    "tabData": "Data",
+    "tabData": "Datos",
     "tabDevTools": "Alat Pembangun",
     "tabLocale": "Wika at Pag-format",
     "tabNotifications": "Mga Notipikasyon",
@@ -4635,7 +4635,7 @@
     "shortcuts": "Mga Shortcut"
   },
   "simplefinConnect": {
-    "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
+    "accountsConnected": "{count, plural, one {# account ang naka-connect} other {# account ang naka-connect}}",
     "alreadyHaveToken": "Sudah ada token?",
     "asOf": "setakat {date}",
     "autoImportDescription": "Import transaksi secara automatik dari akaun bank anda",
@@ -4696,7 +4696,7 @@
       "title": "Akaun Disambung"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "accountsLinked": "{count, plural, =1 {1 account ang naka-link} other {# account ang naka-link}}",
       "connectButton": "Sambung Akaun Bank",
       "connected": "Disambungkan",
       "description": "Sambungkan akaun bank anda untuk mengimport transaksi secara automatik",
@@ -4718,7 +4718,7 @@
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "hoursAgo": "{hours, plural, =1 {1 oras ang nakalipas} other {# oras ang nakalipas}}",
       "lastSynced": "Terakhir disegerak: {time}",
       "lessThanHour": "Kurang daripada sejam yang lalu",
       "never": "Tidak Pernah",
@@ -4761,7 +4761,7 @@
   },
   "simplefinStatus": {
     "active": "Aktif",
-    "asOf": "as of {date}",
+    "asOf": "noong {date}",
     "cancel": "Batal",
     "connected": "Disambungkan",
     "connecting": "Menyambung...",
@@ -4770,32 +4770,32 @@
     "error": "Ralat",
     "errorsLabel": "Ralat:",
     "expired": "Tamat Tempoh",
-    "hoursAgo": "{hours}h ago",
+    "hoursAgo": "{hours} oras ang nakalipas",
     "imported": "Diimport",
-    "justNow": "just now",
+    "justNow": "ngayon lang",
     "lastSynced": "Terakhir disegerak: {time}",
-    "minutesAgo": "{minutes}m ago",
-    "neverSynced": "Never synced",
-    "noBankAccounts": "No bank accounts connected",
+    "minutesAgo": "{minutes} min ang nakalipas",
+    "neverSynced": "Hindi pa naka-sync",
+    "noBankAccounts": "Walang naka-connect na bank account",
     "pause": "Jeda",
     "paused": "Dijeda",
-    "processing": "Processing: {account}",
+    "processing": "Pinoproseso: {account}",
     "resume": "Sambung",
-    "skippedDuplicates": "Skipped (duplicates)",
+    "skippedDuplicates": "Nilaktawan (duplikado)",
     "statusLabel": "SimpleFIN: {status}",
     "sync": "Segerak",
-    "syncComplete": "Sync Complete",
-    "syncCompletedWithErrors": "Sync Completed with Errors",
-    "syncFailed": "Sync Failed",
-    "syncSuccessful": "Sync Successful",
-    "syncedDaysAgo": "Synced {days}d ago",
-    "syncedHoursAgo": "Synced {hours}h ago",
-    "syncedJustNow": "Synced just now",
-    "syncedYesterday": "Synced yesterday",
+    "syncComplete": "Kumpleto ang Sync",
+    "syncCompletedWithErrors": "Nakumpleto ang Sync na may mga Error",
+    "syncFailed": "Nabigo ang Sync",
+    "syncSuccessful": "Matagumpay ang Sync",
+    "syncedDaysAgo": "Na-sync {days} araw ang nakalipas",
+    "syncedHoursAgo": "Na-sync {hours} oras ang nakalipas",
+    "syncedJustNow": "Kaka-sync lang",
+    "syncedYesterday": "Na-sync kahapon",
     "syncing": "Menyegerak...",
     "transactionsCount": "({count} transaksi)",
     "unlink": "Nyahpaut",
-    "warningsLabel": "Warnings:"
+    "warningsLabel": "Mga Babala:"
   },
   "spendingTrendChart": {
     "forecastFooter": "Ramalan berdasarkan regresi linear {months} bulan lepas",
@@ -4901,7 +4901,7 @@
     "splitATransaction": "Bahagi Transaksi",
     "splitFlow": {
       "amountsCorrect": "Amaun dijumlahkan dengan betul",
-      "confirmDescription": "This will create {count, plural, one {# split} other {# splits}} for this transaction. Each person's share will be tracked until settled.",
+      "confirmDescription": "Gagawa ito ng {count, plural, one {# hatian} other {# hatian}} para sa transaksyong ito. Ang bahagi ng bawat tao ay susubaybayan hanggang maayos.",
       "confirmSplit": "Sahkan Bahagian",
       "howToSplit": "Bagaimana untuk dibahagi?",
       "modes": {
@@ -4933,7 +4933,7 @@
     "title": "Bahagi Transaksi",
     "total": "jumlah",
     "unknownTransaction": "Transaksi tidak diketahui",
-    "unsettledSplitCount": "{count, plural, one {# unsettled split} other {# unsettled splits}}",
+    "unsettledSplitCount": "{count, plural, one {# hindi pa naayos na hatian} other {# hindi pa naayos na hatian}}",
     "unsettledSplits": "Bahagian Belum Selesai ({count})",
     "via": "melalui",
     "youOwe": "Anda berhutang {amount}",
@@ -4965,7 +4965,7 @@
     },
     "buttons": {
       "claimManage": "Tuntut & Urus",
-      "edit": "Edit",
+      "edit": "I-edit",
       "transactions": "Transaksi"
     },
     "confidence": {
@@ -4996,7 +4996,7 @@
       "cancelSubscription": "Batalkan Langganan",
       "claimManage": "Tuntut & Urus",
       "delete": "Padam",
-      "edit": "Edit",
+      "edit": "I-edit",
       "notSubscription": "Bukan Langganan",
       "pause": "Jeda",
       "resume": "Sambung Semula",
@@ -5015,7 +5015,7 @@
       "totalSpent": "Jumlah Dibelanjakan"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {1 araw na lang sa trial} other {# araw na lang sa trial}}"
     },
     "reminderToggle": {
       "disableReminder": "I-disable ang paalala",
@@ -5034,18 +5034,18 @@
       "upcomingCharges": "Caj Akan Datang (30 Hari Seterusnya)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "activeSubscriptions": "{count, plural, =1 {1 aktibong subscription} other {# aktibong subscription}}",
       "annualCost": "Kos Tahunan",
       "monthlyCost": "Kos Bulanan",
       "next30Days": "30 Hari Seterusnya",
       "projectedYearly": "Anggaran perbelanjaan tahunan",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "upcomingCharges": "{count, plural, =1 {1 paparating na singil} other {# paparating na singil}}"
     },
     "suggestions": {
       "inactiveTitle": "Langganan yang mungkin dibatalkan",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
+      "inactiveDescription": "{count, plural, =1 {1 subscription ang hindi pa} other {# subscription ang hindi pa}} naningil kamakailan. I-verify kung talagang nakansela na ang mga ito.",
       "trialsTitle": "Percubaan akan tamat",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
+      "trialsDescription": "{count, plural, =1 {1 trial} other {# trial}} ang matatapos sa susunod na 7 araw. Kanselahin kung hindi mo ginagamit.",
       "highCostTitle": "Langganan kos tinggi",
       "highCostDescription": "Langganan ini mewakili sebahagian besar perbelanjaan anda. Pertimbangkan sama ada anda mendapat nilai penuh."
     }
@@ -5117,39 +5117,39 @@
     "deleteError": "Gagal memadam langganan",
     "dismissError": "Gagal mengabaikan langganan",
     "empty": {
-      "noMatching": "No matching subscriptions",
-      "noMatchingDescription": "Try adjusting your filters or search query.",
-      "noSubscriptions": "No subscriptions yet",
+      "noMatching": "Walang tumutugmang subscription",
+      "noMatchingDescription": "Subukang ayusin ang iyong mga filter o paghahanap.",
+      "noSubscriptions": "Wala pang subscription",
       "noSubscriptionsDescription": "Tambah langganan anda secara manual atau import transaksi untuk mengesan pembayaran berulang secara automatik."
     },
     "help": {
-      "description": "Manual: Add subscriptions you want to track precisely. Auto-detected: We analyze your transactions to find recurring patterns. Claim auto-detected subscriptions to manage them manually with reminders and more control.",
-      "title": "Smart Subscription Management"
+      "description": "Manual: Magdagdag ng mga subscription na gusto mong subaybayan nang tumpak. Auto-detected: Sinusuri namin ang iyong mga transaksyon para mahanap ang mga paulit-ulit na pattern. I-claim ang mga auto-detected na subscription para pamahalaan ang mga ito nang manual na may mga paalala at higit pang kontrol.",
+      "title": "Matalinong Pamamahala ng Subscription"
     },
     "importTransactions": "Import Transaksi",
-    "loading": "Loading subscriptions...",
-    "refreshAutoDetection": "Refresh auto-detection",
+    "loading": "Nilo-load ang mga subscription...",
+    "refreshAutoDetection": "I-refresh ang auto-detection",
     "saveError": "Gagal menyimpan langganan",
     "searchPlaceholder": "Cari langganan...",
     "sort": {
       "amount": "Amaun",
-      "ascending": "Sort ascending",
+      "ascending": "Pataas na ayos",
       "dateAdded": "Tarikh Ditambah",
-      "descending": "Sort descending",
+      "descending": "Pababang ayos",
       "name": "Nama",
-      "nextBilling": "Next Billing"
+      "nextBilling": "Susunod na Billing"
     },
     "stats": {
       "active": "Aktif",
       "annual": "Tahunan",
       "estimatedCost": "Anggaran kos",
-      "inactive": "{count} inactive",
+      "inactive": "{count} hindi aktibo",
       "monthly": "Bulanan",
-      "next7Days": "Next 7 Days",
-      "projectedSpend": "Projected spend",
-      "upcomingCharges": "Upcoming charges"
+      "next7Days": "Susunod na 7 Araw",
+      "projectedSpend": "Inaasahang gastos",
+      "upcomingCharges": "Mga paparating na singil"
     },
-    "subtitle": "Manage your recurring payments and subscriptions",
+    "subtitle": "Pamahalaan ang iyong mga paulit-ulit na bayad at subscription",
     "title": "Langganan",
     "viewMode": {
       "active": "Aktif",
@@ -5209,32 +5209,32 @@
     "finalLoss": "Kerugian Akhir",
     "howItWorks": "Cara ia berfungsi",
     "howStep1": "Menjana ~350 contoh latihan daripada 35 peraturan pengkategorian",
-    "howStep2": "Trains a neural network (64→32 neurons) using TensorFlow.js",
+    "howStep2": "Nagta-train ng neural network (64→32 neuron) gamit ang TensorFlow.js",
     "howStep3": "Mencapai ketepatan 90%+ pada set ujian",
-    "howStep4": "Saves model to IndexedDB for fast predictions",
+    "howStep4": "Sine-save ang model sa IndexedDB para sa mabilis na mga prediction",
     "howStep5": "Simpanan untuk transaksi yang tidak sepadan dengan peraturan",
     "howToUse": "Cara Penggunaan",
-    "loadSavedModel": "Load Saved Model",
-    "lowerIsBetter": "Lower is better",
-    "modelLoadedSuccess": "Model loaded successfully!",
-    "modelSavedReady": "Model saved to IndexedDB and ready for predictions.",
-    "noSavedModel": "No saved model found. Please train first.",
-    "subtitle": "Train a neural network to categorize transactions",
-    "targetAccuracy": "Target: ≥90%",
-    "testAccuracy": "Test Accuracy",
-    "testPredictions": "Test Predictions",
+    "loadSavedModel": "I-load ang Naka-save na Model",
+    "lowerIsBetter": "Mas mababa, mas maganda",
+    "modelLoadedSuccess": "Matagumpay na na-load ang model!",
+    "modelSavedReady": "Na-save ang model sa IndexedDB at handa na para sa mga prediction.",
+    "noSavedModel": "Walang nahanap na naka-save na model. Mangyaring mag-train muna.",
+    "subtitle": "Mag-train ng neural network para ikategorya ang mga transaksyon",
+    "targetAccuracy": "Layunin: ≥90%",
+    "testAccuracy": "Katumpakan ng Pagsubok",
+    "testPredictions": "Mga Test Prediction",
     "title": "Latih Model AI",
-    "trainModel": "Train Model",
-    "trainingComplete": "Training Complete!",
-    "trainingFailed": "Training Failed",
-    "trainingInProgress": "Training in progress... This may take 30-60 seconds.",
-    "trainingModel": "Training Model...",
-    "unknownError": "Unknown error",
-    "useStep1": "<strong>1. Train Model:</strong> Click \"Train Model\" to generate training data and train the neural network (30-60s)",
-    "useStep2": "<strong>2. Automatic Integration:</strong> The model is automatically used as a fallback when rule-based categorization fails",
-    "useStep3": "<strong>3. Hybrid System:</strong> Rules are tried first (fast), ML is used for unknown patterns",
-    "useStep4": "<strong>4. Model Persistence:</strong> Trained model is saved to IndexedDB and loads automatically",
-    "useStep5": "<strong>5. Retraining:</strong> Run training again to update the model with new data",
+    "trainModel": "I-train ang Model",
+    "trainingComplete": "Kumpleto na ang Training!",
+    "trainingFailed": "Nabigo ang Training",
+    "trainingInProgress": "Kasalukuyang nagta-train... Maaaring tumagal ng 30-60 segundo.",
+    "trainingModel": "Tinatrain ang Model...",
+    "unknownError": "Hindi kilalang error",
+    "useStep1": "<strong>1. I-train ang Model:</strong> I-click ang \"I-train ang Model\" para mag-generate ng training data at mag-train ng neural network (30-60s)",
+    "useStep2": "<strong>2. Awtomatikong Integrasyon:</strong> Awtomatikong ginagamit ang model bilang fallback kapag nabigo ang rule-based na pagkakategorya",
+    "useStep3": "<strong>3. Hybrid System:</strong> Sinusubukan muna ang mga rule (mabilis), ginagamit ang ML para sa mga hindi kilalang pattern",
+    "useStep4": "<strong>4. Pag-iimbak ng Model:</strong> Ang na-train na model ay nase-save sa IndexedDB at awtomatikong nilo-load",
+    "useStep5": "<strong>5. Muling Pag-train:</strong> Patakbuhin muli ang training para i-update ang model gamit ang bagong data",
     "description": "Tingkatkan pengkategorian automatik dengan melatih model dengan transaksi anda",
     "trainNow": "Latih Sekarang",
     "training": "Melatih...",
@@ -5329,26 +5329,26 @@
     "clearRecent": "Kosongkan",
     "filterName": "Nama penapis",
     "noResults": "Tiada transaksi ditemui",
-    "noResultsDescription": "Try a different search or adjust your filters",
-    "noTransactionsYet": "No transactions yet",
+    "noResultsDescription": "Subukan ang ibang paghahanap o ayusin ang iyong mga filter",
+    "noTransactionsYet": "Wala pang transaksyon",
     "placeholder": "Cari transaksi...",
-    "placeholderExtended": "Try 'coffee last week' or 'amount:>50'",
-    "recentSearchLabel": "Recent search",
+    "placeholderExtended": "Subukan ang 'kape noong nakaraang linggo' o 'amount:>50'",
+    "recentSearchLabel": "Kamakailang paghahanap",
     "recentSearches": "Carian Terkini",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
+    "resultCount": "{count} {count, plural, =1 {resulta} other {resulta}}",
     "save": "Simpan",
     "saveFilter": "Simpan Penapis",
     "savedFilters": "Penapis Disimpan",
-    "searchFilterLabel": "Search filter",
-    "searchTipAmount": "Use <code>$50-100</code> for amount ranges",
-    "searchTipChars": "Type 3+ characters to search transactions",
-    "searchTipNL": "Try <code>coffee last week</code> for natural language",
-    "searchTipsIntro": "Search Tips:",
+    "searchFilterLabel": "Filter sa paghahanap",
+    "searchTipAmount": "Gamitin ang <code>$50-100</code> para sa hanay ng halaga",
+    "searchTipChars": "Mag-type ng 3+ character para maghanap ng transaksyon",
+    "searchTipNL": "Subukan ang <code>kape noong nakaraang linggo</code> para sa natural na paghahanap",
+    "searchTipsIntro": "Mga Tip sa Paghahanap:",
     "searchingFor": "Mencari: {query}",
     "suggestions": {
       "amounts": "Julat Amaun",
       "categories": "Kategori",
-      "merchants": "Merchants",
+      "merchants": "Mga Merchant",
       "recent": "Terkini"
     },
     "suggestionsHeading": "Suggestions",
@@ -5361,10 +5361,10 @@
       "type": "Jenis: 'type:income' atau 'type:expense'"
     },
     "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
-    "viewAllResults": "View all {count} results",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available",
+    "usedTimes": "Ginamit {count} {count, plural, =1 {beses} other {beses}}",
+    "viewAllResults": "Tingnan lahat ng {count} resulta",
+    "resultsFound": "{count} {count, plural, =1 {resulta} other {resulta}} ang nahanap",
+    "suggestionsAvailable": "{count} {count, plural, =1 {suhestiyon} other {suhestiyon}} ang available",
     "searching": "Mencari...",
     "clearHistory": "Padam Sejarah"
   },
@@ -5372,7 +5372,7 @@
     "actions": {
       "attachReceipt": "Lampirkan resit",
       "delete": "Padam",
-      "edit": "Edit",
+      "edit": "I-edit",
       "split": "Pisahkan"
     },
     "emptyState": "Tiada transaksi untuk dipaparkan",
@@ -5417,7 +5417,7 @@
     "deleteTransaction": "Padam transaksi",
     "deleteTransactionTitle": "Padam Transaksi",
     "description": "Penerangan",
-    "edit": "Edit",
+    "edit": "I-edit",
     "editTransaction": "Sunting transaksi",
     "existingCategoriesReplaced": "Sebarang kategori sedia ada akan digantikan",
     "expenseLabel": "Perbelanjaan",
@@ -5523,22 +5523,22 @@
     "flagged": "Dibenderai"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
-    "daysRemaining": "{count} days remaining in your free trial",
+    "daysLeft": "{count, plural, =0 {Matatapos na ang iyong trial ngayon!} =1 {1 araw na lang sa iyong trial} other {# araw na lang sa iyong trial}}",
+    "daysRemaining": "{count} araw na natitira sa iyong libreng trial",
     "dismiss": "Tolak",
-    "expired": "Your trial has expired",
+    "expired": "Nag-expire na ang iyong trial",
     "expiredDescription": "Apl dalam mod baca sahaja. Naik taraf untuk terus menguruskan kewangan anda.",
-    "upgrade": "Upgrade - {price}",
-    "upgradeNow": "Upgrade Now - {price}",
-    "upgradePrompt": "Upgrade now to keep full access to your budget data.",
-    "viewPricing": "View pricing"
+    "upgrade": "Mag-upgrade - {price}",
+    "upgradeNow": "Mag-upgrade Ngayon - {price}",
+    "upgradePrompt": "Mag-upgrade ngayon para mapanatili ang buong access sa iyong budget data.",
+    "viewPricing": "Tingnan ang presyo"
   },
   "validationWarnings": {
     "aiAnalysis": "Analisis AI:",
     "amount": "Amaun:",
     "cancelImport": "Batal Import",
     "closeModal": "Tutup modal",
-    "confidence": "{percent}% confidence",
+    "confidence": "{percent}% kumpiyansa",
     "continueWithAll": "Teruskan dengan Semua",
     "criticalIssues": "Isu Kritikal",
     "date": "Tarikh:",
@@ -5547,16 +5547,16 @@
     "ignoreAllContinue": "Abaikan Semua & Teruskan",
     "informational": "Maklumat",
     "issuesDetected": "Isu Dikesan",
-    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
+    "issuesFound": "Nakahanap kami ng {count, plural, =1 {1 isyu} other {# isyu}} na nangangailangan ng iyong pansin",
     "marked": "Ditanda",
-    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
+    "removalNote": "{count, plural, =1 {1 transaksyon} other {# transaksyon}} ang aalisin sa pag-import kung magpapatuloy ka.",
     "remove": "Buang",
-    "removeAndContinue": "Remove {count} & Continue",
-    "suggestion": "Suggestion:",
-    "title": "Transaction Validation Results",
-    "transactionNumber": "Transaction #{number}",
-    "viewDetails": "View Transaction Details",
-    "warnings": "Warnings"
+    "removeAndContinue": "Alisin ang {count} at Magpatuloy",
+    "suggestion": "Suhestiyon:",
+    "title": "Mga Resulta ng Validation ng Transaksyon",
+    "transactionNumber": "Transaksyon #{number}",
+    "viewDetails": "Tingnan ang mga Detalye ng Transaksyon",
+    "warnings": "Mga Babala"
   },
   "vaultSetup": {
     "aes256Description": "Data anda disulitkan dengan penyulitan AES-256",
@@ -5641,7 +5641,7 @@
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "category": "{count, plural, =1 {1 kategorya} other {# kategorya}}",
       "createNew": "Buat Baru",
       "description": "Petakan kategori YNAB ke kategori sedia ada atau buat yang baru.",
       "mapToExisting": "Petakan ke Sedia Ada",
@@ -5654,7 +5654,7 @@
       "errors": "Ralat",
       "importAnother": "Import Lagi",
       "success": "Import Selesai!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "successMessage": "{count, plural, =1 {1 item ang matagumpay na na-import} other {# item ang matagumpay na na-import}} mula sa YNAB.",
       "viewTransactions": "Lihat Transaksi",
       "whatNext": "Apa yang anda ingin lakukan seterusnya?",
       "withIssues": "Import Selesai dengan Isu"
@@ -5767,7 +5767,7 @@
       "budgetImportFailed": "Import bajet gagal: {details}"
     },
     "importSuccess": "Data YNAB berjaya diimport!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importWithErrors": "Nakumpleto ang pag-import na may {count, plural, =1 {1 error} other {# error}}"
   },
   "balanceReconciliation": {
     "title": "Kumpleto na ang Pag-import!",

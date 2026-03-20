@@ -105,7 +105,7 @@
     "actionCreated": "Krijuar",
     "actionDeleted": "Fshirë",
     "actionExport": "Eksport",
-    "actionImport": "Import",
+    "actionImport": "Importo",
     "actionLogin": "Hyrje",
     "actionLogout": "Dalje",
     "actionUpdated": "Përditësuar",
@@ -288,7 +288,7 @@
     "maxPlaceholder": "Maks",
     "maxThumb": "Shuma maksimale",
     "minLabel": "Shuma minimale",
-    "minPlaceholder": "Min",
+    "minPlaceholder": "Min.",
     "minThumb": "Shuma minimale",
     "title": "Diapazoni i Shumës"
   },
@@ -428,7 +428,7 @@
       "checkEmailTitle": "Kontrolloni Emailin Tuaj",
       "checkSpam": "Nuk e morët emailin? Kontrolloni dosjen e postës së padëshiruar ose provoni përsëri.",
       "defaultError": "Dështoi dërgimi i emailit të rivendosjes",
-      "emailLabel": "Email",
+      "emailLabel": "Email-i",
       "emailPlaceholder": "ju@shembull.com",
       "rememberPassword": "Mbani mend fjalëkalimin tuaj?",
       "resetLinkSent": "Kemi dërguar një lidhje rivendosjeje fjalëkalimi te {email}",
@@ -439,7 +439,7 @@
     },
     "login": {
       "defaultError": "Dështoi hyrja",
-      "emailLabel": "Email",
+      "emailLabel": "Email-i",
       "emailPlaceholder": "ju@shembull.com",
       "forgotPassword": "Keni harruar fjalëkalimin?",
       "noAccount": "Nuk keni llogari?",
@@ -470,7 +470,7 @@
       "confirmPasswordPlaceholder": "Rivendosni fjalëkalimin tuaj",
       "createAccountButton": "Krijo Llogari",
       "defaultError": "Dështoi krijimi i llogarisë",
-      "emailLabel": "Email",
+      "emailLabel": "Email-i",
       "emailPlaceholder": "ju@shembull.com",
       "fullNameLabel": "Emri i Plotë",
       "fullNamePlaceholder": "Emri Mbiemri",
@@ -1014,7 +1014,7 @@
       "accuracyTitle": "Llogaritje Precize",
       "infoTitle": "Rreth Këtyre Llogaritësve",
       "privacyDescription": "Të gjitha llogaritjet ndodhin në pajisjen tuaj. Të dhënat tuaja financiare nuk largohen kurrë nga shfletuesi juaj.",
-      "privacyTitle": "100% Private",
+      "privacyTitle": "100% Privatësi",
       "sectionCore": "Llogaritësit Kryesorë",
       "sectionPlanning": "Planifikimi Financiar",
       "sectionTools": "Mjete & Lidhje",
@@ -1253,7 +1253,7 @@
     },
     "transparency": {
       "assumptions": "Supozimet",
-      "formula": "Formula",
+      "formula": "Formulë",
       "title": "Si Funksionon"
     },
     "chart": {
@@ -1285,7 +1285,7 @@
       "delete": "Fshi",
       "sideBySide": "Krahasim Krah për Krah",
       "field": "Fusha",
-      "delta": "Delta",
+      "delta": "Ndryshimi",
       "selectOneMore": "Zgjidhni edhe një skenar për të krahasuar",
       "copySuffix": "(kopje)"
     },
@@ -2556,7 +2556,7 @@
         "cloud": "Aplikacion Tipik Cloud",
         "feature": "Veçoria",
         "local": "BudgetPro Lokal",
-        "sync": "BudgetPro Sync (Pro)"
+        "sync": "BudgetPro Sinkronizim (Pro)"
       },
       "offlineMode": {
         "feature": "Mënyra Jashtë Linje"
@@ -2756,25 +2756,25 @@
       "title": "Ndërtuar për jetën reale, jo për tabelat llogaritëse"
     },
     "preview": {
-      "balanceAmount": "$24,500.00",
+      "balanceAmount": "24.500,00 $",
       "balanceChange": "+12.5%",
       "currencySymbol": "$",
       "expenses": "Shpenzime",
-      "expensesAmount": "$1,250.00",
+      "expensesAmount": "1.250,00 $",
       "expensesChange": "-5.2%",
-      "live": "Live",
+      "live": "Drejtpërdrejt",
       "overview": "Pasqyrë",
       "recentTransactions": "Transaksionet e Fundit",
       "savingsGoal": "Objektivi i Kursimeve",
       "savingsPercent": "85%",
       "totalBalance": "Bilanci Total",
-      "tx0Amount": "-$124.50",
+      "tx0Amount": "-124,50 $",
       "tx0Date": "Sot, 2:30 PM",
       "tx0Name": "Dyqani i Ushqimeve",
-      "tx1Amount": "+$4,250.00",
+      "tx1Amount": "+4.250,00 $",
       "tx1Date": "Dje, 9:00 AM",
       "tx1Name": "Tech Solutions Inc.",
-      "tx2Amount": "-$15.99",
+      "tx2Amount": "-15,99 $",
       "tx2Date": "24 Tetor 2025",
       "tx2Name": "Abonimi Netflix",
       "vsLastMonth": "kundrejt muajit të kaluar",
@@ -3480,7 +3480,7 @@
     "ipAddressDescription": "Vendosni adresën tuaj lokale IP për të lejuar pajisjet e tjera të lidhen.",
     "ipAddressRequired": "Adresa IP Kërkohet",
     "ipPlaceholder": "192.168.1.100",
-    "manual": "Manual",
+    "manual": "Manuale",
     "pairingFailed": "Çiftëzimi Dështoi",
     "pairingSuccessful": "Çiftëzimi i suksesshëm!",
     "pendingConnection": "Lidhje në Pritje",
@@ -4595,7 +4595,7 @@
     },
     "source": {
       "auto-detected": "I zbuluar automatikisht",
-      "manual": "Manual",
+      "manual": "Manuale",
       "merged": "I ndjekur"
     },
     "stats": {

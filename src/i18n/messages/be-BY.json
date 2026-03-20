@@ -364,7 +364,7 @@
     "syncStatus": "Статус синхронізації: {status}",
     "toggleSeniorsMode": "Перемикач режиму для літніх",
     "typeQuestion": "Введіть своє запитання",
-    "unreadNotifications": "{count, plural, =1 {1 unread notification} other {# unread notifications}}",
+    "unreadNotifications": "{count, plural, =1 {1 непрачытанае апавяшчэнне} one {# непрачытанае апавяшчэнне} few {# непрачытаныя апавяшчэнні} many {# непрачытаных апавяшчэнняў} other {# непрачытаных апавяшчэнняў}}",
     "welcomeBudgetApp": "Ласкаво просимо до Бюджетного застосунку"
   },
   "auth": {
@@ -503,8 +503,8 @@
       "addAccount": "Додати рахунок",
       "addFirstAccount": "Додайте перший рахунок",
       "allTransactionsCleared": "Усі транзакції очищено. Тепер ви можете повторно імпортувати виписки.",
-      "assignCount": "Assign {count, plural, one {# Transaction} other {# Transactions}}",
-      "assignModalDescription": "{count, plural, one {# transaction needs} other {# transactions need}} to be assigned to an account.",
+      "assignCount": "Прызначыць {count, plural, one {# транзакцыю} few {# транзакцыі} many {# транзакцый} other {# транзакцый}}",
+      "assignModalDescription": "{count, plural, one {# транзакцыя павінна быць} few {# транзакцыі павінны быць} many {# транзакцый павінна быць} other {# транзакцый павінна быць}} прызначана да рахунку.",
       "assignTransactions": "Призначити транзакції",
       "assignTransactionsNow": "Призначити транзакції зараз",
       "assignedTransactions": "Призначено {count} транзакцій до {name}",
@@ -553,11 +553,11 @@
       "subtitle": "Керуйте своїми банківськими рахунками та початковими балансами",
       "title": "Рахунки",
       "totalStartingBalance": "Загальний початковий баланс",
-      "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
+      "transactionCount": "{count, plural, one {# транзакцыя} few {# транзакцыі} many {# транзакцый} other {# транзакцый}}",
       "unassignedClickToAssign": "Натисніть нижче, щоб автоматично призначити їх до ваших рахунків.",
       "unassignedCreateFirst": "Спочатку створіть рахунок, а потім вони будуть автоматично призначені.",
       "unassignedDescription": "Ці транзакції були імпортовані до налаштування рахунків.",
-      "unassignedTitle": "{count, plural, one {# transaction needs} other {# transactions need}} account assignment",
+      "unassignedTitle": "{count, plural, one {# транзакцыя патрабуе} few {# транзакцыі патрабуюць} many {# транзакцый патрабуюць} other {# транзакцый патрабуюць}} прызначэння рахунку",
       "update": "Оновити"
     },
     "budgets": {
@@ -610,8 +610,8 @@
       "totalBudgeted": "Загальний бюджет",
       "totalExpenses": "Загальні витрати",
       "totalSpent": "Витрачено всього",
-      "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
-      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transaction will become unbudgeted} other {# transactions will become unbudgeted}}",
+      "transactionCount": "{count, plural, one {# транзакцыя} few {# транзакцыі} many {# транзакцый} other {# транзакцый}}",
+      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# транзакцыя стане небюджэтнай} few {# транзакцыі стануць небюджэтнымі} many {# транзакцый стануць небюджэтнымі} other {# транзакцый стануць небюджэтнымі}}",
       "youWillLose": "Ви втратите:"
     },
     "events": {
@@ -824,7 +824,7 @@
     "applyTo": "Застосувати до {count}",
     "categorize": "Категоризувати",
     "clearSelection": "Зняти вибір",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "confirmDelete": "Выдаліць {count, plural, =1 {1 транзакцыю} one {# транзакцыю} few {# транзакцыі} many {# транзакцый} other {# транзакцый}}?",
     "delete": "Видалити",
     "deleteWarning": "Цю дію неможливо скасувати.",
     "export": "Експорт",
@@ -1629,7 +1629,7 @@
     "viewAllLoans": "Переглянути всі позики"
   },
   "debtOverview": {
-    "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
+    "activeLoans": "{count, plural, one {# актыўны крэдыт} few {# актыўныя крэдыты} many {# актыўных крэдытаў} other {# актыўных крэдытаў}}",
     "activeLoansTitle": "Активні позики",
     "addLoan": "Додати позику",
     "avgRate": "Середня ставка",
@@ -1640,7 +1640,7 @@
     "totalDebt": "Загальний борг",
     "upcomingPayments": "Майбутні платежі",
     "viewAll": "Переглянути всі",
-    "viewMore": "{count, plural, one {View # more loan} other {View # more loans}}"
+    "viewMore": "{count, plural, one {Паглядзець яшчэ # крэдыт} few {Паглядзець яшчэ # крэдыты} many {Паглядзець яшчэ # крэдытаў} other {Паглядзець яшчэ # крэдытаў}}"
   },
   "debtPayoff": {
     "addDebt": "Додати борг",
@@ -1798,8 +1798,8 @@
     "dragToReorder": "Перетягніть для зміни порядку віджета"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
+    "months": "{count, plural, =1 {1 месяц} one {# месяц} few {# месяцы} many {# месяцаў} other {# месяцаў}}",
+    "years": "{count, plural, =1 {1 год} one {# год} few {# гады} many {# гадоў} other {# гадоў}}",
     "yearsAndMonths": "{years}р {months}міс"
   },
   "emptyStates": {
@@ -1861,7 +1861,7 @@
       "viewGuide": "Переглянути посібник з усунення несправностей"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "canRecover": "Добрая навіна! Мы знайшлі {count} {count, plural, =1 {спосаб} one {спосаб} few {спосабы} many {спосабаў} other {спосабаў}} аднаўлення пасля гэтай памылкі.",
       "cannotRecover": "Відновлення неможливе. Вам потрібно повторно експортувати файл із свого банку або спробувати інший формат.",
       "optionsTitle": "Варіанти відновлення"
     },
@@ -2067,8 +2067,8 @@
     "loading": "Завантаження...",
     "placeholderContent": "Тут з'явиться контент огляду",
     "stepCounter": "{current} / {total}",
-    "stepLabel": "Step {current}: {title}",
-    "stepProgress": "Step {current} of {total}: {title}",
+    "stepLabel": "Крок {current}: {title}",
+    "stepProgress": "Крок {current} з {total}: {title}",
     "steps": {
       "budgets": {
         "subtitle": "Як ваші бюджети?",
@@ -2104,7 +2104,7 @@
       "line2": "Оцінку фінансового здоров'я"
     },
     "grade": "Оцінка: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
+    "missingFactors": "{count, plural, =1 {Адсутнічае 1 фактар} one {Адсутнічае # фактар} few {Адсутнічаюць # фактары} many {Адсутнічае # фактараў} other {Адсутнічае # фактараў}}",
     "title": "Фінансове здоров'я",
     "history": {
       "title": "Гісторыя ацэнкі",
@@ -2347,7 +2347,7 @@
       "description": "Це назавжди видалить рахунок та всі пов'язані активи.",
       "impactAccount": "Рахунок: {name}",
       "impactHistory": "Всю історію транзакцій",
-      "impactHoldings": "{count, plural, one {# holding} other {# holdings}}",
+      "impactHoldings": "{count, plural, one {# актыў} few {# актывы} many {# актываў} other {# актываў}}",
       "impactTitle": "Ви втратите:",
       "impactValue": "Загальна вартість: {value}",
       "title": "Видалити інвестиційний рахунок"
@@ -2374,7 +2374,7 @@
     },
     "gainLoss": "Прибуток/збиток",
     "hideDetails": "Приховати деталі",
-    "holdingsCount": "{count, plural, one {# holding} other {# holdings}}",
+    "holdingsCount": "{count, plural, one {# актыў} few {# актывы} many {# актываў} other {# актываў}}",
     "loading": "Завантаження інвестицій...",
     "marketDataNotice": "Примітка про ринкові дані",
     "noHoldings": "У цьому рахунку ще немає активів.",
@@ -2437,7 +2437,7 @@
     "pairedDevices": {
       "addDevice": "Додати пристрій",
       "addFirstDevice": "Додати перший пристрій",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "deviceCount": "{count, plural, =1 {1 спалучаная прылада} one {# спалучаная прылада} few {# спалучаныя прылады} many {# спалучаных прылад} other {# спалучаных прылад}}",
       "emptyDescription": "Спаруйте пристрій для синхронізації даних бюджету",
       "emptyTitle": "Пристроїв не спаровано",
       "noDevices": "Пристроїв ще не спаровано",
@@ -2451,14 +2451,14 @@
     },
     "syncAll": "Синхронізувати все",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "daysAgo": "{count, plural, =1 {1 дзень таму} one {# дзень таму} few {# дні таму} many {# дзён таму} other {# дзён таму}}",
+      "hoursAgo": "{count, plural, =1 {1 гадзіну таму} one {# гадзіну таму} few {# гадзіны таму} many {# гадзін таму} other {# гадзін таму}}",
       "justNow": "Щойно",
       "lastSync": "Остання синхронізація: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "minutesAgo": "{count, plural, =1 {1 хвіліну таму} one {# хвіліну таму} few {# хвіліны таму} many {# хвілін таму} other {# хвілін таму}}",
       "neverSynced": "Ніколи не синхронізовано"
     },
-    "title": "LAN Sync"
+    "title": "Сінхранізацыя па LAN"
   },
   "landing": {
     "accessibility": {
@@ -2500,8 +2500,8 @@
       "headers": {
         "cloud": "Типовий хмарний додаток",
         "feature": "Функція",
-        "local": "BudgetPro Local",
-        "sync": "BudgetPro Sync (Pro)"
+        "local": "BudgetPro Лакальны",
+        "sync": "BudgetPro Сінхранізацыя (Pro)"
       },
       "offlineMode": {
         "feature": "Офлайн режим"
@@ -3476,7 +3476,7 @@
     "savePayment": "Зберегти платіж",
     "status": "Статус",
     "suggestedMatches": "Запропоновані збіги транзакцій",
-    "suggestedMatchesDescription": "We found {count, plural, one {# transaction} other {# transactions}} that might be loan payments",
+    "suggestedMatchesDescription": "Мы знайшлі {count, plural, one {# транзакцыю} few {# транзакцыі} many {# транзакцый} other {# транзакцый}}, якія могуць быць плацяжамі па крэдыце",
     "title": "Історія платежів",
     "uncategorized": "Без категорії",
     "unlinkConfirm": "Від'єднати цей платіж від транзакції?",
@@ -3618,7 +3618,7 @@
       "payFrequencyHelp": "Як часто ви отримуєте зарплату? Це визначає, коли генеруються зарплати.",
       "payFrequencyHelpAriaLabel": "Більше інформації про частоту виплат",
       "paycheckTimeline": "Графік зарплати",
-      "paychecksPlanned": "{count, plural, one {# paycheck planned} other {# paychecks planned}}",
+      "paychecksPlanned": "{count, plural, one {# запланаваная зарплата} few {# запланаваныя зарплаты} many {# запланаваных зарплат} other {# запланаваных зарплат}}",
       "percentOfIncome": "{percent}% від доходу",
       "regeneratePaychecks": "Перегенерувати зарплати",
       "remainingToAllocate": "Залишилось розподілити",
@@ -3636,7 +3636,7 @@
       "scheduleSemimonthlyDesc": "1-го та 15-го",
       "scheduleWeekly": "Щотижня",
       "scheduleWeeklyDesc": "Кожного тижня",
-      "scheduledPaychecks": "{count, plural, one {# scheduled paycheck} other {# scheduled paychecks}}",
+      "scheduledPaychecks": "{count, plural, one {# запланаваная выплата} few {# запланаваныя выплаты} many {# запланаваных выплат} other {# запланаваных выплат}}",
       "setUpPaycheckPlan": "Налаштувати план зарплати",
       "setUpPlan": "Налаштувати план",
       "subtitle": "Розподіляйте зарплату заздалегідь",
@@ -3707,7 +3707,7 @@
       "tfsaBalance": "Залишок TFSA",
       "title": "Планування виходу на пенсію",
       "toReachGoal": "Щоб досягти цілі, ви могли б:",
-      "workMoreYears": "Work {years, plural, one {# more year} other {# more years}}",
+      "workMoreYears": "Працаваць яшчэ {years, plural, one {# год} few {# гады} many {# гадоў} other {# гадоў}}",
       "yearAge": "{year} (вік {age})",
       "yearsToRetirement": "Років до пенсії",
       "youWillLose": "Ви втратите:",
@@ -3750,7 +3750,7 @@
     "chatbotDescription": "Асистент на базі ШІ, який може відповідати на питання про транзакції, бюджети та зразки витрат. Розмови обробляються через OpenAI API.",
     "chatbotPrivacyNotice": "Ваші фінансові дані надсилаються до OpenAI для відповіді на питання. OpenAI не використовує дані API для навчання моделей. Ви можете вимкнути будь-коли.",
     "confirmDelete": "Підтвердити видалення",
-    "confirmDeleteWarning": "You are about to permanently delete {count, plural, one {# data type} other {# data types}}. Click \"Confirm Delete\" to proceed.",
+    "confirmDeleteWarning": "Вы збіраецеся назаўжды выдаліць {count, plural, one {# тып даных} few {# тыпы даных} many {# тыпаў даных} other {# тыпаў даных}}. Націсніце \"Пацвердзіць выдаленне\", каб працягнуць.",
     "conversationHistory": "Історія розмов",
     "conversationStorageNotice": "Розмови зберігаються локально у браузері. Ви можете видалити їх будь-коли вручну.",
     "dataAccessPermission": "Дозвіл на доступ до даних",
@@ -3911,7 +3911,7 @@
       "save": "Зберегти"
     },
     "clickToSelect": "Натисніть на категорію для вибору",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "description": "Абярыце катэгорыю для {count, plural, =1 {гэтай транзакцыі} one {# транзакцыі} few {# транзакцый} many {# транзакцый} other {# транзакцый}}",
     "general": "Загальне",
     "noResults": "Категорій не знайдено",
     "pressEnter": "Натисніть ↵ Enter",
@@ -3947,7 +3947,7 @@
     "downloadPdf": "Завантажити PDF",
     "fileSize": "{size} КБ",
     "pdfReceipt": "PDF-чек",
-    "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
+    "receiptCount": "{count, plural, =1 {1 квітанцыя} one {# квітанцыя} few {# квітанцыі} many {# квітанцый} other {# квітанцый}}",
     "unsupportedFileType": "Непідтримуваний тип файлу",
     "uploaded": "Завантажено {date}",
     "view": "Прагляд"
@@ -4001,16 +4001,16 @@
       "quarterly": "Щоквартально",
       "weekly": "Щотижня"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
+    "inDays": "{count, plural, =0 {(сёння)} =1 {(праз 1 дзень)} one {(праз # дзень)} few {(праз # дні)} many {(праз # дзён)} other {(праз # дзён)}}",
     "next": "Наступне: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "occurrences": "{count, plural, =1 {Выяўлена 1 паўтарэнне} one {Выяўлена # паўтарэнне} few {Выяўлена # паўтарэнні} many {Выяўлена # паўтарэнняў} other {Выяўлена # паўтарэнняў}}",
     "perPeriod": {
       "month": "на місяць",
       "quarter": "на квартал",
       "twoWeeks": "на 2 тижні",
       "week": "на тиждень"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "showingPatterns": "{count, plural, =1 {Паказаны 1 шаблон рэгулярных транзакцый} one {Паказаны # шаблон рэгулярных транзакцый} few {Паказана # шаблоны рэгулярных транзакцый} many {Паказана # шаблонаў рэгулярных транзакцый} other {Паказана # шаблонаў рэгулярных транзакцый}}",
     "subtitle": "Виявлені підписки та рахунки",
     "title": "Регулярні транзакції"
   },
@@ -4188,7 +4188,7 @@
     "shortcuts": "Швидкі клавіші"
   },
   "simplefinConnect": {
-    "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
+    "accountsConnected": "{count, plural, one {# рахунак падключаны} few {# рахункі падключаны} many {# рахункаў падключана} other {# рахункаў падключана}}",
     "alreadyHaveToken": "Вже є токен?",
     "asOf": "станом на {date}",
     "autoImportDescription": "Автоматичний імпорт транзакцій з банківських рахунків",
@@ -4249,7 +4249,7 @@
       "title": "Підключені рахунки"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "accountsLinked": "{count, plural, =1 {1 рахунак падключаны} one {# рахунак падключаны} few {# рахункі падключаны} many {# рахункаў падключана} other {# рахункаў падключана}}",
       "connectButton": "Підключити банківський рахунок",
       "connected": "Підключено",
       "description": "Підключіть свої банківські рахунки для автоматичного імпорту транзакцій",
@@ -4271,7 +4271,7 @@
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "hoursAgo": "{hours, plural, =1 {1 гадзіну таму} one {# гадзіну таму} few {# гадзіны таму} many {# гадзін таму} other {# гадзін таму}}",
       "lastSynced": "Остання синхронізація: {time}",
       "lessThanHour": "Менше години тому",
       "never": "Ніколи",
@@ -4454,7 +4454,7 @@
     "splitATransaction": "Розділити транзакцію",
     "splitFlow": {
       "amountsCorrect": "Суми правильно збалансовані",
-      "confirmDescription": "This will create {count, plural, one {# split} other {# splits}} for this transaction. Each person's share will be tracked until settled.",
+      "confirmDescription": "Гэта створыць {count, plural, one {# падзел} few {# падзелы} many {# падзелаў} other {# падзелаў}} для гэтай транзакцыі. Доля кожнага ўдзельніка будзе адсочвацца да разліку.",
       "confirmSplit": "Підтвердити розподіл",
       "howToSplit": "Як розділити?",
       "modes": {
@@ -4486,7 +4486,7 @@
     "title": "Розподіл витрат",
     "total": "разом",
     "unknownTransaction": "Невідома транзакція",
-    "unsettledSplitCount": "{count, plural, one {# unsettled split} other {# unsettled splits}}",
+    "unsettledSplitCount": "{count, plural, one {# неразлічаны падзел} few {# неразлічаныя падзелы} many {# неразлічаных падзелаў} other {# неразлічаных падзелаў}}",
     "unsettledSplits": "Нерозраховані поділи ({count})",
     "via": "через",
     "youOwe": "Ви винні {amount}",
@@ -4551,7 +4551,7 @@
       "totalSpent": "Всього витрачено"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {Застаўся 1 дзень пробнага перыяду} one {Застаўся # дзень пробнага перыяду} few {Засталіся # дні пробнага перыяду} many {Засталося # дзён пробнага перыяду} other {Засталося # дзён пробнага перыяду}}"
     },
     "reminderToggle": {
       "disableReminder": "Адключыць напамінак",
@@ -4570,18 +4570,18 @@
       "upcomingCharges": "Майбутні платежі (наступні 30 днів)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "activeSubscriptions": "{count, plural, =1 {1 актыўная падпіска} one {# актыўная падпіска} few {# актыўныя падпіскі} many {# актыўных падпісак} other {# актыўных падпісак}}",
       "annualCost": "Річна вартість",
       "monthlyCost": "Місячна вартість",
       "next30Days": "Наступні 30 днів",
       "projectedYearly": "Прогнозовані річні витрати",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "upcomingCharges": "{count, plural, =1 {1 будучае спісанне} one {# будучае спісанне} few {# будучыя спісанні} many {# будучых спісанняў} other {# будучых спісанняў}}"
     },
     "suggestions": {
       "inactiveTitle": "Можливо скасовані підписки",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
+      "inactiveDescription": "{count, plural, =1 {1 падпіска не спісвала} one {# падпіска не спісвала} few {# падпіскі не спісвалі} many {# падпісак не спісвалі} other {# падпісак не спісвалі}} сродкі нядаўна. Праверце, ці сапраўды яны скасаваны.",
       "trialsTitle": "Пробні версії, що закінчуються",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
+      "trialsDescription": "{count, plural, =1 {1 пробны перыяд} one {# пробны перыяд} few {# пробныя перыяды} many {# пробных перыядаў} other {# пробных перыядаў}} заканчваецца на працягу наступных 7 дзён. Скасуйце, калі вы імі не карыстаецеся.",
       "highCostTitle": "Дорогі підписки",
       "highCostDescription": "Ці підписки складають велику частину ваших витрат. Розгляньте, чи отримуєте ви повну цінність."
     }
@@ -4839,7 +4839,7 @@
     "placeholderExtended": "Спробуйте 'кава минулого тижня' або 'сума:>50'",
     "recentSearchLabel": "Останній пошук",
     "recentSearches": "Останні пошуки",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
+    "resultCount": "{count} {count, plural, =1 {вынік} one {вынік} few {вынікі} many {вынікаў} other {вынікаў}}",
     "save": "Зберегти",
     "saveFilter": "Зберегти фільтр",
     "savedFilters": "Збережені фільтри",
@@ -4864,11 +4864,11 @@
       "title": "Поради з пошуку",
       "type": "Тип: 'тип:дохід' або 'тип:витрата'"
     },
-    "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
+    "transactionCount": "{count} {count, plural, =1 {транзакцыя} one {транзакцыя} few {транзакцыі} many {транзакцый} other {транзакцый}}",
+    "usedTimes": "Выкарыстана {count} {count, plural, =1 {раз} one {раз} few {разы} many {разоў} other {разоў}}",
     "viewAllResults": "Переглянути всі {count} результатів",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "resultsFound": "{count, plural, =1 {Знойдзены 1 вынік} one {Знойдзены # вынік} few {Знойдзена # вынікі} many {Знойдзена # вынікаў} other {Знойдзена # вынікаў}}",
+    "suggestionsAvailable": "{count, plural, =1 {Даступная 1 прапанова} one {Даступная # прапанова} few {Даступна # прапановы} many {Даступна # прапаноў} other {Даступна # прапаноў}}"
   },
   "transactionTable": {
     "actions": {
@@ -4973,7 +4973,7 @@
     "toDate": "До дати",
     "totalExpenses": "Загальні витрати",
     "totalIncome": "Загальний дохід",
-    "transactionCount": "{count, plural, one {1 transaction} other {# transactions}}",
+    "transactionCount": "{count, plural, one {1 транзакцыя} few {# транзакцыі} many {# транзакцый} other {# транзакцый}}",
     "transactionDeleted": "Транзакцію успішно видалено",
     "transactionFeaturesInfo": "Більше інформації про функції транзакцій",
     "transactionSaved": "Транзакцію успішно збережено",
@@ -4987,7 +4987,7 @@
     "youWillLose": "Ви втратите:"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
+    "daysLeft": "{count, plural, =0 {Ваш пробны перыяд заканчваецца сёння!} =1 {Застаўся толькі 1 дзень пробнага перыяду} one {Засталося # дзень пробнага перыяду} few {Засталося # дні пробнага перыяду} many {Засталося # дзён пробнага перыяду} other {Засталося # дзён пробнага перыяду}}",
     "daysRemaining": "{count} днів залишилось у безкоштовній пробній версії",
     "dismiss": "Закрити",
     "expired": "Термін вашої пробної версії закінчився",
@@ -5011,9 +5011,9 @@
     "ignoreAllContinue": "Ігнорувати все та продовжити",
     "informational": "Інформаційні",
     "issuesDetected": "Виявлено проблеми",
-    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
+    "issuesFound": "Мы знайшлі {count, plural, =1 {1 праблему} one {# праблему} few {# праблемы} many {# праблем} other {# праблем}}, якія патрабуюць вашай увагі",
     "marked": "Позначено",
-    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
+    "removalNote": "{count, plural, =1 {1 транзакцыя будзе выдалена} one {# транзакцыя будзе выдалена} few {# транзакцыі будуць выдалены} many {# транзакцый будзе выдалена} other {# транзакцый будзе выдалена}} з імпарту, калі вы працягнеце.",
     "remove": "Видалити",
     "removeAndContinue": "Видалити {count} та продовжити",
     "suggestion": "Пропозиція:",
@@ -5105,7 +5105,7 @@
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "category": "{count, plural, =1 {1 катэгорыя} one {# катэгорыя} few {# катэгорыі} many {# катэгорый} other {# катэгорый}}",
       "createNew": "Створити нову",
       "description": "Зіставте категорії YNAB з наявними категоріями або створіть нові.",
       "mapToExisting": "Зіставити з наявною",
@@ -5118,7 +5118,7 @@
       "errors": "Помилки",
       "importAnother": "Імпортувати ще",
       "success": "Імпорт завершено!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "successMessage": "{count, plural, =1 {1 элемент паспяхова імпартаваны} one {# элемент паспяхова імпартаваны} few {# элементы паспяхова імпартаваны} many {# элементаў паспяхова імпартавана} other {# элементаў паспяхова імпартавана}} з YNAB.",
       "viewTransactions": "Переглянути транзакції",
       "whatNext": "Що бажаєте зробити далі?",
       "withIssues": "Імпорт завершено з помилками"
@@ -5231,7 +5231,7 @@
       "budgetImportFailed": "Імпорт бюджету не вдався: {details}"
     },
     "importSuccess": "Дані YNAB успішно імпортовано!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importWithErrors": "Імпарт завершаны з {count, plural, =1 {1 памылкай} one {# памылкай} few {# памылкамі} many {# памылкамі} other {# памылкамі}}"
   },
   "balanceReconciliation": {
     "title": "Імпарт завершаны!",

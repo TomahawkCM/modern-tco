@@ -1,0 +1,262 @@
+{
+  "budget": {
+    "budgets": {
+      "periodHelpTooltip": "I budget mensili si azzerano ogni mese. I budget annuali dividono il totale su 12 mesi. Esempio: CHF 1.200 annui = CHF 100 al mese.",
+      "rolloverHelpTooltip": "Cos'è il rollover del budget? Se abilitato, i fondi non spesi passano al mese successivo. Esempio: Budget: CHF 500/mese, Speso: CHF 400, Rimanente: CHF 100, Il mese successivo inizia con: CHF 600 (CHF 500 + CHF 100 riportati)"
+    },
+    "scenarios": {
+      "types": {
+        "cancelSubscription": {
+          "description": "Vedi come cambierebbe il tuo budget se annullassi un abbonamento."
+        },
+        "changeIncome": {
+          "description": "Simula un cambiamento nel tuo reddito per vedere l'impatto sul budget."
+        },
+        "addExpense": {
+          "description": "Aggiungi una nuova spesa e vedi come influisce sul tuo budget."
+        },
+        "payOffDebt": {
+          "description": "Vedi come ripagare un debito cambierebbe il tuo budget mensile."
+        },
+        "increaseSavings": {
+          "description": "Simula un aumento dei tuoi risparmi per vedere l'impatto."
+        }
+      }
+    }
+  },
+  "calculators": {
+    "inflation": {
+      "inflationRateHelp": "Media storica svizzera: ~1-2%"
+    },
+    "debtPayoff": {
+      "debtName": "Nome debito"
+    },
+    "subscriptionCost": {
+      "name": "Nome"
+    },
+    "chart": {
+      "portfolio": "Portafoglio",
+      "snowball": "Palla di neve"
+    }
+  },
+  "commandPalette": {
+    "commands": {
+      "addTransaction": "Aggiungi transazione",
+      "budgets": "Budgets",
+      "categories": "Categorie",
+      "darkTheme": "Tema scuro",
+      "exportData": "Esporta dati",
+      "futurePlans": "Piani futuri",
+      "highContrastTheme": "Tema ad alto contrasto",
+      "importCsv": "Importa CSV",
+      "investments": "Investimenti",
+      "lightTheme": "Tema chiaro",
+      "loans": "Prestiti",
+      "newBudget": "Nuovo budget",
+      "reports": "Rapporti",
+      "retirement": "Pensionamento",
+      "scanReceipt": "Scansiona ricevuta",
+      "settings": "Impostazioni",
+      "transactions": "Transactions"
+    }
+  },
+  "landing": {
+    "comparison": {
+      "cost": {
+        "cloud": "CHF 100+/anno Abbonamento"
+      }
+    },
+    "features": {
+      "2": {
+        "description": "Scansiona le ricevute localmente con Tesseract.js. Nessun'elaborazione nel cloud."
+      }
+    },
+    "footer": {
+      "features": "Funzionalità"
+    },
+    "heroSection": {
+      "demo": {
+        "cloudStorage": "Archiviazione cloud",
+        "dining": "Ristorazione",
+        "expenses": "Uscite",
+        "foodToday": "Cibo • Oggi",
+        "groceries": "Spesa alimentare",
+        "groceryStore": "Supermercato",
+        "income": "Entrate",
+        "incomeYesterday": "Entrate • Ieri",
+        "monthly": "Mensile",
+        "netWorth": "Patrimonio netto",
+        "salary": "Stipendio",
+        "subscriptionOct24": "Abbonamento • Ott 24",
+        "yearly": "Annuale"
+      }
+    },
+    "howItWorks": {
+      "2": {
+        "description": "Assegna a ogni franco un compito e prevedi il tuo patrimonio netto futuro."
+      }
+    },
+    "marquee": {
+      "logos": [
+        "Budgeting",
+        "Abbonamenti",
+        "Prestiti",
+        "Ricevute OCR",
+        "Report",
+        "Pianificazione",
+        "Offline",
+        "Modalità Anziani"
+      ]
+    },
+    "preview": {
+      "balanceAmount": "CHF 24'500.00",
+      "currencySymbol": "CHF",
+      "expensesAmount": "CHF 1'250.00",
+      "tx0Amount": "-CHF 124.50",
+      "tx0Name": "Negozio di alimentari",
+      "tx1Amount": "+CHF 4'250.00",
+      "tx2Amount": "-CHF 15.99"
+    }
+  },
+  "notificationSettings": {
+    "emailNotifications": {
+      "description": "Ricevi riepiloghi e avvisi importanti via email",
+      "emailAddress": "Indirizzo email",
+      "invalidEmail": "Indirizzo email non valido",
+      "sendTest": "Invia prova",
+      "testEmail": "Email di prova",
+      "testEmailDescription": "Invia un'email di prova per verificare le impostazioni",
+      "testEmailFailed": "Invio email di prova fallito",
+      "testEmailSent": "Email di prova inviata con successo",
+      "title": "Notifiche email",
+      "types": "Tipi"
+    },
+    "infoBox": {
+      "emailExplanation": "Le notifiche email richiedono un indirizzo email verificato.",
+      "pushExplanation": "Le notifiche push richiedono l'autorizzazione del browser.",
+      "storedLocally": "Le preferenze di notifica sono salvate localmente sul tuo dispositivo."
+    },
+    "masterToggle": {
+      "description": "Attiva o disattiva tutte le notifiche dell'app",
+      "title": "Attiva notifiche"
+    },
+    "notAvailable": "Le impostazioni di notifica non sono disponibili.",
+    "notificationTypes": {
+      "billReminders": {
+        "description": "Ricevi promemoria prima della scadenza delle fatture",
+        "title": "Promemoria fatture"
+      },
+      "budgetAlerts": {
+        "description": "Ricevi avvisi quando ti avvicini ai limiti di budget",
+        "title": "Avvisi budget"
+      },
+      "description": "Scegli quali notifiche ricevere",
+      "goalMilestones": {
+        "description": "Ricevi notifiche quando raggiungi traguardi nei tuoi obiettivi",
+        "title": "Traguardi obiettivi"
+      },
+      "title": "Tipi di notifica"
+    }
+  },
+  "planning": {
+    "paycheck": {
+      "subtitle": "Pianifica dove va ogni franco prima di ricevere lo stipendio"
+    },
+    "retirement": {
+      "currentSavingsAmount": "Risparmi attuali: {amount}"
+    },
+    "future": {
+      "currentSavingsValue": "Risparmi attuali: {amount}"
+    }
+  },
+  "privacyPanel": {
+    "anomalyDetectionDescription": "Segnala schemi di spesa insoliti (es. «Il tuo acquisto Starbucks di 85 CHF è insolito»)"
+  },
+  "settings": {
+    "tabDevTools": "Strumenti per sviluppatori",
+    "tabLocale": "Lingua e formattazione",
+    "tipLabel": "Consiglio:",
+    "unarchiveCategory": "Dearchivia categoria",
+    "unarchiveFailed": "Impossibile dearchiviare la categoria",
+    "webmcpDescription": "Consenti agli agenti IA del browser di interagire con i dati del tuo budget. Richiede Chrome 146+ con il flag WebMCP abilitato.",
+    "webmcpToolsDescription": "Quando abilitati, 9 strumenti sono esposti agli agenti IA del browser: cerca transazioni, riepilogo budget, spese per categoria, saldi conti, elenca categorie, ottieni abbonamenti, aggiungi transazione, categorizza transazione e imposta limite budget. I campi di crittografia e i dati di identificazione bancaria non vengono mai condivisi."
+  },
+  "shortcutsModal": {
+    "close": "Chiudi guida tasti di scelta rapida",
+    "proTip": {
+      "description": "I tasti di scelta rapida funzionano su qualsiasi pagina tranne quando si digita nei moduli. Premi {key} in qualsiasi momento per vedere questa guida.",
+      "title": "💡 Suggerimento professionale"
+    },
+    "subtitle": "Suggerimenti di produttività per utenti esperti",
+    "title": "Tasti di scelta rapida"
+  },
+  "splits": {
+    "splitFlow": {
+      "modes": {
+        "percentage": {
+          "description": "Imposta le percentuali per ogni persona"
+        }
+      }
+    },
+    "name": "Nome"
+  },
+  "subscriptionCard": {
+    "badges": {
+      "aiVerified": "Verificato IA"
+    },
+    "confidence": {
+      "label": "Confidenza rilevamento"
+    }
+  },
+  "subscriptionModal": {
+    "currencySymbol": "CHF",
+    "statusLabel": "Stato"
+  },
+  "transactionModal": {
+    "description": {
+      "placeholder": "es. Spesa al supermercato Migros"
+    }
+  },
+  "transactions": {
+    "splitTransactionsHelp": "Dividi un singolo acquisto tra più categorie. Esempio: visita al supermercato (CHF 100) → Spesa (CHF 80) + Casa (CHF 20). Clicca il pulsante Dividi su qualsiasi transazione per dividerla."
+  },
+  "simplefinSettings": {
+    "disconnect": {
+      "dialogDescription": "Questo rimuoverà la connessione ai tuoi conti bancari. Le transazioni esistenti non verranno eliminate, ma le nuove transazioni non si sincronizzeranno più automaticamente."
+    },
+    "help": {
+      "protocolDocs": "Documentazione protocollo SimpleFIN"
+    }
+  },
+  "subscriptions": {
+    "sort": {
+      "name": "Nome"
+    }
+  },
+  "debug": {
+    "name": "Nome"
+  },
+  "columnMapper": {
+    "status": "Stato"
+  },
+  "paymentHistoryPanel": {
+    "status": "Stato"
+  },
+  "profileDialog": {
+    "nameLabel": "Nome"
+  },
+  "vaultSetup": {
+    "zeroKnowledge": "Conoscenza zero"
+  },
+  "activityLog": {
+    "typeSystem": "Sistema"
+  },
+  "syncStatus": {
+    "offline": "Non in linea"
+  },
+  "recommendations": {
+    "factorLabels": {
+      "budgetAdherence": "Rispetto del budget"
+    }
+  }
+}

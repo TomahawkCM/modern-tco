@@ -1,0 +1,702 @@
+{
+  "accessibilitySettings": {
+    "fontSize": {
+      "description": "Passen Sie die Grundtextgröße für bessere Lesbarkeit an",
+      "extraLarge": "Extra groß",
+      "large": "Groß",
+      "title": "Schriftgröße"
+    },
+    "seniorsMode": {
+      "description": "Barrierefreiheitsverbesserung mit einem Klick: größerer Text, größere Berührungsziele und vereinfachte Oberfläche"
+    }
+  },
+  "accessibilityToggle": {
+    "largeTextMode": "Großer Textmodus",
+    "largeTextModeDescription": "Größerer Text und Berührungsziele",
+    "sizeLarge": "Groß",
+    "sizeXLarge": "Extra groß",
+    "textSize": "Textgröße"
+  },
+  "aiColumnMapper": {
+    "closeModal": "Modal schließen"
+  },
+  "apiErrors": {
+    "fileTooLarge": "Datei zu groß. Maximum {maxSize}."
+  },
+  "aria": {
+    "close": "Schließen",
+    "closeAccessibilityMenu": "Barrierefreiheitsmenü schließen",
+    "closeChatbot": "Chatbot schließen",
+    "closeHoldingModal": "Modal schließen",
+    "closeIconPicker": "Symbolauswahl schließen",
+    "closeModal": "Modal schließen",
+    "closeNotification": "Benachrichtigung schließen",
+    "closeOnboarding": "Onboarding-Assistent schließen",
+    "closeReceiptViewer": "Belegansicht schließen",
+    "closeSubscriptionModal": "Modal schließen",
+    "decreaseTextSize": "Textgröße verringern",
+    "dragToClose": "Nach unten ziehen zum Schließen",
+    "increaseTextSize": "Textgröße erhöhen"
+  },
+  "bottomSheet": {
+    "close": "Schließen",
+    "dragToClose": "Nach unten ziehen zum Schließen"
+  },
+  "budget": {
+    "events": {
+      "daysLeft": "{count} days left",
+      "noEventsDescription": "Create an event budget to track spending for weddings, holidays, and more"
+    },
+    "gamification": {
+      "noAchievements": "Aktionen abschließen, um Abzeichen zu verdienen"
+    },
+    "netWorth": {
+      "history": "Historical Snapshots",
+      "milestoneReached": "Milestone reached: {amount}!",
+      "noLiabilities": "No liabilities — great job!"
+    },
+    "scenarios": {
+      "amountLabel": "Amount",
+      "impact": "Impact",
+      "run": "Run Scenario",
+      "subtitle": "Model financial changes and see their impact",
+      "types": {
+        "addExpense": {
+          "description": "Sehen Sie, wie sich eine neue wiederkehrende Ausgabe auf Ihr Budget auswirkt"
+        },
+        "cancelSubscription": {
+          "description": "Sehen Sie die Auswirkungen der Kündigung einer wiederkehrenden Ausgabe"
+        },
+        "changeIncome": {
+          "description": "Simulieren Sie eine Gehaltsänderung oder eine neue Einkommensquelle"
+        },
+        "increaseSavings": {
+          "description": "Sehen Sie die Auswirkungen von höheren monatlichen Sparraten"
+        },
+        "payOffDebt": {
+          "description": "Simulieren Sie eine beschleunigte Schuldenrückzahlung"
+        }
+      }
+    }
+  },
+  "calculators": {
+    "budgetAnalyzer": {
+      "balanced": "Ihr Budget ist Ausgewogen!",
+      "description": "Analysieren Sie Ihre Ausgaben anhand der beliebten Budgetregel",
+      "exceeding": "Überschreitend",
+      "inputTitle": "Ihre Monatlichen Finanzen",
+      "monthlyIncomeHelp": "Ihr Nettolohn nach Steuern",
+      "needsAdjustment": "Anpassungen Empfohlen",
+      "needsDescription": "Wohnen, Nebenkosten, Lebensmittel, Versicherung, Mindestzahlungen für Schulden",
+      "over": "Überschritten",
+      "savings": "Sparen",
+      "savingsDescription": "Notfallreserve, Investitionen, Rente, zusätzliche Schuldenzahlungen",
+      "savingsExamples": "Sparen, Investitionen, zusätzliche Schulden",
+      "title": "50/30/20 Budget-Analysator",
+      "wantsDescription": "Essen gehen, Unterhaltung, Einkaufen, Abonnements",
+      "wantsExamples": "Restaurants, Unterhaltung, Einkaufen"
+    },
+    "common": {
+      "back": "Zurück zu den Rechnern",
+      "save": "Plan Speichern"
+    },
+    "compoundInterest": {
+      "annualRateHelp": "Sparen: 4-5%, Anleihen: 5-6%, Aktien: 7-10%",
+      "assumptionCompounding": "Zinskapitalisierung",
+      "assumptionReinvest": "Alle Zinsen reinvestiert",
+      "chartTitle": "Wachstum im Zeitverlauf",
+      "compoundingFrequency": "Zinskapitalisierungsfrequenz",
+      "description": "Sehen Sie, wie Ihr Geld mit Zinseszins wächst",
+      "finalBalance": "Endsaldo",
+      "formulaExplanation": "FV = Endwert, PV = Barwert, r = Jahreszins, n = Zinskapitalisierungen pro Jahr, t = Jahre, PMT = periodische Zahlung",
+      "frequency": {
+        "annually": "Jährlich (1/Jahr)",
+        "daily": "Täglich (365/Jahr)",
+        "monthly": "Monatlich (12/Jahr)",
+        "quarterly": "Vierteljährlich (4/Jahr)",
+        "semiannually": "Halbjährlich (2/Jahr)",
+        "weekly": "Wöchentlich (52/Jahr)"
+      },
+      "initialDeposit": "Ersteinlage",
+      "inputTitle": "Investitionsdetails",
+      "resultTitle": "Wachstum Ihrer Investition",
+      "subtitle": "Beobachten Sie, wie Ihr Geld im Laufe der Zeit wächst",
+      "title": "Zinseszins-Rechner"
+    },
+    "debtPayoff": {
+      "addDebt": "Schuld Hinzufügen",
+      "apr": "Jahreszins (%)",
+      "avalanche": "Lawinen-Strategie",
+      "avalancheDescription": "Zuerst den höchsten Zinssatz abbezahlen, um am meisten zu sparen",
+      "description": "Vergleichen Sie Schneeball- vs. Lawinenstrategie zur schnelleren Schuldenrückzahlung",
+      "extraMonthlyPayment": "Zusätzliche Monatszahlung",
+      "extraMonthlyPaymentHelp": "Zusätzlicher Betrag, den Sie über die Mindestzahlungen hinaus jeden Monat zahlen können",
+      "payoffDate": "Rückzahlungsdauer",
+      "savingsTitle": "Zinsersparnis mit Lawine",
+      "snowball": "Schneeball-Strategie",
+      "snowballDescription": "Zuerst den kleinsten Saldo abbezahlen für schnelle Erfolge und Motivation",
+      "title": "Schuldenrückzahlungs-Rechner"
+    },
+    "emergencyFund": {
+      "amountNeeded": "Sie brauchen noch {amount}, um Ihr Ziel zu erreichen",
+      "description": "Berechnen Sie, wie viel Sie für finanzielle Sicherheit brauchen und verfolgen Sie Ihren Fortschritt",
+      "goalMet": "Ziel Erreicht!",
+      "monthlyContributionHelp": "Wie viel Sie monatlich für Ihre Notfallreserve sparen können",
+      "monthlyExpensesHelp": "Einschließlich Miete, Nebenkosten, Lebensmittel, Versicherung und andere wichtige Kosten",
+      "targetAmount": "Ziel-Notfallreserve",
+      "targetMonths": "Zielmonate der Abdeckung",
+      "tip1": "Bewahren Sie Ihre Notfallreserve auf einem Tagesgeldkonto für einfachen Zugang und bessere Renditen auf",
+      "tip2": "Automatisieren Sie Ihre Beiträge durch automatische Überweisungen am Zahltag",
+      "tip3": "Fangen Sie klein an, wenn nötig - auch regelmäßig kleine Beträge zu sparen summiert sich mit der Zeit",
+      "tipsTitle": "Tipps zum Aufbau Ihrer Notfallreserve",
+      "title": "Notfallreserve-Rechner"
+    },
+    "hub": {
+      "accuracyDescription": "Verwendung von Finanz-Arithmetik zur Vermeidung von Gleitkommafehler in allen Berechnungen.",
+      "infoTitle": "Über Diese Rechner",
+      "privacyDescription": "Alle Berechnungen erfolgen auf Ihrem Gerät. Ihre Finanzdaten verlassen niemals Ihren Browser.",
+      "subtitle": "Werkzeuge zur Planung und Analyse Ihrer Finanzen"
+    },
+    "inflation": {
+      "assumptionCompound": "Inflation jährlich kumuliert",
+      "description": "Sehen Sie, wie die Inflation Ihre Kaufkraft im Laufe der Zeit erodiert",
+      "formulaExplanation": "Zeigt, wie viel Ihr Geld in der Zukunft tatsächlich kaufen wird, bereinigt um steigende Preise",
+      "formulaText": "Realwert = Nominalwert / (1 + Inflation)^Jahre",
+      "inflationRateHelp": "Historischer Durchschnitt: ~3%",
+      "inputTitle": "Auswirkung Berechnen",
+      "subtitle": "Verstehen Sie die wahren Kosten der Inflation",
+      "tableReal": "Realwert",
+      "tableTitle": "Jahr-für-Jahr-Aufschlüsselung",
+      "title": "Inflationswirkungsrechner"
+    },
+    "loanTracker": {
+      "description": "Verfolgen Sie alle Ihre Kredite, Zahlungen und Rückzahlungsfortschritt",
+      "title": "Kreditverfolgung"
+    },
+    "monteCarlo": {
+      "assumptionInflationApplied": "Auf Entnahmen angewendet (kumuliert)",
+      "assumptionPRNGValue": "Geseedeter PRNG (Mulberry32) — deterministisch",
+      "assumptionVolatility": "Volatilität (Standardabweichung)",
+      "badgeCaution": "Überprüfung Nötig",
+      "badgeStrong": "Solider Plan",
+      "expectedReturn": "Erwartete Jahresrendite (%)",
+      "formulaExplanation": "Jeden Monat wird eine zufällige Rendite aus einer Normalverteilung gezogen. Beiträge werden hinzugefügt, inflationsbereinigte Entnahmen abgezogen. Wiederholt über N Simulationen.",
+      "formulaText": "Monatsrendite = Normal(μ/12, σ/√12); Saldo_t = Saldo_(t-1) × (1 + r_t) + C - W",
+      "initialBalance": "Startportfoliosaldo",
+      "medianFinal": "Medianer Endsaldo",
+      "simulations": "Anzahl der Simulationen",
+      "subtitle": "Führen Sie Tausende von Marktsimulationen durch, um zu sehen, wie Ihr Plan standhält",
+      "successRateDescription": "{total} Simulationen durchgeführt, {failures} gingen das Geld aus",
+      "title": "Monte-Carlo-Simulator",
+      "volatility": "Jährliche Volatilität / Standardabweichung (%)",
+      "volatilityHelp": "S&P 500 historisch: ~15%. Höher = größere Ergebnisspanne."
+    },
+    "mortgage": {
+      "annualRateHelp": "Aktueller Durchschnitt: 6-7% für 30-Jahres-Festzins",
+      "assumptionNoEscrow": "Ohne Steuern, Versicherung oder Hausgeld",
+      "description": "Berechnen Sie Raten oder finden Sie heraus, wie viel Immobilie Sie sich leisten können",
+      "downPayment": "Eigenkapital",
+      "downPaymentAmount": "Eigenkapitalbetrag",
+      "downPaymentPercent": "Eigenkapital (%)",
+      "dtiRatio": "Schuldenquote",
+      "extraPayment": "Zusätzliche Monatszahlung",
+      "extraPaymentHelp": "Zusätzliche Zahlung auf das Kapital jeden Monat",
+      "formulaExplanation": "M = Monatliche Rate, P = Kapital, i = Monatlicher Zinssatz, n = Gesamtzahl der Zahlungen",
+      "hideFullSchedule": "Plan Ausblenden",
+      "homePrice": "Immobilienpreis",
+      "maxHomePrice": "Maximaler Immobilienpreis",
+      "modeAffordability": "Was Kann Ich Mir Leisten?",
+      "modePayment": "Rate Berechnen",
+      "monthlyDebts": "Monatliche Schuldenzahlungen",
+      "monthlyDebtsHelp": "Autokredit, Studienkredit, Kreditkarten usw.",
+      "payoffMonths": "Rückzahlungsdauer",
+      "scheduleBalance": "Restschuld",
+      "schedulePayment": "Rate",
+      "showFullSchedule": "Vollständigen Plan Anzeigen",
+      "subtitle": "Planen Sie Ihren Immobilienkauf mit Zuversicht",
+      "term": "Darlehenslaufzeit"
+    },
+    "retirement": {
+      "assumptionPostReturn": "Rendite nach Rente",
+      "assumptionPreReturn": "Rendite vor Rente",
+      "assumptionSS": "Sozialversicherung eingerechnet ab Alter {age}",
+      "balanceAtRetirement": "Saldo bei Renteneintritt",
+      "currentSavings": "Aktuelle Rentenersparnisse",
+      "description": "Planen Sie Ihren Ruhestand mit umfassenden Spar- und Entnahmeprojektionen",
+      "desiredIncome": "Gewünschtes Monatseinkommen (in heutigen Euro)",
+      "desiredIncomeHelp": "Wie viel Sie monatlich im Ruhestand ausgeben möchten, in heutigen Euro",
+      "formulaExplanation": "Zwei-Phasen-Simulation: Ersparnisse bis zur Rente wachsen lassen, dann mit inflationsbereinigten Entnahmen abbauen",
+      "heroInsufficient": "Ihre Ersparnisse könnten mit {age} Jahren aufgebraucht sein",
+      "heroInsufficientBadge": "Handlung Erforderlich",
+      "heroSufficientBadge": "Auf Kurs",
+      "monthlyWithdrawal": "Monatliche Entnahme (bei Rente)",
+      "postRetirementReturn": "Rendite Nach-Rente (%)",
+      "postRetirementReturnHelp": "Erwartete Jahresrendite während der Entnahmen (konservativ ~4-5%)",
+      "preRetirementReturn": "Rendite Vor-Rente (%)",
+      "preRetirementReturnHelp": "Erwartete Jahresrendite während des Sparens (Aktien Ø ~7-10%)",
+      "resultTitle": "Rentenprojektion",
+      "retirementAge": "Rentenalter",
+      "shortfall": "Defizit bei Lebenserwartung",
+      "socialSecurity": "Sozialversicherung / Rente (monatlich)",
+      "socialSecurityAge": "Alter bei Beginn der Sozialversicherung",
+      "title": "Rentenplaner",
+      "yearsMoneyLasts": "Jahre, die das Geld Reicht"
+    },
+    "savingsGoal": {
+      "description": "Planen Sie Ihr Sparen mit Zinseszins-Projektionen",
+      "expectedReturn": "Erwartete Jahresrendite (%)",
+      "expectedReturnHelp": "Hochzinssparen: 4-5%, Investitionen: 6-8%",
+      "projectedAmount": "Projizierte Summe",
+      "projectionTitle": "Sparprojektion",
+      "resultHowMuchTitle": "Benötigter Monatlicher Sparbetrag",
+      "resultWhenTitle": "Sie Werden Ihr Ziel Erreichen",
+      "timelineTitle": "Wachstumsverlauf",
+      "title": "Sparziel-Rechner"
+    },
+    "subscriptionCost": {
+      "addSubscription": "Abonnement Hinzufügen",
+      "breakdown": "Essenziell vs. Nicht Essenziell",
+      "description": "Verfolgen und analysieren Sie die wahren Kosten Ihrer Abonnements",
+      "essential": "Essenziell",
+      "essentialCost": "Essenziell",
+      "namePlaceholder": "z.B. Netflix, Spotify",
+      "nonEssentialCost": "Nicht Essenziell",
+      "potentialSavings": "Potenzielle Jährliche Einsparung",
+      "potentialSavingsHelp": "Wenn Sie alle nicht-essenziellen Abonnements kündigen würden",
+      "showIncomePercent": "Einkommensprozentsatz anzeigen",
+      "subtitle": "Sehen Sie, wohin Ihr wiederkehrendes Geld fließt",
+      "title": "Abonnementkosten-Rechner",
+      "totalCost": "Gesamtkosten der Abonnements"
+    },
+    "transparency": {
+      "title": "So Funktioniert's"
+    }
+  },
+  "chatbotOptIn": {
+    "closeDialog": "Chatbot-Opt-in-Dialog schließen",
+    "privacy": {
+      "noTraining": "OpenAI verwendet API-Daten nicht zum Trainieren von Modellen (gemäß ihrer Richtlinie)"
+    }
+  },
+  "common": {
+    "loading": "Wird geladen..."
+  },
+  "confidenceMeter": {
+    "aiPowered": "KI-unterstützt",
+    "high": "Hohe Konfidenz",
+    "low": "Niedrige Konfidenz",
+    "manualReview": "Manuelle Überprüfung empfohlen",
+    "medium": "Mittlere Konfidenz",
+    "moderate": "Mäßig",
+    "percentConfident": "{percent}% sicher",
+    "verifyResults": "Ergebnisse überprüfen"
+  },
+  "designSystem": {
+    "a11y": {
+      "fontSize": "Basis-Schriftgröße: 18px für verbesserte Lesbarkeit (seniorenfreundlich)",
+      "wcag": "WCAG 2.2 AA-konform: Kontrastverhältnisse ≥4,5:1 für normalen Text, ≥3:1 für großen Text"
+    },
+    "baseFontSize": "Basis-Schriftgröße: {size}px",
+    "bodyText": "Fließtext (18px Basis) – Lorem ipsum dolor sit amet, consectetur adipiscing elit. Optimiert für beste Lesbarkeit mit WCAG 2.2 AA-Konformität.",
+    "extraSmallText": "Sehr kleiner Text (14px) – Fußnoten und rechtliche Hinweise",
+    "large": "Groß",
+    "sizes": "Größen"
+  },
+  "developerTools": {
+    "infoProduction": "Produktions-Builds schließen die en-XA-Locale automatisch aus"
+  },
+  "dialog": {
+    "processing": "Wird verarbeitet..."
+  },
+  "errorRecovery": {
+    "closeModal": "Modal schließen",
+    "footer": {
+      "close": "Schließen"
+    }
+  },
+  "export": {
+    "fullBackupDescription": "Exportieren Sie alle Daten einschließlich Konten, Transaktionen, Budgets, Ziele und Einstellungen. Verwenden Sie dies für vollständige Sicherungen, die später wiederhergestellt werden können.",
+    "tipJson": "<strong>JSON-Sicherung</strong> eignet sich am besten zur Datenwiederherstellung – erstellen Sie regelmäßig Sicherungen an einem sicheren Ort",
+    "tipRegularBackup": "Sichern Sie Ihre Daten regelmäßig (wöchentlich empfohlen)"
+  },
+  "exportDialog": {
+    "dataSummary": {
+      "estimatedSize": "Gesch. Größe"
+    },
+    "options": {
+      "includeReceipts": {
+        "description": "Belegbilder anhängen (erhöht die Dateigröße)"
+      }
+    }
+  },
+  "fridayReview": {
+    "closeReview": "Rückblick schließen"
+  },
+  "iconPicker": {
+    "close": "Schließen"
+  },
+  "import": {
+    "largePdfTip": "Für sehr große Kontoauszüge sollten Sie einen CSV-Export von Ihrer Bank anfordern, um die Verarbeitung zu beschleunigen.",
+    "largePdfWarning": "Großes PDF erkannt ({pages} Seiten). Die Verarbeitung kann länger dauern und viel Speicher benötigen."
+  },
+  "investmentAccountModal": {
+    "closeModal": "Modal schließen"
+  },
+  "landing": {
+    "accessibility": {
+      "badges": {
+        "largeTouchTargets": "Große Touch-Ziele"
+      },
+      "buttons": {
+        "settings": "Barrierefreiheitseinstellungen"
+      },
+      "description": "Der Seniorenmodus bietet vereinfachte Navigation und größere Touch-Ziele. Tastenkombinationen, Fokuszustände und klarer Kontrast helfen jedem, schneller voranzukommen.",
+      "title": "Standardmäßig zugänglich"
+    },
+    "comparison": {
+      "cost": {
+        "cloud": "$100+/Jahr Abonnement"
+      }
+    },
+    "faq": {
+      "0": {
+        "a": "Ja. Im lokalen Protokoll verlässt die Daten niemals Ihr Gerät. Sie lebt in der IndexedDB Ihres Browsers."
+      },
+      "1": {
+        "a": "Sie können jederzeit ein vollständiges JSON-Backup exportieren. Wir empfehlen auch regelmäßige CSV-Exporte."
+      },
+      "2": {
+        "a": "Kommt bald: Ein optionales Abonnement, um verschlüsselte Daten zwischen Geräten über Supabase zu synchronisieren."
+      }
+    },
+    "features": {
+      "0": {
+        "description": "Nettovermögen, Cashflow und Kategorieneinteilung. Sofortige Ladezeiten."
+      },
+      "1": {
+        "description": "Intelligenter CSV-Mapping-Assistent für BMO, Home Trust und anpassbare Formate."
+      },
+      "5": {
+        "description": "Optionale clientseitige Verschlüsselung für eine zusätzliche Sicherheitsebene."
+      }
+    },
+    "featuresDeepDive": {
+      "explore": "Entdecken"
+    },
+    "footer": {
+      "helpCenter": "Hilfe-Center"
+    },
+    "hero": {
+      "finePrint": "Keine Bankdaten erforderlich. Kein Konto für den lokalen Modus nötig.",
+      "subhead": "Die Leistung einer Tabelle. Die Einfachheit einer App. Erleben Sie finanzielle Klarheit mit der einzigen Budget-App, die garantiert, dass Ihre Daten Ihr Gerät niemals verlassen."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Für Klarheit, nicht Chaos, gebaut."
+      },
+      "preview": {
+        "recentTransactions": "Aktuelle Transaktionen"
+      }
+    },
+    "howItWorks": {
+      "2": {
+        "description": "Weisen Sie jedem Euro eine Aufgabe zu und prognostizieren Sie Ihr zukünftiges Nettovermögen."
+      }
+    },
+    "howItWorksSection": {
+      "description": "Ein Workflow, der Sie schnell zur Klarheit führt, ohne Sie in ein kompliziertes System einzusperren."
+    },
+    "marquee": {
+      "logos": [
+        "Budgetierung",
+        "Abonnements",
+        "Darlehen",
+        "OCR Belege",
+        "Berichte",
+        "Planung",
+        "Offline",
+        "Seniorenmodus"
+      ]
+    },
+    "outcomesSection": {
+      "description": "Die meisten Budgetierungs-Apps lassen Sie die Arbeit machen. BudgetPro ist so konzipiert, dass es Reibung reduziert und Sie gleichzeitig die Kontrolle behält.",
+      "title": "Für das echte Leben, nicht für Tabellenkalkulationen gebaut"
+    },
+    "preview": {
+      "balanceAmount": "24.500,00 €",
+      "currencySymbol": "€",
+      "expensesAmount": "1.250,00 €",
+      "totalBalance": "Gesamtguthaben",
+      "tx0Amount": "-124,50 €",
+      "tx0Date": "Heute, 14:30 Uhr",
+      "tx1Amount": "+4.250,00 €",
+      "tx1Date": "Gestern, 9:00 Uhr",
+      "tx1Name": "Tech Solutions GmbH",
+      "tx2Amount": "-15,99 €"
+    },
+    "pricing": {
+      "description": "Beginnen Sie mit dem leistungsstarken lokalen Protokoll. Später upgraden, wenn Sie die Synchronisierung auf mehreren Geräten benötigen."
+    },
+    "pricingSection": {
+      "productDescription": "Die vollständige Budgetierungserfahrung, die vollständig auf Ihrem Gerät läuft.",
+      "whyChooseDescription": "Sehen Sie, wie wir uns gegen die Cloud-Riesen behaupten."
+    },
+    "security": {
+      "cards": {
+        "encryption": {
+          "description": "Die App enthält eine Verschlüsselungsschicht, um sensible Budgetaufzeichnungen zu schützen, wenn sie aktiviert ist."
+        },
+        "exportDelete": {
+          "title": "Exportieren & löschen"
+        }
+      },
+      "description": "Die Budget App speichert Ihre Daten lokal (offline-fähig) und gibt Ihnen Kontrollen für KI-Funktionen, Export und Löschung."
+    },
+    "socialProof": {
+      "description": "Die Details, die das Budgetieren festigen: Onboarding, Verknüpfungen, mobile Navigation und offline-fähige Leistung.",
+      "features": {
+        "pwaInstall": {
+          "description": "Installieren Sie wie eine App und machen Sie weiter, auch bei unzuverlässigem Internet."
+        }
+      }
+    }
+  },
+  "loans": {
+    "tooltip": {
+      "amortizationBody": "Wie Ihr Kredit im Laufe der Zeit abbezahlt wird. Jede Zahlung deckt zuerst die Zinsen, dann die Tilgung. Der Plan zeigt genau, wie viel monatlich wohin fließt. Frühe Zahlungen sind hauptsächlich Zinsen!"
+    }
+  },
+  "ocr": {
+    "errorFileSize": "Dateigröße muss unter 10 MB liegen"
+  },
+  "onboarding": {
+    "steps": {
+      "categorize": {
+        "description": "Überprüfen und passen Sie die Kategorien der Transaktionen an. Unsere intelligente Kategorisierung lernt aus Ihren Korrekturen, um sich im Laufe der Zeit zu verbessern. Verwenden Sie Massenaktionen, um mehrere Transaktionen auf einmal zu kategorisieren!"
+      },
+      "reports": {
+        "description": "Visualisieren Sie Ihre Ausgabemuster, verfolgen Sie Ihr Nettovermögen und treffen Sie informierte finanzielle Entscheidungen. Ihr Dashboard wird mit jeder Transaktion automatisch aktualisiert!"
+      }
+    }
+  },
+  "pairingDialog": {
+    "deviceAdded": "Gerät hinzugefügt. Verbinden, um die Kopplung abzuschließen."
+  },
+  "planning": {
+    "paycheck": {
+      "deletePlanDescription": "Dies entfernt Ihren gesamten Gehaltsplan, einschließlich aller Zeitpläne und Zuweisungen.",
+      "irregularScheduleHint": "Ihr Plan verwendet einen unregelmäßigen Zeitplan. Aktualisieren Sie Ihre Einstellungen, um Gehälter hinzuzufügen.",
+      "scheduleIrregular": "Unregelmäßig"
+    }
+  },
+  "pwaInstall": {
+    "close": "Installationshinweis schließen"
+  },
+  "qrScanner": {
+    "cameraInUse": "Kamera wird von einer anderen Anwendung verwendet. Bitte schließen Sie andere Apps, die die Kamera nutzen."
+  },
+  "receiptThumbnail": {
+    "close": "Schließen"
+  },
+  "receiptUpload": {
+    "errors": {
+      "tooLarge": "Datei ist zu groß. Maximale Größe ist {size}MB"
+    }
+  },
+  "reports": {
+    "moneyFlowDescription": "Visualisieren Sie, wie Einnahmen in Kategorien und Ersparnisse fließen"
+  },
+  "searchNaturalLanguage": {
+    "around": "ungefähr",
+    "bill": "Rechnung",
+    "bought": "gekauft",
+    "cheap": "günstig",
+    "deposit": "Einzahlung",
+    "exampleAmazonOver50": "Amazon-Bestellungen über 50 €",
+    "exampleCoffeeLastWeek": "Kaffeekäufe der letzten Woche",
+    "exampleExpensive": "Transaktionen über 100 €",
+    "exampleStructured": "Einkäufe über 200 € (strukturiert)",
+    "expense": "Ausgabe",
+    "expensive": "teuer",
+    "income": "Einnahme",
+    "large": "groß",
+    "lastMonth": "letzter Monat",
+    "lastWeek": "letzte Woche",
+    "lastYear": "letztes Jahr",
+    "noResults": "Keine Ergebnisse gefunden",
+    "over": "über",
+    "paid": "bezahlt",
+    "purchase": "Einkauf",
+    "recently": "kürzlich",
+    "refund": "Rückerstattung",
+    "resultsCount": "{count} Ergebnisse",
+    "salary": "Gehalt",
+    "searchPlaceholder": "Transaktionen durchsuchen...",
+    "searchTips": "Suchtipps",
+    "small": "klein",
+    "spent": "ausgegeben",
+    "thisMonth": "dieser Monat",
+    "thisWeek": "diese Woche",
+    "thisYear": "dieses Jahr",
+    "today": "heute",
+    "under": "unter",
+    "yesterday": "gestern"
+  },
+  "searchOperators": {
+    "account": "konto",
+    "amount": "betrag",
+    "category": "kategorie",
+    "date": "datum",
+    "dateLast30": "letzte30",
+    "dateLast7": "letzte7",
+    "dateLastMonth": "letzterMonat",
+    "dateLastWeek": "letzteWoche",
+    "dateLastYear": "letztesJahr",
+    "dateThisMonth": "dieserMonat",
+    "dateThisYear": "diesesJahr",
+    "dateToday": "heute",
+    "dateYesterday": "gestern",
+    "is": "ist",
+    "isExpense": "ausgabe",
+    "isIncome": "einnahme",
+    "isRecurring": "wiederkehrend",
+    "isSplit": "aufgeteilt",
+    "merchant": "händler",
+    "tag": "tag",
+    "type": "typ",
+    "typeExpense": "ausgabe",
+    "typeIncome": "einnahme"
+  },
+  "settings": {
+    "budgetFileInfo4": "Belegbilder können in den Export einbezogen werden (erhöht die Dateigröße)"
+  },
+  "shortcutsModal": {
+    "close": "Tastaturkürzel-Hilfe schließen",
+    "proTip": {
+      "description": "Tastaturkürzel funktionieren auf jeder Seite, außer wenn Sie in Formulare tippen. Drücken Sie jederzeit {key}, um diese Hilfe zu sehen."
+    }
+  },
+  "simplefinConnect": {
+    "completeSetup": "Einrichtung abschließen"
+  },
+  "splitTransaction": {
+    "closeModal": "Modal schließen",
+    "distributeEvenly": "Gleichmäßig verteilen",
+    "help": {
+      "step2": "Verwenden Sie \"Gleichmäßig verteilen\", um den Betrag gleichmäßig auf alle Kategorien zu verteilen"
+    }
+  },
+  "splits": {
+    "splitFlow": {
+      "modes": {
+        "equal": {
+          "label": "Gleichmäßig teilen"
+        }
+      }
+    }
+  },
+  "subscriptionCard": {
+    "interval": {
+      "irregular": "Unregelmäßig"
+    }
+  },
+  "transactionModal": {
+    "closeModal": "Modal schließen"
+  },
+  "transactions": {
+    "aToZ": "A bis Z",
+    "account": "Konto",
+    "addFailed": "Transaktion konnte nicht hinzugefügt werden",
+    "allTypes": "Alle Typen",
+    "attachReceipt": "Beleg anhängen",
+    "categorizeSelected": "Ausgewählte kategorisieren",
+    "confirmDelete": "Transaktion löschen?",
+    "confirmDeleteDescription": "Dies kann nicht rückgängig gemacht werden.",
+    "confirmDeleteMultiple": "{count} Transaktionen löschen?",
+    "confirmDeleteMultipleDescription": "Diese Aktion kann nicht rückgängig gemacht werden.",
+    "dateRange": "Datumsbereich",
+    "deleteFailed": "Transaktion konnte nicht gelöscht werden",
+    "deleteSelected": "Ausgewählte löschen",
+    "deselectAll": "Alle abwählen",
+    "expense": "Ausgaben",
+    "exportSelected": "Ausgewählte exportieren",
+    "filterByType": "Nach Typ filtern",
+    "filtersApplied": "{count} Filter aktiv",
+    "getStarted": "Fügen Sie Ihre erste Transaktion hinzu oder importieren Sie Daten von Ihrer Bank.",
+    "highestFirst": "Höchste zuerst",
+    "importing": "Wird importiert...",
+    "income": "Einnahmen",
+    "loadMore": "Mehr laden",
+    "lowestFirst": "Niedrigste zuerst",
+    "noTransactions": "Keine Transaktionen gefunden",
+    "notes": "Notizen",
+    "pagination": {
+      "firstPage": "Erste Seite",
+      "lastPage": "Letzte Seite",
+      "next": "Nächste",
+      "page": "Seite {page} von {total}",
+      "previous": "Vorherige",
+      "rowsPerPage": "Zeilen pro Seite",
+      "showing": "{from}-{to} von {total}"
+    },
+    "recurring": "Wiederkehrend",
+    "selectAll": "Alle auswählen",
+    "selected": "{count} ausgewählt",
+    "showingFiltered": "{shown} von {total} Transaktionen werden angezeigt",
+    "sortAmount": "Betrag",
+    "sortBy": "Sortieren nach",
+    "sortCategory": "Kategorie",
+    "sortDate": "Datum",
+    "sortDescription": "Beschreibung",
+    "splitOf": "Aufteilung von {parent}",
+    "summary": {
+      "netAmount": "Nettobetrag",
+      "totalExpenses": "Gesamtausgaben",
+      "totalIncome": "Gesamteinnahmen"
+    },
+    "tags": "Tags",
+    "transactionAdded": "Transaktion hinzugefügt",
+    "transactionUpdated": "Transaktion aktualisiert",
+    "transactionsDeleted": "{count} Transaktionen gelöscht",
+    "tryAdjustingFilters": "Versuchen Sie, Ihre Filter oder Ihren Suchbegriff anzupassen",
+    "type": "Typ",
+    "updateFailed": "Transaktion konnte nicht aktualisiert werden",
+    "viewReceipt": "Beleg anzeigen",
+    "zToA": "Z bis A"
+  },
+  "validationWarnings": {
+    "closeModal": "Modal schließen"
+  },
+  "widget": {
+    "accountBalances": {
+      "description": "Aktuelle Salden aller Ihrer Konten"
+    },
+    "budgetProgress": {
+      "description": "Verfolgen Sie, wie Sie gegenüber Ihren Budgetzielen abschneiden"
+    },
+    "incomeVsExpenses": {
+      "description": "Vergleichen Sie Ihre Einnahmen und Ausgaben im Zeitverlauf"
+    },
+    "recentTransactions": {
+      "description": "Schnellansicht Ihrer letzten Finanzaktivitäten",
+      "title": "Letzte Transaktionen"
+    },
+    "spendingByCategory": {
+      "description": "Sehen Sie mit visuellen Aufschlüsselungen, wohin Ihr Geld fließt"
+    },
+    "upcomingBills": {
+      "description": "Verpassen Sie nie eine Zahlung mit Rechnungserinnerungen",
+      "title": "Anstehende Rechnungen"
+    }
+  },
+  "ynabMigrationWizard": {
+    "header": {
+      "closeLabel": "Assistenten schließen"
+    },
+    "optionsStep": {
+      "accountOptions": {
+        "includeOffBudgetAccounts": "Konten außerhalb des Budgets einbeziehen"
+      }
+    }
+  }
+}

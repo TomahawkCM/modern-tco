@@ -106,8 +106,8 @@
     "actionDeleted": "Excluído",
     "actionExport": "Exportação",
     "actionImport": "Importação",
-    "actionLogin": "Login",
-    "actionLogout": "Logout",
+    "actionLogin": "Entrar",
+    "actionLogout": "Sair",
     "actionUpdated": "Atualizado",
     "allActions": "Todas as ações",
     "allProfiles": "Todos os perfis",
@@ -208,7 +208,7 @@
     "sessionRefreshMessage": "Sua sessão precisa ser atualizada. Por favor, saia e entre novamente para estabelecer uma nova sessão.",
     "signOutRefresh": "Sair e Atualizar Sessão",
     "signingOut": "Saindo...",
-    "statusColumn": "Status",
+    "statusColumn": "Situação",
     "subtitle": "Gerenciar usuários e assinaturas",
     "suspend": "Suspender",
     "suspendConfirm": "Suspender {count} usuários?",
@@ -272,7 +272,7 @@
     "interest": "Juros",
     "monthLabel": "Mês {month}",
     "paymentBreakdown": "Detalhamento do Pagamento",
-    "principal": "Principal",
+    "principal": "Capital",
     "remainingBalance": "Saldo Restante",
     "title": "Visualização de Amortização do Empréstimo",
     "totalInterest": "Total de Juros",
@@ -373,7 +373,7 @@
       "checkEmailTitle": "Verifique Seu Email",
       "checkSpam": "Não recebeu o email? Verifique sua pasta de spam ou tente novamente.",
       "defaultError": "Falha ao enviar email de redefinição",
-      "emailLabel": "Email",
+      "emailLabel": "E-mail",
       "emailPlaceholder": "voce@exemplo.com",
       "rememberPassword": "Lembrou a senha?",
       "resetLinkSent": "Enviamos um link de redefinição de senha para {email}",
@@ -384,7 +384,7 @@
     },
     "login": {
       "defaultError": "Falha ao entrar",
-      "emailLabel": "Email",
+      "emailLabel": "E-mail",
       "emailPlaceholder": "voce@exemplo.com",
       "forgotPassword": "Esqueceu a senha?",
       "noAccount": "Não tem uma conta?",
@@ -415,7 +415,7 @@
       "confirmPasswordPlaceholder": "Digite a senha novamente",
       "createAccountButton": "Criar Conta",
       "defaultError": "Falha ao criar conta",
-      "emailLabel": "Email",
+      "emailLabel": "E-mail",
       "emailPlaceholder": "voce@exemplo.com",
       "fullNameLabel": "Nome Completo",
       "fullNamePlaceholder": "João Silva",
@@ -1079,7 +1079,7 @@
       "scheduleInterest": "Juros",
       "scheduleMonth": "Mês",
       "schedulePayment": "Parcela",
-      "schedulePrincipal": "Principal",
+      "schedulePrincipal": "Capital",
       "scheduleTitle": "Tabela de Amortização",
       "showFullSchedule": "Mostrar Tabela Completa",
       "subtitle": "Planeje a compra do seu imóvel com confiança",
@@ -1404,7 +1404,7 @@
     "selectAllRequired": "Por favor, selecione todas as colunas obrigatórias",
     "selectColumn": "Selecionar coluna...",
     "singleAmountColumn": "Coluna de Valor Único (ex.: Nubank)",
-    "status": "Status",
+    "status": "Situação",
     "title": "Mapeamento Manual de Colunas",
     "transactionPreview": "Pré-visualização de Transações (Primeiras 5)",
     "useSavedMapping": "Usar Mapeamento Salvo"
@@ -1540,7 +1540,7 @@
         "noData": "Nenhum gasto registrado ainda",
         "thisMonth": "Este Mês",
         "title": "Gastos por Categoria",
-        "total": "Total",
+        "total": "Total geral",
         "uncategorized": "Sem Categoria"
       },
       "streaks": {
@@ -1618,7 +1618,7 @@
         "percentOfTotal": "% da Dívida Total"
       },
       "title": "Comparação de Empréstimos",
-      "total": "Total"
+      "total": "Total geral"
     },
     "empty": {
       "addFirstLoan": "Adicionar Seu Primeiro Empréstimo",
@@ -1758,7 +1758,7 @@
     "highContrast": "Alto Contraste",
     "highlightedCard": "Cartão Destacado",
     "highlightedCardDescription": "Cartão com borda primária",
-    "hover": "Hover",
+    "hover": "Passar o mouse",
     "inputs": "Campos de Entrada",
     "invalidPlaceholder": "Inválido...",
     "large": "Grande",
@@ -1799,8 +1799,8 @@
     "dragToReorder": "Arraste para reordenar widget"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
+    "months": "{count, plural, =1 {1 mês} other {# meses}}",
+    "years": "{count, plural, =1 {1 ano} other {# anos}}",
     "yearsAndMonths": "{years}a {months}m",
     "days": "dias"
   },
@@ -2177,7 +2177,7 @@
     "langEnglish": "Inglês",
     "langFrench": "Francês",
     "langGerman": "Alemão",
-    "langHindi": "Hindi",
+    "langHindi": "Híndi",
     "langItalian": "Italiano",
     "langJapanese": "Japonês",
     "langKorean": "Coreano",
@@ -2325,7 +2325,7 @@
       "gainLoss": "Ganho/Perda",
       "percentReturn": "% Retorno",
       "symbol": "Símbolo",
-      "total": "Total"
+      "total": "Total geral"
     },
     "titles": {
       "accountTypeAllocation": "Alocação por Tipo de Conta",
@@ -2586,7 +2586,7 @@
       "download": "Baixar",
       "features": "Funcionalidades",
       "helpCenter": "Central de Ajuda",
-      "legal": "Legal",
+      "legal": "Jurídico",
       "pricing": "Preços",
       "privacyPolicy": "Política de Privacidade",
       "product": "Produto",
@@ -2820,7 +2820,7 @@
   "linkToLoan": {
     "bestMatch": "Melhor Correspondência",
     "cancel": "Cancelar",
-    "extra": "Extra",
+    "extra": "Adicional",
     "interest": "Juros",
     "linkError": "Falha ao vincular transação. Por favor, tente novamente.",
     "linkPayment": "Vincular Pagamento",
@@ -2830,7 +2830,7 @@
     "noActiveLoans": "Nenhum empréstimo ativo encontrado",
     "paymentBreakdown": "Detalhamento do Pagamento",
     "possibleMatch": "Possível Correspondência",
-    "principal": "Principal",
+    "principal": "Capital",
     "title": "Vincular ao Empréstimo"
   },
   "linkedLoan": {
@@ -2927,7 +2927,7 @@
     "paymentBreakdown": "Detalhamento do Pagamento",
     "paymentOverWarning": "Este pagamento é {amount} a mais que o pagamento mensal regular. O extra será aplicado ao principal.",
     "paymentUnderWarning": "Este pagamento é {amount} a menos que o pagamento mensal regular de {monthlyPayment}.",
-    "principal": "Principal:",
+    "principal": "Capital:",
     "selectLoan": "Selecionar Empréstimo"
   },
   "loans": {
@@ -3005,14 +3005,14 @@
       "paidOff": "Quitado",
       "refinanced": "Refinanciado"
     },
-    "statusLabel": "Status",
+    "statusLabel": "Situação",
     "subtitle": "Gerencie e acompanhe todos os seus empréstimos",
     "table": {
       "date": "Data",
       "interest": "Juros",
       "month": "Mês",
       "payment": "Pagamento",
-      "principal": "Principal",
+      "principal": "Capital",
       "remaining": "Restante"
     },
     "tabs": {
@@ -3457,7 +3457,7 @@
     "dismissed": "{count} dispensadas",
     "emptyState": "Nenhum histórico de pagamento ainda",
     "emptyStateDescription": "Adicione pagamentos manualmente ou vincule-os das suas transações",
-    "extra": "Extra",
+    "extra": "Adicional",
     "extraPrincipalLabel": "Principal Extra (Opcional)",
     "highConfidence": "Alta Confiança",
     "interest": "Juros",
@@ -3474,9 +3474,9 @@
     "notesPlaceholder": "Notas do pagamento...",
     "paymentAmount": "Valor do Pagamento",
     "paymentDate": "Data do Pagamento",
-    "principal": "Principal",
+    "principal": "Capital",
     "savePayment": "Salvar Pagamento",
-    "status": "Status",
+    "status": "Situação",
     "suggestedMatches": "Correspondências Sugeridas de Transações",
     "suggestedMatchesDescription": "Encontramos {count, plural, one {# transação} other {# transações}} que podem ser pagamentos de empréstimo",
     "title": "Histórico de Pagamentos",
@@ -4642,12 +4642,12 @@
       "upcomingCharges": "{count, plural, =1 {1 cobrança futura} other {# cobranças futuras}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "Assinaturas possivelmente canceladas",
+      "inactiveDescription": "{count, plural, =1 {1 assinatura não foi} other {# assinaturas não foram}} cobrada(s) recentemente. Verifique se foram realmente canceladas.",
+      "trialsTitle": "Períodos de teste expirando em breve",
+      "trialsDescription": "{count, plural, =1 {1 período de teste} other {# períodos de teste}} expirando nos próximos 7 dias. Cancele se não estiver usando.",
+      "highCostTitle": "Assinaturas de alto custo",
+      "highCostDescription": "Estas assinaturas representam uma grande parte dos seus gastos. Avalie se está aproveitando ao máximo."
     }
   },
   "subscriptionModal": {
@@ -4697,7 +4697,7 @@
     "startDateLabel": "Data de Início *",
     "statusActive": "Ativa",
     "statusCancelled": "Cancelada",
-    "statusLabel": "Status",
+    "statusLabel": "Situação",
     "statusPaused": "Pausada",
     "statusTrial": "Teste",
     "trialEndDateHint": "Defina quando seu teste gratuito termina para rastreá-lo",
@@ -4768,7 +4768,7 @@
     "lastSync": "Última sinc: {time}",
     "minutesAgo": "{minutes}min atrás",
     "never": "Nunca",
-    "offline": "Offline",
+    "offline": "Desconectado",
     "partialSync": "Sincronização Parcial",
     "syncError": "Erro de Sincronização",
     "synced": "Sincronizado",
@@ -4931,8 +4931,8 @@
     "transactionCount": "{count} {count, plural, =1 {transação} other {transações}}",
     "usedTimes": "Usado {count} {count, plural, =1 {vez} other {vezes}}",
     "viewAllResults": "Ver todos os {count} resultados",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "resultsFound": "{count} {count, plural, =1 {resultado} other {resultados}} encontrado(s)",
+    "suggestionsAvailable": "{count} {count, plural, =1 {sugestão} other {sugestões}} disponível(eis)"
   },
   "transactionTable": {
     "actions": {
@@ -5056,7 +5056,7 @@
     "dismiss": "Dispensar",
     "expired": "Seu período de teste expirou",
     "expiredDescription": "O app está em modo somente leitura. Faça upgrade para continuar gerenciando suas finanças.",
-    "upgrade": "Upgrade - {price}",
+    "upgrade": "Atualizar - {price}",
     "upgradeNow": "Fazer Upgrade - {price}",
     "upgradePrompt": "Faça upgrade agora para manter acesso total aos seus dados de orçamento.",
     "viewPricing": "Ver preços"
@@ -5265,7 +5265,7 @@
       },
       "upload": {
         "description": "Selecionar arquivo de exportação YNAB",
-        "title": "Upload"
+        "title": "Enviar"
       }
     },
     "uploadStep": {
@@ -5286,16 +5286,16 @@
       "transactions": "Transações"
     },
     "errors": {
-      "parseFailed": "Failed to parse YNAB file",
-      "previewFailed": "Failed to generate preview",
-      "accountImportFailed": "Account import failed: {details}",
-      "categoryImportFailed": "Category import failed: {details}",
-      "transactionImportFailed": "Transaction import failed: {details}",
-      "unknownError": "Unknown error",
-      "budgetImportFailed": "Budget import failed: {details}"
+      "parseFailed": "Falha ao analisar o arquivo YNAB",
+      "previewFailed": "Falha ao gerar pré-visualização",
+      "accountImportFailed": "Falha ao importar conta: {details}",
+      "categoryImportFailed": "Falha ao importar categoria: {details}",
+      "transactionImportFailed": "Falha ao importar transação: {details}",
+      "unknownError": "Erro desconhecido",
+      "budgetImportFailed": "Falha ao importar orçamento: {details}"
     },
-    "importSuccess": "YNAB data imported successfully!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importSuccess": "Dados do YNAB importados com sucesso!",
+    "importWithErrors": "Importação concluída com {count, plural, =1 {1 erro} other {# erros}}"
   },
   "balanceReconciliation": {
     "title": "Importação concluída!",

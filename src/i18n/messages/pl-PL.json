@@ -35,7 +35,7 @@
       "title": "Tryb dla seniorów"
     },
     "themeMode": {
-      "auto": "Auto",
+      "auto": "Automatyczny",
       "autoDesc": "Dopasuj do systemu",
       "dark": "Ciemny",
       "darkDesc": "Łagodny dla oczu",
@@ -128,7 +128,7 @@
     "typeBudgets": "Budżety",
     "typeCategories": "Kategorie",
     "typeProfiles": "Profile",
-    "typeSystem": "System",
+    "typeSystem": "Systemowe",
     "typeTransactions": "Transakcje"
   },
   "admin": {
@@ -208,7 +208,7 @@
     "sessionRefreshMessage": "Twoja sesja wymaga odświeżenia. Wyloguj się i zaloguj ponownie, aby ustanowić nową sesję.",
     "signOutRefresh": "Wyloguj i odśwież sesję",
     "signingOut": "Wylogowywanie...",
-    "statusColumn": "Status",
+    "statusColumn": "Stan",
     "subtitle": "Zarządzaj użytkownikami i subskrypcjami",
     "suspend": "Zawieś",
     "suspendConfirm": "Zawiesić {count} użytkowników?",
@@ -284,7 +284,7 @@
     "maxPlaceholder": "Maks",
     "maxThumb": "Kwota maksymalna",
     "minLabel": "Kwota minimalna",
-    "minPlaceholder": "Min",
+    "minPlaceholder": "Min.",
     "minThumb": "Kwota minimalna",
     "title": "Zakres kwot"
   },
@@ -672,7 +672,7 @@
       "totalAssets": "Łączne aktywa",
       "totalLiabilities": "Łączne zobowiązania",
       "totalNetWorth": "Łączna wartość netto",
-      "trend": "Trend"
+      "trend": "Tendencja"
     },
     "privacy": {
       "disabled": "Wartości finansowe są widoczne",
@@ -1403,7 +1403,7 @@
     "selectAllRequired": "Proszę wybrać wszystkie wymagane kolumny",
     "selectColumn": "Wybierz kolumnę...",
     "singleAmountColumn": "Pojedyncza kolumna kwoty (np. PKO BP)",
-    "status": "Status",
+    "status": "Stan",
     "title": "Ręczne mapowanie kolumn",
     "transactionPreview": "Podgląd transakcji (pierwsze 5)",
     "useSavedMapping": "Użyj zapisanego mapowania"
@@ -2112,9 +2112,9 @@
       "emptyTitle": "Historia wyników pojawi się tutaj w miarę gromadzenia danych",
       "emptySubtitle": "Sprawdź ponownie w następnym miesiącu!",
       "legendScore": "Wynik",
-      "legendTrend": "Trend",
+      "legendTrend": "Tendencja",
       "tooltipScore": "Wynik",
-      "tooltipTrend": "Trend",
+      "tooltipTrend": "Tendencja",
       "loadingChart": "Ładowanie wykresu..."
     }
   },
@@ -2175,7 +2175,7 @@
     "langEnglish": "Angielski",
     "langFrench": "Francuski",
     "langGerman": "Niemiecki",
-    "langHindi": "Hindi",
+    "langHindi": "Hinduski",
     "langItalian": "Włoski",
     "langJapanese": "Japoński",
     "langKorean": "Koreański",
@@ -2322,7 +2322,7 @@
       "currentValue": "Bieżąca wartość",
       "gainLoss": "Zysk/Strata",
       "percentReturn": "% zwrotu",
-      "symbol": "Symbol",
+      "symbol": "Ticker",
       "total": "Razem"
     },
     "titles": {
@@ -2358,7 +2358,7 @@
       "impactCurrentValue": "Bieżąca wartość: {value}",
       "impactPurchasePrice": "Cena zakupu: {price}",
       "impactShares": "{count} akcji",
-      "impactSymbol": "Symbol: {symbol}",
+      "impactSymbol": "Ticker: {symbol}",
       "impactTitle": "Utracisz:",
       "title": "Usuń pozycję"
     },
@@ -2393,7 +2393,7 @@
       "gainLoss": "Zysk/Strata",
       "purchasePrice": "Cena zakupu",
       "shares": "Akcje",
-      "symbol": "Symbol",
+      "symbol": "Ticker",
       "value": "Wartość"
     },
     "title": "Portfel inwestycyjny",
@@ -2501,7 +2501,7 @@
         "cloud": "Typowa aplikacja w chmurze",
         "feature": "Funkcja",
         "local": "BudgetPro Lokalnie",
-        "sync": "BudgetPro Sync (Pro)"
+        "sync": "BudgetPro Sync (wersja Pro)"
       },
       "offlineMode": {
         "feature": "Tryb offline"
@@ -3003,7 +3003,7 @@
       "paidOff": "Spłacona",
       "refinanced": "Refinansowana"
     },
-    "statusLabel": "Status",
+    "statusLabel": "Stan",
     "subtitle": "Zarządzaj i śledź wszystkie pożyczki",
     "table": {
       "date": "Data",
@@ -3079,7 +3079,7 @@
     "ipRequired": "Adres IP jest wymagany",
     "optionalDefault": "opcjonalnie, domyślnie: {port}",
     "pairingCode": "Kod parowania",
-    "port": "Port",
+    "port": "Numer portu",
     "portInvalid": "Port musi być między 1 a 65535",
     "title": "Ręczne wprowadzanie",
     "whereToFind": "Gdzie to znaleźć?"
@@ -3210,7 +3210,7 @@
       "bill_reminder": "Przypomnienie o rachunku",
       "budget_alert": "Alert budżetowy",
       "goal_milestone": "Kamień milowy celu",
-      "system": "System"
+      "system": "Systemowe"
     }
   },
   "ocr": {
@@ -3421,7 +3421,7 @@
     "description": "Połącz się z innym urządzeniem w sieci lokalnej",
     "deviceAdded": "Urządzenie dodane. Połącz się, aby dokończyć parowanie.",
     "failedToInitialize": "Nie udało się zainicjować urządzenia. Spróbuj ponownie.",
-    "host": "Host",
+    "host": "Nazwa hosta",
     "ipAddressDescription": "Wprowadź lokalny adres IP, aby umożliwić innym urządzeniom połączenie.",
     "ipAddressRequired": "Wymagany adres IP",
     "ipPlaceholder": "192.168.1.100",
@@ -3474,7 +3474,7 @@
     "paymentDate": "Data płatności",
     "principal": "Kapitał",
     "savePayment": "Zapisz płatność",
-    "status": "Status",
+    "status": "Stan",
     "suggestedMatches": "Sugerowane dopasowania transakcji",
     "suggestedMatchesDescription": "Znaleźliśmy {count, plural, one {# transakcję} few {# transakcje} many {# transakcji} other {# transakcji}}, które mogą być płatnościami pożyczki",
     "title": "Historia płatności",
@@ -3689,7 +3689,7 @@
       "nonRegisteredBalance": "Saldo niezarejestrowane",
       "onTrack": "✓ Jesteś na dobrej drodze!",
       "onTrackDescription": "Twoje prognozowane oszczędności w wysokości {amount} przekraczają wymagane oszczędności.",
-      "planName": "Plan: {name}",
+      "planName": "Nazwa planu: {name}",
       "planSaved": "Plan emerytalny zapisany!",
       "planSummary": "Wiek {currentAge} → {retirementAge} | {monthlyContribution}/mies. | {expectedReturn}% zwrotu",
       "projectedSavings": "Prognozowane oszczędności",
@@ -4633,7 +4633,7 @@
     "startDateLabel": "Data rozpoczęcia *",
     "statusActive": "Aktywna",
     "statusCancelled": "Anulowana",
-    "statusLabel": "Status",
+    "statusLabel": "Stan",
     "statusPaused": "Wstrzymana",
     "statusTrial": "Okres próbny",
     "trialEndDateHint": "Ustaw, kiedy kończy się bezpłatny okres próbny, aby go śledzić",
@@ -4704,7 +4704,7 @@
     "lastSync": "Ostatnia synchronizacja: {time}",
     "minutesAgo": "{minutes}min temu",
     "never": "Nigdy",
-    "offline": "Offline",
+    "offline": "Rozłączono",
     "partialSync": "Częściowa synchronizacja",
     "syncError": "Błąd synchronizacji",
     "synced": "Zsynchronizowane",
@@ -5210,7 +5210,7 @@
       "clickToSelect": "Kliknij, aby wybrać plik",
       "dragAndDrop": "lub przeciągnij i upuść tutaj",
       "fileSummary": "Podsumowanie pliku",
-      "format": "Format",
+      "format": "Rodzaj",
       "formatApiExport": "Eksport API YNAB",
       "formatApiExportDesc": "JSON z nYNAB",
       "formatCsv": "Eksport CSV",

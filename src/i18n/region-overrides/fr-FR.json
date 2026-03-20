@@ -1,0 +1,268 @@
+{
+  "actions": {
+    "resetDefaults": "Réinitialiser les paramètres par défaut"
+  },
+  "budget": {
+    "events": {
+      "daysLeft": "{count} days left",
+      "noEventsDescription": "Create an event budget to track spending for weddings, holidays, and more"
+    },
+    "netWorth": {
+      "history": "Historical Snapshots",
+      "milestoneReached": "Milestone reached: {amount}!",
+      "noLiabilities": "No liabilities — great job!"
+    },
+    "scenarios": {
+      "amountLabel": "Amount",
+      "run": "Run Scenario",
+      "subtitle": "Model financial changes and see their impact",
+      "types": {
+        "addExpense": {
+          "description": "See the impact of a new recurring expense"
+        },
+        "cancelSubscription": {
+          "description": "See savings from canceling a recurring charge"
+        },
+        "changeIncome": {
+          "description": "Model an income increase or decrease"
+        },
+        "increaseSavings": {
+          "description": "See goal timeline acceleration"
+        },
+        "payOffDebt": {
+          "description": "Calculate interest savings from early payoff"
+        }
+      }
+    }
+  },
+  "dashboard": {
+    "widgets": {
+      "accountBalances": {
+        "imported": "Importé",
+        "netWorth": "Patrimoine net",
+        "viewAll": "Tout afficher"
+      },
+      "recentTransactions": {
+        "uncategorized": "Non catégorisé",
+        "viewAll": "Tout afficher"
+      }
+    }
+  },
+  "landing": {
+    "accessibility": {
+      "description": "Le mode seniors offre une navigation simplifiée et des cibles tactiles plus grandes. Les raccourcis clavier, les états de focus et un contraste clair aident tout le monde à avancer plus rapidement."
+    },
+    "comparison": {
+      "cost": {
+        "cloud": "Abonnement de 100 $+/an"
+      },
+      "dataPrivacy": {
+        "sync": "Chiffré de bout en bout"
+      },
+      "headers": {
+        "cloud": "Application Cloud Typique"
+      }
+    },
+    "faqSection": {
+      "description": "Réponses simples aux questions courantes sur les essais, la tarification et l'accès."
+    },
+    "features": {
+      "2": {
+        "description": "Scanner les reçus localement avec Tesseract.js. Pas de traitement dans le cloud."
+      }
+    },
+    "featuresDeepDive": {
+      "description": "Arrêtez de vous battre avec des formules cassées. Obtenez la flexibilité du contrôle manuel avec la rapidité d'une application moderne.",
+      "heading1": "Puissance de tableur."
+    },
+    "heroSection": {
+      "badges": {
+        "offlineReady": "Prêt pour hors ligne"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "description": "Glissez-déposez des CSV ou scannez des reçus. L'IA mappe les colonnes localement."
+      },
+      "2": {
+        "description": "Assignez un emploi à chaque euro et prévoyez votre future valeur nette."
+      }
+    },
+    "marquee": {
+      "logos": [
+        "Budgétisation",
+        "Abonnements",
+        "Prêts",
+        "OCR Reçus",
+        "Rapports",
+        "Planification",
+        "Hors ligne",
+        "Mode seniors"
+      ]
+    },
+    "outcomes": {
+      "0": {
+        "description": "Fini les connexions rompues ou les boucles de ré-authentification. Vous contrôlez l'entrée des données."
+      },
+      "2": {
+        "description": "Modélisez la retraite, le remboursement de prêts et les objectifs d'épargne dans une vue intégrée.",
+        "title": "Planification à l'épreuve du futur"
+      }
+    },
+    "outcomesSection": {
+      "description": "La plupart des applications de budgétisation vous font faire le travail. BudgetPro est conçu pour réduire les frictions tout en vous gardant en contrôle."
+    },
+    "preview": {
+      "balanceAmount": "24 500,00 €",
+      "balanceChange": "+12,5 %",
+      "currencySymbol": "€",
+      "expensesAmount": "1 250,00 €",
+      "expensesChange": "-5,2 %",
+      "tx0Amount": "-124,50 €",
+      "tx0Date": "Aujourd'hui, 14h30",
+      "tx0Name": "Supermarché",
+      "tx1Amount": "+4 250,00 €",
+      "tx1Date": "Hier, 9h00",
+      "tx1Name": "Tech Solutions Inc.",
+      "tx2Amount": "-15,99 €",
+      "welcomeBack": "Bienvenue de nouveau, Alex"
+    },
+    "pricing": {
+      "title": "Local est gratuit. Sync est Pro."
+    },
+    "security": {
+      "cards": {
+        "encryption": {
+          "description": "L'application comprend une couche de chiffrement pour protéger les enregistrements budgétaires sensibles lorsqu'elle est activée."
+        }
+      },
+      "description": "L'application Budget stocke vos données localement (prête pour hors ligne) et vous donne des contrôles pour les fonctionnalités d'IA, l'exportation et la suppression.",
+      "title": "Priorité à la vie privée par conception"
+    },
+    "socialProof": {
+      "description": "Les détails qui rendent la budgétisation efficace : onboarding, raccourcis, navigation mobile et performance prête pour hors ligne.",
+      "features": {
+        "mobileUx": {
+          "description": "Navigation en bas et mises en page réactives qui semblent natives.",
+          "title": "UX mobile-first"
+        },
+        "shortcuts": {
+          "description": "Déplacez-vous rapidement avec des raccourcis de recherche et d'action intégrés à l'interface."
+        }
+      }
+    },
+    "trust": {
+      "1": {
+        "title": "Puissance de tableur"
+      },
+      "2": {
+        "description": "Zéro latence. Fonctionne au sommet d'une montagne ou dans un tunnel de métro."
+      }
+    }
+  },
+  "onboarding": {
+    "dontShowAgain": "Ne pas montrer cette visite à nouveau",
+    "steps": {
+      "import": {
+        "description": "Commencez par importer vos transactions bancaires à partir d'un fichier CSV. Nous supportons BMO, Home Trust et de nombreuses autres banques. L'application catégorisera automatiquement vos transactions !"
+      },
+      "reports": {
+        "title": "📊 Voir les rapports & insights"
+      },
+      "welcome": {
+        "description": "Faisons une visite rapide pour vous aider à gérer vos finances domestiques. Cela ne prendra pas longtemps !"
+      }
+    },
+    "tips": {
+      "import": "Glissez-déposez votre fichier CSV ou cliquez pour parcourir. Nous détectons automatiquement les formats BMO et Home Trust !"
+    }
+  },
+  "searchNaturalLanguage": {
+    "around": "environ",
+    "bill": "facture",
+    "bought": "acheté",
+    "cheap": "bon marché",
+    "deposit": "dépôt",
+    "exampleAmazonOver50": "Commandes Amazon de plus de 50 €",
+    "exampleCoffeeLastWeek": "Achats de café de la semaine dernière",
+    "exampleExpensive": "Transactions de plus de 100 €",
+    "exampleStructured": "Achats de plus de 200 € (structuré)",
+    "expense": "dépense",
+    "expensive": "cher",
+    "income": "revenu",
+    "large": "important",
+    "lastMonth": "mois dernier",
+    "lastWeek": "semaine dernière",
+    "lastYear": "année dernière",
+    "noResults": "Aucun résultat trouvé",
+    "over": "plus de",
+    "paid": "payé",
+    "purchase": "achat",
+    "recently": "récemment",
+    "refund": "remboursement",
+    "resultsCount": "{count} résultats",
+    "salary": "salaire",
+    "searchPlaceholder": "Rechercher des transactions...",
+    "searchTips": "Astuces de recherche",
+    "small": "petit",
+    "spent": "dépensé",
+    "thisMonth": "ce mois-ci",
+    "thisWeek": "cette semaine",
+    "thisYear": "cette année",
+    "today": "aujourd'hui",
+    "under": "moins de",
+    "yesterday": "hier"
+  },
+  "searchOperators": {
+    "account": "compte",
+    "amount": "montant",
+    "category": "catégorie",
+    "date": "date",
+    "dateLast30": "derniers30",
+    "dateLast7": "derniers7",
+    "dateLastMonth": "dernierMois",
+    "dateLastWeek": "dernièreSemaine",
+    "dateLastYear": "dernièreAnnée",
+    "dateThisMonth": "ceMois",
+    "dateThisYear": "cetteAnnée",
+    "dateToday": "aujourd'hui",
+    "dateYesterday": "hier",
+    "is": "est",
+    "isExpense": "dépense",
+    "isIncome": "revenu",
+    "isRecurring": "récurrent",
+    "isSplit": "divisé",
+    "merchant": "marchand",
+    "tag": "étiquette",
+    "type": "type",
+    "typeExpense": "dépense",
+    "typeIncome": "revenu"
+  },
+  "sidebar": {
+    "navigation": {
+      "properties": "Biens"
+    },
+    "search": "Rechercher..."
+  },
+  "welcome": {
+    "subtitle": "Commencez par ajouter votre première transaction ou en important des données de votre banque",
+    "title": "Bienvenue dans Budget App"
+  },
+  "widget": {
+    "incomeVsExpenses": {
+      "description": "Comparez vos revenus et dépenses au fil du temps"
+    },
+    "monthlyTrends": {
+      "description": "Visualisez vos habitudes financières mois par mois"
+    },
+    "recentTransactions": {
+      "description": "Aperçu rapide de votre activité financière récente"
+    },
+    "spendingByCategory": {
+      "description": "Visualisez la répartition de vos dépenses"
+    },
+    "upcomingBills": {
+      "description": "Ne manquez jamais un paiement grâce aux rappels"
+    }
+  }
+}

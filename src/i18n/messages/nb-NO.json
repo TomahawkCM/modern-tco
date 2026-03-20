@@ -216,9 +216,9 @@
       "emptyTitle": "Scorehistorikken din vises her etter hvert som data samles inn",
       "emptySubtitle": "Kom tilbake neste måned!",
       "legendScore": "Poeng",
-      "legendTrend": "Trend",
+      "legendTrend": "Utvikling",
       "tooltipScore": "Poeng",
-      "tooltipTrend": "Trend",
+      "tooltipTrend": "Utvikling",
       "loadingChart": "Laster diagram..."
     }
   },
@@ -289,7 +289,7 @@
       "srOnly": "Bruk piltastene for å navigere mellom rader. Trykk Tab for å gå til neste element.",
       "visual": "Bruk ← → eller ↑ ↓ for å navigere • Home/End for å hoppe til start/slutt"
     },
-    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support."
+    "chartDescription": "{description}. {dataPoints} datapunkter vist. {dataList}. Trykk på Tabell-knappen for å vise data i tabellformat med tastaturnavigasjon."
   },
   "investmentCharts": {
     "emptyState": "Ingen beholdninger å visualisere. Legg til beholdninger for å se diagrammer.",
@@ -309,7 +309,7 @@
       "loss": "Tap"
     },
     "tableHeaders": {
-      "symbol": "Symbol",
+      "symbol": "Ticker",
       "costBasis": "Kostgrunnlag",
       "currentValue": "Gjeldende verdi",
       "gainLoss": "Gevinst/tap",
@@ -528,7 +528,7 @@
       "description": "Etter 3 lignende rettelser vil fremtidige transaksjoner fra denne forhandleren automatisk kategoriseres."
     },
     "type": {
-      "label": "Type",
+      "label": "Kategori",
       "expense": "Utgift",
       "income": "Inntekt"
     },
@@ -607,7 +607,7 @@
     },
     "encryption": {
       "encrypted": "Denne filen er kryptert",
-      "hint": "Hint: {hint}",
+      "hint": "Tips: {hint}",
       "password": "Passord",
       "enterPassword": "Skriv inn passord",
       "decrypt": "Dekrypter og fortsett"
@@ -762,7 +762,7 @@
     "dateRange": "Datoperiode",
     "category": "Kategori",
     "account": "Konto",
-    "type": "Type",
+    "type": "Kategori",
     "allCategories": "Alle kategorier",
     "allAccounts": "Alle kontoer",
     "allTypes": "Alle typer",
@@ -1340,7 +1340,7 @@
         "expenses": "Utgifter",
         "groceries": "Dagligvarer",
         "dining": "Restaurantbesøk",
-        "shopping": "Shopping",
+        "shopping": "Handel",
         "groceryStore": "Dagligvarebutikk",
         "foodToday": "Mat • I dag",
         "salary": "Lønn",
@@ -1389,21 +1389,12 @@
       "tagline": "Premium budsjettering"
     },
     "marquee": {
-      "logos": {
-        "0": "Budsjettering",
-        "1": "Abonnementer",
-        "2": "Lån",
-        "3": "OCR Kvitteringer",
-        "4": "Rapporter",
-        "5": "Planlegging",
-        "6": "Frakoblet",
-        "7": "Eldremodus"
-      }
+      "logos": "Budsjettering,Abonnementer,Lån,OCR-kvitteringer,Rapporter,Planlegging,Frakoblet,Seniormodus"
     },
     "preview": {
       "overview": "Oversikt",
       "welcomeBack": "Velkommen tilbake, Alex",
-      "live": "Live",
+      "live": "Direkte",
       "totalBalance": "Total saldo",
       "expenses": "Utgifter",
       "savingsGoal": "Sparemål",
@@ -1635,7 +1626,7 @@
     "buttons": {
       "exportConversation": "Eksporter samtale",
       "clearHistory": "Slett chatthistorikk",
-      "send": "Send"
+      "send": "Send melding"
     },
     "emptyState": {
       "title": "Start en samtale",
@@ -1732,7 +1723,7 @@
       "accounts": "Kontoer",
       "transactions": "Transaksjoner",
       "categories": "Kategorier",
-      "format": "Format"
+      "format": "Filformat"
     },
     "categoryStep": {
       "title": "Kategorimapping",
@@ -1823,7 +1814,7 @@
       "darkDesc": "Skånsomt for øynene",
       "highContrast": "Høy kontrast",
       "highContrastDesc": "Maksimal synlighet",
-      "auto": "Auto",
+      "auto": "Automatisk",
       "autoDesc": "Følg systemet"
     },
     "reducedMotion": {
@@ -1849,11 +1840,11 @@
       "title": "Hurtiginnstillinger:",
       "off": "Av",
       "offDesc": "Standard grensesnitt",
-      "mild": "Mild",
+      "mild": "Moderat",
       "mildDesc": "Litt forbedret",
       "moderate": "Moderat",
       "moderateDesc": "Anbefalt for de fleste",
-      "full": "Full",
+      "full": "Komplett",
       "fullDesc": "Maksimal tilgjengelighet"
     }
   },
@@ -1879,7 +1870,7 @@
     "disconnect": {
       "button": "Koble fra",
       "dialogTitle": "Koble fra SimpleFIN?",
-      "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
+      "dialogDescription": "Dette vil fjerne tilkoblingen til bankkontoene dine. Eksisterende transaksjoner vil ikke bli slettet, men nye transaksjoner vil ikke lenger synkroniseres automatisk.",
       "cancel": "Avbryt",
       "confirm": "Koble fra"
     },
@@ -1922,8 +1913,8 @@
     },
     "help": {
       "title": "Trenger du hjelp?",
-      "bridgeDashboard": "SimpleFIN Bridge Dashboard",
-      "protocolDocs": "SimpleFIN Protocol Documentation"
+      "bridgeDashboard": "SimpleFIN Bridge-dashbord",
+      "protocolDocs": "SimpleFIN-protokolldokumentasjon"
     }
   },
   "calculators": {
@@ -2082,7 +2073,7 @@
       "actual": "Faktisk",
       "target": "Mål",
       "variance": "Avvik",
-      "over": "Over",
+      "over": "Overforbruk",
       "under": "I rute",
       "exceeding": "Overskrider"
     },
@@ -2336,7 +2327,7 @@
     "maxThumb": "Maksimalt beløp",
     "minLabel": "Minimalt beløp",
     "maxLabel": "Maksimalt beløp",
-    "minPlaceholder": "Min",
+    "minPlaceholder": "Minimum",
     "maxPlaceholder": "Maks"
   },
   "transactionSearch": {
@@ -2408,7 +2399,7 @@
       "bill_reminder": "Regningspåminnelse",
       "budget_alert": "Budsjettvarsel",
       "goal_milestone": "Målsmilepæl",
-      "system": "System"
+      "system": "Systemmelding"
     }
   },
   "notificationSettings": {
@@ -2677,7 +2668,7 @@
       "noLiabilities": "No liabilities — great job!",
       "history": "Historical Snapshots",
       "milestoneReached": "Milestone reached: {amount}!",
-      "trend": "Trend",
+      "trend": "Utvikling",
       "_note": "Already internationalized in client.tsx using budget.netWorth namespace"
     },
     "property": {
@@ -2790,7 +2781,7 @@
       "deleteAccountTitle": "Slett konto",
       "deleteAccountDescription": "Er du sikker på at du vil slette \"{name}\"? Dette sletter ikke tilknyttede transaksjoner.",
       "clearAllTitle": "Slett alle transaksjoner",
-      "clearAllDescription": "This will permanently delete ALL transactions from the database. Your accounts and their starting balances will be preserved. You can then re-import your bank statements fresh. This action cannot be undone.",
+      "clearAllDescription": "Dette vil permanent slette ALLE transaksjoner fra databasen. Kontoene dine og startsaldoene deres vil bli bevart. Du kan deretter importere bankkontoutskriftene dine på nytt. Denne handlingen kan ikke angres.",
       "clearAllConfirm": "Slett alle transaksjoner",
       "startingBalanceSetTo": "Startsaldo satt til {amount}",
       "failedToUpdateBalance": "Klarte ikke å oppdatere kontosaldo",
@@ -2826,7 +2817,7 @@
       "progressHelpTooltipAriaLabel": "Mer informasjon om budsjettfremdrift og varselgrenser",
       "statusOnTrack": "✓ I rute",
       "statusWarning": "⚠ Advarsel",
-      "statusOver": "✖ Over",
+      "statusOver": "✖ Overforbruk",
       "budgetAlerts": "⚠️ Budsjettadvarsler",
       "transactionCount": "{count, plural, one {# transaksjon} other {# transaksjoner}}",
       "of": "av",
@@ -3130,7 +3121,7 @@
     "createCategory": "Opprett kategori",
     "categoryNameLabel": "Kategorinavn *",
     "categoryNamePlaceholder": "f.eks. Hjemutgifter",
-    "typeLabel": "Type",
+    "typeLabel": "Kategori",
     "expense": "Utgift",
     "income": "Inntekt",
     "subcategoriesLabel": "Underkategorier (kommaseparert)",
@@ -3163,7 +3154,7 @@
     "tabNotifications": "Varsler",
     "tabPrivacy": "Personvern og AI",
     "tabAccessibility": "Tilgjengelighet",
-    "tabData": "Data",
+    "tabData": "Databehandling",
     "tabLocale": "Lokalinnstillinger og formatering",
     "tabProfiles": "Profiler",
     "tabDevTools": "Utviklerverktøy",
@@ -3217,7 +3208,7 @@
     "updateAccount": "Oppdater konto",
     "categoryName": "Kategorinavn",
     "categoryNamePlaceholder": "f.eks. Underholdning, Dagligvarer, Lønn",
-    "type": "Type",
+    "type": "Kategori",
     "icon": "Ikon",
     "tapToChangeIcon": "Trykk for å endre ikon",
     "color": "Farge",
@@ -3235,7 +3226,7 @@
     "webmcpDescription": "La nettleser-AI-agenter samhandle med budsjettdataene dine. Krever Chrome 146+ med WebMCP-flagget aktivert.",
     "webmcpNotSupported": "Nettleseren din støtter ikke WebMCP ennå. Aktiver chrome://flags/#webmcp-for-testing i Chrome 146 Canary.",
     "toggleWebmcp": "Slå WebMCP AI-agentverktøy av/på",
-    "webmcpToolsDescription": "When enabled, 9 tools are exposed to browser AI agents: search transactions, get budget summary, spending by category, account balances, list categories, get subscriptions, add transaction, categorize transaction, and set budget limit. Encryption fields and bank identification data are never shared.",
+    "webmcpToolsDescription": "Når aktivert, gjøres 9 verktøy tilgjengelige for nettleser-AI-agenter: søk i transaksjoner, hent budsjettsammendrag, forbruk per kategori, kontosaldoer, liste over kategorier, hent abonnementer, legg til transaksjon, kategoriser transaksjon og sett budsjettgrense. Krypteringsfelt og bankidentifikasjonsdata deles aldri.",
     "accountSaveFailed": "Klarte ikke å lagre konto",
     "deleteAccountConfirm": "Slette denne kontoen? Transaksjoner vil IKKE bli slettet.",
     "accountDeleteFailed": "Klarte ikke å slette konto",
@@ -3274,7 +3265,7 @@
     "langArabic": "Arabisk",
     "langTurkish": "Tyrkisk",
     "langPolish": "Polsk",
-    "langHindi": "Hindi",
+    "langHindi": "Hindi (हिन्दी)",
     "importError": "Importfeil",
     "dismiss": "Avvis",
     "exportDebugData": "Eksporter feilsøkingsdata",
@@ -3302,7 +3293,7 @@
     "couldNotParseCSV": "Kunne ikke lese CSV-filen. Sjekk filformatet.",
     "invalidBankConfig": "Ugyldig bankkonfigurasjon. Prøv å velge en annen bank.",
     "noDataInCSV": "Ingen data funnet i CSV-filen. Filen kan være tom eller feil formatert.",
-    "noTransactionsParsed": "No transactions could be parsed from this file.\n\nPossible causes:\n• The file format may not be recognized\n• The date or amount columns may be empty\n• The file may contain only headers\n\nTry selecting a different bank format or contact support.",
+    "noTransactionsParsed": "Ingen transaksjoner kunne tolkes fra denne filen.\n\nMulige årsaker:\n• Filformatet gjenkjennes kanskje ikke\n• Dato- eller beløpskolonnene kan være tomme\n• Filen inneholder kanskje bare overskrifter\n\nPrøv å velge et annet bankformat eller kontakt kundestøtte.",
     "unsupportedFileFormat": "Filformat ikke støttet: {format}. Bruk CSV, OFX, QFX, QIF, MT940, CAMT.053 eller PDF-filer.",
     "selectAccountFirst": "Velg en konto før du importerer transaksjoner. Gå til Kontoer-siden for å opprette en konto først.",
     "allTransactionsRemoved": "Alle transaksjoner ble fjernet under validering. Prøv å importere en annen fil.",
@@ -3385,7 +3376,7 @@
     "existingCategoriesReplaced": "Eventuelle eksisterende kategorier vil bli erstattet",
     "applyToSelected": "Bruk på valgte",
     "splitTransactionsLabel": "Delte transaksjoner",
-    "splitTransactionsHelp": "Divide a single purchase across multiple categories. Example: Grocery store visit ($100) → Groceries ($80) + Household ($20). Click the Split button on any transaction to divide it.",
+    "splitTransactionsHelp": "Del et enkelt kjøp på tvers av flere kategorier. Eksempel: Dagligvarehandel (kr 1000) → Dagligvarer (kr 800) + Husholdning (kr 200). Klikk på Del-knappen på en transaksjon for å dele den.",
     "transactionFeaturesInfo": "Mer informasjon om transaksjonsfunksjoner",
     "searchingVendorTransactions": "🔍 Søker etter andre \"{vendor}\"-transaksjoner...",
     "foundMatchingTransactions": "✓ Fant {count} samsvarende \"{vendor}\"-transaksjoner ({time}s)",
@@ -3425,7 +3416,7 @@
     "ownerRoleRequired": "Eierrolle kreves for masseendringer",
     "ownerRoleRequiredToEdit": "Eierrolle kreves for å redigere",
     "roleOwner": "eier",
-    "roleAdmin": "admin",
+    "roleAdmin": "administrator",
     "roleMember": "medlem",
     "roleViewer": "leser",
     "roleChild": "barn",
@@ -3443,7 +3434,7 @@
     "selectAllUsers": "Velg alle brukere",
     "userColumn": "Bruker",
     "joinedColumn": "Ble med",
-    "statusColumn": "Status",
+    "statusColumn": "Tilstand",
     "trialStatusColumn": "Prøveperiodestatus",
     "lastLoginColumn": "Siste innlogging",
     "actionsColumn": "Handlinger",
@@ -3494,7 +3485,7 @@
     "exportCsv": "Eksporter CSV",
     "exportJson": "Eksporter JSON",
     "filterByAction": "Filtrer etter handling eller metadata",
-    "filter": "Filter",
+    "filter": "Filtrer",
     "whenColumn": "Når",
     "actorColumn": "Aktør",
     "actionColumn": "Handling",
@@ -3661,7 +3652,7 @@
     "merchantRequired": "Forhandler *",
     "merchantPlaceholder": "f.eks. Rema 1000, Coop",
     "amountRequired": "Beløp *",
-    "dateRequired": "Date *",
+    "dateRequired": "Dato *",
     "receiptDateAriaLabel": "Kvitteringsdato",
     "descriptionLabel": "Beskrivelse",
     "descriptionPlaceholder": "Valgfri beskrivelse",
@@ -3782,7 +3773,7 @@
     "monthlyPaymentsCount": "{count} månedlige betalinger",
     "startDate": "Startdato",
     "firstPaymentDate": "Første betalingsdato",
-    "statusLabel": "Status",
+    "statusLabel": "Tilstand",
     "vehicle": "Kjøretøy",
     "notes": "Notater",
     "costAnalysis": "Kostnadsanalyse",
@@ -3803,7 +3794,7 @@
     "amortizationSchedule": "Amortiseringsplan",
     "amortizationDescription": "Måned-for-måned-oversikt som viser hvordan lånet ditt betales ned",
     "tip": "Tips",
-    "amortizationTip": "Notice how early payments are mostly interest (red), but later payments are mostly principal (teal). Making extra payments early can save you thousands in interest!",
+    "amortizationTip": "Legg merke til hvordan tidlige betalinger hovedsakelig er renter (rødt), mens senere betalinger hovedsakelig er avdrag (blågrønt). Å gjøre ekstra innbetalinger tidlig kan spare deg for tusenvis i renter!",
     "showingPayments": "Viser de første {shown} av {total} betalinger",
     "scrollToSeeMore": "Rull ned for å se mer",
     "colorKey": "Fargenøkkel",
@@ -3826,15 +3817,15 @@
     },
     "tooltip": {
       "principalVsInterestTitle": "Avdrag vs. renter",
-      "principalVsInterestBody": "Your payment splits between the loan balance (principal) and borrowing cost (interest). Early payments are mostly interest. Later payments are mostly principal. See the Amortization Schedule tab for the full breakdown.",
+      "principalVsInterestBody": "Betalingen din deles mellom lånesaldoen (avdrag) og lånekostnaden (renter). Tidlige betalinger er hovedsakelig renter. Senere betalinger er hovedsakelig avdrag. Se fanen Nedbetalingsplan for full oversikt.",
       "principalVsInterestAria": "Mer informasjon om avdrag og renter",
-      "aprExplained": "APR (Annual Percentage Rate) is the yearly cost to borrow money. Example: 5% APR on $10,000 = $500 interest per year. Lower APR = less you pay overall.",
+      "aprExplained": "Effektiv rente er den årlige kostnaden for å låne penger. Eksempel: 5 % effektiv rente på kr 100 000 = kr 5 000 i renter per år. Lavere rente = mindre betaler du totalt.",
       "aprAria": "Mer informasjon om effektiv rente og rentesatser",
       "amortizationTitle": "Amortisering",
-      "amortizationBody": "How your loan gets paid off over time. Each payment covers interest first, then principal. The schedule shows exactly how much goes to each, month by month. Early payments are mostly interest!",
+      "amortizationBody": "Slik blir lånet ditt nedbetalt over tid. Hver betaling dekker renter først, deretter avdrag. Planen viser nøyaktig hvor mye som går til hvert formål, måned for måned. Tidlige betalinger er hovedsakelig renter!",
       "amortizationAria": "Mer informasjon om amortisering og lånenedbetaling",
       "extraPaymentsTitle": "Ekstrautbetalinger",
-      "extraPaymentsBody": "Paying more than the minimum reduces principal faster, saving thousands in interest. Example: $100 extra/month on a 30-year mortgage can save 5-7 years! Use the Extra Payment Calculator tab to see your savings.",
+      "extraPaymentsBody": "Å betale mer enn minimumsbeløpet reduserer hovedstolen raskere og sparer tusenvis i renter. Eksempel: kr 1 000 ekstra per måned på et 30-års boliglån kan spare 5–7 år! Bruk fanen Ekstrabetalingskalkulator for å se besparelsene dine.",
       "extraPaymentsAria": "Mer informasjon om ekstrautbetalinger"
     }
   },
@@ -3887,7 +3878,7 @@
     },
     "help": {
       "title": "Smart abonnementsstyring",
-      "description": "Manual: Add subscriptions you want to track precisely. Auto-detected: We analyze your transactions to find recurring patterns. Claim auto-detected subscriptions to manage them manually with reminders and more control."
+      "description": "Manuell: Legg til abonnementer du vil spore nøyaktig. Automatisk oppdaget: Vi analyserer transaksjonene dine for å finne gjentakende mønstre. Gjør krav på automatisk oppdagede abonnementer for å administrere dem manuelt med påminnelser og mer kontroll."
     }
   },
   "investments": {
@@ -3920,7 +3911,7 @@
     "portfolioAnalysis": "Porteføljeanalyse",
     "portfolioAnalysisSubtitle": "Visuell oversikt over investeringene dine",
     "table": {
-      "symbol": "Symbol",
+      "symbol": "Ticker",
       "shares": "Aksjer",
       "purchasePrice": "Kjøpspris",
       "currentPrice": "Gjeldende pris",
@@ -3953,7 +3944,7 @@
       "title": "Slett beholdning",
       "description": "Dette vil permanent fjerne denne beholdningen fra porteføljen din.",
       "impactTitle": "Du vil miste:",
-      "impactSymbol": "Symbol: {symbol}",
+      "impactSymbol": "Ticker: {symbol}",
       "impactShares": "{count} aksjer",
       "impactPurchasePrice": "Kjøpspris: {price}",
       "impactCurrentValue": "Gjeldende verdi: {value}",
@@ -3980,7 +3971,7 @@
     "unsettledSplitCount": "{count, plural, one {# uoppgjort deling} other {# uoppgjorte delinger}}",
     "settledHistory": "Oppgjørshistorikk ({count})",
     "settled": "Gjort opp",
-    "via": "via",
+    "via": "gjennom",
     "total": "totalt",
     "amount": "Beløp",
     "paymentMethod": "Betalingsmetode",
@@ -4041,7 +4032,7 @@
       "percentagesCorrect": "Prosentandelene summeres til 100%",
       "previewSplit": "Forhåndsvis deling",
       "confirmSplit": "Bekreft deling",
-      "confirmDescription": "This will create {count, plural, one {# split} other {# splits}} for this transaction. Each person's share will be tracked until settled."
+      "confirmDescription": "Dette vil opprette {count, plural, one {# deling} other {# delinger}} for denne transaksjonen. Hver persons andel vil bli sporet til den er gjort opp."
     }
   },
   "fridayReview": {
@@ -4124,7 +4115,7 @@
     "loading": "Laster databaseinformasjon...",
     "development": "UTVIKLING",
     "production": "PRODUKSJON",
-    "database": "Database",
+    "database": "Databaseverktøy",
     "devIsolationNote": "Utviklingsdata er isolert fra produksjon. Test fritt uten å påvirke ekte brukere.",
     "error": "Feil",
     "databaseInfo": "Databaseinformasjon",
@@ -4296,7 +4287,7 @@
         "foodDining": "Mat & Restaurant",
         "transportation": "Transport",
         "billsUtilities": "Regninger & Forsyninger",
-        "shopping": "Shopping",
+        "shopping": "Handel",
         "entertainment": "Underholdning",
         "healthFitness": "Helse & Trening",
         "personalCare": "Personlig pleie",
@@ -4432,11 +4423,11 @@
       "deleteRetirementPlan": "Slett pensjonsplan",
       "deleteRetirementPlanDescription": "Dette vil permanent fjerne denne pensjonplanen og alle dens beregninger.",
       "youWillLose": "Du vil miste:",
-      "planName": "Plan: {name}",
+      "planName": "Pensjonsplan: {name}",
       "currentAgeYears": "Gjeldende alder: {age} år",
       "retirementAgeYears": "Pensjonsalder: {age} år",
       "monthlyContributionAmount": "Månedlig bidrag: {amount}",
-      "currentSavingsAmount": "Current savings: {amount}",
+      "currentSavingsAmount": "Nåværende sparing: {amount}",
       "allGrowthProjections": "Alle vekstprojeksjoner og beregninger",
       "deletePlan": "Slett plan",
       "planSaved": "Pensjonsplan lagret!",
@@ -4464,7 +4455,7 @@
       "youWillLose": "Du vil miste",
       "goalName": "Mål: {name}",
       "targetAmountValue": "Målbeløp: {amount}",
-      "currentSavingsValue": "Current savings: {amount}",
+      "currentSavingsValue": "Nåværende sparing: {amount}",
       "timeline": "Tidslinje: {date}",
       "descriptionValue": "Beskrivelse: {description}",
       "deleteGoal": "Slett mål",
@@ -4526,7 +4517,7 @@
     "reduceMotion": "Reduser bevegelse",
     "reduceMotionDescription": "Minimer animasjoner",
     "textSize": "Tekststørrelse",
-    "sizeNormal": "Normal",
+    "sizeNormal": "Vanlig",
     "sizeLarge": "Stor",
     "sizeXLarge": "X-Stor",
     "featuresActive": "Tilgjengelighetsfunksjoner aktive"
@@ -4555,7 +4546,7 @@
     "date": "Dato",
     "descriptionHeader": "Beskrivelse",
     "amount": "Beløp",
-    "status": "Status",
+    "status": "Tilstand",
     "selectAllRequired": "Velg alle nødvendige kolonner",
     "cancel": "Avbryt",
     "applyMapping": "Bruk tilordning"
@@ -4767,7 +4758,7 @@
     "date": "Dato",
     "amount": "Beløp",
     "balanceAfter": "Saldo etter",
-    "status": "Status",
+    "status": "Tilstand",
     "actions": "Handlinger",
     "linked": "Koblet",
     "manual": "Manuell",
@@ -4807,7 +4798,7 @@
     "cycleMonthly": "Månedlig",
     "cycleQuarterly": "Kvartalsvis (3 måneder)",
     "cycleAnnual": "Årlig (12 måneder)",
-    "statusLabel": "Status",
+    "statusLabel": "Tilstand",
     "statusActive": "Aktiv",
     "statusTrial": "Prøveperiode",
     "statusPaused": "Satt på pause",
@@ -4944,7 +4935,7 @@
     "loggingNotEnabled": "Aktivitetslogging er ikke aktivert.",
     "description": "Spor endringer gjort av alle profiler ({count} oppføringer totalt)",
     "refresh": "Oppdater",
-    "filter": "Filter:",
+    "filter": "Filtrer:",
     "allProfiles": "Alle profiler",
     "allActions": "Alle handlinger",
     "actionCreated": "Opprettet",
@@ -4960,7 +4951,7 @@
     "typeAccounts": "Kontoer",
     "typeCategories": "Kategorier",
     "typeProfiles": "Profiler",
-    "typeSystem": "System",
+    "typeSystem": "Systemmelding",
     "searchPlaceholder": "Søk i aktiviteter...",
     "noActivityFound": "Ingen aktivitet funnet",
     "clearFilters": "Fjern filtre",
@@ -4975,7 +4966,7 @@
     "ipAddress": "IP-adresse",
     "ipRequired": "IP-adresse er påkrevd",
     "ipInvalid": "Ugyldig IP-adresseformat (f.eks. 192.168.1.100)",
-    "port": "Port",
+    "port": "Portnummer",
     "optionalDefault": "valgfritt, standard: {port}",
     "portInvalid": "Port må være mellom 1 og 65535",
     "pairingCode": "Parkoblingskode",

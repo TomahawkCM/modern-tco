@@ -364,7 +364,7 @@
     "syncStatus": "Estado de sincronización: {status}",
     "toggleSeniorsMode": "Alternar modo para mayores",
     "typeQuestion": "Escriba su pregunta",
-    "unreadNotifications": "{count, plural, =1 {1 unread notification} other {# unread notifications}}",
+    "unreadNotifications": "{count, plural, one {# notificació no llegida} other {# notificacions no llegides}}",
     "welcomeBudgetApp": "Bienvenido a la aplicación de presupuesto"
   },
   "auth": {
@@ -373,7 +373,7 @@
       "checkEmailTitle": "Revisa Tu Email",
       "checkSpam": "¿No recibiste el email? Revisa tu carpeta de spam o inténtalo de nuevo.",
       "defaultError": "Error al enviar el email de restablecimiento",
-      "emailLabel": "Email",
+      "emailLabel": "Correu electrònic",
       "emailPlaceholder": "tu@ejemplo.com",
       "rememberPassword": "¿Recuerdas tu contraseña?",
       "resetLinkSent": "Hemos enviado un enlace de restablecimiento de contraseña a {email}",
@@ -384,7 +384,7 @@
     },
     "login": {
       "defaultError": "Error al iniciar sesión",
-      "emailLabel": "Email",
+      "emailLabel": "Correu electrònic",
       "emailPlaceholder": "tu@ejemplo.com",
       "forgotPassword": "¿Olvidaste tu contraseña?",
       "noAccount": "¿No tienes cuenta?",
@@ -415,7 +415,7 @@
       "confirmPasswordPlaceholder": "Repite tu contraseña",
       "createAccountButton": "Crear Cuenta",
       "defaultError": "Error al crear la cuenta",
-      "emailLabel": "Email",
+      "emailLabel": "Correu electrònic",
       "emailPlaceholder": "tu@ejemplo.com",
       "fullNameLabel": "Nombre Completo",
       "fullNamePlaceholder": "Juan García",
@@ -503,8 +503,8 @@
       "addAccount": "Añadir Cuenta",
       "addFirstAccount": "Añade Tu Primera Cuenta",
       "allTransactionsCleared": "Todas las transacciones borradas. Ahora puedes reimportar tus extractos.",
-      "assignCount": "Assign {count, plural, one {# Transaction} other {# Transactions}}",
-      "assignModalDescription": "{count, plural, one {# transaction needs} other {# transactions need}} to be assigned to an account.",
+      "assignCount": "Assignar {count, plural, one {# transacció} other {# transaccions}}",
+      "assignModalDescription": "{count, plural, one {# transacció necessita} other {# transaccions necessiten}} ser assignada a un compte.",
       "assignTransactions": "Asignar Transacciones",
       "assignTransactionsNow": "Asignar Transacciones Ahora",
       "assignedTransactions": "{count} transacciones asignadas a {name}",
@@ -557,7 +557,7 @@
       "unassignedClickToAssign": "Haz clic abajo para asignarlas automáticamente a tus cuentas.",
       "unassignedCreateFirst": "Crea una cuenta primero, luego se asignarán automáticamente.",
       "unassignedDescription": "Estas transacciones se importaron antes de configurar las cuentas.",
-      "unassignedTitle": "{count, plural, one {# transaction needs} other {# transactions need}} account assignment",
+      "unassignedTitle": "{count, plural, one {# transacció necessita} other {# transaccions necessiten}} assignació de compte",
       "update": "Actualizar"
     },
     "budgets": {
@@ -611,7 +611,7 @@
       "totalExpenses": "Gastos totales",
       "totalSpent": "Total Gastado",
       "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
-      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transaction will become unbudgeted} other {# transactions will become unbudgeted}}",
+      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transacció quedarà sense pressupost} other {# transaccions quedaran sense pressupost}}",
       "youWillLose": "Perderás:"
     },
     "events": {
@@ -824,7 +824,7 @@
     "applyTo": "Aplicar a {count}",
     "categorize": "Categorizar",
     "clearSelection": "Borrar selección",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "confirmDelete": "{count, plural, one {Eliminar # transacció} other {Eliminar # transaccions}}?",
     "delete": "Eliminar",
     "deleteWarning": "Esta acción no se puede deshacer.",
     "export": "Exportar",
@@ -1007,9 +1007,9 @@
       "assumptionInflationApplied": "Aplicada a las retiradas (compuesta)",
       "assumptionInflationNone": "No aplicada en modo acumulación",
       "assumptionPRNG": "Generador de números aleatorios",
-      "assumptionPRNGValue": "PRNG con semilla (Mulberry32) — determinístico",
+      "assumptionPRNGValue": "PRNG amb llavor (Mulberry32) — determinista",
       "assumptionReturns": "Distribución de rentabilidad",
-      "assumptionReturnsValue": "Distribución normal (Box-Muller)",
+      "assumptionReturnsValue": "Distribució normal (Box-Muller)",
       "assumptionVolatility": "Volatilidad (desv. estándar)",
       "badgeCaution": "Necesita Revisión",
       "badgeRisk": "Alto Riesgo",
@@ -1629,7 +1629,7 @@
     "viewAllLoans": "Ver todos los préstamos"
   },
   "debtOverview": {
-    "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
+    "activeLoans": "{count, plural, one {# préstec actiu} other {# préstecs actius}}",
     "activeLoansTitle": "Préstamos activos",
     "addLoan": "Añadir préstamo",
     "avgRate": "Tipo medio",
@@ -1640,7 +1640,7 @@
     "totalDebt": "Deuda total",
     "upcomingPayments": "Próximos pagos",
     "viewAll": "Ver todo",
-    "viewMore": "{count, plural, one {View # more loan} other {View # more loans}}"
+    "viewMore": "{count, plural, one {Veure # préstec més} other {Veure # préstecs més}}"
   },
   "debtPayoff": {
     "addDebt": "Añadir deuda",
@@ -1798,8 +1798,8 @@
     "dragToReorder": "Arrastrar para reordenar widget"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
+    "months": "{count, plural, one {# mes} other {# mesos}}",
+    "years": "{count, plural, one {# any} other {# anys}}",
     "yearsAndMonths": "{years}a {months}m"
   },
   "emptyStates": {
@@ -1861,7 +1861,7 @@
       "viewGuide": "Ver guía de resolución de problemas"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "canRecover": "Bones notícies! Hem trobat {count} {count, plural, one {manera} other {maneres}} de recuperar-se d'aquest error.",
       "cannotRecover": "No es posible la recuperación. Necesitarás reexportar el archivo desde tu banco o probar un formato diferente.",
       "optionsTitle": "Opciones de Recuperación"
     },
@@ -1975,7 +1975,7 @@
   "exportDialog": {
     "buttons": {
       "cancel": "Cancelar",
-      "done": "Done!",
+      "done": "Fet!",
       "download": "Descargar",
       "export": "Exportar Datos"
     },
@@ -2104,7 +2104,7 @@
       "line2": "Puntuación de salud financiera"
     },
     "grade": "Nota: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
+    "missingFactors": "{count, plural, one {# factor faltant} other {# factors faltants}}",
     "title": "Salud financiera",
     "history": {
       "title": "Historial de puntuació",
@@ -2347,7 +2347,7 @@
       "description": "Esto eliminará permanentemente la cuenta y todos los activos asociados.",
       "impactAccount": "Cuenta: {name}",
       "impactHistory": "Todo el historial de transacciones",
-      "impactHoldings": "{count, plural, one {# holding} other {# holdings}}",
+      "impactHoldings": "{count, plural, one {# posició} other {# posicions}}",
       "impactTitle": "Perderás:",
       "impactValue": "Valor total: {value}",
       "title": "Eliminar Cuenta de Inversión"
@@ -2374,7 +2374,7 @@
     },
     "gainLoss": "Ganancia/Pérdida",
     "hideDetails": "Ocultar detalles",
-    "holdingsCount": "{count, plural, one {# holding} other {# holdings}}",
+    "holdingsCount": "{count, plural, one {# posició} other {# posicions}}",
     "loading": "Cargando inversiones...",
     "marketDataNotice": "Aviso de datos de mercado",
     "noHoldings": "Aún no hay posiciones en esta cuenta.",
@@ -2437,7 +2437,7 @@
     "pairedDevices": {
       "addDevice": "Añadir Dispositivo",
       "addFirstDevice": "Añade Tu Primer Dispositivo",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "deviceCount": "{count, plural, one {# dispositiu vinculat} other {# dispositius vinculats}}",
       "emptyDescription": "Vincula un dispositivo para empezar a sincronizar tus datos de presupuesto",
       "emptyTitle": "Sin dispositivos vinculados",
       "noDevices": "Sin dispositivos vinculados aún",
@@ -2451,11 +2451,11 @@
     },
     "syncAll": "Sincronizar todo",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "daysAgo": "{count, plural, one {fa # dia} other {fa # dies}}",
+      "hoursAgo": "{count, plural, one {fa # hora} other {fa # hores}}",
       "justNow": "Ahora mismo",
       "lastSync": "Última sinc: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "minutesAgo": "{count, plural, one {fa # minut} other {fa # minuts}}",
       "neverSynced": "Nunca sincronizado"
     },
     "title": "Sincronización LAN"
@@ -2510,7 +2510,7 @@
         "cloud": "La seva Base de Dades",
         "feature": "Ubicació d'Emmagatzematge",
         "local": "El Teu Dispositiu",
-        "sync": "Núvol Zero-Conèixer"
+        "sync": "Núvol de coneixement zero"
       }
     },
     "faq": {
@@ -2616,22 +2616,22 @@
         "viewPricing": "Veure preus"
       },
       "demo": {
-        "cloudStorage": "Cloud storage",
-        "dining": "Dining",
-        "expenses": "Expenses",
-        "foodToday": "Food • Today",
-        "groceries": "Groceries",
-        "groceryStore": "Grocery Store",
-        "income": "Income",
-        "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
-        "netWorth": "Net worth",
+        "cloudStorage": "Emmagatzematge al núvol",
+        "dining": "Restaurants",
+        "expenses": "Despeses",
+        "foodToday": "Alimentació • Avui",
+        "groceries": "Queviures",
+        "groceryStore": "Supermercat",
+        "income": "Ingressos",
+        "incomeYesterday": "Ingressos • Ahir",
+        "monthly": "Mensual",
+        "netWorth": "Patrimoni net",
         "netflix": "Netflix",
-        "salary": "Salary",
+        "salary": "Nòmina",
         "shopping": "Shopping",
         "spotify": "Spotify",
-        "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "subscriptionOct24": "Subscripció • Oct 24",
+        "yearly": "Anual"
       },
       "modes": {
         "budgets": "Pressupostos",
@@ -3476,7 +3476,7 @@
     "savePayment": "Guardar pago",
     "status": "Estado",
     "suggestedMatches": "Coincidencias de transacciones sugeridas",
-    "suggestedMatchesDescription": "We found {count, plural, one {# transaction} other {# transactions}} that might be loan payments",
+    "suggestedMatchesDescription": "Hem trobat {count, plural, one {# transacció} other {# transaccions}} que podrien ser pagaments de préstec",
     "title": "Historial de pagos",
     "uncategorized": "Sin categorizar",
     "unlinkConfirm": "¿Desvincular este pago de la transacción?",
@@ -3618,7 +3618,7 @@
       "payFrequencyHelp": "¿Con qué frecuencia cobras? Esto determina cuándo se generan tus nóminas.",
       "payFrequencyHelpAriaLabel": "Más información sobre la frecuencia de pago",
       "paycheckTimeline": "Línea de Tiempo de Nóminas",
-      "paychecksPlanned": "{count, plural, one {# paycheck planned} other {# paychecks planned}}",
+      "paychecksPlanned": "{count, plural, one {# nòmina planificada} other {# nòmines planificades}}",
       "percentOfIncome": "{percent}% de los ingresos",
       "regeneratePaychecks": "Regenerar Nóminas",
       "remainingToAllocate": "Pendiente de asignar",
@@ -3636,7 +3636,7 @@
       "scheduleSemimonthlyDesc": "1 y 15 de cada mes",
       "scheduleWeekly": "Semanal",
       "scheduleWeeklyDesc": "Cada semana",
-      "scheduledPaychecks": "{count, plural, one {# scheduled paycheck} other {# scheduled paychecks}}",
+      "scheduledPaychecks": "{count, plural, one {# nòmina programada} other {# nòmines programades}}",
       "setUpPaycheckPlan": "Configurar Plan de Nómina",
       "setUpPlan": "Configurar Plan",
       "subtitle": "Planifica a dónde va cada euro antes de cobrar",
@@ -3707,7 +3707,7 @@
       "tfsaBalance": "Saldo TFSA",
       "title": "Calculadora de Jubilación",
       "toReachGoal": "Para alcanzar tu meta, podrías:",
-      "workMoreYears": "Work {years, plural, one {# more year} other {# more years}}",
+      "workMoreYears": "Treballar {years, plural, one {# any més} other {# anys més}}",
       "yearAge": "{year} (Edad {age})",
       "yearsToRetirement": "Años hasta la Jubilación",
       "youWillLose": "Perderás:",
@@ -3738,91 +3738,91 @@
     "trainingModel": "Entrenando modelo y generando predicciones..."
   },
   "privacyPanel": {
-    "active": "Activo",
-    "aiFeatures": "Funciones de IA",
-    "aiFeaturesDescription": "Active las funciones de IA con tecnología OpenAI para funcionalidad avanzada. Al desactivarlas, todas las funciones dependientes de IA se desactivan automáticamente.",
-    "aiFeaturesTitle": "Funciones de IA (interruptor principal)",
-    "analyticsAndMonitoring": "Analítica y monitorización",
-    "anomalyDetection": "Detección de anomalías",
-    "anomalyDetectionDescription": "Detectar patrones de gasto inusuales (p. ej., \"Su compra en Starbucks de 85 $ es inusual\")",
-    "budgetChatbot": "Chatbot de presupuesto",
-    "cannotBeUndone": "Esta acción no se puede deshacer.",
-    "chatbotDescription": "Asistente con IA que puede responder preguntas sobre sus transacciones, presupuestos y patrones de gasto. Las conversaciones se procesan a través de la API de OpenAI.",
-    "chatbotPrivacyNotice": "Sus datos financieros se envían a OpenAI para responder preguntas. OpenAI no utiliza los datos de la API para entrenar modelos. Puede desactivarlo en cualquier momento.",
-    "confirmDelete": "Confirmar eliminación",
-    "confirmDeleteWarning": "You are about to permanently delete {count, plural, one {# data type} other {# data types}}. Click \"Confirm Delete\" to proceed.",
-    "conversationHistory": "Historial de conversaciones",
-    "conversationStorageNotice": "Las conversaciones se almacenan localmente en su navegador. Puede eliminarlas manualmente en cualquier momento.",
-    "dataAccessPermission": "Permiso de acceso a datos",
-    "dataAccountBalances": "saldos de cuentas",
-    "dataAccounts": "cuentas",
+    "active": "Actiu",
+    "aiFeatures": "Funcions d'IA",
+    "aiFeaturesDescription": "Habilita les funcions d'IA de OpenAI per a funcionalitats avançades. Quan es desactiva, totes les funcions dependents d'IA es desactiven automàticament.",
+    "aiFeaturesTitle": "Funcions d'IA (Interruptor principal)",
+    "analyticsAndMonitoring": "Anàlisi i monitoratge",
+    "anomalyDetection": "Detecció d'anomalies",
+    "anomalyDetectionDescription": "Marca patrons de despesa inusuals (p. ex., 'La teva compra a Starbucks de 85 $ és inusual')",
+    "budgetChatbot": "Xatbot de pressupost",
+    "cannotBeUndone": "Aquesta acció no es pot desfer!",
+    "chatbotDescription": "Assistent amb IA que pot respondre preguntes sobre les teves transaccions, pressupostos i patrons de despesa. Les converses es processen mitjançant l'API d'OpenAI.",
+    "chatbotPrivacyNotice": "Les teves dades financeres s'envien a OpenAI per respondre preguntes. OpenAI no utilitza les dades de l'API per entrenar models. Pots desactivar-ho en qualsevol moment.",
+    "confirmDelete": "Confirmar eliminació",
+    "confirmDeleteWarning": "Estàs a punt d'eliminar permanentment {count, plural, one {# tipus de dades} other {# tipus de dades}}. Fes clic a \"Confirmar eliminació\" per continuar.",
+    "conversationHistory": "Historial de converses",
+    "conversationStorageNotice": "Les converses s'emmagatzemen localment al teu navegador. Pots eliminar-les manualment en qualsevol moment.",
+    "dataAccessPermission": "Permís d'accés a dades",
+    "dataAccountBalances": "saldos dels comptes",
+    "dataAccounts": "comptes",
     "dataBudgets": "presupuestos",
-    "dataCategories": "categorías",
-    "dataManagement": "Gestión de datos",
-    "dataPrivacySettings": "ajustes de privacidad",
-    "dataProcessing": "Procesamiento de datos",
-    "dataSecurity": "Seguridad de datos",
+    "dataCategories": "categories de despesa",
+    "dataManagement": "Gestió de dades",
+    "dataPrivacySettings": "configuració de privadesa",
+    "dataProcessing": "Processament de dades",
+    "dataSecurity": "Seguretat de dades",
     "dataTransactions": "transacciones",
-    "deleteAccountsDescription": "Cuentas bancarias y tarjetas de crédito",
-    "deleteAccountsLabel": "Cuentas",
-    "deleteAfter30Days": "Eliminar después de 30 días",
-    "deleteAfter7Days": "Eliminar después de 7 días (Recomendado)",
-    "deleteBalancesDescription": "Restablecer todos los saldos de cuentas a 0 $",
-    "deleteBalancesLabel": "Saldos de cuentas",
-    "deleteBudgetsDescription": "Asignaciones mensuales de presupuesto",
+    "deleteAccountsDescription": "Comptes bancaris i targetes de crèdit",
+    "deleteAccountsLabel": "Comptes",
+    "deleteAfter30Days": "Eliminar després de 30 dies",
+    "deleteAfter7Days": "Eliminar després de 7 dies (recomanat)",
+    "deleteBalancesDescription": "Restableix tots els saldos dels comptes a 0 $",
+    "deleteBalancesLabel": "Saldos dels comptes",
+    "deleteBudgetsDescription": "Assignacions de pressupost mensual",
     "deleteBudgetsLabel": "Presupuestos",
-    "deleteCategoriesDescription": "Categorías de gasto personalizadas",
-    "deleteCategoriesLabel": "Categorías",
-    "deleteData": "Eliminar datos",
-    "deleteFailed": "Error al eliminar los datos. Inténtelo de nuevo.",
-    "deletePrivacySettingsDescription": "Restablecer todos los ajustes a los valores predeterminados",
-    "deletePrivacySettingsLabel": "Ajustes de privacidad",
-    "deleteSelected": "Eliminar seleccionados",
-    "deleteTransactionsDescription": "Todas las transacciones importadas y manuales",
+    "deleteCategoriesDescription": "Categories de despesa personalitzades",
+    "deleteCategoriesLabel": "Categories de despesa",
+    "deleteData": "Eliminar dades",
+    "deleteFailed": "No s'han pogut eliminar les dades. Torna-ho a provar.",
+    "deletePrivacySettingsDescription": "Restableix tota la configuració als valors predeterminats",
+    "deletePrivacySettingsLabel": "Configuració de privadesa",
+    "deleteSelected": "Eliminar seleccionats",
+    "deleteTransactionsDescription": "Totes les transaccions importades i manuals",
     "deleteTransactionsLabel": "Transacciones",
-    "deleting": "Eliminando...",
-    "deselectAll": "Deseleccionar todo",
-    "enableAnalytics": "Activar analítica",
-    "enableAnalyticsDescription": "Seguimiento del uso de funciones y rendimiento de la aplicación mediante PostHog. No se recopilan datos financieros personales (importes, descripciones).",
-    "enableChatbot": "Activar chatbot",
-    "enableErrorTracking": "Activar seguimiento de errores",
-    "enableErrorTrackingDescription": "Informar automáticamente de errores y fallos a Sentry para mejorar la aplicación. No se incluyen datos financieros en los informes de errores.",
-    "encryptStoredData": "Cifrar datos almacenados",
-    "encryptStoredDataDescription": "Cifrar datos sensibles de transacciones en reposo usando cifrado AES-GCM. Requiere generación de clave en la primera activación.",
-    "encryptionActive": "El cifrado está activo. Sus datos están cifrados en IndexedDB.",
-    "encryptionFailed": "Error al activar el cifrado. Inténtelo de nuevo.",
-    "encryptionNotAvailable": "El cifrado no está disponible en este navegador. Utilice un navegador moderno con compatibilidad con Web Crypto API.",
+    "deleting": "Eliminant...",
+    "deselectAll": "Desseleccionar tot",
+    "enableAnalytics": "Habilitar anàlisi",
+    "enableAnalyticsDescription": "Fes seguiment de l'ús de funcions i el rendiment de l'aplicació amb PostHog. No es recopilen dades financeres personals (imports, descripcions).",
+    "enableChatbot": "Habilitar xatbot",
+    "enableErrorTracking": "Habilitar seguiment d'errors",
+    "enableErrorTrackingDescription": "Informa automàticament d'errors i fallades a Sentry per millorar l'aplicació. No s'inclouen dades financeres als informes d'errors.",
+    "encryptStoredData": "Xifrar dades emmagatzemades",
+    "encryptStoredDataDescription": "Xifra les dades sensibles de transaccions en repòs amb xifratge AES-GCM. Requereix generació de clau en la primera habilitació.",
+    "encryptionActive": "El xifratge és actiu. Les teves dades estan xifrades a IndexedDB.",
+    "encryptionFailed": "No s'ha pogut habilitar el xifratge. Torna-ho a provar.",
+    "encryptionNotAvailable": "El xifratge no està disponible en aquest navegador. Utilitza un navegador modern amb suport per a l'API Web Crypto.",
     "export": "Exportar",
-    "exportAllData": "Exportar todos los datos",
-    "exportAllDataDescription": "Descargue todas sus cuentas, transacciones, categorías y presupuestos como JSON",
-    "exportFailed": "Error al exportar los datos. Inténtelo de nuevo.",
-    "fullAccess": "Acceso completo",
-    "fullAccessDescription": "El chatbot puede realizar acciones como añadir transacciones y crear presupuestos",
-    "includedInAccounts": "incluido en Cuentas",
-    "keepForever": "Conservar siempre",
-    "nSelected": "{count} seleccionados",
-    "naturalLanguageImport": "Importación en lenguaje natural",
-    "naturalLanguageImportDescription": "Configurar automáticamente importaciones bancarias usando lenguaje natural (p. ej., \"Importar mi CSV de cuenta corriente TD\")",
-    "nothingSelected": "Nada seleccionado",
-    "predictiveSpending": "Gasto predictivo",
-    "predictiveSpendingDescription": "Pronosticar el gasto mensual por categoría usando análisis de IA",
-    "privacy": "Privacidad:",
-    "privacyFirst": "Privacidad ante todo",
-    "privacyNotice": "Todo el procesamiento ocurre en su navegador. No se suben datos de transacciones a servidores. Las funciones de IA son opcionales y solo envían descripciones limpias de transacciones (sin números de cuenta, nombres ni direcciones) cuando están activadas.",
-    "readOnlyDescription": "El chatbot puede ver datos y responder preguntas pero no puede modificar nada",
-    "readOnlyRecommended": "Solo lectura (Recomendado)",
-    "receiptOCR": "OCR de recibos",
-    "receiptOCRDescription": "Extraer detalles de transacciones de imágenes de recibos usando OCR del lado del cliente (Tesseract.js). Ningún dato sale de su dispositivo.",
-    "requiresAIFeatures": "Requiere funciones de IA",
-    "selectAll": "Seleccionar todo",
-    "selectDataToDelete": "Seleccione qué datos desea eliminar permanentemente:",
-    "smartDuplicateDetection": "Detección inteligente de duplicados",
-    "smartDuplicateDetectionDescription": "Usar IA para detectar transacciones duplicadas incluso cuando los nombres de comercios difieren (p. ej., \"AMAZON PRIME\" vs \"AMZN MKTP CA\")",
-    "subtitle": "Controle cómo se procesan sus datos y qué funciones de IA están activadas",
-    "successfullyCleared": "Eliminado correctamente: {items}",
-    "title": "Controles de privacidad e IA",
-    "whatsSent": "Qué se envía:",
-    "whatsSentDescription": "Solo descripciones limpias de transacciones (p. ej., \"AMAZON.COM\"). Sin números de cuenta, nombres ni direcciones. Con tecnología OpenAI GPT-4o-mini."
+    "exportAllData": "Exportar totes les dades",
+    "exportAllDataDescription": "Descarrega tots els comptes, transaccions, categories i pressupostos en format JSON",
+    "exportFailed": "No s'han pogut exportar les dades. Torna-ho a provar.",
+    "fullAccess": "Accés complet",
+    "fullAccessDescription": "El xatbot pot realitzar accions com afegir transaccions i crear pressupostos",
+    "includedInAccounts": "inclòs en Comptes",
+    "keepForever": "Conservar per sempre",
+    "nSelected": "{count} seleccionats",
+    "naturalLanguageImport": "Importació en llenguatge natural",
+    "naturalLanguageImportDescription": "Configura automàticament les importacions bancàries amb llenguatge natural (p. ex., 'Importa el meu CSV del compte corrent TD')",
+    "nothingSelected": "Res seleccionat",
+    "predictiveSpending": "Despesa predictiva",
+    "predictiveSpendingDescription": "Preveu la despesa mensual per categoria mitjançant anàlisi d'IA",
+    "privacy": "Privadesa:",
+    "privacyFirst": "Privadesa primer",
+    "privacyNotice": "Tot el processament es fa al teu navegador. No es carreguen dades de transaccions als servidors. Les funcions d'IA són opcionals i només envien descripcions netes de transaccions (sense números de compte, noms ni adreces) quan estan habilitades.",
+    "readOnlyDescription": "El xatbot pot veure dades i respondre preguntes però no pot modificar res",
+    "readOnlyRecommended": "Només lectura (recomanat)",
+    "receiptOCR": "OCR de rebuts",
+    "receiptOCRDescription": "Extreu detalls de transaccions d'imatges de rebuts mitjançant OCR al dispositiu (Tesseract.js). Cap dada surt del teu dispositiu.",
+    "requiresAIFeatures": "Requereix funcions d'IA",
+    "selectAll": "Seleccionar tot",
+    "selectDataToDelete": "Selecciona quines dades vols eliminar permanentment:",
+    "smartDuplicateDetection": "Detecció intel·ligent de duplicats",
+    "smartDuplicateDetectionDescription": "Utilitza IA per detectar transaccions duplicades encara que els noms dels comerços difereixin (p. ex., 'AMAZON PRIME' vs 'AMZN MKTP CA')",
+    "subtitle": "Controla com es processen les teves dades i quines funcions d'IA estan habilitades",
+    "successfullyCleared": "S'ha eliminat correctament: {items}",
+    "title": "Privadesa i controls d'IA",
+    "whatsSent": "Què s'envia:",
+    "whatsSentDescription": "Només descripcions netes de transaccions (p. ex., \"AMAZON.COM\"). Sense números de compte, noms ni adreces. Amb tecnologia OpenAI GPT-4o-mini."
   },
   "profileDialog": {
     "cancel": "Cancelar",
@@ -3911,7 +3911,7 @@
       "save": "Guardar"
     },
     "clickToSelect": "Pulse una categoría para seleccionarla",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "description": "{count, plural, one {Seleccioneu una categoria per a aquesta transacció} other {Seleccioneu una categoria per a # transaccions}}",
     "general": "General",
     "noResults": "No se encontraron categorías",
     "pressEnter": "Pulse ↵ Intro",
@@ -3947,7 +3947,7 @@
     "downloadPdf": "Descargar PDF",
     "fileSize": "{size} KB",
     "pdfReceipt": "Recibo PDF",
-    "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
+    "receiptCount": "{count, plural, one {# rebut} other {# rebuts}}",
     "unsupportedFileType": "Tipo de archivo no compatible",
     "uploaded": "Subido el {date}",
     "view": "Veure"
@@ -4001,16 +4001,16 @@
       "quarterly": "Trimestral",
       "weekly": "Semanal"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
+    "inDays": "{count, plural, =0 {(avui)} =1 {(en # dia)} other {(en # dies)}}",
     "next": "Próxima: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "occurrences": "{count, plural, one {# ocurrència detectada} other {# ocurrències detectades}}",
     "perPeriod": {
       "month": "por mes",
       "quarter": "por trimestre",
       "twoWeeks": "por 2 semanas",
       "week": "por semana"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "showingPatterns": "{count, plural, one {Mostrant # patró de transacció recurrent} other {Mostrant # patrons de transaccions recurrents}}",
     "subtitle": "Suscripciones y facturas detectadas",
     "title": "Transacciones recurrentes"
   },
@@ -4144,8 +4144,8 @@
   "shortcutsModal": {
     "close": "Cerrar",
     "proTip": {
-      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
-      "title": "💡 Pro Tip"
+      "description": "Les dreceres de teclat funcionen a qualsevol pàgina excepte quan escriviu en formularis. Premeu {key} en qualsevol moment per veure aquesta ajuda.",
+      "title": "💡 Consell"
     },
     "subtitle": "Consejos de productividad para usuarios avanzados",
     "title": "Atajos de Teclado"
@@ -4188,7 +4188,7 @@
     "shortcuts": "Drecers"
   },
   "simplefinConnect": {
-    "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
+    "accountsConnected": "{count, plural, one {# compte connectat} other {# comptes connectats}}",
     "alreadyHaveToken": "¿Ya tiene un token?",
     "asOf": "a fecha de {date}",
     "autoImportDescription": "Importe automáticamente transacciones de sus cuentas bancarias",
@@ -4229,7 +4229,7 @@
     "securePrivate": "Seguro y privado",
     "securePrivateDescription": "SimpleFIN nunca ve sus credenciales de acceso. Usted controla el acceso.",
     "selectAccount": "Seleccionar cuenta",
-    "setupToken": "Token de configuración",
+    "setupToken": "Token de configuració",
     "step1Description": "Cree o inicie sesión en su cuenta de SimpleFIN",
     "step1Title": "Paso 1: Obtener token de configuración",
     "step2Description": "Pegue el token de SimpleFIN Bridge",
@@ -4249,7 +4249,7 @@
       "title": "Cuentas Conectadas"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "accountsLinked": "{count, plural, one {# compte vinculat} other {# comptes vinculats}}",
       "connectButton": "Conectar Cuenta Bancaria",
       "connected": "Conectado",
       "description": "Conecta tus cuentas bancarias para importar transacciones automáticamente",
@@ -4271,7 +4271,7 @@
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "hoursAgo": "{hours, plural, one {fa # hora} other {fa # hores}}",
       "lastSynced": "Última sincronización: {time}",
       "lessThanHour": "Hace menos de una hora",
       "never": "Nunca",
@@ -4454,7 +4454,7 @@
     "splitATransaction": "Dividir una transacción",
     "splitFlow": {
       "amountsCorrect": "Las cantidades suman correctamente",
-      "confirmDescription": "This will create {count, plural, one {# split} other {# splits}} for this transaction. Each person's share will be tracked until settled.",
+      "confirmDescription": "Això crearà {count, plural, one {# divisió} other {# divisions}} per a aquesta transacció. La part de cada persona es farà un seguiment fins que es liquidi.",
       "confirmSplit": "Confirmar División",
       "howToSplit": "¿Cómo dividir?",
       "modes": {
@@ -4486,7 +4486,7 @@
     "title": "División de gastos",
     "total": "total",
     "unknownTransaction": "Transacción desconocida",
-    "unsettledSplitCount": "{count, plural, one {# unsettled split} other {# unsettled splits}}",
+    "unsettledSplitCount": "{count, plural, one {# divisió pendent} other {# divisions pendents}}",
     "unsettledSplits": "Divisiones pendientes ({count})",
     "via": "vía",
     "youOwe": "Usted debe {amount}",
@@ -4551,7 +4551,7 @@
       "totalSpent": "Total Gastado"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, one {# dia restant de prova} other {# dies restants de prova}}"
     },
     "reminderToggle": {
       "disableReminder": "Desactivar recordatori",
@@ -4570,20 +4570,20 @@
       "upcomingCharges": "Cargos próximos (próximos 30 días)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "activeSubscriptions": "{count, plural, one {# subscripció activa} other {# subscripcions actives}}",
       "annualCost": "Coste anual",
       "monthlyCost": "Coste mensual",
       "next30Days": "Próximos 30 días",
       "projectedYearly": "Gasto anual proyectado",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "upcomingCharges": "{count, plural, one {# càrrec proper} other {# càrrecs propers}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "Subscripcions potencialment cancel·lades",
+      "inactiveDescription": "{count, plural, one {# subscripció no ha} other {# subscripcions no han}} cobrat recentment. Verifiqueu que realment estiguin cancel·lades.",
+      "trialsTitle": "Proves que acaben aviat",
+      "trialsDescription": "{count, plural, one {# prova} other {# proves}} acaba en els propers 7 dies. Cancel·leu-les si no les feu servir.",
+      "highCostTitle": "Subscripcions de cost elevat",
+      "highCostDescription": "Aquestes subscripcions representen una gran part de la vostra despesa. Considereu si n'obteniu el valor complet."
     }
   },
   "subscriptionModal": {
@@ -4839,7 +4839,7 @@
     "placeholderExtended": "Pruebe \"café la semana pasada\" o \"amount:>50\"",
     "recentSearchLabel": "Búsqueda reciente",
     "recentSearches": "Búsquedas recientes",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
+    "resultCount": "{count} {count, plural, one {resultat} other {resultats}}",
     "save": "Guardar",
     "saveFilter": "Guardar filtro",
     "savedFilters": "Filtros guardados",
@@ -4865,10 +4865,10 @@
       "type": "Tipo: 'type:income' o 'type:expense'"
     },
     "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
+    "usedTimes": "Utilitzat {count} {count, plural, one {vegada} other {vegades}}",
     "viewAllResults": "Ver los {count} resultados",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "resultsFound": "{count} {count, plural, one {resultat} other {resultats}} trobats",
+    "suggestionsAvailable": "{count} {count, plural, one {suggeriment} other {suggeriments}} disponibles"
   },
   "transactionTable": {
     "actions": {
@@ -4987,7 +4987,7 @@
     "youWillLose": "Perderá:"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
+    "daysLeft": "{count, plural, =0 {La vostra prova acaba avui!} =1 {Només # dia restant de prova} other {# dies restants de prova}}",
     "daysRemaining": "{count} días restantes en su prueba gratuita",
     "dismiss": "Descartar",
     "expired": "Su período de prueba ha expirado",
@@ -5011,9 +5011,9 @@
     "ignoreAllContinue": "Ignorar todo y continuar",
     "informational": "Informativos",
     "issuesDetected": "Problemas detectados",
-    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
+    "issuesFound": "Hem trobat {count, plural, one {# problema} other {# problemes}} que necessiten la vostra atenció",
     "marked": "Marcada",
-    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
+    "removalNote": "{count, plural, one {# transacció} other {# transaccions}} s'eliminaran de la importació si continueu.",
     "remove": "Eliminar",
     "removeAndContinue": "Eliminar {count} y continuar",
     "suggestion": "Sugerencia:",
@@ -5047,7 +5047,7 @@
     "strengthVeryStrong": "Muy fuerte",
     "strengthVeryWeak": "Muy débil",
     "strengthWeak": "Débil",
-    "zeroKnowledge": "Conocimiento cero"
+    "zeroKnowledge": "Coneixement zero"
   },
   "welcome": {
     "subtitle": "Comença afegint la teva primera transacció o important dades del teu banc",
@@ -5105,7 +5105,7 @@
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "category": "{count, plural, one {# categoria} other {# categories}}",
       "createNew": "Crear Nueva",
       "description": "Asigna las categorías de YNAB a tus categorías existentes o crea nuevas.",
       "mapToExisting": "Asignar a Existente",
@@ -5118,7 +5118,7 @@
       "errors": "Errores",
       "importAnother": "Importar Otro",
       "success": "¡Importación Completada!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "successMessage": "{count, plural, one {# element importat} other {# elements importats}} correctament des de YNAB.",
       "viewTransactions": "Ver Transacciones",
       "whatNext": "¿Qué te gustaría hacer a continuación?",
       "withIssues": "Importación Completada con Incidencias"
@@ -5222,16 +5222,16 @@
       "transactions": "Transacciones"
     },
     "errors": {
-      "parseFailed": "Failed to parse YNAB file",
-      "previewFailed": "Failed to generate preview",
-      "accountImportFailed": "Account import failed: {details}",
-      "categoryImportFailed": "Category import failed: {details}",
-      "transactionImportFailed": "Transaction import failed: {details}",
-      "unknownError": "Unknown error",
-      "budgetImportFailed": "Budget import failed: {details}"
+      "parseFailed": "No s'ha pogut analitzar el fitxer YNAB",
+      "previewFailed": "No s'ha pogut generar la previsualització",
+      "accountImportFailed": "La importació del compte ha fallat: {details}",
+      "categoryImportFailed": "La importació de categories ha fallat: {details}",
+      "transactionImportFailed": "La importació de transaccions ha fallat: {details}",
+      "unknownError": "Error desconegut",
+      "budgetImportFailed": "La importació del pressupost ha fallat: {details}"
     },
-    "importSuccess": "YNAB data imported successfully!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importSuccess": "Dades YNAB importades correctament!",
+    "importWithErrors": "Importació completada amb {count, plural, one {# error} other {# errors}}"
   },
   "developerTools": {
     "title": "Eines de desenvolupador",

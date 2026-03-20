@@ -48,18 +48,18 @@
     }
   },
   "accessibilityToggle": {
-    "featuresActive": "Accessibility features active",
+    "featuresActive": "Жеткиликтүүлүк функциялары активдүү",
     "highContrast": "Yüksək Kontrast",
-    "highContrastDescription": "Enhanced color contrast",
-    "largeTextMode": "Large Text Mode",
-    "largeTextModeDescription": "Bigger text & touch targets",
-    "reduceMotion": "Reduce Motion",
-    "reduceMotionDescription": "Minimize animations",
+    "highContrastDescription": "Күчөтүлгөн түс контрасты",
+    "largeTextMode": "Чоң текст режими",
+    "largeTextModeDescription": "Чоңураак текст жана тийүү аймактары",
+    "reduceMotion": "Кыймылды азайтуу",
+    "reduceMotionDescription": "Анимацияларды минималдаштыруу",
     "sizeLarge": "Böyük",
     "sizeNormal": "Normal",
     "sizeXLarge": "Çox böyük",
-    "textSize": "Text Size",
-    "title": "Accessibility"
+    "textSize": "Текст өлчөмү",
+    "title": "Жеткиликтүүлүк"
   },
   "accessibleChart": {
     "buttons": {
@@ -109,25 +109,25 @@
     "actionLogin": "Giriş",
     "actionLogout": "Çıxış",
     "actionUpdated": "Yeniləndi",
-    "allActions": "All actions",
-    "allProfiles": "All profiles",
+    "allActions": "Бардык аракеттер",
+    "allProfiles": "Бардык профилдер",
     "allTypes": "Bütün növlər",
     "clearFilters": "Filtrləri təmizlə",
-    "daysAgo": "{count}d ago",
-    "description": "Track changes made by all profiles ({count} total entries)",
+    "daysAgo": "{count} к мурун",
+    "description": "Бардык профилдер тарабынан жасалган өзгөртүүлөрдү көзөмөлдөңүз ({count} жалпы жазуу)",
     "filter": "Filtr:",
-    "hoursAgo": "{count}h ago",
+    "hoursAgo": "{count} с мурун",
     "justNow": "Indicə",
-    "loggingNotEnabled": "Activity logging is not enabled.",
-    "minutesAgo": "{count}m ago",
-    "noActivityFound": "No activity found",
+    "loggingNotEnabled": "Иш-аракет журналы иштетилген эмес.",
+    "minutesAgo": "{count} мүн мурун",
+    "noActivityFound": "Иш-аракет табылган жок",
     "refresh": "Yenilə",
-    "searchPlaceholder": "Search activities...",
-    "title": "Activity Log",
+    "searchPlaceholder": "Иш-аракеттерди издөө...",
+    "title": "Иш-аракет журналы",
     "typeAccounts": "Hesablar",
     "typeBudgets": "Büdcələr",
     "typeCategories": "Kateqoriyalar",
-    "typeProfiles": "Profiles",
+    "typeProfiles": "Профилдер",
     "typeSystem": "Sistem",
     "typeTransactions": "Əməliyyatlar"
   },
@@ -261,52 +261,52 @@
     "title": "AI Sütun Xəritəçəkmə Sihirbazı"
   },
   "amortizationChart": {
-    "balanceDescription": "Your balance decreases over time as you make payments",
-    "balanceOverTime": "Balance Over Time",
-    "breakdownDescription": "Early payments are mostly interest; later payments are mostly principal",
-    "cumulative": "Cumulative",
-    "cumulativeDescription": "Total principal paid vs total interest paid over the life of the loan",
-    "cumulativeInterest": "Cumulative Interest",
-    "cumulativePrincipal": "Cumulative Principal",
-    "description": "Visual breakdown of your loan over time",
-    "interest": "Interest",
-    "monthLabel": "Month {month}",
-    "paymentBreakdown": "Payment Breakdown",
+    "balanceDescription": "Төлөм жасаган сайын балансыңыз азаят",
+    "balanceOverTime": "Убакыт боюнча баланс",
+    "breakdownDescription": "Алгачкы төлөмдөр негизинен пайыздан турат; кийинки төлөмдөр негизинен негизги карыздан",
+    "cumulative": "Кумулятивдик",
+    "cumulativeDescription": "Насыянын мөөнөтүндөгү жалпы төлөнгөн негизги карыз жана пайыз",
+    "cumulativeInterest": "Кумулятивдик пайыз",
+    "cumulativePrincipal": "Кумулятивдик негизги карыз",
+    "description": "Убакыт өткөн сайын насыяңыздын визуалдык бөлүштүрүлүшү",
+    "interest": "Пайыз",
+    "monthLabel": "{month}-ай",
+    "paymentBreakdown": "Төлөм бөлүштүрүлүшү",
     "principal": "Principal",
-    "remainingBalance": "Remaining Balance",
-    "title": "Loan Amortization Visualization",
+    "remainingBalance": "Калган баланс",
+    "title": "Насыя амортизациясын визуалдаштыруу",
     "totalInterest": "Ümumi Faiz",
-    "totalPayments": "Total Payments"
+    "totalPayments": "Жалпы төлөмдөр"
   },
   "amountFilter": {
     "clear": "Təmizlə",
-    "maxLabel": "Maximum amount",
+    "maxLabel": "Максималдуу сумма",
     "maxPlaceholder": "Maks",
-    "maxThumb": "Maximum amount",
-    "minLabel": "Minimum amount",
+    "maxThumb": "Максималдуу сумма",
+    "minLabel": "Минималдуу сумма",
     "minPlaceholder": "Min",
-    "minThumb": "Minimum amount",
-    "title": "Amount Range"
+    "minThumb": "Минималдуу сумма",
+    "title": "Суммалардын диапазону"
   },
   "apiErrors": {
-    "aiAnalysisUnavailable": "AI analysis unavailable, using pattern matching",
-    "aiApiError": "AI API error: {message}",
-    "autoDetectionUnavailable": "Auto-detection unavailable - using column order guess",
-    "emptyAiResponse": "Empty response from AI",
-    "failedToParseResponse": "Failed to parse AI response",
-    "fileMustBePdf": "File must be a PDF",
-    "fileTooLarge": "File too large. Maximum {maxSize}.",
-    "internalServerError": "Internal server error",
-    "lowConfidence": "Low confidence - please verify mappings",
-    "missingHeaders": "Missing or invalid headers",
-    "missingSampleData": "Missing or invalid sample data",
-    "noAiResponse": "No response from AI model",
-    "noApiKey": "AI API key not configured. AI extraction requires an active subscription.",
-    "noFileProvided": "No file provided",
-    "rateLimitExceeded": "Rate limit exceeded. Please try again later.",
-    "responseValidationIssues": "Response structure validation had issues",
-    "unknownError": "An unknown error occurred",
-    "verifyMappings": "Please verify all mappings before importing"
+    "aiAnalysisUnavailable": "AI анализи жеткиликсиз, үлгү дал келтирүү колдонулууда",
+    "aiApiError": "AI API катасы: {message}",
+    "autoDetectionUnavailable": "Авто-аныктоо жеткиликсиз - тилке тартиби боюнча болжолдоо колдонулууда",
+    "emptyAiResponse": "AI'дан бош жооп",
+    "failedToParseResponse": "AI жообун иштетүү мүмкүн болгон жок",
+    "fileMustBePdf": "Файл PDF болушу керек",
+    "fileTooLarge": "Файл өтө чоң. Максимум {maxSize}.",
+    "internalServerError": "Ички сервер катасы",
+    "lowConfidence": "Ишеним аз - салыштырууларды текшериңиз",
+    "missingHeaders": "Жетишпеген же жараксыз баш маалыматтар",
+    "missingSampleData": "Жетишпеген же жараксыз үлгү маалыматтар",
+    "noAiResponse": "AI моделинен жооп жок",
+    "noApiKey": "AI API ачкычы конфигурацияланган эмес. AI экстракциясы активдүү жазылууну талап кылат.",
+    "noFileProvided": "Файл берилген жок",
+    "rateLimitExceeded": "Чектөө ашып кетти. Кийинчерээк кайра аракет кылыңыз.",
+    "responseValidationIssues": "Жооп структурасын текшерүүдө маселелер бар",
+    "unknownError": "Белгисиз ката пайда болду",
+    "verifyMappings": "Импорттоо алдында бардык салыштырууларды текшериңиз"
   },
   "aria": {
     "accessibilitySettings": "Əlçatanlıq parametrləri",
@@ -364,7 +364,7 @@
     "syncStatus": "Sinxronizasiya statusu: {status}",
     "toggleSeniorsMode": "Yaşlılar rejimini keçir",
     "typeQuestion": "Sualınızı yazın",
-    "unreadNotifications": "{count, plural, =1 {1 unread notification} other {# unread notifications}}",
+    "unreadNotifications": "{count, plural, =1 {1 окулбаган билдирме} other {# окулбаган билдирме}}",
     "welcomeBudgetApp": "Budget App-a xoş gəlmisiniz"
   },
   "auth": {
@@ -468,24 +468,24 @@
   },
   "bottomSheet": {
     "close": "Bağla",
-    "dragToClose": "Drag down to close"
+    "dragToClose": "Жабуу үчүн ылдый сүйрөңүз"
   },
   "breadcrumb": {
-    "budgetAnalyzer": "Budget Analyzer",
+    "budgetAnalyzer": "Бюджет анализатору",
     "debtPayoffCalculator": "Borc Geri Ödəmə Kalkulyatoru",
     "details": "Təfərrüatlar",
     "edit": "Redaktə et",
-    "emergencyFund": "Emergency Fund",
+    "emergencyFund": "Шашылыш фонд",
     "futurePlans": "Gələcək Planlar",
     "home": "Ana səhifə",
-    "merchantRules": "Merchant Rules",
+    "merchantRules": "Соодагер эрежелери",
     "more": "Daha çox",
     "netWorth": "Xalis Dəyər",
     "new": "Yeni",
     "ocr": "OCR",
-    "retirementPlanning": "Retirement Planning",
-    "savingsGoal": "Savings Goal",
-    "subscriptionCost": "Subscription Cost"
+    "retirementPlanning": "Пенсияга пландоо",
+    "savingsGoal": "Аманат максаты",
+    "subscriptionCost": "Жазылуу баасы"
   },
   "budget": {
     "accounts": {
@@ -503,8 +503,8 @@
       "addAccount": "Hesab əlavə et",
       "addFirstAccount": "İlk hesabınızı əlavə edin",
       "allTransactionsCleared": "Bütün əməliyyatlar təmizləndi. İndi hesab çıxarışlarınızı yenidən idxal edə bilərsiniz.",
-      "assignCount": "Assign {count, plural, one {# Transaction} other {# Transactions}}",
-      "assignModalDescription": "{count, plural, one {# transaction needs} other {# transactions need}} to be assigned to an account.",
+      "assignCount": "{count, plural, one {# Транзакцияны} other {# Транзакцияны}} дайындоо",
+      "assignModalDescription": "{count, plural, one {# транзакция аккаунтка} other {# транзакция аккаунтка}} дайындалышы керек.",
       "assignTransactions": "Əməliyyatları təyin et",
       "assignTransactionsNow": "Əməliyyatları indi təyin et",
       "assignedTransactions": "{count} əməliyyat {name} hesabına təyin edildi",
@@ -557,7 +557,7 @@
       "unassignedClickToAssign": "Onları avtomatik hesablara təyin etmək üçün aşağıya klikləyin.",
       "unassignedCreateFirst": "Əvvəlcə hesab yaradın, sonra avtomatik təyin olunacaqlar.",
       "unassignedDescription": "Bu əməliyyatlar hesablar qurulmadan əvvəl idxal olunub.",
-      "unassignedTitle": "{count, plural, one {# transaction needs} other {# transactions need}} account assignment",
+      "unassignedTitle": "{count, plural, one {# транзакция аккаунт} other {# транзакция аккаунт}} дайындоо керек",
       "update": "Yenilə"
     },
     "budgets": {
@@ -611,7 +611,7 @@
       "totalExpenses": "Ümumi xərclər",
       "totalSpent": "Ümumi Xərcləndi",
       "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
-      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transaction will become unbudgeted} other {# transactions will become unbudgeted}}",
+      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# транзакция бюджетсиз калат} other {# транзакция бюджетсиз калат}}",
       "youWillLose": "İtirəcəksiniz:"
     },
     "events": {
@@ -824,7 +824,7 @@
     "applyTo": "{count}-ə tətbiq et",
     "categorize": "Kateqoriyalaşdır",
     "clearSelection": "Seçimi təmizlə",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "confirmDelete": "{count, plural, =1 {1 транзакцияны} other {# транзакцияны}} өчүрүү?",
     "delete": "Sil",
     "deleteWarning": "Bu əməl geri alına bilməz.",
     "export": "İxrac et",
@@ -1237,54 +1237,54 @@
     "openCalculator": "Калькуляторду ачуу"
   },
   "calendarExport": {
-    "addToCalendar": "Add to Calendar",
+    "addToCalendar": "Календарга кошуу",
     "dialog": {
       "cancel": "Ləğv et",
-      "description": "Add bill reminders to your calendar",
-      "deselectAll": "Deselect all",
-      "export": "Export {count} subscription(s)",
-      "exportMethod": "Export Method",
+      "description": "Эсеп эскертүүлөрүн календарыңызга кошуңуз",
+      "deselectAll": "Баарын тандоодон чыгаруу",
+      "export": "{count} жазылууну экспорттоо",
+      "exportMethod": "Экспорт ыкмасы",
       "exporting": "İxrac edilir...",
       "selectAll": "Hamısını seç",
-      "selectSubscriptions": "Select Subscriptions",
-      "title": "Export to Calendar"
+      "selectSubscriptions": "Жазылууларды тандаңыз",
+      "title": "Календарга экспорттоо"
     },
-    "downloadAllICS": "Download All as ICS",
-    "downloadICS": "Download ICS File",
-    "exportToCalendar": "Export to Calendar",
+    "downloadAllICS": "Баарын ICS катары жүктөп алуу",
+    "downloadICS": "ICS файлын жүктөп алуу",
+    "exportToCalendar": "Календарга экспорттоо",
     "googleCalendar": "Google Calendar",
     "outlookCalendar": "Outlook Calendar",
-    "selectSubscriptions": "Select Subscriptions..."
+    "selectSubscriptions": "Жазылууларды тандаңыз..."
   },
   "categories": {
     "cancel": "Ləğv et",
-    "cannotDeleteDefault": "Cannot delete default categories",
-    "categoryNameLabel": "Category Name *",
-    "categoryNamePlaceholder": "e.g., Home Expenses",
+    "cannotDeleteDefault": "Демейки категорияларды өчүрүү мүмкүн эмес",
+    "categoryNameLabel": "Категориянын аты *",
+    "categoryNamePlaceholder": "мис., Үй чыгымдары",
     "colorLabel": "Rəng",
-    "createCategory": "Create Category",
-    "createFirstCategory": "Create Your First Category",
+    "createCategory": "Категория түзүү",
+    "createFirstCategory": "Биринчи категорияңызды түзүңүз",
     "default": "Standart",
     "delete": "Sil",
-    "deleteCategoryAria": "Delete category",
-    "deleteConfirm": "Delete \"{name}\"? This cannot be undone.",
-    "deleteFailed": "Failed to delete category",
+    "deleteCategoryAria": "Категорияны өчүрүү",
+    "deleteConfirm": "\"{name}\" өчүрүлсүнбү? Бул кайтарылгыс.",
+    "deleteFailed": "Категорияны өчүрүү мүмкүн болгон жок",
     "edit": "Redaktə",
-    "editCategory": "Edit Category",
-    "editCategoryAria": "Edit category",
+    "editCategory": "Категорияны түзөтүү",
+    "editCategoryAria": "Категорияны түзөтүү",
     "expense": "Xərc",
     "income": "Gəlir",
-    "loading": "Loading categories...",
+    "loading": "Категориялар жүктөлүүдө...",
     "nameRequired": "Kateqoriya adı tələb olunur",
-    "newCategory": "New Category",
+    "newCategory": "Жаңы категория",
     "noCategories": "Kateqoriya tapılmadı",
     "save": "Saxla",
-    "saveFailed": "Failed to save category",
-    "subcategoriesLabel": "Subcategories (comma-separated)",
-    "subcategoriesPlaceholder": "e.g., Rent, Maintenance, Insurance",
-    "subtitle": "Manage your budget categories and subcategories",
+    "saveFailed": "Категорияны сактоо мүмкүн болгон жок",
+    "subcategoriesLabel": "Подкатегориялар (үтүр менен бөлүнгөн)",
+    "subcategoriesPlaceholder": "мис., Ижара, Тейлөө, Камсыздандыруу",
+    "subtitle": "Бюджет категорияларыңызды жана подкатегорияларыңызды башкарыңыз",
     "tipLabel": "İpucu:",
-    "tipText": "Default categories cannot be edited or deleted. Create custom categories for your specific needs.",
+    "tipText": "Демейки категорияларды түзөтүү же өчүрүү мүмкүн эмес. Өзгөчө муктаждыктарыңыз үчүн ыңгайлаштырылган категорияларды түзүңүз.",
     "title": "Kateqoriyalar",
     "typeLabel": "Növ"
   },
@@ -1367,7 +1367,7 @@
       "title": "Məxfilik Nəzarətləri"
     },
     "gdpr": {
-      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+      "notice": "<strong>Сиздин укуктарыңыз:</strong> Чатботту иштетүү менен сиз финансылык маалыматтарыңыздын OpenAI API аркылуу иштетилишине макулдук бересиз. Макулдугуңузду каалаган убакта Жөндөөлөр → Купуялуулук бөлүмүнөн чатботту өчүрүү аркылуу кайтара аласыз. Маалыматтарыңыз Купуялуулук саясатыбызга жана GDPR талаптарына ылайык иштелет. Сүйлөшүү тарыхыңызга жетүү, өчүрүү жана экспорттоо укугуңуз бар."
     },
     "privacy": {
       "dataSent": "Suallarınıza cavab vermək üçün maliyyə məlumatları API-yə göndərilir",
@@ -1381,32 +1381,32 @@
   },
   "columnMapper": {
     "amount": "Məbləğ",
-    "amountColumn": "Amount Column",
-    "applyMapping": "Apply Mapping",
-    "bankStatementFormat": "Bank Statement Format",
+    "amountColumn": "Сумма тилкеси",
+    "applyMapping": "Дал келтирүүнү колдонуу",
+    "bankStatementFormat": "Банк выписка форматы",
     "cancel": "Ləğv et",
-    "columnNumber": "Column {number}",
-    "creditColumn": "Credit Column",
+    "columnNumber": "Тилке {number}",
+    "creditColumn": "Кредит тилкеси",
     "date": "Tarix",
-    "dateColumn": "Date Column",
-    "debitColumn": "Debit Column",
-    "debitCreditColumns": "Debit/Credit Columns (e.g., Home Trust)",
+    "dateColumn": "Дата тилкеси",
+    "debitColumn": "Дебет тилкеси",
+    "debitCreditColumns": "Дебет/Кредит тилкелери (мис., Home Trust)",
     "delete": "Sil",
-    "description": "Auto-detection confidence is low. Please manually map columns.",
-    "descriptionColumn": "Description Column",
+    "description": "Автоматтык аныктоо ишеними аз. Тилкелерди кол менен дал келтириңиз.",
+    "descriptionColumn": "Сүрөттөмө тилкеси",
     "descriptionHeader": "Təsvir",
     "dismiss": "Rədd et",
-    "lastUsed": "Last used: {date}",
-    "mapColumnsToFields": "Map Columns to Fields",
-    "pdfPreview": "PDF Data Preview (First 5 Rows)",
-    "savedMappingFound": "Saved mapping found for {bankName}",
-    "selectAllRequired": "Please select all required columns",
-    "selectColumn": "Select column...",
-    "singleAmountColumn": "Single Amount Column (e.g., BMO)",
+    "lastUsed": "Акыркы колдонулган: {date}",
+    "mapColumnsToFields": "Тилкелерди талааларга дал келтирүү",
+    "pdfPreview": "PDF маалыматтарын алдын ала көрүү (биринчи 5 сап)",
+    "savedMappingFound": "{bankName} үчүн сакталган дал келтирүү табылды",
+    "selectAllRequired": "Бардык талап кылынган тилкелерди тандаңыз",
+    "selectColumn": "Тилке тандаңыз...",
+    "singleAmountColumn": "Бирдиктүү сумма тилкеси (мис., BMO)",
     "status": "Status",
-    "title": "Manual Column Mapping",
-    "transactionPreview": "Transaction Preview (First 5)",
-    "useSavedMapping": "Use Saved Mapping"
+    "title": "Кол менен тилке дал келтирүү",
+    "transactionPreview": "Транзакцияны алдын ала көрүү (биринчи 5)",
+    "useSavedMapping": "Сакталган дал келтирүүнү колдонуу"
   },
   "combobox": {
     "noResults": "Nəticə tapılmadı.",
@@ -1453,14 +1453,14 @@
     "success": "Ийгилик!"
   },
   "confidenceMeter": {
-    "autoCategorized": "Auto-categorized:",
+    "autoCategorized": "Автоматтык категорияланган:",
     "confidence": "{percent}% etibarlılıq",
-    "confident": "Confident",
-    "confirmCategorization": "Confirm this categorization to improve accuracy",
-    "learnFromThis": "Learn from this",
-    "lowConfidence": "Low Confidence",
+    "confident": "Ишенимдүү",
+    "confirmCategorization": "Тактыкты жакшыртуу үчүн бул категориялоону ырастаңыз",
+    "learnFromThis": "Мындан үйрөнүү",
+    "lowConfidence": "Аз ишеним",
     "moderate": "Orta",
-    "veryConfident": "Very Confident"
+    "veryConfident": "Абдан ишенимдүү"
   },
   "dashboard": {
     "widgets": {
@@ -1629,18 +1629,18 @@
     "viewAllLoans": "Bütün Kreditlərə Bax"
   },
   "debtOverview": {
-    "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
-    "activeLoansTitle": "Active Loans",
-    "addLoan": "Add Loan",
-    "avgRate": "Avg Rate",
+    "activeLoans": "{count, plural, one {# активдүү насыя} other {# активдүү насыя}}",
+    "activeLoansTitle": "Активдүү насыялар",
+    "addLoan": "Насыя кошуу",
+    "avgRate": "Орточо ставка",
     "balance": "Qalıq",
     "monthlyPayment": "Aylıq ödəniş",
-    "paidOff": "{percent}% paid off",
+    "paidOff": "{percent}% төлөндү",
     "title": "Borc icmalı",
     "totalDebt": "Ümumi borc",
-    "upcomingPayments": "Upcoming Payments",
+    "upcomingPayments": "Алдыдагы төлөмдөр",
     "viewAll": "Hamısını gör",
-    "viewMore": "{count, plural, one {View # more loan} other {View # more loans}}"
+    "viewMore": "{count, plural, one {Дагы # насыяны көрүү} other {Дагы # насыяны көрүү}}"
   },
   "debtPayoff": {
     "addDebt": "Borc əlavə et",
@@ -1798,9 +1798,9 @@
     "dragToReorder": "Vidceti yenidən sıralamaq üçün sürükləyin"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
-    "yearsAndMonths": "{years}y {months}m"
+    "months": "{count, plural, =1 {1 ай} other {# ай}}",
+    "years": "{count, plural, =1 {1 жыл} other {# жыл}}",
+    "yearsAndMonths": "{years}ж {months}ай"
   },
   "emptyStates": {
     "budgets": {
@@ -1861,7 +1861,7 @@
       "viewGuide": "Problemin həlli bələdçisinə bax"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "canRecover": "Жакшы жаңылык! Биз бул катадан калыбына келтирүүнүн {count} {count, plural, =1 {жолун} other {жолун}} таптык.",
       "cannotRecover": "Bərpa mümkün deyil. Faylı bankınızdan yenidən ixrac etməli və ya fərqli format sınamalısınız.",
       "optionsTitle": "Bərpa Seçimləri"
     },
@@ -2059,43 +2059,43 @@
   },
   "fridayReview": {
     "back": "Geri",
-    "backToDashboard": "Back to Dashboard",
-    "closeReview": "Close review",
-    "continue": "Continue",
+    "backToDashboard": "Башкы панелге кайтуу",
+    "closeReview": "Серепти жабуу",
+    "continue": "Улантуу",
     "done": "Hazır",
-    "goToStep": "Go to {step}",
-    "loading": "Loading your weekly review...",
-    "placeholderContent": "Step content will be implemented in subsequent tasks (F-021 through F-025).",
+    "goToStep": "{step} кадамга өтүү",
+    "loading": "Жумалык сереп жүктөлүүдө...",
+    "placeholderContent": "Кадам мазмуну кийинки тапшырмаларда (F-021 — F-025) ишке ашырылат.",
     "stepCounter": "{total}-dən {current}-ci addım",
-    "stepLabel": "Step {current}: {title}",
-    "stepProgress": "Step {current} of {total}: {title}",
+    "stepLabel": "Кадам {current}: {title}",
+    "stepProgress": "Кадам {current} / {total}: {title}",
     "steps": {
       "budgets": {
-        "subtitle": "How are your budgets doing?",
-        "title": "Budget Check"
+        "subtitle": "Бюджетиңиз кандай?",
+        "title": "Бюджет текшерүүсү"
       },
       "celebration": {
-        "subtitle": "See you next Friday!",
-        "title": "Great job this week!"
+        "subtitle": "Кийинки жумада көрүшөбүз!",
+        "title": "Бул жумада жакшы иш кылдыңыз!"
       },
       "goals": {
-        "subtitle": "You're making progress on your goals!",
-        "title": "Goal Progress"
+        "subtitle": "Максаттарыңызда илгерилөө бар!",
+        "title": "Максат жүрүшү"
       },
       "spending": {
-        "subtitle": "Here's where your money went this week.",
-        "title": "Spending Recap"
+        "subtitle": "Бул жумада акчаңыз кайда жумшалды.",
+        "title": "Чыгым серебү"
       },
       "upcoming": {
-        "subtitle": "Heads up for next week.",
+        "subtitle": "Кийинки жумага даярдануу.",
         "title": "Gələcək Ödənişlər"
       },
       "welcome": {
-        "subtitle": "Let's check in on your week.",
-        "title": "Happy Friday!"
+        "subtitle": "Жумаңыздын жыйынтыгын чыгаралы.",
+        "title": "Жума куттуу болсун!"
       }
     },
-    "title": "Friday Review"
+    "title": "Жума серебү"
   },
   "healthScore": {
     "ariaLabel": "Maliyyə Sağlamlığı Balı: 100-dən {score}. {interpretation}",
@@ -2104,7 +2104,7 @@
       "line2": "Maliyyə Sağlamlığı Balı"
     },
     "grade": "Qiymət: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
+    "missingFactors": "{count, plural, =1 {1 фактор жетишпейт} other {# фактор жетишпейт}}",
     "title": "Maliyyə Sağlamlığı",
     "history": {
       "title": "Упай тарыхы",
@@ -2119,38 +2119,38 @@
     }
   },
   "holdingModal": {
-    "addHolding": "Add Holding",
-    "canadianStockHint": "Use .TO for Canadian stocks (e.g., TD.TO, VGRO.TO)",
+    "addHolding": "Актив кошуу",
+    "canadianStockHint": "Канада акциялары үчүн .TO колдонуңуз (мис., TD.TO, VGRO.TO)",
     "cancel": "Ləğv et",
-    "editHolding": "Edit Holding",
-    "enterSymbol": "Please enter a stock symbol",
-    "failedToSave": "Failed to save holding",
+    "editHolding": "Активди түзөтүү",
+    "enterSymbol": "Акция символун киргизиңиз",
+    "failedToSave": "Активди сактоо мүмкүн болгон жок",
     "notesOptional": "Qeydlər (İsteğe bağlı)",
-    "notesPlaceholder": "e.g., Part of retirement portfolio, employee stock purchase",
-    "numberOfShares": "Number of Shares",
+    "notesPlaceholder": "мис., Пенсия портфелинин бөлүгү, кызматкерлердин акцияларын сатып алуу",
+    "numberOfShares": "Акциялардын саны",
     "pricePlaceholder": "50.00",
-    "purchaseDate": "Purchase Date",
-    "purchasePricePerShare": "Purchase Price per Share",
+    "purchaseDate": "Сатып алуу күнү",
+    "purchasePricePerShare": "Бир акция баасы",
     "quantityPlaceholder": "100",
     "saving": "Saxlanır...",
-    "stockSymbol": "Stock Symbol",
-    "symbolPlaceholder": "e.g., AAPL, VGRO.TO, TD.TO",
-    "totalInvestment": "Total Investment",
-    "updateHolding": "Update Holding",
-    "validPurchasePrice": "Please enter a valid purchase price",
-    "validQuantity": "Please enter a valid quantity"
+    "stockSymbol": "Акция символу",
+    "symbolPlaceholder": "мис., AAPL, VGRO.TO, TD.TO",
+    "totalInvestment": "Жалпы инвестиция",
+    "updateHolding": "Активди жаңыртуу",
+    "validPurchasePrice": "Жарактуу сатып алуу баасын киргизиңиз",
+    "validQuantity": "Жарактуу санды киргизиңиз"
   },
   "iconPicker": {
-    "clearSearch": "Clear Search",
+    "clearSearch": "Издөөнү тазалоо",
     "close": "Bağla",
-    "currentIcon": "Current Icon",
-    "foundCount": "Found {count} icon(s)",
-    "iconsAvailable": "{count} icons available",
-    "noIconsFound": "No icons found",
-    "noIconsFoundHint": "Try a different search term or browse all icons",
-    "searchPlaceholder": "Search icons by name or category...",
-    "subtitle": "Select an icon to represent your category",
-    "title": "Choose an Icon"
+    "currentIcon": "Учурдагы сүрөтчө",
+    "foundCount": "{count} сүрөтчө табылды",
+    "iconsAvailable": "{count} сүрөтчө жеткиликтүү",
+    "noIconsFound": "Сүрөтчө табылган жок",
+    "noIconsFoundHint": "Башка издөө сөзүн колдонуңуз же бардык сүрөтчөлөрдү карап чыгыңыз",
+    "searchPlaceholder": "Сүрөтчөлөрдү аты же категориясы боюнча издөө...",
+    "subtitle": "Категорияңызды билдирүүчү сүрөтчө тандаңыз",
+    "title": "Сүрөтчө тандоо"
   },
   "import": {
     "added": "əlavə edildi",
@@ -2347,7 +2347,7 @@
       "description": "Bu, hesabı və bütün əlaqəli sahəlikləri həmişəlik siləcək.",
       "impactAccount": "Hesab: {name}",
       "impactHistory": "Bütün əməliyyat tarixçəsi",
-      "impactHoldings": "{count, plural, one {# holding} other {# holdings}}",
+      "impactHoldings": "{count, plural, one {# активдүү} other {# активдүү}}",
       "impactTitle": "İtirəcəksiniz:",
       "impactValue": "Ümumi dəyər: {value}",
       "title": "İnvestisiya hesabını sil"
@@ -2374,7 +2374,7 @@
     },
     "gainLoss": "Mənfəət/zərər",
     "hideDetails": "Təfərrüatları gizlə",
-    "holdingsCount": "{count, plural, one {# holding} other {# holdings}}",
+    "holdingsCount": "{count, plural, one {# активдүү} other {# активдүү}}",
     "loading": "İnvestisiyalar yüklənir...",
     "marketDataNotice": "Bazar məlumatı bildirişi",
     "noHoldings": "Bu hesabda hələ sahəlik yoxdur.",
@@ -2437,7 +2437,7 @@
     "pairedDevices": {
       "addDevice": "Cihaz Əlavə Et",
       "addFirstDevice": "İlk Cihazınızı Əlavə Edin",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "deviceCount": "{count, plural, =1 {1 түзмөк жупташтырылган} other {# түзмөк жупташтырылган}}",
       "emptyDescription": "Büdcə məlumatlarınızı sinxronlaşdırmağa başlamaq üçün bir cihaz cütləşdirin",
       "emptyTitle": "Cihaz cütləşdirilməyib",
       "noDevices": "Hələ cihaz cütləşdirilməyib",
@@ -2451,11 +2451,11 @@
     },
     "syncAll": "Hamısını Sinxronlaşdır",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "daysAgo": "{count, plural, =1 {1 күн мурун} other {# күн мурун}}",
+      "hoursAgo": "{count, plural, =1 {1 саат мурун} other {# саат мурун}}",
       "justNow": "Indicə",
       "lastSync": "Son sinxronizasiya: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "minutesAgo": "{count, plural, =1 {1 мүнөт мурун} other {# мүнөт мурун}}",
       "neverSynced": "Heç vaxt sinxronlaşdırılmayıb"
     },
     "title": "LAN Sinxronizasiya"
@@ -2816,29 +2816,29 @@
     }
   },
   "linkToLoan": {
-    "bestMatch": "Best Match",
+    "bestMatch": "Эң жакшы дал келүү",
     "cancel": "Ləğv et",
     "extra": "Əlavə",
-    "interest": "Interest",
-    "linkError": "Failed to link transaction. Please try again.",
-    "linkPayment": "Link Payment",
-    "linking": "Linking...",
-    "lowMatch": "Low Match",
-    "monthlyPayment": "${amount}/mo",
-    "noActiveLoans": "No active loans found",
-    "paymentBreakdown": "Payment Breakdown",
-    "possibleMatch": "Possible Match",
+    "interest": "Пайыз",
+    "linkError": "Транзакцияны байланыштыруу мүмкүн болгон жок. Кайра аракет кылыңыз.",
+    "linkPayment": "Төлөмдү байланыштыруу",
+    "linking": "Байланыштырылууда...",
+    "lowMatch": "Аз дал келүү",
+    "monthlyPayment": "${amount}/ай",
+    "noActiveLoans": "Активдүү насыялар табылган жок",
+    "paymentBreakdown": "Төлөм бөлүштүрүлүшү",
+    "possibleMatch": "Мүмкүн болгон дал келүү",
     "principal": "Principal",
-    "title": "Link to Loan"
+    "title": "Насыяга байланыштыруу"
   },
   "linkedLoan": {
-    "loanPrefix": "Loan: {name}",
+    "loanPrefix": "Насыя: {name}",
     "unlink": "Ayır",
-    "unlinkConfirm": "Unlink this transaction from the loan payment?",
-    "unlinkFailed": "Failed to unlink transaction. Please try again.",
-    "unlinkFromLoan": "Unlink from loan",
-    "viewLoan": "View loan",
-    "viewLoanDetails": "View loan details"
+    "unlinkConfirm": "Бул транзакцияны насыя төлөмүнөн ажыратуу?",
+    "unlinkFailed": "Транзакцияны ажыратуу мүмкүн болгон жок. Кайра аракет кылыңыз.",
+    "unlinkFromLoan": "Насыядан ажыратуу",
+    "viewLoan": "Насыяны көрүү",
+    "viewLoanDetails": "Насыя деталдарын көрүү"
   },
   "loanForm": {
     "autoCalculated": "Avtomatik hesablanmış: {amount}",
@@ -2913,20 +2913,20 @@
     "weeklyPaymentHint": "Həftəlik ödəniş (yalnız əsas məbləğ və faiz)"
   },
   "loanPaymentSelector": {
-    "balanceAfterPayment": "Balance After Payment:",
-    "currentBalance": "Current Balance:",
-    "extraPrincipal": "Extra Principal:",
-    "interest": "Interest:",
-    "interestRate": "Interest Rate:",
-    "linkToLoanPayment": "Link to Loan Payment",
-    "loanOption": "{name} ({lender}) - {payment}/mo",
-    "nextDue": "Next Due:",
-    "noLoan": "-- No loan --",
-    "paymentBreakdown": "Payment Breakdown",
-    "paymentOverWarning": "This payment is {amount} more than the regular monthly payment. The extra will be applied to principal.",
-    "paymentUnderWarning": "This payment is {amount} less than the regular monthly payment of {monthlyPayment}.",
+    "balanceAfterPayment": "Төлөмдөн кийинки баланс:",
+    "currentBalance": "Учурдагы баланс:",
+    "extraPrincipal": "Кошумча негизги карыз:",
+    "interest": "Пайыз:",
+    "interestRate": "Пайыз ставкасы:",
+    "linkToLoanPayment": "Насыя төлөмүнө байланыштыруу",
+    "loanOption": "{name} ({lender}) - {payment}/ай",
+    "nextDue": "Кийинки төлөм:",
+    "noLoan": "-- Насыя жок --",
+    "paymentBreakdown": "Төлөм бөлүштүрүлүшү",
+    "paymentOverWarning": "Бул төлөм кадимки айлык төлөмдөн {amount} көп. Кошумча сумма негизги карызга жөнөтүлөт.",
+    "paymentUnderWarning": "Бул төлөм кадимки айлык төлөм {monthlyPayment} көрө {amount} аз.",
     "principal": "Principal:",
-    "selectLoan": "Select Loan"
+    "selectLoan": "Насыя тандоо"
   },
   "loans": {
     "acrossActiveLoans": "{count} aktiv borc üzrə",
@@ -3048,41 +3048,41 @@
     "youvePaid": "İndiyə qədər {amount} ödədiniz"
   },
   "localeSettings": {
-    "currency": "Currency",
-    "formatPreview": "Format Preview",
-    "language": "Language",
+    "currency": "Валюта",
+    "formatPreview": "Формат алдын ала көрүү",
+    "language": "Тил",
     "monday": "Bazar ertəsi",
-    "resetToDefaults": "Reset to Browser Defaults",
+    "resetToDefaults": "Браузердин демейки маанилерине кайтаруу",
     "saveChanges": "Dəyişiklikləri saxla",
-    "subtitle": "Configure language, region, currency, and formatting preferences",
+    "subtitle": "Тил, аймак, валюта жана форматтоо параметрлерин конфигурациялаңыз",
     "sunday": "Bazar",
-    "title": "Locale & Formatting",
-    "unsavedChanges": "You have unsaved changes",
-    "weekStartsOn": "Week Starts On"
+    "title": "Локализация жана форматтоо",
+    "unsavedChanges": "Сакталбаган өзгөртүүлөр бар",
+    "weekStartsOn": "Жума башталышы"
   },
   "manualPairing": {
-    "codeHint": "6-character code shown on the host device",
-    "codeInvalid": "Pairing code must be 6 alphanumeric characters",
-    "codeRequired": "Pairing code is required",
+    "codeHint": "Хост түзмөктө көрсөтүлгөн 6 белгилүү код",
+    "codeInvalid": "Жупташтыруу коду 6 алфавиттик-сандык белгиден турушу керек",
+    "codeRequired": "Жупташтыруу коду талап кылынат",
     "connect": "Qoşul",
-    "connecting": "Connecting...",
-    "description": "Enter the connection details shown on the host device",
-    "fixFormErrors": "Please fix the form errors",
-    "helpStep1": "Open Budget App on the device you want to sync with",
-    "helpStep2": "Go to Settings → LAN Sync",
-    "helpStep3": "Tap \"Allow Connections\"",
-    "helpStep4": "The IP address, port, and pairing code will be displayed below the QR code",
-    "helpTitle": "Finding Connection Details",
-    "hideHelp": "Hide Help",
-    "ipAddress": "IP Address",
-    "ipInvalid": "Invalid IP address format (e.g., 192.168.1.100)",
-    "ipRequired": "IP address is required",
-    "optionalDefault": "optional, default: {port}",
-    "pairingCode": "Pairing Code",
+    "connecting": "Байланышууда...",
+    "description": "Хост түзмөктө көрсөтүлгөн байланыш маалыматтарын киргизиңиз",
+    "fixFormErrors": "Форма каталарын оңдоңуз",
+    "helpStep1": "Синхрондоо керек болгон түзмөктө Budget App ачыңыз",
+    "helpStep2": "Жөндөөлөр → LAN синхрондоо бөлүмүнө өтүңүз",
+    "helpStep3": "\"Байланыштарга уруксат берүү\" баскычын басыңыз",
+    "helpStep4": "IP дареги, порт жана жупташтыруу коду QR коддун астында көрсөтүлөт",
+    "helpTitle": "Байланыш маалыматтарын табуу",
+    "hideHelp": "Жардамды жашыруу",
+    "ipAddress": "IP дареги",
+    "ipInvalid": "Жараксыз IP дарек форматы (мис., 192.168.1.100)",
+    "ipRequired": "IP дареги талап кылынат",
+    "optionalDefault": "кошумча, демейки: {port}",
+    "pairingCode": "Жупташтыруу коду",
     "port": "Port",
-    "portInvalid": "Port must be between 1 and 65535",
-    "title": "Manual Entry",
-    "whereToFind": "Where do I find these?"
+    "portInvalid": "Порт 1 менен 65535 ортосунда болушу керек",
+    "title": "Кол менен киргизүү",
+    "whereToFind": "Буларды кайдан табам?"
   },
   "mobileNav": {
     "accounts": "Эсептер",
@@ -3184,13 +3184,13 @@
     "title": "Bildirişlər"
   },
   "notifications": {
-    "clearAll": "Clear all",
+    "clearAll": "Баарын тазалоо",
     "dismiss": "Rədd et",
-    "empty": "No notifications",
-    "emptyAll": "You're all caught up!",
-    "emptySnoozed": "No snoozed notifications",
-    "emptyUnread": "No unread notifications",
-    "markAllRead": "Mark all read",
+    "empty": "Билдирмелер жок",
+    "emptyAll": "Баары даяр!",
+    "emptySnoozed": "Кийинкиге калтырылган билдирмелер жок",
+    "emptyUnread": "Окулбаган билдирмелер жок",
+    "markAllRead": "Баарын окулду деп белгилөө",
     "snooze": "Təxirə sal",
     "snoozeOptions": {
       "1day": "1 gün",
@@ -3199,7 +3199,7 @@
       "3days": "3 gün",
       "3hours": "3 saat"
     },
-    "snoozedUntil": "Snoozed for {time}",
+    "snoozedUntil": "{time} га кийинкиге калтырылды",
     "tabs": {
       "all": "Hamısı",
       "snoozed": "Təxirə salınmış",
@@ -3207,9 +3207,9 @@
     },
     "title": "Notifications",
     "types": {
-      "bill_reminder": "Bill Reminder",
-      "budget_alert": "Budget Alert",
-      "goal_milestone": "Goal Milestone",
+      "bill_reminder": "Эсеп эскертүүсү",
+      "budget_alert": "Бюджет эскертүүсү",
+      "goal_milestone": "Максат этабы",
       "system": "Sistem"
     }
   },
@@ -3271,16 +3271,16 @@
     "viewRawOcrText": "Xam OCR mətnini bax"
   },
   "offline": {
-    "backOnline": "You're back online! Click refresh to reload the page.",
-    "connectionRestored": "Connection restored",
-    "goToDashboard": "Go to Dashboard",
-    "lostConnection": "It looks like you've lost your internet connection. The page you're trying to reach isn't available offline yet.",
-    "noConnection": "No internet connection",
-    "offlineFeatures": "Offline Features",
-    "offlineFeaturesDescription": "Once you visit a page while online, it will be available offline. All your data is stored locally on your device.",
-    "reloadPage": "Reload Page",
-    "title": "You're Offline",
-    "tryAgain": "Try Again"
+    "backOnline": "Сиз кайра онлайнсыз! Баракты кайра жүктөө үчүн жаңыртуу баскычын басыңыз.",
+    "connectionRestored": "Байланыш калыбына келтирилди",
+    "goToDashboard": "Башкы панелге өтүү",
+    "lostConnection": "Интернет байланышыңыз үзүлгөн окшойт. Сиз барууга аракет кылган барак азырынча оффлайнда жеткиликтүү эмес.",
+    "noConnection": "Интернет байланышы жок",
+    "offlineFeatures": "Оффлайн функциялар",
+    "offlineFeaturesDescription": "Баракты онлайнда зыярат кылгандан кийин, ал оффлайнда жеткиликтүү болот. Бардык маалыматтарыңыз түзмөгүңүздө жергиликтүү сакталат.",
+    "reloadPage": "Баракты кайра жүктөө",
+    "title": "Сиз оффлайнсыз",
+    "tryAgain": "Кайра аракет кылуу"
   },
   "onboarding": {
     "dontShowAgain": "Бул турду кайра көрсөтпө",
@@ -3329,25 +3329,25 @@
     "stepCounter": "{total}-dən {current}-ci addım",
     "steps": {
       "complete": {
-        "content": "Your profile is ready. Let's go to your dashboard.",
-        "description": "Ready to start budgeting?",
-        "title": "You're All Set!"
+        "content": "Профилиңиз даяр. Башкы панелге өтөлү.",
+        "description": "Бюджет түзүүгө даярсызбы?",
+        "title": "Баары даяр!"
       },
       "currency": {
-        "description": "Select your primary currency.",
-        "note": "You can add accounts in other currencies later.",
-        "title": "Currency & Region"
+        "description": "Негизги валютаңызды тандаңыз.",
+        "note": "Кийинчерээк башка валютада каттоолорду кошо аласыз.",
+        "title": "Валюта жана аймак"
       },
       "profile": {
-        "description": "What should we call you?",
-        "nameLabel": "Your Name",
-        "namePlaceholder": "e.g. Alex",
-        "privacyNote": "This name will be used for your local profile. Your data stays on your device.",
-        "title": "Create Your Profile"
+        "description": "Сизди кантип атайлы?",
+        "nameLabel": "Атыңыз",
+        "namePlaceholder": "мис. Алмаз",
+        "privacyNote": "Бул ат жергиликтүү профилиңиз үчүн колдонулат. Маалыматтарыңыз түзмөгүңүздө калат.",
+        "title": "Профилиңизди түзүңүз"
       },
       "welcome": {
-        "content": "We'll help you set up your profile, choose your currency, and get ready to track your spending.",
-        "description": "Let's get your finances organized in minutes.",
+        "content": "Профилиңизди орнотууга, валютаңызды тандоого жана чыгымдарыңызды көзөмөлдөөгө жардам беребиз.",
+        "description": "Финансыңызды бир нече мүнөттө уюштуралы.",
         "title": "Büdcə Tətbiqinə Xoş Gəldiniz"
       }
     },
@@ -3415,28 +3415,28 @@
     }
   },
   "pairingDialog": {
-    "anErrorOccurred": "An error occurred",
-    "connecting": "Connecting...",
-    "connectingToDevice": "Connecting to device...",
-    "description": "Connect to another device on your local network",
-    "deviceAdded": "Device added. Connect to complete pairing.",
-    "failedToInitialize": "Failed to initialize device. Please try again.",
+    "anErrorOccurred": "Ката пайда болду",
+    "connecting": "Байланышууда...",
+    "connectingToDevice": "Түзмөккө байланышууда...",
+    "description": "Жергиликтүү тармагыңыздагы башка түзмөккө байланышыңыз",
+    "deviceAdded": "Түзмөк кошулду. Жупташтырууну аяктоо үчүн байланышыңыз.",
+    "failedToInitialize": "Түзмөктү инициализациялоо мүмкүн болгон жок. Кайра аракет кылыңыз.",
     "host": "Ev sahibi",
-    "ipAddressDescription": "Enter your local IP address to allow other devices to connect.",
-    "ipAddressRequired": "IP Address Required",
+    "ipAddressDescription": "Башка түзмөктөрдүн байланышына уруксат берүү үчүн жергиликтүү IP дарегиңизди киргизиңиз.",
+    "ipAddressRequired": "IP дареги талап кылынат",
     "ipPlaceholder": "192.168.1.100",
     "manual": "Əl ilə",
-    "pairingFailed": "Pairing Failed",
-    "pairingSuccessful": "Pairing successful!",
-    "pendingConnection": "Pending Connection",
-    "readyDescription": "Other devices can now scan this QR code or enter the connection details manually.",
-    "readyForConnections": "Ready for Connections",
-    "readyToConnectTo": "Ready to connect to {deviceName}",
+    "pairingFailed": "Жупташтыруу ишке ашкан жок",
+    "pairingSuccessful": "Жупташтыруу ийгиликтүү!",
+    "pendingConnection": "Күтүүдөгү байланыш",
+    "readyDescription": "Башка түзмөктөр азыр бул QR кодду сканерлей алат же байланыш маалыматтарын кол менен киргизе алат.",
+    "readyForConnections": "Байланыштарга даяр",
+    "readyToConnectTo": "{deviceName} менен байланышууга даяр",
     "scan": "Skan et",
     "set": "Qur",
-    "title": "LAN Sync Pairing",
-    "tryAgain": "Try Again",
-    "verifyingConnection": "Verifying connection..."
+    "title": "LAN синхрондоо жупташтыруу",
+    "tryAgain": "Кайра аракет кылуу",
+    "verifyingConnection": "Байланыш текшерилүүдө..."
   },
   "paymentHistoryPanel": {
     "actions": "Əməllər",
@@ -3458,7 +3458,7 @@
     "extra": "Əlavə",
     "extraPrincipalLabel": "Əlavə əsas məbləğ (isteğe bağlı)",
     "highConfidence": "Yüksək əminlik",
-    "interest": "Interest",
+    "interest": "Пайыз",
     "linkPayment": "Ödənişi bağla",
     "linkTransactionError": "Əməliyyat bağlana bilmədi. Yenidən cəhd edin.",
     "linked": "Bağlı",
@@ -3476,7 +3476,7 @@
     "savePayment": "Ödənişi saxla",
     "status": "Status",
     "suggestedMatches": "Təklif olunan əməliyyat uyğunluqları",
-    "suggestedMatchesDescription": "We found {count, plural, one {# transaction} other {# transactions}} that might be loan payments",
+    "suggestedMatchesDescription": "Насыя төлөмдөрү болушу мүмкүн болгон {count, plural, one {# транзакция} other {# транзакция}} табылды",
     "title": "Ödəniş tarixçəsi",
     "uncategorized": "Kateqoriyasız",
     "unlinkConfirm": "Bu ödənişi əməliyyatdan ayırmaq?",
@@ -3490,12 +3490,12 @@
     "changePin": "PIN dəyişdir",
     "confirmNewPinLabel": "Yeni PIN-i təsdiqləyin",
     "confirmNewPinPlaceholder": "Yeni PIN-i təsdiqləyin",
-    "continue": "Continue",
+    "continue": "Улантуу",
     "currentPinLabel": "Cari PIN",
     "defaultProfileName": "Profil",
     "enterCurrentPinPlaceholder": "Cari PIN daxil edin",
     "enterNewPinPlaceholder": "Yeni PIN daxil edin",
-    "enterPinPlaceholder": "Enter PIN",
+    "enterPinPlaceholder": "PIN киргизиңиз",
     "errorIncorrectPin": "Yanlış cari PIN",
     "errorInvalidPin": "Etibarsız PIN",
     "errorPinMismatch": "PIN-lər uyğun gəlmir",
@@ -3618,7 +3618,7 @@
       "payFrequencyHelp": "Nə qədər tez-tez maaş alırsınız? Bu, maaşlarınızın nə vaxt yaradılacağını müəyyən edir.",
       "payFrequencyHelpAriaLabel": "Ödəniş tezliyi haqqında ətraflı məlumat",
       "paycheckTimeline": "Maaş zaman xətti",
-      "paychecksPlanned": "{count, plural, one {# paycheck planned} other {# paychecks planned}}",
+      "paychecksPlanned": "{count, plural, one {# айлык пландалган} other {# айлык пландалган}}",
       "percentOfIncome": "Gəlirin {percent}%-i",
       "regeneratePaychecks": "Maaşları yenidən yarat",
       "remainingToAllocate": "Bölüşdürmək üçün qalan",
@@ -3636,7 +3636,7 @@
       "scheduleSemimonthlyDesc": "1-ci və 15-ci",
       "scheduleWeekly": "Həftəlik",
       "scheduleWeeklyDesc": "Hər həftə",
-      "scheduledPaychecks": "{count, plural, one {# scheduled paycheck} other {# scheduled paychecks}}",
+      "scheduledPaychecks": "{count, plural, one {# пландалган айлык} other {# пландалган айлык}}",
       "setUpPaycheckPlan": "Maaş planı qur",
       "setUpPlan": "Plan qur",
       "subtitle": "Maaş almadan əvvəl hər manatın hara getdiyini planlayın",
@@ -3707,7 +3707,7 @@
       "tfsaBalance": "TFSA balansı",
       "title": "Pensiya kalkulyatoru",
       "toReachGoal": "Hədəfə çatmaq üçün:",
-      "workMoreYears": "Work {years, plural, one {# more year} other {# more years}}",
+      "workMoreYears": "Дагы {years, plural, one {# жыл} other {# жыл}} иштөө",
       "yearAge": "{year} (Yaş {age})",
       "yearsToRetirement": "Pensiyaya illər",
       "youWillLose": "İtirəcəksiniz:",
@@ -3750,7 +3750,7 @@
     "chatbotDescription": "Əməliyyatlarınız, büdcələriniz və xərcləmə nümunələriniz haqqında suallara cavab verə bilən AI ilə işləyən köməkçi.",
     "chatbotPrivacyNotice": "Maliyyə məlumatlarınız suallara cavab vermək üçün OpenAI-yə göndərilir. İstənilən vaxt deaktiv edə bilərsiniz.",
     "confirmDelete": "Silməni təsdiqləyin",
-    "confirmDeleteWarning": "You are about to permanently delete {count, plural, one {# data type} other {# data types}}. Click \"Confirm Delete\" to proceed.",
+    "confirmDeleteWarning": "{count, plural, one {# маалымат түрүн} other {# маалымат түрүн}} биротоло өчүрмөксүз. Улантуу үчүн \"Өчүрүүнү ырастоо\" баскычын басыңыз.",
     "conversationHistory": "Söhbət tarixçəsi",
     "conversationStorageNotice": "Söhbətlər brauzerinizdə yerli olaraq saxlanılır. İstənilən vaxt əl ilə silə bilərsiniz.",
     "dataAccessPermission": "Məlumat girişi icazəsi",
@@ -3826,25 +3826,25 @@
   },
   "profileDialog": {
     "cancel": "Ləğv et",
-    "confirmPinLabel": "Confirm PIN",
-    "confirmPinPlaceholder": "Confirm PIN",
-    "createDescription": "Add a new profile for a family member. Each profile can have its own private budgets.",
-    "createTitle": "Create Profile",
-    "defaultProfileNote": "This is the default profile and will be selected on app start.",
-    "editDescription": "Update the profile name and avatar color.",
-    "editTitle": "Edit Profile",
-    "enterPinPlaceholder": "Enter PIN",
-    "errorCreateFailed": "Failed to create profile",
-    "errorInvalidPin": "Invalid PIN",
-    "errorNameRequired": "Please enter a name for the profile",
-    "errorNameTooLong": "Name must be 30 characters or less",
-    "errorPinMismatch": "PINs do not match",
-    "errorUpdateFailed": "Failed to update profile",
+    "confirmPinLabel": "PIN ырастоо",
+    "confirmPinPlaceholder": "PIN ырастоо",
+    "createDescription": "Үй-бүлө мүчөсү үчүн жаңы профиль кошуңуз. Ар бир профилдин өзүнчө бюджеттери болушу мүмкүн.",
+    "createTitle": "Профиль түзүү",
+    "defaultProfileNote": "Бул демейки профиль жана колдонмо башталганда тандалат.",
+    "editDescription": "Профилдин атын жана аватар түсүн жаңыртыңыз.",
+    "editTitle": "Профильди түзөтүү",
+    "enterPinPlaceholder": "PIN киргизиңиз",
+    "errorCreateFailed": "Профиль түзүү мүмкүн болгон жок",
+    "errorInvalidPin": "Жараксыз PIN",
+    "errorNameRequired": "Профиль үчүн ат киргизиңиз",
+    "errorNameTooLong": "Аты 30 белгиден ашпашы керек",
+    "errorPinMismatch": "PIN дал келбейт",
+    "errorUpdateFailed": "Профильди жаңыртуу мүмкүн болгон жок",
     "nameLabel": "Ad",
-    "namePlaceholder": "Enter profile name",
-    "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
-    "pinLabel": "PIN (4-6 digits)",
-    "protectWithPin": "Protect with PIN",
+    "namePlaceholder": "Профиль атын киргизиңиз",
+    "pinHelpText": "PIN бул профилге кирүүнү коргойт. Эстей турган, бирок өтө жөнөкөй болбогон нерсени тандаңыз.",
+    "pinLabel": "PIN (4-6 цифра)",
+    "protectWithPin": "PIN менен коргоо",
     "saveChanges": "Dəyişiklikləri saxla",
     "errorDeleteFailed": "Профилди жоюу ишке ашкан жок",
     "deleteTitle": "Профилди жоюу?",
@@ -3855,8 +3855,8 @@
     "deleteButton": "Профилди жоюу"
   },
   "pullToRefresh": {
-    "pull": "Pull to refresh",
-    "release": "Release to refresh"
+    "pull": "Жаңыртуу үчүн тартыңыз",
+    "release": "Жаңыртуу үчүн коё бериңиз"
   },
   "pwaInstall": {
     "buttons": {
@@ -3879,7 +3879,7 @@
   },
   "qrScanner": {
     "allowCameraAccess": "Sorulduqda kamera girişinə icazə verin",
-    "cameraError": "Camera Error",
+    "cameraError": "Камера катасы",
     "cameraFailed": "Kameraya giriş uğursuz oldu. Yenidən cəhd edin.",
     "cameraInUse": "Kamera başqa tətbiq tərəfindən istifadə olunur. Kameranı istifadə edən digər tətbiqləri bağlayın.",
     "cameraStep1": "Brauzer ünvan çubuğundakı kilid/məlumat ikonuna klikləyin",
@@ -3898,11 +3898,11 @@
     "qrExpired": "Bu QR kodun vaxtı keçib. Ev sahibi cihazda yenisini yaradın.",
     "readyToConnect": "{deviceName} ilə bağlanmağa hazır",
     "scanDescription": "Bağlanmaq üçün ev sahibi cihazda göstərilən QR kodu skan edin",
-    "scanQrCode": "Scan QR Code",
+    "scanQrCode": "QR кодду сканерлөө",
     "scanningForQr": "QR kod axtarılır...",
     "startCamera": "Kameranı başlat",
     "startingCamera": "Kamera başlayır...",
-    "tryAgain": "Try Again"
+    "tryAgain": "Кайра аракет кылуу"
   },
   "quickCategorize": {
     "buttons": {
@@ -3911,7 +3911,7 @@
       "save": "Saxla"
     },
     "clickToSelect": "Seçmək üçün bir kateqoriyaya klikləyin",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "description": "{count, plural, =1 {бул транзакция} other {# транзакция}} үчүн категория тандаңыз",
     "general": "Ümumi",
     "noResults": "Kateqoriya tapılmadı",
     "pressEnter": "↵ Enter düyməsinə basın",
@@ -3933,23 +3933,23 @@
     "timePeriod": "Zaman Dövrü"
   },
   "quickStats": {
-    "balance": "Total Balance",
+    "balance": "Жалпы баланс",
     "expenses": "Xərclər",
     "income": "Gəlir",
-    "savingsRate": "Savings Rate",
-    "savingsRateDescription": "Percentage of income saved this month"
+    "savingsRate": "Аманат көрсөткүчү",
+    "savingsRateDescription": "Бул айда кирешенин сакталган пайызы"
   },
   "receiptThumbnail": {
     "close": "Bağla",
-    "deleteConfirm": "Delete receipt \"{filename}\"?",
+    "deleteConfirm": "\"{filename}\" чекти өчүрүү?",
     "deleteFailed": "Qəbz silinmədi",
     "deleteReceipt": "Qəbzi sil",
-    "downloadPdf": "Download PDF",
+    "downloadPdf": "PDF жүктөп алуу",
     "fileSize": "{size} KB",
     "pdfReceipt": "PDF Qəbz",
-    "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
-    "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}",
+    "receiptCount": "{count, plural, =1 {1 чек} other {# чек}}",
+    "unsupportedFileType": "Колдоого алынбаган файл түрү",
+    "uploaded": "{date} жүктөлгөн",
     "view": "Көрүү"
   },
   "receiptUpload": {
@@ -4001,51 +4001,51 @@
       "quarterly": "Rüblük",
       "weekly": "Həftəlik"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
+    "inDays": "{count, plural, =0 {(бүгүн)} =1 {(1 күндөн кийин)} other {(# күндөн кийин)}}",
     "next": "Növbəti: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "occurrences": "{count, plural, =1 {1 кайталануу аныкталды} other {# кайталануу аныкталды}}",
     "perPeriod": {
       "month": "ayda",
       "quarter": "rübdə",
       "twoWeeks": "2 həftədə",
       "week": "həftədə"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "showingPatterns": "{count, plural, =1 {1 кайталануучу транзакция үлгүсү көрсөтүлүүдө} other {# кайталануучу транзакция үлгүсү көрсөтүлүүдө}}",
     "subtitle": "Aşkar edilmiş abunəliklər və hesablar",
     "title": "Dövri Əməliyyatlar"
   },
   "reports": {
-    "addTransactionsToSeeFlow": "Add income and expense transactions to see your money flow",
+    "addTransactionsToSeeFlow": "Акча агымын көрүү үчүн киреше жана чыгым транзакцияларын кошуңуз",
     "amount": "Məbləğ",
     "category": "Kateqoriya",
-    "categoryBreakdown": "Category Breakdown",
-    "downloadPng": "Download as PNG",
-    "downloadSvg": "Download as SVG",
+    "categoryBreakdown": "Категория боюнча бөлүштүрүү",
+    "downloadPng": "PNG катары жүктөп алуу",
+    "downloadSvg": "SVG катары жүктөп алуу",
     "expenses": "Xərclər",
     "income": "Gəlir",
-    "incomeVsExpenses": "Income vs Expenses (Last 6 Months)",
-    "loading": "Loading reports...",
-    "moneyFlow": "Money Flow",
-    "moneyFlowDescription": "Visualize how income flows to categories and savings",
+    "incomeVsExpenses": "Киреше жана чыгымдар (акыркы 6 ай)",
+    "loading": "Отчеттор жүктөлүүдө...",
+    "moneyFlow": "Акча агымы",
+    "moneyFlowDescription": "Кирешенин категорияларга жана аманатка кантип агып баратканын визуалдаштырыңыз",
     "net": "Xalis",
-    "netSavings": "Net Savings",
+    "netSavings": "Таза аманат",
     "noDataAvailable": "Məlumat yoxdur",
-    "noSpendingData": "No spending data available",
-    "noTrendData": "No trend data available",
-    "percentOfTotal": "% of Total",
-    "savingsRate": "Savings Rate",
+    "noSpendingData": "Чыгым маалыматтары жеткиликсиз",
+    "noTrendData": "Тенденция маалыматтары жеткиликсиз",
+    "percentOfTotal": "Жалпынын %",
+    "savingsRate": "Аманат көрсөткүчү",
     "spendingByCategory": "Kateqoriyaya görə xərclər",
-    "subtitle": "Visualize your financial data",
+    "subtitle": "Финансылык маалыматтарыңызды визуалдаштырыңыз",
     "timeRange": {
       "all": "Hamısı",
       "month": "Ay",
       "quarter": "Rüb",
       "year": "İl"
     },
-    "title": "Reports & Insights",
-    "topCategories": "Top 5 Categories",
-    "totalExpenses": "Total Expenses",
-    "totalIncome": "Total Income",
+    "title": "Отчеттор жана түшүнүктөр",
+    "topCategories": "Алдыңкы 5 категория",
+    "totalExpenses": "Жалпы чыгымдар",
+    "totalIncome": "Жалпы киреше",
     "transactions": "Əməliyyatlar"
   },
   "settings": {
@@ -4188,7 +4188,7 @@
     "shortcuts": "Тез жеткиликтүүлүктөр"
   },
   "simplefinConnect": {
-    "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
+    "accountsConnected": "{count, plural, one {# каттоо байланышты} other {# каттоо байланышты}}",
     "alreadyHaveToken": "Artıq tokeniniz var?",
     "asOf": "{date} tarixinə",
     "autoImportDescription": "Bank hesablarınızdan avtomatik əməliyyat idxal edin",
@@ -4249,7 +4249,7 @@
       "title": "Qoşulmuş Hesablar"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "accountsLinked": "{count, plural, =1 {1 каттоо байланыштырылды} other {# каттоо байланыштырылды}}",
       "connectButton": "Bank Hesabını Qoş",
       "connected": "Qoşuldu",
       "description": "Əməliyyatları avtomatik idxal etmək üçün bank hesablarınızı qoşun",
@@ -4271,7 +4271,7 @@
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "hoursAgo": "{hours, plural, =1 {1 саат мурун} other {# саат мурун}}",
       "lastSynced": "Son sinxronizasiya: {time}",
       "lessThanHour": "Bir saaatdan az əvvəl",
       "never": "Heç vaxt",
@@ -4454,7 +4454,7 @@
     "splitATransaction": "Əməliyyatı böl",
     "splitFlow": {
       "amountsCorrect": "Məbləğlər düzgün toplanır",
-      "confirmDescription": "This will create {count, plural, one {# split} other {# splits}} for this transaction. Each person's share will be tracked until settled.",
+      "confirmDescription": "Бул транзакция үчүн {count, plural, one {# бөлүшүү} other {# бөлүшүү}} түзүлөт. Ар бир адамдын үлүшү чечилгенге чейин көзөмөлдөнөт.",
       "confirmSplit": "Bölüşməni təsdiq et",
       "howToSplit": "Necə bölüşəcəksiniz?",
       "modes": {
@@ -4486,7 +4486,7 @@
     "title": "Xərc bölüşməsi",
     "total": "cəmi",
     "unknownTransaction": "Naməlum əməliyyat",
-    "unsettledSplitCount": "{count, plural, one {# unsettled split} other {# unsettled splits}}",
+    "unsettledSplitCount": "{count, plural, one {# чечилбеген бөлүшүү} other {# чечилбеген бөлүшүү}}",
     "unsettledSplits": "Hesablaşılmamış bölüşmələr ({count})",
     "via": "vasitəsilə",
     "youOwe": "{amount} borclunuz var",
@@ -4551,7 +4551,7 @@
       "totalSpent": "Ümumi Xərcləndi"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {Сыноодо 1 күн калды} other {Сыноодо # күн калды}}"
     },
     "reminderToggle": {
       "disableReminder": "Эскертмени өчүрүү",
@@ -4570,18 +4570,18 @@
       "upcomingCharges": "Gələcək Ödənişlər (Növbəti 30 gün)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "activeSubscriptions": "{count, plural, =1 {1 активдүү жазылуу} other {# активдүү жазылуу}}",
       "annualCost": "İllik Xərc",
       "monthlyCost": "Aylıq Xərc",
       "next30Days": "Növbəti 30 gün",
       "projectedYearly": "Proqnozlaşdırılmış illik xərc",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "upcomingCharges": "{count, plural, =1 {1 алдыдагы төлөм} other {# алдыдагы төлөм}}"
     },
     "suggestions": {
       "inactiveTitle": "Potensial olaraq ləğv edilmiş abunəliklər",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
+      "inactiveDescription": "{count, plural, =1 {1 жазылуу жакында} other {# жазылуу жакында}} төлөнгөн жок. Алар чындап эле жокко чыгарылганын текшериңиз.",
       "trialsTitle": "Tezliklə bitmək üzrə olan sınaq müddətləri",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
+      "trialsDescription": "{count, plural, =1 {1 сыноо} other {# сыноо}} 7 күндүн ичинде аяктайт. Колдонбосоңуз, жокко чыгарыңыз.",
       "highCostTitle": "Yüksək xərçli abunəliklər",
       "highCostDescription": "Bu abunəliklər xərclərinizin böyük bir hissəsini təşkil edir. Tam dəyər alıb almadığınızı düşünün."
     }
@@ -4670,7 +4670,7 @@
     "sort": {
       "amount": "Məbləğ",
       "ascending": "Artan sıra",
-      "dateAdded": "Date Added",
+      "dateAdded": "Кошулган күнү",
       "descending": "Azalan sıra",
       "name": "Ad",
       "nextBilling": "Növbəti tarifləmə"
@@ -4690,23 +4690,23 @@
     "viewMode": {
       "active": "Aktiv",
       "all": "Hamısı",
-      "analysis": "Analysis",
-      "detected": "Detected",
+      "analysis": "Анализ",
+      "detected": "Аныкталган",
       "manual": "Əl ilə"
     }
   },
   "syncStatus": {
-    "daysAgo": "{days}d ago",
-    "devices": "{connected}/{total} devices",
-    "devicesConnected": "{connected}/{total} devices connected",
-    "hoursAgo": "{hours}h ago",
+    "daysAgo": "{days} к мурун",
+    "devices": "{connected}/{total} түзмөк",
+    "devicesConnected": "{connected}/{total} түзмөк байланышкан",
+    "hoursAgo": "{hours} с мурун",
     "justNow": "Indicə",
     "lastSync": "Son sinxronizasiya: {time}",
-    "minutesAgo": "{minutes}m ago",
+    "minutesAgo": "{minutes} мүн мурун",
     "never": "Heç vaxt",
     "offline": "Oflayn",
-    "partialSync": "Partial Sync",
-    "syncError": "Sync Error",
+    "partialSync": "Жарым-жартылай синхрондоо",
+    "syncError": "Синхрондоо катасы",
     "synced": "Sinxronizasiya olundu",
     "syncing": "Sinxronlaşdırılır..."
   },
@@ -4839,7 +4839,7 @@
     "placeholderExtended": "'Qəhvə keçən həftə' və ya 'məbləğ:>50' sınayın",
     "recentSearchLabel": "Son axtarış",
     "recentSearches": "Son axtarışlar",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
+    "resultCount": "{count} {count, plural, =1 {натыйжа} other {натыйжа}}",
     "save": "Saxla",
     "saveFilter": "Filtri saxla",
     "savedFilters": "Saxlanılmış filtrlər",
@@ -4865,10 +4865,10 @@
       "type": "Növ: 'növ:gəlir' və ya 'növ:xərc'"
     },
     "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
+    "usedTimes": "{count} {count, plural, =1 {жолу} other {жолу}} колдонулду",
     "viewAllResults": "Bütün {count} nəticəni bax",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "resultsFound": "{count} {count, plural, =1 {натыйжа} other {натыйжа}} табылды",
+    "suggestionsAvailable": "{count} {count, plural, =1 {сунуш} other {сунуш}} жеткиликтүү"
   },
   "transactionTable": {
     "actions": {
@@ -4987,67 +4987,67 @@
     "youWillLose": "İtirəcəksiniz:"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
-    "daysRemaining": "{count} days remaining in your free trial",
+    "daysLeft": "{count, plural, =0 {Сыноо мөөнөтүңүз бүгүн аяктайт!} =1 {Сыноо мөөнөтүңүздө 1 күн калды} other {Сыноо мөөнөтүңүздө # күн калды}}",
+    "daysRemaining": "Акысыз сыноо мөөнөтүңүздө {count} күн калды",
     "dismiss": "Rədd et",
-    "expired": "Your trial has expired",
-    "expiredDescription": "App is in read-only mode. Upgrade to continue managing your finances.",
-    "upgrade": "Upgrade - {price}",
-    "upgradeNow": "Upgrade Now - {price}",
-    "upgradePrompt": "Upgrade now to keep full access to your budget data.",
-    "viewPricing": "View pricing"
+    "expired": "Сыноо мөөнөтүңүз аяктады",
+    "expiredDescription": "Колдонмо окуу режиминде. Финансыңызды башкарууну улантуу үчүн жаңыртыңыз.",
+    "upgrade": "Жаңыртуу - {price}",
+    "upgradeNow": "Азыр жаңыртуу - {price}",
+    "upgradePrompt": "Бюджет маалыматтарыңызга толук мүмкүнчүлүктү сактоо үчүн азыр жаңыртыңыз.",
+    "viewPricing": "Баалар менен таанышуу"
   },
   "validationWarnings": {
     "aiAnalysis": "AI Analizi:",
     "amount": "Məbləğ:",
-    "cancelImport": "Cancel Import",
+    "cancelImport": "Импортту жокко чыгаруу",
     "closeModal": "Modalı bağla",
     "confidence": "{percent}% etibarlılıq",
-    "continueWithAll": "Continue with All",
-    "criticalIssues": "Critical Issues",
+    "continueWithAll": "Баары менен улантуу",
+    "criticalIssues": "Маанилүү маселелер",
     "date": "Tarix:",
-    "description": "Description:",
-    "hideDetails": "Hide Transaction Details",
-    "ignoreAllContinue": "Ignore All & Continue",
-    "informational": "Informational",
-    "issuesDetected": "Issues Detected",
-    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
+    "description": "Сүрөттөмө:",
+    "hideDetails": "Транзакция деталдарын жашыруу",
+    "ignoreAllContinue": "Баарын четке кагуу жана улантуу",
+    "informational": "Маалымат",
+    "issuesDetected": "Маселелер аныкталды",
+    "issuesFound": "Көңүлүңүздү бурган {count, plural, =1 {1 маселе} other {# маселе}} табылды",
     "marked": "İşarələnmiş",
-    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
+    "removalNote": "Уланта берсеңиз, импорттон {count, plural, =1 {1 транзакция} other {# транзакция}} алынып салынат.",
     "remove": "Çıxar",
-    "removeAndContinue": "Remove {count} & Continue",
-    "suggestion": "Suggestion:",
-    "title": "Transaction Validation Results",
-    "transactionNumber": "Transaction #{number}",
-    "viewDetails": "View Transaction Details",
+    "removeAndContinue": "{count} өчүрүү жана улантуу",
+    "suggestion": "Сунуш:",
+    "title": "Транзакцияны текшерүү натыйжалары",
+    "transactionNumber": "Транзакция #{number}",
+    "viewDetails": "Транзакция деталдарын көрүү",
     "warnings": "Xəbərdarlıqlar"
   },
   "vaultSetup": {
-    "aes256Description": "Your data is encrypted with AES-256 encryption",
-    "aes256Encryption": "AES-256 Encryption",
-    "automaticDescription": "Your device creates a unique encryption key automatically. No password to remember - your data is protected seamlessly.",
-    "automaticProtection": "Automatic Protection",
-    "bankGradeSecurity": "Bank-Grade Security",
-    "chooseProtection": "Choose how you want to protect your data:",
+    "aes256Description": "Маалыматтарыңыз AES-256 шифрлөө менен корголгон",
+    "aes256Encryption": "AES-256 шифрлөө",
+    "automaticDescription": "Түзмөгүңүз автоматтык түрдө уникалдуу шифрлөө ачкычын түзөт. Эстей турган сырсөз жок - маалыматтарыңыз үзгүлтүксүз корголот.",
+    "automaticProtection": "Автоматтык коргоо",
+    "bankGradeSecurity": "Банк деңгээлиндеги коопсуздук",
+    "chooseProtection": "Маалыматтарыңызды кантип коргоону тандаңыз:",
     "confirmPassword": "Şifrəni Təsdiqlə",
-    "confirmYourPassword": "Confirm your password",
-    "enableEncryption": "Enable Encryption",
-    "enterStrongPassword": "Enter a strong password",
+    "confirmYourPassword": "Сырсөзүңүздү ырастаңыз",
+    "enableEncryption": "Шифрлөөнү иштетүү",
+    "enterStrongPassword": "Күчтүү сырсөз киргизиңиз",
     "important": "Important",
-    "masterPassword": "Master Password",
-    "passwordDescription": "Create a master password to encrypt your vault. More secure if you share this device with others.",
-    "passwordProtection": "Password Protection",
-    "passwordWarning": "If you forget this password, your data cannot be recovered. We cannot reset it for you.",
+    "masterPassword": "Башкы сырсөз",
+    "passwordDescription": "Сактагычыңызды шифрлөө үчүн башкы сырсөз түзүңүз. Түзмөгүңүздү башкалар менен бөлүшсөңүз, коопсуз.",
+    "passwordProtection": "Сырсөз менен коргоо",
+    "passwordWarning": "Бул сырсөздү унутсаңыз, маалыматтарыңызды калыбына келтирүү мүмкүн эмес. Биз аны сиз үчүн кайра орното албайбыз.",
     "passwordsDoNotMatch": "Şifrələr uyğun gəlmir",
     "recommended": "Tövsiyə edilir",
-    "settingUp": "Setting Up...",
-    "setupError": "Failed to set up vault. Please try again.",
+    "settingUp": "Орнотулууда...",
+    "setupError": "Сактагычты орнотуу мүмкүн болгон жок. Кайра аракет кылыңыз.",
     "strengthFair": "Orta",
     "strengthStrong": "Güclü",
-    "strengthVeryStrong": "Very Strong",
-    "strengthVeryWeak": "Very Weak",
+    "strengthVeryStrong": "Өтө күчтүү",
+    "strengthVeryWeak": "Өтө алсыз",
     "strengthWeak": "Zəif",
-    "zeroKnowledge": "Zero Knowledge"
+    "zeroKnowledge": "Нөлдүк билим"
   },
   "welcome": {
     "subtitle": "Алгачкы транзакцияңызды кошуп же банктагы маалыматтарды импорттоодон баштаңыз",
@@ -5105,7 +5105,7 @@
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "category": "{count, plural, =1 {1 категория} other {# категория}}",
       "createNew": "Yeni yarat",
       "description": "YNAB kateqoriyalarını mövcud kateqoriyalarınıza uyğunlaşdırın və ya yenilərini yaradın.",
       "mapToExisting": "Mövcuda uyğunlaşdır",
@@ -5118,7 +5118,7 @@
       "errors": "Xətalar",
       "importAnother": "Başqasını idxal et",
       "success": "İdxal Tamamlandı!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "successMessage": "YNAB'дан {count, plural, =1 {1 элемент} other {# элемент}} ийгиликтүү импорттолду.",
       "viewTransactions": "Əməliyyatlara Bax",
       "whatNext": "Sonra nə etmək istəyirsiniz?",
       "withIssues": "Problemlərlə İdxal Tamamlandı"
@@ -5231,7 +5231,7 @@
       "budgetImportFailed": "Büdcə idxalı uğursuz oldu: {details}"
     },
     "importSuccess": "YNAB məlumatları uğurla idxal olundu!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importWithErrors": "Импорт {count, plural, =1 {1 ката} other {# ката}} менен аяктады"
   },
   "balanceReconciliation": {
     "title": "Импорт аяктады!",

@@ -1,0 +1,281 @@
+{
+  "actions": {
+    "saveChanges": "Guardar Alterações"
+  },
+  "budget": {
+    "events": {
+      "daysLeft": "{count} dias restantes",
+      "noEventsDescription": "Crie um orçamento para eventos para acompanhar gastos em casamentos, férias e muito mais"
+    },
+    "netWorth": {
+      "history": "Instantâneos históricos",
+      "milestoneReached": "Meta alcançada: {amount}!",
+      "noLiabilities": "Sem passivos — excelente trabalho!"
+    },
+    "scenarios": {
+      "amountLabel": "Montante",
+      "annualSavings": "Poupança Anual",
+      "impact": "Impacto",
+      "run": "Executar Cenário",
+      "subtitle": "Modelar alterações financeiras e ver o seu impacto",
+      "types": {
+        "addExpense": {
+          "description": "Ver o impacto de uma nova despesa recorrente"
+        },
+        "cancelSubscription": {
+          "description": "Ver as poupanças obtidas ao cancelar um encargo recorrente",
+          "title": "Cancelar Subscrição"
+        },
+        "changeIncome": {
+          "description": "Modelar um aumento ou diminuição de rendimento",
+          "title": "Alterar Rendimento"
+        },
+        "increaseSavings": {
+          "description": "Ver a aceleração do prazo para atingir os seus objetivos"
+        },
+        "payOffDebt": {
+          "description": "Calcular as poupanças em juros com o pagamento antecipado",
+          "title": "Liquidar Dívida"
+        }
+      }
+    }
+  },
+  "common": {
+    "delete": "Eliminar",
+    "loading": "A carregar...",
+    "save": "Guardar"
+  },
+  "dialog": {
+    "processing": "A processar..."
+  },
+  "footer": {
+    "links": {
+      "login": "Iniciar sessão",
+      "settings": "Definições"
+    }
+  },
+  "landing": {
+    "accessibility": {
+      "buttons": {
+        "openApp": "Abrir a aplicação",
+        "settings": "Definições de acessibilidade"
+      },
+      "description": "O Modo Seniores fornece navegação simplificada e alvos de toque maiores. Atalhos de teclado, estados de foco e contraste claro ajudam todos a mover-se mais rapidamente."
+    },
+    "comparison": {
+      "cost": {
+        "cloud": "Subscrição de $100+/ano"
+      },
+      "headers": {
+        "cloud": "Aplicação Típica na Nuvem"
+      },
+      "storageLocation": {
+        "cloud": "A Base de Dados Deles",
+        "local": "O Seu Dispositivo"
+      }
+    },
+    "faq": {
+      "0": {
+        "q": "Os meus dados são realmente privados?"
+      },
+      "2": {
+        "a": "Em breve: Uma subscrição opcional para sincronizar dados criptografados entre dispositivos via Supabase."
+      }
+    },
+    "features": {
+      "0": {
+        "description": "Património líquido, fluxo de caixa e divisão por categorias. Tempos de carregamento instantâneos."
+      },
+      "3": {
+        "description": "Orçamentação baseada em zero ou rollover com controlo granular por categoria."
+      },
+      "4": {
+        "description": "Projete a sua data de liberdade com visualizações de juros compostos."
+      }
+    },
+    "featuresDeepDive": {
+      "description": "Pare de lutar com fórmulas quebradas. Obtenha a flexibilidade do controlo manual com a velocidade de uma aplicação moderna.",
+      "heading1": "Poder de Folha de Cálculo.",
+      "heading2": "Simplicidade da Aplicação."
+    },
+    "footer": {
+      "changelog": "Registo de Alterações",
+      "download": "Descarregar",
+      "helpCenter": "Centro de Ajuda"
+    },
+    "hero": {
+      "headline": "Domine o Seu Dinheiro sem Vender os Seus Dados.",
+      "secondaryCta": {
+        "label": "Iniciar sessão"
+      },
+      "subhead": "O poder de uma folha de cálculo. A simplicidade de uma aplicação. Experimente a clareza financeira com a única aplicação de orçamento que garante que os seus dados nunca saem do seu dispositivo."
+    },
+    "heroSection": {
+      "badges": {
+        "noSubscriptions": "Sem subscrições"
+      },
+      "modes": {
+        "subscriptions": "Subscrições"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "description": "Arraste e largue CSVs ou digitalize recibos. A IA mapeia as colunas localmente."
+      },
+      "2": {
+        "description": "Atribua a cada euro uma função e preveja o seu património líquido futuro."
+      }
+    },
+    "marquee": {
+      "logos": [
+        "Orçamentação",
+        "Subscrições",
+        "Empréstimos",
+        "Recibos OCR",
+        "Relatórios",
+        "Planejamento",
+        "Offline",
+        "Modo Seniores"
+      ]
+    },
+    "outcomes": {
+      "1": {
+        "description": "Nós não vendemos os seus dados porque não os temos. Ponto final."
+      },
+      "2": {
+        "description": "Modele aposentadoria, pagamentos de empréstimos e objetivos de poupança numa única visão integrada."
+      },
+      "3": {
+        "description": "Identifique drenos recorrentes na sua carteira que outras aplicações perdem.",
+        "title": "Eliminador de Subscrições"
+      }
+    },
+    "outcomesSection": {
+      "title": "Construído para a vida real, não para folhas de cálculo"
+    },
+    "preview": {
+      "balanceAmount": "24.500,00 €",
+      "currencySymbol": "€",
+      "expensesAmount": "1.250,00 €",
+      "savingsGoal": "Objetivo de Poupança",
+      "tx0Amount": "-124,50 €",
+      "tx1Amount": "+4.250,00 €",
+      "tx1Date": "Ontem, 09:00",
+      "tx2Amount": "-15,99 €",
+      "tx2Date": "24 de Out, 2025"
+    },
+    "security": {
+      "buttons": {
+        "privacy": "Privacidade & definições"
+      },
+      "cards": {
+        "aiControls": {
+          "description": "Ative funcionalidades com IA (como deteção de anomalias) e gerencie o acesso ao chatbot nas definições.",
+          "title": "Controlo de funcionalidades de IA"
+        },
+        "encryption": {
+          "description": "A aplicação inclui uma camada de criptografia para proteger registos orçamentais sensíveis quando ativada."
+        },
+        "exportDelete": {
+          "description": "Exporte os seus dados e definições de privacidade, ou elimine dados locais diretamente da aplicação.",
+          "title": "Exportar & eliminar"
+        },
+        "localStorage": {
+          "description": "Os seus dados orçamentais são armazenados no seu navegador (IndexedDB) para que a aplicação permaneça rápida e utilizável offline."
+        }
+      },
+      "description": "O Budget App armazena os seus dados localmente (pronto para offline) e oferece-lhe controlos para funcionalidades de IA, exportação e eliminação."
+    },
+    "socialProof": {
+      "features": {
+        "pwaInstall": {
+          "description": "Instale como uma aplicação e continue mesmo com internet intermitente."
+        }
+      }
+    },
+    "trust": {
+      "0": {
+        "title": "O Seu Dispositivo, Os Seus Dados"
+      },
+      "1": {
+        "title": "Poder de Folha de Cálculo"
+      },
+      "2": {
+        "description": "Zero latência. Funciona no topo de uma montanha ou num túnel de metro."
+      }
+    }
+  },
+  "nav": {
+    "goals": "Objetivos",
+    "settings": "Definições"
+  },
+  "onboarding": {
+    "steps": {
+      "budgets": {
+        "description": "Crie orçamentos para diferentes categorias de gastos. Acompanhe o seu progresso ao longo do mês e receba alertas quando se aproximar dos seus limites.",
+        "title": "🎯 Defina os Seus Orçamentos"
+      },
+      "categorize": {
+        "description": "Revise e ajuste as categorias das transações. A nossa categorização inteligente aprende com as suas correções para melhorar ao longo do tempo. Utilize ações em massa para categorizar várias transações de uma vez!"
+      },
+      "import": {
+        "description": "Comece por importar as suas transações bancárias a partir de um ficheiro CSV. Suportamos BMO, Home Trust e muitos outros bancos. A aplicação irá categorizar automaticamente as suas transações!",
+        "title": "📥 Importar as Suas Transações"
+      },
+      "reports": {
+        "description": "Visualize os seus padrões de gastos, acompanhe o seu património líquido e tome decisões financeiras informadas. O seu painel atualiza automaticamente com cada transação!"
+      },
+      "welcome": {
+        "description": "Vamos fazer um tour rápido para ajudá-lo a começar a gerir as suas finanças domésticas. Não vai demorar muito!"
+      }
+    },
+    "tips": {
+      "budgets": "Defina orçamentos realistas e nós alertá-lo-emos se estiver a caminho de gastar demais.",
+      "import": "Arraste e largue o seu ficheiro CSV ou clique para procurar. Detectamos automaticamente os formatos BMO e Home Trust!"
+    }
+  },
+  "profileDialog": {
+    "cannotDeleteOnly": "Este é o único perfil. Não o pode eliminar.",
+    "cannotUndo": "Esta ação não pode ser anulada.",
+    "defaultProfile": "Perfil predefinido",
+    "deleteButton": "Eliminar perfil",
+    "deleteTitle": "Eliminar perfil?",
+    "errorDeleteFailed": "Falha ao eliminar perfil",
+    "permanentWarning": "Isto eliminará permanentemente este perfil. Quaisquer orçamentos privados deste perfil serão partilhados com todos os perfis."
+  },
+  "sidebar": {
+    "actions": {
+      "backToHome": "Voltar à Página Inicial",
+      "settings": "Definições"
+    },
+    "navigation": {
+      "netWorth": "Património Líquido",
+      "settings": "Definições",
+      "subscriptions": "Subscrições"
+    }
+  },
+  "welcome": {
+    "subtitle": "Comece por adicionar a sua primeira transação ou importar dados do seu banco"
+  },
+  "widget": {
+    "accountBalances": {
+      "description": "Saldos atuais em todas as suas contas"
+    },
+    "budgetProgress": {
+      "description": "Acompanhe como está a cumprir os seus objetivos de orçamento"
+    },
+    "incomeVsExpenses": {
+      "description": "Compare os seus ganhos e gastos ao longo do tempo",
+      "title": "Rendimentos vs Despesas"
+    },
+    "monthlyTrends": {
+      "description": "Visualize os seus padrões financeiros mês a mês"
+    },
+    "recentTransactions": {
+      "description": "Visão rápida da sua atividade financeira mais recente"
+    },
+    "spendingByCategory": {
+      "description": "Veja para onde vai o seu dinheiro com análises visuais"
+    }
+  }
+}

@@ -1,0 +1,351 @@
+{
+  "actions": {
+    "saveChanges": "Salvar Alterações"
+  },
+  "bottomSheet": {
+    "dragHandle": "Arraste para ajustar"
+  },
+  "budget": {
+    "events": {
+      "daysLeft": "{count} days left",
+      "noEventsDescription": "Create an event budget to track spending for weddings, holidays, and more"
+    },
+    "netWorth": {
+      "history": "Historical Snapshots",
+      "milestoneReached": "Milestone reached: {amount}!",
+      "noLiabilities": "No liabilities — great job!"
+    },
+    "scenarios": {
+      "amountLabel": "Amount",
+      "annualSavings": "Economia Anual",
+      "impact": "Impact",
+      "run": "Run Scenario",
+      "subtitle": "Model financial changes and see their impact",
+      "types": {
+        "addExpense": {
+          "description": "See the impact of a new recurring expense"
+        },
+        "cancelSubscription": {
+          "description": "See savings from canceling a recurring charge",
+          "title": "Cancelar Assinatura"
+        },
+        "changeIncome": {
+          "description": "Model an income increase or decrease",
+          "title": "Alterar Receita"
+        },
+        "increaseSavings": {
+          "description": "See goal timeline acceleration"
+        },
+        "payOffDebt": {
+          "description": "Calculate interest savings from early payoff",
+          "title": "Quitar Dívida"
+        }
+      }
+    }
+  },
+  "common": {
+    "delete": "Excluir",
+    "loading": "Carregando...",
+    "save": "Salvar"
+  },
+  "dialog": {
+    "processing": "Processando..."
+  },
+  "duration": {
+    "days": "dias"
+  },
+  "footer": {
+    "links": {
+      "login": "Fazer login",
+      "settings": "Configurações"
+    }
+  },
+  "landing": {
+    "accessibility": {
+      "buttons": {
+        "openApp": "Abrir o aplicativo",
+        "settings": "Configurações de acessibilidade"
+      },
+      "description": "O Modo Seniores fornece navegação simplificada e alvos de toque maiores. Atalhos de teclado, estados de foco e contraste claro ajudam todos a se moverem mais rapidamente."
+    },
+    "comparison": {
+      "cost": {
+        "cloud": "Assinatura de R$100+/ano"
+      },
+      "headers": {
+        "cloud": "Aplicativo Típico na Nuvem"
+      },
+      "storageLocation": {
+        "cloud": "O Banco de Dados Deles",
+        "local": "Seu Dispositivo"
+      }
+    },
+    "faq": {
+      "0": {
+        "q": "Meus dados são realmente privados?"
+      },
+      "2": {
+        "a": "Em breve: Uma assinatura opcional para sincronizar dados criptografados entre dispositivos via Supabase."
+      }
+    },
+    "features": {
+      "0": {
+        "description": "Patrimônio líquido, fluxo de caixa e divisão por categorias. Tempos de carregamento instantâneos."
+      },
+      "3": {
+        "description": "Orçamentação baseada em zero ou rollover com controle granular por categoria."
+      },
+      "4": {
+        "description": "Projete sua data de liberdade com visualizações de juros compostos."
+      }
+    },
+    "featuresDeepDive": {
+      "description": "Pare de lutar com fórmulas quebradas. Obtenha a flexibilidade do controle manual com a velocidade de um aplicativo moderno.",
+      "heading1": "Poder de Planilha.",
+      "heading2": "Simplicidade do Aplicativo."
+    },
+    "footer": {
+      "changelog": "Registro de Mudanças",
+      "download": "Baixar",
+      "helpCenter": "Central de Ajuda"
+    },
+    "hero": {
+      "headline": "Domine Seu Dinheiro sem Vender Seus Dados.",
+      "secondaryCta": {
+        "label": "Fazer login"
+      },
+      "subhead": "O poder de uma planilha. A simplicidade de um aplicativo. Experimente a clareza financeira com o único aplicativo de orçamento que garante que seus dados nunca saem do seu dispositivo."
+    },
+    "heroSection": {
+      "badges": {
+        "noSubscriptions": "Sem assinaturas"
+      },
+      "modes": {
+        "subscriptions": "Assinaturas"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "description": "Arraste e solte CSVs ou digitalize recibos. A IA mapeia as colunas localmente."
+      },
+      "2": {
+        "description": "Atribua a cada real uma função e preveja seu patrimônio líquido futuro."
+      }
+    },
+    "marquee": {
+      "logos": [
+        "Orçamentação",
+        "Assinaturas",
+        "Empréstimos",
+        "Recibos OCR",
+        "Relatórios",
+        "Planejamento",
+        "Offline",
+        "Modo Seniores"
+      ]
+    },
+    "outcomes": {
+      "1": {
+        "description": "Nós não vendemos seus dados porque não os temos. Ponto final."
+      },
+      "2": {
+        "description": "Modele aposentadoria, pagamentos de empréstimos e objetivos de poupança em uma única visão integrada."
+      },
+      "3": {
+        "description": "Identifique drenos recorrentes na sua carteira que outros aplicativos perdem.",
+        "title": "Eliminador de Assinaturas"
+      }
+    },
+    "outcomesSection": {
+      "title": "Construído para a vida real, não para planilhas"
+    },
+    "preview": {
+      "balanceAmount": "R$ 24.500,00",
+      "currencySymbol": "R$",
+      "expensesAmount": "R$ 1.250,00",
+      "savingsGoal": "Meta de Poupança",
+      "tx0Amount": "-R$ 124,50",
+      "tx1Amount": "+R$ 4.250,00",
+      "tx1Date": "Ontem, 9:00",
+      "tx2Amount": "-R$ 15,99",
+      "tx2Date": "24 de out de 2025"
+    },
+    "security": {
+      "buttons": {
+        "privacy": "Privacidade & configurações"
+      },
+      "cards": {
+        "aiControls": {
+          "description": "Ative funcionalidades com IA (como detecção de anomalias) e gerencie o acesso ao chatbot nas configurações.",
+          "title": "Controle de funcionalidades de IA"
+        },
+        "encryption": {
+          "description": "O aplicativo inclui uma camada de criptografia para proteger registros orçamentários sensíveis quando ativada."
+        },
+        "exportDelete": {
+          "description": "Exporte seus dados e configurações de privacidade, ou exclua dados locais diretamente do aplicativo.",
+          "title": "Exportar & excluir"
+        },
+        "localStorage": {
+          "description": "Seus dados orçamentários são armazenados no seu navegador (IndexedDB) para que o aplicativo permaneça rápido e utilizável offline."
+        }
+      },
+      "description": "O Budget App armazena seus dados localmente (pronto para offline) e oferece controles para funcionalidades de IA, exportação e exclusão."
+    },
+    "socialProof": {
+      "features": {
+        "pwaInstall": {
+          "description": "Instale como um aplicativo e continue mesmo com internet intermitente."
+        }
+      }
+    },
+    "trust": {
+      "0": {
+        "title": "Seu Dispositivo, Seus Dados"
+      },
+      "1": {
+        "title": "Poder de Planilha"
+      },
+      "2": {
+        "description": "Zero latência. Funciona no topo de uma montanha ou em um túnel de metrô."
+      }
+    }
+  },
+  "nav": {
+    "goals": "Metas",
+    "settings": "Configurações"
+  },
+  "onboarding": {
+    "steps": {
+      "budgets": {
+        "description": "Crie orçamentos para diferentes categorias de gastos. Acompanhe seu progresso ao longo do mês e receba alertas quando se aproximar dos seus limites.",
+        "title": "🎯 Defina Seus Orçamentos"
+      },
+      "categorize": {
+        "description": "Revise e ajuste as categorias das transações. Nossa categorização inteligente aprende com suas correções para melhorar ao longo do tempo. Utilize ações em massa para categorizar várias transações de uma vez!"
+      },
+      "import": {
+        "description": "Comece importando suas transações bancárias a partir de um arquivo CSV. Suportamos BMO, Home Trust e muitos outros bancos. O aplicativo irá categorizar automaticamente suas transações!",
+        "title": "📥 Importar Suas Transações"
+      },
+      "reports": {
+        "description": "Visualize seus padrões de gastos, acompanhe seu patrimônio líquido e tome decisões financeiras informadas. Seu painel atualiza automaticamente com cada transação!"
+      },
+      "welcome": {
+        "description": "Vamos fazer um tour rápido para ajudá-lo a começar a gerenciar suas finanças. Não vai demorar muito!"
+      }
+    },
+    "tips": {
+      "budgets": "Defina orçamentos realistas e nós alertaremos se você estiver a caminho de gastar demais.",
+      "import": "Arraste e solte seu arquivo CSV ou clique para procurar. Detectamos automaticamente os formatos BMO e Home Trust!"
+    }
+  },
+  "profileDialog": {
+    "cannotDeleteOnly": "Este é o único perfil. Você não pode excluí-lo.",
+    "cannotUndo": "Esta ação não pode ser desfeita.",
+    "defaultProfile": "Perfil padrão",
+    "deleteButton": "Excluir perfil",
+    "deleteTitle": "Excluir perfil?",
+    "errorDeleteFailed": "Falha ao excluir perfil",
+    "permanentWarning": "Isso excluirá permanentemente este perfil. Quaisquer orçamentos privados deste perfil serão compartilhados com todos os perfis."
+  },
+  "pullToRefresh": {
+    "pullDown": "Puxe para atualizar"
+  },
+  "searchNaturalLanguage": {
+    "around": "cerca de",
+    "bill": "conta",
+    "bought": "comprado",
+    "cheap": "barato",
+    "deposit": "depósito",
+    "exampleAmazonOver50": "Pedidos da Amazon acima de R$50",
+    "exampleCoffeeLastWeek": "Compras de café da semana passada",
+    "exampleExpensive": "Transações acima de R$100",
+    "exampleStructured": "Compras acima de R$200 (estruturado)",
+    "expense": "despesa",
+    "expensive": "caro",
+    "income": "receita",
+    "large": "grande",
+    "lastMonth": "mês passado",
+    "lastWeek": "semana passada",
+    "lastYear": "ano passado",
+    "noResults": "Nenhum resultado encontrado",
+    "over": "acima de",
+    "paid": "pago",
+    "purchase": "compra",
+    "recently": "recentemente",
+    "refund": "reembolso",
+    "resultsCount": "{count} resultados",
+    "salary": "salário",
+    "searchPlaceholder": "Pesquisar transações...",
+    "searchTips": "Dicas de pesquisa",
+    "small": "pequeno",
+    "spent": "gasto",
+    "thisMonth": "este mês",
+    "thisWeek": "esta semana",
+    "thisYear": "este ano",
+    "today": "hoje",
+    "under": "abaixo de",
+    "yesterday": "ontem"
+  },
+  "searchOperators": {
+    "account": "conta",
+    "amount": "valor",
+    "category": "categoria",
+    "date": "data",
+    "dateLast30": "últimos30",
+    "dateLast7": "últimos7",
+    "dateLastMonth": "últimoMês",
+    "dateLastWeek": "últimaSemana",
+    "dateLastYear": "últimoAno",
+    "dateThisMonth": "esteMês",
+    "dateThisYear": "esteAno",
+    "dateToday": "hoje",
+    "dateYesterday": "ontem",
+    "is": "é",
+    "isExpense": "despesa",
+    "isIncome": "receita",
+    "isRecurring": "recorrente",
+    "isSplit": "dividido",
+    "merchant": "comerciante",
+    "tag": "etiqueta",
+    "type": "tipo",
+    "typeExpense": "despesa",
+    "typeIncome": "receita"
+  },
+  "sidebar": {
+    "actions": {
+      "backToHome": "Voltar para a Página Inicial",
+      "settings": "Configurações"
+    },
+    "navigation": {
+      "netWorth": "Patrimônio Líquido",
+      "settings": "Configurações",
+      "subscriptions": "Assinaturas"
+    }
+  },
+  "welcome": {
+    "subtitle": "Comece adicionando sua primeira transação ou importando dados do seu banco"
+  },
+  "widget": {
+    "accountBalances": {
+      "description": "Saldos atuais de todas as suas contas"
+    },
+    "budgetProgress": {
+      "description": "Acompanhe como está indo em relação às suas metas de orçamento"
+    },
+    "incomeVsExpenses": {
+      "description": "Compare seus ganhos e gastos ao longo do tempo",
+      "title": "Receitas vs Despesas"
+    },
+    "monthlyTrends": {
+      "description": "Visualize seus padrões financeiros mês a mês"
+    },
+    "recentTransactions": {
+      "description": "Visualização rápida da sua atividade financeira recente"
+    },
+    "spendingByCategory": {
+      "description": "Veja para onde vai seu dinheiro com gráficos visuais"
+    }
+  }
+}

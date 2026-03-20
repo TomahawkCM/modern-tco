@@ -113,13 +113,13 @@
     "allProfiles": "Svi profili",
     "allTypes": "Sve vrste",
     "clearFilters": "Ukloni filtre",
-    "daysAgo": "{count}d ago",
+    "daysAgo": "Pre {count}d",
     "description": "Pratite promjene svih profila ({count} ukupno unosa)",
     "filter": "Filtriraj:",
-    "hoursAgo": "{count}h ago",
+    "hoursAgo": "Pre {count}h",
     "justNow": "Upravo sada",
     "loggingNotEnabled": "Bilježenje aktivnosti nije omogućeno.",
-    "minutesAgo": "{count}m ago",
+    "minutesAgo": "Pre {count}m",
     "noActivityFound": "Nije pronađena aktivnost",
     "refresh": "Osvježi",
     "searchPlaceholder": "Pretraži aktivnosti...",
@@ -364,7 +364,7 @@
     "syncStatus": "Status sinkronizacije: {status}",
     "toggleSeniorsMode": "Uključi/isključi način za starije osobe",
     "typeQuestion": "Upišite pitanje",
-    "unreadNotifications": "{count, plural, =1 {1 unread notification} other {# unread notifications}}",
+    "unreadNotifications": "{count, plural, =1 {1 nepročitano obaveštenje} few {# nepročitana obaveštenja} many {# nepročitanih obaveštenja} other {# nepročitanih obaveštenja}}",
     "welcomeBudgetApp": "Dobrodošli u aplikaciju za proračun"
   },
   "auth": {
@@ -503,8 +503,8 @@
       "addAccount": "Dodaj račun",
       "addFirstAccount": "Dodajte prvi račun",
       "allTransactionsCleared": "Sve transakcije obrisane. Sada možete ponovo uvesti izvode.",
-      "assignCount": "Assign {count, plural, one {# Transaction} other {# Transactions}}",
-      "assignModalDescription": "{count, plural, one {# transaction needs} other {# transactions need}} to be assigned to an account.",
+      "assignCount": "Dodeli {count, plural, one {# transakciju} few {# transakcije} many {# transakcija} other {# transakcija}}",
+      "assignModalDescription": "{count, plural, one {# transakcija zahteva} few {# transakcije zahtevaju} many {# transakcija zahteva} other {# transakcija zahteva}} dodelu računu.",
       "assignTransactions": "Dodijeli transakcije",
       "assignTransactionsNow": "Dodijeli transakcije sada",
       "assignedTransactions": "Dodijeljeno {count} transakcija za {name}",
@@ -557,7 +557,7 @@
       "unassignedClickToAssign": "Kliknite ispod za automatsku dodjelu na vaše račune.",
       "unassignedCreateFirst": "Najprije stvorite račun, a zatim će im biti automatski dodijeljen.",
       "unassignedDescription": "Ove transakcije uvezene su prije nego što su računi postavljeni.",
-      "unassignedTitle": "{count, plural, one {# transaction needs} other {# transactions need}} account assignment",
+      "unassignedTitle": "{count, plural, one {# transakcija zahteva} few {# transakcije zahtevaju} many {# transakcija zahteva} other {# transakcija zahteva}} dodelu računa",
       "update": "Ažuriraj"
     },
     "budgets": {
@@ -611,7 +611,7 @@
       "totalExpenses": "Ukupni troškovi",
       "totalSpent": "Ukupno potrošeno",
       "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
-      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transaction will become unbudgeted} other {# transactions will become unbudgeted}}",
+      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transakcija će biti bez budžeta} few {# transakcije će biti bez budžeta} many {# transakcija će biti bez budžeta} other {# transakcija će biti bez budžeta}}",
       "youWillLose": "Izgubiti ćete:"
     },
     "events": {
@@ -824,7 +824,7 @@
     "applyTo": "Primijeni na {count}",
     "categorize": "Kategoriziraj",
     "clearSelection": "Poništi odabir",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "confirmDelete": "Obrisati {count, plural, =1 {1 transakciju} few {# transakcije} many {# transakcija} other {# transakcija}}?",
     "delete": "Obriši",
     "deleteWarning": "Ova radnja ne može se poništiti.",
     "export": "Izvezi",
@@ -1629,7 +1629,7 @@
     "viewAllLoans": "Prikaži sve zajmove"
   },
   "debtOverview": {
-    "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
+    "activeLoans": "{count, plural, one {# aktivan zajam} few {# aktivna zajma} many {# aktivnih zajmova} other {# aktivnih zajmova}}",
     "activeLoansTitle": "Aktivni zajmovi",
     "addLoan": "Dodaj zajam",
     "avgRate": "Prosj. stopa",
@@ -1640,7 +1640,7 @@
     "totalDebt": "Ukupni dug",
     "upcomingPayments": "Nadolazeće rate",
     "viewAll": "Prikaži sve",
-    "viewMore": "{count, plural, one {View # more loan} other {View # more loans}}"
+    "viewMore": "{count, plural, one {Pogledaj još # zajam} few {Pogledaj još # zajma} many {Pogledaj još # zajmova} other {Pogledaj još # zajmova}}"
   },
   "debtPayoff": {
     "addDebt": "Dodaj dug",
@@ -1798,8 +1798,8 @@
     "dragToReorder": "Povuci za promjenu redoslijeda widgeta"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
+    "months": "{count, plural, =1 {1 mesec} few {# meseca} many {# meseci} other {# meseci}}",
+    "years": "{count, plural, =1 {1 godina} few {# godine} many {# godina} other {# godina}}",
     "yearsAndMonths": "{years}g {months}m"
   },
   "emptyStates": {
@@ -1861,7 +1861,7 @@
       "viewGuide": "Pogledajte vodič za rješavanje problema"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "canRecover": "Dobre vesti! Pronašli smo {count} {count, plural, =1 {način} few {načina} many {načina} other {načina}} za oporavak od ove greške.",
       "cannotRecover": "Oporavak nije moguć. Morat ćete ponovo izvesti datoteku iz banke ili isprobati drugi format.",
       "optionsTitle": "Mogućnosti oporavka"
     },
@@ -2104,7 +2104,7 @@
       "line2": "Ocjene financijskog zdravlja"
     },
     "grade": "Ocjena: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
+    "missingFactors": "{count, plural, =1 {Nedostaje 1 faktor} few {Nedostaju # faktora} many {Nedostaje # faktora} other {Nedostaje # faktora}}",
     "title": "Financijsko zdravlje",
     "history": {
       "title": "Историја резултата",
@@ -2347,7 +2347,7 @@
       "description": "Ovo će trajno izbrisati račun i sve pridružene pozicije.",
       "impactAccount": "Račun: {name}",
       "impactHistory": "Sva povijest transakcija",
-      "impactHoldings": "{count, plural, one {# holding} other {# holdings}}",
+      "impactHoldings": "{count, plural, one {# udeo} few {# udela} many {# udela} other {# udela}}",
       "impactTitle": "Izgubiti ćete:",
       "impactValue": "Ukupna vrijednost: {value}",
       "title": "Izbriši investicijski račun"
@@ -2374,7 +2374,7 @@
     },
     "gainLoss": "Dobitak/Gubitak",
     "hideDetails": "Sakrij detalje",
-    "holdingsCount": "{count, plural, one {# holding} other {# holdings}}",
+    "holdingsCount": "{count, plural, one {# udeo} few {# udela} many {# udela} other {# udela}}",
     "loading": "Učitavanje ulaganja...",
     "marketDataNotice": "Obavijest o tržišnim podacima",
     "noHoldings": "Još nema pozicija u ovom računu.",
@@ -2437,7 +2437,7 @@
     "pairedDevices": {
       "addDevice": "Dodaj uređaj",
       "addFirstDevice": "Dodajte prvi uređaj",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "deviceCount": "{count, plural, =1 {1 upareni uređaj} few {# uparena uređaja} many {# uparenih uređaja} other {# uparenih uređaja}}",
       "emptyDescription": "Uparite uređaj kako biste počeli sinkronizirati podatke o budžetu",
       "emptyTitle": "Nema uparenih uređaja",
       "noDevices": "Nema uparenih uređaja",
@@ -2451,11 +2451,11 @@
     },
     "syncAll": "Sinkroniziraj sve",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "daysAgo": "{count, plural, =1 {Pre 1 dan} few {Pre # dana} many {Pre # dana} other {Pre # dana}}",
+      "hoursAgo": "{count, plural, =1 {Pre 1 sat} few {Pre # sata} many {Pre # sati} other {Pre # sati}}",
       "justNow": "Upravo sada",
       "lastSync": "Zadnja sinkronizacija: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "minutesAgo": "{count, plural, =1 {Pre 1 minut} few {Pre # minuta} many {Pre # minuta} other {Pre # minuta}}",
       "neverSynced": "Nikad sinkronizirano"
     },
     "title": "LAN sinkronizacija"
@@ -3421,7 +3421,7 @@
     "description": "Povežite se s drugim uređajem na lokalnoj mreži",
     "deviceAdded": "Uređaj dodan. Spojite se za završetak uparivanja.",
     "failedToInitialize": "Inicijalizacija uređaja nije uspjela. Molimo pokušajte ponovo.",
-    "host": "Host",
+    "host": "Domaćin",
     "ipAddressDescription": "Unesite lokalnu IP adresu kako biste dozvolili spajanje drugima.",
     "ipAddressRequired": "Potrebna je IP adresa",
     "ipPlaceholder": "192.168.1.100",
@@ -3476,7 +3476,7 @@
     "savePayment": "Spremi plaćanje",
     "status": "Status",
     "suggestedMatches": "Predložena podudaranja transakcija",
-    "suggestedMatchesDescription": "We found {count, plural, one {# transaction} other {# transactions}} that might be loan payments",
+    "suggestedMatchesDescription": "Pronašli smo {count, plural, one {# transakciju} few {# transakcije} many {# transakcija} other {# transakcija}} koje bi mogle biti uplate zajma",
     "title": "Povijest plaćanja",
     "uncategorized": "Nekategorizirano",
     "unlinkConfirm": "Razdvojiti ovo plaćanje od transakcije?",
@@ -3618,7 +3618,7 @@
       "payFrequencyHelp": "Koliko često dobivate plaću? Ovo određuje kada se isplate generiraju.",
       "payFrequencyHelpAriaLabel": "Više informacija o učestalosti isplate",
       "paycheckTimeline": "Vremenski okvir isplate",
-      "paychecksPlanned": "{count, plural, one {# paycheck planned} other {# paychecks planned}}",
+      "paychecksPlanned": "{count, plural, one {# planirana plata} few {# planirane plate} many {# planiranih plata} other {# planiranih plata}}",
       "percentOfIncome": "{percent}% prihoda",
       "regeneratePaychecks": "Regeneriraj isplate",
       "remainingToAllocate": "Preostalo za dodjelu",
@@ -3636,7 +3636,7 @@
       "scheduleSemimonthlyDesc": "1. i 15.",
       "scheduleWeekly": "Tjedno",
       "scheduleWeeklyDesc": "Svaki tjedan",
-      "scheduledPaychecks": "{count, plural, one {# scheduled paycheck} other {# scheduled paychecks}}",
+      "scheduledPaychecks": "{count, plural, one {# zakazana plata} few {# zakazane plate} many {# zakazanih plata} other {# zakazanih plata}}",
       "setUpPaycheckPlan": "Postavi plan isplate",
       "setUpPlan": "Postavi plan",
       "subtitle": "Planirajte kamo ide svaka kuna prije nego što dobijete plaću",
@@ -3707,7 +3707,7 @@
       "tfsaBalance": "Saldo TFSA-a",
       "title": "Mirovinski kalkulator",
       "toReachGoal": "Za dosezanje cilja mogli biste:",
-      "workMoreYears": "Work {years, plural, one {# more year} other {# more years}}",
+      "workMoreYears": "Raditi još {years, plural, one {# godinu} few {# godine} many {# godina} other {# godina}}",
       "yearAge": "{year} (Dob {age})",
       "yearsToRetirement": "Godine do umirovljenja",
       "youWillLose": "Izgubiti ćete:",
@@ -3750,7 +3750,7 @@
     "chatbotDescription": "AI asistent koji može odgovarati na pitanja o transakcijama, budžetima i obrascima potrošnje. Razgovori se obrađuju putem OpenAI API-ja.",
     "chatbotPrivacyNotice": "Vaši financijski podaci šalju se OpenAI-ju za odgovaranje na pitanja. OpenAI ne koristi podatke API-ja za treniranje modela. Možete deaktivirati u bilo koje vrijeme.",
     "confirmDelete": "Potvrdi brisanje",
-    "confirmDeleteWarning": "You are about to permanently delete {count, plural, one {# data type} other {# data types}}. Click \"Confirm Delete\" to proceed.",
+    "confirmDeleteWarning": "Nameravate da trajno obrišete {count, plural, one {# tip podataka} few {# tipa podataka} many {# tipova podataka} other {# tipova podataka}}. Kliknite na Potvrdi brisanje za nastavak.",
     "conversationHistory": "Povijest razgovora",
     "conversationStorageNotice": "Razgovori se pohranjuju lokalno u vašem pregledniku. Možete ih ručno izbrisati u bilo koje vrijeme.",
     "dataAccessPermission": "Dozvola za pristup podacima",
@@ -3911,7 +3911,7 @@
       "save": "Spremi"
     },
     "clickToSelect": "Kliknite kategoriju za odabir",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "description": "Izaberite kategoriju za {count, plural, =1 {ovu transakciju} few {# transakcije} many {# transakcija} other {# transakcija}}",
     "general": "Opće",
     "noResults": "Nije pronađena nijedna kategorija",
     "pressEnter": "Pritisnite ↵ Enter",
@@ -3947,7 +3947,7 @@
     "downloadPdf": "Preuzmi PDF",
     "fileSize": "{size} KB",
     "pdfReceipt": "PDF račun",
-    "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
+    "receiptCount": "{count, plural, =1 {1 račun} few {# računa} many {# računa} other {# računa}}",
     "unsupportedFileType": "Nepodržana vrsta datoteke",
     "uploaded": "Preneseno {date}",
     "view": "Прегледај"
@@ -4001,16 +4001,16 @@
       "quarterly": "Kvartalno",
       "weekly": "Tjedno"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
+    "inDays": "{count, plural, =0 {(danas)} =1 {(za 1 dan)} few {(za # dana)} many {(za # dana)} other {(za # dana)}}",
     "next": "Sljedeće: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "occurrences": "{count, plural, =1 {Detektovano 1 pojavljivanje} few {Detektovana # pojavljivanja} many {Detektovano # pojavljivanja} other {Detektovano # pojavljivanja}}",
     "perPeriod": {
       "month": "mjesečno",
       "quarter": "tromjesečno",
       "twoWeeks": "svakih 2 tjedna",
       "week": "tjedno"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "showingPatterns": "{count, plural, =1 {Prikazuje se 1 obrazac ponavljajućih transakcija} few {Prikazuju se # obrasca ponavljajućih transakcija} many {Prikazuje se # obrazaca ponavljajućih transakcija} other {Prikazuje se # obrazaca ponavljajućih transakcija}}",
     "subtitle": "Otkrivene pretplate i računi",
     "title": "Ponavljajuće transakcije"
   },
@@ -4188,7 +4188,7 @@
     "shortcuts": "Prečice"
   },
   "simplefinConnect": {
-    "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
+    "accountsConnected": "{count, plural, one {# povezan račun} few {# povezana računa} many {# povezanih računa} other {# povezanih računa}}",
     "alreadyHaveToken": "Već imate token?",
     "asOf": "na dan {date}",
     "autoImportDescription": "Automatski uvezite transakcije s bankovnih računa",
@@ -4249,7 +4249,7 @@
       "title": "Povezani računi"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "accountsLinked": "{count, plural, =1 {1 povezan račun} few {# povezana računa} many {# povezanih računa} other {# povezanih računa}}",
       "connectButton": "Poveži bankovni račun",
       "connected": "Spojeno",
       "description": "Povežite bankovne račune za automatski uvoz transakcija",
@@ -4271,7 +4271,7 @@
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "hoursAgo": "{hours, plural, =1 {Pre 1 sat} few {Pre # sata} many {Pre # sati} other {Pre # sati}}",
       "lastSynced": "Zadnja sinkronizacija: {time}",
       "lessThanHour": "Manje od sat vremena",
       "never": "Nikad",
@@ -4323,11 +4323,11 @@
     "error": "Greška",
     "errorsLabel": "Greške:",
     "expired": "Isteklo",
-    "hoursAgo": "{hours}h ago",
+    "hoursAgo": "Pre {hours}h",
     "imported": "Uvezeno",
     "justNow": "upravo sada",
     "lastSynced": "Zadnja sinkronizacija: {time}",
-    "minutesAgo": "{minutes}m ago",
+    "minutesAgo": "Pre {minutes}m",
     "neverSynced": "Nikad sinkronizirano",
     "noBankAccounts": "Nema povezanih bankovnih računa",
     "pause": "Pauziraj",
@@ -4454,7 +4454,7 @@
     "splitATransaction": "Podijeli transakciju",
     "splitFlow": {
       "amountsCorrect": "Iznosi se pravilno zbrajaju",
-      "confirmDescription": "This will create {count, plural, one {# split} other {# splits}} for this transaction. Each person's share will be tracked until settled.",
+      "confirmDescription": "Ovo će kreirati {count, plural, one {# podelu} few {# podele} many {# podela} other {# podela}} za ovu transakciju. Udeo svake osobe biće praćen do izmirenja.",
       "confirmSplit": "Potvrdi podjelu",
       "howToSplit": "Kako podijeliti?",
       "modes": {
@@ -4486,7 +4486,7 @@
     "title": "Podjela troškova",
     "total": "ukupno",
     "unknownTransaction": "Nepoznata transakcija",
-    "unsettledSplitCount": "{count, plural, one {# unsettled split} other {# unsettled splits}}",
+    "unsettledSplitCount": "{count, plural, one {# neizmirena podela} few {# neizmirene podele} many {# neizmirenih podela} other {# neizmirenih podela}}",
     "unsettledSplits": "Nenamirene podjele ({count})",
     "via": "putem",
     "youOwe": "Dugujete {amount}",
@@ -4551,7 +4551,7 @@
       "totalSpent": "Ukupno potrošeno"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {Preostao 1 dan probnog perioda} few {Preostala # dana probnog perioda} many {Preostalo # dana probnog perioda} other {Preostalo # dana probnog perioda}}"
     },
     "reminderToggle": {
       "disableReminder": "Искључи подсетник",
@@ -4570,18 +4570,18 @@
       "upcomingCharges": "Nadolazeće naplate (sljedećih 30 dana)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "activeSubscriptions": "{count, plural, =1 {1 aktivna pretplata} few {# aktivne pretplate} many {# aktivnih pretplata} other {# aktivnih pretplata}}",
       "annualCost": "Godišnji trošak",
       "monthlyCost": "Mjesečni trošak",
       "next30Days": "Sljedećih 30 dana",
       "projectedYearly": "Projektirana godišnja potrošnja",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "upcomingCharges": "{count, plural, =1 {1 predstojeća naplata} few {# predstojeće naplate} many {# predstojećih naplata} other {# predstojećih naplata}}"
     },
     "suggestions": {
       "inactiveTitle": "Potencijalno otkazane pretplate",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
+      "inactiveDescription": "{count, plural, =1 {1 pretplata nije} few {# pretplate nisu} many {# pretplata nije} other {# pretplata nije}} nedavno naplaćeno. Proverite da li su zaista otkazane.",
       "trialsTitle": "Probna razdoblja uskoro završavaju",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
+      "trialsDescription": "{count, plural, =1 {1 probni period} few {# probna perioda} many {# probnih perioda} other {# probnih perioda}} se završava u narednih 7 dana. Otkažite ih ako ih ne koristite.",
       "highCostTitle": "Pretplate visokih troškova",
       "highCostDescription": "Ove pretplate čine veliki dio vaše potrošnje. Razmislite dobivate li punu vrijednost."
     }
@@ -4696,10 +4696,10 @@
     }
   },
   "syncStatus": {
-    "daysAgo": "{days}d ago",
+    "daysAgo": "Pre {days}d",
     "devices": "{connected}/{total} uređaja",
     "devicesConnected": "{connected}/{total} uređaja spojeno",
-    "hoursAgo": "{hours}h ago",
+    "hoursAgo": "Pre {hours}h",
     "justNow": "Upravo sada",
     "lastSync": "Zadnja sinkronizacija: {time}",
     "minutesAgo": "{minutes}min ago",
@@ -4839,7 +4839,7 @@
     "placeholderExtended": "Pokušajte 'kava prošli tjedan' ili 'iznos:>50'",
     "recentSearchLabel": "Nedavno pretraživanje",
     "recentSearches": "Nedavna pretraživanja",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
+    "resultCount": "{count} {count, plural, =1 {rezultat} few {rezultata} many {rezultata} other {rezultata}}",
     "save": "Spremi",
     "saveFilter": "Spremi filtar",
     "savedFilters": "Spremljeni filtri",
@@ -4865,10 +4865,10 @@
       "type": "Vrsta: 'vrsta:prihod' ili 'vrsta:trošak'"
     },
     "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
+    "usedTimes": "Korišćeno {count} {count, plural, =1 {put} few {puta} many {puta} other {puta}}",
     "viewAllResults": "Prikaži svih {count} rezultata",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "resultsFound": "{count} {count, plural, =1 {rezultat pronađen} few {rezultata pronađeno} many {rezultata pronađeno} other {rezultata pronađeno}}",
+    "suggestionsAvailable": "{count} {count, plural, =1 {predlog dostupan} few {predloga dostupno} many {predloga dostupno} other {predloga dostupno}}"
   },
   "transactionTable": {
     "actions": {
@@ -4987,7 +4987,7 @@
     "youWillLose": "Izgubiti ćete:"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
+    "daysLeft": "{count, plural, =0 {Vaš probni period se završava danas!} =1 {Preostao samo 1 dan probnog perioda} few {Preostala # dana probnog perioda} many {Preostalo # dana probnog perioda} other {Preostalo # dana probnog perioda}}",
     "daysRemaining": "Preostalo {count} dana besplatnog probnog razdoblja",
     "dismiss": "Odbaci",
     "expired": "Vaše probno razdoblje je isteklo",
@@ -5011,9 +5011,9 @@
     "ignoreAllContinue": "Zanemari sve i nastavi",
     "informational": "Informativno",
     "issuesDetected": "Otkriveni problemi",
-    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
+    "issuesFound": "Pronašli smo {count, plural, =1 {1 problem} few {# problema} many {# problema} other {# problema}} koji zahtevaju vašu pažnju",
     "marked": "Označeno",
-    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
+    "removalNote": "{count, plural, =1 {1 transakcija će biti uklonjena} few {# transakcije će biti uklonjene} many {# transakcija će biti uklonjeno} other {# transakcija će biti uklonjeno}} iz uvoza ako nastavite.",
     "remove": "Ukloni",
     "removeAndContinue": "Ukloni {count} i nastavi",
     "suggestion": "Prijedlog:",
@@ -5105,7 +5105,7 @@
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "category": "{count, plural, =1 {1 kategorija} few {# kategorije} many {# kategorija} other {# kategorija}}",
       "createNew": "Stvori novo",
       "description": "Mapirajte YNAB kategorije na postojeće kategorije ili stvorite nove.",
       "mapToExisting": "Mapiraj na postojeće",
@@ -5118,7 +5118,7 @@
       "errors": "Greške",
       "importAnother": "Uvezi još",
       "success": "Uvoz dovršen!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "successMessage": "{count, plural, =1 {1 stavka uspešno uvezena} few {# stavke uspešno uvezene} many {# stavki uspešno uvezeno} other {# stavki uspešno uvezeno}} iz YNAB-a.",
       "viewTransactions": "Prikaži transakcije",
       "whatNext": "Što biste željeli učiniti sljedeće?",
       "withIssues": "Uvoz završen s problemima"
@@ -5231,7 +5231,7 @@
       "budgetImportFailed": "Uvoz budžeta nije uspio: {details}"
     },
     "importSuccess": "YNAB podaci uvezeni uspješno!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importWithErrors": "Uvoz završen sa {count, plural, =1 {1 greškom} few {# greške} many {# grešaka} other {# grešaka}}"
   },
   "balanceReconciliation": {
     "title": "Увоз завршен!",

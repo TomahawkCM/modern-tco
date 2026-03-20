@@ -1709,14 +1709,14 @@
   },
   "designSystem": {
     "a11y": {
-      "focusIndicators": "Focus Indicators: 3px ring with 50% opacity on all interactive elements",
-      "fontSize": "Base Font Size: 18px for improved readability (seniors-friendly)",
-      "highContrast": "High Contrast Mode: Removes shadows, increases border thickness",
-      "keyboardNav": "Keyboard Navigation: All functionality accessible via keyboard",
-      "reducedMotion": "Reduced Motion: Automatic detection + manual toggle for vestibular disorders",
-      "semanticHtml": "Semantic HTML: Proper heading hierarchy and landmark regions",
-      "touchTargets": "Touch Targets: Minimum 48x48px (54px with spacing) for all interactive elements",
-      "wcag": "WCAG 2.2 AA Compliant: Contrast ratios >=4.5:1 for normal text, >=3:1 for large text"
+      "focusIndicators": "Индикаторы фокуса: кольцо 3px с непрозрачностью 50% на всех интерактивных элементах",
+      "fontSize": "Базовый размер шрифта: 18px для улучшенной читаемости (удобно для пожилых)",
+      "highContrast": "Режим высокой контрастности: убраны тени, увеличена толщина рамок",
+      "keyboardNav": "Клавиатурная навигация: все функции доступны с клавиатуры",
+      "reducedMotion": "Уменьшение анимации: автоматическое определение + ручной переключатель для вестибулярных нарушений",
+      "semanticHtml": "Семантический HTML: правильная иерархия заголовков и области навигации",
+      "touchTargets": "Области нажатия: минимум 48x48 пикселей (54 с отступами) для всех интерактивных элементов",
+      "wcag": "Соответствие WCAG 2.2 AA: контрастность >=4,5:1 для обычного текста, >=3:1 для крупного"
     },
     "accessibilityControls": "Элементы управления доступностью",
     "accessibilityGuidelines": "Руководство по доступности",
@@ -2476,7 +2476,7 @@
     },
     "brand": {
       "name": "BudgetPro",
-      "product": "Budget App"
+      "product": "Приложение «Бюджет»"
     },
     "comparison": {
       "bankConnections": {
@@ -2500,8 +2500,8 @@
       "headers": {
         "cloud": "Типичное облачное приложение",
         "feature": "Функция",
-        "local": "BudgetPro Local",
-        "sync": "BudgetPro Sync (Pro)"
+        "local": "BudgetPro Локальный",
+        "sync": "BudgetPro Синхро (Про)"
       },
       "offlineMode": {
         "feature": "Оффлайн режим"
@@ -4576,6 +4576,14 @@
       "next30Days": "Следующие 30 дней",
       "projectedYearly": "Прогнозируемые годовые расходы",
       "upcomingCharges": "{count, plural, one {# предстоящее списание} few {# предстоящих списания} many {# предстоящих списаний} other {# предстоящих списаний}}"
+    },
+    "suggestions": {
+      "inactiveTitle": "Возможно отменённые подписки",
+      "inactiveDescription": "{count, plural, =1 {1 подписка давно не списывала средства} few {# подписки давно не списывали средства} many {# подписок давно не списывали средства} other {# подписок давно не списывали средства}}. Убедитесь, что они действительно отменены.",
+      "trialsTitle": "Пробные периоды скоро истекут",
+      "trialsDescription": "{count, plural, =1 {1 пробный период истекает} few {# пробных периода истекают} many {# пробных периодов истекают} other {# пробных периодов истекают}} в ближайшие 7 дней. Отмените, если не пользуетесь.",
+      "highCostTitle": "Дорогие подписки",
+      "highCostDescription": "Эти подписки составляют значительную часть ваших расходов. Подумайте, получаете ли вы от них полную отдачу."
     }
   },
   "subscriptionModal": {
@@ -4858,7 +4866,9 @@
     },
     "transactionCount": "{count} {count, plural, one {транзакция} few {транзакции} many {транзакций} other {транзакций}}",
     "usedTimes": "Использовано {count} {count, plural, one {раз} few {раза} many {раз} other {раз}}",
-    "viewAllResults": "Все {count} результата"
+    "viewAllResults": "Все {count} результата",
+    "resultsFound": "{count} {count, plural, =1 {результат найден} few {результата найдено} many {результатов найдено} other {результатов найдено}}",
+    "suggestionsAvailable": "{count} {count, plural, =1 {подсказка доступна} few {подсказки доступны} many {подсказок доступно} other {подсказок доступно}}"
   },
   "transactionTable": {
     "actions": {
@@ -5210,7 +5220,18 @@
       "parsing": "Обработка файла...",
       "supportedFormats": "Поддерживаемые форматы",
       "transactions": "Транзакции"
-    }
+    },
+    "errors": {
+      "parseFailed": "Не удалось разобрать файл YNAB",
+      "previewFailed": "Не удалось сформировать предпросмотр",
+      "accountImportFailed": "Ошибка импорта счетов: {details}",
+      "categoryImportFailed": "Ошибка импорта категорий: {details}",
+      "transactionImportFailed": "Ошибка импорта транзакций: {details}",
+      "unknownError": "Неизвестная ошибка",
+      "budgetImportFailed": "Ошибка импорта бюджета: {details}"
+    },
+    "importSuccess": "Данные YNAB успешно импортированы!",
+    "importWithErrors": "Импорт завершён с {count, plural, =1 {1 ошибкой} few {# ошибками} many {# ошибками} other {# ошибками}}"
   },
   "balanceReconciliation": {
     "title": "Импорт завершён!",

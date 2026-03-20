@@ -1239,7 +1239,7 @@
   "calendarExport": {
     "addToCalendar": "ক্যালেন্ডারে যোগ",
     "dialog": {
-      "cancel": "Cancel",
+      "cancel": "বাতিল",
       "description": "ক্যালেন্ডারে বিল রিমাইন্ডার যোগ করুন",
       "deselectAll": "সব বাতিল",
       "export": "{count}টি সাবস্ক্রিপশন রপ্তানি",
@@ -1257,35 +1257,35 @@
     "selectSubscriptions": "সাবস্ক্রিপশন নির্বাচন..."
   },
   "categories": {
-    "cancel": "Cancel",
+    "cancel": "বাতিল",
     "cannotDeleteDefault": "ডিফল্ট বিভাগ মুছতে পারবেন না",
     "categoryNameLabel": "বিভাগের নাম *",
     "categoryNamePlaceholder": "যেমন, বাড়ি খরচ",
     "colorLabel": "রঙ",
     "createCategory": "বিভাগ তৈরি",
     "createFirstCategory": "প্রথম বিভাগ তৈরি করুন",
-    "default": "Default",
-    "delete": "Delete",
+    "default": "ডিফল্ট",
+    "delete": "মুছুন",
     "deleteCategoryAria": "বিভাগ মুছুন",
     "deleteConfirm": "\"{name}\" মুছবেন? পূর্বাবস্থায় ফেরানো যাবে না।",
     "deleteFailed": "বিভাগ মুছতে ব্যর্থ",
-    "edit": "Edit",
+    "edit": "সম্পাদনা",
     "editCategory": "বিভাগ সম্পাদনা",
     "editCategoryAria": "বিভাগ সম্পাদনা",
-    "expense": "Expense",
-    "income": "Income",
+    "expense": "ব্যয়",
+    "income": "আয়",
     "loading": "বিভাগ লোড হচ্ছে...",
     "nameRequired": "বিভাগের নাম আবশ্যক",
     "newCategory": "নতুন বিভাগ",
     "noCategories": "কোনো বিভাগ পাওয়া যায়নি",
-    "save": "Save",
+    "save": "সংরক্ষণ",
     "saveFailed": "বিভাগ সংরক্ষণ ব্যর্থ",
     "subcategoriesLabel": "উপবিভাগ (কমা দিয়ে আলাদা)",
     "subcategoriesPlaceholder": "যেমন, ভাড়া, রক্ষণাবেক্ষণ, বীমা",
     "subtitle": "বাজেট বিভাগ ও উপবিভাগ পরিচালনা",
     "tipLabel": "টিপ:",
     "tipText": "ডিফল্ট বিভাগ সম্পাদনা বা মুছতে পারবেন না। নিজের প্রয়োজনে কাস্টম বিভাগ তৈরি করুন।",
-    "title": "Categories",
+    "title": "ক্যাটাগরিসমূহ",
     "typeLabel": "ধরন"
   },
   "chatbot": {
@@ -1327,9 +1327,9 @@
     "tabs": {
       "actions": "Actions",
       "budget": "Budget",
-      "income": "Income",
-      "spending": "Spending",
-      "trends": "Trends"
+      "income": "আয়",
+      "spending": "ব্যয়",
+      "trends": "প্রবণতা"
     }
   },
   "chatbotOptIn": {
@@ -1367,7 +1367,7 @@
       "title": "গোপনীয়তা নিয়ন্ত্রণ"
     },
     "gdpr": {
-      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+      "notice": "<strong>আপনার অধিকার:</strong> চ্যাটবট সক্রিয় করার মাধ্যমে, আপনি OpenAI-এর API-এর মাধ্যমে আপনার আর্থিক ডেটা প্রক্রিয়াকরণে সম্মতি দিচ্ছেন। সেটিংস → গোপনীয়তায় চ্যাটবট নিষ্ক্রিয় করে যেকোনো সময় সম্মতি প্রত্যাহার করতে পারবেন। আপনার ডেটা আমাদের গোপনীয়তা নীতি এবং GDPR প্রয়োজনীয়তা অনুযায়ী প্রক্রিয়া করা হয়। আপনার কথোপকথনের ইতিহাস অ্যাক্সেস, মুছে ফেলা এবং এক্সপোর্ট করার অধিকার রয়েছে।"
     },
     "privacy": {
       "dataSent": "প্রশ্নের উত্তরে আর্থিক ডেটা API-তে পাঠানো হয়",
@@ -1380,18 +1380,18 @@
     "title": "বাজেট চ্যাটবট সক্রিয়?"
   },
   "columnMapper": {
-    "amount": "Amount",
+    "amount": "পরিমাণ",
     "amountColumn": "পরিমাণ কলাম",
     "applyMapping": "ম্যাপিং প্রয়োগ",
     "bankStatementFormat": "ব্যাংক স্টেটমেন্ট ফর্ম্যাট",
-    "cancel": "Cancel",
+    "cancel": "বাতিল",
     "columnNumber": "কলাম {number}",
     "creditColumn": "ক্রেডিট কলাম",
     "date": "Date",
     "dateColumn": "তারিখ কলাম",
     "debitColumn": "ডেবিট কলাম",
     "debitCreditColumns": "ডেবিট/ক্রেডিট কলাম",
-    "delete": "Delete",
+    "delete": "মুছুন",
     "description": "স্বয়ংক্রিয় সনাক্তকরণ আস্থা কম। ম্যানুয়ালি কলাম ম্যাপ করুন।",
     "descriptionColumn": "বিবরণ কলাম",
     "descriptionHeader": "Description",
@@ -1409,29 +1409,29 @@
     "useSavedMapping": "সংরক্ষিত ম্যাপিং ব্যবহার"
   },
   "combobox": {
-    "noResults": "No results found.",
-    "search": "Search...",
-    "select": "Select..."
+    "noResults": "কোনো ফলাফল পাওয়া যায়নি।",
+    "search": "অনুসন্ধান করুন...",
+    "select": "নির্বাচন করুন..."
   },
   "commandPalette": {
     "commands": {
       "addTransaction": "লেনদেন যোগ",
       "budgets": "Budgets",
-      "categories": "Categories",
+      "categories": "ক্যাটাগরিসমূহ",
       "darkTheme": "গাঢ় থিম",
       "dashboard": "ড্যাশবোর্ড",
       "exportData": "ডেটা রপ্তানি",
       "futurePlans": "ভবিষ্যৎ পরিকল্পনা",
       "highContrastTheme": "উচ্চ কনট্রাস্ট থিম",
       "importCsv": "CSV আমদানি",
-      "investments": "Investments",
+      "investments": "বিনিয়োগ",
       "lightTheme": "হালকা থিম",
-      "loans": "Loans",
+      "loans": "ঋণ",
       "newBudget": "নতুন বাজেট",
-      "reports": "Reports",
+      "reports": "রিপোর্ট",
       "retirement": "অবসর",
       "scanReceipt": "রসিদ স্ক্যান",
-      "settings": "Settings",
+      "settings": "সেটিংস",
       "transactions": "Transactions"
     },
     "groups": {
@@ -1453,14 +1453,14 @@
     "success": "সফল!"
   },
   "confidenceMeter": {
-    "autoCategorized": "Auto-categorized:",
-    "confidence": "{percent}% confidence",
-    "confident": "Confident",
-    "confirmCategorization": "Confirm this categorization to improve accuracy",
-    "learnFromThis": "Learn from this",
-    "lowConfidence": "Low Confidence",
-    "moderate": "Moderate",
-    "veryConfident": "Very Confident"
+    "autoCategorized": "অটো-শ্রেণীবদ্ধ:",
+    "confidence": "{percent}% আত্মবিশ্বাস",
+    "confident": "আত্মবিশ্বাসী",
+    "confirmCategorization": "নির্ভুলতা উন্নত করতে এই শ্রেণীবদ্ধকরণ নিশ্চিত করুন",
+    "learnFromThis": "এটি থেকে শিখুন",
+    "lowConfidence": "কম আত্মবিশ্বাস",
+    "moderate": "মাঝারি",
+    "veryConfident": "অত্যন্ত আত্মবিশ্বাসী"
   },
   "dashboard": {
     "widgets": {
@@ -1565,17 +1565,17 @@
     }
   },
   "dashboardCustomizer": {
-    "alwaysVisible": "Always visible",
-    "ariaLabel": "Customize dashboard layout",
-    "button": "Customize",
-    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
-    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
-    "reorderTitle": "Reorder Widgets",
-    "resetButton": "Reset to Defaults",
-    "title": "Customize Dashboard",
-    "toggleVisibility": "Toggle {name} visibility",
-    "widgetVisibility": "Widget Visibility",
-    "widgetsVisible": "{visible} of {total} widgets visible"
+    "alwaysVisible": "সবসময় দৃশ্যমান",
+    "ariaLabel": "ড্যাশবোর্ড লেআউট কাস্টমাইজ করুন",
+    "button": "কাস্টমাইজ",
+    "description": "ড্যাশবোর্ড উইজেট দেখান বা লুকান। উইজেটগুলো পুনর্বিন্যাস করতে ড্যাশবোর্ডে টেনে আনুন।",
+    "reorderDescription": "উইজেটের ক্রম পরিবর্তন করতে, আপনার ড্যাশবোর্ডে সরাসরি উইজেটগুলো টেনে ছেড়ে দিন। প্রতিটি উইজেট কার্ডের ড্র্যাগ হ্যান্ডেল (⋮⋮) ধরতে মাউস বা টাচ ব্যবহার করুন।",
+    "reorderTitle": "উইজেট পুনর্বিন্যাস করুন",
+    "resetButton": "ডিফল্টে রিসেট করুন",
+    "title": "ড্যাশবোর্ড কাস্টমাইজ করুন",
+    "toggleVisibility": "{name} দৃশ্যমানতা টগল করুন",
+    "widgetVisibility": "উইজেট দৃশ্যমানতা",
+    "widgetsVisible": "{visible} / {total} উইজেট দৃশ্যমান"
   },
   "debtAnalysis": {
     "cards": {
@@ -1629,29 +1629,29 @@
     "viewAllLoans": "সব ঋণ দেখুন"
   },
   "debtOverview": {
-    "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
-    "activeLoansTitle": "Active Loans",
-    "addLoan": "Add Loan",
-    "avgRate": "Avg Rate",
-    "balance": "Balance",
-    "monthlyPayment": "Monthly Payment",
-    "paidOff": "{percent}% paid off",
-    "title": "Debt Overview",
-    "totalDebt": "Total Debt",
-    "upcomingPayments": "Upcoming Payments",
-    "viewAll": "View All",
-    "viewMore": "{count, plural, one {View # more loan} other {View # more loans}}"
+    "activeLoans": "{count, plural, one {# সক্রিয় ঋণ} other {# সক্রিয় ঋণ}}",
+    "activeLoansTitle": "সক্রিয় ঋণ",
+    "addLoan": "ঋণ যোগ করুন",
+    "avgRate": "গড় হার",
+    "balance": "ব্যালেন্স",
+    "monthlyPayment": "মাসিক পরিশোধ",
+    "paidOff": "{percent}% পরিশোধিত",
+    "title": "ঋণ সংক্ষিপ্তবিবরণী",
+    "totalDebt": "মোট ঋণ",
+    "upcomingPayments": "আসন্ন পরিশোধ",
+    "viewAll": "সব দেখুন",
+    "viewMore": "{count, plural, one {আরো # ঋণ দেখুন} other {আরো # ঋণ দেখুন}}"
   },
   "debtPayoff": {
     "addDebt": "ঋণ যোগ",
     "addDebtTitle": "ঋণ যোগ",
     "addManually": "ম্যানুয়ালি যোগ",
     "apr": "APR %",
-    "balance": "Balance",
+    "balance": "ব্যালেন্স",
     "baselineComparison": "এই কৌশল ব্যবহারে {interest} সুদ সাশ্রয় এবং শুধু সর্বনিম্ন পরিশোধের তুলনায় {months} মাস আগে পরিশোধ।",
-    "cancel": "Cancel",
+    "cancel": "বাতিল",
     "debtFreeDate": "ঋণমুক্তির তারিখ",
-    "debtName": "Name",
+    "debtName": "নাম",
     "debtNamePlaceholder": "যেমন, ক্রেডিট কার্ড, গাড়ি ঋণ",
     "debtOverview": "ঋণ সারসংক্ষেপ",
     "goToLoans": "ঋণে যান",
@@ -1660,9 +1660,9 @@
     "monthsToFreedom": "মুক্তিতে মাস",
     "noDebts": "এখনো কোনো ঋণ যোগ করা হয়নি। ম্যানুয়ালি যোগ করুন বা ঋণ থেকে আমদানি করুন।",
     "payoffChart": "পরিশোধ চার্ট",
-    "payoffTimeline": "Payoff Timeline",
+    "payoffTimeline": "পরিশোধ টাইমলাইন",
     "results": "ফলাফল",
-    "save": "Save",
+    "save": "সংরক্ষণ",
     "saveScenarioTitle": "পরিস্থিতি সংরক্ষণ",
     "savedScenarios": "সংরক্ষিত পরিস্থিতি",
     "scenarioNamePlaceholder": "যেমন, আক্রমণাত্মক পরিকল্পনা",
@@ -1692,7 +1692,7 @@
     "exportSuccess": "ডেটা সফলভাবে রপ্তানি!",
     "importCsvData": "CSV ডেটা আমদানি",
     "loading": "ডাটাবেস তথ্য লোড হচ্ছে...",
-    "name": "Name",
+    "name": "নাম",
     "noDataFound": "কোনো ডেটা পাওয়া যায়নি",
     "noDataReason": "লেনদেন দেখা যাচ্ছে না। কারণ হতে পারে:",
     "noDataReason1": "ডেভেলপমেন্টে ডেটা পরিষ্কার হয়েছে",
@@ -1729,7 +1729,7 @@
     "colors": "রঙ",
     "componentStates": "কম্পোনেন্ট স্টেট",
     "dark": "ডার্ক",
-    "default": "Default",
+    "default": "ডিফল্ট",
     "defaultCard": "ডিফল্ট কার্ড",
     "defaultCardDescription": "ডিফল্ট স্টাইলসহ বেসিক কার্ড",
     "defaultInput": "ডিফল্ট ইনপুট",
@@ -1795,12 +1795,12 @@
     "confirmAction": "কার্য নিশ্চিত করুন"
   },
   "draggableWidget": {
-    "dragToReorder": "Drag to reorder widget"
+    "dragToReorder": "পুনর্বিন্যাস করতে টানুন"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
-    "yearsAndMonths": "{years}y {months}m"
+    "months": "{count, plural, =1 {১ মাস} other {# মাস}}",
+    "years": "{count, plural, =1 {১ বছর} other {# বছর}}",
+    "yearsAndMonths": "{years}বছর {months}মাস"
   },
   "emptyStates": {
     "budgets": {
@@ -1861,7 +1861,7 @@
       "viewGuide": "সমস্যা সমাধান গাইড দেখুন"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "canRecover": "সুসংবাদ! আমরা এই ত্রুটি থেকে পুনরুদ্ধারের {count}টি {count, plural, =1 {উপায়} other {উপায়}} খুঁজে পেয়েছি।",
       "cannotRecover": "পুনরুদ্ধার সম্ভব নয়। ব্যাংক থেকে ফাইল আবার রপ্তানি করুন বা ভিন্ন ফর্ম্যাট চেষ্টা করুন।",
       "optionsTitle": "পুনরুদ্ধার বিকল্প"
     },
@@ -1912,7 +1912,7 @@
     "deselectAll": "সব বাতিল",
     "endDate": "শেষ তারিখ",
     "excelExportedSuccess": "Excel সফলভাবে রপ্তানি! ({sheets} শিট, {size} KB)",
-    "excelWorkbookDescription": "Comprehensive Excel workbook with 12 sheets: Dashboard, Transactions, Monthly Summary, Category Analysis, Accounts, Budgets, Subscriptions, Loans, Investments, Net Worth, Goals, and Data Dictionary. Includes professional formatting, formulas, and charts.",
+    "excelWorkbookDescription": "১২টি শিট সহ বিস্তৃত এক্সেল ওয়ার্কবুক: ড্যাশবোর্ড, লেনদেন, মাসিক সারসংক্ষেপ, ক্যাটাগরি বিশ্লেষণ, অ্যাকাউন্ট, বাজেট, সাবস্ক্রিপশন, ঋণ, বিনিয়োগ, নেট ওয়ার্থ, লক্ষ্য এবং ডেটা অভিধান। পেশাদার ফরম্যাটিং, সূত্র এবং চার্ট অন্তর্ভুক্ত।",
     "excelWorkbookTitle": "আর্থিক সারসংক্ষেপ (Excel)",
     "exportCsv": "CSV রপ্তানি",
     "exportData": "ডেটা রপ্তানি",
@@ -2058,14 +2058,14 @@
     "tagline": "একবারের আপগ্রেডের মাধ্যমে প্রিমিয়াম বাজেটিং।"
   },
   "fridayReview": {
-    "back": "Back",
+    "back": "পেছনে",
     "backToDashboard": "ড্যাশবোর্ডে ফিরুন",
     "closeReview": "পর্যালোচনা বন্ধ",
-    "continue": "Continue",
-    "done": "Done",
+    "continue": "চালিয়ে যান",
+    "done": "সম্পন্ন",
     "goToStep": "{step}-এ যান",
     "loading": "সাপ্তাহিক পর্যালোচনা লোড হচ্ছে...",
-    "placeholderContent": "Step content will be implemented in subsequent tasks (F-021 through F-025).",
+    "placeholderContent": "পরবর্তী টাস্কগুলোতে (F-021 থেকে F-025) স্টেপের কন্টেন্ট বাস্তবায়ন করা হবে।",
     "stepCounter": "ধাপ {current} / {total}",
     "stepLabel": "ধাপ {current}: {title}",
     "stepProgress": "ধাপ {current} / {total}: {title}",
@@ -2098,14 +2098,14 @@
     "title": "শুক্রবারের পর্যালোচনা"
   },
   "healthScore": {
-    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "ariaLabel": "আর্থিক স্বাস্থ্য স্কোর: {score}/১০০। {interpretation}",
     "emptyState": {
-      "line1": "Add transactions to see your",
-      "line2": "Financial Health Score"
+      "line1": "আপনার দেখতে লেনদেন যোগ করুন",
+      "line2": "আর্থিক স্বাস্থ্য স্কোর"
     },
-    "grade": "Grade: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health",
+    "grade": "গ্রেড: {grade}",
+    "missingFactors": "{count, plural, =1 {১টি উপাদান অনুপস্থিত} other {#টি উপাদান অনুপস্থিত}}",
+    "title": "আর্থিক স্বাস্থ্য",
     "history": {
       "title": "স্কোর ইতিহাস",
       "monthsOfData": "{count} {count, plural, =1 {মাসের} other {মাসের}} তথ্য",
@@ -2120,37 +2120,37 @@
   },
   "holdingModal": {
     "addHolding": "হোল্ডিং যোগ",
-    "canadianStockHint": "Use .TO for Canadian stocks (e.g., TD.TO, VGRO.TO)",
+    "canadianStockHint": "কানাডীয় স্টকের জন্য .TO ব্যবহার করুন (যেমন, TD.TO, VGRO.TO)",
     "cancel": "বাতিল",
-    "editHolding": "Edit Holding",
+    "editHolding": "হোল্ডিং সম্পাদনা করুন",
     "enterSymbol": "স্টক সিম্বল দিন",
     "failedToSave": "হোল্ডিং সংরক্ষণ ব্যর্থ",
     "notesOptional": "নোট (ঐচ্ছিক)",
     "notesPlaceholder": "যেমন, অবসর পোর্টফোলিওর অংশ",
     "numberOfShares": "শেয়ার সংখ্যা",
     "pricePlaceholder": "50.00",
-    "purchaseDate": "Purchase Date",
+    "purchaseDate": "ক্রয়ের তারিখ",
     "purchasePricePerShare": "প্রতি শেয়ার ক্রয় মূল্য",
     "quantityPlaceholder": "১০০",
     "saving": "সংরক্ষণ হচ্ছে...",
     "stockSymbol": "স্টক সিম্বল",
     "symbolPlaceholder": "যেমন, AAPL, GOOGL",
-    "totalInvestment": "Total Investment",
+    "totalInvestment": "মোট বিনিয়োগ",
     "updateHolding": "হোল্ডিং আপডেট",
     "validPurchasePrice": "বৈধ ক্রয় মূল্য দিন",
     "validQuantity": "বৈধ পরিমাণ দিন"
   },
   "iconPicker": {
-    "clearSearch": "Clear Search",
-    "close": "Close",
-    "currentIcon": "Current Icon",
-    "foundCount": "Found {count} icon(s)",
-    "iconsAvailable": "{count} icons available",
-    "noIconsFound": "No icons found",
-    "noIconsFoundHint": "Try a different search term or browse all icons",
-    "searchPlaceholder": "Search icons by name or category...",
-    "subtitle": "Select an icon to represent your category",
-    "title": "Choose an Icon"
+    "clearSearch": "সার্চ মুছুন",
+    "close": "বন্ধ করুন",
+    "currentIcon": "বর্তমান আইকন",
+    "foundCount": "{count}টি আইকন পাওয়া গেছে",
+    "iconsAvailable": "{count}টি আইকন পাওয়া যাচ্ছে",
+    "noIconsFound": "কোনো আইকন পাওয়া যায়নি",
+    "noIconsFoundHint": "অন্য সার্চ টার্ম চেষ্টা করুন বা সব আইকন ব্রাউজ করুন",
+    "searchPlaceholder": "নাম বা ক্যাটাগরি অনুযায়ী আইকন খুঁজুন...",
+    "subtitle": "আপনার ক্যাটাগরির জন্য একটি আইকন নির্বাচন করুন",
+    "title": "একটি আইকন বেছে নিন"
   },
   "import": {
     "added": "যোগ",
@@ -2190,7 +2190,7 @@
     "lowOcrConfidence": "⚠️ কম OCR আস্থা ({percent}%)। এটি স্ক্যান করা PDF হতে পারে।",
     "noDataAfterMapping": "কাস্টম ম্যাপিং প্রয়োগের পর CSV-তে ডেটা পাওয়া যায়নি।",
     "noDataInCSV": "CSV ফাইলে কোনো ডেটা পাওয়া যায়নি।",
-    "noTransactionsParsed": "No transactions could be parsed from this file.\n\nPossible causes:\n• The file format may not be recognized\n• The date or amount columns may be empty\n• The file may contain only headers\n\nTry selecting a different bank format or contact support.",
+    "noTransactionsParsed": "এই ফাইল থেকে কোনো লেনদেন পার্স করা যায়নি।\n\nসম্ভাব্য কারণ:\n• ফাইল ফরম্যাট চেনা নাও যেতে পারে\n• তারিখ বা পরিমাণ কলাম খালি হতে পারে\n• ফাইলে শুধুমাত্র হেডার থাকতে পারে\n\nভিন্ন একটি ব্যাংক ফরম্যাট নির্বাচন করুন অথবা সাপোর্টে যোগাযোগ করুন।",
     "ocrLanguage": "OCR ভাষা:",
     "pageCount": "{count} পৃষ্ঠা",
     "partialImport": "আংশিক আমদানি",
@@ -2275,7 +2275,7 @@
       "saving": "সংরক্ষণ হচ্ছে...",
       "update": "অ্যাকাউন্ট আপডেট"
     },
-    "closeModal": "Close modal",
+    "closeModal": "মোডাল বন্ধ করুন",
     "errors": {
       "saveFailed": "অ্যাকাউন্ট সংরক্ষণ ব্যর্থ"
     },
@@ -2304,7 +2304,7 @@
     },
     "title": {
       "add": "বিনিয়োগ অ্যাকাউন্ট যোগ",
-      "edit": "Edit Investment Account"
+      "edit": "বিনিয়োগ অ্যাকাউন্ট সম্পাদনা করুন"
     },
     "validation": {
       "nameRequired": "অ্যাকাউন্টের নাম দিন"
@@ -2347,7 +2347,7 @@
       "description": "এটি অ্যাকাউন্ট ও সব সংশ্লিষ্ট হোল্ডিং স্থায়ীভাবে মুছে ফেলবে।",
       "impactAccount": "অ্যাকাউন্ট: {name}",
       "impactHistory": "সম্পূর্ণ লেনদেন ইতিহাস",
-      "impactHoldings": "{count, plural, one {# holding} other {# holdings}}",
+      "impactHoldings": "{count, plural, one {# হোল্ডিং} other {# হোল্ডিং}}",
       "impactTitle": "আপনি হারাবেন:",
       "impactValue": "মোট মূল্য: {value}",
       "title": "বিনিয়োগ অ্যাকাউন্ট মুছুন"
@@ -2374,13 +2374,13 @@
     },
     "gainLoss": "লাভ/ক্ষতি",
     "hideDetails": "বিবরণ লুকান",
-    "holdingsCount": "{count, plural, one {# holding} other {# holdings}}",
+    "holdingsCount": "{count, plural, one {# হোল্ডিং} other {# হোল্ডিং}}",
     "loading": "বিনিয়োগ লোড হচ্ছে...",
-    "marketDataNotice": "Market Data Notice",
+    "marketDataNotice": "মার্কেট ডেটা নোটিশ",
     "noHoldings": "এই অ্যাকাউন্টে এখনো কোনো হোল্ডিং নেই।",
     "portfolioAnalysis": "পোর্টফোলিও বিশ্লেষণ",
     "portfolioAnalysisSubtitle": "আপনার বিনিয়োগের ভিজ্যুয়াল বিশ্লেষণ",
-    "pricesUpdated": "Market prices updated {time}",
+    "pricesUpdated": "মার্কেট মূল্য আপডেট হয়েছে {time}",
     "refresh": "আপডেট",
     "refreshPrices": "দাম আপডেট করুন",
     "refreshPricesTitle": "বাজার দাম আপডেট",
@@ -2437,7 +2437,7 @@
     "pairedDevices": {
       "addDevice": "ডিভাইস যোগ",
       "addFirstDevice": "প্রথম ডিভাইস যোগ করুন",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "deviceCount": "{count, plural, =1 {১টি ডিভাইস যুক্ত} other {#টি ডিভাইস যুক্ত}}",
       "emptyDescription": "বাজেট ডেটা সিঙ্ক শুরু করতে ডিভাইস পেয়ার করুন",
       "emptyTitle": "কোনো পেয়ারড ডিভাইস নেই",
       "noDevices": "এখনো কোনো ডিভাইস পেয়ার হয়নি",
@@ -2451,11 +2451,11 @@
     },
     "syncAll": "সব সিঙ্ক",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "daysAgo": "{count, plural, =1 {১ দিন আগে} other {# দিন আগে}}",
+      "hoursAgo": "{count, plural, =1 {১ ঘণ্টা আগে} other {# ঘণ্টা আগে}}",
       "justNow": "এইমাত্র",
       "lastSync": "সর্বশেষ সিঙ্ক: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "minutesAgo": "{count, plural, =1 {১ মিনিট আগে} other {# মিনিট আগে}}",
       "neverSynced": "কখনো সিঙ্ক হয়নি"
     },
     "title": "LAN সিঙ্ক"
@@ -2816,14 +2816,14 @@
     }
   },
   "linkToLoan": {
-    "bestMatch": "Best Match",
-    "cancel": "Cancel",
+    "bestMatch": "সেরা মিল",
+    "cancel": "বাতিল",
     "extra": "অতিরিক্ত",
     "interest": "সুদ",
     "linkError": "লেনদেন লিংক ব্যর্থ। আবার চেষ্টা করুন।",
     "linkPayment": "পরিশোধ লিংক",
-    "linking": "Linking...",
-    "lowMatch": "Low Match",
+    "linking": "লিংক করা হচ্ছে...",
+    "lowMatch": "কম মিল",
     "monthlyPayment": "{amount}/মাস",
     "noActiveLoans": "কোনো সক্রিয় ঋণ নেই",
     "paymentBreakdown": "পরিশোধ বিভাজন",
@@ -2832,23 +2832,23 @@
     "title": "ঋণে লিংক"
   },
   "linkedLoan": {
-    "loanPrefix": "Loan: {name}",
-    "unlink": "Unlink",
-    "unlinkConfirm": "Unlink this transaction from the loan payment?",
-    "unlinkFailed": "Failed to unlink transaction. Please try again.",
-    "unlinkFromLoan": "Unlink from loan",
-    "viewLoan": "View loan",
-    "viewLoanDetails": "View loan details"
+    "loanPrefix": "ঋণ: {name}",
+    "unlink": "আনলিংক",
+    "unlinkConfirm": "এই লেনদেনটি ঋণ পরিশোধ থেকে আনলিংক করবেন?",
+    "unlinkFailed": "লেনদেন আনলিংক করতে ব্যর্থ। আবার চেষ্টা করুন।",
+    "unlinkFromLoan": "ঋণ থেকে আনলিংক করুন",
+    "viewLoan": "ঋণ দেখুন",
+    "viewLoanDetails": "ঋণের বিবরণ দেখুন"
   },
   "loanForm": {
     "autoCalculated": "স্বয়ংক্রিয় গণনা: {amount}",
-    "back": "Back",
+    "back": "পেছনে",
     "biWeekly": "পাক্ষিক",
-    "biWeeklyPaymentHint": "Bi-weekly payment amount (P&I only)",
-    "cancel": "Cancel",
+    "biWeeklyPaymentHint": "দ্বি-সাপ্তাহিক পরিশোধের পরিমাণ (শুধু মূলধন ও সুদ)",
+    "cancel": "বাতিল",
     "createLoan": "ঋণ তৈরি",
     "currentBalance": "বর্তমান ব্যালেন্স",
-    "defermentEndDate": "Deferment End Date",
+    "defermentEndDate": "স্থগিতাদেশ শেষের তারিখ",
     "failedToSave": "ঋণ সংরক্ষণ ব্যর্থ। আবার চেষ্টা করুন।",
     "frequencyHint": "কতবার পরিশোধ করেন",
     "interestRate": "সুদের হার (%)",
@@ -2861,12 +2861,12 @@
     "loanStartDate": "ঋণ শুরুর তারিখ",
     "loanTerm": "ঋণ মেয়াদ (মাস)",
     "monthly": "মাসিক",
-    "monthlyHomeInsurance": "Monthly Home Insurance",
-    "monthlyPMI": "Monthly PMI",
-    "monthlyPaymentHint": "Monthly payment amount (P&I only)",
-    "monthlyPropertyTax": "Monthly Property Tax",
+    "monthlyHomeInsurance": "মাসিক গৃহ বীমা",
+    "monthlyPMI": "মাসিক PMI",
+    "monthlyPaymentHint": "মাসিক পরিশোধের পরিমাণ (শুধু মূলধন ও সুদ)",
+    "monthlyPropertyTax": "মাসিক সম্পত্তি কর",
     "namePlaceholder": "যেমন, বন্ধকী, গাড়ি ঋণ",
-    "next": "Next",
+    "next": "পরবর্তী",
     "nextPaymentDate": "পরবর্তী পরিশোধ তারিখ",
     "noAccountLinked": "কোনো অ্যাকাউন্ট লিংক নেই",
     "notes": "নোট",
@@ -2885,7 +2885,7 @@
     "selectLoanTypeDescription": "কোন ধরনের ঋণ ট্র্যাক করতে চান তা বেছে নিন",
     "selectPaymentFrequency": "পরিশোধ ফ্রিকোয়েন্সি নির্বাচন করুন",
     "stepOf": "ধাপ {step} / {totalSteps}",
-    "subsidizedLoan": "Subsidized Loan (gov't pays interest during deferment)",
+    "subsidizedLoan": "ভর্তুকিপ্রাপ্ত ঋণ (স্থগিতকালে সরকার সুদ প্রদান করে)",
     "termPlaceholder": "৩৬০ (৩০ বছর)",
     "termYears": "{years} বছর",
     "types": {
@@ -2910,23 +2910,23 @@
     "vehicleModelPlaceholder": "যেমন, Corolla, City",
     "vehicleYear": "যানবাহন বছর",
     "weekly": "সাপ্তাহিক",
-    "weeklyPaymentHint": "Weekly payment amount (P&I only)"
+    "weeklyPaymentHint": "সাপ্তাহিক পরিশোধের পরিমাণ (শুধু মূলধন ও সুদ)"
   },
   "loanPaymentSelector": {
     "balanceAfterPayment": "পরিশোধের পর ব্যালেন্স:",
     "currentBalance": "বর্তমান ব্যালেন্স:",
     "extraPrincipal": "অতিরিক্ত মূল:",
     "interest": "সুদ:",
-    "interestRate": "Interest Rate:",
+    "interestRate": "সুদের হার:",
     "linkToLoanPayment": "ঋণ পরিশোধে লিংক করুন",
     "loanOption": "{name} ({lender}) - {payment}/মাস",
-    "nextDue": "Next Due:",
+    "nextDue": "পরবর্তী পরিশোধ:",
     "noLoan": "-- কোনো ঋণ নেই --",
     "paymentBreakdown": "পরিশোধ বিভাজন",
-    "paymentOverWarning": "This payment is {amount} more than the regular monthly payment. The extra will be applied to principal.",
-    "paymentUnderWarning": "This payment is {amount} less than the regular monthly payment of {monthlyPayment}.",
+    "paymentOverWarning": "এই পরিশোধ নিয়মিত মাসিক পরিশোধের চেয়ে {amount} বেশি। অতিরিক্ত অংশ মূলধনে প্রয়োগ করা হবে।",
+    "paymentUnderWarning": "এই পরিশোধ {monthlyPayment}-এর নিয়মিত মাসিক পরিশোধের চেয়ে {amount} কম।",
     "principal": "মূল:",
-    "selectLoan": "Select Loan"
+    "selectLoan": "ঋণ নির্বাচন করুন"
   },
   "loans": {
     "acrossActiveLoans": "{count}টি সক্রিয় ঋণ জুড়ে",
@@ -2978,7 +2978,7 @@
       "personal": "ব্যক্তিগত ঋণ",
       "student": "শিক্ষা ঋণ"
     },
-    "monthlyEscrowBreakdown": "Monthly Escrow Breakdown",
+    "monthlyEscrowBreakdown": "মাসিক এসক্রো বিবরণী",
     "monthlyPayment": "মাসিক পরিশোধ",
     "monthlyPaymentsCount": "{count} মাসিক কিস্তি",
     "nextPayment": "পরবর্তী পরিশোধ",
@@ -3048,40 +3048,40 @@
     "youvePaid": "এখন পর্যন্ত {amount} পরিশোধ করেছেন"
   },
   "localeSettings": {
-    "currency": "Currency",
-    "formatPreview": "Format Preview",
-    "language": "Language",
-    "monday": "Monday",
-    "resetToDefaults": "Reset to Browser Defaults",
-    "saveChanges": "Save Changes",
-    "subtitle": "Configure language, region, currency, and formatting preferences",
-    "sunday": "Sunday",
-    "title": "Locale & Formatting",
-    "unsavedChanges": "You have unsaved changes",
-    "weekStartsOn": "Week Starts On"
+    "currency": "মুদ্রা",
+    "formatPreview": "ফরম্যাট প্রিভিউ",
+    "language": "ভাষা",
+    "monday": "সোমবার",
+    "resetToDefaults": "ব্রাউজার ডিফল্টে রিসেট করুন",
+    "saveChanges": "পরিবর্তন সংরক্ষণ করুন",
+    "subtitle": "ভাষা, অঞ্চল, মুদ্রা এবং ফরম্যাটিং পছন্দ কনফিগার করুন",
+    "sunday": "রবিবার",
+    "title": "ভাষা ও ফরম্যাটিং",
+    "unsavedChanges": "আপনার অসংরক্ষিত পরিবর্তন আছে",
+    "weekStartsOn": "সপ্তাহ শুরু হয়"
   },
   "manualPairing": {
     "codeHint": "হোস্ট ডিভাইসে দেখানো ৬-অক্ষরের কোড",
     "codeInvalid": "পেয়ারিং কোড ৬ অক্ষরের আলফানিউমেরিক হতে হবে",
     "codeRequired": "পেয়ারিং কোড আবশ্যক",
-    "connect": "Connect",
-    "connecting": "Connecting...",
-    "description": "Enter the connection details shown on the host device",
+    "connect": "সংযোগ",
+    "connecting": "সংযোগ হচ্ছে...",
+    "description": "হোস্ট ডিভাইসে দেখানো কানেকশনের বিবরণ দিন",
     "fixFormErrors": "ফর্ম ত্রুটি ঠিক করুন",
-    "helpStep1": "Open Budget App on the device you want to sync with",
-    "helpStep2": "Go to Settings → LAN Sync",
-    "helpStep3": "Tap \"Allow Connections\"",
-    "helpStep4": "The IP address, port, and pairing code will be displayed below the QR code",
+    "helpStep1": "আপনি যে ডিভাইসের সাথে সিংক করতে চান সেটিতে Budget App খুলুন",
+    "helpStep2": "সেটিংস → LAN Sync-এ যান",
+    "helpStep3": "\"কানেকশন অনুমতি দিন\" ট্যাপ করুন",
+    "helpStep4": "QR কোডের নিচে IP ঠিকানা, পোর্ট এবং পেয়ারিং কোড দেখানো হবে",
     "helpTitle": "সংযোগ বিবরণ খুঁজুন",
-    "hideHelp": "Hide Help",
-    "ipAddress": "IP Address",
+    "hideHelp": "সাহায্য লুকান",
+    "ipAddress": "IP ঠিকানা",
     "ipInvalid": "অবৈধ IP ঠিকানা ফর্ম্যাট (যেমন, 192.168.1.100)",
     "ipRequired": "IP ঠিকানা আবশ্যক",
     "optionalDefault": "ঐচ্ছিক, ডিফল্ট: {port}",
     "pairingCode": "পেয়ারিং কোড",
     "port": "পোর্ট",
     "portInvalid": "পোর্ট ১ থেকে ৬৫৫৩৫ এর মধ্যে হতে হবে",
-    "title": "Manual Entry",
+    "title": "ম্যানুয়াল এন্ট্রি",
     "whereToFind": "কোথায় পাবেন?"
   },
   "mobileNav": {
@@ -3093,11 +3093,11 @@
   },
   "morePage": {
     "groups": {
-      "toolsSettings": "Tools & Settings",
-      "trackingAnalysis": "Tracking & Analysis",
-      "wealthPlanning": "Wealth & Planning"
+      "toolsSettings": "টুলস ও সেটিংস",
+      "trackingAnalysis": "ট্র্যাকিং ও বিশ্লেষণ",
+      "wealthPlanning": "সম্পদ ও পরিকল্পনা"
     },
-    "title": "More"
+    "title": "আরো"
   },
   "nav": {
     "about": "সম্পর্কে",
@@ -3118,17 +3118,17 @@
       "description": "ইমেইলে বিজ্ঞপ্তি পান",
       "emailAddress": "ইমেইল ঠিকানা",
       "invalidEmail": "বৈধ ইমেইল ঠিকানা দিন",
-      "sendTest": "Send Test",
-      "testEmail": "Test Email",
-      "testEmailDescription": "Send a test email to verify your settings",
-      "testEmailFailed": "Failed to send",
-      "testEmailSent": "Email sent!",
+      "sendTest": "টেস্ট পাঠান",
+      "testEmail": "টেস্ট ইমেল",
+      "testEmailDescription": "আপনার সেটিংস যাচাই করতে একটি টেস্ট ইমেল পাঠান",
+      "testEmailFailed": "পাঠাতে ব্যর্থ",
+      "testEmailSent": "ইমেল পাঠানো হয়েছে!",
       "title": "ইমেইল বিজ্ঞপ্তি",
-      "types": "Email notification types"
+      "types": "ইমেল নোটিফিকেশনের ধরন"
     },
     "infoBox": {
-      "emailExplanation": "Email notifications are sent via our secure email service and require a valid email address.",
-      "pushExplanation": "Push notifications require browser permission and work even when the app is closed.",
+      "emailExplanation": "ইমেল নোটিফিকেশন আমাদের নিরাপদ ইমেল সার্ভিসের মাধ্যমে পাঠানো হয় এবং একটি বৈধ ইমেল ঠিকানা প্রয়োজন।",
+      "pushExplanation": "পুশ নোটিফিকেশনের জন্য ব্রাউজার অনুমতি প্রয়োজন এবং অ্যাপ বন্ধ থাকলেও কাজ করে।",
       "storedLocally": "বিজ্ঞপ্তি সেটিংস আপনার ডিভাইসে স্থানীয়ভাবে সংরক্ষিত।"
     },
     "masterToggle": {
@@ -3158,10 +3158,10 @@
       "enable": "পুশ বিজ্ঞপ্তি সক্রিয়",
       "notSupported": "এই ব্রাউজারে সমর্থিত নয়",
       "states": {
-        "default": "Not set",
-        "denied": "Blocked",
-        "granted": "Enabled",
-        "unsupported": "Unsupported"
+        "default": "সেট করা হয়নি",
+        "denied": "ব্লক করা",
+        "granted": "সক্রিয়",
+        "unsupported": "অসমর্থিত"
       },
       "title": "পুশ বিজ্ঞপ্তি"
     },
@@ -3271,16 +3271,16 @@
     "viewRawOcrText": "কাঁচা OCR টেক্সট দেখুন"
   },
   "offline": {
-    "backOnline": "You're back online! Click refresh to reload the page.",
-    "connectionRestored": "Connection restored",
-    "goToDashboard": "Go to Dashboard",
-    "lostConnection": "It looks like you've lost your internet connection. The page you're trying to reach isn't available offline yet.",
-    "noConnection": "No internet connection",
-    "offlineFeatures": "Offline Features",
-    "offlineFeaturesDescription": "Once you visit a page while online, it will be available offline. All your data is stored locally on your device.",
-    "reloadPage": "Reload Page",
-    "title": "You're Offline",
-    "tryAgain": "Try Again"
+    "backOnline": "আপনি আবার অনলাইনে আছেন! পেজ রিলোড করতে রিফ্রেশ ক্লিক করুন।",
+    "connectionRestored": "সংযোগ পুনরুদ্ধার হয়েছে",
+    "goToDashboard": "ড্যাশবোর্ডে যান",
+    "lostConnection": "মনে হচ্ছে আপনার ইন্টারনেট সংযোগ বিচ্ছিন্ন হয়েছে। আপনি যে পেজটি দেখতে চাইছেন সেটি এখনো অফলাইনে পাওয়া যাচ্ছে না।",
+    "noConnection": "ইন্টারনেট সংযোগ নেই",
+    "offlineFeatures": "অফলাইন ফিচার",
+    "offlineFeaturesDescription": "আপনি অনলাইনে থাকাকালীন কোনো পেজ দেখলে, সেটি অফলাইনে পাওয়া যাবে। আপনার সকল ডেটা আপনার ডিভাইসে লোকালি সংরক্ষিত।",
+    "reloadPage": "পেজ রিলোড করুন",
+    "title": "আপনি অফলাইনে আছেন",
+    "tryAgain": "আবার চেষ্টা করুন"
   },
   "onboarding": {
     "dontShowAgain": "এই ভ্রমণ আবার দেখাবেন না",
@@ -3322,9 +3322,9 @@
     }
   },
   "onboardingPage": {
-    "back": "Back",
+    "back": "পেছনে",
     "getStarted": "শুরু করুন",
-    "next": "Next",
+    "next": "পরবর্তী",
     "saving": "সংরক্ষণ হচ্ছে...",
     "stepCounter": "ধাপ {current} / {total}",
     "steps": {
@@ -3398,127 +3398,127 @@
     }
   },
   "overspendingAlerts": {
-    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
-    "percentOfBudget": "{percent}% of budget",
+    "exceededWarning": "এই হারে, আপনি এই মাসে বাজেটের চেয়ে {amount} বেশি ব্যয় করবেন।",
+    "percentOfBudget": "বাজেটের {percent}%",
     "progress": {
-      "label": "Current progress"
+      "label": "বর্তমান অগ্রগতি"
     },
     "stats": {
       "budget": "Budget",
-      "daysLeft": "Days Left",
-      "projectedTotal": "Projected Total",
-      "spentSoFar": "Spent So Far"
+      "daysLeft": "বাকি দিন",
+      "projectedTotal": "প্রত্যাশিত মোট",
+      "spentSoFar": "এ পর্যন্ত ব্যয়"
     },
     "tip": {
-      "label": "Tip:",
-      "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
+      "label": "টিপ:",
+      "reduceSpending": "বাজেটের মধ্যে থাকতে দৈনিক ব্যয় {amount}-এ কমান।"
     }
   },
   "pairingDialog": {
-    "anErrorOccurred": "An error occurred",
-    "connecting": "Connecting...",
+    "anErrorOccurred": "একটি ত্রুটি ঘটেছে",
+    "connecting": "সংযোগ হচ্ছে...",
     "connectingToDevice": "ডিভাইসে সংযুক্ত হচ্ছে...",
     "description": "স্থানীয় নেটওয়ার্কে অন্য ডিভাইসে সংযুক্ত হন",
-    "deviceAdded": "Device added. Connect to complete pairing.",
-    "failedToInitialize": "Failed to initialize device. Please try again.",
-    "host": "Host",
-    "ipAddressDescription": "Enter your local IP address to allow other devices to connect.",
+    "deviceAdded": "ডিভাইস যোগ হয়েছে। পেয়ারিং সম্পন্ন করতে সংযোগ করুন।",
+    "failedToInitialize": "ডিভাইস ইনিশিয়ালাইজ করতে ব্যর্থ। আবার চেষ্টা করুন।",
+    "host": "হোস্ট",
+    "ipAddressDescription": "অন্য ডিভাইসগুলোকে সংযোগ করতে দিতে আপনার লোকাল IP ঠিকানা দিন।",
     "ipAddressRequired": "IP ঠিকানা আবশ্যক",
     "ipPlaceholder": "192.168.1.100",
     "manual": "Manual",
     "pairingFailed": "পেয়ারিং ব্যর্থ",
     "pairingSuccessful": "পেয়ারিং সফল!",
     "pendingConnection": "মুলতুবি সংযোগ",
-    "readyDescription": "Other devices can now scan this QR code or enter the connection details manually.",
+    "readyDescription": "অন্য ডিভাইসগুলো এখন এই QR কোড স্ক্যান করতে পারবে বা ম্যানুয়ালি কানেকশনের বিবরণ দিতে পারবে।",
     "readyForConnections": "সংযোগের জন্য প্রস্তুত",
     "readyToConnectTo": "{deviceName}-এ সংযুক্ত হতে প্রস্তুত",
-    "scan": "Scan",
-    "set": "Set",
+    "scan": "স্ক্যান",
+    "set": "সেট করুন",
     "title": "ডিভাইস পেয়ার",
-    "tryAgain": "Try Again",
+    "tryAgain": "আবার চেষ্টা করুন",
     "verifyingConnection": "সংযোগ যাচাই হচ্ছে..."
   },
   "paymentHistoryPanel": {
     "actions": "Actions",
     "addPayment": "পরিশোধ যোগ",
-    "addPaymentError": "Failed to add payment. Please try again.",
-    "amount": "Amount",
+    "addPaymentError": "পরিশোধ যোগ করতে ব্যর্থ। আবার চেষ্টা করুন।",
+    "amount": "পরিমাণ",
     "balanceAfter": "পরবর্তী ব্যালেন্স",
-    "cancel": "Cancel",
+    "cancel": "বাতিল",
     "date": "Date",
-    "delete": "Delete",
-    "deleteConfirm": "Delete this payment record? This action cannot be undone.",
-    "deleteError": "Failed to delete payment. Please try again.",
+    "delete": "মুছুন",
+    "deleteConfirm": "এই পরিশোধ রেকর্ড মুছবেন? এই কাজটি পূর্বাবস্থায় ফেরানো যাবে না।",
+    "deleteError": "পরিশোধ মুছতে ব্যর্থ। আবার চেষ্টা করুন।",
     "description": "ঋণ পরিশোধ ট্র্যাক করুন ও লেনদেনে লিংক করুন",
     "dismiss": "বাতিল",
-    "dismissThisMatch": "Dismiss this match",
-    "dismissed": "{count} dismissed",
+    "dismissThisMatch": "এই মিলটি বাতিল করুন",
+    "dismissed": "{count}টি বাতিল",
     "emptyState": "এখনো কোনো পরিশোধ ইতিহাস নেই",
     "emptyStateDescription": "ম্যানুয়ালি পরিশোধ যোগ করুন বা লেনদেন থেকে লিংক করুন",
     "extra": "অতিরিক্ত",
-    "extraPrincipalLabel": "Extra Principal (Optional)",
+    "extraPrincipalLabel": "অতিরিক্ত মূলধন (ঐচ্ছিক)",
     "highConfidence": "উচ্চ আস্থা",
-    "interest": "Interest",
+    "interest": "সুদ",
     "linkPayment": "পরিশোধ লিংক",
-    "linkTransactionError": "Failed to link transaction. Please try again.",
+    "linkTransactionError": "লেনদেন লিংক করতে ব্যর্থ। আবার চেষ্টা করুন।",
     "linked": "লিংকযুক্ত",
-    "linkedFromTransaction": "Linked from transaction: {description}",
+    "linkedFromTransaction": "লেনদেন থেকে লিংক করা: {description}",
     "loading": "পরিশোধ ইতিহাস লোড হচ্ছে...",
-    "loanPaymentCategory": "Loan Payment - {name}",
+    "loanPaymentCategory": "ঋণ পরিশোধ - {name}",
     "lowConfidence": "কম আস্থা",
     "manual": "ম্যানুয়াল",
     "mediumConfidence": "মাঝারি আস্থা",
-    "notesLabel": "Notes (Optional)",
-    "notesPlaceholder": "Payment notes...",
+    "notesLabel": "নোট (ঐচ্ছিক)",
+    "notesPlaceholder": "পরিশোধের নোট...",
     "paymentAmount": "পরিশোধ পরিমাণ",
     "paymentDate": "পরিশোধ তারিখ",
     "principal": "মূল",
     "savePayment": "পরিশোধ সংরক্ষণ",
     "status": "অবস্থা",
     "suggestedMatches": "প্রস্তাবিত লেনদেন মিল",
-    "suggestedMatchesDescription": "We found {count, plural, one {# transaction} other {# transactions}} that might be loan payments",
+    "suggestedMatchesDescription": "আমরা {count, plural, one {# লেনদেন} other {# লেনদেন}} পেয়েছি যা ঋণ পরিশোধ হতে পারে",
     "title": "পরিশোধ ইতিহাস",
-    "uncategorized": "Uncategorized",
-    "unlinkConfirm": "Unlink this payment from the transaction?",
-    "unlinkError": "Failed to unlink payment. Please try again.",
-    "view": "View",
+    "uncategorized": "শ্রেণীবদ্ধ নয়",
+    "unlinkConfirm": "এই পরিশোধটি লেনদেন থেকে আনলিংক করবেন?",
+    "unlinkError": "পরিশোধ আনলিংক করতে ব্যর্থ। আবার চেষ্টা করুন।",
+    "view": "দেখুন",
     "viewTransaction": "লেনদেন দেখুন"
   },
   "pinDialog": {
-    "cancel": "Cancel",
+    "cancel": "বাতিল",
     "changeDescription": "এই প্রোফাইলের PIN পরিবর্তন করুন।",
     "changePin": "PIN পরিবর্তন",
     "confirmNewPinLabel": "নতুন PIN নিশ্চিত",
     "confirmNewPinPlaceholder": "নতুন PIN নিশ্চিত করুন",
-    "continue": "Continue",
+    "continue": "চালিয়ে যান",
     "currentPinLabel": "বর্তমান PIN",
-    "defaultProfileName": "Profile",
+    "defaultProfileName": "প্রোফাইল",
     "enterCurrentPinPlaceholder": "বর্তমান PIN দিন",
     "enterNewPinPlaceholder": "নতুন PIN দিন",
-    "enterPinPlaceholder": "Enter PIN",
+    "enterPinPlaceholder": "PIN দিন",
     "errorIncorrectPin": "বর্তমান PIN ভুল",
     "errorInvalidPin": "অবৈধ PIN",
-    "errorPinMismatch": "PINs do not match",
+    "errorPinMismatch": "PIN মেলেনি",
     "errorSetFailed": "PIN সেট ব্যর্থ",
-    "errorVerificationFailed": "Verification failed",
+    "errorVerificationFailed": "যাচাই ব্যর্থ",
     "newPinLabel": "নতুন PIN (৪-৬ সংখ্যা)",
-    "pinAdviceText": "Choose a PIN that's easy to remember but hard to guess. Avoid simple patterns like 1234 or repeated digits.",
-    "removeConfirmation": "Are you sure you want to remove PIN protection? This profile will be accessible without any authentication.",
+    "pinAdviceText": "মনে রাখা সহজ কিন্তু অনুমান করা কঠিন এমন একটি PIN বেছে নিন। ১২৩৪ বা পুনরাবৃত্ত সংখ্যার মতো সহজ প্যাটার্ন এড়িয়ে চলুন।",
+    "removeConfirmation": "আপনি কি নিশ্চিত যে আপনি PIN সুরক্ষা সরাতে চান? এই প্রোফাইল কোনো অথেন্টিকেশন ছাড়াই অ্যাক্সেসযোগ্য হবে।",
     "removeDescription": "PIN সুরক্ষা সরান। যেকেউ অ্যাক্সেস পাবে।",
     "removePin": "PIN সরান",
     "setDescription": "অননুমোদিত অ্যাক্সেস থেকে এই প্রোফাইল রক্ষায় PIN সেট করুন।",
     "setPin": "PIN সেট করুন",
     "tryAgainIn": "{seconds} সেকেন্ড পর আবার চেষ্টা করুন",
-    "unlock": "Unlock",
+    "unlock": "আনলক",
     "unlockDescription": "এই প্রোফাইলে অ্যাক্সেসে PIN দিন",
     "unlockTitle": "{name} আনলক",
     "useDifferentProfile": "অন্য প্রোফাইল ব্যবহার করুন",
-    "verifyAndRemove": "Verify & Remove"
+    "verifyAndRemove": "যাচাই ও সরান"
   },
   "planning": {
     "future": {
       "activeGoals": "সক্রিয় লক্ষ্য",
-      "activeGoalsHeading": "Active Goals",
+      "activeGoalsHeading": "সক্রিয় লক্ষ্য",
       "addFirstGoal": "প্রথম লক্ষ্য যোগ করুন",
       "addGoal": "লক্ষ্য যোগ করুন",
       "addNewGoal": "নতুন লক্ষ্য যোগ",
@@ -3530,7 +3530,7 @@
       "currentSavingsValue": "বর্তমান সঞ্চয়: {amount}",
       "delete": "মুছুন",
       "deleteGoal": "লক্ষ্য মুছুন",
-      "deleteGoalAriaLabel": "Delete goal",
+      "deleteGoalAriaLabel": "লক্ষ্য মুছুন",
       "deleteGoalDescription": "এই সঞ্চয় লক্ষ্য মুছতে চান? পূর্বাবস্থায় ফেরানো যাবে না।",
       "deleteGoalTitle": "সঞ্চয় লক্ষ্য মুছুন",
       "descriptionLabel": "বিবরণ",
@@ -3538,7 +3538,7 @@
       "descriptionValue": "বিবরণ: {description}",
       "edit": "সম্পাদনা",
       "editGoal": "লক্ষ্য সম্পাদনা",
-      "editGoalAriaLabel": "Edit goal",
+      "editGoalAriaLabel": "লক্ষ্য সম্পাদনা করুন",
       "emptyDescription": "প্রথম সঞ্চয় লক্ষ্য তৈরি করে ভবিষ্যৎ ক্রয় পরিকল্পনা শুরু করুন।",
       "emptyTitle": "এখনো কোনো সঞ্চয় লক্ষ্য নেই",
       "failedToSave": "ক্রয় সংরক্ষণ ব্যর্থ",
@@ -3562,7 +3562,7 @@
       "priorityMedium": "মাঝারি",
       "remaining": "অবশিষ্ট",
       "savingsOf": "{target}-এর মধ্যে {current}",
-      "startPlanning": "Start planning for your future purchases by adding a new savings goal.",
+      "startPlanning": "একটি নতুন সঞ্চয় লক্ষ্য যোগ করে আপনার ভবিষ্যত ক্রয়ের পরিকল্পনা শুরু করুন।",
       "subtitle": "ভবিষ্যৎ ক্রয়ের জন্য সঞ্চয় পরিকল্পনা ও ট্র্যাক করুন",
       "targetAmountLabel": "লক্ষ্য পরিমাণ",
       "targetAmountValue": "লক্ষ্য পরিমাণ: {amount}",
@@ -3607,7 +3607,7 @@
       "generating": "তৈরি হচ্ছে...",
       "helpTooltip": "বেতনদিনের আগে প্রতিটি বেতন বাজেট বিভাগে বরাদ্দ করুন। ঐচ্ছিক ব্যয়ের জন্য কত অবশিষ্ট তা দেখুন।",
       "helpTooltipAriaLabel": "বেতন পরিকল্পনা সম্পর্কে আরো তথ্য",
-      "irregularScheduleHint": "Your plan uses an irregular schedule. Update your setup to add paychecks.",
+      "irregularScheduleHint": "আপনার প্ল্যান একটি অনিয়মিত শিডিউল ব্যবহার করে। পে-চেক যোগ করতে আপনার সেটআপ আপডেট করুন।",
       "loading": "বেতন পরিকল্পনা লোড হচ্ছে...",
       "noAllocationsYet": "এখনো কোনো বরাদ্দ নেই। বিভাগে তহবিল বরাদ্দ করতে \"বরাদ্দ\" ট্যাপ করুন।",
       "noPaychecksScheduled": "কোনো বেতন নির্ধারিত নেই",
@@ -3618,7 +3618,7 @@
       "payFrequencyHelp": "কতবার বেতন পান? এটি নির্ধারণ করে কখন বেতন তৈরি হবে।",
       "payFrequencyHelpAriaLabel": "বেতন ফ্রিকোয়েন্সি সম্পর্কে আরো তথ্য",
       "paycheckTimeline": "বেতন টাইমলাইন",
-      "paychecksPlanned": "{count, plural, one {# paycheck planned} other {# paychecks planned}}",
+      "paychecksPlanned": "{count, plural, one {# পে-চেক পরিকল্পিত} other {# পে-চেক পরিকল্পিত}}",
       "percentOfIncome": "আয়ের {percent}%",
       "regeneratePaychecks": "বেতন পুনরায় তৈরি",
       "remainingToAllocate": "বরাদ্দের জন্য অবশিষ্ট",
@@ -3636,7 +3636,7 @@
       "scheduleSemimonthlyDesc": "১ তারিখ ও ১৫ তারিখ",
       "scheduleWeekly": "সাপ্তাহিক",
       "scheduleWeeklyDesc": "প্রতি সপ্তাহে",
-      "scheduledPaychecks": "{count, plural, one {# scheduled paycheck} other {# scheduled paychecks}}",
+      "scheduledPaychecks": "{count, plural, one {# নির্ধারিত পে-চেক} other {# নির্ধারিত পে-চেক}}",
       "setUpPaycheckPlan": "বেতন পরিকল্পনা তৈরি করুন",
       "setUpPlan": "পরিকল্পনা তৈরি করুন",
       "subtitle": "বেতন পাওয়ার আগে প্রতি টাকা কোথায় যাবে পরিকল্পনা করুন",
@@ -3707,7 +3707,7 @@
       "tfsaBalance": "TFSA ব্যালেন্স",
       "title": "অবসর ক্যালকুলেটর",
       "toReachGoal": "লক্ষ্যে পৌঁছাতে আপনি পারেন:",
-      "workMoreYears": "Work {years, plural, one {# more year} other {# more years}}",
+      "workMoreYears": "আরো {years, plural, one {# বছর} other {# বছর}} কাজ করুন",
       "yearAge": "{year} (বয়স {age})",
       "yearsToRetirement": "অবসরে বছর",
       "youWillLose": "আপনি হারাবেন:",
@@ -3750,7 +3750,7 @@
     "chatbotDescription": "AI-চালিত সহকারী যা লেনদেন, বাজেট ও ব্যয় ধরন সম্পর্কে প্রশ্নের উত্তর দিতে পারে।",
     "chatbotPrivacyNotice": "প্রশ্নের উত্তর দিতে আর্থিক ডেটা OpenAI-তে পাঠানো হয়। যেকোনো সময় নিষ্ক্রিয় করতে পারেন।",
     "confirmDelete": "মোছা নিশ্চিত করুন",
-    "confirmDeleteWarning": "You are about to permanently delete {count, plural, one {# data type} other {# data types}}. Click \"Confirm Delete\" to proceed.",
+    "confirmDeleteWarning": "আপনি স্থায়ীভাবে {count, plural, one {# ডেটা ধরন} other {# ডেটা ধরন}} মুছতে যাচ্ছেন। এগিয়ে যেতে \"নিশ্চিত মুছুন\" ক্লিক করুন।",
     "conversationHistory": "কথোপকথন ইতিহাস",
     "conversationStorageNotice": "কথোপকথন আপনার ব্রাউজারে স্থানীয়ভাবে সংরক্ষিত। যেকোনো সময় ম্যানুয়ালি মুছতে পারেন।",
     "dataAccessPermission": "ডেটা অ্যাক্সেস অনুমতি",
@@ -3825,22 +3825,22 @@
     "whatsSentDescription": "শুধু পরিষ্কার করা লেনদেন বিবরণ (যেমন \"AMAZON.COM\")। কোনো অ্যাকাউন্ট নম্বর, নাম বা ঠিকানা নয়।"
   },
   "profileDialog": {
-    "cancel": "Cancel",
-    "confirmPinLabel": "Confirm PIN",
-    "confirmPinPlaceholder": "Confirm PIN",
+    "cancel": "বাতিল",
+    "confirmPinLabel": "PIN নিশ্চিত করুন",
+    "confirmPinPlaceholder": "PIN নিশ্চিত করুন",
     "createDescription": "পরিবারের সদস্যের জন্য নতুন প্রোফাইল। প্রতিটি প্রোফাইলে নিজস্ব বাজেট থাকতে পারে।",
     "createTitle": "প্রোফাইল তৈরি",
-    "defaultProfileNote": "This is the default profile and will be selected on app start.",
+    "defaultProfileNote": "এটি ডিফল্ট প্রোফাইল এবং অ্যাপ শুরু হলে নির্বাচিত হবে।",
     "editDescription": "প্রোফাইল নাম ও অ্যাভাটার রঙ আপডেট করুন।",
     "editTitle": "প্রোফাইল সম্পাদনা",
-    "enterPinPlaceholder": "Enter PIN",
+    "enterPinPlaceholder": "PIN দিন",
     "errorCreateFailed": "প্রোফাইল তৈরি ব্যর্থ",
     "errorInvalidPin": "অবৈধ PIN",
     "errorNameRequired": "প্রোফাইলের নাম দিন",
     "errorNameTooLong": "নাম ৩০ অক্ষরের মধ্যে হতে হবে",
-    "errorPinMismatch": "PINs do not match",
+    "errorPinMismatch": "PIN মেলেনি",
     "errorUpdateFailed": "প্রোফাইল আপডেট ব্যর্থ",
-    "nameLabel": "Name",
+    "nameLabel": "নাম",
     "namePlaceholder": "প্রোফাইল নাম দিন",
     "pinHelpText": "PIN এই প্রোফাইলের অ্যাক্সেস সুরক্ষিত করে।",
     "pinLabel": "PIN (৪-৬ সংখ্যা)",
@@ -3855,8 +3855,8 @@
     "deleteButton": "প্রোফাইল মুছুন"
   },
   "pullToRefresh": {
-    "pull": "Pull to refresh",
-    "release": "Release to refresh"
+    "pull": "রিফ্রেশ করতে টানুন",
+    "release": "রিফ্রেশ করতে ছেড়ে দিন"
   },
   "pwaInstall": {
     "buttons": {
@@ -3878,31 +3878,31 @@
     "title": "Budget App ইনস্টল করুন"
   },
   "qrScanner": {
-    "allowCameraAccess": "Please allow camera access when prompted",
-    "cameraError": "Camera Error",
+    "allowCameraAccess": "অনুরোধ করা হলে ক্যামেরা অ্যাক্সেস অনুমতি দিন",
+    "cameraError": "ক্যামেরা ত্রুটি",
     "cameraFailed": "ক্যামেরা অ্যাক্সেস ব্যর্থ। আবার চেষ্টা করুন।",
     "cameraInUse": "ক্যামেরা অন্য অ্যাপে ব্যবহৃত হচ্ছে।",
-    "cameraStep1": "Click the lock/info icon in your browser address bar",
-    "cameraStep2": "Find \"Camera\" in the permissions",
-    "cameraStep3": "Change it to \"Allow\"",
-    "cameraStep4": "Refresh this page",
-    "cancel": "Cancel",
+    "cameraStep1": "আপনার ব্রাউজারের অ্যাড্রেস বারে লক/তথ্য আইকনে ক্লিক করুন",
+    "cameraStep2": "পারমিশনে \"Camera\" খুঁজুন",
+    "cameraStep3": "\"Allow\" এ পরিবর্তন করুন",
+    "cameraStep4": "এই পেজ রিফ্রেশ করুন",
+    "cancel": "বাতিল",
     "deviceFound": "ডিভাইস পাওয়া গেছে!",
     "error": "Error",
-    "howToEnableCamera": "How to enable camera access:",
+    "howToEnableCamera": "ক্যামেরা অ্যাক্সেস কিভাবে সক্রিয় করবেন:",
     "invalidQrFormat": "অবৈধ QR কোড ফর্ম্যাট। Budget App পেয়ারিং QR কোড স্ক্যান করুন।",
     "noCamera": "এই ডিভাইসে ক্যামেরা নেই।",
     "permissionDenied": "ক্যামেরা অ্যাক্সেস প্রত্যাখ্যাত। ব্রাউজার সেটিংসে অনুমতি দিন।",
     "pointAtQrCode": "QR কোডে নির্দেশ করুন",
-    "positionQrCode": "Position the QR code within the frame",
+    "positionQrCode": "ফ্রেমের মধ্যে QR কোড রাখুন",
     "qrExpired": "এই QR কোড মেয়াদোত্তীর্ণ। হোস্ট ডিভাইসে নতুন তৈরি করুন।",
     "readyToConnect": "{deviceName}-এ সংযুক্ত হতে প্রস্তুত",
-    "scanDescription": "Scan the QR code displayed on the host device to connect",
-    "scanQrCode": "Scan QR Code",
+    "scanDescription": "সংযোগ করতে হোস্ট ডিভাইসে দেখানো QR কোড স্ক্যান করুন",
+    "scanQrCode": "QR কোড স্ক্যান করুন",
     "scanningForQr": "QR কোড স্ক্যান হচ্ছে...",
     "startCamera": "ক্যামেরা শুরু",
     "startingCamera": "ক্যামেরা শুরু হচ্ছে...",
-    "tryAgain": "Try Again"
+    "tryAgain": "আবার চেষ্টা করুন"
   },
   "quickCategorize": {
     "buttons": {
@@ -3911,7 +3911,7 @@
       "save": "সংরক্ষণ"
     },
     "clickToSelect": "নির্বাচন করতে বিভাগে ক্লিক করুন",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "description": "{count, plural, =1 {এই লেনদেনের} other {#টি লেনদেনের}} জন্য একটি ক্যাটাগরি নির্বাচন করুন",
     "general": "সাধারণ",
     "noResults": "কোনো বিভাগ পাওয়া যায়নি",
     "pressEnter": "↵ Enter চাপুন",
@@ -3933,23 +3933,23 @@
     "timePeriod": "সময়কাল"
   },
   "quickStats": {
-    "balance": "Total Balance",
-    "expenses": "Expenses",
-    "income": "Income",
-    "savingsRate": "Savings Rate",
-    "savingsRateDescription": "Percentage of income saved this month"
+    "balance": "মোট ব্যালেন্স",
+    "expenses": "ব্যয়",
+    "income": "আয়",
+    "savingsRate": "সঞ্চয় হার",
+    "savingsRateDescription": "এই মাসে আয়ের শতকরা সঞ্চিত অংশ"
   },
   "receiptThumbnail": {
-    "close": "Close",
-    "deleteConfirm": "Delete receipt \"{filename}\"?",
-    "deleteFailed": "Failed to delete receipt",
-    "deleteReceipt": "Delete receipt",
-    "downloadPdf": "Download PDF",
+    "close": "বন্ধ করুন",
+    "deleteConfirm": "\"{filename}\" রসিদ মুছবেন?",
+    "deleteFailed": "রসিদ মুছতে ব্যর্থ",
+    "deleteReceipt": "রসিদ মুছুন",
+    "downloadPdf": "PDF ডাউনলোড করুন",
     "fileSize": "{size} KB",
-    "pdfReceipt": "PDF Receipt",
-    "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
-    "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}",
+    "pdfReceipt": "PDF রসিদ",
+    "receiptCount": "{count, plural, =1 {১টি রসিদ} other {#টি রসিদ}}",
+    "unsupportedFileType": "অসমর্থিত ফাইল ধরন",
+    "uploaded": "{date}-এ আপলোড হয়েছে",
     "view": "দেখুন"
   },
   "receiptUpload": {
@@ -4001,46 +4001,46 @@
       "quarterly": "ত্রৈমাসিক",
       "weekly": "সাপ্তাহিক"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
+    "inDays": "{count, plural, =0 {(আজ)} =1 {(১ দিনে)} other {(# দিনে)}}",
     "next": "পরবর্তী: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "occurrences": "{count, plural, =1 {১টি ঘটনা শনাক্ত হয়েছে} other {#টি ঘটনা শনাক্ত হয়েছে}}",
     "perPeriod": {
       "month": "প্রতি মাসে",
       "quarter": "প্রতি ত্রৈমাসিকে",
       "twoWeeks": "প্রতি ২ সপ্তাহে",
       "week": "প্রতি সপ্তাহে"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "showingPatterns": "{count, plural, =1 {১টি পুনরাবৃত্ত লেনদেনের ধরন দেখানো হচ্ছে} other {#টি পুনরাবৃত্ত লেনদেনের ধরন দেখানো হচ্ছে}}",
     "subtitle": "সনাক্ত সাবস্ক্রিপশন ও বিল",
     "title": "পুনরাবৃত্ত লেনদেন"
   },
   "reports": {
     "addTransactionsToSeeFlow": "অর্থ প্রবাহ দেখতে আয় ও ব্যয় লেনদেন যোগ করুন",
-    "amount": "Amount",
-    "category": "Category",
+    "amount": "পরিমাণ",
+    "category": "ক্যাটাগরি",
     "categoryBreakdown": "বিভাগ বিশ্লেষণ",
     "downloadPng": "PNG হিসেবে ডাউনলোড",
     "downloadSvg": "SVG হিসেবে ডাউনলোড",
-    "expenses": "Expenses",
-    "income": "Income",
+    "expenses": "ব্যয়",
+    "income": "আয়",
     "incomeVsExpenses": "আয় বনাম ব্যয় (শেষ ৬ মাস)",
     "loading": "রিপোর্ট লোড হচ্ছে...",
     "moneyFlow": "অর্থ প্রবাহ",
     "moneyFlowDescription": "আয় কীভাবে বিভাগ ও সঞ্চয়ে প্রবাহিত হয় দেখুন",
     "net": "Net",
     "netSavings": "নিট সঞ্চয়",
-    "noDataAvailable": "No data available",
+    "noDataAvailable": "কোনো ডেটা পাওয়া যাচ্ছে না",
     "noSpendingData": "কোনো ব্যয় ডেটা নেই",
     "noTrendData": "কোনো প্রবণতা ডেটা নেই",
-    "percentOfTotal": "% of Total",
+    "percentOfTotal": "মোটের %",
     "savingsRate": "সঞ্চয় হার",
     "spendingByCategory": "বিভাগ অনুযায়ী ব্যয়",
     "subtitle": "আর্থিক ডেটা ভিজ্যুয়ালাইজ করুন",
     "timeRange": {
-      "all": "All",
-      "month": "Month",
-      "quarter": "Quarter",
-      "year": "Year"
+      "all": "সব",
+      "month": "মাস",
+      "quarter": "ত্রৈমাসিক",
+      "year": "বছর"
     },
     "title": "রিপোর্ট ও বিশ্লেষণ",
     "topCategories": "শীর্ষ ৫ বিভাগ",
@@ -4126,7 +4126,7 @@
     "tapToChooseColor": "কাস্টম রঙ বেছে নিতে ট্যাপ করুন",
     "tipLabel": "টিপ:",
     "title": "সেটিংস",
-    "toggleWebmcp": "Toggle WebMCP AI Agent Tools",
+    "toggleWebmcp": "WebMCP AI এজেন্ট টুলস টগল করুন",
     "transaction": "লেনদেন",
     "transactions": "লেনদেন",
     "type": "ধরন",
@@ -4135,10 +4135,10 @@
     "updateAccount": "অ্যাকাউন্ট আপডেট",
     "updateCategory": "বিভাগ আপডেট",
     "updateCategoryDetails": "বিভাগের বিবরণ আপডেট করুন",
-    "webmcpDescription": "Allow browser AI agents to interact with your budget data. Requires Chrome 146+ with the WebMCP flag enabled.",
-    "webmcpNotSupported": "Your browser does not support WebMCP yet. Enable chrome://flags/#webmcp-for-testing in Chrome 146 Canary.",
-    "webmcpTitle": "WebMCP AI Agent Tools",
-    "webmcpToolsDescription": "When enabled, 9 tools are exposed to browser AI agents: search transactions, get budget summary, spending by category, account balances, list categories, get subscriptions, add transaction, categorize transaction, and set budget limit. Encryption fields and bank identification data are never shared.",
+    "webmcpDescription": "ব্রাউজার AI এজেন্টদের আপনার বাজেট ডেটার সাথে ইন্টারঅ্যাক্ট করতে দিন। Chrome 146+ এবং WebMCP ফ্ল্যাগ সক্রিয় থাকা দরকার।",
+    "webmcpNotSupported": "আপনার ব্রাউজার এখনো WebMCP সমর্থন করে না। Chrome 146 Canary-তে chrome://flags/#webmcp-for-testing সক্রিয় করুন।",
+    "webmcpTitle": "WebMCP AI এজেন্ট টুলস",
+    "webmcpToolsDescription": "সক্রিয় হলে, ব্রাউজার AI এজেন্টদের জন্য ৯টি টুল প্রদর্শিত হয়: লেনদেন অনুসন্ধান, বাজেট সারসংক্ষেপ, ক্যাটাগরি অনুযায়ী ব্যয়, অ্যাকাউন্ট ব্যালেন্স, ক্যাটাগরি তালিকা, সাবস্ক্রিপশন, লেনদেন যোগ, লেনদেন শ্রেণীবদ্ধকরণ এবং বাজেট সীমা নির্ধারণ। এনক্রিপশন ফিল্ড এবং ব্যাংক শনাক্তকরণ ডেটা কখনো শেয়ার করা হয় না।",
     "yourAccounts": "আপনার অ্যাকাউন্ট"
   },
   "shortcutsModal": {
@@ -4188,14 +4188,14 @@
     "shortcuts": "শর্টকাট"
   },
   "simplefinConnect": {
-    "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
+    "accountsConnected": "{count, plural, one {# অ্যাকাউন্ট সংযুক্ত} other {# অ্যাকাউন্ট সংযুক্ত}}",
     "alreadyHaveToken": "ইতিমধ্যে টোকেন আছে?",
     "asOf": "{date} পর্যন্ত",
     "autoImportDescription": "ব্যাংক অ্যাকাউন্ট থেকে স্বয়ংক্রিয়ভাবে লেনদেন আমদানি",
     "automaticSync": "স্বয়ংক্রিয় সিঙ্ক",
     "automaticSyncDescription": "লেনদেন প্রতিদিন সিঙ্ক হয়। যেকোনো সময় ম্যানুয়াল আমদানি।",
-    "back": "Back",
-    "cancel": "Cancel",
+    "back": "পেছনে",
+    "cancel": "বাতিল",
     "completeSetup": "সেটআপ সম্পন্ন",
     "connect": "সংযুক্ত করুন",
     "connectYourBank": "আপনার ব্যাংক সংযুক্ত করুন",
@@ -4206,7 +4206,7 @@
     "createNewAccount": "নতুন অ্যাকাউন্ট তৈরি",
     "dialogDescription": "SimpleFIN Bridge দিয়ে ব্যাংক অ্যাকাউন্ট লিংক করুন",
     "dialogTitle": "ব্যাংক অ্যাকাউন্ট সংযুক্ত করুন",
-    "done": "Done",
+    "done": "সম্পন্ন",
     "enterItHere": "এখানে দিন",
     "enterTokenError": "SimpleFIN সেটআপ টোকেন দিন",
     "failedToSave": "সংযোগ সংরক্ষণ ব্যর্থ",
@@ -4238,7 +4238,7 @@
     "step3Title": "ধাপ ৩: অ্যাকাউন্ট লিংক করুন",
     "subscriptionDescription": "SimpleFIN ২৫টি পর্যন্ত ব্যাংক সংযোগে মাসিক $1.50।",
     "subscriptionTitle": "SimpleFIN Bridge সাবস্ক্রিপশন",
-    "syncDescription": "Your transactions will be automatically synced daily. You can also sync manually from the Import page.",
+    "syncDescription": "আপনার লেনদেন প্রতিদিন অটোমেটিক সিংক হবে। আপনি ইমপোর্ট পেজ থেকে ম্যানুয়ালিও সিংক করতে পারবেন।",
     "tokenHint": "টোকেন অক্ষর ও সংখ্যা দিয়ে শুরু হওয়া দীর্ঘ স্ট্রিং",
     "tryAgain": "আবার চেষ্টা করুন",
     "unexpectedError": "অপ্রত্যাশিত ত্রুটি"
@@ -4249,7 +4249,7 @@
       "title": "সংযুক্ত অ্যাকাউন্ট"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "accountsLinked": "{count, plural, =1 {১টি অ্যাকাউন্ট লিংক হয়েছে} other {#টি অ্যাকাউন্ট লিংক হয়েছে}}",
       "connectButton": "ব্যাংক অ্যাকাউন্ট সংযুক্ত",
       "connected": "সংযুক্ত",
       "description": "স্বয়ংক্রিয়ভাবে লেনদেন আমদানিতে ব্যাংক অ্যাকাউন্ট সংযুক্ত করুন",
@@ -4271,9 +4271,9 @@
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "hoursAgo": "{hours, plural, =1 {১ ঘণ্টা আগে} other {# ঘণ্টা আগে}}",
       "lastSynced": "সর্বশেষ সিঙ্ক: {time}",
-      "lessThanHour": "Less than an hour ago",
+      "lessThanHour": "এক ঘণ্টারও কম আগে",
       "never": "কখনো না",
       "syncNow": "এখন সিঙ্ক",
       "syncing": "সিঙ্ক হচ্ছে..."
@@ -4351,18 +4351,18 @@
     "warningsLabel": "সতর্কতা:"
   },
   "spendingTrendChart": {
-    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "forecastFooter": "শেষ {months} মাসের লিনিয়ার রিগ্রেশনের ভিত্তিতে পূর্বাভাস",
     "legend": {
-      "actualSpending": "Actual Spending",
-      "projected": "Projected"
+      "actualSpending": "প্রকৃত ব্যয়",
+      "projected": "প্রত্যাশিত"
     },
-    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "notEnoughData": "প্রবণতা তৈরি করতে পর্যাপ্ত ডেটা নেই। কমপক্ষে ২ মাসের লেনদেন যোগ করুন।",
     "stats": {
-      "avgMonthly": "Avg Monthly",
-      "lastMonth": "Last Month",
-      "projected": "Projected"
+      "avgMonthly": "গড় মাসিক",
+      "lastMonth": "গত মাস",
+      "projected": "প্রত্যাশিত"
     },
-    "title": "Spending Trends & Forecast"
+    "title": "ব্যয়ের প্রবণতা ও পূর্বাভাস"
   },
   "splitTransaction": {
     "addSplit": "বিভক্তি যোগ ({current}/{max})",
@@ -4442,7 +4442,7 @@
     "settleAmount": "{amount} মেটান",
     "settleUp": "মিটিয়ে নিন",
     "settled": "মেটানো",
-    "settledHistory": "Settled History ({count})",
+    "settledHistory": "মীমাংসিত ইতিহাস ({count})",
     "settlementMethods": {
       "cash": "নগদ",
       "eTransfer": "ই-ট্রান্সফার",
@@ -4454,7 +4454,7 @@
     "splitATransaction": "একটি লেনদেন ভাগ করুন",
     "splitFlow": {
       "amountsCorrect": "পরিমাণ সঠিকভাবে যোগ হয়েছে",
-      "confirmDescription": "This will create {count, plural, one {# split} other {# splits}} for this transaction. Each person's share will be tracked until settled.",
+      "confirmDescription": "এটি এই লেনদেনের জন্য {count, plural, one {# স্প্লিট} other {# স্প্লিট}} তৈরি করবে। প্রতিটি ব্যক্তির ভাগ মীমাংসা না হওয়া পর্যন্ত ট্র্যাক করা হবে।",
       "confirmSplit": "ভাগাভাগি নিশ্চিত করুন",
       "howToSplit": "কীভাবে ভাগ করবেন?",
       "modes": {
@@ -4486,15 +4486,15 @@
     "title": "ব্যয় ভাগাভাগি",
     "total": "মোট",
     "unknownTransaction": "অজানা লেনদেন",
-    "unsettledSplitCount": "{count, plural, one {# unsettled split} other {# unsettled splits}}",
-    "unsettledSplits": "Unsettled Splits ({count})",
+    "unsettledSplitCount": "{count, plural, one {# অমীমাংসিত স্প্লিট} other {# অমীমাংসিত স্প্লিট}}",
+    "unsettledSplits": "অমীমাংসিত স্প্লিট ({count})",
     "via": "মাধ্যমে",
     "youOwe": "আপনার {amount} দেনা",
     "youOweLabel": "আপনার দেনা"
   },
   "subscriptionCard": {
     "badges": {
-      "aiVerified": "AI Verified",
+      "aiVerified": "AI যাচাইকৃত",
       "cancelled": "বাতিল",
       "paused": "বিরতিতে",
       "trial": "ট্রায়াল"
@@ -4551,7 +4551,7 @@
       "totalSpent": "মোট ব্যয়িত"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {ট্রায়ালে ১ দিন বাকি} other {ট্রায়ালে # দিন বাকি}}"
     },
     "reminderToggle": {
       "disableReminder": "রিমাইন্ডার বন্ধ করুন",
@@ -4570,18 +4570,18 @@
       "upcomingCharges": "আসন্ন চার্জ (পরবর্তী ৩০ দিন)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "activeSubscriptions": "{count, plural, =1 {১টি সক্রিয় সাবস্ক্রিপশন} other {#টি সক্রিয় সাবস্ক্রিপশন}}",
       "annualCost": "বার্ষিক খরচ",
       "monthlyCost": "মাসিক খরচ",
       "next30Days": "পরবর্তী ৩০ দিন",
       "projectedYearly": "প্রক্ষেপিত বার্ষিক ব্যয়",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "upcomingCharges": "{count, plural, =1 {১টি আসন্ন চার্জ} other {#টি আসন্ন চার্জ}}"
     },
     "suggestions": {
       "inactiveTitle": "সম্ভবত বাতিল সাবস্ক্রিপশন",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
+      "inactiveDescription": "{count, plural, =1 {১টি সাবস্ক্রিপশন} other {#টি সাবস্ক্রিপশন}} সম্প্রতি চার্জ করেনি। যাচাই করুন যে সেগুলো আসলেই বাতিল হয়েছে।",
       "trialsTitle": "শীঘ্রই শেষ হওয়া ট্রায়াল",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
+      "trialsDescription": "{count, plural, =1 {১টি ট্রায়াল} other {#টি ট্রায়াল}} আগামী ৭ দিনে শেষ হচ্ছে। ব্যবহার না করলে বাতিল করুন।",
       "highCostTitle": "উচ্চ খরচের সাবস্ক্রিপশন",
       "highCostDescription": "এই সাবস্ক্রিপশনগুলো ব্যয়ের বড় অংশ। পূর্ণ মূল্য পাচ্ছেন কিনা বিবেচনা করুন।"
     }
@@ -4651,7 +4651,7 @@
     "deleteConfirmLabel": "মুছুন",
     "deleteConfirmTitle": "সাবস্ক্রিপশন মুছুন",
     "deleteError": "সাবস্ক্রিপশন মুছতে ব্যর্থ",
-    "dismissError": "Failed to dismiss subscription",
+    "dismissError": "সাবস্ক্রিপশন বাতিল করতে ব্যর্থ",
     "empty": {
       "noMatching": "কোনো মিল সাবস্ক্রিপশন নেই",
       "noMatchingDescription": "ফিল্টার বা অনুসন্ধান সামঞ্জস্য করুন।",
@@ -4662,7 +4662,7 @@
       "description": "ম্যানুয়াল: সঠিকভাবে ট্র্যাক করতে চান এমন সাবস্ক্রিপশন যোগ করুন। স্বয়ংক্রিয়: পুনরাবৃত্ত ধরন খুঁজতে লেনদেন বিশ্লেষণ করি।",
       "title": "স্মার্ট সাবস্ক্রিপশন ব্যবস্থাপনা"
     },
-    "importTransactions": "Import Transactions",
+    "importTransactions": "লেনদেন ইমপোর্ট করুন",
     "loading": "সাবস্ক্রিপশন লোড হচ্ছে...",
     "refreshAutoDetection": "স্বয়ংক্রিয় সনাক্তকরণ রিফ্রেশ",
     "saveError": "সাবস্ক্রিপশন সংরক্ষণ ব্যর্থ",
@@ -4689,26 +4689,26 @@
     "title": "সাবস্ক্রিপশন",
     "viewMode": {
       "active": "সক্রিয়",
-      "all": "All",
+      "all": "সব",
       "analysis": "বিশ্লেষণ",
       "detected": "সনাক্ত",
       "manual": "ম্যানুয়াল"
     }
   },
   "syncStatus": {
-    "daysAgo": "{days}d ago",
-    "devices": "{connected}/{total} devices",
-    "devicesConnected": "{connected}/{total} devices connected",
-    "hoursAgo": "{hours}h ago",
-    "justNow": "Just now",
-    "lastSync": "Last sync: {time}",
-    "minutesAgo": "{minutes}m ago",
-    "never": "Never",
+    "daysAgo": "{days}দি আগে",
+    "devices": "{connected}/{total} ডিভাইস",
+    "devicesConnected": "{connected}/{total} ডিভাইস সংযুক্ত",
+    "hoursAgo": "{hours}ঘ আগে",
+    "justNow": "এইমাত্র",
+    "lastSync": "শেষ সিংক: {time}",
+    "minutesAgo": "{minutes}মি আগে",
+    "never": "কখনো না",
     "offline": "Offline",
-    "partialSync": "Partial Sync",
-    "syncError": "Sync Error",
-    "synced": "Synced",
-    "syncing": "Syncing..."
+    "partialSync": "আংশিক সিংক",
+    "syncError": "সিংক ত্রুটি",
+    "synced": "সিংক হয়েছে",
+    "syncing": "সিংক হচ্ছে..."
   },
   "tooltip": {
     "ariaLabel": "আরও তথ্য",
@@ -4717,18 +4717,18 @@
   "trainMl": {
     "confidence": "আস্থা",
     "failedToLoadModel": "মডেল লোড ব্যর্থ: {error}",
-    "finalLoss": "Final Loss",
+    "finalLoss": "চূড়ান্ত লস",
     "howItWorks": "কীভাবে কাজ করে",
-    "howStep1": "Generates ~350 training examples from 35 categorization rules",
-    "howStep2": "Trains a neural network (64→32 neurons) using TensorFlow.js",
-    "howStep3": "Achieves 90%+ accuracy on test set",
-    "howStep4": "Saves model to IndexedDB for fast predictions",
-    "howStep5": "Fallback for transactions that don't match rules",
-    "howToUse": "How to Use",
+    "howStep1": "৩৫টি শ্রেণীবদ্ধকরণ নিয়ম থেকে ~৩৫০টি ট্রেনিং উদাহরণ তৈরি করে",
+    "howStep2": "TensorFlow.js ব্যবহার করে একটি নিউরাল নেটওয়ার্ক (64→32 নিউরন) ট্রেন করে",
+    "howStep3": "টেস্ট সেটে ৯০%+ নির্ভুলতা অর্জন করে",
+    "howStep4": "দ্রুত পূর্বাভাসের জন্য IndexedDB-তে মডেল সেভ করে",
+    "howStep5": "নিয়মের সাথে মিলে না এমন লেনদেনের জন্য ফলব্যাক",
+    "howToUse": "কিভাবে ব্যবহার করবেন",
     "loadSavedModel": "সংরক্ষিত মডেল লোড",
     "lowerIsBetter": "কম ভালো",
     "modelLoadedSuccess": "মডেল সফলভাবে লোড!",
-    "modelSavedReady": "Model saved to IndexedDB and ready for predictions.",
+    "modelSavedReady": "মডেল IndexedDB-তে সেভ হয়েছে এবং পূর্বাভাসের জন্য প্রস্তুত।",
     "noSavedModel": "সংরক্ষিত মডেল পাওয়া যায়নি। আগে ট্রেইন করুন।",
     "subtitle": "লেনদেন শ্রেণীবদ্ধ করতে নিউরাল নেটওয়ার্ক ট্রেইন করুন",
     "targetAccuracy": "লক্ষ্য: ≥৯০%",
@@ -4741,11 +4741,11 @@
     "trainingInProgress": "ট্রেইনিং চলছে... ৩০-৬০ সেকেন্ড লাগতে পারে।",
     "trainingModel": "মডেল ট্রেইন হচ্ছে...",
     "unknownError": "অজানা ত্রুটি",
-    "useStep1": "<strong>1. Train Model:</strong> Click \"Train Model\" to generate training data and train the neural network (30-60s)",
-    "useStep2": "<strong>2. Automatic Integration:</strong> The model is automatically used as a fallback when rule-based categorization fails",
-    "useStep3": "<strong>3. Hybrid System:</strong> Rules are tried first (fast), ML is used for unknown patterns",
-    "useStep4": "<strong>4. Model Persistence:</strong> Trained model is saved to IndexedDB and loads automatically",
-    "useStep5": "<strong>5. Retraining:</strong> Run training again to update the model with new data"
+    "useStep1": "<strong>১. মডেল ট্রেন:</strong> ট্রেনিং ডেটা তৈরি এবং নিউরাল নেটওয়ার্ক ট্রেন করতে \"Train Model\" ক্লিক করুন (৩০-৬০ সেকেন্ড)",
+    "useStep2": "<strong>২. অটোমেটিক ইন্টিগ্রেশন:</strong> রুল-ভিত্তিক শ্রেণীবদ্ধকরণ ব্যর্থ হলে মডেল অটোমেটিক ফলব্যাক হিসেবে ব্যবহৃত হয়",
+    "useStep3": "<strong>৩. হাইব্রিড সিস্টেম:</strong> প্রথমে রুল চেষ্টা করা হয় (দ্রুত), অজানা প্যাটার্নের জন্য ML ব্যবহৃত হয়",
+    "useStep4": "<strong>৪. মডেল পার্সিস্টেন্স:</strong> ট্রেন করা মডেল IndexedDB-তে সেভ হয় এবং অটোমেটিক লোড হয়",
+    "useStep5": "<strong>৫. রিট্রেনিং:</strong> নতুন ডেটা দিয়ে মডেল আপডেট করতে আবার ট্রেনিং চালান"
   },
   "transactionModal": {
     "account": {
@@ -4839,14 +4839,14 @@
     "placeholderExtended": "'চা গত সপ্তাহে' বা 'পরিমাণ:>৫০' চেষ্টা করুন",
     "recentSearchLabel": "সাম্প্রতিক অনুসন্ধান",
     "recentSearches": "সাম্প্রতিক অনুসন্ধান",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
+    "resultCount": "{count} {count, plural, =1 {ফলাফল} other {ফলাফল}}",
     "save": "সংরক্ষণ",
     "saveFilter": "ফিল্টার সংরক্ষণ",
     "savedFilters": "সংরক্ষিত ফিল্টার",
     "searchFilterLabel": "অনুসন্ধান ফিল্টার",
-    "searchTipAmount": "Use <code>$50-100</code> for amount ranges",
+    "searchTipAmount": "পরিমাণের পরিসরের জন্য <code>$50-100</code> ব্যবহার করুন",
     "searchTipChars": "লেনদেন খুঁজতে ৩+ অক্ষর টাইপ করুন",
-    "searchTipNL": "Try <code>coffee last week</code> for natural language",
+    "searchTipNL": "প্রাকৃতিক ভাষার জন্য <code>coffee last week</code> চেষ্টা করুন",
     "searchTipsIntro": "অনুসন্ধান টিপস:",
     "searchingFor": "খোঁজা হচ্ছে: {query}",
     "suggestions": {
@@ -4857,18 +4857,18 @@
     },
     "suggestionsHeading": "পরামর্শ",
     "tips": {
-      "amount": "Amount: '$50-100' or 'amount:>50'",
-      "category": "Category: 'groceries' or 'category:food'",
-      "date": "Date: 'last week', 'this month', 'date:last30'",
-      "fuzzy": "Typo-tolerant: 'starbukcs' finds 'Starbucks'",
+      "amount": "পরিমাণ: '$50-100' বা 'amount:>50'",
+      "category": "ক্যাটাগরি: 'groceries' বা 'category:food'",
+      "date": "তারিখ: 'last week', 'this month', 'date:last30'",
+      "fuzzy": "টাইপো-সহিষ্ণু: 'starbukcs' 'Starbucks' খুঁজে পায়",
       "title": "অনুসন্ধান টিপস",
-      "type": "Type: 'type:income' or 'type:expense'"
+      "type": "ধরন: 'type:income' বা 'type:expense'"
     },
     "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
+    "usedTimes": "{count} {count, plural, =1 {বার} other {বার}} ব্যবহৃত",
     "viewAllResults": "সব {count} ফলাফল দেখুন",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "resultsFound": "{count} {count, plural, =1 {ফলাফল} other {ফলাফল}} পাওয়া গেছে",
+    "suggestionsAvailable": "{count} {count, plural, =1 {পরামর্শ} other {পরামর্শ}} পাওয়া যাচ্ছে"
   },
   "transactionTable": {
     "actions": {
@@ -4987,15 +4987,15 @@
     "youWillLose": "আপনি হারাবেন:"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
-    "daysRemaining": "{count} days remaining in your free trial",
-    "dismiss": "Dismiss",
-    "expired": "Your trial has expired",
-    "expiredDescription": "App is in read-only mode. Upgrade to continue managing your finances.",
-    "upgrade": "Upgrade - {price}",
-    "upgradeNow": "Upgrade Now - {price}",
-    "upgradePrompt": "Upgrade now to keep full access to your budget data.",
-    "viewPricing": "View pricing"
+    "daysLeft": "{count, plural, =0 {আপনার ট্রায়াল আজ শেষ হচ্ছে!} =1 {আপনার ট্রায়ালে মাত্র ১ দিন বাকি} other {আপনার ট্রায়ালে # দিন বাকি}}",
+    "daysRemaining": "আপনার ফ্রি ট্রায়ালে {count} দিন বাকি",
+    "dismiss": "বাতিল করুন",
+    "expired": "আপনার ট্রায়ালের মেয়াদ শেষ হয়ে গেছে",
+    "expiredDescription": "অ্যাপ শুধুমাত্র-পড়া মোডে আছে। আপনার আর্থিক ব্যবস্থাপনা চালিয়ে যেতে আপগ্রেড করুন।",
+    "upgrade": "আপগ্রেড - {price}",
+    "upgradeNow": "এখনই আপগ্রেড করুন - {price}",
+    "upgradePrompt": "আপনার বাজেট ডেটায় পূর্ণ অ্যাক্সেস রাখতে এখনই আপগ্রেড করুন।",
+    "viewPricing": "মূল্য দেখুন"
   },
   "validationWarnings": {
     "aiAnalysis": "AI বিশ্লেষণ:",
@@ -5011,9 +5011,9 @@
     "ignoreAllContinue": "সব উপেক্ষা ও চালিয়ে যান",
     "informational": "তথ্যমূলক",
     "issuesDetected": "সমস্যা সনাক্ত",
-    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
+    "issuesFound": "আমরা {count, plural, =1 {১টি সমস্যা} other {#টি সমস্যা}} পেয়েছি যার প্রতি আপনার মনোযোগ দরকার",
     "marked": "চিহ্নিত",
-    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
+    "removalNote": "আপনি এগিয়ে গেলে {count, plural, =1 {১টি লেনদেন} other {#টি লেনদেন}} ইমপোর্ট থেকে সরানো হবে।",
     "remove": "সরান",
     "removeAndContinue": "{count} সরান ও চালিয়ে যান",
     "suggestion": "পরামর্শ:",
@@ -5029,7 +5029,7 @@
     "automaticProtection": "স্বয়ংক্রিয় সুরক্ষা",
     "bankGradeSecurity": "ব্যাংক-মানের নিরাপত্তা",
     "chooseProtection": "ডেটা কীভাবে সুরক্ষিত করবেন বেছে নিন:",
-    "confirmPassword": "Confirm Password",
+    "confirmPassword": "পাসওয়ার্ড নিশ্চিত করুন",
     "confirmYourPassword": "পাসওয়ার্ড নিশ্চিত করুন",
     "enableEncryption": "এনক্রিপশন সক্রিয়",
     "enterStrongPassword": "শক্তিশালী পাসওয়ার্ড দিন",
@@ -5039,14 +5039,14 @@
     "passwordProtection": "পাসওয়ার্ড সুরক্ষা",
     "passwordWarning": "পাসওয়ার্ড ভুলে গেলে ডেটা পুনরুদ্ধার সম্ভব নয়।",
     "passwordsDoNotMatch": "পাসওয়ার্ড মিলছে না",
-    "recommended": "Recommended",
+    "recommended": "প্রস্তাবিত",
     "settingUp": "সেটআপ হচ্ছে...",
     "setupError": "ভল্ট সেটআপ ব্যর্থ। আবার চেষ্টা করুন।",
-    "strengthFair": "Fair",
-    "strengthStrong": "Strong",
-    "strengthVeryStrong": "Very Strong",
-    "strengthVeryWeak": "Very Weak",
-    "strengthWeak": "Weak",
+    "strengthFair": "মোটামুটি",
+    "strengthStrong": "শক্তিশালী",
+    "strengthVeryStrong": "অত্যন্ত শক্তিশালী",
+    "strengthVeryWeak": "অত্যন্ত দুর্বল",
+    "strengthWeak": "দুর্বল",
     "zeroKnowledge": "জিরো নলেজ"
   },
   "welcome": {
@@ -5063,8 +5063,8 @@
       "title": "বাজেটের অগ্রগতি"
     },
     "eventBudget": {
-      "description": "Track spending for events and projects",
-      "title": "Event Budgets"
+      "description": "ইভেন্ট এবং প্রকল্পের ব্যয় ট্র্যাক করুন",
+      "title": "ইভেন্ট বাজেট"
     },
     "incomeVsExpenses": {
       "description": "আপনার আয় এবং ব্যয়ের তুলনা করুন সময়ের সাথে সাথে",
@@ -5075,37 +5075,37 @@
       "title": "মাসিক প্রবণতা"
     },
     "netWorthMini": {
-      "description": "Quick view of your total net worth",
-      "title": "Net Worth"
+      "description": "আপনার মোট নেট ওয়ার্থের দ্রুত দৃশ্য",
+      "title": "নেট ওয়ার্থ"
     },
     "recentTransactions": {
       "description": "আপনার সর্বশেষ আর্থিক কার্যকলাপের দ্রুত দৃশ্য",
       "title": "সাম্প্রতিক লেনদেন"
     },
     "safeToSpend": {
-      "description": "See how much you can safely spend per category",
-      "title": "Safe to Spend"
+      "description": "দেখুন প্রতিটি ক্যাটাগরিতে আপনি কতটুকু নিরাপদে ব্যয় করতে পারেন",
+      "title": "নিরাপদে ব্যয়"
     },
     "spendingByCategory": {
       "description": "আপনার টাকা কোথায় যাচ্ছে তা ভিজ্যুয়াল বিশ্লেষণের মাধ্যমে দেখুন",
       "title": "শ্রেণী অনুযায়ী ব্যয়"
     },
     "streaks": {
-      "description": "Track your engagement streaks and achievements",
-      "title": "Streaks & Badges"
+      "description": "আপনার ব্যবহারের ধারাবাহিকতা ও অর্জন ট্র্যাক করুন",
+      "title": "ধারাবাহিকতা ও ব্যাজ"
     },
     "upcomingBills": {
       "description": "বিলের স্মরণিকার মাধ্যমে কখনো একটি পেমেন্ট মিস করবেন না",
       "title": "আসন্ন বিল"
     },
     "weeklyRecap": {
-      "description": "Summary of your weekly spending patterns",
-      "title": "Weekly Recap"
+      "description": "আপনার সাপ্তাহিক ব্যয়ের ধরন সম্পর্কে সংক্ষিপ্ত বিবরণী",
+      "title": "সাপ্তাহিক সারসংক্ষেপ"
     }
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "category": "{count, plural, =1 {১টি ক্যাটাগরি} other {#টি ক্যাটাগরি}}",
       "createNew": "নতুন তৈরি",
       "description": "YNAB বিভাগগুলো আপনার বিদ্যমান বিভাগে ম্যাপ করুন বা নতুন তৈরি করুন।",
       "mapToExisting": "বিদ্যমানে ম্যাপ",
@@ -5118,7 +5118,7 @@
       "errors": "ত্রুটি",
       "importAnother": "আরেকটি আমদানি",
       "success": "আমদানি সম্পন্ন!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "successMessage": "YNAB থেকে সফলভাবে {count, plural, =1 {১টি আইটেম ইমপোর্ট} other {#টি আইটেম ইমপোর্ট}} হয়েছে।",
       "viewTransactions": "লেনদেন দেখুন",
       "whatNext": "এরপর কী করতে চান?",
       "withIssues": "সমস্যাসহ আমদানি সম্পন্ন"
@@ -5231,7 +5231,7 @@
       "budgetImportFailed": "বাজেট আমদানি ব্যর্থ: {details}"
     },
     "importSuccess": "YNAB ডেটা সফলভাবে আমদানি হয়েছে!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importWithErrors": "{count, plural, =1 {১টি ত্রুটি} other {#টি ত্রুটি}} সহ ইমপোর্ট সম্পন্ন হয়েছে"
   },
   "developerTools": {
     "title": "ডেভেলপার টুলস",

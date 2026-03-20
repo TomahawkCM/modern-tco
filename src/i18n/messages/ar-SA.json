@@ -3517,35 +3517,35 @@
   },
   "planning": {
     "future": {
-      "activeGoals": "Active Goals",
-      "activeGoalsHeading": "Active Goals",
-      "addFirstGoal": "Add Your First Goal",
-      "addGoal": "Add Goal",
-      "addNewGoal": "Add New Goal",
-      "atCurrentRate": "At current rate, goal will take {months} months (est. {date})",
-      "completed": "Completed",
-      "completedGoals": "Completed Goals",
-      "createFirstGoal": "Create Your First Goal",
-      "currentSavingsLabel": "Current Savings",
-      "currentSavingsValue": "Current savings: {amount}",
-      "delete": "Delete",
-      "deleteGoal": "Delete Goal",
-      "deleteGoalAriaLabel": "Delete goal",
-      "deleteGoalDescription": "Are you sure you want to delete this savings goal? This action cannot be undone.",
-      "deleteGoalTitle": "Delete Savings Goal",
+      "activeGoals": "الأهداف النشطة",
+      "activeGoalsHeading": "الأهداف النشطة",
+      "addFirstGoal": "أضف هدفك الأول",
+      "addGoal": "إضافة هدف",
+      "addNewGoal": "إضافة هدف جديد",
+      "atCurrentRate": "بالمعدل الحالي، سيستغرق الهدف {months} شهرًا (تقديريًا {date})",
+      "completed": "مكتمل",
+      "completedGoals": "الأهداف المكتملة",
+      "createFirstGoal": "إنشاء أول هدف",
+      "currentSavingsLabel": "المدخرات الحالية",
+      "currentSavingsValue": "المدخرات الحالية: {amount}",
+      "delete": "حذف",
+      "deleteGoal": "حذف الهدف",
+      "deleteGoalAriaLabel": "حذف الهدف",
+      "deleteGoalDescription": "هل أنت متأكد أنك تريد حذف هدف الادخار هذا؟ لا يمكن التراجع عن هذا الإجراء.",
+      "deleteGoalTitle": "حذف هدف الادخار",
       "descriptionLabel": "Description",
-      "descriptionPlaceholder": "What are you saving for?",
-      "descriptionValue": "Description: {description}",
-      "edit": "Edit",
-      "editGoal": "Edit Goal",
-      "editGoalAriaLabel": "Edit goal",
-      "emptyDescription": "Start planning for your future purchases by creating your first savings goal. Track your progress and stay on target.",
-      "emptyTitle": "No Savings Goals Yet",
-      "failedToSave": "Failed to save purchase",
-      "goalName": "Goal: {name}",
-      "goalNameLabel": "Goal Name",
-      "goalNamePlaceholder": "e.g., New Laptop, Vacation Fund",
-      "invalidTargetAmount": "Please enter a valid target amount",
+      "descriptionPlaceholder": "لماذا تدخر؟",
+      "descriptionValue": "الوصف: {description}",
+      "edit": "تعديل",
+      "editGoal": "تعديل الهدف",
+      "editGoalAriaLabel": "تعديل الهدف",
+      "emptyDescription": "ابدأ التخطيط لمشترياتك المستقبلية بإنشاء أول هدف ادخار. تابع تقدمك وابقَ على المسار.",
+      "emptyTitle": "لا توجد أهداف ادخار بعد",
+      "failedToSave": "فشل حفظ المشتريات",
+      "goalName": "الهدف: {name}",
+      "goalNameLabel": "اسم الهدف",
+      "goalNamePlaceholder": "مثال: حاسوب محمول جديد، صندوق الإجازة",
+      "invalidTargetAmount": "يرجى إدخال مبلغ مستهدف صالح",
       "loading": "جارٍ تحميل المشتريات المستقبلية...",
       "markComplete": "تحديد كمكتمل",
       "markIncomplete": "تحديد كغير مكتمل",
@@ -3648,70 +3648,70 @@
       "youWillLose": "ستفقد:"
     },
     "retirement": {
-      "adjustmentNeeded": "⚠ Adjustment needed",
-      "allGrowthProjections": "All growth projections and calculations",
-      "canadianGovernmentPensions": "Canadian Government Pensions",
-      "companyBenefits": "Company Benefits",
-      "companyShares": "Company Shares",
-      "currentAge": "Current Age",
-      "currentAgeYears": "Current age: {age} years",
-      "currentSavings": "Current Savings",
-      "currentSavingsAmount": "Current savings: {amount}",
-      "delete": "Delete",
-      "deletePlan": "Delete Plan",
-      "deleteRetirementPlan": "Delete Retirement Plan",
-      "deleteRetirementPlanDescription": "This will permanently remove this retirement plan and all its projections.",
-      "deleteThisPlan": "Delete this plan",
-      "desiredMonthlyIncome": "Desired Monthly Income",
-      "employerPensionPlan": "Employer Pension Plan",
-      "expectedReturn": "Expected Return (%)",
-      "failedToDeletePlan": "Failed to delete plan",
-      "failedToSavePlan": "Failed to save plan",
-      "growthRate": "Growth Rate (%)",
-      "includeCPP": "Include CPP",
-      "includeOAS": "Include OAS",
-      "increaseContribution": "Increase monthly contribution by {amount}",
-      "inflationRate": "Inflation Rate (%)",
-      "investmentAccounts": "Investment Accounts",
-      "lastUpdated": "Last updated: {date}",
-      "lifeExpectancy": "Life Expectancy",
-      "load": "Load",
-      "loadThisPlan": "Load this plan",
-      "loading": "Loading calculator...",
-      "maxCPP2024": "Max CPP 2024: $1,307/mo",
-      "maxOAS2024": "Max OAS 2024: $708/mo",
-      "monthlyCPP": "Monthly CPP",
-      "monthlyContribution": "Monthly Contribution",
-      "monthlyContributionAmount": "Monthly contribution: {amount}",
-      "monthlyIncome": "Monthly Income",
-      "monthlyOAS": "Monthly OAS",
-      "monthlyPension": "Monthly pension",
-      "nonRegisteredBalance": "Non-Registered Balance",
-      "onTrack": "✓ You're on track!",
-      "onTrackDescription": "Your projected savings of {amount} exceeds your required savings.",
+      "adjustmentNeeded": "⚠ يلزم إجراء تعديل",
+      "allGrowthProjections": "جميع توقعات النمو والحسابات",
+      "canadianGovernmentPensions": "معاشات الحكومة الكندية",
+      "companyBenefits": "مزايا الشركة",
+      "companyShares": "أسهم الشركة",
+      "currentAge": "العمر الحالي",
+      "currentAgeYears": "العمر الحالي: {age} سنة",
+      "currentSavings": "المدخرات الحالية",
+      "currentSavingsAmount": "المدخرات الحالية: {amount}",
+      "delete": "حذف",
+      "deletePlan": "حذف الخطة",
+      "deleteRetirementPlan": "حذف خطة التقاعد",
+      "deleteRetirementPlanDescription": "سيؤدي هذا إلى إزالة خطة التقاعد هذه وجميع توقعاتها نهائيًا.",
+      "deleteThisPlan": "حذف هذه الخطة",
+      "desiredMonthlyIncome": "الدخل الشهري المطلوب",
+      "employerPensionPlan": "خطة معاش صاحب العمل",
+      "expectedReturn": "العائد المتوقع (%)",
+      "failedToDeletePlan": "فشل حذف الخطة",
+      "failedToSavePlan": "فشل حفظ الخطة",
+      "growthRate": "معدل النمو (%)",
+      "includeCPP": "تضمين CPP",
+      "includeOAS": "تضمين OAS",
+      "increaseContribution": "زيادة المساهمة الشهرية بمقدار {amount}",
+      "inflationRate": "معدل التضخم (%)",
+      "investmentAccounts": "حسابات الاستثمار",
+      "lastUpdated": "آخر تحديث: {date}",
+      "lifeExpectancy": "متوسط العمر المتوقع",
+      "load": "تحميل",
+      "loadThisPlan": "تحميل هذه الخطة",
+      "loading": "جاري تحميل الآلة الحاسبة...",
+      "maxCPP2024": "الحد الأقصى لـ CPP 2024: 1,307$/شهر",
+      "maxOAS2024": "الحد الأقصى لـ OAS 2024: 708$/شهر",
+      "monthlyCPP": "CPP الشهري",
+      "monthlyContribution": "المساهمة الشهرية",
+      "monthlyContributionAmount": "المساهمة الشهرية: {amount}",
+      "monthlyIncome": "الدخل الشهري",
+      "monthlyOAS": "OAS الشهري",
+      "monthlyPension": "المعاش الشهري",
+      "nonRegisteredBalance": "رصيد غير مسجل",
+      "onTrack": "✓ أنت على المسار الصحيح!",
+      "onTrackDescription": "مدخراتك المتوقعة البالغة {amount} تتجاوز مدخراتك المطلوبة.",
       "planName": "Plan: {name}",
-      "planSaved": "Retirement plan saved!",
-      "planSummary": "Age {currentAge} → {retirementAge} | {monthlyContribution}/mo | {expectedReturn}% return",
-      "projectedSavings": "Projected Savings",
-      "reduceIncome": "Reduce desired monthly income to {amount}",
-      "requiredSavings": "Required Savings",
-      "retirementAge": "Retirement Age",
-      "retirementAgeYears": "Retirement age: {age} years",
-      "rrspBalance": "RRSP Balance",
-      "saveThisPlan": "Save This Plan",
-      "savedPlans": "Saved Plans",
-      "savingsGrowth": "Savings Growth",
-      "shortfallDescription": "You're projected to be short by {amount}.",
-      "stockOptionsVested": "Stock Options (Vested)",
-      "subtitle": "Plan your retirement with compound interest projections",
-      "tfsaBalance": "TFSA Balance",
-      "title": "Retirement Calculator",
-      "toReachGoal": "To reach your goal, you could:",
-      "workMoreYears": "Work {years, plural, one {# more year} other {# more years}}",
-      "yearAge": "{year} (Age {age})",
-      "yearsToRetirement": "Years to Retirement",
-      "youWillLose": "You will lose:",
-      "yourInformation": "Your Information"
+      "planSaved": "تم حفظ خطة التقاعد!",
+      "planSummary": "العمر {currentAge} → {retirementAge} | {monthlyContribution}/شهر | عائد {expectedReturn}%",
+      "projectedSavings": "المدخرات المتوقعة",
+      "reduceIncome": "تخفيض الدخل الشهري المطلوب إلى {amount}",
+      "requiredSavings": "المدخرات المطلوبة",
+      "retirementAge": "سن التقاعد",
+      "retirementAgeYears": "سن التقاعد: {age} سنة",
+      "rrspBalance": "رصيد RRSP",
+      "saveThisPlan": "حفظ هذه الخطة",
+      "savedPlans": "الخطط المحفوظة",
+      "savingsGrowth": "نمو المدخرات",
+      "shortfallDescription": "من المتوقع أن ينقصك {amount}.",
+      "stockOptionsVested": "خيارات الأسهم (المستحقة)",
+      "subtitle": "خطط لتقاعدك مع توقعات الفائدة المركبة",
+      "tfsaBalance": "رصيد TFSA",
+      "title": "حاسبة التقاعد",
+      "toReachGoal": "للوصول إلى هدفك، يمكنك:",
+      "workMoreYears": "{years, plural, zero {لا حاجة لسنوات إضافية} one {العمل سنة إضافية واحدة} two {العمل سنتين إضافيتين} few {العمل # سنوات إضافية} many {العمل # سنة إضافية} other {العمل # سنة إضافية}}",
+      "yearAge": "{year} (العمر {age})",
+      "yearsToRetirement": "سنوات حتى التقاعد",
+      "youWillLose": "ستفقد:",
+      "yourInformation": "معلوماتك"
     }
   },
   "predictiveSpendingChart": {
@@ -4306,70 +4306,70 @@
   },
   "simplefinSettings": {
     "connectedAccounts": {
-      "description": "Manage your linked bank accounts",
-      "title": "Connected Accounts"
+      "description": "إدارة حساباتك البنكية المرتبطة",
+      "title": "الحسابات المتصلة"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
-      "connectButton": "Connect Bank Account",
-      "connected": "Connected",
-      "description": "Connect your bank accounts to automatically import transactions",
-      "notConnected": "Not Connected",
-      "notConnectedDesc": "Connect your bank accounts to start importing transactions",
-      "title": "SimpleFIN Connection"
+      "accountsLinked": "{count, plural, zero {لا حسابات مرتبطة} one {حساب واحد مرتبط} two {حسابان مرتبطان} few {# حسابات مرتبطة} many {# حسابًا مرتبطًا} other {# حساب مرتبط}}",
+      "connectButton": "ربط الحساب البنكي",
+      "connected": "متصل",
+      "description": "اربط حساباتك البنكية لاستيراد المعاملات تلقائيًا",
+      "notConnected": "غير متصل",
+      "notConnectedDesc": "اربط حساباتك البنكية لبدء استيراد المعاملات",
+      "title": "اتصال SimpleFIN"
     },
     "disconnect": {
-      "button": "Disconnect",
-      "cancel": "Cancel",
-      "confirm": "Disconnect",
-      "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
-      "dialogTitle": "Disconnect SimpleFIN?"
+      "button": "قطع الاتصال",
+      "cancel": "إلغاء",
+      "confirm": "قطع الاتصال",
+      "dialogDescription": "سيؤدي هذا إلى إزالة الاتصال بحساباتك البنكية. لن يتم حذف معاملاتك الحالية، لكن المعاملات الجديدة لن تتم مزامنتها تلقائيًا بعد الآن.",
+      "dialogTitle": "قطع اتصال SimpleFIN؟"
     },
     "help": {
       "bridgeDashboard": "SimpleFIN Bridge Dashboard",
       "protocolDocs": "SimpleFIN Protocol Documentation",
-      "title": "Need Help?"
+      "title": "تحتاج مساعدة؟"
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
-      "lastSynced": "Last synced: {time}",
-      "lessThanHour": "Less than an hour ago",
-      "never": "Never",
-      "syncNow": "Sync Now",
-      "syncing": "Syncing..."
+      "hoursAgo": "{hours, plural, zero {الآن} one {منذ ساعة واحدة} two {منذ ساعتين} few {منذ # ساعات} many {منذ # ساعة} other {منذ # ساعة}}",
+      "lastSynced": "آخر مزامنة: {time}",
+      "lessThanHour": "منذ أقل من ساعة",
+      "never": "أبدًا",
+      "syncNow": "مزامنة الآن",
+      "syncing": "جاري المزامنة..."
     },
     "syncSettings": {
       "autoCategorize": {
-        "description": "Automatically categorize imported transactions using AI",
-        "label": "Auto-Categorize"
+        "description": "تصنيف المعاملات المستوردة تلقائيًا باستخدام الذكاء الاصطناعي",
+        "label": "التصنيف التلقائي"
       },
       "autoSync": {
-        "description": "Automatically sync transactions on a schedule",
-        "label": "Automatic Sync"
+        "description": "مزامنة المعاملات تلقائيًا وفقًا لجدول زمني",
+        "label": "المزامنة التلقائية"
       },
-      "description": "Configure how and when transactions are synced",
+      "description": "تكوين كيفية ووقت مزامنة المعاملات",
       "frequency": {
-        "every12Hours": "Every 12 hours",
-        "every2Days": "Every 2 days",
-        "every6Hours": "Every 6 hours",
-        "hint": "SimpleFIN allows up to 24 requests per day. Daily sync is recommended.",
-        "label": "Sync Frequency",
-        "onceDaily": "Once daily"
+        "every12Hours": "كل 12 ساعة",
+        "every2Days": "كل يومين",
+        "every6Hours": "كل 6 ساعات",
+        "hint": "يسمح SimpleFIN بما يصل إلى 24 طلبًا يوميًا. يُوصى بالمزامنة اليومية.",
+        "label": "تكرار المزامنة",
+        "onceDaily": "مرة يوميًا"
       },
       "notifications": {
-        "description": "Show notification when sync completes",
-        "label": "Sync Notifications"
+        "description": "إظهار إشعار عند اكتمال المزامنة",
+        "label": "إشعارات المزامنة"
       },
       "pendingTransactions": {
-        "description": "Include transactions that haven't posted yet",
-        "label": "Import Pending Transactions"
+        "description": "تضمين المعاملات التي لم تُسجَّل بعد",
+        "label": "استيراد المعاملات المعلقة"
       },
-      "title": "Sync Settings",
+      "title": "إعدادات المزامنة",
       "transactionHistory": {
-        "days": "{count} days",
-        "hint": "How many days of transaction history to fetch (max 60 days per SimpleFIN)",
-        "label": "Transaction History"
+        "days": "{count} يوم",
+        "hint": "عدد أيام سجل المعاملات المطلوب جلبها (بحد أقصى 60 يومًا حسب SimpleFIN)",
+        "label": "سجل المعاملات"
       }
     }
   },
@@ -4813,79 +4813,79 @@
       "label": "الحساب"
     },
     "advancedOptions": {
-      "available": "{count} available",
-      "label": "Advanced Options"
+      "available": "{count} متاح",
+      "label": "خيارات متقدمة"
     },
     "amount": {
-      "label": "Amount",
+      "label": "المبلغ",
       "placeholder": "0.00",
-      "validationError": "Please enter a valid amount"
+      "validationError": "يرجى إدخال مبلغ صالح"
     },
     "buttons": {
-      "add": "Add Transaction",
-      "adding": "Adding...",
-      "cancel": "Cancel",
-      "update": "Update Transaction",
-      "updating": "Updating..."
+      "add": "إضافة معاملة",
+      "adding": "جاري الإضافة...",
+      "cancel": "إلغاء",
+      "update": "تحديث المعاملة",
+      "updating": "جاري التحديث..."
     },
     "category": {
-      "aiCategorizing": "AI categorizing...",
-      "create": "Create",
-      "createNew": "+ Create New Category",
-      "label": "Category",
-      "lastUsed": "Using last: {category}",
-      "namePlaceholder": "Category name...",
-      "selectPlaceholder": "Select category...",
-      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+      "aiCategorizing": "جاري التصنيف بالذكاء الاصطناعي...",
+      "create": "إنشاء",
+      "createNew": "+ إنشاء فئة جديدة",
+      "label": "الفئة",
+      "lastUsed": "آخر استخدام: {category}",
+      "namePlaceholder": "اسم الفئة...",
+      "selectPlaceholder": "اختر فئة...",
+      "subcategoriesPlaceholder": "فئات فرعية (اختياري، مفصولة بفواصل)"
     },
     "closeModal": "إغلاق النافذة",
     "createCategory": {
-      "created": "Category \"{name}\" created!",
-      "failed": "Failed to create category",
-      "nameRequired": "Category name is required"
+      "created": "تم إنشاء الفئة \"{name}\"!",
+      "failed": "فشل إنشاء الفئة",
+      "nameRequired": "اسم الفئة مطلوب"
     },
     "date": {
       "label": "Date"
     },
     "description": {
       "label": "Description",
-      "placeholder": "e.g., Grocery shopping at Sobeys"
+      "placeholder": "مثال: تسوق البقالة في السوبرماركت"
     },
     "learned": {
-      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
-      "title": "Learned!"
+      "description": "بعد 3 تصحيحات مشابهة، سيتم تصنيف المعاملات المستقبلية من هذا التاجر تلقائيًا.",
+      "title": "تم التعلم!"
     },
     "notes": {
       "label": "Notes",
-      "placeholder": "Add any additional notes..."
+      "placeholder": "أضف أي ملاحظات إضافية..."
     },
     "receipts": {
-      "addNew": "Add New Receipt",
-      "deleteConfirm": "Are you sure you want to delete this receipt?",
-      "deleteFailed": "Failed to delete receipt",
-      "deleteReceipt": "Delete receipt",
-      "existing": "Existing receipts ({count})",
-      "label": "Receipt Attachments",
-      "newFile": "New: {filename}",
-      "remove": "Remove",
-      "viewFull": "View full receipt"
+      "addNew": "إضافة إيصال جديد",
+      "deleteConfirm": "هل أنت متأكد أنك تريد حذف هذا الإيصال؟",
+      "deleteFailed": "فشل حذف الإيصال",
+      "deleteReceipt": "حذف الإيصال",
+      "existing": "الإيصالات الحالية ({count})",
+      "label": "مرفقات الإيصالات",
+      "newFile": "جديد: {filename}",
+      "remove": "إزالة",
+      "viewFull": "عرض الإيصال كاملاً"
     },
     "subcategory": {
-      "label": "Subcategory",
-      "none": "None",
-      "selectPlaceholder": "Select subcategory..."
+      "label": "الفئة الفرعية",
+      "none": "بدون",
+      "selectPlaceholder": "اختر فئة فرعية..."
     },
     "tags": {
-      "label": "Tags (comma-separated)",
-      "placeholder": "e.g., groceries, weekly, essential"
+      "label": "الوسوم (مفصولة بفواصل)",
+      "placeholder": "مثال: بقالة، أسبوعي، أساسي"
     },
     "title": {
-      "add": "Add Transaction",
-      "edit": "Edit Transaction"
+      "add": "إضافة معاملة",
+      "edit": "تعديل المعاملة"
     },
     "type": {
-      "expense": "Expense",
-      "income": "Income",
+      "expense": "مصروف",
+      "income": "دخل",
       "label": "Type"
     }
   },
@@ -4933,17 +4933,17 @@
   },
   "transactionTable": {
     "actions": {
-      "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
-      "split": "Split"
+      "attachReceipt": "إرفاق إيصال",
+      "delete": "حذف",
+      "edit": "تعديل",
+      "split": "تقسيم"
     },
     "emptyState": "لا توجد معاملات للعرض",
     "headers": {
-      "account": "Account",
+      "account": "الحساب",
       "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
+      "amount": "المبلغ",
+      "category": "الفئة",
       "date": "Date",
       "description": "Description"
     }

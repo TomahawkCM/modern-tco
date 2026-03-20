@@ -1056,7 +1056,7 @@
       "downPaymentAmount": "מקדמה",
       "downPaymentPercent": "מקדמה (%)",
       "dtiRatio": "יחס חוב-הכנסה",
-      "extraPayment": "Extra Monthly Payment",
+      "extraPayment": "תשלום חודשי נוסף",
       "extraPaymentHelp": "תשלום נוסף המוחל על הקרן כל חודש",
       "formulaExplanation": "M = תשלום חודשי, P = קרן, i = ריבית חודשית, n = מספר תשלומים כולל",
       "formulaText": "M = P[i(1+i)^n] / [(1+i)^n - 1]",
@@ -1071,13 +1071,13 @@
       "modePayment": "חשב תשלום",
       "monthlyDebts": "תשלומי חוב חודשיים",
       "monthlyDebtsHelp": "הלוואות רכב, הלוואות סטודנט, כרטיסי אשראי וכו'",
-      "monthlyPayment": "Monthly Payment",
-      "payoffMonths": "Payoff Time",
+      "monthlyPayment": "תשלום חודשי",
+      "payoffMonths": "זמן פירעון",
       "resultTitle": "סיכום תשלום",
-      "scheduleBalance": "Balance",
+      "scheduleBalance": "יתרה",
       "scheduleInterest": "ריבית",
-      "scheduleMonth": "Month",
-      "schedulePayment": "Payment",
+      "scheduleMonth": "חודש",
+      "schedulePayment": "תשלום",
       "schedulePrincipal": "קרן",
       "scheduleTitle": "לוח סילוקין",
       "showFullSchedule": "הצג לוח מלא",
@@ -1091,7 +1091,7 @@
     },
     "netWorth": {
       "description": "ראה את התמונה הפיננסית המלאה שלך עם נכסים והתחייבויות",
-      "title": "Net Worth"
+      "title": "שווי נקי"
     },
     "property": {
       "description": "עקוב אחר ערכי נכסים, רכבים ונכסים אחרים",
@@ -1116,7 +1116,7 @@
       "formulaText": "Accumulation: FV = PV(1+r)^n + PMT[((1+r)^n-1)/r] | Withdrawal: Balance_n = Balance_(n-1)(1+r) - W",
       "heroInsufficient": "החסכונות שלך עלולים להיגמר בגיל {age}",
       "heroInsufficientBadge": "נדרשת פעולה",
-      "heroNeutralBadge": "Close",
+      "heroNeutralBadge": "סגור",
       "heroSufficient": "החסכונות שלך יספיקו ל-{years} שנים בפרישה",
       "heroSufficientBadge": "במסלול",
       "inflationRate": "שיעור אינפלציה (%)",
@@ -1163,25 +1163,25 @@
       "totalContributions": "סה\"כ תרומות"
     },
     "subscriptionCost": {
-      "addSubscription": "Add Subscription",
-      "amount": "Amount",
+      "addSubscription": "הוסף מנוי",
+      "amount": "סכום",
       "breakdown": "חיוני מול לא חיוני",
       "byCategory": "לפי קטגוריה",
-      "daily": "Daily",
+      "daily": "יומי",
       "description": "עקוב ונתח את העלות האמיתית של המנויים שלך",
       "essential": "חיוני",
       "essentialCost": "חיוני",
       "frequency": {
-        "annual": "Annual",
-        "biweekly": "Bi-weekly",
-        "label": "Frequency",
-        "monthly": "Monthly",
-        "quarterly": "Quarterly",
-        "weekly": "Weekly"
+        "annual": "שנתי",
+        "biweekly": "דו-שבועי",
+        "label": "תדירות",
+        "monthly": "חודשי",
+        "quarterly": "רבעוני",
+        "weekly": "שבועי"
       },
-      "monthly": "Monthly",
+      "monthly": "חודשי",
       "monthlyIncome": "הכנסה חודשית",
-      "name": "Name",
+      "name": "שם",
       "namePlaceholder": "למשל, Netflix, Spotify",
       "nonEssentialCost": "לא חיוני",
       "perYear": "/שנה",
@@ -1193,7 +1193,7 @@
       "subtitle": "ראה לאן הכסף החוזר שלך הולך",
       "title": "מחשבון עלות מנויים",
       "totalCost": "סה\"כ עלות מנויים",
-      "yearly": "Yearly",
+      "yearly": "שנתי",
       "yourSubscriptions": "המנויים שלך"
     },
     "transparency": {
@@ -1237,24 +1237,24 @@
     "openCalculator": "פתח מחשבון"
   },
   "calendarExport": {
-    "addToCalendar": "Add to Calendar",
+    "addToCalendar": "הוסף ליומן",
     "dialog": {
-      "cancel": "Cancel",
-      "description": "Add bill reminders to your calendar",
-      "deselectAll": "Deselect all",
-      "export": "Export {count} subscription(s)",
-      "exportMethod": "Export Method",
-      "exporting": "Exporting...",
-      "selectAll": "Select all",
-      "selectSubscriptions": "Select Subscriptions",
-      "title": "Export to Calendar"
+      "cancel": "ביטול",
+      "description": "הוסף תזכורות חשבונות ליומן שלך",
+      "deselectAll": "בטל בחירת הכל",
+      "export": "ייצא {count} מנוי(ים)",
+      "exportMethod": "שיטת ייצוא",
+      "exporting": "מייצא...",
+      "selectAll": "בחר הכל",
+      "selectSubscriptions": "בחר מנויים",
+      "title": "ייצוא ליומן"
     },
-    "downloadAllICS": "Download All as ICS",
-    "downloadICS": "Download ICS File",
-    "exportToCalendar": "Export to Calendar",
+    "downloadAllICS": "הורד הכל כ-ICS",
+    "downloadICS": "הורד קובץ ICS",
+    "exportToCalendar": "ייצא ליומן",
     "googleCalendar": "Google Calendar",
     "outlookCalendar": "Outlook Calendar",
-    "selectSubscriptions": "Select Subscriptions..."
+    "selectSubscriptions": "בחר מנויים..."
   },
   "categories": {
     "cancel": "ביטול",
@@ -1327,9 +1327,9 @@
     "tabs": {
       "actions": "Actions",
       "budget": "Budget",
-      "income": "Income",
-      "spending": "Spending",
-      "trends": "Trends"
+      "income": "הכנסה",
+      "spending": "הוצאות",
+      "trends": "מגמות"
     }
   },
   "chatbotOptIn": {
@@ -1380,18 +1380,18 @@
     "title": "להפעיל צ'אטבוט תקציב?"
   },
   "columnMapper": {
-    "amount": "Amount",
+    "amount": "סכום",
     "amountColumn": "עמודת סכום",
     "applyMapping": "החל מיפוי",
     "bankStatementFormat": "פורמט דף חשבון בנק",
-    "cancel": "Cancel",
+    "cancel": "ביטול",
     "columnNumber": "עמודה {number}",
     "creditColumn": "עמודת זיכוי",
     "date": "Date",
     "dateColumn": "עמודת תאריך",
     "debitColumn": "עמודת חיוב",
     "debitCreditColumns": "עמודות חיוב/זיכוי",
-    "delete": "Delete",
+    "delete": "מחק",
     "description": "ביטחון הזיהוי האוטומטי נמוך. אנא מפה עמודות ידנית.",
     "descriptionColumn": "עמודת תיאור",
     "descriptionHeader": "Description",
@@ -1409,29 +1409,29 @@
     "useSavedMapping": "השתמש במיפוי שמור"
   },
   "combobox": {
-    "noResults": "No results found.",
-    "search": "Search...",
-    "select": "Select..."
+    "noResults": "לא נמצאו תוצאות.",
+    "search": "חפש...",
+    "select": "בחר..."
   },
   "commandPalette": {
     "commands": {
       "addTransaction": "הוסף עסקה",
       "budgets": "Budgets",
-      "categories": "Categories",
+      "categories": "קטגוריות",
       "darkTheme": "ערכת נושא כהה",
       "dashboard": "לוח מחוונים",
       "exportData": "ייצא נתונים",
       "futurePlans": "תוכניות עתידיות",
       "highContrastTheme": "ערכת נושא ניגודיות גבוהה",
       "importCsv": "ייבא CSV",
-      "investments": "Investments",
+      "investments": "השקעות",
       "lightTheme": "ערכת נושא בהירה",
-      "loans": "Loans",
+      "loans": "הלוואות",
       "newBudget": "תקציב חדש",
-      "reports": "Reports",
+      "reports": "דוחות",
       "retirement": "פרישה",
       "scanReceipt": "סרוק קבלה",
-      "settings": "Settings",
+      "settings": "הגדרות",
       "transactions": "Transactions"
     },
     "groups": {
@@ -1453,14 +1453,14 @@
     "success": "הצלחה!"
   },
   "confidenceMeter": {
-    "autoCategorized": "Auto-categorized:",
-    "confidence": "{percent}% confidence",
-    "confident": "Confident",
-    "confirmCategorization": "Confirm this categorization to improve accuracy",
-    "learnFromThis": "Learn from this",
-    "lowConfidence": "Low Confidence",
-    "moderate": "Moderate",
-    "veryConfident": "Very Confident"
+    "autoCategorized": "סווג אוטומטית:",
+    "confidence": "{percent}% ביטחון",
+    "confident": "ביטחון גבוה",
+    "confirmCategorization": "אשר סיווג זה כדי לשפר דיוק",
+    "learnFromThis": "למד מזה",
+    "lowConfidence": "ביטחון נמוך",
+    "moderate": "בינוני",
+    "veryConfident": "ביטחון גבוה מאוד"
   },
   "dashboard": {
     "widgets": {
@@ -1565,17 +1565,17 @@
     }
   },
   "dashboardCustomizer": {
-    "alwaysVisible": "Always visible",
-    "ariaLabel": "Customize dashboard layout",
-    "button": "Customize",
-    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
-    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
-    "reorderTitle": "Reorder Widgets",
-    "resetButton": "Reset to Defaults",
-    "title": "Customize Dashboard",
-    "toggleVisibility": "Toggle {name} visibility",
-    "widgetVisibility": "Widget Visibility",
-    "widgetsVisible": "{visible} of {total} widgets visible"
+    "alwaysVisible": "תמיד גלוי",
+    "ariaLabel": "התאם אישית את פריסת לוח המחוונים",
+    "button": "התאמה אישית",
+    "description": "הצג או הסתר וידג'טים בלוח המחוונים. גרור וידג'טים בלוח המחוונים כדי לשנות את סדרם.",
+    "reorderDescription": "כדי לשנות את סדר הוידג'טים, גרור ושחרר וידג'טים ישירות על לוח המחוונים שלך. השתמש בעכבר או במגע כדי לתפוס את ידית הגרירה (⋮⋮) בכל כרטיס וידג'ט.",
+    "reorderTitle": "סידור מחדש של וידג'טים",
+    "resetButton": "אפס לברירות מחדל",
+    "title": "התאמת לוח המחוונים",
+    "toggleVisibility": "החלף נראות של {name}",
+    "widgetVisibility": "נראות וידג'טים",
+    "widgetsVisible": "{visible} מתוך {total} וידג'טים גלויים"
   },
   "debtAnalysis": {
     "cards": {
@@ -1629,27 +1629,27 @@
     "viewAllLoans": "הצג את כל ההלוואות"
   },
   "debtOverview": {
-    "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
-    "activeLoansTitle": "Active Loans",
-    "addLoan": "Add Loan",
-    "avgRate": "Avg Rate",
-    "balance": "Balance",
+    "activeLoans": "{count, plural, one {הלוואה פעילה אחת} two {2 הלוואות פעילות} other {# הלוואות פעילות}}",
+    "activeLoansTitle": "הלוואות פעילות",
+    "addLoan": "הוסף הלוואה",
+    "avgRate": "ריבית ממוצעת",
+    "balance": "יתרה",
     "monthlyPayment": "תשלום חודשי",
-    "paidOff": "{percent}% paid off",
+    "paidOff": "{percent}% שולם",
     "title": "סקירת חובות",
     "totalDebt": "סה\"כ חוב",
-    "upcomingPayments": "Upcoming Payments",
-    "viewAll": "View All",
-    "viewMore": "{count, plural, one {View # more loan} other {View # more loans}}"
+    "upcomingPayments": "תשלומים קרובים",
+    "viewAll": "צפה בהכל",
+    "viewMore": "{count, plural, one {צפה בהלוואה נוספת אחת} two {צפה ב-2 הלוואות נוספות} other {צפה ב-# הלוואות נוספות}}"
   },
   "debtPayoff": {
     "addDebt": "הוסף חוב",
     "addDebtTitle": "הוסף חוב",
     "addManually": "הוסף ידנית",
     "apr": "ריבית %",
-    "balance": "Balance",
+    "balance": "יתרה",
     "baselineComparison": "בשימוש באסטרטגיה זו, תחסוך {interest} בריבית ותפרע {months} חודשים מוקדם יותר בהשוואה לתשלומי מינימום בלבד.",
-    "cancel": "Cancel",
+    "cancel": "ביטול",
     "debtFreeDate": "תאריך ללא חוב",
     "debtName": "שם",
     "debtNamePlaceholder": "למשל, כרטיס אשראי, הלוואת רכב",
@@ -1662,7 +1662,7 @@
     "payoffChart": "גרף פירעון",
     "payoffTimeline": "ציר זמן פירעון",
     "results": "תוצאות",
-    "save": "Save",
+    "save": "שמור",
     "saveScenarioTitle": "שמור תרחיש",
     "savedScenarios": "תרחישים שמורים",
     "scenarioNamePlaceholder": "למשל, תוכנית מפולת אגרסיבית",
@@ -1729,7 +1729,7 @@
     "colors": "צבעים",
     "componentStates": "מצבי רכיבים",
     "dark": "כהה",
-    "default": "Default",
+    "default": "ברירת מחדל",
     "defaultCard": "כרטיס ברירת מחדל",
     "defaultCardDescription": "כרטיס בסיסי עם סגנונות ברירת מחדל",
     "defaultInput": "שדה קלט ברירת מחדל",
@@ -1795,12 +1795,12 @@
     "confirmAction": "אישור פעולה"
   },
   "draggableWidget": {
-    "dragToReorder": "Drag to reorder widget"
+    "dragToReorder": "גרור לסידור מחדש של וידג'ט"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
-    "yearsAndMonths": "{years}y {months}m"
+    "months": "{count, plural, one {חודש אחד} two {חודשיים} other {# חודשים}}",
+    "years": "{count, plural, one {שנה אחת} two {שנתיים} other {# שנים}}",
+    "yearsAndMonths": "{years}ש {months}ח"
   },
   "emptyStates": {
     "budgets": {
@@ -2034,17 +2034,17 @@
     "title": "ייצוא נתונים"
   },
   "filters": {
-    "account": "Account",
-    "allAccounts": "All accounts",
-    "allCategories": "All categories",
-    "allTypes": "All types",
-    "apply": "Apply filters",
-    "category": "Category",
-    "clearFilters": "Clear filters",
-    "dateRange": "Date range",
-    "expense": "Expense",
-    "income": "Income",
-    "search": "Search transactions...",
+    "account": "חשבון",
+    "allAccounts": "כל החשבונות",
+    "allCategories": "כל הקטגוריות",
+    "allTypes": "כל הסוגים",
+    "apply": "החל מסננים",
+    "category": "קטגוריה",
+    "clearFilters": "נקה מסננים",
+    "dateRange": "טווח תאריכים",
+    "expense": "הוצאה",
+    "income": "הכנסה",
+    "search": "חפש עסקאות...",
     "type": "Type"
   },
   "footer": {
@@ -2058,11 +2058,11 @@
     "tagline": "תקצוב פרימיום עם שדרוג חד פעמי."
   },
   "fridayReview": {
-    "back": "Back",
+    "back": "חזרה",
     "backToDashboard": "חזרה ללוח מחוונים",
     "closeReview": "סגור סקירה",
-    "continue": "Continue",
-    "done": "Done",
+    "continue": "המשך",
+    "done": "סיום",
     "goToStep": "עבור ל-{step}",
     "loading": "טוען את הסקירה השבועית שלך...",
     "placeholderContent": "תוכן השלב יושם במשימות הבאות (F-021 עד F-025).",
@@ -2098,14 +2098,14 @@
     "title": "סקירת יום שישי"
   },
   "healthScore": {
-    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "ariaLabel": "ציון בריאות פיננסית: {score} מתוך 100. {interpretation}",
     "emptyState": {
-      "line1": "Add transactions to see your",
-      "line2": "Financial Health Score"
+      "line1": "הוסף עסקאות כדי לראות את",
+      "line2": "ציון הבריאות הפיננסית"
     },
-    "grade": "Grade: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health",
+    "grade": "ציון: {grade}",
+    "missingFactors": "{count, plural, one {גורם אחד חסר} two {2 גורמים חסרים} other {# גורמים חסרים}}",
+    "title": "בריאות פיננסית",
     "history": {
       "title": "היסטוריית ציון",
       "monthsOfData": "{count} {count, plural, =1 {חודש} other {חודשים}} של נתונים",
@@ -2122,35 +2122,35 @@
     "addHolding": "הוסף אחזקה",
     "canadianStockHint": "השתמש ב-.TO למניות קנדיות (למשל, TD.TO, VGRO.TO)",
     "cancel": "ביטול",
-    "editHolding": "Edit Holding",
+    "editHolding": "ערוך אחזקה",
     "enterSymbol": "אנא הכנס סמל מניה",
     "failedToSave": "שמירת אחזקה נכשלה",
     "notesOptional": "הערות (אופציונלי)",
     "notesPlaceholder": "למשל, חלק מתיק הפרישה, רכישת מניות של עובד",
     "numberOfShares": "מספר מניות",
     "pricePlaceholder": "50.00",
-    "purchaseDate": "Purchase Date",
+    "purchaseDate": "תאריך רכישה",
     "purchasePricePerShare": "מחיר רכישה למניה",
     "quantityPlaceholder": "100",
     "saving": "שומר...",
     "stockSymbol": "סמל מניה",
     "symbolPlaceholder": "למשל, AAPL, TEVA",
-    "totalInvestment": "Total Investment",
+    "totalInvestment": "סה\"כ השקעה",
     "updateHolding": "עדכן אחזקה",
     "validPurchasePrice": "אנא הכנס מחיר רכישה תקין",
     "validQuantity": "אנא הכנס כמות תקינה"
   },
   "iconPicker": {
-    "clearSearch": "Clear Search",
-    "close": "Close",
-    "currentIcon": "Current Icon",
-    "foundCount": "Found {count} icon(s)",
-    "iconsAvailable": "{count} icons available",
-    "noIconsFound": "No icons found",
-    "noIconsFoundHint": "Try a different search term or browse all icons",
-    "searchPlaceholder": "Search icons by name or category...",
-    "subtitle": "Select an icon to represent your category",
-    "title": "Choose an Icon"
+    "clearSearch": "נקה חיפוש",
+    "close": "סגור",
+    "currentIcon": "אייקון נוכחי",
+    "foundCount": "נמצאו {count} אייקונ(ים)",
+    "iconsAvailable": "{count} אייקונים זמינים",
+    "noIconsFound": "לא נמצאו אייקונים",
+    "noIconsFoundHint": "נסה מונח חיפוש אחר או עיין בכל האייקונים",
+    "searchPlaceholder": "חפש אייקונים לפי שם או קטגוריה...",
+    "subtitle": "בחר אייקון שייצג את הקטגוריה שלך",
+    "title": "בחר אייקון"
   },
   "import": {
     "added": "נוספו",
@@ -2270,71 +2270,71 @@
   },
   "investmentAccountModal": {
     "buttons": {
-      "cancel": "Cancel",
-      "create": "Create Account",
-      "saving": "Saving...",
-      "update": "Update Account"
+      "cancel": "ביטול",
+      "create": "צור חשבון",
+      "saving": "שומר...",
+      "update": "עדכן חשבון"
     },
-    "closeModal": "Close modal",
+    "closeModal": "סגור חלון",
     "errors": {
-      "saveFailed": "Failed to save account"
+      "saveFailed": "שמירת החשבון נכשלה"
     },
     "fields": {
       "accountNumber": {
-        "label": "Account Number (Optional)",
-        "placeholder": "e.g., Last 4 digits: 1234"
+        "label": "מספר חשבון (אופציונלי)",
+        "placeholder": "למשל, 4 ספרות אחרונות: 1234"
       },
       "institution": {
-        "label": "Financial Institution (Optional)",
-        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
+        "label": "מוסד פיננסי (אופציונלי)",
+        "placeholder": "למשל, Questrade, Wealthsimple, TD Direct"
       },
       "name": {
-        "label": "Account Name",
-        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
+        "label": "שם חשבון",
+        "placeholder": "למשל, RRSP שלי, חיסכון TFSA, מניות חברה"
       },
       "type": {
         "descriptions": {
-          "Company shares": "Employee stock purchase or stock options",
-          "Non-registered": "Taxable investment account",
-          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
-          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
+          "Company shares": "רכישת מניות עובדים או אופציות מניות",
+          "Non-registered": "חשבון השקעות חייב במס",
+          "RRSP": "תוכנית חיסכון פרישה רשומה - צמיחה דחויית מס",
+          "TFSA": "חשבון חיסכון פטור ממס - צמיחה ומשיכות פטורות ממס"
         },
-        "label": "Account Type"
+        "label": "סוג חשבון"
       }
     },
     "title": {
-      "add": "Add Investment Account",
-      "edit": "Edit Investment Account"
+      "add": "הוסף חשבון השקעות",
+      "edit": "ערוך חשבון השקעות"
     },
     "validation": {
-      "nameRequired": "Please enter an account name"
+      "nameRequired": "אנא הזן שם חשבון"
     }
   },
   "investmentCharts": {
-    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "emptyState": "אין אחזקות להצגה. הוסף אחזקות כדי לראות תרשימים.",
     "legend": {
-      "gain": "Gain",
-      "loss": "Loss"
+      "gain": "רווח",
+      "loss": "הפסד"
     },
     "tableHeaders": {
-      "allocation": "Allocation",
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "gainLoss": "Gain/Loss",
-      "percentReturn": "% Return",
-      "symbol": "Symbol",
+      "allocation": "הקצאה",
+      "costBasis": "עלות מקורית",
+      "currentValue": "ערך נוכחי",
+      "gainLoss": "רווח/הפסד",
+      "percentReturn": "% תשואה",
+      "symbol": "סמל",
       "total": "Total"
     },
     "titles": {
-      "accountTypeAllocation": "Allocation by Account Type",
-      "gainLoss": "Gain/Loss by Holding",
-      "performanceSummary": "Performance Summary",
-      "portfolioAllocation": "Portfolio Allocation by Holding"
+      "accountTypeAllocation": "הקצאה לפי סוג חשבון",
+      "gainLoss": "רווח/הפסד לפי אחזקה",
+      "performanceSummary": "סיכום ביצועים",
+      "portfolioAllocation": "הקצאת תיק לפי אחזקה"
     },
     "tooltip": {
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "percentOfPortfolio": "{percent}% of portfolio"
+      "costBasis": "עלות מקורית",
+      "currentValue": "ערך נוכחי",
+      "percentOfPortfolio": "{percent}% מהתיק"
     }
   },
   "investments": {
@@ -2816,36 +2816,36 @@
     }
   },
   "linkToLoan": {
-    "bestMatch": "Best Match",
-    "cancel": "Cancel",
+    "bestMatch": "התאמה מיטבית",
+    "cancel": "ביטול",
     "extra": "נוסף",
-    "interest": "Interest",
-    "linkError": "Failed to link transaction. Please try again.",
-    "linkPayment": "Link Payment",
-    "linking": "Linking...",
-    "lowMatch": "Low Match",
-    "monthlyPayment": "${amount}/mo",
-    "noActiveLoans": "No active loans found",
-    "paymentBreakdown": "Payment Breakdown",
-    "possibleMatch": "Possible Match",
+    "interest": "ריבית",
+    "linkError": "קישור העסקה נכשל. אנא נסה שוב.",
+    "linkPayment": "קשר תשלום",
+    "linking": "מקשר...",
+    "lowMatch": "התאמה נמוכה",
+    "monthlyPayment": "${amount}/חודש",
+    "noActiveLoans": "לא נמצאו הלוואות פעילות",
+    "paymentBreakdown": "פירוט תשלום",
+    "possibleMatch": "התאמה אפשרית",
     "principal": "Principal",
-    "title": "Link to Loan"
+    "title": "קשר להלוואה"
   },
   "linkedLoan": {
-    "loanPrefix": "Loan: {name}",
+    "loanPrefix": "הלוואה: {name}",
     "unlink": "נתק",
-    "unlinkConfirm": "Unlink this transaction from the loan payment?",
-    "unlinkFailed": "Failed to unlink transaction. Please try again.",
-    "unlinkFromLoan": "Unlink from loan",
-    "viewLoan": "View loan",
-    "viewLoanDetails": "View loan details"
+    "unlinkConfirm": "לנתק עסקה זו מתשלום ההלוואה?",
+    "unlinkFailed": "ניתוק העסקה נכשל. אנא נסה שוב.",
+    "unlinkFromLoan": "נתק מהלוואה",
+    "viewLoan": "צפה בהלוואה",
+    "viewLoanDetails": "צפה בפרטי ההלוואה"
   },
   "loanForm": {
     "autoCalculated": "חושב אוטומטית: {amount}",
-    "back": "Back",
+    "back": "חזרה",
     "biWeekly": "דו-שבועי",
     "biWeeklyPaymentHint": "תשלום דו-שבועי (קרן וריבית בלבד)",
-    "cancel": "Cancel",
+    "cancel": "ביטול",
     "createLoan": "צור הלוואה",
     "currentBalance": "יתרה נוכחית",
     "defermentEndDate": "תאריך סיום דחייה",
@@ -2866,7 +2866,7 @@
     "monthlyPaymentHint": "תשלום חודשי (קרן וריבית בלבד)",
     "monthlyPropertyTax": "מס רכוש חודשי",
     "namePlaceholder": "למשל, משכנתא, הלוואת רכב",
-    "next": "Next",
+    "next": "הבא",
     "nextPaymentDate": "תאריך תשלום הבא",
     "noAccountLinked": "לא מקושר חשבון",
     "notes": "הערות",
@@ -2913,20 +2913,20 @@
     "weeklyPaymentHint": "תשלום שבועי (קרן וריבית בלבד)"
   },
   "loanPaymentSelector": {
-    "balanceAfterPayment": "Balance After Payment:",
-    "currentBalance": "Current Balance:",
-    "extraPrincipal": "Extra Principal:",
-    "interest": "Interest:",
-    "interestRate": "Interest Rate:",
-    "linkToLoanPayment": "Link to Loan Payment",
-    "loanOption": "{name} ({lender}) - {payment}/mo",
-    "nextDue": "Next Due:",
-    "noLoan": "-- No loan --",
-    "paymentBreakdown": "Payment Breakdown",
-    "paymentOverWarning": "This payment is {amount} more than the regular monthly payment. The extra will be applied to principal.",
-    "paymentUnderWarning": "This payment is {amount} less than the regular monthly payment of {monthlyPayment}.",
+    "balanceAfterPayment": "יתרה לאחר תשלום:",
+    "currentBalance": "יתרה נוכחית:",
+    "extraPrincipal": "קרן נוספת:",
+    "interest": "ריבית:",
+    "interestRate": "שיעור ריבית:",
+    "linkToLoanPayment": "קשר לתשלום הלוואה",
+    "loanOption": "{name} ({lender}) - {payment}/חודש",
+    "nextDue": "מועד הבא:",
+    "noLoan": "-- ללא הלוואה --",
+    "paymentBreakdown": "פירוט תשלום",
+    "paymentOverWarning": "תשלום זה גבוה ב-{amount} מהתשלום החודשי הרגיל. העודף יוחל על הקרן.",
+    "paymentUnderWarning": "תשלום זה נמוך ב-{amount} מהתשלום החודשי הרגיל של {monthlyPayment}.",
     "principal": "Principal:",
-    "selectLoan": "Select Loan"
+    "selectLoan": "בחר הלוואה"
   },
   "loans": {
     "acrossActiveLoans": "על פני {count} הלוואות פעילות",
@@ -3048,40 +3048,40 @@
     "youvePaid": "שילמת {amount} עד כה"
   },
   "localeSettings": {
-    "currency": "Currency",
-    "formatPreview": "Format Preview",
-    "language": "Language",
+    "currency": "מטבע",
+    "formatPreview": "תצוגה מקדימה של תבנית",
+    "language": "שפה",
     "monday": "יום שני",
-    "resetToDefaults": "Reset to Browser Defaults",
-    "saveChanges": "Save Changes",
-    "subtitle": "Configure language, region, currency, and formatting preferences",
+    "resetToDefaults": "אפס לברירות מחדל של הדפדפן",
+    "saveChanges": "שמור שינויים",
+    "subtitle": "הגדר שפה, אזור, מטבע והעדפות תבנית",
     "sunday": "יום ראשון",
-    "title": "Locale & Formatting",
-    "unsavedChanges": "You have unsaved changes",
-    "weekStartsOn": "Week Starts On"
+    "title": "אזור ותבנית",
+    "unsavedChanges": "יש לך שינויים שלא נשמרו",
+    "weekStartsOn": "השבוע מתחיל ב"
   },
   "manualPairing": {
     "codeHint": "קוד בן 6 תווים המוצג במכשיר המארח",
     "codeInvalid": "קוד ההתאמה חייב להיות 6 תווים אלפאנומריים",
     "codeRequired": "קוד התאמה נדרש",
-    "connect": "Connect",
-    "connecting": "Connecting...",
-    "description": "Enter the connection details shown on the host device",
+    "connect": "התחבר",
+    "connecting": "מתחבר...",
+    "description": "הזן את פרטי החיבור המוצגים במכשיר המארח",
     "fixFormErrors": "אנא תקן את שגיאות הטופס",
     "helpStep1": "פתח את אפליקציית התקציב במכשיר שאתה רוצה לסנכרן איתו",
     "helpStep2": "עבור להגדרות → סנכרון רשת מקומית",
     "helpStep3": "הקש \"אפשר חיבורים\"",
     "helpStep4": "כתובת ה-IP, הפורט וקוד ההתאמה יוצגו מתחת לקוד ה-QR",
     "helpTitle": "מציאת פרטי חיבור",
-    "hideHelp": "Hide Help",
-    "ipAddress": "IP Address",
+    "hideHelp": "הסתר עזרה",
+    "ipAddress": "כתובת IP",
     "ipInvalid": "פורמט כתובת IP לא תקין (למשל, 192.168.1.100)",
     "ipRequired": "כתובת IP נדרשת",
     "optionalDefault": "אופציונלי, ברירת מחדל: {port}",
     "pairingCode": "קוד התאמה",
     "port": "פורט",
     "portInvalid": "הפורט חייב להיות בין 1 ל-65535",
-    "title": "Manual Entry",
+    "title": "הזנה ידנית",
     "whereToFind": "איפה מוצאים?"
   },
   "mobileNav": {
@@ -3093,9 +3093,9 @@
   },
   "morePage": {
     "groups": {
-      "toolsSettings": "Tools & Settings",
-      "trackingAnalysis": "Tracking & Analysis",
-      "wealthPlanning": "Wealth & Planning"
+      "toolsSettings": "כלים והגדרות",
+      "trackingAnalysis": "מעקב וניתוח",
+      "wealthPlanning": "עושר ותכנון"
     },
     "title": "עוד"
   },
@@ -3271,16 +3271,16 @@
     "viewRawOcrText": "הצג טקסט OCR גולמי"
   },
   "offline": {
-    "backOnline": "You're back online! Click refresh to reload the page.",
-    "connectionRestored": "Connection restored",
-    "goToDashboard": "Go to Dashboard",
-    "lostConnection": "It looks like you've lost your internet connection. The page you're trying to reach isn't available offline yet.",
-    "noConnection": "No internet connection",
-    "offlineFeatures": "Offline Features",
-    "offlineFeaturesDescription": "Once you visit a page while online, it will be available offline. All your data is stored locally on your device.",
-    "reloadPage": "Reload Page",
-    "title": "You're Offline",
-    "tryAgain": "Try Again"
+    "backOnline": "אתה שוב מחובר! לחץ על רענון כדי לטעון את הדף מחדש.",
+    "connectionRestored": "החיבור שוחזר",
+    "goToDashboard": "עבור ללוח המחוונים",
+    "lostConnection": "נראה שאיבדת את חיבור האינטרנט שלך. הדף שאתה מנסה להגיע אליו עדיין לא זמין במצב לא מקוון.",
+    "noConnection": "אין חיבור לאינטרנט",
+    "offlineFeatures": "תכונות לא מקוונות",
+    "offlineFeaturesDescription": "ברגע שתבקר בדף כשאתה מחובר, הוא יהיה זמין במצב לא מקוון. כל הנתונים שלך מאוחסנים מקומית במכשיר שלך.",
+    "reloadPage": "טען דף מחדש",
+    "title": "אתה לא מחובר",
+    "tryAgain": "נסה שוב"
   },
   "onboarding": {
     "dontShowAgain": "אל תראה סיור זה שוב",
@@ -3322,9 +3322,9 @@
     }
   },
   "onboardingPage": {
-    "back": "Back",
+    "back": "חזרה",
     "getStarted": "התחל",
-    "next": "Next",
+    "next": "הבא",
     "saving": "שומר...",
     "stepCounter": "שלב {current} מתוך {total}",
     "steps": {
@@ -3398,25 +3398,25 @@
     }
   },
   "overspendingAlerts": {
-    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
-    "percentOfBudget": "{percent}% of budget",
+    "exceededWarning": "בקצב הזה, תחרוג מהתקציב ב-{amount} החודש.",
+    "percentOfBudget": "{percent}% מהתקציב",
     "progress": {
-      "label": "Current progress"
+      "label": "התקדמות נוכחית"
     },
     "stats": {
       "budget": "Budget",
-      "daysLeft": "Days Left",
-      "projectedTotal": "Projected Total",
-      "spentSoFar": "Spent So Far"
+      "daysLeft": "ימים שנותרו",
+      "projectedTotal": "סה\"כ צפוי",
+      "spentSoFar": "הוצאות עד כה"
     },
     "tip": {
-      "label": "Tip:",
-      "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
+      "label": "טיפ:",
+      "reduceSpending": "הפחת הוצאות יומיות ל-{amount} כדי להישאר בתקציב."
     }
   },
   "pairingDialog": {
-    "anErrorOccurred": "An error occurred",
-    "connecting": "Connecting...",
+    "anErrorOccurred": "אירעה שגיאה",
+    "connecting": "מתחבר...",
     "connectingToDevice": "מתחבר למכשיר...",
     "description": "התחבר למכשיר אחר ברשת המקומית שלך",
     "deviceAdded": "מכשיר נוסף. התחבר להשלמת ההתאמה.",
@@ -3435,18 +3435,18 @@
     "scan": "סרוק",
     "set": "הגדר",
     "title": "התאם מכשיר",
-    "tryAgain": "Try Again",
+    "tryAgain": "נסה שוב",
     "verifyingConnection": "מאמת חיבור..."
   },
   "paymentHistoryPanel": {
     "actions": "Actions",
     "addPayment": "הוסף תשלום",
     "addPaymentError": "הוספת תשלום נכשלה. אנא נסה שוב.",
-    "amount": "Amount",
+    "amount": "סכום",
     "balanceAfter": "יתרה לאחר",
-    "cancel": "Cancel",
+    "cancel": "ביטול",
     "date": "Date",
-    "delete": "Delete",
+    "delete": "מחק",
     "deleteConfirm": "למחוק רשומת תשלום זו? פעולה זו לא ניתנת לביטול.",
     "deleteError": "מחיקת תשלום נכשלה. אנא נסה שוב.",
     "description": "עקוב אחר תשלומי ההלוואה שלך וקשר לעסקאות",
@@ -3458,7 +3458,7 @@
     "extra": "תוספת",
     "extraPrincipalLabel": "קרן נוספת (אופציונלי)",
     "highConfidence": "ביטחון גבוה",
-    "interest": "Interest",
+    "interest": "ריבית",
     "linkPayment": "קשר תשלום",
     "linkTransactionError": "קישור עסקה נכשל. אנא נסה שוב.",
     "linked": "מקושר",
@@ -3485,17 +3485,17 @@
     "viewTransaction": "הצג עסקה"
   },
   "pinDialog": {
-    "cancel": "Cancel",
+    "cancel": "ביטול",
     "changeDescription": "שנה את ה-PIN של פרופיל זה.",
     "changePin": "שנה PIN",
     "confirmNewPinLabel": "אשר PIN חדש",
     "confirmNewPinPlaceholder": "אשר PIN חדש",
-    "continue": "Continue",
+    "continue": "המשך",
     "currentPinLabel": "PIN נוכחי",
     "defaultProfileName": "פרופיל",
     "enterCurrentPinPlaceholder": "הכנס PIN נוכחי",
     "enterNewPinPlaceholder": "הכנס PIN חדש",
-    "enterPinPlaceholder": "Enter PIN",
+    "enterPinPlaceholder": "הזן קוד PIN",
     "errorIncorrectPin": "PIN נוכחי שגוי",
     "errorInvalidPin": "PIN לא תקין",
     "errorPinMismatch": "קודי PIN אינם תואמים",
@@ -3716,26 +3716,26 @@
   },
   "predictiveSpendingChart": {
     "legend": {
-      "actual": "Actual",
-      "confidenceInterval": "Confidence Interval",
-      "predicted": "Predicted"
+      "actual": "בפועל",
+      "confidenceInterval": "מרווח ביטחון",
+      "predicted": "חזוי"
     },
-    "noData": "No data available for predictions",
-    "predictionUnavailable": "Prediction Unavailable",
+    "noData": "אין נתונים זמינים לתחזיות",
+    "predictionUnavailable": "תחזית לא זמינה",
     "stats": {
-      "avgConfidence": "Avg Confidence",
-      "nextMonth": "Next Month",
-      "threeMonthAvg": "3-Month Avg"
+      "avgConfidence": "ביטחון ממוצע",
+      "nextMonth": "חודש הבא",
+      "threeMonthAvg": "ממוצע 3 חודשים"
     },
     "table": {
-      "confidence": "Confidence",
-      "month": "Month",
-      "predicted": "Predicted",
-      "range": "Range",
-      "title": "Monthly Predictions"
+      "confidence": "ביטחון",
+      "month": "חודש",
+      "predicted": "חזוי",
+      "range": "טווח",
+      "title": "תחזיות חודשיות"
     },
-    "title": "Spending Forecast: {category}",
-    "trainingModel": "Training model and generating predictions..."
+    "title": "תחזית הוצאות: {category}",
+    "trainingModel": "מאמן מודל ומייצר תחזיות..."
   },
   "privacyPanel": {
     "active": "פעיל",
@@ -3825,7 +3825,7 @@
     "whatsSentDescription": "רק תיאורי עסקאות מנוקים (למשל \"AMAZON.COM\"). ללא מספרי חשבון, שמות או כתובות. מופעל ע\"י OpenAI GPT-4o-mini."
   },
   "profileDialog": {
-    "cancel": "Cancel",
+    "cancel": "ביטול",
     "confirmPinLabel": "אשר PIN",
     "confirmPinPlaceholder": "אשר PIN",
     "createDescription": "הוסף פרופיל חדש לבן משפחה. לכל פרופיל יכולים להיות תקציבים פרטיים משלו.",
@@ -3855,38 +3855,38 @@
     "deleteButton": "מחק פרופיל"
   },
   "pullToRefresh": {
-    "pull": "Pull to refresh",
-    "release": "Release to refresh"
+    "pull": "משוך לרענון",
+    "release": "שחרר לרענון"
   },
   "pwaInstall": {
     "buttons": {
-      "install": "Install",
-      "notNow": "Not now"
+      "install": "התקן",
+      "notNow": "לא עכשיו"
     },
-    "close": "Close install prompt",
-    "description": "Add to your home screen for quick access and offline use",
+    "close": "סגור הנחיית התקנה",
+    "description": "הוסף למסך הבית לגישה מהירה ושימוש לא מקוון",
     "features": {
-      "fastSecure": "Fast & secure",
-      "noAppStore": "No app store needed",
-      "offline": "Works offline"
+      "fastSecure": "מהיר ומאובטח",
+      "noAppStore": "ללא צורך בחנות אפליקציות",
+      "offline": "עובד ללא חיבור"
     },
-    "iosAddToHome": "\"Add to Home Screen\"",
-    "iosForFullExperience": "for the full app experience with faster loading.",
+    "iosAddToHome": "\"הוסף למסך הבית\"",
+    "iosForFullExperience": "לחוויית האפליקציה המלאה עם טעינה מהירה יותר.",
     "iosTap": "הקש",
-    "iosThen": "then",
-    "iosTitle": "Install Budget App",
-    "title": "Install Budget App"
+    "iosThen": "ואז",
+    "iosTitle": "התקן את אפליקציית התקציב",
+    "title": "התקן את אפליקציית התקציב"
   },
   "qrScanner": {
     "allowCameraAccess": "אנא אשר גישה למצלמה כשתתבקש",
-    "cameraError": "Camera Error",
+    "cameraError": "שגיאת מצלמה",
     "cameraFailed": "הגישה למצלמה נכשלה. אנא נסה שוב.",
     "cameraInUse": "המצלמה בשימוש ע\"י אפליקציה אחרת. סגור אפליקציות אחרות המשתמשות במצלמה.",
     "cameraStep1": "לחץ על סמל הנעילה/מידע בשורת הכתובת של הדפדפן",
     "cameraStep2": "מצא \"מצלמה\" בהרשאות",
     "cameraStep3": "שנה ל-\"אפשר\"",
     "cameraStep4": "רענן את הדף הזה",
-    "cancel": "Cancel",
+    "cancel": "ביטול",
     "deviceFound": "מכשיר נמצא!",
     "error": "Error",
     "howToEnableCamera": "איך להפעיל גישה למצלמה:",
@@ -3898,58 +3898,58 @@
     "qrExpired": "פג תוקפו של קוד QR זה. צור חדש במכשיר המארח.",
     "readyToConnect": "מוכן להתחבר ל-{deviceName}",
     "scanDescription": "סרוק את קוד ה-QR המוצג במכשיר המארח כדי להתחבר",
-    "scanQrCode": "Scan QR Code",
+    "scanQrCode": "סרוק קוד QR",
     "scanningForQr": "סורק קוד QR...",
     "startCamera": "הפעל מצלמה",
     "startingCamera": "מפעיל מצלמה...",
-    "tryAgain": "Try Again"
+    "tryAgain": "נסה שוב"
   },
   "quickCategorize": {
     "buttons": {
-      "apply": "Apply Category",
-      "cancel": "Cancel",
-      "save": "Save"
+      "apply": "החל קטגוריה",
+      "cancel": "ביטול",
+      "save": "שמור"
     },
-    "clickToSelect": "Click a category to select",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "clickToSelect": "לחץ על קטגוריה לבחירה",
+    "description": "בחר קטגוריה עבור {count, plural, one {עסקה זו} two {2 עסקאות אלו} other {# עסקאות אלו}}",
     "general": "General",
-    "noResults": "No categories found",
-    "pressEnter": "Press ↵ Enter",
-    "saving": "Saving...",
-    "searchPlaceholder": "Search categories...",
-    "title": "Quick Categorize"
+    "noResults": "לא נמצאו קטגוריות",
+    "pressEnter": "לחץ ↵ Enter",
+    "saving": "שומר...",
+    "searchPlaceholder": "חפש קטגוריות...",
+    "title": "סיווג מהיר"
   },
   "quickFilters": {
     "all": "הכל",
-    "categories": "Categories",
-    "clearFilters": "Clear Filters",
-    "moreCategories": "+{count} more",
+    "categories": "קטגוריות",
+    "clearFilters": "נקה מסננים",
+    "moreCategories": "+{count} נוספות",
     "presets": {
-      "last30": "Last 30 Days",
-      "last90": "Last 90 Days",
-      "thisMonth": "This Month",
-      "thisYear": "This Year"
+      "last30": "30 הימים האחרונים",
+      "last90": "90 הימים האחרונים",
+      "thisMonth": "החודש",
+      "thisYear": "השנה"
     },
-    "timePeriod": "Time Period"
+    "timePeriod": "תקופת זמן"
   },
   "quickStats": {
-    "balance": "Total Balance",
-    "expenses": "Expenses",
-    "income": "Income",
-    "savingsRate": "Savings Rate",
-    "savingsRateDescription": "Percentage of income saved this month"
+    "balance": "יתרה כוללת",
+    "expenses": "הוצאות",
+    "income": "הכנסה",
+    "savingsRate": "שיעור חיסכון",
+    "savingsRateDescription": "אחוז ההכנסה שנחסך החודש"
   },
   "receiptThumbnail": {
-    "close": "Close",
-    "deleteConfirm": "Delete receipt \"{filename}\"?",
-    "deleteFailed": "Failed to delete receipt",
-    "deleteReceipt": "Delete receipt",
-    "downloadPdf": "Download PDF",
+    "close": "סגור",
+    "deleteConfirm": "למחוק את הקבלה \"{filename}\"?",
+    "deleteFailed": "מחיקת הקבלה נכשלה",
+    "deleteReceipt": "מחק קבלה",
+    "downloadPdf": "הורד PDF",
     "fileSize": "{size} KB",
-    "pdfReceipt": "PDF Receipt",
-    "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
-    "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}",
+    "pdfReceipt": "קבלת PDF",
+    "receiptCount": "{count, plural, one {קבלה אחת} two {2 קבלות} other {# קבלות}}",
+    "unsupportedFileType": "סוג קובץ לא נתמך",
+    "uploaded": "הועלה {date}",
     "view": "הצג"
   },
   "receiptUpload": {
@@ -3993,26 +3993,26 @@
     "removeFile": "הסר קובץ"
   },
   "recurringTransactions": {
-    "confidence": "{percent}% confidence",
-    "estimatedMonthly": "Estimated Monthly",
+    "confidence": "{percent}% ביטחון",
+    "estimatedMonthly": "אומדן חודשי",
     "frequency": {
-      "biweekly": "Bi-weekly",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "biweekly": "דו-שבועי",
+      "monthly": "חודשי",
+      "quarterly": "רבעוני",
+      "weekly": "שבועי"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
-    "next": "Next: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "inDays": "{count, plural, one {(היום)} two {(בעוד יומיים)} other {(בעוד # ימים)}}",
+    "next": "הבא: {date}",
+    "occurrences": "{count, plural, one {זוהה מופע אחד} two {זוהו 2 מופעים} other {זוהו # מופעים}}",
     "perPeriod": {
-      "month": "per month",
-      "quarter": "per quarter",
-      "twoWeeks": "per 2 weeks",
-      "week": "per week"
+      "month": "לחודש",
+      "quarter": "לרבעון",
+      "twoWeeks": "לשבועיים",
+      "week": "לשבוע"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
-    "subtitle": "Detected subscriptions and bills",
-    "title": "Recurring Transactions"
+    "showingPatterns": "{count, plural, one {מציג דפוס עסקה חוזרת אחד} two {מציג 2 דפוסי עסקאות חוזרות} other {מציג # דפוסי עסקאות חוזרות}}",
+    "subtitle": "מנויים וחשבונות שזוהו",
+    "title": "עסקאות חוזרות"
   },
   "reports": {
     "addTransactionsToSeeFlow": "הוסף עסקאות הכנסה והוצאה כדי לראות את זרימת הכסף שלך",
@@ -4142,13 +4142,13 @@
     "yourAccounts": "החשבונות שלך"
   },
   "shortcutsModal": {
-    "close": "Close shortcuts help",
+    "close": "סגור עזרת קיצורים",
     "proTip": {
-      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
-      "title": "💡 Pro Tip"
+      "description": "קיצורי מקלדת פועלים בכל דף חוץ מהקלדה בטפסים. לחץ על {key} בכל עת כדי לראות עזרה זו.",
+      "title": "💡 טיפ מקצועי"
     },
-    "subtitle": "Power-user productivity tips",
-    "title": "Keyboard Shortcuts"
+    "subtitle": "טיפים לפרודוקטיביות למשתמשים מתקדמים",
+    "title": "קיצורי מקלדת"
   },
   "sidebar": {
     "actions": {
@@ -4194,8 +4194,8 @@
     "autoImportDescription": "ייבא עסקאות אוטומטית מחשבונות הבנק שלך",
     "automaticSync": "סנכרון אוטומטי",
     "automaticSyncDescription": "עסקאות מסונכרנות יומית. ייבוא ידני בכל עת.",
-    "back": "Back",
-    "cancel": "Cancel",
+    "back": "חזרה",
+    "cancel": "ביטול",
     "completeSetup": "השלם הגדרה",
     "connect": "התחבר",
     "connectYourBank": "חבר את הבנק שלך",
@@ -4206,7 +4206,7 @@
     "createNewAccount": "צור חשבון חדש",
     "dialogDescription": "קשר את חשבונות הבנק שלך דרך SimpleFIN Bridge",
     "dialogTitle": "חבר חשבון בנק",
-    "done": "Done",
+    "done": "סיום",
     "enterItHere": "הכנס אותו כאן",
     "enterTokenError": "אנא הכנס את טוקן ההגדרה של SimpleFIN",
     "failedToSave": "שמירת החיבור נכשלה",
@@ -4351,18 +4351,18 @@
     "warningsLabel": "אזהרות:"
   },
   "spendingTrendChart": {
-    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "forecastFooter": "תחזית מבוססת על רגרסיה לינארית של {months} החודשים האחרונים",
     "legend": {
-      "actualSpending": "Actual Spending",
-      "projected": "Projected"
+      "actualSpending": "הוצאות בפועל",
+      "projected": "צפוי"
     },
-    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "notEnoughData": "אין מספיק נתונים ליצירת מגמות. הוסף לפחות חודשיים של עסקאות.",
     "stats": {
-      "avgMonthly": "Avg Monthly",
-      "lastMonth": "Last Month",
-      "projected": "Projected"
+      "avgMonthly": "ממוצע חודשי",
+      "lastMonth": "חודש שעבר",
+      "projected": "צפוי"
     },
-    "title": "Spending Trends & Forecast"
+    "title": "מגמות הוצאות ותחזית"
   },
   "splitTransaction": {
     "addSplit": "הוסף פיצול ({current}/{max})",
@@ -4560,30 +4560,30 @@
     }
   },
   "subscriptionCostChart": {
-    "emptyState": "No active subscriptions to analyze",
-    "loadingChart": "Loading chart...",
-    "moreCharges": "+{count} more charges",
-    "perMonth": "/month",
+    "emptyState": "אין מנויים פעילים לניתוח",
+    "loadingChart": "טוען תרשים...",
+    "moreCharges": "+{count} חיובים נוספים",
+    "perMonth": "/חודש",
     "sections": {
-      "costByCategory": "Cost by Category",
-      "potentialSavings": "Potential Savings",
-      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+      "costByCategory": "עלות לפי קטגוריה",
+      "potentialSavings": "חיסכון פוטנציאלי",
+      "upcomingCharges": "חיובים קרובים (30 הימים הבאים)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
-      "annualCost": "Annual Cost",
-      "monthlyCost": "Monthly Cost",
-      "next30Days": "Next 30 Days",
-      "projectedYearly": "Projected yearly spend",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "activeSubscriptions": "{count, plural, one {מנוי פעיל אחד} two {2 מנויים פעילים} other {# מנויים פעילים}}",
+      "annualCost": "עלות שנתית",
+      "monthlyCost": "עלות חודשית",
+      "next30Days": "30 הימים הבאים",
+      "projectedYearly": "הוצאה שנתית צפויה",
+      "upcomingCharges": "{count, plural, one {חיוב קרוב אחד} two {2 חיובים קרובים} other {# חיובים קרובים}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "מנויים שייתכן שבוטלו",
+      "inactiveDescription": "{count, plural, one {מנוי אחד לא חייב} two {2 מנויים לא חייבו} other {# מנויים לא חייבו}} לאחרונה. ודא שהם אכן בוטלו.",
+      "trialsTitle": "תקופות ניסיון מסתיימות בקרוב",
+      "trialsDescription": "{count, plural, one {תקופת ניסיון אחת} two {2 תקופות ניסיון} other {# תקופות ניסיון}} מסתיימות ב-7 הימים הקרובים. בטל אם אינך משתמש בהם.",
+      "highCostTitle": "מנויים יקרים",
+      "highCostDescription": "מנויים אלה מהווים חלק גדול מההוצאות שלך. שקול אם אתה מנצל אותם במלואם."
     }
   },
   "subscriptionModal": {
@@ -4696,19 +4696,19 @@
     }
   },
   "syncStatus": {
-    "daysAgo": "{days}d ago",
-    "devices": "{connected}/{total} devices",
-    "devicesConnected": "{connected}/{total} devices connected",
-    "hoursAgo": "{hours}h ago",
-    "justNow": "Just now",
-    "lastSync": "Last sync: {time}",
-    "minutesAgo": "{minutes}m ago",
-    "never": "Never",
+    "daysAgo": "לפני {days} ימים",
+    "devices": "{connected}/{total} מכשירים",
+    "devicesConnected": "{connected}/{total} מכשירים מחוברים",
+    "hoursAgo": "לפני {hours} שע'",
+    "justNow": "הרגע",
+    "lastSync": "סנכרון אחרון: {time}",
+    "minutesAgo": "לפני {minutes} דק'",
+    "never": "מעולם לא",
     "offline": "לא מקוון",
-    "partialSync": "Partial Sync",
-    "syncError": "Sync Error",
+    "partialSync": "סנכרון חלקי",
+    "syncError": "שגיאת סנכרון",
     "synced": "מסונכרן",
-    "syncing": "Syncing..."
+    "syncing": "מסנכרן..."
   },
   "tooltip": {
     "ariaLabel": "מידע נוסף",
@@ -4872,17 +4872,17 @@
   },
   "transactionTable": {
     "actions": {
-      "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
-      "split": "Split"
+      "attachReceipt": "צרף קבלה",
+      "delete": "מחיקה",
+      "edit": "עריכה",
+      "split": "פיצול"
     },
-    "emptyState": "No transactions to display",
+    "emptyState": "אין עסקאות להצגה",
     "headers": {
-      "account": "Account",
+      "account": "חשבון",
       "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
+      "amount": "סכום",
+      "category": "קטגוריה",
       "date": "Date",
       "description": "Description"
     }
@@ -4987,15 +4987,15 @@
     "youWillLose": "תאבד:"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
-    "daysRemaining": "{count} days remaining in your free trial",
+    "daysLeft": "{count, plural, one {תקופת הניסיון שלך מסתיימת היום!} two {נותרו יומיים בתקופת הניסיון שלך} other {נותרו # ימים בתקופת הניסיון שלך}}",
+    "daysRemaining": "{count} ימים נותרו בתקופת הניסיון החינמית שלך",
     "dismiss": "סגור",
-    "expired": "Your trial has expired",
-    "expiredDescription": "App is in read-only mode. Upgrade to continue managing your finances.",
-    "upgrade": "Upgrade - {price}",
-    "upgradeNow": "Upgrade Now - {price}",
-    "upgradePrompt": "Upgrade now to keep full access to your budget data.",
-    "viewPricing": "View pricing"
+    "expired": "תקופת הניסיון שלך הסתיימה",
+    "expiredDescription": "האפליקציה במצב קריאה בלבד. שדרג כדי להמשיך לנהל את הכספים שלך.",
+    "upgrade": "שדרג - {price}",
+    "upgradeNow": "שדרג עכשיו - {price}",
+    "upgradePrompt": "שדרג עכשיו כדי לשמור על גישה מלאה לנתוני התקציב שלך.",
+    "viewPricing": "צפה בתמחור"
   },
   "validationWarnings": {
     "aiAnalysis": "ניתוח AI:",
@@ -5029,7 +5029,7 @@
     "automaticProtection": "הגנה אוטומטית",
     "bankGradeSecurity": "אבטחה ברמת בנק",
     "chooseProtection": "בחר כיצד ברצונך להגן על הנתונים שלך:",
-    "confirmPassword": "Confirm Password",
+    "confirmPassword": "אשר סיסמה",
     "confirmYourPassword": "אשר את הסיסמה שלך",
     "enableEncryption": "הפעל הצפנה",
     "enterStrongPassword": "הכנס סיסמה חזקה",
@@ -5039,13 +5039,13 @@
     "passwordProtection": "הגנת סיסמה",
     "passwordWarning": "אם תשכח סיסמה זו, לא ניתן יהיה לשחזר את הנתונים שלך. איננו יכולים לאפס אותה עבורך.",
     "passwordsDoNotMatch": "הסיסמאות אינן תואמות",
-    "recommended": "Recommended",
+    "recommended": "מומלץ",
     "settingUp": "מגדיר...",
     "setupError": "הגדרת הכספת נכשלה. אנא נסה שוב.",
     "strengthFair": "סביר",
     "strengthStrong": "חזק",
-    "strengthVeryStrong": "Very Strong",
-    "strengthVeryWeak": "Very Weak",
+    "strengthVeryStrong": "חזק מאוד",
+    "strengthVeryWeak": "חלש מאוד",
     "strengthWeak": "חלש",
     "zeroKnowledge": "ידע אפסי"
   },
@@ -5063,8 +5063,8 @@
       "title": "התקדמות התקציב"
     },
     "eventBudget": {
-      "description": "Track spending for events and projects",
-      "title": "Event Budgets"
+      "description": "עקוב אחרי הוצאות לאירועים ופרויקטים",
+      "title": "תקציבי אירועים"
     },
     "incomeVsExpenses": {
       "description": "השווה בין הרווחים להוצאות שלך לאורך זמן",
@@ -5075,8 +5075,8 @@
       "title": "מגמות חודשיות"
     },
     "netWorthMini": {
-      "description": "Quick view of your total net worth",
-      "title": "Net Worth"
+      "description": "תצוגה מהירה של השווי הנקי הכולל שלך",
+      "title": "שווי נקי"
     },
     "recentTransactions": {
       "description": "תצוגה מהירה של הפעילות הפיננסית האחרונה שלך",
@@ -5091,7 +5091,7 @@
       "title": "הוצאות לפי קטגוריה"
     },
     "streaks": {
-      "description": "Track your engagement streaks and achievements",
+      "description": "עקוב אחרי רצפי המעורבות וההישגים שלך",
       "title": "רצפים ותגים"
     },
     "upcomingBills": {
@@ -5099,8 +5099,8 @@
       "title": "חשבונות קרובים"
     },
     "weeklyRecap": {
-      "description": "Summary of your weekly spending patterns",
-      "title": "Weekly Recap"
+      "description": "סיכום דפוסי ההוצאות השבועיים שלך",
+      "title": "סיכום שבועי"
     }
   },
   "ynabMigrationWizard": {

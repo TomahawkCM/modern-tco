@@ -35,7 +35,7 @@
       "title": "Modalità Anziani"
     },
     "themeMode": {
-      "auto": "Auto",
+      "auto": "Automatico",
       "autoDesc": "Corrisponde al sistema",
       "dark": "Scuro",
       "darkDesc": "Riposante per gli occhi",
@@ -196,7 +196,7 @@
     "removeMember": "Rimuovere {email} dal gruppo?",
     "rename": "Rinomina",
     "renameGroup": "Rinomina gruppo",
-    "roleAdmin": "admin",
+    "roleAdmin": "amministratore",
     "roleChild": "figlio",
     "roleColumn": "Ruolo",
     "roleMember": "membro",
@@ -281,10 +281,10 @@
   "amountFilter": {
     "clear": "Cancella",
     "maxLabel": "Importo massimo",
-    "maxPlaceholder": "Max",
+    "maxPlaceholder": "Max.",
     "maxThumb": "Importo massimo",
     "minLabel": "Importo minimo",
-    "minPlaceholder": "Min",
+    "minPlaceholder": "Min.",
     "minThumb": "Importo minimo",
     "title": "Intervallo di Importo"
   },
@@ -313,7 +313,7 @@
     "addTransaction": "Aggiungi transazione",
     "aiChatbot": "Chatbot IA - Funzione Premium",
     "assistantTyping": "L'assistente sta scrivendo",
-    "breadcrumb": "Breadcrumb",
+    "breadcrumb": "Percorso di navigazione",
     "chatMessages": "Messaggi chat",
     "clearSearch": "Cancella ricerca",
     "close": "Chiudi",
@@ -337,7 +337,7 @@
     "dismissWelcome": "Ignora banner di benvenuto",
     "dragToClose": "Trascina verso il basso per chiudere",
     "editTransaction": "Modifica transazione",
-    "home": "Home",
+    "home": "Pagina iniziale",
     "increaseTextSize": "Aumenta dimensione testo",
     "loadingChart": "Caricamento grafico...",
     "mainSidebar": "Barra laterale principale",
@@ -388,7 +388,7 @@
       "emailPlaceholder": "tu@esempio.com",
       "forgotPassword": "Password dimenticata?",
       "noAccount": "Non hai un account?",
-      "passwordLabel": "Password",
+      "passwordLabel": "Parola d'accesso",
       "signInButton": "Accedi",
       "startFreeTrial": "Inizia la prova gratuita",
       "subtitle": "Accedi al tuo account BudgetPro",
@@ -420,7 +420,7 @@
       "fullNameLabel": "Nome completo",
       "fullNamePlaceholder": "Mario Rossi",
       "hasAccount": "Hai già un account?",
-      "passwordLabel": "Password",
+      "passwordLabel": "Parola d'accesso",
       "passwordPlaceholder": "Crea una password sicura",
       "passwordTooShort": "La password deve contenere almeno 8 caratteri.",
       "passwordsMismatch": "Le password non corrispondono. Reinserisci la password.",
@@ -477,7 +477,7 @@
     "edit": "Modifica",
     "emergencyFund": "Fondo di emergenza",
     "futurePlans": "Piani futuri",
-    "home": "Home",
+    "home": "Pagina iniziale",
     "merchantRules": "Regole commercianti",
     "more": "Altro",
     "netWorth": "Patrimonio netto",
@@ -1198,7 +1198,7 @@
     },
     "transparency": {
       "assumptions": "Ipotesi",
-      "formula": "Formula",
+      "formula": "Formula di calcolo",
       "title": "Come funziona"
     },
     "chart": {
@@ -1326,7 +1326,7 @@
   "chatbotHelp": {
     "tabs": {
       "actions": "Azioni",
-      "budget": "Budget",
+      "budget": "Bilancio",
       "income": "Entrate",
       "spending": "Spese",
       "trends": "Tendenze"
@@ -1419,7 +1419,7 @@
       "budgets": "Budget",
       "categories": "Categorie",
       "darkTheme": "Tema Scuro",
-      "dashboard": "Dashboard",
+      "dashboard": "Pannello di controllo",
       "exportData": "Esporta Dati",
       "futurePlans": "Piani Futuri",
       "highContrastTheme": "Tema Alto Contrasto",
@@ -1682,7 +1682,7 @@
     "clearConfirm": "Cancellare TUTTI i dati? Questa azione non può essere annullata!",
     "clearFailed": "Cancellazione fallita: {error}",
     "clearSuccess": "Database cancellato. Aggiorna la pagina.",
-    "database": "Database",
+    "database": "Banca dati",
     "databaseInfo": "Informazioni sul database",
     "devIsolationNote": "I dati di sviluppo sono isolati dalla produzione. Testa liberamente senza influenzare gli utenti reali.",
     "development": "SVILUPPO",
@@ -1746,7 +1746,7 @@
     "errorInput": "Campo con errore",
     "errorMessage": "Messaggio di errore",
     "extraSmallText": "Testo extra piccolo (14px) - Note a piè di pagina e testo legale",
-    "focus": "Focus",
+    "focus": "Evidenziazione",
     "formControls": "Controlli modulo",
     "ghost": "Fantasma",
     "heading1": "Intestazione 1 (48px)",
@@ -1881,7 +1881,7 @@
     "technical": {
       "canRecover": "Può essere ripristinato:",
       "errorCategory": "Categoria errore:",
-      "no": "No",
+      "no": "No, grazie",
       "severity": "Gravità:",
       "suggestions": "Suggerimenti:",
       "title": "Dettagli tecnici avanzati",
@@ -2024,7 +2024,7 @@
       "hint": "Suggerimento password (facoltativo)",
       "hintNote": "Questo suggerimento sarà archiviato non crittografato nel file",
       "hintPlaceholder": "Un suggerimento per ricordartela",
-      "label": "Password",
+      "label": "Parola d'accesso",
       "minLength": "La password deve essere di almeno 8 caratteri",
       "mismatch": "Le password non corrispondono",
       "placeholder": "Inserisci password (min. 8 caratteri)",
@@ -2175,7 +2175,7 @@
     "langEnglish": "Inglese",
     "langFrench": "Francese",
     "langGerman": "Tedesco",
-    "langHindi": "Hindi",
+    "langHindi": "Lingua hindi",
     "langItalian": "Italiano",
     "langJapanese": "Giapponese",
     "langKorean": "Coreano",
@@ -2249,7 +2249,7 @@
       "encrypted": "Questo file è crittografato",
       "enterPassword": "Inserisci password",
       "hint": "Suggerimento: {hint}",
-      "password": "Password"
+      "password": "Parola d'accesso"
     },
     "importing": {
       "pleaseWait": "Attendi, potrebbe richiedere un momento",
@@ -2501,7 +2501,7 @@
         "cloud": "App Cloud Tipica",
         "feature": "Funzionalità",
         "local": "BudgetPro Locale",
-        "sync": "BudgetPro Sync (Pro)"
+        "sync": "BudgetPro Sincro (Pro)"
       },
       "offlineMode": {
         "feature": "Modalità Offline"
@@ -2628,7 +2628,7 @@
         "netWorth": "Patrimonio netto",
         "netflix": "Netflix",
         "salary": "Stipendio",
-        "shopping": "Shopping",
+        "shopping": "Acquisti",
         "spotify": "Spotify",
         "subscriptionOct24": "Abbonamento • 24 ott",
         "yearly": "Annuale"
@@ -2818,7 +2818,7 @@
   "linkToLoan": {
     "bestMatch": "Corrispondenza migliore",
     "cancel": "Annulla",
-    "extra": "Extra",
+    "extra": "Supplemento",
     "interest": "Interessi",
     "linkError": "Impossibile collegare la transazione. Riprova.",
     "linkPayment": "Collega pagamento",
@@ -3087,8 +3087,8 @@
   "mobileNav": {
     "accounts": "Conti",
     "activity": "Attività",
-    "budget": "Budget",
-    "home": "Home",
+    "budget": "Bilancio",
+    "home": "Inizio",
     "more": "Altro"
   },
   "morePage": {
@@ -3388,7 +3388,7 @@
         "foodDining": "Cibo e Ristorazione",
         "transportation": "Trasporti",
         "billsUtilities": "Bollette e Utenze",
-        "shopping": "Shopping",
+        "shopping": "Acquisti",
         "entertainment": "Intrattenimento",
         "healthFitness": "Salute e Fitness",
         "personalCare": "Cura personale",
@@ -3404,7 +3404,7 @@
       "label": "Progresso attuale"
     },
     "stats": {
-      "budget": "Budget",
+      "budget": "Bilancio",
       "daysLeft": "Giorni rimasti",
       "projectedTotal": "Totale previsto",
       "spentSoFar": "Speso finora"
@@ -3421,7 +3421,7 @@
     "description": "Connetti un altro dispositivo sulla tua rete locale",
     "deviceAdded": "Dispositivo aggiunto. Connetti per completare l'abbinamento.",
     "failedToInitialize": "Impossibile inizializzare il dispositivo. Riprova.",
-    "host": "Host",
+    "host": "Indirizzo server",
     "ipAddressDescription": "Inserisci il tuo indirizzo IP locale per consentire ad altri dispositivi di connettersi.",
     "ipAddressRequired": "Indirizzo IP richiesto",
     "ipPlaceholder": "192.168.1.100",
@@ -3455,7 +3455,7 @@
     "dismissed": "{count} ignorati",
     "emptyState": "Nessuna cronologia pagamenti ancora",
     "emptyStateDescription": "Aggiungi pagamenti manualmente o collegali dalle tue transazioni",
-    "extra": "Extra",
+    "extra": "Supplemento",
     "extraPrincipalLabel": "Capitale extra (facoltativo)",
     "highConfidence": "Alta confidenza",
     "interest": "Interessi",
@@ -3806,7 +3806,7 @@
     "nothingSelected": "Nessuna selezione",
     "predictiveSpending": "Spesa predittiva",
     "predictiveSpendingDescription": "Prevedi la spesa mensile per categoria tramite analisi IA",
-    "privacy": "Privacy:",
+    "privacy": "Riservatezza:",
     "privacyFirst": "Privacy al primo posto",
     "privacyNotice": "Tutta l'elaborazione avviene nel tuo browser. Nessun dato sulle transazioni viene caricato sui server. Le funzionalità IA sono facoltative e inviano solo descrizioni delle transazioni ripulite (senza numeri di conto, nomi o indirizzi) quando abilitate.",
     "readOnlyDescription": "Il chatbot può visualizzare i dati e rispondere alle domande ma non può modificare nulla",
@@ -4228,7 +4228,7 @@
       "budgets": "Budget",
       "calculators": "Calcolatori",
       "categories": "Categorie",
-      "dashboard": "Dashboard",
+      "dashboard": "Pannello di controllo",
       "events": "Eventi",
       "futurePlans": "Piani Futuri",
       "import": "Importa CSV",
@@ -4765,7 +4765,7 @@
     "lastSync": "Ultima sincronizzazione: {time}",
     "minutesAgo": "{minutes}m fa",
     "never": "Mai",
-    "offline": "Offline",
+    "offline": "Non in linea",
     "partialSync": "Sincronizzazione parziale",
     "syncError": "Errore di sincronizzazione",
     "synced": "Sincronizzato",
@@ -5318,7 +5318,7 @@
     "factorLabels": {
       "savingsRate": "Risparmio",
       "debtToIncome": "Debiti",
-      "budgetAdherence": "Budget",
+      "budgetAdherence": "Bilancio",
       "emergencyFund": "Fondo di emergenza",
       "investmentGrowth": "Investimenti",
       "expenseStability": "Spese"

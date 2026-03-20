@@ -106,8 +106,8 @@
     "actionDeleted": "Excluído",
     "actionExport": "Exportação",
     "actionImport": "Importação",
-    "actionLogin": "Login",
-    "actionLogout": "Logout",
+    "actionLogin": "Inicio de sesión",
+    "actionLogout": "Peche de sesión",
     "actionUpdated": "Atualizado",
     "allActions": "Todas as ações",
     "allProfiles": "Todos os perfis",
@@ -364,7 +364,7 @@
     "syncStatus": "Status de sincronização: {status}",
     "toggleSeniorsMode": "Alternar Modo Sênior",
     "typeQuestion": "Digite sua pergunta",
-    "unreadNotifications": "{count, plural, =1 {1 unread notification} other {# unread notifications}}",
+    "unreadNotifications": "{count, plural, =1 {1 notificación sen ler} other {# notificacións sen ler}}",
     "welcomeBudgetApp": "Bem-vindo ao App de Orçamento"
   },
   "auth": {
@@ -373,7 +373,7 @@
       "checkEmailTitle": "Verifique Seu Email",
       "checkSpam": "Não recebeu o email? Verifique sua pasta de spam ou tente novamente.",
       "defaultError": "Falha ao enviar email de redefinição",
-      "emailLabel": "Email",
+      "emailLabel": "Correo electrónico",
       "emailPlaceholder": "voce@exemplo.com",
       "rememberPassword": "Lembrou a senha?",
       "resetLinkSent": "Enviamos um link de redefinição de senha para {email}",
@@ -384,7 +384,7 @@
     },
     "login": {
       "defaultError": "Falha ao entrar",
-      "emailLabel": "Email",
+      "emailLabel": "Correo electrónico",
       "emailPlaceholder": "voce@exemplo.com",
       "forgotPassword": "Esqueceu a senha?",
       "noAccount": "Não tem uma conta?",
@@ -415,7 +415,7 @@
       "confirmPasswordPlaceholder": "Digite a senha novamente",
       "createAccountButton": "Criar Conta",
       "defaultError": "Falha ao criar conta",
-      "emailLabel": "Email",
+      "emailLabel": "Correo electrónico",
       "emailPlaceholder": "voce@exemplo.com",
       "fullNameLabel": "Nome Completo",
       "fullNamePlaceholder": "João Silva",
@@ -503,8 +503,8 @@
       "addAccount": "Adicionar Conta",
       "addFirstAccount": "Adicionar Sua Primeira Conta",
       "allTransactionsCleared": "Todas as transações foram limpas. Agora você pode reimportar seus extratos.",
-      "assignCount": "Assign {count, plural, one {# Transaction} other {# Transactions}}",
-      "assignModalDescription": "{count, plural, one {# transaction needs} other {# transactions need}} to be assigned to an account.",
+      "assignCount": "Asignar {count, plural, one {# transacción} other {# transaccións}}",
+      "assignModalDescription": "{count, plural, one {# transacción necesita} other {# transaccións necesitan}} ser asignadas a unha conta.",
       "assignTransactions": "Atribuir Transações",
       "assignTransactionsNow": "Atribuir Transações Agora",
       "assignedTransactions": "{count} transações atribuídas a {name}",
@@ -557,7 +557,7 @@
       "unassignedClickToAssign": "Clique abaixo para atribuí-las automaticamente às suas contas.",
       "unassignedCreateFirst": "Crie uma conta primeiro, depois elas serão atribuídas automaticamente.",
       "unassignedDescription": "Essas transações foram importadas antes das contas serem configuradas.",
-      "unassignedTitle": "{count, plural, one {# transaction needs} other {# transactions need}} account assignment",
+      "unassignedTitle": "{count, plural, one {# transacción necesita} other {# transaccións necesitan}} asignación de conta",
       "update": "Atualizar"
     },
     "budgets": {
@@ -611,7 +611,7 @@
       "totalExpenses": "Total de despesas",
       "totalSpent": "Total Gasto",
       "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
-      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transaction will become unbudgeted} other {# transactions will become unbudgeted}}",
+      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transacción quedará sen orzamento} other {# transaccións quedarán sen orzamento}}",
       "youWillLose": "Você perderá:"
     },
     "events": {
@@ -824,7 +824,7 @@
     "applyTo": "Aplicar a {count}",
     "categorize": "Categorizar",
     "clearSelection": "Limpar seleção",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "confirmDelete": "Eliminar {count, plural, =1 {1 transacción} other {# transaccións}}?",
     "delete": "Excluir",
     "deleteWarning": "Esta ação não pode ser desfeita.",
     "export": "Exportar",
@@ -1629,7 +1629,7 @@
     "viewAllLoans": "Ver Todos os Empréstimos"
   },
   "debtOverview": {
-    "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
+    "activeLoans": "{count, plural, one {# préstamo activo} other {# préstamos activos}}",
     "activeLoansTitle": "Empréstimos Ativos",
     "addLoan": "Adicionar Empréstimo",
     "avgRate": "Taxa Média",
@@ -1640,7 +1640,7 @@
     "totalDebt": "Dívida Total",
     "upcomingPayments": "Pagamentos Futuros",
     "viewAll": "Ver Todos",
-    "viewMore": "{count, plural, one {View # more loan} other {View # more loans}}"
+    "viewMore": "{count, plural, one {Ver # préstamo máis} other {Ver # préstamos máis}}"
   },
   "debtPayoff": {
     "addDebt": "Adicionar Dívida",
@@ -1798,8 +1798,8 @@
     "dragToReorder": "Arraste para reordenar widget"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
+    "months": "{count, plural, =1 {1 mes} other {# meses}}",
+    "years": "{count, plural, =1 {1 ano} other {# anos}}",
     "yearsAndMonths": "{years}a {months}m"
   },
   "emptyStates": {
@@ -1861,7 +1861,7 @@
       "viewGuide": "Ver guia de solução de problemas"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "canRecover": "Boas noticias! Atopamos {count} {count, plural, =1 {forma} other {formas}} de recuperarse deste erro.",
       "cannotRecover": "Recuperação não é possível. Você precisará exportar o arquivo novamente do seu banco ou tentar um formato diferente.",
       "optionsTitle": "Opções de Recuperação"
     },
@@ -2104,7 +2104,7 @@
       "line2": "Pontuação de Saúde Financeira"
     },
     "grade": "Nota: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
+    "missingFactors": "{count, plural, =1 {1 factor que falta} other {# factores que faltan}}",
     "title": "Saúde Financeira",
     "history": {
       "title": "Historial de puntuación",
@@ -2347,7 +2347,7 @@
       "description": "Isso excluirá permanentemente a conta e todos os ativos associados.",
       "impactAccount": "Conta: {name}",
       "impactHistory": "Todo o histórico de transações",
-      "impactHoldings": "{count, plural, one {# holding} other {# holdings}}",
+      "impactHoldings": "{count, plural, one {# posición} other {# posicións}}",
       "impactTitle": "Você perderá:",
       "impactValue": "Valor total: {value}",
       "title": "Excluir Conta de Investimento"
@@ -2374,7 +2374,7 @@
     },
     "gainLoss": "Ganho/Perda",
     "hideDetails": "Ocultar Detalhes",
-    "holdingsCount": "{count, plural, one {# holding} other {# holdings}}",
+    "holdingsCount": "{count, plural, one {# posición} other {# posicións}}",
     "loading": "Carregando investimentos...",
     "marketDataNotice": "Aviso de Dados de Mercado",
     "noHoldings": "Nenhum ativo nesta conta ainda.",
@@ -2437,7 +2437,7 @@
     "pairedDevices": {
       "addDevice": "Adicionar Dispositivo",
       "addFirstDevice": "Adicionar Seu Primeiro Dispositivo",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "deviceCount": "{count, plural, =1 {1 dispositivo emparellado} other {# dispositivos emparellados}}",
       "emptyDescription": "Emparelhe um dispositivo para começar a sincronizar seus dados de orçamento",
       "emptyTitle": "Nenhum dispositivo emparelhado",
       "noDevices": "Nenhum dispositivo emparelhado ainda",
@@ -2451,11 +2451,11 @@
     },
     "syncAll": "Sincronizar Tudo",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "daysAgo": "{count, plural, =1 {hai 1 día} other {hai # días}}",
+      "hoursAgo": "{count, plural, =1 {hai 1 hora} other {hai # horas}}",
       "justNow": "Agora mesmo",
       "lastSync": "Última sincronização: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "minutesAgo": "{count, plural, =1 {hai 1 minuto} other {hai # minutos}}",
       "neverSynced": "Nunca sincronizado"
     },
     "title": "Sincronização LAN"
@@ -3476,7 +3476,7 @@
     "savePayment": "Salvar Pagamento",
     "status": "Status",
     "suggestedMatches": "Correspondências Sugeridas de Transações",
-    "suggestedMatchesDescription": "We found {count, plural, one {# transaction} other {# transactions}} that might be loan payments",
+    "suggestedMatchesDescription": "Atopamos {count, plural, one {# transacción} other {# transaccións}} que poderían ser pagamentos de préstamos",
     "title": "Histórico de Pagamentos",
     "uncategorized": "Sem categoria",
     "unlinkConfirm": "Desvincular este pagamento da transação?",
@@ -3618,7 +3618,7 @@
       "payFrequencyHelp": "Com que frequência você recebe? Isso determina quando seus salários são gerados.",
       "payFrequencyHelpAriaLabel": "Mais informações sobre frequência de pagamento",
       "paycheckTimeline": "Cronograma de Salários",
-      "paychecksPlanned": "{count, plural, one {# paycheck planned} other {# paychecks planned}}",
+      "paychecksPlanned": "{count, plural, one {# nómina planificada} other {# nóminas planificadas}}",
       "percentOfIncome": "{percent}% da receita",
       "regeneratePaychecks": "Regenerar Salários",
       "remainingToAllocate": "Restante para alocar",
@@ -3636,7 +3636,7 @@
       "scheduleSemimonthlyDesc": "1º e 15",
       "scheduleWeekly": "Semanal",
       "scheduleWeeklyDesc": "Toda semana",
-      "scheduledPaychecks": "{count, plural, one {# scheduled paycheck} other {# scheduled paychecks}}",
+      "scheduledPaychecks": "{count, plural, one {# nómina programada} other {# nóminas programadas}}",
       "setUpPaycheckPlan": "Configurar Plano de Salário",
       "setUpPlan": "Configurar Plano",
       "subtitle": "Planeje para onde cada real vai antes de receber",
@@ -3707,7 +3707,7 @@
       "tfsaBalance": "Saldo TFSA",
       "title": "Calculadora de Aposentadoria",
       "toReachGoal": "Para alcançar sua meta, você poderia:",
-      "workMoreYears": "Work {years, plural, one {# more year} other {# more years}}",
+      "workMoreYears": "Traballar {years, plural, one {# ano máis} other {# anos máis}}",
       "yearAge": "{year} (Idade {age})",
       "yearsToRetirement": "Anos para Aposentadoria",
       "youWillLose": "Você perderá:",
@@ -3750,7 +3750,7 @@
     "chatbotDescription": "Assistente alimentado por IA que pode responder perguntas sobre suas transações, orçamentos e padrões de gastos. As conversas são processadas via API da OpenAI.",
     "chatbotPrivacyNotice": "Seus dados financeiros são enviados à OpenAI para responder perguntas. A OpenAI não usa dados da API para treinar modelos. Você pode desativar a qualquer momento.",
     "confirmDelete": "Confirmar Exclusão",
-    "confirmDeleteWarning": "You are about to permanently delete {count, plural, one {# data type} other {# data types}}. Click \"Confirm Delete\" to proceed.",
+    "confirmDeleteWarning": "Está a piques de eliminar permanentemente {count, plural, one {# tipo de datos} other {# tipos de datos}}. Prema \"Confirmar eliminación\" para continuar.",
     "conversationHistory": "Histórico de Conversas",
     "conversationStorageNotice": "As conversas são armazenadas localmente no seu navegador. Você pode excluí-las manualmente a qualquer momento.",
     "dataAccessPermission": "Permissão de Acesso aos Dados",
@@ -3911,7 +3911,7 @@
       "save": "Salvar"
     },
     "clickToSelect": "Clique em uma categoria para selecionar",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "description": "Seleccione unha categoría para {count, plural, =1 {esta transacción} other {# transaccións}}",
     "general": "Geral",
     "noResults": "Nenhuma categoria encontrada",
     "pressEnter": "Pressione ↵ Enter",
@@ -3947,7 +3947,7 @@
     "downloadPdf": "Baixar PDF",
     "fileSize": "{size} KB",
     "pdfReceipt": "Recibo em PDF",
-    "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
+    "receiptCount": "{count, plural, =1 {1 recibo} other {# recibos}}",
     "unsupportedFileType": "Tipo de arquivo não suportado",
     "uploaded": "Enviado em {date}",
     "view": "Ver"
@@ -4001,16 +4001,16 @@
       "quarterly": "Trimestral",
       "weekly": "Semanal"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
+    "inDays": "{count, plural, =0 {(hoxe)} =1 {(en 1 día)} other {(en # días)}}",
     "next": "Próxima: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "occurrences": "{count, plural, =1 {1 ocorrencia detectada} other {# ocorrencias detectadas}}",
     "perPeriod": {
       "month": "por mês",
       "quarter": "por trimestre",
       "twoWeeks": "por quinzena",
       "week": "por semana"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "showingPatterns": "{count, plural, =1 {Amosando 1 patrón de transacción recorrente} other {Amosando # patróns de transaccións recorrentes}}",
     "subtitle": "Assinaturas e contas detectadas",
     "title": "Transações Recorrentes"
   },
@@ -4188,7 +4188,7 @@
     "shortcuts": "Atallos"
   },
   "simplefinConnect": {
-    "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
+    "accountsConnected": "{count, plural, one {# conta conectada} other {# contas conectadas}}",
     "alreadyHaveToken": "Já tem um token?",
     "asOf": "em {date}",
     "autoImportDescription": "Importe transações automaticamente das suas contas bancárias",
@@ -4249,7 +4249,7 @@
       "title": "Contas Conectadas"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "accountsLinked": "{count, plural, =1 {1 conta vinculada} other {# contas vinculadas}}",
       "connectButton": "Conectar Conta Bancária",
       "connected": "Conectado",
       "description": "Conecte suas contas bancárias para importar transações automaticamente",
@@ -4271,7 +4271,7 @@
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "hoursAgo": "{hours, plural, =1 {hai 1 hora} other {hai # horas}}",
       "lastSynced": "Última sincronização: {time}",
       "lessThanHour": "Menos de uma hora atrás",
       "never": "Nunca",
@@ -4454,7 +4454,7 @@
     "splitATransaction": "Dividir uma Transação",
     "splitFlow": {
       "amountsCorrect": "Os valores estão corretos",
-      "confirmDescription": "This will create {count, plural, one {# split} other {# splits}} for this transaction. Each person's share will be tracked until settled.",
+      "confirmDescription": "Isto creará {count, plural, one {# división} other {# divisións}} para esta transacción. A parte de cada persoa rastrexarase ata que se liquide.",
       "confirmSplit": "Confirmar Divisão",
       "howToSplit": "Como dividir?",
       "modes": {
@@ -4486,7 +4486,7 @@
     "title": "Divisão de Despesas",
     "total": "total",
     "unknownTransaction": "Transação desconhecida",
-    "unsettledSplitCount": "{count, plural, one {# unsettled split} other {# unsettled splits}}",
+    "unsettledSplitCount": "{count, plural, one {# división sen liquidar} other {# divisións sen liquidar}}",
     "unsettledSplits": "Divisões Pendentes ({count})",
     "via": "via",
     "youOwe": "Você deve {amount}",
@@ -4551,7 +4551,7 @@
       "totalSpent": "Total Gasto"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {1 día restante na proba} other {# días restantes na proba}}"
     },
     "reminderToggle": {
       "disableReminder": "Desactivar recordatorio",
@@ -4570,20 +4570,20 @@
       "upcomingCharges": "Cobranças Futuras (Próximos 30 Dias)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "activeSubscriptions": "{count, plural, =1 {1 subscrición activa} other {# subscricións activas}}",
       "annualCost": "Custo Anual",
       "monthlyCost": "Custo Mensal",
       "next30Days": "Próximos 30 Dias",
       "projectedYearly": "Gasto anual projetado",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "upcomingCharges": "{count, plural, =1 {1 cargo próximo} other {# cargos próximos}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "Subscricións potencialmente canceladas",
+      "inactiveDescription": "{count, plural, =1 {1 subscrición non} other {# subscricións non}} cobraron recentemente. Verifique que estean realmente canceladas.",
+      "trialsTitle": "Probas que rematan pronto",
+      "trialsDescription": "{count, plural, =1 {1 proba} other {# probas}} rematan nos próximos 7 días. Cancéleas se non as está a usar.",
+      "highCostTitle": "Subscricións de alto custo",
+      "highCostDescription": "Estas subscricións representan unha gran parte do seu gasto. Considere se lles está sacando todo o proveito."
     }
   },
   "subscriptionModal": {
@@ -4839,7 +4839,7 @@
     "placeholderExtended": "Tente 'café semana passada' ou 'valor:>50'",
     "recentSearchLabel": "Busca recente",
     "recentSearches": "Buscas Recentes",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
+    "resultCount": "{count} {count, plural, =1 {resultado} other {resultados}}",
     "save": "Salvar",
     "saveFilter": "Salvar Filtro",
     "savedFilters": "Filtros Salvos",
@@ -4865,10 +4865,10 @@
       "type": "Tipo: 'tipo:receita' ou 'tipo:despesa'"
     },
     "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
+    "usedTimes": "Usado {count} {count, plural, =1 {vez} other {veces}}",
     "viewAllResults": "Ver todos os {count} resultados",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "resultsFound": "{count} {count, plural, =1 {resultado} other {resultados}} atopados",
+    "suggestionsAvailable": "{count} {count, plural, =1 {suxestión} other {suxestións}} dispoñibles"
   },
   "transactionTable": {
     "actions": {
@@ -4987,12 +4987,12 @@
     "youWillLose": "Você perderá:"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
+    "daysLeft": "{count, plural, =0 {A súa proba remata hoxe!} =1 {Só queda 1 día na súa proba} other {Quedan # días na súa proba}}",
     "daysRemaining": "{count} dias restantes no seu teste gratuito",
     "dismiss": "Dispensar",
     "expired": "Seu período de teste expirou",
     "expiredDescription": "O app está em modo somente leitura. Faça upgrade para continuar gerenciando suas finanças.",
-    "upgrade": "Upgrade - {price}",
+    "upgrade": "Mellorar - {price}",
     "upgradeNow": "Fazer Upgrade - {price}",
     "upgradePrompt": "Faça upgrade agora para manter acesso total aos seus dados de orçamento.",
     "viewPricing": "Ver preços"
@@ -5011,9 +5011,9 @@
     "ignoreAllContinue": "Ignorar Tudo e Continuar",
     "informational": "Informativo",
     "issuesDetected": "Problemas Detectados",
-    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
+    "issuesFound": "Atopamos {count, plural, =1 {1 problema} other {# problemas}} que necesitan a súa atención",
     "marked": "Marcada",
-    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
+    "removalNote": "{count, plural, =1 {1 transacción} other {# transaccións}} eliminaranse da importación se continúa.",
     "remove": "Remover",
     "removeAndContinue": "Remover {count} e Continuar",
     "suggestion": "Sugestão:",
@@ -5105,7 +5105,7 @@
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "category": "{count, plural, =1 {1 categoría} other {# categorías}}",
       "createNew": "Criar Nova",
       "description": "Mapeie categorias do YNAB para suas categorias existentes ou crie novas.",
       "mapToExisting": "Mapear para Existente",
@@ -5118,7 +5118,7 @@
       "errors": "Erros",
       "importAnother": "Importar Outro",
       "success": "Importação Concluída!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "successMessage": "{count, plural, =1 {1 elemento importado} other {# elementos importados}} con éxito desde YNAB.",
       "viewTransactions": "Ver Transações",
       "whatNext": "O que você gostaria de fazer agora?",
       "withIssues": "Importação Concluída com Problemas"
@@ -5201,7 +5201,7 @@
       },
       "upload": {
         "description": "Selecionar arquivo de exportação YNAB",
-        "title": "Upload"
+        "title": "Cargar"
       }
     },
     "uploadStep": {
@@ -5222,16 +5222,16 @@
       "transactions": "Transações"
     },
     "errors": {
-      "parseFailed": "Failed to parse YNAB file",
-      "previewFailed": "Failed to generate preview",
-      "accountImportFailed": "Account import failed: {details}",
-      "categoryImportFailed": "Category import failed: {details}",
-      "transactionImportFailed": "Transaction import failed: {details}",
-      "unknownError": "Unknown error",
-      "budgetImportFailed": "Budget import failed: {details}"
+      "parseFailed": "Non se puido analizar o ficheiro YNAB",
+      "previewFailed": "Non se puido xerar a vista previa",
+      "accountImportFailed": "Fallou a importación de contas: {details}",
+      "categoryImportFailed": "Fallou a importación de categorías: {details}",
+      "transactionImportFailed": "Fallou a importación de transaccións: {details}",
+      "unknownError": "Erro descoñecido",
+      "budgetImportFailed": "Fallou a importación de orzamentos: {details}"
     },
-    "importSuccess": "YNAB data imported successfully!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importSuccess": "Datos de YNAB importados con éxito!",
+    "importWithErrors": "Importación completada con {count, plural, =1 {1 erro} other {# erros}}"
   },
   "developerTools": {
     "title": "Ferramentas de desenvolvedor",

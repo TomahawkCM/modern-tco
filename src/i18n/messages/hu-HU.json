@@ -281,10 +281,10 @@
   "amountFilter": {
     "clear": "Törlés",
     "maxLabel": "Maximális összeg",
-    "maxPlaceholder": "Max",
+    "maxPlaceholder": "Max.",
     "maxThumb": "Maximális összeg",
     "minLabel": "Minimális összeg",
-    "minPlaceholder": "Min",
+    "minPlaceholder": "Min.",
     "minThumb": "Minimális összeg",
     "title": "Összeg tartomány"
   },
@@ -2112,9 +2112,9 @@
       "emptyTitle": "A pontszám előzmények itt jelennek meg az adatok gyarapodásával",
       "emptySubtitle": "Nézzen vissza jövő hónapban!",
       "legendScore": "Pontszám",
-      "legendTrend": "Trend",
+      "legendTrend": "Tendencia",
       "tooltipScore": "Pontszám",
-      "tooltipTrend": "Trend",
+      "tooltipTrend": "Tendencia",
       "loadingChart": "Diagram betöltése..."
     }
   },
@@ -2175,7 +2175,7 @@
     "langEnglish": "Angol",
     "langFrench": "Francia",
     "langGerman": "Német",
-    "langHindi": "Hindi",
+    "langHindi": "Hindi nyelv",
     "langItalian": "Olasz",
     "langJapanese": "Japán",
     "langKorean": "Koreai",
@@ -2818,7 +2818,7 @@
   "linkToLoan": {
     "bestMatch": "Legjobb egyezés",
     "cancel": "Mégse",
-    "extra": "Extra",
+    "extra": "Többlet",
     "interest": "Kamat",
     "linkError": "Nem sikerült a tranzakciót összekapcsolni. Kérjük, próbálja újra.",
     "linkPayment": "Befizetés összekapcsolása",
@@ -3079,7 +3079,7 @@
     "ipRequired": "Az IP-cím megadása kötelező",
     "optionalDefault": "nem kötelező, alapértelmezett: {port}",
     "pairingCode": "Párosítási kód",
-    "port": "Port",
+    "port": "Port szám",
     "portInvalid": "A portnak 1 és 65535 között kell lennie",
     "title": "Kézi bevitel",
     "whereToFind": "Hol találom ezeket?"
@@ -3455,7 +3455,7 @@
     "dismissed": "{count} elutasítva",
     "emptyState": "Még nincsenek befizetési előzmények",
     "emptyStateDescription": "Adjon hozzá befizetéseket manuálisan, vagy kapcsolja össze a tranzakcióival",
-    "extra": "Extra",
+    "extra": "Többlet",
     "extraPrincipalLabel": "Extra tőke (nem kötelező)",
     "highConfidence": "Magas megbízhatóság",
     "interest": "Kamat",
@@ -4488,7 +4488,7 @@
     "unknownTransaction": "Ismeretlen tranzakció",
     "unsettledSplitCount": "{count, plural, one {# nem rendezett felosztás} other {# nem rendezett felosztás}}",
     "unsettledSplits": "Nem rendezett felosztások ({count})",
-    "via": "via",
+    "via": "által",
     "youOwe": "{amount}-val tartozik",
     "youOweLabel": "Ön tartozik"
   },
@@ -4704,7 +4704,7 @@
     "lastSync": "Utolsó szinkronizálás: {time}",
     "minutesAgo": "{minutes} perce",
     "never": "Soha",
-    "offline": "Offline",
+    "offline": "Nincs kapcsolat",
     "partialSync": "Részleges szinkronizálás",
     "syncError": "Szinkronizálási hiba",
     "synced": "Szinkronizálva",

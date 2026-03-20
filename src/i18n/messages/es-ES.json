@@ -35,7 +35,7 @@
       "title": "Modo Mayores"
     },
     "themeMode": {
-      "auto": "Auto",
+      "auto": "Automático",
       "autoDesc": "Seguir sistema",
       "dark": "Oscuro",
       "darkDesc": "Fácil para la vista",
@@ -373,7 +373,7 @@
       "checkEmailTitle": "Revisa Tu Email",
       "checkSpam": "¿No recibiste el email? Revisa tu carpeta de spam o inténtalo de nuevo.",
       "defaultError": "Error al enviar el email de restablecimiento",
-      "emailLabel": "Email",
+      "emailLabel": "Correo electrónico",
       "emailPlaceholder": "tu@ejemplo.com",
       "rememberPassword": "¿Recuerdas tu contraseña?",
       "resetLinkSent": "Hemos enviado un enlace de restablecimiento de contraseña a {email}",
@@ -384,7 +384,7 @@
     },
     "login": {
       "defaultError": "Error al iniciar sesión",
-      "emailLabel": "Email",
+      "emailLabel": "Correo electrónico",
       "emailPlaceholder": "tu@ejemplo.com",
       "forgotPassword": "¿Olvidaste tu contraseña?",
       "noAccount": "¿No tienes cuenta?",
@@ -415,7 +415,7 @@
       "confirmPasswordPlaceholder": "Repite tu contraseña",
       "createAccountButton": "Crear Cuenta",
       "defaultError": "Error al crear la cuenta",
-      "emailLabel": "Email",
+      "emailLabel": "Correo electrónico",
       "emailPlaceholder": "tu@ejemplo.com",
       "fullNameLabel": "Nombre Completo",
       "fullNamePlaceholder": "Juan García",
@@ -1078,7 +1078,7 @@
       "scheduleInterest": "Intereses",
       "scheduleMonth": "Mes",
       "schedulePayment": "Cuota",
-      "schedulePrincipal": "Principal",
+      "schedulePrincipal": "Capital",
       "scheduleTitle": "Cuadro de Amortización",
       "showFullSchedule": "Mostrar Cuadro Completo",
       "subtitle": "Planifica la compra de tu vivienda con confianza",
@@ -1757,7 +1757,7 @@
     "highContrast": "Alto contraste",
     "highlightedCard": "Tarjeta destacada",
     "highlightedCardDescription": "Tarjeta con borde primario",
-    "hover": "Hover",
+    "hover": "Pasar el cursor",
     "inputs": "Campos de entrada",
     "invalidPlaceholder": "No válido...",
     "large": "Grande",
@@ -1975,7 +1975,7 @@
   "exportDialog": {
     "buttons": {
       "cancel": "Cancelar",
-      "done": "Done!",
+      "done": "¡Listo!",
       "download": "Descargar",
       "export": "Exportar Datos"
     },
@@ -2616,22 +2616,22 @@
         "viewPricing": "Ver precios"
       },
       "demo": {
-        "cloudStorage": "Cloud storage",
-        "dining": "Dining",
-        "expenses": "Expenses",
-        "foodToday": "Food • Today",
-        "groceries": "Groceries",
-        "groceryStore": "Grocery Store",
-        "income": "Income",
-        "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
-        "netWorth": "Net worth",
+        "cloudStorage": "Almacenamiento en la nube",
+        "dining": "Restaurantes",
+        "expenses": "Gastos",
+        "foodToday": "Alimentación • Hoy",
+        "groceries": "Supermercado",
+        "groceryStore": "Supermercado",
+        "income": "Ingresos",
+        "incomeYesterday": "Ingresos • Ayer",
+        "monthly": "Mensual",
+        "netWorth": "Patrimonio neto",
         "netflix": "Netflix",
-        "salary": "Salary",
-        "shopping": "Shopping",
+        "salary": "Salario",
+        "shopping": "Compras",
         "spotify": "Spotify",
-        "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "subscriptionOct24": "Suscripción • 24 oct",
+        "yearly": "Anual"
       },
       "modes": {
         "budgets": "Presupuestos",
@@ -3010,7 +3010,7 @@
       "interest": "Intereses",
       "month": "Mes",
       "payment": "Pago",
-      "principal": "Principal",
+      "principal": "Capital",
       "remaining": "Restante"
     },
     "tabs": {
@@ -4144,8 +4144,8 @@
   "shortcutsModal": {
     "close": "Cerrar",
     "proTip": {
-      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
-      "title": "💡 Pro Tip"
+      "description": "Los atajos de teclado funcionan en cualquier página excepto al escribir en formularios. Pulse {key} en cualquier momento para ver esta ayuda.",
+      "title": "💡 Consejo"
     },
     "subtitle": "Consejos de productividad para usuarios avanzados",
     "title": "Atajos de Teclado"
@@ -4578,12 +4578,12 @@
       "upcomingCharges": "{count, plural, =1 {1 cargo próximo} other {# cargos próximos}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "Suscripciones posiblemente canceladas",
+      "inactiveDescription": "{count, plural, =1 {1 suscripción no ha} other {# suscripciones no han}} generado cargos recientemente. Verifique que realmente estén canceladas.",
+      "trialsTitle": "Pruebas que finalizan pronto",
+      "trialsDescription": "{count, plural, =1 {1 prueba finaliza} other {# pruebas finalizan}} en los próximos 7 días. Cancélelas si no las está utilizando.",
+      "highCostTitle": "Suscripciones de alto coste",
+      "highCostDescription": "Estas suscripciones representan una gran parte de sus gastos. Considere si les está sacando el máximo provecho."
     }
   },
   "subscriptionModal": {
@@ -4867,8 +4867,8 @@
     "transactionCount": "{count} {count, plural, =1 {transacción} other {transacciones}}",
     "usedTimes": "Usado {count} {count, plural, =1 {vez} other {veces}}",
     "viewAllResults": "Ver los {count} resultados",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "resultsFound": "{count} {count, plural, =1 {resultado encontrado} other {resultados encontrados}}",
+    "suggestionsAvailable": "{count} {count, plural, =1 {sugerencia disponible} other {sugerencias disponibles}}"
   },
   "transactionTable": {
     "actions": {
@@ -5222,16 +5222,16 @@
       "transactions": "Transacciones"
     },
     "errors": {
-      "parseFailed": "Failed to parse YNAB file",
-      "previewFailed": "Failed to generate preview",
-      "accountImportFailed": "Account import failed: {details}",
-      "categoryImportFailed": "Category import failed: {details}",
-      "transactionImportFailed": "Transaction import failed: {details}",
-      "unknownError": "Unknown error",
-      "budgetImportFailed": "Budget import failed: {details}"
+      "parseFailed": "No se pudo analizar el archivo YNAB",
+      "previewFailed": "No se pudo generar la vista previa",
+      "accountImportFailed": "Error al importar la cuenta: {details}",
+      "categoryImportFailed": "Error al importar la categoría: {details}",
+      "transactionImportFailed": "Error al importar las transacciones: {details}",
+      "unknownError": "Error desconocido",
+      "budgetImportFailed": "Error al importar el presupuesto: {details}"
     },
-    "importSuccess": "YNAB data imported successfully!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importSuccess": "¡Datos de YNAB importados correctamente!",
+    "importWithErrors": "Importación completada con {count, plural, =1 {1 error} other {# errores}}"
   },
   "balanceReconciliation": {
     "title": "¡Importación completada!",

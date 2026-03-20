@@ -364,7 +364,7 @@
     "syncStatus": "တပြေးညီ အခြေအနေ: {status}",
     "toggleSeniorsMode": "သက်ကြီးရွယ်အိုမုဒ် ဖွင့်/ပိတ်ရန်",
     "typeQuestion": "သင့်မေးခွန်းကို ရိုက်ထည့်ပါ",
-    "unreadNotifications": "{count, plural, =1 {1 ဖတ်မထားသောအသိပေးချက်} other {# ဖတ်မထားသောအသိပေးချက်များ}}",
+    "unreadNotifications": "{count, plural, other {မဖတ်ရသေးသော အကြောင်းကြားချက် # ခု}}",
     "welcomeBudgetApp": "ဘတ်ဂျက်အပ်သို့ ကြိုဆိုပါ"
   },
   "auth": {
@@ -503,8 +503,8 @@
       "addAccount": "အကောင့် ထည့်မည်",
       "addFirstAccount": "သင့်ပထမဆုံးအကောင့် ထည့်မည်",
       "allTransactionsCleared": "ငွေလွှဲများ အားလုံး ရှင်းပြီး။ သင့်ထုတ်ပြန်ချက်များကို ပြန်တင်သွင်းနိုင်ပြီ။",
-      "assignCount": "{count, plural, one {# ငွေလွှဲ} other {# ငွေလွှဲများ}} သတ်မှတ်ပါ",
-      "assignModalDescription": "{count, plural, one {# ငွေလွှဲ} other {# ငွေလွှဲများ}} အကောင့်သို့ သတ်မှတ်ရန် လိုအပ်သည်။",
+      "assignCount": "{count, plural, other {အရောင်းအဝယ် # ခု}} သတ်မှတ်ပါ",
+      "assignModalDescription": "{count, plural, other {အရောင်းအဝယ် # ခုကို}} အကောင့်တစ်ခုသို့ သတ်မှတ်ရန် လိုအပ်သည်။",
       "assignTransactions": "ငွေလွှဲများ သတ်မှတ်မည်",
       "assignTransactionsNow": "ငွေလွှဲများ ယခုပင် သတ်မှတ်မည်",
       "assignedTransactions": "{name} သို့ ငွေလွှဲ {count} ခု သတ်မှတ်ပြီး",
@@ -557,7 +557,7 @@
       "unassignedClickToAssign": "သင့်အကောင့်များသို့ အလိုအလျောက် သတ်မှတ်ရန် အောက်တွင် နှိပ်ပါ။",
       "unassignedCreateFirst": "ဦးစွာ အကောင့်တစ်ခု ဖန်တီးပါ၊ ထို့နောက် ၎င်းတို့ကို အလိုအလျောက် သတ်မှတ်မည်။",
       "unassignedDescription": "ဤငွေလွှဲများကို အကောင့်မသတ်မှတ်မီ တင်သွင်းခဲ့သည်။",
-      "unassignedTitle": "{count, plural, one {# ငွေလွှဲ} other {# ငွေလွှဲများ}} အကောင့်သတ်မှတ်မှု လိုသည်",
+      "unassignedTitle": "{count, plural, other {အရောင်းအဝယ် # ခုတွင်}} အကောင့် သတ်မှတ်ရန် လိုအပ်သည်",
       "update": "မွမ်းမံမည်"
     },
     "budgets": {
@@ -611,7 +611,7 @@
       "totalExpenses": "ကုန်ကျစရိတ် စုစုပေါင်း",
       "totalSpent": "သုံးပြီးသော စုစုပေါင်း",
       "transactionCount": "{count, plural, one {# ငွေလွှဲ} other {# ငွေလွှဲများ}}",
-      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# ငွေလွှဲသည် ဘတ်ဂျက်မဲ့ ဖြစ်မည်} other {# ငွေလွှဲများသည် ဘတ်ဂျက်မဲ့ ဖြစ်မည်}}",
+      "transactionsWillBecomeUnbudgeted": "{count, plural, other {အရောင်းအဝယ် # ခုသည် ဘတ်ဂျက်မဲ့ ဖြစ်သွားမည်}}",
       "youWillLose": "သင် ဆုံးရှုံးမည်:"
     },
     "events": {
@@ -824,7 +824,7 @@
     "applyTo": "{count} ခုသို့ ထည့်ရန်",
     "categorize": "အမျိုးအစားခွဲရန်",
     "clearSelection": "ရွေးချယ်မှု ရှင်းရန်",
-    "confirmDelete": "ငွေလွှဲ {count, plural, =1 {၁ ခု} other {# ခု}} ဖျက်မည်လား?",
+    "confirmDelete": "{count, plural, other {အရောင်းအဝယ် # ခု}} ဖျက်မလား?",
     "delete": "ဖျက်ရန်",
     "deleteWarning": "ဤလုပ်ဆောင်ချက်ကို ပြန်ပြင်၍ မရပါ။",
     "export": "ထုတ်ယူရန်",
@@ -1007,9 +1007,9 @@
       "assumptionInflationApplied": "ထုတ်ယူမှုများတွင် ကျင့်သုံး (ပေါင်းစပ်)",
       "assumptionInflationNone": "စုဆောင်းမှု မုဒ်တွင် မကျင့်သုံး",
       "assumptionPRNG": "ကျပန်း နံပါတ် ထုတ်လုပ်စက်",
-      "assumptionPRNGValue": "Seeded PRNG (Mulberry32) — deterministic",
+      "assumptionPRNGValue": "Seeded PRNG (Mulberry32) — ပုံသေတန်ဖိုးရှိ",
       "assumptionReturns": "အပြန် ဖြန့်ဖြူးမှု",
-      "assumptionReturnsValue": "Normal distribution (Box-Muller)",
+      "assumptionReturnsValue": "ပုံမှန်ဖြန့်ဝေမှု (Box-Muller)",
       "assumptionVolatility": "မတည်ငြိမ်မှု (စံသွေဖယ်မှု)",
       "badgeCaution": "ပြန်စစ်ရန် လိုအပ်",
       "badgeRisk": "အန္တရာယ် မြင့်",
@@ -1629,7 +1629,7 @@
     "viewAllLoans": "ချေးငွေအားလုံး ကြည့်ရန်"
   },
   "debtOverview": {
-    "activeLoans": "{count, plural, one {လက်ရှိ ချေးငွေ # ခု} other {လက်ရှိ ချေးငွေ # ခု}}",
+    "activeLoans": "{count, plural, other {အသက်ဝင်သော ချေးငွေ # ခု}}",
     "activeLoansTitle": "လက်ရှိ ချေးငွေများ",
     "addLoan": "ချေးငွေ ထည့်ရန်",
     "avgRate": "ပျမ်းမျှ နှုန်း",
@@ -1640,7 +1640,7 @@
     "totalDebt": "စုစုပေါင်း အကြွေး",
     "upcomingPayments": "လာမည့် ပေးချေမှုများ",
     "viewAll": "အားလုံးကြည့်ရန်",
-    "viewMore": "{count, plural, one {ချေးငွေ # ခု ပိုကြည့်ရန်} other {ချေးငွေ # ခု ပိုကြည့်ရန်}}"
+    "viewMore": "{count, plural, other {ချေးငွေ # ခု ထပ်ကြည့်ပါ}}"
   },
   "debtPayoff": {
     "addDebt": "အကြွေးထည့်ရန်",
@@ -1798,8 +1798,8 @@
     "dragToReorder": "ဝီဂျက် ပြန်စီရန် ဆွဲယူပါ"
   },
   "duration": {
-    "months": "{count, plural, =1 {၁ လ} other {# လ}}",
-    "years": "{count, plural, =1 {၁ နှစ်} other {# နှစ်}}",
+    "months": "{count, plural, other {# လ}}",
+    "years": "{count, plural, other {# နှစ်}}",
     "yearsAndMonths": "{years}နှစ် {months}လ"
   },
   "emptyStates": {
@@ -1861,7 +1861,7 @@
       "viewGuide": "ပြဿနာဖြေရှင်းမှု လမ်းညွှန် ကြည့်ရန်"
     },
     "recovery": {
-      "canRecover": "သတင်းကောင်း! ဤအမှားမှ ပြန်ယူရန် နည်းလမ်း {count} {count, plural, =1 {ခု} other {ခု}} တွေ့ရှိသည်။",
+      "canRecover": "သတင်းကောင်းပါ! ဤအမှားမှ ပြန်လည်ကုစားရန် {count} {count, plural, other {နည်းလမ်း}} ကို တွေ့ရှိပါသည်။",
       "cannotRecover": "ပြန်ယူ၍ မရပါ။ သင့်ဘဏ်မှ ဖိုင်ကို ပြန်ထုတ်ယူ သို့မဟုတ် အခြားဖော်မတ် ကြိုးစားပါ။",
       "optionsTitle": "ပြန်ယူမှု ရွေးချယ်စရာများ"
     },
@@ -2104,7 +2104,7 @@
       "line2": "ငွေလွှဲများ ထည့်ပါ"
     },
     "grade": "အဆင့်: {grade}",
-    "missingFactors": "{count, plural, =1 {အချက် ၁ ခု ပျောက်ဆုံး} other {အချက် # ခု ပျောက်ဆုံး}}",
+    "missingFactors": "{count, plural, other {အချက် # ခု လိုနေသည်}}",
     "title": "ငွေကြေး ကျန်းမာရေး",
     "history": {
       "title": "အမှတ်မှတ်တမ်း",
@@ -2347,7 +2347,7 @@
       "description": "ဤအကောင့်နှင့် ဆက်စပ်ပိုင်ဆိုင်မှုအားလုံးကို အပြီးတိုင် ဖျက်မည်။",
       "impactAccount": "အကောင့်: {name}",
       "impactHistory": "ငွေလွှဲမှတ်တမ်း အားလုံး",
-      "impactHoldings": "{count, plural, one {ပိုင်ဆိုင်မှု # ခု} other {ပိုင်ဆိုင်မှု # ခု}}",
+      "impactHoldings": "{count, plural, other {ပိုင်ဆိုင်မှု # ခု}}",
       "impactTitle": "သင် ဆုံးရှုံးမည်:",
       "impactValue": "စုစုပေါင်းတန်ဖိုး: {value}",
       "title": "ရင်းနှီးမြှုပ်နှံမှု အကောင့် ဖျက်ရန်"
@@ -2374,7 +2374,7 @@
     },
     "gainLoss": "အမြတ်/အရှုံး",
     "hideDetails": "အသေးစိတ် ဝှက်ရန်",
-    "holdingsCount": "{count, plural, one {ပိုင်ဆိုင်မှု # ခု} other {ပိုင်ဆိုင်မှု # ခု}}",
+    "holdingsCount": "{count, plural, other {ပိုင်ဆိုင်မှု # ခု}}",
     "loading": "ရင်းနှီးမြှုပ်နှံမှုများ တင်နေသည်...",
     "marketDataNotice": "ဈေးကွက်ဒေတာ အသိပေးချက်",
     "noHoldings": "ဤအကောင့်တွင် ပိုင်ဆိုင်မှု မရှိသေးပါ။",
@@ -2437,7 +2437,7 @@
     "pairedDevices": {
       "addDevice": "စက်ပစ္စည်း ထည့်ရန်",
       "addFirstDevice": "ပထမဆုံး စက်ပစ္စည်း ထည့်ပါ",
-      "deviceCount": "{count, plural, =1 {စက်ပစ္စည်း ၁ ခု တွဲထား} other {စက်ပစ္စည်း # ခု တွဲထား}}",
+      "deviceCount": "{count, plural, other {စက် # လုံး ချိတ်ဆက်ထားသည်}}",
       "emptyDescription": "ဘတ်ဂျက်ဒေတာ စင့်ခ်စတင်ရန် စက်ပစ္စည်း တွဲပါ",
       "emptyTitle": "တွဲထားသော စက်ပစ္စည်း မရှိပါ",
       "noDevices": "တွဲထားသော စက်ပစ္စည်း မရှိသေးပါ",
@@ -2451,11 +2451,11 @@
     },
     "syncAll": "အားလုံး စင့်ခ်",
     "time": {
-      "daysAgo": "{count, plural, =1 {၁ ရက် ကြာပြီ} other {# ရက် ကြာပြီ}}",
-      "hoursAgo": "{count, plural, =1 {၁ နာရီ ကြာပြီ} other {# နာရီ ကြာပြီ}}",
+      "daysAgo": "{count, plural, other {# ရက်အကြာ}}",
+      "hoursAgo": "{count, plural, other {# နာရီအကြာ}}",
       "justNow": "ခုမှ",
       "lastSync": "နောက်ဆုံး စင့်ခ်: {time}",
-      "minutesAgo": "{count, plural, =1 {၁ မိနစ် ကြာပြီ} other {# မိနစ် ကြာပြီ}}",
+      "minutesAgo": "{count, plural, other {# မိနစ်အကြာ}}",
       "neverSynced": "စင့်ခ် မလုပ်ရသေးပါ"
     },
     "title": "LAN စင့်ခ်"
@@ -2510,7 +2510,7 @@
         "cloud": "သူတို့၏ ဒေတာဘေ့စ်",
         "feature": "သိမ်းဆည်းမှု အနေအထား",
         "local": "သင်၏ ကိရိယာ",
-        "sync": "Zero-Knowledge Cloud"
+        "sync": "Zero-Knowledge Cloud သိုလှောင်မှု"
       }
     },
     "faq": {
@@ -2617,11 +2617,11 @@
       },
       "demo": {
         "cloudStorage": "Cloud သိုလှောင်မှု",
-        "dining": "စားသောက်",
-        "expenses": "ကုန်ကျစရိတ်",
+        "dining": "စားသောက်ဆိုင်",
+        "expenses": "အသုံးစရိတ်",
         "foodToday": "အစားအစာ • ယနေ့",
-        "groceries": "စျေးဝယ်",
-        "groceryStore": "စျေးဆိုင်",
+        "groceries": "စားသောက်ကုန်",
+        "groceryStore": "စားသောက်ကုန်ဆိုင်",
         "income": "ဝင်ငွေ",
         "incomeYesterday": "ဝင်ငွေ • မနေ့က",
         "monthly": "လစဉ်",
@@ -2630,7 +2630,7 @@
         "salary": "လစာ",
         "shopping": "ဈေးဝယ်ထွက်",
         "spotify": "Spotify",
-        "subscriptionOct24": "စာရင်းသွင်းမှု • အောက်တို ၂၄",
+        "subscriptionOct24": "စာရင်းသွင်းမှု • အောက်တိုဘာ ၂၄",
         "yearly": "နှစ်စဉ်"
       },
       "modes": {
@@ -3476,7 +3476,7 @@
     "savePayment": "ပေးချေမှု သိမ်းရန်",
     "status": "အခြေအနေ",
     "suggestedMatches": "အကြံပြုထားသော ငွေလွှဲမှတ်တမ်း ကိုက်ညီမှုများ",
-    "suggestedMatchesDescription": "ချေးငွေ ပေးချေမှုဖြစ်နိုင်သော ငွေလွှဲမှတ်တမ်း {count, plural, one {# ခု} other {# ခု}} တွေ့ပါသည်",
+    "suggestedMatchesDescription": "ချေးငွေ ပေးချေမှုဖြစ်နိုင်သော {count, plural, other {အရောင်းအဝယ် # ခု}} ကို တွေ့ရှိပါသည်",
     "title": "ပေးချေမှု မှတ်တမ်း",
     "uncategorized": "အမျိုးအစားမခွဲထား",
     "unlinkConfirm": "ဤပေးချေမှုကို ငွေလွှဲမှတ်တမ်းမှ ချိတ်ဆက်ဖြုတ်မလား?",
@@ -3618,7 +3618,7 @@
       "payFrequencyHelp": "ဘယ်နှစ်ကြိမ် လစာ ရသနည်း? လစာများ ထုတ်ချိန်ကို ဆုံးဖြတ်သည်။",
       "payFrequencyHelpAriaLabel": "လစာ အကြိမ်ရေအကြောင်း ပိုမိုသိရန်",
       "paycheckTimeline": "လစာ အချိန်ဇယား",
-      "paychecksPlanned": "{count, plural, one {လစာ # ခု စီစဉ်ပြီး} other {လစာ # ခု စီစဉ်ပြီး}}",
+      "paychecksPlanned": "{count, plural, other {လစာ # ခု စီစဉ်ထားသည်}}",
       "percentOfIncome": "ဝင်ငွေ၏ {percent}%",
       "regeneratePaychecks": "လစာများ ပြန်ထုတ်ရန်",
       "remainingToAllocate": "ခွဲဝေရန် ကျန်ရှိ",
@@ -3636,7 +3636,7 @@
       "scheduleSemimonthlyDesc": "၁ ရက်နှင့် ၁၅ ရက်",
       "scheduleWeekly": "အပတ်စဉ်",
       "scheduleWeeklyDesc": "အပတ်တိုင်း",
-      "scheduledPaychecks": "{count, plural, one {စီစဉ်ထားသော လစာ # ခု} other {စီစဉ်ထားသော လစာ # ခု}}",
+      "scheduledPaychecks": "{count, plural, other {အချိန်ဇယား လစာ # ခု}}",
       "setUpPaycheckPlan": "လစာ အစီအစဉ် သတ်မှတ်ရန်",
       "setUpPlan": "အစီအစဉ် သတ်မှတ်ရန်",
       "subtitle": "လစာမရမီ ဒေါ်လာတိုင်း ဘယ်သွားမည်ကို စီစဉ်ပါ",
@@ -3707,7 +3707,7 @@
       "tfsaBalance": "TFSA လက်ကျန်",
       "title": "အငြိမ်းစား တွက်ချက်စက်",
       "toReachGoal": "ပန်းတိုင်ရောက်ရန် သင်လုပ်နိုင်သည်:",
-      "workMoreYears": "{years, plural, one {နောက် # နှစ်} other {နောက် # နှစ်}} ပိုအလုပ်လုပ်ပါ",
+      "workMoreYears": "{years, plural, other {# နှစ်ထပ်}} အလုပ်လုပ်ပါ",
       "yearAge": "{year} (အသက် {age})",
       "yearsToRetirement": "အငြိမ်းစားယူရန် နှစ်များ",
       "youWillLose": "ဆုံးရှုံးမည်:",
@@ -3738,91 +3738,91 @@
     "trainingModel": "မော်ဒယ် လေ့ကျင့်နေပြီး ခန့်မှန်းချက်များ ထုတ်နေသည်..."
   },
   "privacyPanel": {
-    "active": "Active",
-    "aiFeatures": "AI Features",
-    "aiFeaturesDescription": "Enable AI Features powered by OpenAI for advanced functionality. When disabled, all AI-dependent features are automatically disabled.",
-    "aiFeaturesTitle": "AI Features (Master Switch)",
-    "analyticsAndMonitoring": "Analytics & Monitoring",
-    "anomalyDetection": "Anomaly Detection",
-    "anomalyDetectionDescription": "Flag unusual spending patterns (e.g., 'Your Starbucks purchase of $85 is unusual')",
-    "budgetChatbot": "Budget Chatbot",
-    "cannotBeUndone": "This action cannot be undone!",
-    "chatbotDescription": "AI-powered assistant that can answer questions about your transactions, budgets, and spending patterns. Conversations are processed via OpenAI API.",
-    "chatbotPrivacyNotice": "Your financial data is sent to OpenAI to answer questions. OpenAI does not use API data to train models. You can disable anytime.",
-    "confirmDelete": "Confirm Delete",
-    "confirmDeleteWarning": "You are about to permanently delete {count, plural, one {# data type} other {# data types}}. Click \"Confirm Delete\" to proceed.",
-    "conversationHistory": "Conversation History",
-    "conversationStorageNotice": "Conversations are stored locally in your browser. You can manually delete them anytime.",
-    "dataAccessPermission": "Data Access Permission",
-    "dataAccountBalances": "account balances",
-    "dataAccounts": "accounts",
+    "active": "အသက်ဝင်",
+    "aiFeatures": "AI လုပ်ဆောင်ချက်များ",
+    "aiFeaturesDescription": "အဆင့်မြင့်လုပ်ဆောင်ချက်များအတွက် OpenAI ဖြင့် AI လုပ်ဆောင်ချက်များကို ဖွင့်ပါ။ ပိတ်ထားသောအခါ AI မှီခိုသော လုပ်ဆောင်ချက်အားလုံး အလိုအလျောက် ပိတ်သွားမည်။",
+    "aiFeaturesTitle": "AI လုပ်ဆောင်ချက်များ (ပင်မခလုတ်)",
+    "analyticsAndMonitoring": "ခွဲခြမ်းစိတ်ဖြာမှုနှင့် စောင့်ကြည့်မှု",
+    "anomalyDetection": "မမှန်မကန်ရှာဖွေမှု",
+    "anomalyDetectionDescription": "ပုံမှန်မဟုတ်သော အသုံးစရိတ်ပုံစံများကို မှတ်သားပါ (ဥပမာ 'သင့် Starbucks ဝယ်ယူမှု $85 သည် ပုံမှန်မဟုတ်ပါ')",
+    "budgetChatbot": "ဘတ်ဂျက် ချက်ဘော့",
+    "cannotBeUndone": "ဤလုပ်ဆောင်ချက်ကို ပြန်ပြင်၍ မရပါ!",
+    "chatbotDescription": "သင့်အရောင်းအဝယ်များ၊ ဘတ်ဂျက်များနှင့် အသုံးစရိတ်ပုံစံများအကြောင်း မေးခွန်းများကို ဖြေနိုင်သော AI အကူအညီပေးသူ။ စကားပြောမှုများကို OpenAI API မှတစ်ဆင့် လုပ်ဆောင်သည်။",
+    "chatbotPrivacyNotice": "သင့်ငွေကြေးဒေတာကို မေးခွန်းများဖြေရန် OpenAI သို့ ပို့သည်။ OpenAI သည် API ဒေတာကို မော်ဒယ်များ လေ့ကျင့်ရန် အသုံးမပြုပါ။ အချိန်မရွေး ပိတ်နိုင်ပါသည်။",
+    "confirmDelete": "ဖျက်ခြင်း အတည်ပြုပါ",
+    "confirmDeleteWarning": "သင်သည် {count, plural, other {ဒေတာအမျိုးအစား # ခုကို}} အပြီးတိုင် ဖျက်ရန် ပြင်ဆင်နေပါသည်။ ဆက်လက်ရန် \"ဖျက်ခြင်း အတည်ပြုပါ\" ကို နှိပ်ပါ။",
+    "conversationHistory": "စကားပြောမှတ်တမ်း",
+    "conversationStorageNotice": "စကားပြောမှုများကို သင့်ဘရောက်ဆာတွင် စက်တွင်းသိမ်းထားသည်။ အချိန်မရွေး ကိုယ်တိုင် ဖျက်နိုင်ပါသည်။",
+    "dataAccessPermission": "ဒေတာဝင်ရောက်ခွင့်",
+    "dataAccountBalances": "အကောင့်လက်ကျန်များ",
+    "dataAccounts": "အကောင့်များ",
     "dataBudgets": "budgets",
-    "dataCategories": "categories",
-    "dataManagement": "Data Management",
-    "dataPrivacySettings": "privacy settings",
-    "dataProcessing": "Data Processing",
-    "dataSecurity": "Data Security",
+    "dataCategories": "အမျိုးအစားများ",
+    "dataManagement": "ဒေတာ စီမံခန့်ခွဲမှု",
+    "dataPrivacySettings": "ကိုယ်ရေးကိုယ်တာ ဆက်တင်များ",
+    "dataProcessing": "ဒေတာ လုပ်ဆောင်မှု",
+    "dataSecurity": "ဒေတာလုံခြုံရေး",
     "dataTransactions": "transactions",
-    "deleteAccountsDescription": "Bank accounts and credit cards",
-    "deleteAccountsLabel": "Accounts",
-    "deleteAfter30Days": "Delete after 30 days",
-    "deleteAfter7Days": "Delete after 7 days (Recommended)",
-    "deleteBalancesDescription": "Reset all account balances to $0",
-    "deleteBalancesLabel": "Account Balances",
-    "deleteBudgetsDescription": "Monthly budget allocations",
+    "deleteAccountsDescription": "ဘဏ်အကောင့်များနှင့် အကြွေးကတ်များ",
+    "deleteAccountsLabel": "အကောင့်များ",
+    "deleteAfter30Days": "၃၀ ရက်အကြာ ဖျက်ပါ",
+    "deleteAfter7Days": "၇ ရက်အကြာ ဖျက်ပါ (အကြံပြုသည်)",
+    "deleteBalancesDescription": "အကောင့်လက်ကျန်အားလုံးကို $0 သို့ ပြန်သတ်မှတ်ပါ",
+    "deleteBalancesLabel": "အကောင့်လက်ကျန်များ",
+    "deleteBudgetsDescription": "လစဉ် ဘတ်ဂျက် ခွဲဝေမှုများ",
     "deleteBudgetsLabel": "Budgets",
-    "deleteCategoriesDescription": "Custom spending categories",
-    "deleteCategoriesLabel": "Categories",
-    "deleteData": "Delete Data",
-    "deleteFailed": "Failed to delete data. Please try again.",
-    "deletePrivacySettingsDescription": "Reset all settings to defaults",
-    "deletePrivacySettingsLabel": "Privacy Settings",
-    "deleteSelected": "Delete Selected",
-    "deleteTransactionsDescription": "All imported and manual transactions",
+    "deleteCategoriesDescription": "စိတ်ကြိုက် အသုံးစရိတ်အမျိုးအစားများ",
+    "deleteCategoriesLabel": "အမျိုးအစားများ",
+    "deleteData": "ဒေတာ ဖျက်ပါ",
+    "deleteFailed": "ဒေတာ ဖျက်ရန် မအောင်မြင်ပါ။ ထပ်မံကြိုးစားပါ။",
+    "deletePrivacySettingsDescription": "ဆက်တင်အားလုံးကို မူလတန်ဖိုးများသို့ ပြန်သတ်မှတ်ပါ",
+    "deletePrivacySettingsLabel": "ကိုယ်ရေးကိုယ်တာ ဆက်တင်များ",
+    "deleteSelected": "ရွေးချယ်ထားသည်များကို ဖျက်ပါ",
+    "deleteTransactionsDescription": "တင်သွင်းထားသောနှင့် ကိုယ်တိုင်ထည့်သော အရောင်းအဝယ်အားလုံး",
     "deleteTransactionsLabel": "Transactions",
-    "deleting": "Deleting...",
-    "deselectAll": "Deselect All",
-    "enableAnalytics": "Enable Analytics",
-    "enableAnalyticsDescription": "Track feature usage and app performance using PostHog. No personal financial data (amounts, descriptions) is collected.",
-    "enableChatbot": "Enable Chatbot",
-    "enableErrorTracking": "Enable Error Tracking",
-    "enableErrorTrackingDescription": "Automatically report errors and crashes to Sentry to help improve the app. No financial data is included in error reports.",
-    "encryptStoredData": "Encrypt Stored Data",
-    "encryptStoredDataDescription": "Encrypt sensitive transaction data at rest using AES-GCM encryption. Requires key generation on first enable.",
-    "encryptionActive": "Encryption is active. Your data is encrypted in IndexedDB.",
-    "encryptionFailed": "Failed to enable encryption. Please try again.",
-    "encryptionNotAvailable": "Encryption is not available in this browser. Please use a modern browser with Web Crypto API support.",
+    "deleting": "ဖျက်နေသည်...",
+    "deselectAll": "အားလုံး ဖြုတ်ပါ",
+    "enableAnalytics": "ခွဲခြမ်းစိတ်ဖြာမှု ဖွင့်ပါ",
+    "enableAnalyticsDescription": "PostHog ဖြင့် လုပ်ဆောင်ချက်အသုံးပြုမှုနှင့် အက်ပ်စွမ်းဆောင်ရည်ကို ခြေရာခံပါ။ ကိုယ်ရေးကိုယ်တာ ငွေကြေးဒေတာ (ပမာဏ၊ ဖော်ပြချက်များ) ကို စုဆောင်းမည်မဟုတ်ပါ။",
+    "enableChatbot": "ချက်ဘော့ ဖွင့်ပါ",
+    "enableErrorTracking": "အမှားခြေရာခံမှု ဖွင့်ပါ",
+    "enableErrorTrackingDescription": "အက်ပ်ကို ပိုမိုကောင်းမွန်စေရန် အမှားများနှင့် ပျက်ကျမှုများကို Sentry သို့ အလိုအလျောက် အစီရင်ခံပါ။ ငွေကြေးဒေတာကို အမှားအစီရင်ခံစာများတွင် ထည့်သွင်းမည်မဟုတ်ပါ။",
+    "encryptStoredData": "သိမ်းထားသော ဒေတာကို ကုဒ်ဝှက်ပါ",
+    "encryptStoredDataDescription": "AES-GCM ကုဒ်ဝှက်ခြင်းဖြင့် အရောင်းအဝယ်ဒေတာကို အနားယူစဉ် ကုဒ်ဝှက်ပါ။ ပထမဆုံးအကြိမ် ဖွင့်သောအခါ သော့ဖန်တီးရန် လိုအပ်သည်။",
+    "encryptionActive": "ကုဒ်ဝှက်ခြင်း အသက်ဝင်ပါသည်။ သင့်ဒေတာကို IndexedDB တွင် ကုဒ်ဝှက်ထားပါသည်။",
+    "encryptionFailed": "ကုဒ်ဝှက်ခြင်း ဖွင့်ရန် မအောင်မြင်ပါ။ ထပ်မံကြိုးစားပါ။",
+    "encryptionNotAvailable": "ဤဘရောက်ဆာတွင် ကုဒ်ဝှက်ခြင်း မရနိုင်ပါ။ Web Crypto API ပံ့ပိုးမှုရှိသော ခေတ်မီဘရောက်ဆာကို အသုံးပြုပါ။",
     "export": "Export",
-    "exportAllData": "Export All Data",
-    "exportAllDataDescription": "Download all your accounts, transactions, categories, and budgets as JSON",
-    "exportFailed": "Failed to export data. Please try again.",
-    "fullAccess": "Full Access",
-    "fullAccessDescription": "Chatbot can perform actions like adding transactions and creating budgets",
-    "includedInAccounts": "included in Accounts",
-    "keepForever": "Keep forever",
-    "nSelected": "{count} selected",
-    "naturalLanguageImport": "Natural Language Import",
-    "naturalLanguageImportDescription": "Auto-configure bank imports using natural language (e.g., 'Import my TD checking account CSV')",
-    "nothingSelected": "Nothing selected",
-    "predictiveSpending": "Predictive Spending",
-    "predictiveSpendingDescription": "Forecast monthly spending by category using AI analysis",
-    "privacy": "Privacy:",
-    "privacyFirst": "Privacy First",
-    "privacyNotice": "All processing happens in your browser. No transaction data is uploaded to servers. AI features are opt-in and only send cleaned transaction descriptions (no account numbers, names, or addresses) when enabled.",
-    "readOnlyDescription": "Chatbot can view data and answer questions but cannot modify anything",
-    "readOnlyRecommended": "Read-Only (Recommended)",
-    "receiptOCR": "Receipt OCR",
-    "receiptOCRDescription": "Extract transaction details from receipt images using client-side OCR (Tesseract.js). No data leaves your device.",
-    "requiresAIFeatures": "Requires AI Features",
-    "selectAll": "Select All",
-    "selectDataToDelete": "Select which data you want to permanently delete:",
-    "smartDuplicateDetection": "Smart Duplicate Detection",
-    "smartDuplicateDetectionDescription": "Use AI to detect duplicate transactions even when merchant names differ (e.g., 'AMAZON PRIME' vs 'AMZN MKTP CA')",
-    "subtitle": "Control how your data is processed and which AI features are enabled",
-    "successfullyCleared": "Successfully cleared: {items}",
-    "title": "Privacy & AI Controls",
-    "whatsSent": "What's sent:",
-    "whatsSentDescription": "Only cleaned transaction descriptions (e.g., \"AMAZON.COM\"). No account numbers, names, or addresses. Powered by OpenAI GPT-4o-mini."
+    "exportAllData": "ဒေတာအားလုံး ထုတ်ပါ",
+    "exportAllDataDescription": "သင့်အကောင့်များ၊ အရောင်းအဝယ်များ၊ အမျိုးအစားများနှင့် ဘတ်ဂျက်များအားလုံးကို JSON အဖြစ် ဒေါင်းလုဒ်ဆွဲပါ",
+    "exportFailed": "ဒေတာ ထုတ်ရန် မအောင်မြင်ပါ။ ထပ်မံကြိုးစားပါ။",
+    "fullAccess": "အပြည့်အဝ ဝင်ရောက်ခွင့်",
+    "fullAccessDescription": "ချက်ဘော့သည် အရောင်းအဝယ်များ ထည့်ခြင်းနှင့် ဘတ်ဂျက်များ ဖန်တီးခြင်းကဲ့သို့ လုပ်ဆောင်ချက်များ ပြုလုပ်နိုင်သည်",
+    "includedInAccounts": "အကောင့်များတွင် ပါဝင်သည်",
+    "keepForever": "အမြဲတမ်း သိမ်းထားပါ",
+    "nSelected": "{count} ရွေးချယ်ထားသည်",
+    "naturalLanguageImport": "သဘာဝဘာသာဖြင့် တင်သွင်းခြင်း",
+    "naturalLanguageImportDescription": "သဘာဝဘာသာဖြင့် ဘဏ်တင်သွင်းမှုများကို အလိုအလျောက် ပြင်ဆင်ပါ (ဥပမာ 'ကျွန်ုပ်၏ TD စစ်ဆေးရေးအကောင့် CSV ကို တင်သွင်းပါ')",
+    "nothingSelected": "ဘာမှ မရွေးချယ်ထားပါ",
+    "predictiveSpending": "ခန့်မှန်းအသုံးစရိတ်",
+    "predictiveSpendingDescription": "AI ခွဲခြမ်းစိတ်ဖြာမှုဖြင့် အမျိုးအစားအလိုက် လစဉ်အသုံးစရိတ်ကို ခန့်မှန်းပါ",
+    "privacy": "ကိုယ်ရေးကိုယ်တာ:",
+    "privacyFirst": "ကိုယ်ရေးကိုယ်တာ ဦးစားပေး",
+    "privacyNotice": "လုပ်ဆောင်မှုအားလုံး သင့်ဘရောက်ဆာတွင် ဖြစ်ပါသည်။ အရောင်းအဝယ်ဒေတာကို ဆာဗာများသို့ မတင်ပါ။ AI လုပ်ဆောင်ချက်များသည် ရွေးချယ်မှုဖြစ်ပြီး ဖွင့်ထားသောအခါ သန့်ရှင်းထားသော အရောင်းအဝယ်ဖော်ပြချက်များသာ (အကောင့်နံပါတ်၊ အမည်၊ လိပ်စာမပါ) ပို့သည်။",
+    "readOnlyDescription": "ချက်ဘော့သည် ဒေတာကြည့်ရှုပြီး မေးခွန်းများဖြေနိုင်သော်လည်း ဘာမှ ပြင်ဆင်နိုင်မည်မဟုတ်ပါ",
+    "readOnlyRecommended": "ဖတ်ရန်သာ (အကြံပြုသည်)",
+    "receiptOCR": "ပြေစာ OCR",
+    "receiptOCRDescription": "စက်တွင်း OCR (Tesseract.js) ဖြင့် ပြေစာပုံများမှ အရောင်းအဝယ်အသေးစိတ်များကို ထုတ်ယူပါ။ ဒေတာ သင့်စက်မှ မထွက်ပါ။",
+    "requiresAIFeatures": "AI လုပ်ဆောင်ချက်များ လိုအပ်သည်",
+    "selectAll": "အားလုံး ရွေးပါ",
+    "selectDataToDelete": "အပြီးတိုင် ဖျက်လိုသော ဒေတာကို ရွေးချယ်ပါ:",
+    "smartDuplicateDetection": "စမတ် ထပ်တူရှာဖွေမှု",
+    "smartDuplicateDetectionDescription": "ကုန်သည်အမည်များ ကွဲပြားသည့်တိုင် ထပ်တူအရောင်းအဝယ်များကို AI ဖြင့် ရှာဖွေပါ (ဥပမာ 'AMAZON PRIME' vs 'AMZN MKTP CA')",
+    "subtitle": "သင့်ဒေတာကို မည်သို့ လုပ်ဆောင်သည်နှင့် မည်သည့် AI လုပ်ဆောင်ချက်များ ဖွင့်ထားသည်ကို ထိန်းချုပ်ပါ",
+    "successfullyCleared": "အောင်မြင်စွာ ရှင်းလင်းပြီး: {items}",
+    "title": "ကိုယ်ရေးကိုယ်တာနှင့် AI ထိန်းချုပ်မှုများ",
+    "whatsSent": "ပို့သည့်အရာ:",
+    "whatsSentDescription": "သန့်ရှင်းထားသော အရောင်းအဝယ်ဖော်ပြချက်များသာ (ဥပမာ \"AMAZON.COM\")။ အကောင့်နံပါတ်၊ အမည်၊ လိပ်စာ မပါ။ OpenAI GPT-4o-mini ဖြင့် အသုံးပြုသည်။"
   },
   "profileDialog": {
     "cancel": "ပယ်ဖျက်ရန်",
@@ -3911,7 +3911,7 @@
       "save": "သိမ်းရန်"
     },
     "clickToSelect": "ရွေးရန် အမျိုးအစားကို နှိပ်ပါ",
-    "description": "{count, plural, =1 {ဤငွေလွှဲ} other {ငွေလွှဲ # ခု}} အတွက် အမျိုးအစား ရွေးပါ",
+    "description": "{count, plural, other {အရောင်းအဝယ် # ခုအတွက်}} အမျိုးအစားတစ်ခု ရွေးချယ်ပါ",
     "general": "အထွေထွေ",
     "noResults": "အမျိုးအစား မတွေ့ပါ",
     "pressEnter": "↵ Enter နှိပ်ပါ",
@@ -3947,7 +3947,7 @@
     "downloadPdf": "PDF ဒေါင်းလုဒ်",
     "fileSize": "{size} KB",
     "pdfReceipt": "PDF ပြေစာ",
-    "receiptCount": "{count, plural, =1 {ပြေစာ ၁ ခု} other {ပြေစာ # ခု}}",
+    "receiptCount": "{count, plural, other {ပြေစာ # ခု}}",
     "unsupportedFileType": "ပံ့ပိုးမထားသော ဖိုင်အမျိုးအစား",
     "uploaded": "{date} တင်ပြီး",
     "view": "ကြည့်မည်"
@@ -4001,16 +4001,16 @@
       "quarterly": "သုံးလတစ်ကြိမ်",
       "weekly": "အပတ်စဉ်"
     },
-    "inDays": "{count, plural, =0 {(ယနေ့)} =1 {(၁ ရက်အတွင်း)} other {(# ရက်အတွင်း)}}",
+    "inDays": "{count, plural, =0 {(ယနေ့)} other {(# ရက်အတွင်း)}}",
     "next": "နောက်: {date}",
-    "occurrences": "{count, plural, =1 {ဖြစ်ပွားမှု ၁ ခု ရှာဖွေတွေ့ရှိ} other {ဖြစ်ပွားမှု # ခု ရှာဖွေတွေ့ရှိ}}",
+    "occurrences": "{count, plural, other {# ကြိမ် တွေ့ရှိသည်}}",
     "perPeriod": {
       "month": "တစ်လလျှင်",
       "quarter": "သုံးလလျှင်",
       "twoWeeks": "နှစ်ပတ်လျှင်",
       "week": "တစ်ပတ်လျှင်"
     },
-    "showingPatterns": "{count, plural, =1 {ထပ်ခါတလဲလဲ ငွေလွှဲပုံစံ ၁ ခု ပြသနေသည်} other {ထပ်ခါတလဲလဲ ငွေလွှဲပုံစံ # ခု ပြသနေသည်}}",
+    "showingPatterns": "{count, plural, other {ထပ်တလဲလဲ အရောင်းအဝယ်ပုံစံ # ခု ပြသနေသည်}}",
     "subtitle": "ရှာဖွေတွေ့ရှိထားသော စာရင်းသွင်းမှုများနှင့် ငွေတောင်းခံလွှာများ",
     "title": "ထပ်ခါတလဲလဲ ငွေလွှဲများ"
   },
@@ -4144,8 +4144,8 @@
   "shortcutsModal": {
     "close": "အမြန်ချိတ်ဆက်မှု အကူအညီ ပိတ်ရန်",
     "proTip": {
-      "description": "ဖောင်များတွင် ရိုက်နေချိန်မှလွဲ၍ မည်သည့်စာမျက်နှာတွင်မဆို ကီးဘုတ် အမြန်ချိတ်ဆက်မှုများ အလုပ်လုပ်သည်။ ဤအကူအညီကိုကြည့်ရန် {key} ကို အချိန်မရွေးနှိပ်ပါ။",
-      "title": "💡 အကြံပြု"
+      "description": "ကီးဘုတ်ဖြတ်လမ်းများသည် ဖောင်တွင် စာရိုက်နေချိန်မှလွဲ၍ မည်သည့်စာမျက်နှာတွင်မဆို အလုပ်လုပ်သည်။ ဤအကူအညီကို ကြည့်ရန် {key} ကို နှိပ်ပါ။",
+      "title": "💡 အကြံပြုချက်"
     },
     "subtitle": "ကျွမ်းကျင်သူအတွက် ကုန်ထုတ်စွမ်းအား အကြံပြုချက်များ",
     "title": "ကီးဘုတ် အမြန်ချိတ်ဆက်မှုများ"
@@ -4188,7 +4188,7 @@
     "shortcuts": "တိုက်ရိုက်လမ်းညွှန်များ"
   },
   "simplefinConnect": {
-    "accountsConnected": "{count, plural, one {အကောင့် # ခု ချိတ်ဆက်ပြီး} other {အကောင့် # ခု ချိတ်ဆက်ပြီး}}",
+    "accountsConnected": "{count, plural, other {အကောင့် # ခု ချိတ်ဆက်ထားသည်}}",
     "alreadyHaveToken": "Token ရှိပြီးသားလား?",
     "asOf": "{date} အရ",
     "autoImportDescription": "သင့်ဘဏ်အကောင့်များမှ ငွေလွှဲမှတ်တမ်းများ အလိုအလျောက် သွင်းယူပါ",
@@ -4229,7 +4229,7 @@
     "securePrivate": "လုံခြုံပြီး ကိုယ်ရေးလွတ်လပ်",
     "securePrivateDescription": "SimpleFIN သည် သင့်ဝင်ရောက်မှုအထောက်အထားကို မမြင်ပါ။ ဝင်ရောက်ခွင့်ကို သင်ထိန်းချုပ်သည်။",
     "selectAccount": "အကောင့် ရွေးပါ",
-    "setupToken": "Setup Token",
+    "setupToken": "တပ်ဆင်မှု Token",
     "step1Description": "SimpleFIN အကောင့် ဖန်တီးပါ သို့မဟုတ် ဝင်ရောက်ပါ",
     "step1Title": "အဆင့် ၁: Setup Token ရယူရန်",
     "step2Description": "SimpleFIN Bridge မှ token ကို paste လုပ်ပါ",
@@ -4249,7 +4249,7 @@
       "title": "ချိတ်ဆက်ထားသော အကောင့်များ"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {အကောင့် ၁ ခု ချိတ်ဆက်ပြီး} other {အကောင့် # ခု ချိတ်ဆက်ပြီး}}",
+      "accountsLinked": "{count, plural, other {အကောင့် # ခု ချိတ်ဆက်ထားသည်}}",
       "connectButton": "ဘဏ်အကောင့် ချိတ်ဆက်ရန်",
       "connected": "ချိတ်ဆက်ပြီး",
       "description": "ငွေလွှဲများ အလိုအလျောက် သွင်းယူရန် သင့်ဘဏ်အကောင့်များကို ချိတ်ဆက်ပါ",
@@ -4271,7 +4271,7 @@
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {၁ နာရီ ကြာပြီ} other {# နာရီ ကြာပြီ}}",
+      "hoursAgo": "{hours, plural, other {# နာရီအကြာ}}",
       "lastSynced": "နောက်ဆုံး စင့်ခ်: {time}",
       "lessThanHour": "တစ်နာရီ မပြည့်သေးပါ",
       "never": "မဖြစ်တော့ပါ",
@@ -4454,7 +4454,7 @@
     "splitATransaction": "ငွေလွှဲမှတ်တမ်း ခွဲရန်",
     "splitFlow": {
       "amountsCorrect": "ပမာဏများ မှန်ကန်စွာ ပေါင်းပြီး",
-      "confirmDescription": "ဤငွေလွှဲမှတ်တမ်းအတွက် ခွဲဝေမှု {count, plural, one {# ခု} other {# ခု}} ဖန်တီးမည်။ လူတစ်ဦးချင်း၏ အစုကို ရှင်းသည်အထိ ခြေရာခံမည်။",
+      "confirmDescription": "ဤအရောင်းအဝယ်အတွက် {count, plural, other {ခွဲဝေမှု # ခု}} ဖန်တီးမည်။ လူတစ်ဦးချင်းစီ၏ အခွန်ကို ရှင်းလင်းပြီးသည်အထိ ခြေရာခံမည်။",
       "confirmSplit": "ခွဲဝေမှု အတည်ပြုရန်",
       "howToSplit": "ဘယ်လို ခွဲမလဲ?",
       "modes": {
@@ -4486,7 +4486,7 @@
     "title": "အသုံးစရိတ် ခွဲဝေခြင်း",
     "total": "စုစုပေါင်း",
     "unknownTransaction": "မသိသော ငွေလွှဲမှတ်တမ်း",
-    "unsettledSplitCount": "{count, plural, one {မရှင်းရသေးသော ခွဲဝေမှု # ခု} other {မရှင်းရသေးသော ခွဲဝေမှု # ခု}}",
+    "unsettledSplitCount": "{count, plural, other {မရှင်းလင်းရသေးသော ခွဲဝေမှု # ခု}}",
     "unsettledSplits": "မရှင်းရသေးသော ခွဲဝေမှုများ ({count})",
     "via": "မှတဆင့်",
     "youOwe": "သင် {amount} အကြွေးတင်",
@@ -4551,7 +4551,7 @@
       "totalSpent": "သုံးစွဲပြီးစုစုပေါင်း"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {စမ်းသပ်ကာလ ၁ ရက် ကျန်} other {စမ်းသပ်ကာလ # ရက် ကျန်}}"
+      "daysLeft": "{count, plural, other {အစမ်းသုံးမှုတွင် # ရက်ကျန်သည်}}"
     },
     "reminderToggle": {
       "disableReminder": "သတိပေးချက်ပိတ်မည်",
@@ -4570,20 +4570,20 @@
       "upcomingCharges": "လာမည့် ငွေသွင်းမှုများ (နောက် ၃၀ ရက်)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {လက်ရှိ စာရင်းသွင်းမှု ၁ ခု} other {လက်ရှိ စာရင်းသွင်းမှု # ခု}}",
+      "activeSubscriptions": "{count, plural, other {အသက်ဝင်သော စာရင်းသွင်းမှု # ခု}}",
       "annualCost": "နှစ်စဉ် ကုန်ကျစရိတ်",
       "monthlyCost": "လစဉ် ကုန်ကျစရိတ်",
       "next30Days": "နောက် ၃၀ ရက်",
       "projectedYearly": "ခန့်မှန်း နှစ်စဉ် သုံးစွဲမှု",
-      "upcomingCharges": "{count, plural, =1 {လာမည့် ငွေသွင်းမှု ၁ ခု} other {လာမည့် ငွေသွင်းမှု # ခု}}"
+      "upcomingCharges": "{count, plural, other {လာမည့် ကောက်ခံမှု # ခု}}"
     },
     "suggestions": {
-      "inactiveTitle": "ဖျက်သိမ်းထားနိုင်သော စာရင်းသွင်းမှုများ",
-      "inactiveDescription": "{count, plural, =1 {စာရင်းသွင်းမှု ၁ ခု မကြာသေးမီ} other {စာရင်းသွင်းမှု # ခု မကြာသေးမီ}} ငွေမကောက်ပါ။ ဖျက်သိမ်းထားခြင်း ရှိမရှိ စစ်ဆေးပါ။",
-      "trialsTitle": "စမ်းသပ်ကာလ မကြာမီ ကုန်ဆုံးမည်",
-      "trialsDescription": "{count, plural, =1 {စမ်းသပ်ကာလ ၁ ခု} other {စမ်းသပ်ကာလ # ခု}} နောက် ၇ ရက်အတွင်း ကုန်ဆုံးမည်။ မသုံးပါက ဖျက်သိမ်းပါ။",
-      "highCostTitle": "ကုန်ကျစရိတ်မြင့်သော စာရင်းသွင်းမှုများ",
-      "highCostDescription": "ဤစာရင်းသွင်းမှုများသည် သင့်သုံးစွဲမှု၏ အစိတ်အပိုင်းကြီး ဖြစ်သည်။ တန်ဖိုးအပြည့် ရနေခြင်း ရှိမရှိ စဉ်းစားပါ။"
+      "inactiveTitle": "ဖျက်သိမ်းပြီးဖြစ်နိုင်သော စာရင်းသွင်းမှုများ",
+      "inactiveDescription": "{count, plural, other {စာရင်းသွင်းမှု # ခုသည်}} မကြာသေးမီက ကောက်ခံခြင်းမရှိပါ။ ၎င်းတို့ကို အမှန်တကယ် ဖျက်သိမ်းပြီးဖြစ်ကြောင်း အတည်ပြုပါ။",
+      "trialsTitle": "မကြာမီ ကုန်ဆုံးမည့် အစမ်းသုံးမှုများ",
+      "trialsDescription": "{count, plural, other {အစမ်းသုံးမှု # ခု}} လာမည့် ၇ ရက်အတွင်း ကုန်ဆုံးမည်။ အသုံးမပြုပါက ဖျက်သိမ်းပါ။",
+      "highCostTitle": "စျေးကြီးသော စာရင်းသွင်းမှုများ",
+      "highCostDescription": "ဤစာရင်းသွင်းမှုများသည် သင့်အသုံးစရိတ်၏ အများစုကို ကိုယ်စားပြုသည်။ သင် တန်ဖိုးအပြည့်ရနေသလား စဉ်းစားပါ။"
     }
   },
   "subscriptionModal": {
@@ -4839,7 +4839,7 @@
     "placeholderExtended": "'ကော်ဖီ ယခင်အပတ်' သို့မဟုတ် 'amount:>50' စမ်းပါ",
     "recentSearchLabel": "မကြာသေးမီ ရှာဖွေမှု",
     "recentSearches": "မကြာသေးမီ ရှာဖွေမှုများ",
-    "resultCount": "ရလဒ် {count} {count, plural, =1 {ခု} other {ခု}}",
+    "resultCount": "{count} {count, plural, other {ရလဒ်}}",
     "save": "သိမ်းရန်",
     "saveFilter": "စစ်ထုတ်မှု သိမ်းရန်",
     "savedFilters": "သိမ်းထားသော စစ်ထုတ်မှုများ",
@@ -4865,10 +4865,10 @@
       "type": "အမျိုးအစား: 'type:income' သို့မဟုတ် 'type:expense'"
     },
     "transactionCount": "ငွေလွှဲ {count} {count, plural, =1 {ခု} other {ခု}}",
-    "usedTimes": "{count} {count, plural, =1 {ကြိမ်} other {ကြိမ်}} အသုံးပြုပြီး",
+    "usedTimes": "{count} {count, plural, other {ကြိမ်}} အသုံးပြုပြီး",
     "viewAllResults": "ရလဒ် {count} ခုလုံး ကြည့်ရန်",
-    "resultsFound": "ရလဒ် {count} {count, plural, =1 {ခု} other {ခု}} တွေ့ရှိ",
-    "suggestionsAvailable": "အကြံပြုချက် {count} {count, plural, =1 {ခု} other {ခု}} ရရှိနိုင်"
+    "resultsFound": "{count} {count, plural, other {ရလဒ်}} တွေ့ရှိ",
+    "suggestionsAvailable": "{count} {count, plural, other {အကြံပြုချက်}} ရရှိနိုင်"
   },
   "transactionTable": {
     "actions": {
@@ -4987,7 +4987,7 @@
     "youWillLose": "ဆုံးရှုံးမည်:"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {သင့်စမ်းသပ်ကာလ ယနေ့ ကုန်ဆုံးမည်!} =1 {စမ်းသပ်ကာလ ၁ ရက်သာ ကျန်} other {စမ်းသပ်ကာလ # ရက် ကျန်}}",
+    "daysLeft": "{count, plural, =0 {သင့်အစမ်းသုံးမှု ယနေ့ ကုန်ဆုံးသည်!} other {သင့်အစမ်းသုံးမှုတွင် # ရက်ကျန်သည်}}",
     "daysRemaining": "သင့် အခမဲ့ စမ်းသပ်ကာလတွင် {count} ရက် ကျန်ရှိ",
     "dismiss": "ပယ်ဖျက်ရန်",
     "expired": "သင့် စမ်းသပ်ကာလ ကုန်ဆုံးပြီ",
@@ -5011,9 +5011,9 @@
     "ignoreAllContinue": "အားလုံးလျစ်လျူရှု၍ ဆက်လက်ရန်",
     "informational": "အချက်အလက်",
     "issuesDetected": "ပြဿနာများ တွေ့ရှိသည်",
-    "issuesFound": "{count, plural, =1 {ပြဿနာ ၁ ခု} other {ပြဿနာ # ခု}} သင့်အာရုံစိုက်မှု လိုအပ်သည်",
+    "issuesFound": "သင့်အာရုံစိုက်ရန် လိုအပ်သော {count, plural, other {ပြဿနာ # ခု}} ကို တွေ့ရှိပါသည်",
     "marked": "အမှတ်အသားပြုထား",
-    "removalNote": "{count, plural, =1 {ငွေလွှဲမှု ၁ ခု} other {ငွေလွှဲမှု # ခု}} ဆက်လက်လုပ်ဆောင်ပါက သွင်းယူမှုမှ ဖယ်ရှားမည်။",
+    "removalNote": "သင်ဆက်လက်လုပ်ဆောင်ပါက {count, plural, other {အရောင်းအဝယ် # ခုကို}} တင်သွင်းမှုမှ ဖယ်ရှားမည်။",
     "remove": "ဖယ်ရှားရန်",
     "removeAndContinue": "{count} ခု ဖယ်ရှား၍ ဆက်လက်ရန်",
     "suggestion": "အကြံပြုချက်:",
@@ -5047,7 +5047,7 @@
     "strengthVeryStrong": "အလွန်ခိုင်မာ",
     "strengthVeryWeak": "အလွန်အားနည်း",
     "strengthWeak": "အားနည်း",
-    "zeroKnowledge": "Zero Knowledge"
+    "zeroKnowledge": "Zero Knowledge ကုဒ်ဝှက်"
   },
   "welcome": {
     "subtitle": "သင်၏ ပထမဆုံး ငွေလွှဲကို ထည့်ရန် သို့မဟုတ် ဘဏ်မှ ဒေတာသွင်းယူရန် စတင်ပါ",
@@ -5105,7 +5105,7 @@
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {အမျိုးအစား ၁ ခု} other {အမျိုးအစား # ခု}}",
+      "category": "{count, plural, other {အမျိုးအစား # ခု}}",
       "createNew": "အသစ် ဖန်တီးရန်",
       "description": "YNAB အမျိုးအစားများကို သင့်ရှိပြီးသား အမျိုးအစားများသို့ ချိတ်ဆက်ပါ သို့မဟုတ် အသစ် ဖန်တီးပါ။",
       "mapToExisting": "ရှိပြီးသားသို့ ချိတ်ဆက်ရန်",
@@ -5118,7 +5118,7 @@
       "errors": "အမှားများ",
       "importAnother": "နောက်တစ်ခု သွင်းယူရန်",
       "success": "သွင်းယူမှု ပြီးပါပြီ!",
-      "successMessage": "YNAB မှ {count, plural, =1 {အရာ ၁ ခု} other {အရာ # ခု}} အောင်မြင်စွာ သွင်းယူပြီး။",
+      "successMessage": "YNAB မှ {count, plural, other {အရာ # ခု}} အောင်မြင်စွာ တင်သွင်းပြီး။",
       "viewTransactions": "ငွေလွှဲများ ကြည့်ရန်",
       "whatNext": "နောက်ဘာလုပ်ချင်ပါသနည်း?",
       "withIssues": "ပြဿနာများဖြင့် သွင်းယူမှု ပြီးပါပြီ"
@@ -5222,16 +5222,16 @@
       "transactions": "ငွေလွှဲများ"
     },
     "errors": {
-      "parseFailed": "YNAB ဖိုင် ခွဲခြမ်းခြင်း မအောင်မြင်ပါ",
-      "previewFailed": "ကြိုကြည့်မှု ထုတ်ခြင်း မအောင်မြင်ပါ",
-      "accountImportFailed": "အကောင့် သွင်းယူခြင်း မအောင်မြင်: {details}",
-      "categoryImportFailed": "အမျိုးအစား သွင်းယူခြင်း မအောင်မြင်: {details}",
-      "transactionImportFailed": "ငွေလွှဲ သွင်းယူခြင်း မအောင်မြင်: {details}",
+      "parseFailed": "YNAB ဖိုင်ကို ခွဲခြမ်းစိတ်ဖြာရန် မအောင်မြင်ပါ",
+      "previewFailed": "အကြိုကြည့်ရှုခြင်း ဖန်တီးရန် မအောင်မြင်ပါ",
+      "accountImportFailed": "အကောင့် တင်သွင်းခြင်း မအောင်မြင်ပါ: {details}",
+      "categoryImportFailed": "အမျိုးအစား တင်သွင်းခြင်း မအောင်မြင်ပါ: {details}",
+      "transactionImportFailed": "အရောင်းအဝယ် တင်သွင်းခြင်း မအောင်မြင်ပါ: {details}",
       "unknownError": "အမည်မသိ အမှား",
-      "budgetImportFailed": "ဘတ်ဂျက် သွင်းယူခြင်း မအောင်မြင်: {details}"
+      "budgetImportFailed": "ဘတ်ဂျက် တင်သွင်းခြင်း မအောင်မြင်ပါ: {details}"
     },
-    "importSuccess": "YNAB ဒေတာ အောင်မြင်စွာ သွင်းယူပြီး!",
-    "importWithErrors": "အမှား {count, plural, =1 {၁ ခု} other {# ခု}} ဖြင့် သွင်းယူမှု ပြီးဆုံးပြီ"
+    "importSuccess": "YNAB ဒေတာ အောင်မြင်စွာ တင်သွင်းပြီး!",
+    "importWithErrors": "{count, plural, other {အမှား # ခုဖြင့်}} တင်သွင်းခြင်း ပြီးဆုံးပါပြီ"
   },
   "balanceReconciliation": {
     "title": "တင်သွင်းခြင်း ပြီးပါပြီ!",

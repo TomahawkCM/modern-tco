@@ -1212,8 +1212,8 @@
       "interestEarned": "کمایا ہوا سود",
       "interest": "سود",
       "totalInterest": "کل سود",
-      "snowball": "Snowball",
-      "avalanche": "Avalanche",
+      "snowball": "برفانی گولا",
+      "avalanche": "برفانی تودہ",
       "portfolio": "پورٹ فولیو",
       "fireTarget": "FIRE ہدف",
       "median50th": "درمیانہ (50واں)",
@@ -2458,7 +2458,7 @@
       "minutesAgo": "{count, plural, =1 {1 منٹ پہلے} other {# منٹ پہلے}}",
       "neverSynced": "کبھی ہم آہنگ نہیں ہوا"
     },
-    "title": "LAN Sync"
+    "title": "LAN ہم آہنگی"
   },
   "landing": {
     "accessibility": {
@@ -2616,22 +2616,22 @@
         "viewPricing": "قیمتیں دیکھیں"
       },
       "demo": {
-        "cloudStorage": "Cloud storage",
-        "dining": "Dining",
-        "expenses": "Expenses",
-        "foodToday": "Food • Today",
-        "groceries": "Groceries",
-        "groceryStore": "Grocery Store",
-        "income": "Income",
-        "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
-        "netWorth": "Net worth",
+        "cloudStorage": "کلاؤڈ اسٹوریج",
+        "dining": "کھانا",
+        "expenses": "اخراجات",
+        "foodToday": "کھانا • آج",
+        "groceries": "گروسری",
+        "groceryStore": "گروسری اسٹور",
+        "income": "آمدنی",
+        "incomeYesterday": "آمدنی • کل",
+        "monthly": "ماہانہ",
+        "netWorth": "کل اثاثے",
         "netflix": "Netflix",
-        "salary": "Salary",
-        "shopping": "Shopping",
+        "salary": "تنخواہ",
+        "shopping": "خریداری",
         "spotify": "Spotify",
-        "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "subscriptionOct24": "سبسکرپشن • اکتوبر 24",
+        "yearly": "سالانہ"
       },
       "modes": {
         "budgets": "بجٹ",

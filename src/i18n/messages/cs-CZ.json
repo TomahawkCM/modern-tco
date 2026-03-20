@@ -364,7 +364,7 @@
     "syncStatus": "Status synchronizacji: {status}",
     "toggleSeniorsMode": "Przełącz tryb dla seniorów",
     "typeQuestion": "Wpisz swoje pytanie",
-    "unreadNotifications": "{count, plural, =1 {1 unread notification} other {# unread notifications}}",
+    "unreadNotifications": "{count, plural, =1 {1 nepřečtené oznámení} few {# nepřečtená oznámení} many {# nepřečtených oznámení} other {# nepřečtených oznámení}}",
     "welcomeBudgetApp": "Vítejte v aplikaci Rozpočet"
   },
   "auth": {
@@ -503,8 +503,8 @@
       "addAccount": "Dodaj konto",
       "addFirstAccount": "Dodaj swoje pierwsze konto",
       "allTransactionsCleared": "Wszystkie transakcje wyczyszczone. Możesz teraz ponownie zaimportować wyciągi.",
-      "assignCount": "Assign {count, plural, one {# Transaction} other {# Transactions}}",
-      "assignModalDescription": "{count, plural, one {# transaction needs} other {# transactions need}} to be assigned to an account.",
+      "assignCount": "Přiřadit {count, plural, one {# transakci} few {# transakce} many {# transakcí} other {# transakcí}}",
+      "assignModalDescription": "{count, plural, one {# transakce potřebuje} few {# transakce potřebují} many {# transakcí potřebuje} other {# transakcí potřebuje}} přiřazení k účtu.",
       "assignTransactions": "Przypisz transakcje",
       "assignTransactionsNow": "Przypisz transakcje teraz",
       "assignedTransactions": "Przypisano {count} transakcji do {name}",
@@ -557,7 +557,7 @@
       "unassignedClickToAssign": "Kliknij poniżej, aby automatycznie przypisać je do swoich kont.",
       "unassignedCreateFirst": "Najpierw utwórz konto, a następnie zostaną automatycznie przypisane.",
       "unassignedDescription": "Te transakcje zostały zaimportowane przed skonfigurowaniem kont.",
-      "unassignedTitle": "{count, plural, one {# transaction needs} other {# transactions need}} account assignment",
+      "unassignedTitle": "{count, plural, one {# transakce potřebuje} few {# transakce potřebují} many {# transakcí potřebuje} other {# transakcí potřebuje}} přiřazení účtu",
       "update": "Aktualizuj"
     },
     "budgets": {
@@ -611,7 +611,7 @@
       "totalExpenses": "Łączne wydatki",
       "totalSpent": "Łącznie wydano",
       "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
-      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transaction will become unbudgeted} other {# transactions will become unbudgeted}}",
+      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transakce bude bez rozpočtu} few {# transakce budou bez rozpočtu} many {# transakcí bude bez rozpočtu} other {# transakcí bude bez rozpočtu}}",
       "youWillLose": "Stracisz:"
     },
     "events": {
@@ -824,7 +824,7 @@
     "applyTo": "Zastosuj do {count}",
     "categorize": "Kategoryzuj",
     "clearSelection": "Wyczyść zaznaczenie",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "confirmDelete": "Smazat {count, plural, =1 {1 transakci} few {# transakce} many {# transakcí} other {# transakcí}}?",
     "delete": "Smazat",
     "deleteWarning": "Tuto akci nelze vrátit zpět.",
     "export": "Eksportuj",
@@ -1629,7 +1629,7 @@
     "viewAllLoans": "Zobacz wszystkie pożyczki"
   },
   "debtOverview": {
-    "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
+    "activeLoans": "{count, plural, one {# aktivní půjčka} few {# aktivní půjčky} many {# aktivních půjček} other {# aktivních půjček}}",
     "activeLoansTitle": "Aktywne pożyczki",
     "addLoan": "Přidat půjčku",
     "avgRate": "Śr. stopa",
@@ -1640,7 +1640,7 @@
     "totalDebt": "Celkový dluh",
     "upcomingPayments": "Nadchodzące płatności",
     "viewAll": "Zobacz wszystkie",
-    "viewMore": "{count, plural, one {View # more loan} other {View # more loans}}"
+    "viewMore": "{count, plural, one {Zobrazit # další půjčku} few {Zobrazit # další půjčky} many {Zobrazit # dalších půjček} other {Zobrazit # dalších půjček}}"
   },
   "debtPayoff": {
     "addDebt": "Dodaj dług",
@@ -1798,8 +1798,8 @@
     "dragToReorder": "Przeciągnij, aby zmienić kolejność widżetu"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
+    "months": "{count, plural, =1 {1 měsíc} few {# měsíce} many {# měsíců} other {# měsíců}}",
+    "years": "{count, plural, =1 {1 rok} few {# roky} many {# let} other {# let}}",
     "yearsAndMonths": "{years}l {months}m"
   },
   "emptyStates": {
@@ -1861,7 +1861,7 @@
       "viewGuide": "Zobacz przewodnik rozwiązywania problemów"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "canRecover": "Dobrá zpráva! Našli jsme {count} {count, plural, =1 {způsob} few {způsoby} many {způsobů} other {způsobů}}, jak tuto chybu opravit.",
       "cannotRecover": "Odzyskanie nie jest możliwe. Musisz ponownie wyeksportować plik z banku lub spróbować innego formatu.",
       "optionsTitle": "Opcje odzyskiwania"
     },
@@ -2104,7 +2104,7 @@
       "line2": "Wynik zdrowia finansowego"
     },
     "grade": "Ocena: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
+    "missingFactors": "{count, plural, =1 {Chybí 1 faktor} few {Chybí # faktory} many {Chybí # faktorů} other {Chybí # faktorů}}",
     "title": "Zdrowie finansowe",
     "history": {
       "title": "Historie skóre",
@@ -2347,7 +2347,7 @@
       "description": "Spowoduje to trwałe usunięcie konta i wszystkich powiązanych pozycji.",
       "impactAccount": "Konto: {name}",
       "impactHistory": "Cała historia transakcji",
-      "impactHoldings": "{count, plural, one {# holding} other {# holdings}}",
+      "impactHoldings": "{count, plural, one {# podíl} few {# podíly} many {# podílů} other {# podílů}}",
       "impactTitle": "Utracisz:",
       "impactValue": "Łączna wartość: {value}",
       "title": "Usuń konto inwestycyjne"
@@ -2374,7 +2374,7 @@
     },
     "gainLoss": "Zisk/ztráta",
     "hideDetails": "Ukryj szczegóły",
-    "holdingsCount": "{count, plural, one {# holding} other {# holdings}}",
+    "holdingsCount": "{count, plural, one {# podíl} few {# podíly} many {# podílů} other {# podílů}}",
     "loading": "Načítání investic...",
     "marketDataNotice": "Informacja o danych rynkowych",
     "noHoldings": "Brak pozycji na tym koncie.",
@@ -2437,7 +2437,7 @@
     "pairedDevices": {
       "addDevice": "Dodaj urządzenie",
       "addFirstDevice": "Dodaj pierwsze urządzenie",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "deviceCount": "{count, plural, =1 {1 spárované zařízení} few {# spárovaná zařízení} many {# spárovaných zařízení} other {# spárovaných zařízení}}",
       "emptyDescription": "Sparuj urządzenie, aby rozpocząć synchronizację danych budżetu",
       "emptyTitle": "Brak sparowanych urządzeń",
       "noDevices": "Nie sparowano jeszcze żadnych urządzeń",
@@ -2451,11 +2451,11 @@
     },
     "syncAll": "Synchronizuj wszystko",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "daysAgo": "{count, plural, =1 {Před 1 dnem} few {Před # dny} many {Před # dny} other {Před # dny}}",
+      "hoursAgo": "{count, plural, =1 {Před 1 hodinou} few {Před # hodinami} many {Před # hodinami} other {Před # hodinami}}",
       "justNow": "Przed chwilą",
       "lastSync": "Ostatnia synchronizacja: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "minutesAgo": "{count, plural, =1 {Před 1 minutou} few {Před # minutami} many {Před # minutami} other {Před # minutami}}",
       "neverSynced": "Nigdy nie synchronizowano"
     },
     "title": "Synchronizacja LAN"
@@ -3421,7 +3421,7 @@
     "description": "Połącz się z innym urządzeniem w sieci lokalnej",
     "deviceAdded": "Urządzenie dodane. Połącz się, aby dokończyć parowanie.",
     "failedToInitialize": "Nie udało się zainicjować urządzenia. Spróbuj ponownie.",
-    "host": "Host",
+    "host": "Hostitel",
     "ipAddressDescription": "Wprowadź lokalny adres IP, aby umożliwić innym urządzeniom połączenie.",
     "ipAddressRequired": "Wymagany adres IP",
     "ipPlaceholder": "192.168.1.100",
@@ -3476,7 +3476,7 @@
     "savePayment": "Zapisz płatność",
     "status": "Status",
     "suggestedMatches": "Sugerowane dopasowania transakcji",
-    "suggestedMatchesDescription": "We found {count, plural, one {# transaction} other {# transactions}} that might be loan payments",
+    "suggestedMatchesDescription": "Nalezli jsme {count, plural, one {# transakci} few {# transakce} many {# transakcí} other {# transakcí}}, které mohou být splátkami půjčky",
     "title": "Historia płatności",
     "uncategorized": "Nekategorizované",
     "unlinkConfirm": "Odłączyć tę płatność od transakcji?",
@@ -3618,7 +3618,7 @@
       "payFrequencyHelp": "Jak często otrzymujesz wypłatę? To determinuje, kiedy generowane są Twoje wypłaty.",
       "payFrequencyHelpAriaLabel": "Więcej informacji o częstotliwości wypłat",
       "paycheckTimeline": "Harmonogram wypłat",
-      "paychecksPlanned": "{count, plural, one {# paycheck planned} other {# paychecks planned}}",
+      "paychecksPlanned": "{count, plural, one {# naplánovaná výplata} few {# naplánované výplaty} many {# naplánovaných výplat} other {# naplánovaných výplat}}",
       "percentOfIncome": "{percent}% dochodu",
       "regeneratePaychecks": "Wygeneruj ponownie wypłaty",
       "remainingToAllocate": "Pozostało do przydzielenia",
@@ -3636,7 +3636,7 @@
       "scheduleSemimonthlyDesc": "1. i 15. każdego miesiąca",
       "scheduleWeekly": "Týdně",
       "scheduleWeeklyDesc": "Co tydzień",
-      "scheduledPaychecks": "{count, plural, one {# scheduled paycheck} other {# scheduled paychecks}}",
+      "scheduledPaychecks": "{count, plural, one {# naplánovaná výplata} few {# naplánované výplaty} many {# naplánovaných výplat} other {# naplánovaných výplat}}",
       "setUpPaycheckPlan": "Skonfiguruj plan wypłat",
       "setUpPlan": "Skonfiguruj plan",
       "subtitle": "Zaplanuj, na co przeznaczysz każdą złotówkę przed dniem wypłaty",
@@ -3707,7 +3707,7 @@
       "tfsaBalance": "Saldo TFSA",
       "title": "Kalkulator emerytalny",
       "toReachGoal": "Aby osiągnąć cel, możesz:",
-      "workMoreYears": "Work {years, plural, one {# more year} other {# more years}}",
+      "workMoreYears": "Pracovat ještě {years, plural, one {# rok} few {# roky} many {# let} other {# let}}",
       "yearAge": "{year} (wiek {age})",
       "yearsToRetirement": "Lata do emerytury",
       "youWillLose": "Utracisz:",
@@ -3750,7 +3750,7 @@
     "chatbotDescription": "Asystent AI, który może odpowiadać na pytania dotyczące Twoich transakcji, budżetów i wzorców wydatków. Rozmowy są przetwarzane przez API OpenAI.",
     "chatbotPrivacyNotice": "Twoje dane finansowe są wysyłane do OpenAI w celu odpowiadania na pytania. OpenAI nie wykorzystuje danych API do trenowania modeli. Możesz to wyłączyć w dowolnym momencie.",
     "confirmDelete": "Potwierdź usunięcie",
-    "confirmDeleteWarning": "You are about to permanently delete {count, plural, one {# data type} other {# data types}}. Click \"Confirm Delete\" to proceed.",
+    "confirmDeleteWarning": "Chystáte se trvale smazat {count, plural, one {# typ dat} few {# typy dat} many {# typů dat} other {# typů dat}}. Klikněte na Potvrdit smazání pro pokračování.",
     "conversationHistory": "Historia rozmów",
     "conversationStorageNotice": "Rozmowy są przechowywane lokalnie w przeglądarce. Możesz je ręcznie usunąć w dowolnym momencie.",
     "dataAccessPermission": "Uprawnienia dostępu do danych",
@@ -3911,7 +3911,7 @@
       "save": "Uložit"
     },
     "clickToSelect": "Kliknij kategorię, aby wybrać",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "description": "Vyberte kategorii pro {count, plural, =1 {tuto transakci} few {# transakce} many {# transakcí} other {# transakcí}}",
     "general": "Ogólne",
     "noResults": "Nenalezeny žádné kategorie",
     "pressEnter": "Naciśnij ↵ Enter",
@@ -3947,7 +3947,7 @@
     "downloadPdf": "Pobierz PDF",
     "fileSize": "{size} KB",
     "pdfReceipt": "Paragon PDF",
-    "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
+    "receiptCount": "{count, plural, =1 {1 účtenka} few {# účtenky} many {# účtenek} other {# účtenek}}",
     "unsupportedFileType": "Nieobsługiwany typ pliku",
     "uploaded": "Przesłano {date}",
     "view": "Zobrazit"
@@ -4001,16 +4001,16 @@
       "quarterly": "Čtvrtletně",
       "weekly": "Týdně"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
+    "inDays": "{count, plural, =0 {(dnes)} =1 {(za 1 den)} few {(za # dny)} many {(za # dnů)} other {(za # dnů)}}",
     "next": "Następne: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "occurrences": "{count, plural, =1 {Zjištěn 1 výskyt} few {Zjištěny # výskyty} many {Zjištěno # výskytů} other {Zjištěno # výskytů}}",
     "perPeriod": {
       "month": "miesięcznie",
       "quarter": "kwartalnie",
       "twoWeeks": "co 2 tygodnie",
       "week": "tygodniowo"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "showingPatterns": "{count, plural, =1 {Zobrazuje se 1 opakující se vzor transakcí} few {Zobrazují se # opakující se vzory transakcí} many {Zobrazuje se # opakujících se vzorů transakcí} other {Zobrazuje se # opakujících se vzorů transakcí}}",
     "subtitle": "Wykryte subskrypcje i rachunki",
     "title": "Transakcje cykliczne"
   },
@@ -4188,7 +4188,7 @@
     "shortcuts": "Zkratky"
   },
   "simplefinConnect": {
-    "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
+    "accountsConnected": "{count, plural, one {# propojený účet} few {# propojené účty} many {# propojených účtů} other {# propojených účtů}}",
     "alreadyHaveToken": "Masz już token?",
     "asOf": "na dzień {date}",
     "autoImportDescription": "Automatycznie importuj transakcje z kont bankowych",
@@ -4249,7 +4249,7 @@
       "title": "Połączone konta"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "accountsLinked": "{count, plural, =1 {1 propojený účet} few {# propojené účty} many {# propojených účtů} other {# propojených účtů}}",
       "connectButton": "Połącz konto bankowe",
       "connected": "Połączone",
       "description": "Połącz konta bankowe, aby automatycznie importować transakcje",
@@ -4271,7 +4271,7 @@
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "hoursAgo": "{hours, plural, =1 {Před 1 hodinou} few {Před # hodinami} many {Před # hodinami} other {Před # hodinami}}",
       "lastSynced": "Ostatnia synchronizacja: {time}",
       "lessThanHour": "Mniej niż godzinę temu",
       "never": "Nigdy",
@@ -4454,7 +4454,7 @@
     "splitATransaction": "Podziel transakcję",
     "splitFlow": {
       "amountsCorrect": "Kwoty sumują się poprawnie",
-      "confirmDescription": "This will create {count, plural, one {# split} other {# splits}} for this transaction. Each person's share will be tracked until settled.",
+      "confirmDescription": "Tím se vytvoří {count, plural, one {# podíl} few {# podíly} many {# podílů} other {# podílů}} pro tuto transakci. Podíl každé osoby bude sledován do vyrovnání.",
       "confirmSplit": "Potwierdź podział",
       "howToSplit": "Jak podzielić?",
       "modes": {
@@ -4486,7 +4486,7 @@
     "title": "Podział wydatków",
     "total": "łącznie",
     "unknownTransaction": "Nieznana transakcja",
-    "unsettledSplitCount": "{count, plural, one {# unsettled split} other {# unsettled splits}}",
+    "unsettledSplitCount": "{count, plural, one {# nevyrovnaný podíl} few {# nevyrovnané podíly} many {# nevyrovnaných podílů} other {# nevyrovnaných podílů}}",
     "unsettledSplits": "Nierozliczone podziały ({count})",
     "via": "przez",
     "youOwe": "Jesteś winien/winna {amount}",
@@ -4551,7 +4551,7 @@
       "totalSpent": "Łącznie wydano"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {Zbývá 1 den zkušební doby} few {Zbývají # dny zkušební doby} many {Zbývá # dnů zkušební doby} other {Zbývá # dnů zkušební doby}}"
     },
     "reminderToggle": {
       "disableReminder": "Vypnout připomínku",
@@ -4570,18 +4570,18 @@
       "upcomingCharges": "Nadchodzące obciążenia (następne 30 dni)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "activeSubscriptions": "{count, plural, =1 {1 aktivní předplatné} few {# aktivní předplatná} many {# aktivních předplatných} other {# aktivních předplatných}}",
       "annualCost": "Koszt roczny",
       "monthlyCost": "Koszt miesięczny",
       "next30Days": "Następne 30 dni",
       "projectedYearly": "Prognozowane roczne wydatki",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "upcomingCharges": "{count, plural, =1 {1 nadcházející platba} few {# nadcházející platby} many {# nadcházejících plateb} other {# nadcházejících plateb}}"
     },
     "suggestions": {
       "inactiveTitle": "Potencjalnie anulowane subskrypcje",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
+      "inactiveDescription": "{count, plural, =1 {1 předplatné nebylo} few {# předplatná nebyla} many {# předplatných nebylo} other {# předplatných nebylo}} nedávno účtováno. Ověřte, zda jsou skutečně zrušena.",
       "trialsTitle": "Okresy próbne kończące się wkrótce",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
+      "trialsDescription": "{count, plural, =1 {1 zkušební období} few {# zkušební období} many {# zkušebních období} other {# zkušebních období}} končí v příštích 7 dnech. Zrušte je, pokud je nepoužíváte.",
       "highCostTitle": "Drogie subskrypcje",
       "highCostDescription": "Te subskrypcje stanowią dużą część Twoich wydatków. Zastanów się, czy czerpiesz z nich pełną wartość."
     }
@@ -4839,7 +4839,7 @@
     "placeholderExtended": "Spróbuj 'kawa zeszły tydzień' lub 'kwota:>50'",
     "recentSearchLabel": "Ostatnie wyszukiwanie",
     "recentSearches": "Ostatnie wyszukiwania",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
+    "resultCount": "{count} {count, plural, =1 {výsledek} few {výsledky} many {výsledků} other {výsledků}}",
     "save": "Uložit",
     "saveFilter": "Zapisz filtr",
     "savedFilters": "Zapisane filtry",
@@ -4865,10 +4865,10 @@
       "type": "Typ: 'typ:przychód' lub 'typ:wydatek'"
     },
     "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
+    "usedTimes": "Použito {count} {count, plural, =1 {krát} few {krát} many {krát} other {krát}}",
     "viewAllResults": "Zobacz wszystkie {count} wyniki",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "resultsFound": "{count} {count, plural, =1 {výsledek nalezen} few {výsledky nalezeny} many {výsledků nalezeno} other {výsledků nalezeno}}",
+    "suggestionsAvailable": "{count} {count, plural, =1 {návrh k dispozici} few {návrhy k dispozici} many {návrhů k dispozici} other {návrhů k dispozici}}"
   },
   "transactionTable": {
     "actions": {
@@ -4987,7 +4987,7 @@
     "youWillLose": "Utracisz:"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
+    "daysLeft": "{count, plural, =0 {Vaše zkušební doba končí dnes!} =1 {Zbývá 1 den zkušební doby} few {Zbývají # dny zkušební doby} many {Zbývá # dnů zkušební doby} other {Zbývá # dnů zkušební doby}}",
     "daysRemaining": "{count} dni pozostało w Twoim bezpłatnym okresie próbnym",
     "dismiss": "Odrzuć",
     "expired": "Twój okres próbny wygasł",
@@ -5011,9 +5011,9 @@
     "ignoreAllContinue": "Zignoruj wszystkie i kontynuuj",
     "informational": "Informacyjne",
     "issuesDetected": "Wykryto problemy",
-    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
+    "issuesFound": "Nalezli jsme {count, plural, =1 {1 problém} few {# problémy} many {# problémů} other {# problémů}}, které vyžadují vaši pozornost",
     "marked": "Oznaczone",
-    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
+    "removalNote": "{count, plural, =1 {1 transakce bude odstraněna} few {# transakce budou odstraněny} many {# transakcí bude odstraněno} other {# transakcí bude odstraněno}} z importu, pokud budete pokračovat.",
     "remove": "Usuń",
     "removeAndContinue": "Usuń {count} i kontynuuj",
     "suggestion": "Sugestia:",
@@ -5105,7 +5105,7 @@
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "category": "{count, plural, =1 {1 kategorie} few {# kategorie} many {# kategorií} other {# kategorií}}",
       "createNew": "Utwórz nową",
       "description": "Przypisz kategorie YNAB do istniejących kategorii lub utwórz nowe.",
       "mapToExisting": "Przypisz do istniejącej",
@@ -5118,7 +5118,7 @@
       "errors": "Błędy",
       "importAnother": "Importuj ponownie",
       "success": "Import zakończony!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "successMessage": "{count, plural, =1 {1 položka úspěšně importována} few {# položky úspěšně importovány} many {# položek úspěšně importováno} other {# položek úspěšně importováno}} z YNAB.",
       "viewTransactions": "Zobacz transakcje",
       "whatNext": "Co chcesz zrobić dalej?",
       "withIssues": "Import zakończony z problemami"
@@ -5231,7 +5231,7 @@
       "budgetImportFailed": "Import budżetu nieudany: {details}"
     },
     "importSuccess": "Dane YNAB zaimportowane pomyślnie!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importWithErrors": "Import dokončen s {count, plural, =1 {1 chybou} few {# chybami} many {# chybami} other {# chybami}}"
   },
   "balanceReconciliation": {
     "title": "Import dokončen!",

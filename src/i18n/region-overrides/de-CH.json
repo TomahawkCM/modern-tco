@@ -1,0 +1,573 @@
+{
+  "accessibilitySettings": {
+    "fontSize": {
+      "description": "Passen Sie die Grundtextgrösse für bessere Lesbarkeit an",
+      "extraLarge": "Extra gross",
+      "large": "Gross",
+      "title": "Schriftgrösse"
+    },
+    "seniorsMode": {
+      "description": "Barrierefreiheitsverbesserung mit einem Klick: grösserer Text, grössere Berührungsziele und vereinfachte Oberfläche"
+    }
+  },
+  "accessibilityToggle": {
+    "largeTextMode": "Grosser Textmodus",
+    "largeTextModeDescription": "Grösserer Text und Berührungsziele",
+    "sizeLarge": "Gross",
+    "sizeXLarge": "Extra gross",
+    "textSize": "Textgrösse"
+  },
+  "aiColumnMapper": {
+    "closeModal": "Modal schliessen"
+  },
+  "apiErrors": {
+    "fileTooLarge": "Datei zu gross. Maximum {maxSize}."
+  },
+  "aria": {
+    "close": "Schliessen",
+    "closeAccessibilityMenu": "Barrierefreiheitsmenü schliessen",
+    "closeChatbot": "Chatbot schliessen",
+    "closeHoldingModal": "Modal schliessen",
+    "closeIconPicker": "Symbolauswahl schliessen",
+    "closeModal": "Modal schliessen",
+    "closeNotification": "Benachrichtigung schliessen",
+    "closeOnboarding": "Onboarding-Assistent schliessen",
+    "closeReceiptViewer": "Belegansicht schliessen",
+    "closeSubscriptionModal": "Modal schliessen",
+    "decreaseTextSize": "Textgrösse verringern",
+    "dragToClose": "Nach unten ziehen zum Schliessen",
+    "increaseTextSize": "Textgrösse erhöhen"
+  },
+  "bottomSheet": {
+    "close": "Schliessen",
+    "dragToClose": "Nach unten ziehen zum Schliessen"
+  },
+  "budget": {
+    "events": {
+      "daysLeft": "{count} Tage verbleibend",
+      "noEventsDescription": "Erstellen Sie ein Ereignisbudget, um Ausgaben für Hochzeiten, Urlaube und mehr zu verfolgen"
+    },
+    "gamification": {
+      "noAchievements": "Aktionen abschliessen, um Abzeichen zu verdienen"
+    },
+    "netWorth": {
+      "history": "Historische Momentaufnahmen",
+      "milestoneReached": "Meilenstein erreicht: {amount}!",
+      "noLiabilities": "Keine Verbindlichkeiten — ausgezeichnet!"
+    },
+    "scenarios": {
+      "amountLabel": "Betrag",
+      "impact": "Auswirkung",
+      "run": "Szenario ausführen",
+      "subtitle": "Finanzielle Änderungen modellieren und deren Auswirkungen sehen",
+      "types": {
+        "addExpense": {
+          "description": "Sehen Sie die Auswirkung einer neuen wiederkehrenden Ausgabe"
+        },
+        "cancelSubscription": {
+          "description": "Sehen Sie die Ersparnisse durch Kündigung einer wiederkehrenden Gebühr"
+        },
+        "changeIncome": {
+          "description": "Modellieren Sie eine Einkommenserhöhung oder -senkung"
+        },
+        "increaseSavings": {
+          "description": "Sehen Sie die Beschleunigung des Zielzeitplans"
+        },
+        "payOffDebt": {
+          "description": "Berechnen Sie Zinseinsparungen durch vorzeitige Tilgung"
+        }
+      }
+    }
+  },
+  "calculators": {
+    "budgetAnalyzer": {
+      "balanced": "Ihr Budget ist ausgeglichen!",
+      "description": "Analysieren Sie Ihre Ausgaben nach der beliebten Budgetregel",
+      "exceeding": "Überschreitung",
+      "inputTitle": "Ihre monatlichen Finanzen",
+      "monthlyIncomeHelp": "Ihr Nettogehalt nach Steuern",
+      "needsAdjustment": "Anpassungen empfohlen",
+      "needsDescription": "Wohnen, Nebenkosten, Lebensmittel, Versicherung, Mindestzahlungen",
+      "over": "Über",
+      "savings": "Ersparnisse",
+      "savingsDescription": "Notfallfonds, Investitionen, Altersvorsorge, zusätzliche Schuldentilgung",
+      "savingsExamples": "Ersparnisse, Investitionen, Extra-Tilgung",
+      "title": "50/30/20 Budgetanalyse",
+      "wantsDescription": "Auswärts essen, Unterhaltung, Shopping, Abonnements",
+      "wantsExamples": "Restaurants, Unterhaltung, Shopping"
+    },
+    "common": {
+      "back": "Zurück zu Rechnern",
+      "save": "Plan speichern"
+    },
+    "compoundInterest": {
+      "annualRateHelp": "Tagesgeld: 2-3%, Anleihen: 3-5%, Aktien: 7-10%",
+      "assumptionCompounding": "Verzinsung",
+      "assumptionReinvest": "Alle Zinsen werden reinvestiert",
+      "chartTitle": "Wachstum über die Zeit",
+      "compoundingFrequency": "Zinseszinshäufigkeit",
+      "description": "Sehen Sie, wie Ihr Geld mit der Kraft des Zinseszins wächst",
+      "finalBalance": "Endguthaben",
+      "formulaExplanation": "FV = Endwert, PV = Barwert, r = Jahreszins, n = Zinsperioden pro Jahr, t = Jahre, PMT = periodische Zahlung",
+      "frequency": {
+        "annually": "Jährlich (1/J.)",
+        "daily": "Täglich (365/J.)",
+        "monthly": "Monatlich (12/J.)",
+        "quarterly": "Vierteljährlich (4/J.)",
+        "semiannually": "Halbjährlich (2/J.)",
+        "weekly": "Wöchentlich (52/J.)"
+      },
+      "initialDeposit": "Anfangseinlage",
+      "inputTitle": "Anlagedetails",
+      "resultTitle": "Ihr Anlagewachstum",
+      "subtitle": "Beobachten Sie Ihr Geldwachstum über die Zeit",
+      "title": "Zinseszinsrechner"
+    },
+    "debtPayoff": {
+      "addDebt": "Schuld hinzufügen",
+      "apr": "Zinssatz (%)",
+      "avalanche": "Lawinenstrategie",
+      "avalancheDescription": "Höchsten Zinssatz zuerst tilgen, um am meisten Geld zu sparen",
+      "description": "Vergleichen Sie Schneeball- und Lawinenstrategie, um Schulden schneller zu tilgen",
+      "extraMonthlyPayment": "Zusätzliche monatliche Zahlung",
+      "extraMonthlyPaymentHelp": "Zusätzlicher Betrag über die Mindestzahlungen hinaus pro Monat",
+      "payoffDate": "Tilgungszeit",
+      "savingsTitle": "Zinsersparnis mit Lawinenmethode",
+      "snowball": "Schneeballstrategie",
+      "snowballDescription": "Kleinsten Saldo zuerst tilgen für schnelle Erfolge und Motivation",
+      "title": "Schuldentilgungsrechner"
+    },
+    "emergencyFund": {
+      "amountNeeded": "Sie benötigen noch {amount}, um Ihr Ziel zu erreichen",
+      "description": "Berechnen Sie, wie viel Sie für finanzielle Sicherheit benötigen, und verfolgen Sie Ihren Fortschritt",
+      "goalMet": "Ziel erreicht!",
+      "monthlyContributionHelp": "Wie viel Sie jeden Monat für Ihren Notfallfonds sparen können",
+      "monthlyExpensesHelp": "Einschliesslich Miete, Nebenkosten, Lebensmittel, Versicherung und andere wesentliche Kosten",
+      "targetAmount": "Ziel-Notfallfonds",
+      "targetMonths": "Ziel-Monate der Absicherung",
+      "tip1": "Bewahren Sie Ihren Notfallfonds auf einem Tagesgeldkonto auf für einfachen Zugang und bessere Rendite",
+      "tip2": "Automatisieren Sie Ihre Beiträge durch Einrichten automatischer Überweisungen am Zahltag",
+      "tip3": "Fangen Sie klein an – auch regelmässiges Sparen kleiner Beträge summiert sich im Laufe der Zeit",
+      "tipsTitle": "Tipps zum Aufbau Ihres Notfallfonds",
+      "title": "Notfallfonds-Rechner"
+    },
+    "hub": {
+      "accuracyDescription": "Verwendung von Finanzarithmetik zur Vermeidung von Gleitkommafehler in allen Berechnungen.",
+      "infoTitle": "Über diese Rechner",
+      "privacyDescription": "Alle Berechnungen erfolgen auf Ihrem Gerät. Ihre Finanzdaten verlassen nie Ihren Browser.",
+      "subtitle": "Tools zur Planung und Analyse Ihrer Finanzen"
+    },
+    "inflation": {
+      "assumptionCompound": "Inflation wird jährlich kumuliert",
+      "description": "Sehen Sie, wie Inflation Ihre Kaufkraft im Laufe der Zeit verringert",
+      "formulaExplanation": "Zeigt, wie viel Ihr Geld in Zukunft tatsächlich kaufen kann, bereinigt um steigende Preise",
+      "formulaText": "Realer Wert = Nominalwert / (1 + Inflation)^Jahre",
+      "inflationRateHelp": "Historischer Durchschnitt DE: ~2%",
+      "inputTitle": "Auswirkung berechnen",
+      "subtitle": "Verstehen Sie die tatsächlichen Kosten der Inflation",
+      "tableReal": "Realer Wert",
+      "tableTitle": "Aufschlüsselung nach Jahren",
+      "title": "Inflationsrechner"
+    },
+    "loanTracker": {
+      "description": "Verfolgen Sie alle Ihre Darlehen, Zahlungen und den Tilgungsfortschritt",
+      "title": "Darlehenstracker"
+    },
+    "monteCarlo": {
+      "assumptionInflationApplied": "Auf Entnahmen angewendet (kumulierend)",
+      "assumptionPRNGValue": "Seeded PRNG (Mulberry32) — deterministisch",
+      "assumptionVolatility": "Volatilität (Std.Abw.)",
+      "badgeCaution": "Überprüfung nötig",
+      "badgeStrong": "Starker Plan",
+      "expectedReturn": "Erwartete jährliche Rendite (%)",
+      "formulaExplanation": "Jeden Monat wird eine zufällige Rendite aus einer Normalverteilung gezogen. Beiträge werden addiert, inflationsangepasste Entnahmen abgezogen.",
+      "formulaText": "Monatliche Rendite = Normal(μ/12, σ/√12); Saldo_t = Saldo_(t-1) × (1 + r_t) + C - W",
+      "initialBalance": "Anfängliches Portfolioguthaben",
+      "medianFinal": "Medianes Endguthaben",
+      "simulations": "Anzahl Simulationen",
+      "subtitle": "Führen Sie tausende Marktsimulationen durch, um Ihren Plan zu prüfen",
+      "successRateDescription": "{total} Simulationen durchgeführt, {failures} wurden zahlungsunfähig",
+      "title": "Monte-Carlo-Simulation",
+      "volatility": "Jährliche Volatilität / Std.Abw. (%)",
+      "volatilityHelp": "S&P 500 historisch: ~15%. Höher = breitere Ergebnisspanne."
+    },
+    "mortgage": {
+      "annualRateHelp": "Aktueller Durchschnitt: 3-4% für 10-jährige Zinsbindung",
+      "assumptionNoEscrow": "Ohne Steuern, Versicherung oder Nebenkosten",
+      "description": "Berechnen Sie Zahlungen oder finden Sie heraus, wie viel Haus Sie sich leisten können",
+      "downPayment": "Anzahlung",
+      "downPaymentAmount": "Anzahlung",
+      "downPaymentPercent": "Anzahlung (%)",
+      "dtiRatio": "Schulden-Einkommens-Verhältnis",
+      "extraPayment": "Zusätzliche monatliche Zahlung",
+      "extraPaymentHelp": "Zusätzliche Zahlung, die jeden Monat auf die Tilgung angerechnet wird",
+      "formulaExplanation": "M = Monatliche Rate, P = Darlehensbetrag, i = Monatlicher Zinssatz, n = Gesamtanzahl der Zahlungen",
+      "hideFullSchedule": "Vollständigen Plan ausblenden",
+      "homePrice": "Hauspreis",
+      "maxHomePrice": "Maximaler Hauspreis",
+      "modeAffordability": "Was kann ich mir leisten?",
+      "modePayment": "Zahlung berechnen",
+      "monthlyDebts": "Monatliche Schuldenraten",
+      "monthlyDebtsHelp": "Autokredite, Studienkredite, Kreditkarten usw.",
+      "payoffMonths": "Tilgungszeit",
+      "scheduleBalance": "Saldo",
+      "schedulePayment": "Zahlung",
+      "showFullSchedule": "Vollständigen Plan anzeigen",
+      "subtitle": "Planen Sie Ihren Hauskauf mit Zuversicht",
+      "term": "Laufzeit"
+    },
+    "retirement": {
+      "assumptionPostReturn": "Rendite nach Ruhestand",
+      "assumptionPreReturn": "Rendite vor Ruhestand",
+      "assumptionSS": "Rente ab Alter {age} berücksichtigt",
+      "balanceAtRetirement": "Guthaben bei Ruhestandsantritt",
+      "currentSavings": "Aktuelle Altersvorsorge",
+      "description": "Planen Sie Ihren Ruhestand mit einer umfassenden Spar- und Entnahmeprognose",
+      "desiredIncome": "Gewünschtes monatliches Einkommen (heutige Euros)",
+      "desiredIncomeHelp": "Wie viel Sie monatlich im Ruhestand ausgeben möchten, in heutigen Euros",
+      "formulaExplanation": "Zwei-Phasen-Simulation: Ersparnisse wachsen bis zum Ruhestand, dann Entnahme mit inflationsangepassten Abhebungen",
+      "heroInsufficient": "Ihre Ersparnisse könnten im Alter von {age} aufgebraucht sein",
+      "heroInsufficientBadge": "Handlungsbedarf",
+      "heroSufficientBadge": "Im Plan",
+      "monthlyWithdrawal": "Monatliche Entnahme (bei Ruhestandsantritt)",
+      "postRetirementReturn": "Rendite nach Ruhestand (%)",
+      "postRetirementReturnHelp": "Erwartete jährliche Rendite bei Entnahme (konservativ ~4-5%)",
+      "preRetirementReturn": "Rendite vor Ruhestand (%)",
+      "preRetirementReturnHelp": "Erwartete jährliche Rendite beim Sparen (Aktien durchschn. ~7-10%)",
+      "resultTitle": "Ruhestandsprognose",
+      "retirementAge": "Ruhestandsalter",
+      "shortfall": "Fehlbetrag bei Lebenserwartung",
+      "socialSecurity": "Rente / Pension (monatlich)",
+      "socialSecurityAge": "Rentenantrittsalter",
+      "title": "Ruhestandsplaner",
+      "yearsMoneyLasts": "Jahre Geldreichweite"
+    },
+    "savingsGoal": {
+      "description": "Planen Sie Ihre Ersparnisse mit Zinseszins-Prognosen",
+      "expectedReturn": "Erwartete jährliche Rendite (%)",
+      "expectedReturnHelp": "Tagesgeld: 2-3%, Investitionen: 6-8%",
+      "projectedAmount": "Prognostizierte Summe",
+      "projectionTitle": "Sparprognose",
+      "resultHowMuchTitle": "Benötigter monatlicher Sparbetrag",
+      "resultWhenTitle": "Sie erreichen Ihr Ziel",
+      "timelineTitle": "Wachstumszeitplan",
+      "title": "Sparzielrechner"
+    },
+    "subscriptionCost": {
+      "addSubscription": "Abonnement hinzufügen",
+      "breakdown": "Wesentlich vs. Nicht wesentlich",
+      "description": "Verfolgen und analysieren Sie die tatsächlichen Kosten Ihrer Abonnements",
+      "essential": "Wesentlich",
+      "essentialCost": "Wesentlich",
+      "namePlaceholder": "z. B. Netflix, Spotify",
+      "nonEssentialCost": "Nicht wesentlich",
+      "potentialSavings": "Potenzielle jährliche Einsparungen",
+      "potentialSavingsHelp": "Wenn Sie alle nicht wesentlichen Abonnements kündigen würden",
+      "showIncomePercent": "Prozentsatz des Einkommens anzeigen",
+      "subtitle": "Sehen Sie, wohin Ihr wiederkehrendes Geld fliesst",
+      "title": "Abonnementkostenrechner",
+      "totalCost": "Gesamte Abonnementkosten"
+    },
+    "transparency": {
+      "title": "So funktioniert es"
+    }
+  },
+  "chatbotOptIn": {
+    "closeDialog": "Chatbot-Opt-in-Dialog schliessen",
+    "privacy": {
+      "noTraining": "OpenAI verwendet API-Daten nicht zum Trainieren von Modellen (gemäss ihrer Richtlinie)"
+    }
+  },
+  "common": {
+    "loading": "Lädt..."
+  },
+  "confidenceMeter": {
+    "moderate": "Mässig"
+  },
+  "designSystem": {
+    "a11y": {
+      "fontSize": "Basis-Schriftgrösse: 18px für verbesserte Lesbarkeit (seniorenfreundlich)",
+      "wcag": "WCAG 2.2 AA-konform: Kontrastverhältnisse ≥4,5:1 für normalen Text, ≥3:1 für grossen Text"
+    },
+    "baseFontSize": "Basis-Schriftgrösse: {size}px",
+    "bodyText": "Fliesstext (18px Basis) – Lorem ipsum dolor sit amet, consectetur adipiscing elit. Optimiert für beste Lesbarkeit mit WCAG 2.2 AA-Konformität.",
+    "extraSmallText": "Sehr kleiner Text (14px) – Fussnoten und rechtliche Hinweise",
+    "large": "Gross",
+    "sizes": "Grössen"
+  },
+  "developerTools": {
+    "infoProduction": "Produktions-Builds schliessen die en-XA-Locale automatisch aus"
+  },
+  "dialog": {
+    "processing": "Verarbeitung..."
+  },
+  "errorRecovery": {
+    "closeModal": "Modal schliessen",
+    "footer": {
+      "close": "Schliessen"
+    }
+  },
+  "export": {
+    "fullBackupDescription": "Exportieren Sie alle Daten einschliesslich Konten, Transaktionen, Budgets, Ziele und Einstellungen. Verwenden Sie dies für vollständige Sicherungen, die später wiederhergestellt werden können.",
+    "tipJson": "<strong>JSON-Sicherung</strong> eignet sich am besten zur Datenwiederherstellung – erstellen Sie regelmässig Sicherungen an einem sicheren Ort",
+    "tipRegularBackup": "Sichern Sie Ihre Daten regelmässig (wöchentlich empfohlen)"
+  },
+  "exportDialog": {
+    "dataSummary": {
+      "estimatedSize": "Gesch. Grösse"
+    },
+    "options": {
+      "includeReceipts": {
+        "description": "Belegbilder anhängen (erhöht die Dateigrösse)"
+      }
+    }
+  },
+  "fridayReview": {
+    "closeReview": "Rückblick schliessen"
+  },
+  "iconPicker": {
+    "close": "Schliessen"
+  },
+  "import": {
+    "largePdfTip": "Für sehr grosse Kontoauszüge sollten Sie einen CSV-Export von Ihrer Bank anfordern, um die Verarbeitung zu beschleunigen.",
+    "largePdfWarning": "Grosses PDF erkannt ({pages} Seiten). Die Verarbeitung kann länger dauern und viel Speicher benötigen."
+  },
+  "investmentAccountModal": {
+    "closeModal": "Modal schliessen"
+  },
+  "landing": {
+    "accessibility": {
+      "badges": {
+        "largeTouchTargets": "Grosse Touch-Ziele"
+      },
+      "buttons": {
+        "settings": "Zugänglichkeitseinstellungen"
+      },
+      "description": "Der Seniorenmodus bietet vereinfachte Navigation und grössere Touch-Ziele. Tastenkombinationen, Fokuszustände und klarer Kontrast helfen jedem, schneller voranzukommen.",
+      "title": "Standardmässig zugänglich"
+    },
+    "comparison": {
+      "cost": {
+        "cloud": "CHF 100+/Jahr Abonnement"
+      }
+    },
+    "faq": {
+      "0": {
+        "a": "Ja. Im lokalen Protokoll verlässt die Daten Ihr Gerät nie. Sie leben in der IndexedDB innerhalb Ihres Browsers."
+      },
+      "1": {
+        "a": "Sie können jederzeit ein vollständiges JSON-Backup exportieren. Wir empfehlen auch regelmässige CSV-Exporte."
+      },
+      "2": {
+        "a": "Kommt bald: Ein optionales Abonnement zur Synchronisierung verschlüsselter Daten zwischen Geräten über Supabase."
+      }
+    },
+    "features": {
+      "0": {
+        "description": "Nettovermögen, Cashflow und Kategoriedurchbruch. Sofortige Ladezeiten."
+      },
+      "1": {
+        "description": "Intelligente CSV-Zuordnung für BMO, Home Trust und anpassbare benutzerdefinierte Formate."
+      },
+      "5": {
+        "description": "Optionale client-seitige Verschlüsselung für eine zusätzliche Sicherheitsebene."
+      }
+    },
+    "featuresDeepDive": {
+      "explore": "Erforschen"
+    },
+    "footer": {
+      "helpCenter": "Hilfezentrum"
+    },
+    "hero": {
+      "finePrint": "Keine Bankdaten erforderlich. Kein Konto für den lokalen Modus erforderlich.",
+      "subhead": "Die Kraft einer Tabelle. Die Einfachheit einer App. Erleben Sie finanzielle Klarheit mit der einzigen Budget-App, die garantiert, dass Ihre Daten Ihr Gerät nie verlassen."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Für Klarheit, nicht Chaos, entwickelt."
+      },
+      "preview": {
+        "recentTransactions": "Neueste Transaktionen"
+      }
+    },
+    "howItWorks": {
+      "2": {
+        "description": "Weisen Sie jedem Franken eine Aufgabe zu und prognostizieren Sie Ihr zukünftiges Nettovermögen."
+      }
+    },
+    "howItWorksSection": {
+      "description": "Ein Workflow, der Sie schnell zu Klarheit führt, ohne Sie in ein kompliziertes System einzusperren."
+    },
+    "marquee": {
+      "logos": [
+        "Budgetierung",
+        "Abonnements",
+        "Darlehen",
+        "OCR-Belege",
+        "Berichte",
+        "Planung",
+        "Offline",
+        "Seniorenmodus"
+      ]
+    },
+    "outcomesSection": {
+      "description": "Die meisten Budgetierungs-Apps lassen Sie die Arbeit machen. BudgetPro ist so konzipiert, dass es Reibung reduziert und Sie die Kontrolle behält.",
+      "title": "Für das echte Leben, nicht für Tabellenkalkulationen entwickelt"
+    },
+    "preview": {
+      "balanceAmount": "CHF 24'500.00",
+      "currencySymbol": "CHF",
+      "expensesAmount": "CHF 1'250.00",
+      "totalBalance": "Gesamtbetrag",
+      "tx0Amount": "-CHF 124.50",
+      "tx0Date": "Heute, 14:30",
+      "tx1Amount": "+CHF 4'250.00",
+      "tx1Date": "Gestern, 09:00",
+      "tx1Name": "Tech Solutions AG",
+      "tx2Amount": "-CHF 15.99"
+    },
+    "pricing": {
+      "description": "Beginnen Sie mit dem leistungsstarken lokalen Protokoll. Später upgraden, wenn Sie die Synchronisation auf mehreren Geräten benötigen."
+    },
+    "pricingSection": {
+      "productDescription": "Das vollständige Budgetierungserlebnis, das vollständig auf Ihrem Gerät läuft.",
+      "whyChooseDescription": "Sehen Sie, wie wir uns gegen die Cloud-Riesen schlagen."
+    },
+    "security": {
+      "cards": {
+        "encryption": {
+          "description": "Die App enthält eine Verschlüsselungsebene, um sensible Budgetaufzeichnungen zu schützen, wenn aktiviert."
+        },
+        "exportDelete": {
+          "title": "Exportieren & Löschen"
+        }
+      },
+      "description": "Die Budget App speichert Ihre Daten lokal (offline-fähig) und gibt Ihnen Kontrolle über KI-Funktionen, Export und Löschung."
+    },
+    "socialProof": {
+      "description": "Die Details, die das Budgetieren festhalten: Onboarding, Verknüpfungen, mobile Navigation und offline-fähige Leistung.",
+      "features": {
+        "pwaInstall": {
+          "description": "Installieren Sie wie eine App und arbeiten Sie weiter, selbst bei instabilem Internet."
+        }
+      }
+    }
+  },
+  "loans": {
+    "tooltip": {
+      "amortizationBody": "Wie Ihr Kredit im Laufe der Zeit abbezahlt wird. Jede Zahlung deckt zuerst die Zinsen, dann die Tilgung. Der Plan zeigt genau, wie viel monatlich wohin fliesst. Frühe Zahlungen sind hauptsächlich Zinsen!"
+    }
+  },
+  "ocr": {
+    "errorFileSize": "Dateigrösse muss unter 10 MB liegen"
+  },
+  "onboarding": {
+    "steps": {
+      "categorize": {
+        "description": "Überprüfen und passen Sie die Transaktionskategorien an. Unsere intelligente Kategorisierung lernt aus Ihren Korrekturen und verbessert sich im Laufe der Zeit. Verwenden Sie Massenaktionen, um mehrere Transaktionen auf einmal zu kategorisieren!"
+      },
+      "reports": {
+        "description": "Visualisieren Sie Ihre Ausgabemuster, verfolgen Sie Ihr Nettovermögen und treffen Sie informierte finanzielle Entscheidungen. Ihr Dashboard wird bei jeder Transaktion automatisch aktualisiert!"
+      }
+    }
+  },
+  "pairingDialog": {
+    "deviceAdded": "Gerät hinzugefügt. Verbinden, um die Kopplung abzuschliessen."
+  },
+  "planning": {
+    "paycheck": {
+      "deletePlanDescription": "Dies entfernt Ihren gesamten Gehaltsplan, einschliesslich aller Zeitpläne und Zuweisungen.",
+      "irregularScheduleHint": "Ihr Plan verwendet einen unregelmässigen Zeitplan. Aktualisieren Sie Ihre Einstellungen, um Gehälter hinzuzufügen.",
+      "scheduleIrregular": "Unregelmässig"
+    }
+  },
+  "pwaInstall": {
+    "close": "Installationshinweis schliessen"
+  },
+  "qrScanner": {
+    "cameraInUse": "Kamera wird von einer anderen Anwendung verwendet. Bitte schliessen Sie andere Apps, die die Kamera nutzen."
+  },
+  "receiptThumbnail": {
+    "close": "Schliessen"
+  },
+  "receiptUpload": {
+    "errors": {
+      "tooLarge": "Datei ist zu gross. Maximale Grösse ist {size}MB"
+    }
+  },
+  "reports": {
+    "moneyFlowDescription": "Visualisieren Sie, wie Einnahmen in Kategorien und Ersparnisse fliessen"
+  },
+  "settings": {
+    "budgetFileInfo4": "Belegbilder können in den Export einbezogen werden (erhöht die Dateigrösse)"
+  },
+  "shortcutsModal": {
+    "close": "Tastaturkürzel-Hilfe schliessen",
+    "proTip": {
+      "description": "Tastaturkürzel funktionieren auf jeder Seite, ausser wenn Sie in Formulare tippen. Drücken Sie jederzeit {key}, um diese Hilfe zu sehen."
+    }
+  },
+  "simplefinConnect": {
+    "completeSetup": "Einrichtung abschliessen"
+  },
+  "splitTransaction": {
+    "closeModal": "Modal schliessen",
+    "distributeEvenly": "Gleichmässig verteilen",
+    "help": {
+      "step2": "Verwenden Sie \"Gleichmässig verteilen\", um den Betrag gleichmässig auf alle Kategorien zu verteilen"
+    }
+  },
+  "splits": {
+    "splitFlow": {
+      "modes": {
+        "equal": {
+          "label": "Gleichmässig teilen"
+        }
+      }
+    }
+  },
+  "subscriptionCard": {
+    "interval": {
+      "irregular": "Unregelmässig"
+    }
+  },
+  "transactionModal": {
+    "closeModal": "Modal schliessen"
+  },
+  "validationWarnings": {
+    "closeModal": "Modal schliessen"
+  },
+  "widget": {
+    "accountBalances": {
+      "description": "Aktuelle Salden über alle Ihre Konten"
+    },
+    "budgetProgress": {
+      "description": "Verfolgen Sie, wie Sie im Vergleich zu Ihren Budgetzielen abschneiden"
+    },
+    "incomeVsExpenses": {
+      "description": "Vergleichen Sie Ihre Einnahmen und Ausgaben im Laufe der Zeit"
+    },
+    "recentTransactions": {
+      "description": "Schneller Überblick über Ihre neuesten finanziellen Aktivitäten",
+      "title": "Neueste Transaktionen"
+    },
+    "spendingByCategory": {
+      "description": "Sehen Sie, wohin Ihr Geld fliesst, mit visuellen Aufschlüsselungen"
+    },
+    "upcomingBills": {
+      "description": "Verpassen Sie keine Zahlung mit Rechnungsbenachrichtigungen",
+      "title": "Bevorstehende Rechnungen"
+    }
+  },
+  "ynabMigrationWizard": {
+    "header": {
+      "closeLabel": "Assistenten schliessen"
+    },
+    "optionsStep": {
+      "accountOptions": {
+        "includeOffBudgetAccounts": "Konten ausserhalb des Budgets einbeziehen"
+      }
+    }
+  }
+}

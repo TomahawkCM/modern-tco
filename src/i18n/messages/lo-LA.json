@@ -364,7 +364,7 @@
     "syncStatus": "สถานะการซิงค์: {status}",
     "toggleSeniorsMode": "สลับโหมดผู้สูงอายุ",
     "typeQuestion": "พิมพ์คำถามของคุณ",
-    "unreadNotifications": "{count, plural, =1 {1 unread notification} other {# unread notifications}}",
+    "unreadNotifications": "{count, plural, other {# ການແຈ້ງເຕືອນທີ່ຍັງບໍ່ໄດ້ອ່ານ}}",
     "welcomeBudgetApp": "ยินดีต้อนรับสู่แอปงบประมาณ"
   },
   "auth": {
@@ -503,8 +503,8 @@
       "addAccount": "เพิ่มบัญชี",
       "addFirstAccount": "เพิ่มบัญชีแรกของคุณ",
       "allTransactionsCleared": "ล้างธุรกรรมทั้งหมดแล้ว ขณะนี้คุณสามารถนำเข้าใบแจ้งยอดอีกครั้ง",
-      "assignCount": "Assign {count, plural, one {# Transaction} other {# Transactions}}",
-      "assignModalDescription": "{count, plural, one {# transaction needs} other {# transactions need}} to be assigned to an account.",
+      "assignCount": "ມອບໝາຍ {count, plural, other {# ທຸລະກຳ}}",
+      "assignModalDescription": "{count, plural, other {# ທຸລະກຳຕ້ອງ}} ຖືກມອບໝາຍໃຫ້ບັນຊີ.",
       "assignTransactions": "กำหนดธุรกรรม",
       "assignTransactionsNow": "กำหนดธุรกรรมทันที",
       "assignedTransactions": "กำหนด {count} ธุรกรรมให้กับ {name} แล้ว",
@@ -557,7 +557,7 @@
       "unassignedClickToAssign": "คลิกด้านล่างเพื่อกำหนดอัตโนมัติให้กับบัญชีของคุณ",
       "unassignedCreateFirst": "สร้างบัญชีก่อน จากนั้นจะกำหนดให้อัตโนมัติ",
       "unassignedDescription": "ธุรกรรมเหล่านี้ถูกนำเข้าก่อนที่จะตั้งค่าบัญชี",
-      "unassignedTitle": "{count, plural, one {# transaction needs} other {# transactions need}} account assignment",
+      "unassignedTitle": "{count, plural, other {# ທຸລະກຳຕ້ອງການ}} ການມອບໝາຍບັນຊີ",
       "update": "อัปเดต"
     },
     "budgets": {
@@ -611,7 +611,7 @@
       "totalExpenses": "ค่าใช้จ่ายรวม",
       "totalSpent": "ใช้จ่ายรวม",
       "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
-      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transaction will become unbudgeted} other {# transactions will become unbudgeted}}",
+      "transactionsWillBecomeUnbudgeted": "{count, plural, other {# ທຸລະກຳຈະກາຍເປັນບໍ່ມີງົບປະມານ}}",
       "youWillLose": "คุณจะสูญเสีย:"
     },
     "events": {
@@ -824,7 +824,7 @@
     "applyTo": "ใช้กับ {count}",
     "categorize": "จัดหมวดหมู่",
     "clearSelection": "ล้างการเลือก",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "confirmDelete": "ລຶບ {count, plural, other {# ທຸລະກຳ}}?",
     "delete": "ลบ",
     "deleteWarning": "การดำเนินการนี้ไม่สามารถยกเลิกได้",
     "export": "ส่งออก",
@@ -1629,7 +1629,7 @@
     "viewAllLoans": "ดูสินเชื่อทั้งหมด"
   },
   "debtOverview": {
-    "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
+    "activeLoans": "{count, plural, other {# ສິນເຊື່ອທີ່ໃຊ້ງານຢູ່}}",
     "activeLoansTitle": "สินเชื่อที่ใช้งานอยู่",
     "addLoan": "เพิ่มสินเชื่อ",
     "avgRate": "อัตราเฉลี่ย",
@@ -1640,7 +1640,7 @@
     "totalDebt": "หนี้รวม",
     "upcomingPayments": "การชำระที่กำลังจะมาถึง",
     "viewAll": "ดูทั้งหมด",
-    "viewMore": "{count, plural, one {View # more loan} other {View # more loans}}"
+    "viewMore": "{count, plural, other {ເບິ່ງ # ສິນເຊື່ອເພີ່ມ}}"
   },
   "debtPayoff": {
     "addDebt": "เพิ่มหนี้",
@@ -1798,8 +1798,8 @@
     "dragToReorder": "ลากเพื่อจัดเรียงวิดเจ็ตใหม่"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
+    "months": "{count, plural, other {# ເດືອນ}}",
+    "years": "{count, plural, other {# ປີ}}",
     "yearsAndMonths": "{years}ปี {months}เดือน"
   },
   "emptyStates": {
@@ -1861,7 +1861,7 @@
       "viewGuide": "ดูคู่มือการแก้ปัญหา"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "canRecover": "ຂ່າວດີ! ພວກເຮົາພົບ {count} {count, plural, other {ວິທີ}} ເພື່ອກູ້ຄືນຈາກຂໍ້ຜິດພາດນີ້.",
       "cannotRecover": "ไม่สามารถกู้คืนได้ คุณต้องส่งออกไฟล์ใหม่จากธนาคารหรือลองรูปแบบอื่น",
       "optionsTitle": "ตัวเลือกการกู้คืน"
     },
@@ -2104,7 +2104,7 @@
       "line2": "คะแนนสุขภาพทางการเงิน"
     },
     "grade": "ระดับ: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
+    "missingFactors": "{count, plural, other {# ປັດໃຈທີ່ຂາດຫາຍ}}",
     "title": "สุขภาพทางการเงิน",
     "history": {
       "title": "ປະຫວັດຄະແນນ",
@@ -2347,7 +2347,7 @@
       "description": "การดำเนินการนี้จะลบบัญชีและการถือครองที่เกี่ยวข้องทั้งหมดอย่างถาวร",
       "impactAccount": "บัญชี: {name}",
       "impactHistory": "ประวัติธุรกรรมทั้งหมด",
-      "impactHoldings": "{count, plural, one {# holding} other {# holdings}}",
+      "impactHoldings": "{count, plural, other {# ການຖືຄອງ}}",
       "impactTitle": "คุณจะสูญเสีย:",
       "impactValue": "มูลค่ารวม: {value}",
       "title": "ลบบัญชีการลงทุน"
@@ -2374,7 +2374,7 @@
     },
     "gainLoss": "กำไร/ขาดทุน",
     "hideDetails": "ซ่อนรายละเอียด",
-    "holdingsCount": "{count, plural, one {# holding} other {# holdings}}",
+    "holdingsCount": "{count, plural, other {# ການຖືຄອງ}}",
     "loading": "กำลังโหลดการลงทุน...",
     "marketDataNotice": "ข้อสังเกตเกี่ยวกับข้อมูลตลาด",
     "noHoldings": "ยังไม่มีการถือครองในบัญชีนี้",
@@ -2437,7 +2437,7 @@
     "pairedDevices": {
       "addDevice": "เพิ่มอุปกรณ์",
       "addFirstDevice": "เพิ่มอุปกรณ์แรกของคุณ",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "deviceCount": "{count, plural, other {# ອຸປະກອນທີ່ຈັບຄູ່ແລ້ວ}}",
       "emptyDescription": "จับคู่อุปกรณ์เพื่อเริ่มซิงค์ข้อมูลงบประมาณของคุณ",
       "emptyTitle": "ไม่มีอุปกรณ์ที่จับคู่",
       "noDevices": "ยังไม่มีอุปกรณ์ที่จับคู่",
@@ -2451,11 +2451,11 @@
     },
     "syncAll": "ซิงค์ทั้งหมด",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "daysAgo": "{count, plural, other {# ມື້ກ່ອນ}}",
+      "hoursAgo": "{count, plural, other {# ຊົ່ວໂມງກ່ອນ}}",
       "justNow": "เมื่อกี้",
       "lastSync": "ซิงค์ล่าสุด: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "minutesAgo": "{count, plural, other {# ນາທີກ່ອນ}}",
       "neverSynced": "ไม่เคยซิงค์"
     },
     "title": "LAN Sync"
@@ -2616,22 +2616,22 @@
         "viewPricing": "ดูราคา"
       },
       "demo": {
-        "cloudStorage": "Cloud storage",
-        "dining": "Dining",
-        "expenses": "Expenses",
-        "foodToday": "Food • Today",
-        "groceries": "Groceries",
-        "groceryStore": "Grocery Store",
-        "income": "Income",
-        "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
-        "netWorth": "Net worth",
+        "cloudStorage": "ບ່ອນເກັບຂໍ້ມູນຄລາວ",
+        "dining": "ອາຫານ",
+        "expenses": "ລາຍຈ່າຍ",
+        "foodToday": "ອາຫານ • ມື້ນີ້",
+        "groceries": "ເຄື່ອງໃຊ້ປະຈຳວັນ",
+        "groceryStore": "ຮ້ານຂາຍເຄື່ອງ",
+        "income": "ລາຍຮັບ",
+        "incomeYesterday": "ລາຍຮັບ • ມື້ວານ",
+        "monthly": "ລາຍເດືອນ",
+        "netWorth": "ມູນຄ່າສຸທິ",
         "netflix": "Netflix",
-        "salary": "Salary",
+        "salary": "ເງິນເດືອນ",
         "shopping": "Shopping",
         "spotify": "Spotify",
-        "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "subscriptionOct24": "ການສະໝັກ • 24 ຕ.ລ.",
+        "yearly": "ລາຍປີ"
       },
       "modes": {
         "budgets": "งบประมาณ",
@@ -3476,7 +3476,7 @@
     "savePayment": "บันทึกการชำระ",
     "status": "สถานะ",
     "suggestedMatches": "ธุรกรรมที่แนะนำ",
-    "suggestedMatchesDescription": "We found {count, plural, one {# transaction} other {# transactions}} that might be loan payments",
+    "suggestedMatchesDescription": "ພວກເຮົາພົບ {count, plural, other {# ທຸລະກຳ}} ທີ່ອາດເປັນການຊຳລະສິນເຊື່ອ",
     "title": "ประวัติการชำระ",
     "uncategorized": "ยังไม่จัดหมวดหมู่",
     "unlinkConfirm": "ยกเลิกการเชื่อมโยงการชำระนี้จากธุรกรรม?",
@@ -3618,7 +3618,7 @@
       "payFrequencyHelp": "คุณรับเงินบ่อยแค่ไหน? ซึ่งจะกำหนดว่าเงินเดือนของคุณถูกสร้างเมื่อไร",
       "payFrequencyHelpAriaLabel": "ข้อมูลเพิ่มเติมเกี่ยวกับความถี่การรับเงิน",
       "paycheckTimeline": "ไทม์ไลน์เงินเดือน",
-      "paychecksPlanned": "{count, plural, one {# paycheck planned} other {# paychecks planned}}",
+      "paychecksPlanned": "{count, plural, other {# ເງິນເດືອນທີ່ວາງແຜນໄວ້}}",
       "percentOfIncome": "{percent}% ของรายได้",
       "regeneratePaychecks": "สร้างตารางเงินเดือนใหม่",
       "remainingToAllocate": "คงเหลือสำหรับจัดสรร",
@@ -3636,7 +3636,7 @@
       "scheduleSemimonthlyDesc": "วันที่ 1 และ 15",
       "scheduleWeekly": "รายสัปดาห์",
       "scheduleWeeklyDesc": "ทุกสัปดาห์",
-      "scheduledPaychecks": "{count, plural, one {# scheduled paycheck} other {# scheduled paychecks}}",
+      "scheduledPaychecks": "{count, plural, other {# ເງິນເດືອນທີ່ກຳນົດໄວ້}}",
       "setUpPaycheckPlan": "ตั้งค่าแผนเงินเดือน",
       "setUpPlan": "ตั้งค่าแผน",
       "subtitle": "วางแผนว่าทุกบาทจะไปไหนก่อนรับเงิน",
@@ -3707,7 +3707,7 @@
       "tfsaBalance": "ยอดคงเหลือ TFSA",
       "title": "เครื่องคำนวณการเกษียณ",
       "toReachGoal": "เพื่อบรรลุเป้าหมาย คุณอาจ:",
-      "workMoreYears": "Work {years, plural, one {# more year} other {# more years}}",
+      "workMoreYears": "ເຮັດວຽກອີກ {years, plural, other {# ປີ}}",
       "yearAge": "{year} (อายุ {age})",
       "yearsToRetirement": "ปีก่อนเกษียณ",
       "youWillLose": "คุณจะสูญเสีย:",
@@ -3750,7 +3750,7 @@
     "chatbotDescription": "ผู้ช่วยที่ขับเคลื่อนด้วย AI ที่ตอบคำถามเกี่ยวกับธุรกรรม งบประมาณ และรูปแบบการใช้จ่ายของคุณ การสนทนาถูกประมวลผลผ่าน OpenAI API",
     "chatbotPrivacyNotice": "ข้อมูลการเงินของคุณถูกส่งไปยัง OpenAI เพื่อตอบคำถาม OpenAI ไม่ใช้ข้อมูล API เพื่อฝึกโมเดล คุณสามารถปิดใช้งานได้ตลอดเวลา",
     "confirmDelete": "ยืนยันการลบ",
-    "confirmDeleteWarning": "You are about to permanently delete {count, plural, one {# data type} other {# data types}}. Click \"Confirm Delete\" to proceed.",
+    "confirmDeleteWarning": "ທ່ານກຳລັງຈະລຶບ {count, plural, other {# ປະເພດຂໍ້ມູນ}} ຖາວອນ. ກົດ \"ຢືນຢັນການລຶບ\" ເພື່ອດຳເນີນການ.",
     "conversationHistory": "ประวัติการสนทนา",
     "conversationStorageNotice": "การสนทนาจะถูกเก็บไว้ในเบราว์เซอร์ของคุณ คุณสามารถลบได้ตลอดเวลา",
     "dataAccessPermission": "สิทธิ์การเข้าถึงข้อมูล",
@@ -3911,7 +3911,7 @@
       "save": "บันทึก"
     },
     "clickToSelect": "คลิกหมวดหมู่เพื่อเลือก",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "description": "ເລືອກໝວດໝູ່ສຳລັບ {count, plural, other {# ທຸລະກຳ}}",
     "general": "ทั่วไป",
     "noResults": "ไม่พบหมวดหมู่",
     "pressEnter": "กด ↵ Enter",
@@ -3947,7 +3947,7 @@
     "downloadPdf": "ดาวน์โหลด PDF",
     "fileSize": "{size} KB",
     "pdfReceipt": "ใบเสร็จ PDF",
-    "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
+    "receiptCount": "{count, plural, other {# ໃບຮັບ}}",
     "unsupportedFileType": "ประเภทไฟล์ไม่รองรับ",
     "uploaded": "อัปโหลดเมื่อ {date}",
     "view": "ເບິ່ງ"
@@ -4001,16 +4001,16 @@
       "quarterly": "รายไตรมาส",
       "weekly": "รายสัปดาห์"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
+    "inDays": "{count, plural, =0 {(ມື້ນີ້)} other {(ໃນ # ມື້)}}",
     "next": "ถัดไป: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "occurrences": "{count, plural, other {ກວດພົບ # ຄັ້ງ}}",
     "perPeriod": {
       "month": "ต่อเดือน",
       "quarter": "ต่อไตรมาส",
       "twoWeeks": "ต่อ 2 สัปดาห์",
       "week": "ต่อสัปดาห์"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "showingPatterns": "{count, plural, other {ກຳລັງສະແດງ # ຮູບແບບທຸລະກຳທີ່ເກີດຂຶ້ນຊ້ຳ}}",
     "subtitle": "การสมัครสมาชิกและบิลที่ตรวจพบ",
     "title": "ธุรกรรมซ้ำ"
   },
@@ -4188,7 +4188,7 @@
     "shortcuts": "ทางลัด"
   },
   "simplefinConnect": {
-    "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
+    "accountsConnected": "{count, plural, other {# ບັນຊີເຊື່ອມຕໍ່ແລ້ວ}}",
     "alreadyHaveToken": "มีโทเค็นแล้ว?",
     "asOf": "ณ {date}",
     "autoImportDescription": "นำเข้าธุรกรรมจากบัญชีธนาคารของคุณโดยอัตโนมัติ",
@@ -4229,7 +4229,7 @@
     "securePrivate": "ปลอดภัยและเป็นส่วนตัว",
     "securePrivateDescription": "SimpleFIN จะไม่เห็นข้อมูลเข้าสู่ระบบของคุณ คุณควบคุมการเข้าถึง",
     "selectAccount": "เลือกบัญชี",
-    "setupToken": "Setup Token",
+    "setupToken": "ໂທເຄັນການຕັ້ງຄ່າ",
     "step1Description": "สร้างหรือลงชื่อเข้าใช้บัญชี SimpleFIN ของคุณ",
     "step1Title": "ขั้นตอนที่ 1: รับ Setup Token",
     "step2Description": "วาง token จาก SimpleFIN Bridge",
@@ -4249,7 +4249,7 @@
       "title": "บัญชีที่เชื่อมต่อ"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "accountsLinked": "{count, plural, other {# ບັນຊີທີ່ເຊື່ອມຕໍ່ແລ້ວ}}",
       "connectButton": "เชื่อมต่อบัญชีธนาคาร",
       "connected": "เชื่อมต่อแล้ว",
       "description": "เชื่อมต่อบัญชีธนาคารของคุณเพื่อนำเข้าธุรกรรมอัตโนมัติ",
@@ -4271,7 +4271,7 @@
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "hoursAgo": "{hours, plural, other {# ຊົ່ວໂມງກ່ອນ}}",
       "lastSynced": "ซิงค์ล่าสุด: {time}",
       "lessThanHour": "น้อยกว่าหนึ่งชั่วโมงที่แล้ว",
       "never": "ไม่เคย",
@@ -4454,7 +4454,7 @@
     "splitATransaction": "แบ่งจ่ายธุรกรรม",
     "splitFlow": {
       "amountsCorrect": "จำนวนเงินรวมถูกต้อง",
-      "confirmDescription": "This will create {count, plural, one {# split} other {# splits}} for this transaction. Each person's share will be tracked until settled.",
+      "confirmDescription": "ນີ້ຈະສ້າງ {count, plural, other {# ການແບ່ງ}} ສຳລັບທຸລະກຳນີ້. ສ່ວນແບ່ງຂອງແຕ່ລະຄົນຈະຖືກຕິດຕາມຈົນກວ່າຈະຊຳລະ.",
       "confirmSplit": "ยืนยันการแบ่งจ่าย",
       "howToSplit": "แบ่งอย่างไร?",
       "modes": {
@@ -4486,7 +4486,7 @@
     "title": "การแบ่งจ่ายค่าใช้จ่าย",
     "total": "รวม",
     "unknownTransaction": "ธุรกรรมที่ไม่รู้จัก",
-    "unsettledSplitCount": "{count, plural, one {# unsettled split} other {# unsettled splits}}",
+    "unsettledSplitCount": "{count, plural, other {# ການແບ່ງທີ່ຍັງບໍ່ໄດ້ຊຳລະ}}",
     "unsettledSplits": "ยังไม่ชำระ ({count})",
     "via": "ผ่าน",
     "youOwe": "คุณค้างจ่าย {amount}",
@@ -4551,7 +4551,7 @@
       "totalSpent": "ใช้จ่ายทั้งหมด"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, other {ເຫຼືອ # ມື້ໃນການທົດລອງໃຊ້}}"
     },
     "reminderToggle": {
       "disableReminder": "ປິດການແຈ້ງເຕືອນ",
@@ -4570,18 +4570,18 @@
       "upcomingCharges": "การเรียกเก็บที่กำลังจะมาถึง (30 วันถัดไป)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "activeSubscriptions": "{count, plural, other {# ການສະໝັກສະມາຊິກທີ່ໃຊ້ງານຢູ່}}",
       "annualCost": "ค่าใช้จ่ายรายปี",
       "monthlyCost": "ค่าใช้จ่ายรายเดือน",
       "next30Days": "30 วันถัดไป",
       "projectedYearly": "ค่าใช้จ่ายที่คาดการณ์รายปี",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "upcomingCharges": "{count, plural, other {# ການຮຽກເກັບເງິນທີ່ຈະມາເຖິງ}}"
     },
     "suggestions": {
       "inactiveTitle": "สมาชิกที่อาจถูกยกเลิกแล้ว",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
+      "inactiveDescription": "{count, plural, other {# ການສະໝັກສະມາຊິກບໍ່ໄດ້}} ຮຽກເກັບເງິນເມື່ອບໍ່ດົນມານີ້. ກວດສອບວ່າພວກມັນຖືກຍົກເລີກແລ້ວແທ້.",
       "trialsTitle": "ช่วงทดลองใช้ที่กำลังจะหมดอายุ",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
+      "trialsDescription": "{count, plural, other {# ການທົດລອງໃຊ້}} ຈະໝົດອາຍຸພາຍໃນ 7 ມື້ຂ້າງໜ້າ. ຍົກເລີກຖ້າທ່ານບໍ່ໄດ້ໃຊ້ງານ.",
       "highCostTitle": "สมาชิกราคาสูง",
       "highCostDescription": "สมาชิกเหล่านี้คิดเป็นสัดส่วนใหญ่ของค่าใช้จ่ายของคุณ กรุณาพิจารณาว่าคุ้มค่าหรือไม่"
     }
@@ -4839,7 +4839,7 @@
     "placeholderExtended": "ลอง 'กาแฟสัปดาห์ที่แล้ว' หรือ 'amount:>50'",
     "recentSearchLabel": "การค้นหาล่าสุด",
     "recentSearches": "การค้นหาล่าสุด",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
+    "resultCount": "{count} {count, plural, other {ຜົນລັບ}}",
     "save": "บันทึก",
     "saveFilter": "บันทึกตัวกรอง",
     "savedFilters": "ตัวกรองที่บันทึกไว้",
@@ -4865,10 +4865,10 @@
       "type": "ประเภท: 'type:income' หรือ 'type:expense'"
     },
     "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
+    "usedTimes": "ໃຊ້ {count} {count, plural, other {ຄັ້ງ}}",
     "viewAllResults": "ดูผลลัพธ์ทั้งหมด {count} รายการ",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "resultsFound": "ພົບ {count} {count, plural, other {ຜົນລັບ}}",
+    "suggestionsAvailable": "ມີ {count} {count, plural, other {ຄຳແນະນຳ}}"
   },
   "transactionTable": {
     "actions": {
@@ -4987,7 +4987,7 @@
     "youWillLose": "คุณจะสูญเสีย:"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
+    "daysLeft": "{count, plural, =0 {ການທົດລອງໃຊ້ຂອງທ່ານໝົດມື້ນີ້!} other {ເຫຼືອ # ມື້ໃນການທົດລອງໃຊ້ຂອງທ່ານ}}",
     "daysRemaining": "เหลืออีก {count} วันในช่วงทดลองใช้ฟรีของคุณ",
     "dismiss": "ปิด",
     "expired": "ช่วงทดลองใช้ของคุณหมดอายุแล้ว",
@@ -5011,9 +5011,9 @@
     "ignoreAllContinue": "ละเว้นทั้งหมดและดำเนินการต่อ",
     "informational": "ข้อมูล",
     "issuesDetected": "ตรวจพบปัญหา",
-    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
+    "issuesFound": "ພວກເຮົາພົບ {count, plural, other {# ບັນຫາ}} ທີ່ຕ້ອງການຄວາມສົນໃຈຂອງທ່ານ",
     "marked": "ทำเครื่องหมายแล้ว",
-    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
+    "removalNote": "{count, plural, other {# ທຸລະກຳ}} ຈະຖືກລຶບອອກຈາກການນຳເຂົ້າຖ້າທ່ານດຳເນີນການຕໍ່.",
     "remove": "ลบ",
     "removeAndContinue": "ลบ {count} รายการและดำเนินการต่อ",
     "suggestion": "คำแนะนำ:",
@@ -5105,7 +5105,7 @@
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "category": "{count, plural, other {# ໝວດໝູ່}}",
       "createNew": "สร้างใหม่",
       "description": "จับคู่หมวดหมู่ YNAB กับหมวดหมู่ที่มีอยู่หรือสร้างใหม่",
       "mapToExisting": "จับคู่กับที่มีอยู่",
@@ -5118,7 +5118,7 @@
       "errors": "ข้อผิดพลาด",
       "importAnother": "นำเข้าอีกไฟล์",
       "success": "นำเข้าเสร็จสิ้น!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "successMessage": "{count, plural, other {# ລາຍການນຳເຂົ້າ}} ຈາກ YNAB ສຳເລັດແລ້ວ.",
       "viewTransactions": "ดูรายการ",
       "whatNext": "คุณต้องการทำอะไรต่อไป?",
       "withIssues": "นำเข้าเสร็จสิ้นพร้อมปัญหา"
@@ -5211,9 +5211,9 @@
       "dragAndDrop": "หรือลากและวางที่นี่",
       "fileSummary": "สรุปไฟล์",
       "format": "รูปแบบ",
-      "formatApiExport": "YNAB API Export",
+      "formatApiExport": "ສົ່ງອອກ YNAB API",
       "formatApiExportDesc": "JSON จาก nYNAB",
-      "formatCsv": "CSV Export",
+      "formatCsv": "ສົ່ງອອກ CSV",
       "formatCsvDesc": "จากเว็บแอป YNAB",
       "formatYfull": "Budget.yfull / Budget.ynab4",
       "formatYfullDesc": "ส่งออกจาก YNAB4 desktop",
@@ -5231,7 +5231,7 @@
       "budgetImportFailed": "นำเข้างบประมาณไม่สำเร็จ: {details}"
     },
     "importSuccess": "นำเข้าข้อมูล YNAB สำเร็จ!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importWithErrors": "ການນຳເຂົ້າສຳເລັດດ້ວຍ {count, plural, other {# ຂໍ້ຜິດພາດ}}"
   },
   "balanceReconciliation": {
     "title": "ການນຳເຂົ້າສຳເລັດ!",

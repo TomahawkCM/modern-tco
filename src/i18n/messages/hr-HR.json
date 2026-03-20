@@ -216,9 +216,9 @@
       "emptyTitle": "Vaša povijest rezultata pojavit će se ovdje kako se podaci nakupljaju",
       "emptySubtitle": "Provjerite ponovo sljedeći mjesec!",
       "legendScore": "Rezultat",
-      "legendTrend": "Trend",
+      "legendTrend": "Kretanje",
       "tooltipScore": "Rezultat",
-      "tooltipTrend": "Trend",
+      "tooltipTrend": "Kretanje",
       "loadingChart": "Učitavanje grafikona..."
     }
   },
@@ -1732,7 +1732,7 @@
       "accounts": "Računi",
       "transactions": "Transakcije",
       "categories": "Kategorije",
-      "format": "Format"
+      "format": "Oblik"
     },
     "categoryStep": {
       "title": "Mapiranje kategorija",
@@ -2089,7 +2089,7 @@
     "transparency": {
       "title": "Kako ovo radi",
       "assumptions": "Pretpostavke",
-      "formula": "Formula"
+      "formula": "Obrazac"
     },
     "compoundInterest": {
       "title": "Kalkulator složene kamate",
@@ -2336,7 +2336,7 @@
     "maxThumb": "Maksimalni iznos",
     "minLabel": "Minimalni iznos",
     "maxLabel": "Maksimalni iznos",
-    "minPlaceholder": "Min",
+    "minPlaceholder": "Min.",
     "maxPlaceholder": "Maks"
   },
   "transactionSearch": {
@@ -2677,7 +2677,7 @@
       "noLiabilities": "No liabilities — great job!",
       "history": "Historical Snapshots",
       "milestoneReached": "Milestone reached: {amount}!",
-      "trend": "Trend",
+      "trend": "Kretanje",
       "_note": "Već internacionalizirano u client.tsx koristeći namespace budget.netWorth"
     },
     "property": {
@@ -2896,8 +2896,8 @@
     "resume": "Nastavi",
     "unlink": "Odvoji",
     "justNow": "upravo sada",
-    "minutesAgo": "{minutes}m ago",
-    "hoursAgo": "{hours}h ago",
+    "minutesAgo": "prije {minutes} min",
+    "hoursAgo": "prije {hours} h",
     "lastSynced": "Zadnja sinkronizacija: {time}",
     "statusLabel": "SimpleFIN: {status}",
     "asOf": "na dan {date}"
@@ -3443,7 +3443,7 @@
     "selectAllUsers": "Odaberi sve korisnike",
     "userColumn": "Korisnik",
     "joinedColumn": "Pridružio se",
-    "statusColumn": "Status",
+    "statusColumn": "Stanje",
     "trialStatusColumn": "Status probnog razdoblja",
     "lastLoginColumn": "Zadnja prijava",
     "actionsColumn": "Radnje",
@@ -3782,7 +3782,7 @@
     "monthlyPaymentsCount": "{count} miesečnih rata",
     "startDate": "Datum početka",
     "firstPaymentDate": "Datum prve rate",
-    "statusLabel": "Status",
+    "statusLabel": "Stanje",
     "vehicle": "Vozilo",
     "notes": "Bilješke",
     "costAnalysis": "Analiza troška",
@@ -4180,7 +4180,7 @@
     "default": "Zadano",
     "large": "Veliko",
     "states": "Stanja",
-    "hover": "Hover",
+    "hover": "Lebdjenje",
     "focus": "Fokus",
     "disabled": "Onemogućeno",
     "inputs": "Unosi",
@@ -4432,7 +4432,7 @@
       "deleteRetirementPlan": "Izbriši mirovinski plan",
       "deleteRetirementPlanDescription": "Ovo će trajno ukloniti ovaj mirovinski plan i sve projekcije.",
       "youWillLose": "Izgubiti ćete:",
-      "planName": "Plan: {name}",
+      "planName": "Naziv plana: {name}",
       "currentAgeYears": "Trenutna dob: {age} godina",
       "retirementAgeYears": "Dob umirovljenja: {age} godina",
       "monthlyContributionAmount": "Miesečni doprinos: {amount}",
@@ -4555,7 +4555,7 @@
     "date": "Datum",
     "descriptionHeader": "Opis",
     "amount": "Iznos",
-    "status": "Status",
+    "status": "Stanje",
     "selectAllRequired": "Molimo odaberite sve obavezne stupce",
     "cancel": "Odustani",
     "applyMapping": "Primijeni mapiranje"
@@ -4767,7 +4767,7 @@
     "date": "Datum",
     "amount": "Iznos",
     "balanceAfter": "Saldo nakon",
-    "status": "Status",
+    "status": "Stanje",
     "actions": "Radnje",
     "linked": "Povezano",
     "manual": "Ručno",
@@ -4807,7 +4807,7 @@
     "cycleMonthly": "Mjesečno",
     "cycleQuarterly": "Tromjesečno (3 mieseca)",
     "cycleAnnual": "Godišnje (12 mieseci)",
-    "statusLabel": "Status",
+    "statusLabel": "Stanje",
     "statusActive": "Aktivan",
     "statusTrial": "Probno",
     "statusPaused": "Pauzirano",
@@ -4965,9 +4965,9 @@
     "noActivityFound": "Nije pronađena aktivnost",
     "clearFilters": "Ukloni filtre",
     "justNow": "Upravo sada",
-    "minutesAgo": "{count}m ago",
-    "hoursAgo": "{count}h ago",
-    "daysAgo": "{count}d ago"
+    "minutesAgo": "prije {count} min",
+    "hoursAgo": "prije {count} h",
+    "daysAgo": "prije {count} d"
   },
   "manualPairing": {
     "title": "Ručni unos",
@@ -4975,7 +4975,7 @@
     "ipAddress": "IP adresa",
     "ipRequired": "IP adresa je obavezna",
     "ipInvalid": "Nevaljani format IP adrese (npr. 192.168.1.100)",
-    "port": "Port",
+    "port": "Priključak",
     "optionalDefault": "neobavezno, zadano: {port}",
     "portInvalid": "Port mora biti između 1 i 65535",
     "pairingCode": "Kôd uparivanja",
@@ -5202,7 +5202,7 @@
     "description": "Povežite se s drugim uređajem na lokalnoj mreži",
     "scan": "Skeniraj",
     "manual": "Ručno",
-    "host": "Host",
+    "host": "Domaćin",
     "connecting": "Spajanje...",
     "verifyingConnection": "Provjera veze...",
     "pairingSuccessful": "Uparivanje uspješno!",
@@ -5226,8 +5226,8 @@
     "never": "Nikad",
     "justNow": "Upravo sada",
     "minutesAgo": "{minutes}min ago",
-    "hoursAgo": "{hours}h ago",
-    "daysAgo": "{days}d ago",
+    "hoursAgo": "prije {hours} h",
+    "daysAgo": "prije {days} d",
     "devicesConnected": "{connected}/{total} uređaja spojeno",
     "lastSync": "Zadnja sinkronizacija: {time}",
     "syncing": "Sinkronizacija...",

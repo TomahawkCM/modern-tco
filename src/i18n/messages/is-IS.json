@@ -15,9 +15,9 @@
       "title": "Om tilgjengelighetsinnstillinger"
     },
     "presets": {
-      "full": "Full",
+      "full": "Fullt",
       "fullDesc": "Maksimal tilgjengelighet",
-      "mild": "Mild",
+      "mild": "Vægt",
       "mildDesc": "Litt forbedret",
       "moderate": "Moderat",
       "moderateDesc": "Anbefalt for de fleste",
@@ -68,7 +68,7 @@
       "showTable": "Vis datatabellvisning",
       "table": "Tabell"
     },
-    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support.",
+    "chartDescription": "{description}. {dataPoints} gagnapunktar sýndir. {dataList}. Ýttu á Tafla hnappinn til að skoða gögn á töfluformi með lyklaborðsstuðningi.",
     "chartTypeDescription": "Dette er et {chartType}-diagram med {dataPoints} datapunkter.",
     "footer": {
       "average": "Gjennomsnitt:",
@@ -364,7 +364,7 @@
     "syncStatus": "Synkroniseringsstatus: {status}",
     "toggleSeniorsMode": "Slå på/av seniorsmodus",
     "typeQuestion": "Skriv spørsmålet ditt",
-    "unreadNotifications": "{count, plural, =1 {1 unread notification} other {# unread notifications}}",
+    "unreadNotifications": "{count, plural, one {# ólesin tilkynning} other {# ólesnar tilkynningar}}",
     "welcomeBudgetApp": "Velkommen til Budget App"
   },
   "auth": {
@@ -503,8 +503,8 @@
       "addAccount": "Legg til konto",
       "addFirstAccount": "Legg til din første konto",
       "allTransactionsCleared": "Alle transaksjoner slettet. Du kan nå importere kontoutskriftene dine på nytt.",
-      "assignCount": "Assign {count, plural, one {# Transaction} other {# Transactions}}",
-      "assignModalDescription": "{count, plural, one {# transaction needs} other {# transactions need}} to be assigned to an account.",
+      "assignCount": "Úthluta {count, plural, one {# færslu} other {# færslum}}",
+      "assignModalDescription": "{count, plural, one {# færsla þarf} other {# færslur þurfa}} að vera úthlutað á reikning.",
       "assignTransactions": "Tildel transaksjoner",
       "assignTransactionsNow": "Tildel transaksjoner nå",
       "assignedTransactions": "Tildelte {count} transaksjoner til {name}",
@@ -513,7 +513,7 @@
       "cancel": "Avbryt",
       "chooseAccount": "Velg en konto...",
       "clearAllConfirm": "Slett alle transaksjoner",
-      "clearAllDescription": "This will permanently delete ALL transactions from the database. Your accounts and their starting balances will be preserved. You can then re-import your bank statements fresh. This action cannot be undone.",
+      "clearAllDescription": "Þetta mun eyða ÖLLUM færslum varanlega úr gagnagrunninum. Reikningarnir þínir og upphafsstöður þeirra verða varðveitt. Þú getur síðan flutt inn bankayfirlýsingar á ný. Þessa aðgerð er ekki hægt að afturkalla.",
       "clearAllTitle": "Slett alle transaksjoner",
       "clearAllTransactions": "Slett alle transaksjoner og start på nytt",
       "clickToView": "Klikk for å vise",
@@ -557,7 +557,7 @@
       "unassignedClickToAssign": "Klikk nedenfor for å automatisk tildele dem til kontoene dine.",
       "unassignedCreateFirst": "Opprett en konto først, så vil de automatisk bli tilordnet.",
       "unassignedDescription": "Disse transaksjonene ble importert før kontoer ble satt opp.",
-      "unassignedTitle": "{count, plural, one {# transaction needs} other {# transactions need}} account assignment",
+      "unassignedTitle": "{count, plural, one {# færsla þarf} other {# færslur þurfa}} reikningsúthlutun",
       "update": "Oppdater"
     },
     "budgets": {
@@ -604,14 +604,14 @@
       "saveBudget": "Lagre budsjett",
       "setBudget": "+ Angi budsjett",
       "statusOnTrack": "✓ I rute",
-      "statusOver": "✖ Over",
+      "statusOver": "✖ Yfir",
       "statusWarning": "⚠ Advarsel",
       "title": "Budsjetter",
       "totalBudgeted": "Totalt budsjettert",
       "totalExpenses": "Totale utgifter",
       "totalSpent": "Totalt brukt",
       "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
-      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transaction will become unbudgeted} other {# transactions will become unbudgeted}}",
+      "transactionsWillBecomeUnbudgeted": "{count, plural, one {# færsla verður án fjárhagsáætlunar} other {# færslur verða án fjárhagsáætlunar}}",
       "youWillLose": "Du vil miste:"
     },
     "events": {
@@ -824,7 +824,7 @@
     "applyTo": "Bruk på {count}",
     "categorize": "Kategoriser",
     "clearSelection": "Fjern valg",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "confirmDelete": "{count, plural, one {Eyða # færslu} other {Eyða # færslum}}?",
     "delete": "Slett",
     "deleteWarning": "Denne handlingen kan ikke angres.",
     "export": "Eksporter",
@@ -847,7 +847,7 @@
       "needsAdjustment": "Justeringer anbefalt",
       "needsDescription": "Bolig, strøm, dagligvarer, forsikring, minimumsgjeldbetalinger",
       "needsExamples": "leie, strøm, dagligvarer",
-      "over": "Over",
+      "over": "Yfir",
       "ruleExplanation": "50/30/20-regelen",
       "savings": "Sparekonto",
       "savingsDescription": "Nødfond, investeringer, pensjon, ekstra gjeldsbetalinger",
@@ -1292,7 +1292,7 @@
     "buttons": {
       "clearHistory": "Slett chatthistorikk",
       "exportConversation": "Eksporter samtale",
-      "send": "Send"
+      "send": "Senda"
     },
     "disabled": {
       "description": "Aktiver chatboten i Innstillinger → Personvern → Budsjettchatbot for å komme i gang.",
@@ -1629,7 +1629,7 @@
     "viewAllLoans": "Vis alle lån"
   },
   "debtOverview": {
-    "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
+    "activeLoans": "{count, plural, one {# virkt lán} other {# virk lán}}",
     "activeLoansTitle": "Aktive lån",
     "addLoan": "Legg til lån",
     "avgRate": "Gj.snitt rente",
@@ -1640,7 +1640,7 @@
     "totalDebt": "Total gjeld",
     "upcomingPayments": "Kommende betalinger",
     "viewAll": "Vis alle",
-    "viewMore": "{count, plural, one {View # more loan} other {View # more loans}}"
+    "viewMore": "{count, plural, one {Skoða # lán til viðbótar} other {Skoða # lán til viðbótar}}"
   },
   "debtPayoff": {
     "addDebt": "Legg til gjeld",
@@ -1682,7 +1682,7 @@
     "clearConfirm": "Slett ALLE data? Dette kan ikke angres!",
     "clearFailed": "Sletting mislyktes: {error}",
     "clearSuccess": "Database slettet. Oppdater siden.",
-    "database": "Database",
+    "database": "Gagnagrunnur",
     "databaseInfo": "Databaseinformasjon",
     "devIsolationNote": "Utviklingsdata er isolert fra produksjon. Test fritt uten å påvirke ekte brukere.",
     "development": "UTVIKLING",
@@ -1798,8 +1798,8 @@
     "dragToReorder": "Dra for å omorganisere widget"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
+    "months": "{count, plural, one {# mánuður} other {# mánuðir}}",
+    "years": "{count, plural, one {# ár} other {# ár}}",
     "yearsAndMonths": "{years}å {months}m"
   },
   "emptyStates": {
@@ -1861,7 +1861,7 @@
       "viewGuide": "Vis feilsøkingsveiledning"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "canRecover": "Góðar fréttir! Við fundum {count} {count, plural, one {leið} other {leiðir}} til að leysa þessa villu.",
       "cannotRecover": "Gjenoppretting er ikke mulig. Du må re-eksportere filen fra banken din eller prøve et annet format.",
       "optionsTitle": "Gjenopprettingsalternativer"
     },
@@ -2104,7 +2104,7 @@
       "line2": "Finansiell helsepoengsum"
     },
     "grade": "Karakter: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
+    "missingFactors": "{count, plural, one {# þáttur vantar} other {# þættir vantar}}",
     "title": "Finansiell helse",
     "history": {
       "title": "Stigasaga",
@@ -2190,7 +2190,7 @@
     "lowOcrConfidence": "⚠️ Lav OCR-tillit ({percent}%). Dette kan være en skannet/bildebasert PDF.",
     "noDataAfterMapping": "Ingen data funnet i CSV-filen etter bruk av egendefinert tilordning.",
     "noDataInCSV": "Ingen data funnet i CSV-filen. Filen kan være tom eller feil formatert.",
-    "noTransactionsParsed": "No transactions could be parsed from this file.\n\nPossible causes:\n• The file format may not be recognized\n• The date or amount columns may be empty\n• The file may contain only headers\n\nTry selecting a different bank format or contact support.",
+    "noTransactionsParsed": "Engar færslur fundust í þessari skrá.\n\nMögulegar orsakir:\n• Skráarsniðið er kannski ekki þekkt\n• Dagsetningar- eða upphæðardálkar kunna að vera tómir\n• Skráin inniheldur kannski aðeins fyrirsagnir\n\nReyndu að velja annað bankasnið eða hafðu samband við þjónustuver.",
     "ocrLanguage": "OCR-språk:",
     "pageCount": "{count} sider",
     "partialImport": "Delvis import",
@@ -2248,7 +2248,7 @@
       "decrypt": "Dekrypter og fortsett",
       "encrypted": "Denne filen er kryptert",
       "enterPassword": "Skriv inn passord",
-      "hint": "Hint: {hint}",
+      "hint": "Vísbending: {hint}",
       "password": "Passord"
     },
     "importing": {
@@ -2322,7 +2322,7 @@
       "currentValue": "Gjeldende verdi",
       "gainLoss": "Gevinst/tap",
       "percentReturn": "% avkastning",
-      "symbol": "Symbol",
+      "symbol": "Auðkenni",
       "total": "Totalt"
     },
     "titles": {
@@ -2347,7 +2347,7 @@
       "description": "Dette vil permanent slette kontoen og alle tilknyttede beholdninger.",
       "impactAccount": "Konto: {name}",
       "impactHistory": "Fullstendig transaksjonshistorikk",
-      "impactHoldings": "{count, plural, one {# holding} other {# holdings}}",
+      "impactHoldings": "{count, plural, one {# eign} other {# eignir}}",
       "impactTitle": "Du vil miste:",
       "impactValue": "Totalverdi: {value}",
       "title": "Slett investeringskonto"
@@ -2358,7 +2358,7 @@
       "impactCurrentValue": "Gjeldende verdi: {value}",
       "impactPurchasePrice": "Kjøpspris: {price}",
       "impactShares": "{count} aksjer",
-      "impactSymbol": "Symbol: {symbol}",
+      "impactSymbol": "Auðkenni: {symbol}",
       "impactTitle": "Du vil miste:",
       "title": "Slett beholdning"
     },
@@ -2374,7 +2374,7 @@
     },
     "gainLoss": "Gevinst/tap",
     "hideDetails": "Skjul detaljer",
-    "holdingsCount": "{count, plural, one {# holding} other {# holdings}}",
+    "holdingsCount": "{count, plural, one {# eign} other {# eignir}}",
     "loading": "Laster investeringer...",
     "marketDataNotice": "Markedsdatavarsel",
     "noHoldings": "Ingen beholdninger på denne kontoen ennå.",
@@ -2393,7 +2393,7 @@
       "gainLoss": "Gevinst/tap",
       "purchasePrice": "Kjøpspris",
       "shares": "Aksjer",
-      "symbol": "Symbol",
+      "symbol": "Auðkenni",
       "value": "Verdi"
     },
     "title": "Investeringsportefølje",
@@ -2437,7 +2437,7 @@
     "pairedDevices": {
       "addDevice": "Legg til enhet",
       "addFirstDevice": "Legg til din første enhet",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "deviceCount": "{count, plural, one {# tæki parað} other {# tæki pöruð}}",
       "emptyDescription": "Par en enhet for å begynne å synkronisere budsjettdataene dine",
       "emptyTitle": "Ingen enheter paret",
       "noDevices": "Ingen enheter paret ennå",
@@ -2451,11 +2451,11 @@
     },
     "syncAll": "Synkroniser alle",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "daysAgo": "{count, plural, one {# degi síðan} other {# dögum síðan}}",
+      "hoursAgo": "{count, plural, one {# klukkustund síðan} other {# klukkustundum síðan}}",
       "justNow": "Akkurat nå",
       "lastSync": "Siste synk: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "minutesAgo": "{count, plural, one {# mínútu síðan} other {# mínútum síðan}}",
       "neverSynced": "Aldri synkronisert"
     },
     "title": "LAN-synk"
@@ -2936,7 +2936,7 @@
     "allTypes": "Alle typer",
     "amortizationDescription": "Måned-for-måned-oversikt som viser hvordan lånet ditt betales ned",
     "amortizationSchedule": "Amortiseringsplan",
-    "amortizationTip": "Notice how early payments are mostly interest (red), but later payments are mostly principal (teal). Making extra payments early can save you thousands in interest!",
+    "amortizationTip": "Taktu eftir hvernig snemmgreiðslur eru aðallega vextir (rautt) en seinni greiðslur eru aðallega höfuðstóll (blágrænt). Aukagreiðslur snemma geta sparað þér þúsundir í vöxtum!",
     "amountYouBorrowed": "Beløp du lånte",
     "annualPercentageRate": "Effektiv rente",
     "avgInterestRate": "Gj.snitt rente",
@@ -3024,15 +3024,15 @@
     "title": "Lån",
     "tooltip": {
       "amortizationAria": "Mer informasjon om amortisering og lånenedbetaling",
-      "amortizationBody": "How your loan gets paid off over time. Each payment covers interest first, then principal. The schedule shows exactly how much goes to each, month by month. Early payments are mostly interest!",
+      "amortizationBody": "Hvernig lánið þitt er greitt niður yfir tíma. Hver greiðsla fer fyrst í vexti, síðan höfuðstól. Áætlunin sýnir nákvæmlega hversu mikið fer í hvort, mánuð fyrir mánuð. Snemmgreiðslur eru aðallega vextir!",
       "amortizationTitle": "Amortisering",
       "aprAria": "Mer informasjon om effektiv rente og rentesatser",
-      "aprExplained": "APR (Annual Percentage Rate) is the yearly cost to borrow money. Example: 5% APR on $10,000 = $500 interest per year. Lower APR = less you pay overall.",
+      "aprExplained": "APR (Árlegt hlutfall) er árlegur kostnaður við lántöku. Dæmi: 5% APR á $10.000 = $500 vextir á ári. Lægra APR = minna borgað í heildina.",
       "extraPaymentsAria": "Mer informasjon om ekstrautbetalinger",
-      "extraPaymentsBody": "Paying more than the minimum reduces principal faster, saving thousands in interest. Example: $100 extra/month on a 30-year mortgage can save 5-7 years! Use the Extra Payment Calculator tab to see your savings.",
+      "extraPaymentsBody": "Að borga meira en lágmarkið minnkar höfuðstólinn hraðar og sparar þúsundir í vöxtum. Dæmi: $100 aukalega á mánuði á 30 ára húsnæðisláni getur sparað 5-7 ár! Notaðu Aukagreiðslureikninn til að sjá sparnaðinn.",
       "extraPaymentsTitle": "Ekstrautbetalinger",
       "principalVsInterestAria": "Mer informasjon om avdrag og renter",
-      "principalVsInterestBody": "Your payment splits between the loan balance (principal) and borrowing cost (interest). Early payments are mostly interest. Later payments are mostly principal. See the Amortization Schedule tab for the full breakdown.",
+      "principalVsInterestBody": "Greiðslan þín skiptist á milli lánsstöðu (höfuðstóls) og lántökukostnaðar (vaxta). Snemmgreiðslur eru aðallega vextir. Seinni greiðslur eru aðallega höfuðstóll. Sjá afborgunaráætlun flipann fyrir sundurliðun.",
       "principalVsInterestTitle": "Avdrag vs. renter"
     },
     "totalDebt": "Total gjeld",
@@ -3476,7 +3476,7 @@
     "savePayment": "Lagre betaling",
     "status": "Status",
     "suggestedMatches": "Foreslåtte transaksjonsmatches",
-    "suggestedMatchesDescription": "We found {count, plural, one {# transaction} other {# transactions}} that might be loan payments",
+    "suggestedMatchesDescription": "Við fundum {count, plural, one {# færslu} other {# færslur}} sem gætu verið lánagreiðslur",
     "title": "Betalingshistorikk",
     "uncategorized": "Ukategorisert",
     "unlinkConfirm": "Koble fra denne betalingen fra transaksjonen?",
@@ -3527,7 +3527,7 @@
       "completedGoals": "Fullførte mål",
       "createFirstGoal": "Opprett ditt første mål",
       "currentSavingsLabel": "Gjeldende sparing",
-      "currentSavingsValue": "Current savings: {amount}",
+      "currentSavingsValue": "Núverandi sparnaður: {amount}",
       "delete": "Slett",
       "deleteGoal": "Slett mål",
       "deleteGoalAriaLabel": "Slett mål",
@@ -3618,7 +3618,7 @@
       "payFrequencyHelp": "Hvor ofte får du betalt? Dette bestemmer når lønningene dine genereres.",
       "payFrequencyHelpAriaLabel": "Mer informasjon om lønnsfrekvens",
       "paycheckTimeline": "Lønnstidslinje",
-      "paychecksPlanned": "{count, plural, one {# paycheck planned} other {# paychecks planned}}",
+      "paychecksPlanned": "{count, plural, one {# launagreiðsla áætluð} other {# launagreiðslur áætlaðar}}",
       "percentOfIncome": "{percent}% av inntekt",
       "regeneratePaychecks": "Regenerer lønner",
       "remainingToAllocate": "Gjenstående å tildele",
@@ -3636,7 +3636,7 @@
       "scheduleSemimonthlyDesc": "1. og 15.",
       "scheduleWeekly": "Ukentlig",
       "scheduleWeeklyDesc": "Hver uke",
-      "scheduledPaychecks": "{count, plural, one {# scheduled paycheck} other {# scheduled paychecks}}",
+      "scheduledPaychecks": "{count, plural, one {# áætluð launagreiðsla} other {# áætlaðar launagreiðslur}}",
       "setUpPaycheckPlan": "Sett opp lønnsplan",
       "setUpPlan": "Sett opp plan",
       "subtitle": "Planlegg hvor hver krone går før du får betalt",
@@ -3656,7 +3656,7 @@
       "currentAge": "Nåværende alder",
       "currentAgeYears": "Gjeldende alder: {age} år",
       "currentSavings": "Gjeldende sparing",
-      "currentSavingsAmount": "Current savings: {amount}",
+      "currentSavingsAmount": "Núverandi sparnaður: {amount}",
       "delete": "Slett",
       "deletePlan": "Slett plan",
       "deleteRetirementPlan": "Slett pensjonsplan",
@@ -3707,7 +3707,7 @@
       "tfsaBalance": "TFSA-saldo",
       "title": "Pensjonskalkulator",
       "toReachGoal": "For å nå målet ditt kan du:",
-      "workMoreYears": "Work {years, plural, one {# more year} other {# more years}}",
+      "workMoreYears": "Vinna {years, plural, one {# ár í viðbót} other {# ár í viðbót}}",
       "yearAge": "{year} (Alder {age})",
       "yearsToRetirement": "År til pensjon",
       "youWillLose": "Du vil miste:",
@@ -3750,7 +3750,7 @@
     "chatbotDescription": "AI-drevet assistent som kan svare på spørsmål om transaksjonene, budsjettene og forbruksmønstrene dine.",
     "chatbotPrivacyNotice": "Finansdataene dine sendes til OpenAI for å svare på spørsmål. OpenAI bruker ikke API-data til å trene modeller.",
     "confirmDelete": "Bekreft sletting",
-    "confirmDeleteWarning": "You are about to permanently delete {count, plural, one {# data type} other {# data types}}. Click \"Confirm Delete\" to proceed.",
+    "confirmDeleteWarning": "Þú ert að fara að eyða {count, plural, one {# gagnagerð} other {# gagnagerðum}} varanlega. Smelltu á \"Staðfesta eyðingu\" til að halda áfram.",
     "conversationHistory": "Samtalehistorikk",
     "conversationStorageNotice": "Samtaler lagres lokalt i nettleseren din. Du kan slette dem manuelt når som helst.",
     "dataAccessPermission": "Datatilangsttillatelse",
@@ -3911,7 +3911,7 @@
       "save": "Lagre"
     },
     "clickToSelect": "Klikk på en kategori for å velge",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "description": "{count, plural, one {Veldu flokk fyrir þessa færslu} other {Veldu flokk fyrir # færslur}}",
     "general": "Generelt",
     "noResults": "Ingen kategorier funnet",
     "pressEnter": "Trykk ↵ Enter",
@@ -3947,7 +3947,7 @@
     "downloadPdf": "Last ned PDF",
     "fileSize": "{size} KB",
     "pdfReceipt": "PDF-kvittering",
-    "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
+    "receiptCount": "{count, plural, one {# kvittun} other {# kvittanir}}",
     "unsupportedFileType": "Filtype ikke støttet",
     "uploaded": "Lastet opp {date}",
     "view": "Skoða"
@@ -4001,16 +4001,16 @@
       "quarterly": "Kvartalsvis",
       "weekly": "Ukentlig"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
+    "inDays": "{count, plural, =0 {(í dag)} =1 {(eftir # dag)} other {(eftir # daga)}}",
     "next": "Neste: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "occurrences": "{count, plural, one {# tilfelli fundið} other {# tilvik fundin}}",
     "perPeriod": {
       "month": "per måned",
       "quarter": "per kvartal",
       "twoWeeks": "per 2 uker",
       "week": "per uke"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "showingPatterns": "{count, plural, one {Sýni # endurtekið færslumynstur} other {Sýni # endurtekin færslumynstur}}",
     "subtitle": "Oppdagede abonnementer og regninger",
     "title": "Gjentakende transaksjoner"
   },
@@ -4116,7 +4116,7 @@
     "tabAccessibility": "Tilgjengelighet",
     "tabAccounts": "Kontoer",
     "tabCategories": "Kategorier",
-    "tabData": "Data",
+    "tabData": "Gögn",
     "tabDevTools": "Utviklerverktøy",
     "tabLocale": "Lokalinnstillinger og formatering",
     "tabNotifications": "Varsler",
@@ -4138,7 +4138,7 @@
     "webmcpDescription": "La nettleser-AI-agenter samhandle med budsjettdataene dine. Krever Chrome 146+ med WebMCP-flagget aktivert.",
     "webmcpNotSupported": "Nettleseren din støtter ikke WebMCP ennå. Aktiver chrome://flags/#webmcp-for-testing i Chrome 146 Canary.",
     "webmcpTitle": "WebMCP AI-agentverktøy",
-    "webmcpToolsDescription": "When enabled, 9 tools are exposed to browser AI agents: search transactions, get budget summary, spending by category, account balances, list categories, get subscriptions, add transaction, categorize transaction, and set budget limit. Encryption fields and bank identification data are never shared.",
+    "webmcpToolsDescription": "Þegar virkt eru 9 verkfæri aðgengileg vafra-gervigreindaraðilum: leita í færslum, fá fjárhagsáætlunaryfirlit, útgjöld eftir flokkum, reikningsstaða, lista flokka, sækja áskriftir, bæta við færslu, flokka færslu og setja fjárhagsáætlunarmörk. Dulkóðunarreitir og bankauðkenningargögn eru aldrei deild.",
     "yourAccounts": "Dine kontoer"
   },
   "shortcutsModal": {
@@ -4188,7 +4188,7 @@
     "shortcuts": "Snöggir tenglar"
   },
   "simplefinConnect": {
-    "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
+    "accountsConnected": "{count, plural, one {# reikningur tengdur} other {# reikningar tengdir}}",
     "alreadyHaveToken": "Har du allerede et token?",
     "asOf": "per {date}",
     "autoImportDescription": "Importer transaksjoner automatisk fra bankkontoene dine",
@@ -4249,7 +4249,7 @@
       "title": "Tilkoblede kontoer"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "accountsLinked": "{count, plural, one {# reikningur tengdur} other {# reikningar tengdir}}",
       "connectButton": "Koble til bankkonto",
       "connected": "Tilkoblet",
       "description": "Koble til bankkontoene dine for å importere transaksjoner automatisk",
@@ -4261,7 +4261,7 @@
       "button": "Koble fra",
       "cancel": "Avbryt",
       "confirm": "Koble fra",
-      "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
+      "dialogDescription": "Þetta mun fjarlægja tengingu við bankareikningana þína. Núverandi færslur verða ekki eytt, en nýjar færslur munu ekki lengur samstillast sjálfkrafa.",
       "dialogTitle": "Koble fra SimpleFIN?"
     },
     "help": {
@@ -4271,7 +4271,7 @@
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "hoursAgo": "{hours, plural, one {# klukkustund síðan} other {# klukkustundum síðan}}",
       "lastSynced": "Sist synkronisert: {time}",
       "lessThanHour": "For mindre enn en time siden",
       "never": "Aldri",
@@ -4454,7 +4454,7 @@
     "splitATransaction": "Del en transaksjon",
     "splitFlow": {
       "amountsCorrect": "Beløpene summeres riktig",
-      "confirmDescription": "This will create {count, plural, one {# split} other {# splits}} for this transaction. Each person's share will be tracked until settled.",
+      "confirmDescription": "Þetta mun búa til {count, plural, one {# skiptingu} other {# skiptingar}} fyrir þessa færslu. Hlutur hvers aðila verður rakinn þar til uppgjör á sér stað.",
       "confirmSplit": "Bekreft deling",
       "howToSplit": "Hvordan dele?",
       "modes": {
@@ -4486,7 +4486,7 @@
     "title": "Utgiftsdeling",
     "total": "totalt",
     "unknownTransaction": "Ukjent transaksjon",
-    "unsettledSplitCount": "{count, plural, one {# unsettled split} other {# unsettled splits}}",
+    "unsettledSplitCount": "{count, plural, one {# óuppgerð skipting} other {# óuppgerðar skiptingar}}",
     "unsettledSplits": "Uoppgjorte delinger ({count})",
     "via": "via",
     "youOwe": "Du skylder {amount}",
@@ -4551,7 +4551,7 @@
       "totalSpent": "Totalt brukt"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, one {# dagur eftir af prufutíma} other {# dagar eftir af prufutíma}}"
     },
     "reminderToggle": {
       "disableReminder": "Slökkva á áminningu",
@@ -4570,18 +4570,18 @@
       "upcomingCharges": "Kommende belastninger (neste 30 dager)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "activeSubscriptions": "{count, plural, one {# virk áskrift} other {# virkar áskriftir}}",
       "annualCost": "Årslig kostnad",
       "monthlyCost": "Månedlig kostnad",
       "next30Days": "Neste 30 dager",
       "projectedYearly": "Anslått årlig forbruk",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "upcomingCharges": "{count, plural, one {# væntanlegt gjald} other {# væntanleg gjöld}}"
     },
     "suggestions": {
       "inactiveTitle": "Potensielt avsluttede abonnementer",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
+      "inactiveDescription": "{count, plural, one {# áskrift hefur ekki} other {# áskriftir hafa ekki}} rukkað nýlega. Staðfestu að þær séu raunverulega afturkallaðar.",
       "trialsTitle": "Prøveperioder som avsluttes snart",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
+      "trialsDescription": "{count, plural, one {# prufuáskrift} other {# prufuáskriftir}} renna út á næstu 7 dögum. Segðu upp ef þú notar þær ekki.",
       "highCostTitle": "Kostbare abonnementer",
       "highCostDescription": "Disse abonnementene utgjør en stor del av forbruket ditt. Vurder om du får full verdi for pengene."
     }
@@ -4659,7 +4659,7 @@
       "noSubscriptionsDescription": "Legg til abonnementene dine manuelt eller importer transaksjoner for automatisk å oppdage gjentakende betalinger."
     },
     "help": {
-      "description": "Manual: Add subscriptions you want to track precisely. Auto-detected: We analyze your transactions to find recurring patterns. Claim auto-detected subscriptions to manage them manually with reminders and more control.",
+      "description": "Handvirkt: Bættu við áskriftum sem þú vilt rekja nákvæmlega. Sjálfvirkt greind: Við greinum færslurnar þínar til að finna endurtekin mynstur. Merktu sjálfvirkt greindar áskriftir til að stjórna þeim handvirkt með áminningum og meiri stjórn.",
       "title": "Smart abonnementsstyring"
     },
     "importTransactions": "Importer transaksjoner",
@@ -4839,7 +4839,7 @@
     "placeholderExtended": "Prøv 'kaffe forrige uke' eller 'beløp:>50'",
     "recentSearchLabel": "Nylig søk",
     "recentSearches": "Nylige søk",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
+    "resultCount": "{count} {count, plural, one {niðurstaða} other {niðurstöður}}",
     "save": "Lagre",
     "saveFilter": "Lagre filter",
     "savedFilters": "Lagrede filtre",
@@ -4865,10 +4865,10 @@
       "type": "Type: 'type:inntekt' eller 'type:utgift'"
     },
     "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
+    "usedTimes": "Notað {count} {count, plural, one {sinni} other {sinnum}}",
     "viewAllResults": "Vis alle {count} resultater",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "resultsFound": "{count} {count, plural, one {niðurstaða} other {niðurstöður}} fundust",
+    "suggestionsAvailable": "{count} {count, plural, one {tillaga} other {tillögur}} tiltækar"
   },
   "transactionTable": {
     "actions": {
@@ -4966,7 +4966,7 @@
     "sortByDate": "Sorter etter dato",
     "split": "Del",
     "splitTransaction": "Del transaksjon",
-    "splitTransactionsHelp": "Divide a single purchase across multiple categories. Example: Grocery store visit ($100) → Groceries ($80) + Household ($20). Click the Split button on any transaction to divide it.",
+    "splitTransactionsHelp": "Skiptu einu kaupum á marga flokka. Dæmi: Matvöruverslun ($100) → Matvörur ($80) + Heimilisvörur ($20). Smelltu á Skipta hnappinn á hvaða færslu sem er til að skipta henni.",
     "splitTransactionsLabel": "Delte transaksjoner",
     "thisWillUpdate": "Dette vil oppdatere:",
     "title": "Transaksjoner",
@@ -4987,7 +4987,7 @@
     "youWillLose": "Du vil miste:"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
+    "daysLeft": "{count, plural, =0 {Prufutíminn þinn rennur út í dag!} =1 {Aðeins # dagur eftir af prufutíma} other {# dagar eftir af prufutíma}}",
     "daysRemaining": "{count} dager igjen av gratisprøveperioden",
     "dismiss": "Avvis",
     "expired": "Prøveperioden din har utløpt",
@@ -5011,9 +5011,9 @@
     "ignoreAllContinue": "Ignorer alle og fortsett",
     "informational": "Informasjonsmeldinger",
     "issuesDetected": "Problemer oppdaget",
-    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
+    "issuesFound": "Við fundum {count, plural, one {# vandamál} other {# vandamál}} sem þarfnast athygli þinnar",
     "marked": "Merket",
-    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
+    "removalNote": "{count, plural, one {# færsla} other {# færslur}} verða fjarlægðar úr innflutningi ef þú heldur áfram.",
     "remove": "Fjern",
     "removeAndContinue": "Fjern {count} og fortsett",
     "suggestion": "Forslag:",
@@ -5105,7 +5105,7 @@
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "category": "{count, plural, one {# flokkur} other {# flokkar}}",
       "createNew": "Opprett ny",
       "description": "Tilordne YNAB-kategorier til eksisterende kategorier eller opprett nye.",
       "mapToExisting": "Tilordne til eksisterende",
@@ -5118,7 +5118,7 @@
       "errors": "Feil",
       "importAnother": "Importer en annen",
       "success": "Import fullført!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "successMessage": "{count, plural, one {# hlutur fluttur inn} other {# hlutir fluttir inn}} úr YNAB.",
       "viewTransactions": "Vis transaksjoner",
       "whatNext": "Hva vil du gjøre nå?",
       "withIssues": "Import fullført med problemer"
@@ -5231,7 +5231,7 @@
       "budgetImportFailed": "Budsjettimport mislyktes: {details}"
     },
     "importSuccess": "YNAB-data importert!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importWithErrors": "Innflutningur lokið með {count, plural, one {# villu} other {# villum}}"
   },
   "balanceReconciliation": {
     "title": "Innflutningur lokið!",
