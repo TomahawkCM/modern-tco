@@ -1813,8 +1813,8 @@
     "dragToReorder": "Arraste para reordenar widget"
   },
   "duration": {
-    "months": "meses",
-    "years": "anos",
+    "months": "{count, plural, =1 {1 mês} other {# meses}}",
+    "years": "{count, plural, =1 {1 ano} other {# anos}}",
     "yearsAndMonths": "{years}a {months}m"
   },
   "emptyStates": {

@@ -20,6 +20,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 import type { SupportedLocale } from "../src/i18n/config";
+import { isSharedEnglishLocale } from "../src/i18n/locale-message-plan";
 import { readEffectiveLocaleMessages } from "./lib/effective-locale-messages";
 
 const MESSAGES_DIR = path.resolve(__dirname, "..", "src", "i18n", "messages");
@@ -31,22 +32,43 @@ const MASTER_FILE = path.join(MESSAGES_DIR, "en.json");
 // ---------------------------------------------------------------------------
 
 const EXCLUDED_KEY_PATTERNS: RegExp[] = [
-  /\.href$/,                          // URL paths — always identical
-  /\._note$/,                         // Internal documentation notes
-  /calculators\.\w+\.formulaText$/,   // Mathematical formulas
+  /\.href$/, // URL paths — always identical
+  /\._note$/, // Internal documentation notes
+  /calculators\.\w+\.formulaText$/, // Mathematical formulas
   /calculators\.\w+\.formulaExplanation$/, // Formula variable explanations
 ];
 
 const EXCLUDED_KEY_VALUES = new Set([
   // Brand names / proper nouns
-  "Netflix", "Spotify", "Venmo", "PayPal", "BudgetPro", "OCR", "API", "FAQ", "Emoji",
-  "Google Calendar", "Outlook Calendar", "SimpleFIN",
+  "Netflix",
+  "Spotify",
+  "Venmo",
+  "PayPal",
+  "BudgetPro",
+  "OCR",
+  "API",
+  "FAQ",
+  "Emoji",
+  "Google Calendar",
+  "Outlook Calendar",
+  "SimpleFIN",
   // Number / format placeholders
-  "0.00", "100", "50.00", "192.168.1.100", "+12.5%", "-5.2%", "85%",
-  "you@example.com", "$", "Cmd+Shift+P",
+  "0.00",
+  "100",
+  "50.00",
+  "192.168.1.100",
+  "+12.5%",
+  "-5.2%",
+  "85%",
+  "you@example.com",
+  "$",
+  "Cmd+Shift+P",
   // Format-only strings (only interpolation variables, no translatable words)
-  "© {year} {brandName}", "{date}", "{size} KB",
-  "SimpleFIN: {status}", "{title}. {body}",
+  "© {year} {brandName}",
+  "{date}",
+  "{size} KB",
+  "SimpleFIN: {status}",
+  "{title}. {body}",
   // Mathematical formulas (also caught by pattern, but kept for safety)
   "FV = PV(1+r/n)^(nt) + PMT[((1+r/n)^(nt)-1)/(r/n)]",
   "M = P[i(1+i)^n] / [(1+i)^n - 1]",
@@ -66,56 +88,123 @@ const EXCLUDED_KEY_VALUES = new Set([
   // International cognates — identical in French, Spanish, Portuguese, Italian, German, etc.
   // For non-cognate languages (CJK, Arabic, etc.) these are already translated to different values
   // so the exclusion has no effect.
-  "Transactions", "transactions", "Transaction", "transaction",
-  "Budget", "Budgets", "budgets",
-  "Total", "total", "Total:",
-  "Description", "Date", "Date *",
-  "Actions", "Action",
-  "Notes", "Type", "Score",
-  "Version", "Options", "Option 1", "Option 2",
-  "Format", "Notifications", "notifications",
-  "Net", "Min", "Max",
-  "Institution", "Port",
-  "Points", "points", "Badges", "badges",
-  "Focus", "Solution", "Normal", "Important",
-  "Suggestions", "Occurrences", "PRODUCTION",
-  "Shopping", "Avalanche",
+  "Transactions",
+  "transactions",
+  "Transaction",
+  "transaction",
+  "Budget",
+  "Budgets",
+  "budgets",
+  "Total",
+  "total",
+  "Total:",
+  "Description",
+  "Date",
+  "Date *",
+  "Actions",
+  "Action",
+  "Notes",
+  "Type",
+  "Score",
+  "Version",
+  "Options",
+  "Option 1",
+  "Option 2",
+  "Format",
+  "Notifications",
+  "notifications",
+  "Net",
+  "Min",
+  "Max",
+  "Institution",
+  "Port",
+  "Points",
+  "points",
+  "Badges",
+  "badges",
+  "Focus",
+  "Solution",
+  "Normal",
+  "Important",
+  "Suggestions",
+  "Occurrences",
+  "PRODUCTION",
+  "Shopping",
+  "Avalanche",
   "Hindi",
   // Common short labels
-  "Auto", "Status", "Filter", "Filter:",
-  "via", "admin",
-  "Trend", "Debit", "Credit",
-  "Offline", "Online",
-  "Hover", "Extra",
+  "Auto",
+  "Status",
+  "Filter",
+  "Filter:",
+  "via",
+  "admin",
+  "Trend",
+  "Debit",
+  "Credit",
+  "Offline",
+  "Online",
+  "Hover",
+  "Extra",
   "LAN Sync",
   // Longer cognates common across European languages
-  "Documentation", "System",
-  "Import", "Export",
+  "Documentation",
+  "System",
+  "Import",
+  "Export",
   "SimpleFIN Bridge Dashboard",
   "SimpleFIN Protocol Documentation",
   // More cognates found across multiple locales
-  "Symbol", "Symbol: {symbol}",
-  "Email", "Data", "Database",
-  "Cost", "Period", "Live", "Mild",
+  "Symbol",
+  "Symbol: {symbol}",
+  "Email",
+  "Data",
+  "Database",
+  "Cost",
+  "Period",
+  "Live",
+  "Mild",
   "Zero Knowledge",
   "Send",
   "Hint: {hint}",
   // Demo currency amounts (locale-specific formatting not required in demo)
-  "-$124.50", "+$4,250.00", "-$15.99", "$24,500.00", "$1,250.00",
+  "-$124.50",
+  "+$4,250.00",
+  "-$15.99",
+  "$24,500.00",
+  "$1,250.00",
   // Short duration format
   "{years}y {months}m",
-  "Password", "Home", "Host", "Privacy:",
+  "Password",
+  "Home",
+  "Host",
+  "Privacy:",
   // Additional cognates identical in Romance languages
-  "Manual", "Irregular", "Experimental", "Principal", "Principal:",
+  "Manual",
+  "Irregular",
+  "Experimental",
+  "Principal",
+  "Principal:",
   "Legal",
   // Brand names with modifiers
-  "BudgetPro Local", "BudgetPro Sync (Pro)",
+  "BudgetPro Local",
+  "BudgetPro Sync (Pro)",
   // Format strings with cognates/interpolation only
-  "Total: {value}.", "Original: {amount}", "Plan: {name}",
+  "Total: {value}.",
+  "Original: {amount}",
+  "Plan: {name}",
   // Cognates identical in Spanish, Portuguese, Italian, and many other languages
-  "Error", "No", "General", "Color",
-  "Manual", "Irregular", "Experimental", "Actor",
-  "Formula", "Principal", "Principal:",
+  "Error",
+  "No",
+  "General",
+  "Color",
+  "Manual",
+  "Irregular",
+  "Experimental",
+  "Actor",
+  "Formula",
+  "Principal",
+  "Principal:",
   "Budget App",
   // ICU plurals using only cognate words (transaction/page are identical in French, etc.)
   "{count} {count, plural, =1 {transaction} other {transactions}}",
@@ -290,14 +379,23 @@ function main(): void {
   // Analyze all target locales
   const results: LocaleStatus[] = [];
   for (const file of targetFiles) {
-    const localeName = file.replace(".json", "");
-    results.push(
-      analyzeLocale(
-        enFlat,
-        readEffectiveLocaleMessages(localeName as SupportedLocale),
-        localeName
-      )
-    );
+    const localeName = file.replace(".json", "") as SupportedLocale;
+
+    // shared-en locales (en-AU, en-CA, etc.) intentionally use en.json —
+    // report them as 100% translated rather than counting every key as untranslated
+    if (isSharedEnglishLocale(localeName)) {
+      results.push({
+        locale: localeName,
+        total: totalKeys,
+        translated: totalKeys,
+        untranslated: 0,
+        coverage: 100,
+        untranslatedKeys: [],
+      });
+      continue;
+    }
+
+    results.push(analyzeLocale(enFlat, readEffectiveLocaleMessages(localeName), localeName));
   }
 
   // Sort by coverage ascending (worst first)
@@ -373,22 +471,34 @@ function main(): void {
 
   // Print gate result
   if (failingLocales.length > 0) {
-    console.log(`\n❌ QUALITY GATE FAILED: ${failingLocales.length} locale(s) have >${UNTRANSLATED_THRESHOLD} untranslated values:`);
+    console.log(
+      `\n❌ QUALITY GATE FAILED: ${failingLocales.length} locale(s) have >${UNTRANSLATED_THRESHOLD} untranslated values:`
+    );
     for (const r of failingLocales) {
-      console.log(`   ${r.locale}: ${r.untranslated} untranslated (${r.coverage.toFixed(1)}% coverage)`);
+      console.log(
+        `   ${r.locale}: ${r.untranslated} untranslated (${r.coverage.toFixed(1)}% coverage)`
+      );
     }
   } else {
-    console.log(`\n✅ Quality gate passed: all non-en-* locales have ≤${UNTRANSLATED_THRESHOLD} untranslated values`);
+    console.log(
+      `\n✅ Quality gate passed: all non-en-* locales have ≤${UNTRANSLATED_THRESHOLD} untranslated values`
+    );
   }
 
   // Print fragile passes (always, regardless of gate result)
   if (fragileLocales.length > 0) {
-    console.log(`\n⚠️  FRAGILE PASSES: ${fragileLocales.length} locale(s) pass but are near the threshold (>${FRAGILE_THRESHOLD} untranslated):`);
+    console.log(
+      `\n⚠️  FRAGILE PASSES: ${fragileLocales.length} locale(s) pass but are near the threshold (>${FRAGILE_THRESHOLD} untranslated):`
+    );
     for (const r of fragileLocales) {
       const headroom = UNTRANSLATED_THRESHOLD - r.untranslated;
-      console.log(`   ${r.locale}: ${r.untranslated} untranslated (${r.coverage.toFixed(1)}% coverage, ${headroom} keys of headroom)`);
+      console.log(
+        `   ${r.locale}: ${r.untranslated} untranslated (${r.coverage.toFixed(1)}% coverage, ${headroom} keys of headroom)`
+      );
     }
-    console.log(`   These locales may fail if en.json grows. Consider translating more keys for stability.`);
+    console.log(
+      `   These locales may fail if en.json grows. Consider translating more keys for stability.`
+    );
   }
 
   // Exit with correct code (after all reporting is printed)
