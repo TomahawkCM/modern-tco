@@ -8,7 +8,7 @@
  *   Each <Ntry> contains: <BookgDt>, <Amt>, <CdtDbtInd>, <NtryDtls>
  */
 
-import type { ParsedTransaction } from "@/types/budget";
+import type { ParsedTransaction } from "./types";
 import { XMLParser } from "fast-xml-parser";
 
 export interface CAMT053ParseOptions {

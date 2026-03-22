@@ -12,7 +12,7 @@ import type {
   OFXAccountInfo,
   OFXBalances,
   ParsedTransaction,
-} from "@/types/budget";
+} from "./types";
 
 /**
  * Detect OFX file variant (1.x SGML vs 2.x XML)
@@ -441,7 +441,9 @@ export function parseMultiAccountOFX(content: string): ParsedOFXAccount[] {
     const ofxData = parseOFXContent(content);
     accounts.push({
       accountInfo: ofxData.accountInfo,
-      transactions: ofxData.transactions.map((txn) => mapOFXTransaction(txn, ofxData.accountInfo.ACCTID)),
+      transactions: ofxData.transactions.map((txn) =>
+        mapOFXTransaction(txn, ofxData.accountInfo.ACCTID)
+      ),
       balances: ofxData.balances,
       currency: ofxData.currency,
     });

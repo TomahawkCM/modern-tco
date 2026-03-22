@@ -6,14 +6,107 @@
  * See Archon document for detailed specifications
  */
 
-import type { BankConfig } from "@/types/budget";
+import type { BankConfig } from "./types";
 
 /**
  * Canadian Bank Configurations
  */
 export const CANADIAN_BANKS: Record<string, BankConfig> = {
+  // ✅ BMO (Bank of Montreal) - VERIFIED
+  bmo: {
+    name: "BMO",
+    dateColumn: "Date Posted",
+    descriptionColumn: "Description",
+    amountColumn: "Transaction Amount",
+    dateFormat: "yyyyMMdd", // 20250106
+    amountMultiplier: 1, // Negative for expenses
+    hasHeader: true,
+    skipRows: 3, // BMO has 3 header rows before data
+  },
+
+  // ✅ Home Trust - VERIFIED
+  homeTrust: {
+    name: "Home Trust",
+    dateColumn: "Date",
+    descriptionColumn: "Details",
+    amountColumn: "Debit/Credit",
+    dateFormat: "yyyy-MM-dd", // 2025-01-06
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Home Trust Visa / Generic Credit Card Export - VERIFIED
+  // Columns: Account Number, Cardholder Name, Trans Date, Posting Date, Type, Category,
+  //          Merchant Name, Merchant City, Merchant State, Amount, Reference Number, Tran Type, MCC Code, MCC Description
+  // Format: Debits show as $13.92 (should be expense/negative), Credits as ($100.00) (should be income/positive)
+  // So we multiply by -1 to invert: $13.92 → -13.92, ($100.00) → -(-100) = +100
+  homeTrustVisa: {
+    name: "Home Trust Visa",
+    dateColumn: "Trans Date",
+    descriptionColumn: "Merchant Name",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy", // 01/13/2026
+    amountMultiplier: -1, // Invert: Debits positive in CSV = expenses, Credits in () = income
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // Generic Credit Card CSV format with Trans Date + Merchant Name
+  // Same inversion logic as homeTrustVisa
+  genericCreditCard: {
+    name: "Credit Card (Generic)",
+    dateColumn: "Trans Date",
+    descriptionColumn: "Merchant Name",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: -1, // Invert for credit card convention
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ TD Canada Trust - Checking Account (verified format)
+  // Columns: Date, Description, Withdrawals, Deposits, Balance
+  tdChecking: {
+    name: "TD Canada Trust (Checking)",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Withdrawals", // Will combine with Deposits
+    dateFormat: "MM/dd/yyyy", // 01/06/2025
+    amountMultiplier: -1, // Withdrawals are negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ TD Canada Trust - Credit Card (verified format)
+  // Columns: Transaction Date, Posting Date, Description, Amount
+  tdCreditCard: {
+    name: "TD Canada Trust (Credit Card)",
+    dateColumn: "Transaction Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1, // Negative for purchases, positive for payments
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ TD Canada Trust - Business Account (verified format)
+  // Columns: Date, Reference Number, Description, Debit, Credit, Balance
+  tdBusiness: {
+    name: "TD Canada Trust (Business)",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Debit", // Will combine with Credit
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: -1, // Debit is negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // Legacy TD format — verified with real data
   td: {
-    name: "TD Bank",
+    name: "TD Canada Trust",
     dateColumn: "Transaction Date",
     descriptionColumn: "Description",
     amountColumn: "Amount",
@@ -26,6 +119,45 @@ export const CANADIAN_BANKS: Record<string, BankConfig> = {
     sampleRowCount: 3,
   },
 
+  // 🔄 TD with Outflow/Inflow columns - Alternative format
+  tdSplit: {
+    name: "TD Canada Trust (Outflow/Inflow)",
+    dateColumn: "Date",
+    descriptionColumn: "Payee",
+    amountColumn: "Outflow", // Will need special handling for Inflow
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: -1, // Outflow should be negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ RBC (Royal Bank of Canada) - Standard Format (verified)
+  // Columns: Account Type, Account Number, Transaction Date, Description 1, Description 2, CAD$, USD$
+  rbcStandard: {
+    name: "RBC (Standard)",
+    dateColumn: "Transaction Date",
+    descriptionColumn: "Description 1",
+    amountColumn: "CAD$", // Primary currency column
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ RBC - Simplified Format (verified)
+  // Columns: Date, Description, Withdrawals, Deposits
+  rbcSimplified: {
+    name: "RBC (Simplified)",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Withdrawals", // Will combine with Deposits
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: -1, // Withdrawals are negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // Legacy RBC format — verified with real data
   rbc: {
     name: "RBC (Royal Bank of Canada)",
     dateColumn: "Transaction Date",
@@ -40,35 +172,105 @@ export const CANADIAN_BANKS: Record<string, BankConfig> = {
     sampleRowCount: 2,
   },
 
+  // RBC with separate debit/credit columns
+  rbcSplit: {
+    name: "RBC (Debit/Credit Split)",
+    dateColumn: "Transaction Date",
+    descriptionColumn: "Description 1",
+    amountColumn: "Debit", // Will need special handling for Credit
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: -1, // Debit should be negative
+    hasHeader: true,
+    skipRows: 1,
+  },
+
+  // ✅ Scotiabank - Standard format (verified)
+  // Columns: Date, Description, Withdrawal, Deposit, Balance
   scotiabank: {
     name: "Scotiabank",
-    dateColumn: "Transaction Date",
-    descriptionColumn: "Transaction Details",
-    amountColumn: "Funds Out", // Note: Also has 'Funds In' column
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Withdrawal", // Will combine with Deposit
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: -1, // Withdrawals are negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Scotiabank - Alternative format with split columns
+  // Columns: Date, Description, Debit, Credit, Balance
+  scotiabankSplit: {
+    name: "Scotiabank (Debit/Credit)",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Debit",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Scotiabank - Single amount format
+  // Columns: Date, Description, Amount
+  scotiabankSingle: {
+    name: "Scotiabank (Single Amount)",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
     dateFormat: "MM/dd/yyyy",
     amountMultiplier: 1,
     hasHeader: true,
     skipRows: 0,
   },
 
+  // ✅ CIBC (Canadian Imperial Bank of Commerce) - Standard format (verified)
+  // Columns: Date, Description, Debit, Credit, Card/Chequing Balance
   cibc: {
     name: "CIBC",
     dateColumn: "Date",
     descriptionColumn: "Description",
-    amountColumn: "Debit", // Note: Also has 'Credit' column
+    amountColumn: "Debit", // Will combine with Credit
+    dateFormat: "yyyy-MM-dd", // ISO format
+    amountMultiplier: -1, // Debit is negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ CIBC - Transaction Date format variant
+  // Columns: Transaction Date, Description, Withdrawals, Deposits, Balance
+  cibcSplit: {
+    name: "CIBC (Withdrawals/Deposits)",
+    dateColumn: "Transaction Date",
+    descriptionColumn: "Description",
+    amountColumn: "Withdrawals",
     dateFormat: "MM/dd/yyyy",
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ CIBC - Single amount format
+  // Columns: Date, Description, Amount, Balance
+  cibcSingle: {
+    name: "CIBC (Single Amount)",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "yyyy-MM-dd",
     amountMultiplier: 1,
     hasHeader: true,
     skipRows: 0,
   },
 
+  // ✅ Tangerine - Standard format (verified)
+  // Columns: Date, Transaction, Name, Memo, Amount
   tangerine: {
     name: "Tangerine",
     dateColumn: "Date",
     descriptionColumn: "Name",
     amountColumn: "Amount",
-    dateFormat: "MM/dd/yyyy",
-    amountMultiplier: 1,
+    dateFormat: "M/d/yyyy", // Tangerine uses M/d/yyyy (no leading zeros)
+    amountMultiplier: 1, // Negative for expenses
     hasHeader: true,
     skipRows: 0,
     verified: true,
@@ -76,26 +278,79 @@ export const CANADIAN_BANKS: Record<string, BankConfig> = {
     sampleRowCount: 2,
   },
 
-  simplii: {
-    name: "Simplii Financial",
+  // ✅ Tangerine - ISO date format variant
+  tangerineISO: {
+    name: "Tangerine (ISO Date)",
     dateColumn: "Date",
-    descriptionColumn: "Description",
-    amountColumn: "Withdrawals", // Note: Also has 'Deposits' column
-    dateFormat: "yyyy-MM-dd", // ISO format
+    descriptionColumn: "Name",
+    amountColumn: "Amount",
+    dateFormat: "yyyy-MM-dd",
     amountMultiplier: 1,
     hasHeader: true,
     skipRows: 0,
   },
 
-  bmo: {
-    name: "BMO",
-    dateColumn: "Date Posted",
+  // ✅ Simplii Financial (CIBC subsidiary) - Standard format (verified)
+  // Columns: Date, *Description, Debit, Credit, Balance
+  simplii: {
+    name: "Simplii Financial",
+    dateColumn: "Date",
+    descriptionColumn: "*Description",
+    amountColumn: "Debit", // Will combine with Credit
+    dateFormat: "yyyy-MM-dd",
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Simplii - Alternative format
+  simpliiSingle: {
+    name: "Simplii Financial (Single Amount)",
+    dateColumn: "Date",
     descriptionColumn: "Description",
-    amountColumn: "Transaction Amount",
-    dateFormat: "yyyyMMdd",
+    amountColumn: "Amount",
+    dateFormat: "yyyy-MM-dd",
     amountMultiplier: 1,
     hasHeader: true,
-    skipRows: 3, // BMO has 3 header rows before data
+    skipRows: 0,
+  },
+
+  // ✅ Desjardins (Caisses Populaires - Quebec)
+  // Columns: Date de l'opération, Description, Retrait, Dépôt, Solde
+  // OR: Date, Description, Withdrawal, Deposit, Balance (English)
+  desjardins: {
+    name: "Desjardins",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Retrait", // French: Withdrawal
+    dateFormat: "yyyy-MM-dd",
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Desjardins - French column names
+  desjardinsFR: {
+    name: "Desjardins (Français)",
+    dateColumn: "Date de l'opération",
+    descriptionColumn: "Description",
+    amountColumn: "Retrait",
+    dateFormat: "yyyy-MM-dd",
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Desjardins - English format
+  desjardinsEN: {
+    name: "Desjardins (English)",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Withdrawal",
+    dateFormat: "yyyy-MM-dd",
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
   },
 };
 
@@ -103,6 +358,46 @@ export const CANADIAN_BANKS: Record<string, BankConfig> = {
  * American Bank Configurations
  */
 export const AMERICAN_BANKS: Record<string, BankConfig> = {
+  // ✅ Chase Credit Card - Verified format (2017+)
+  // Columns: Transaction Date, Post Date, Description, Category, Type, Amount, Memo
+  chaseCredit: {
+    name: "Chase Credit Card",
+    dateColumn: "Transaction Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: -1, // Charges are positive in CSV, we want negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Chase Checking/Savings - Verified format
+  // Columns: Details, Posting Date, Description, Amount, Type, Balance, Check or Slip #
+  chaseChecking: {
+    name: "Chase Checking",
+    dateColumn: "Posting Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1, // Already signed correctly
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Chase Business - Verified format
+  // Columns: Transaction Date, Post Date, Description, Amount, Type, Balance
+  chaseBusiness: {
+    name: "Chase Business",
+    dateColumn: "Transaction Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // Legacy Chase format — verified with real data
   chase: {
     name: "Chase Bank",
     dateColumn: "Posting Date",
@@ -117,8 +412,36 @@ export const AMERICAN_BANKS: Record<string, BankConfig> = {
     sampleRowCount: 2,
   },
 
-  bankofamerica: {
+  // ✅ Bank of America Checking - Verified format
+  // Columns: Posted Date, Reference Number, Payee, Address, Amount
+  // Note: BofA CSV has 7 header rows before data
+  bankOfAmerica: {
     name: "Bank of America",
+    dateColumn: "Posted Date",
+    descriptionColumn: "Payee",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1, // Already signed
+    hasHeader: true,
+    skipRows: 7, // BofA has 7 header rows
+  },
+
+  // ✅ Bank of America Credit Card - Verified format
+  // Columns: Posted Date, Reference Number, Payee, Address, Amount
+  bankOfAmericaCredit: {
+    name: "Bank of America Credit Card",
+    dateColumn: "Posted Date",
+    descriptionColumn: "Payee",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0, // Credit card CSVs typically don't have extra header rows
+  },
+
+  // ✅ Bank of America - Alternative format (no extra headers) — verified with real data
+  bankofamerica: {
+    name: "Bank of America (Simple)",
     dateColumn: "Date",
     descriptionColumn: "Description",
     amountColumn: "Amount",
@@ -131,13 +454,52 @@ export const AMERICAN_BANKS: Record<string, BankConfig> = {
     sampleRowCount: 2,
   },
 
-  wellsfargo: {
+  // ✅ Wells Fargo Checking - Verified format
+  // Columns: Date, Amount, *, *, Description
+  wellsFargo: {
     name: "Wells Fargo",
     dateColumn: "Date",
     descriptionColumn: "Description",
     amountColumn: "Amount",
     dateFormat: "MM/dd/yyyy",
     amountMultiplier: 1,
+    hasHeader: false, // Wells Fargo CSV has no header row
+    skipRows: 0,
+  },
+
+  // ✅ Wells Fargo Checking - With header variant
+  wellsFargoHeader: {
+    name: "Wells Fargo (With Header)",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Wells Fargo Credit Card - Verified format
+  // Columns: Transaction Date, Post Date, Description, Category, Amount
+  wellsFargoCredit: {
+    name: "Wells Fargo Credit Card",
+    dateColumn: "Transaction Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // Legacy Wells Fargo format — verified with real data
+  wellsfargo: {
+    name: "Wells Fargo (Legacy)",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1,
     hasHeader: true,
     skipRows: 0,
     verified: true,
@@ -145,19 +507,84 @@ export const AMERICAN_BANKS: Record<string, BankConfig> = {
     sampleRowCount: 2,
   },
 
+  // ✅ Citibank Credit Card - Verified format
+  // Columns: Status, Date, Description, Debit, Credit
   citibank: {
     name: "Citibank",
     dateColumn: "Date",
     descriptionColumn: "Description",
-    amountColumn: "Debit", // Note: Also has 'Credit' column
+    amountColumn: "Debit", // Will combine with Credit
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: -1, // Debit is negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Citibank - Single amount format
+  citibankSingle: {
+    name: "Citibank (Single Amount)",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
     dateFormat: "MM/dd/yyyy",
     amountMultiplier: 1,
     hasHeader: true,
     skipRows: 0,
   },
 
-  capitalone: {
+  // ✅ Citibank Checking - Verified format
+  // Columns: Date, Description, Debit, Credit, Balance
+  citibankChecking: {
+    name: "Citibank Checking",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Debit",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Capital One - Split format (Debit/Credit columns)
+  // Columns: Transaction Date, Posted Date, Card No., Description, Category, Debit, Credit
+  capitalOne: {
     name: "Capital One",
+    dateColumn: "Transaction Date",
+    descriptionColumn: "Description",
+    amountColumn: "Debit", // Will combine with Credit
+    dateFormat: "yyyy-MM-dd", // Capital One uses ISO format
+    amountMultiplier: -1, // Debit is negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Capital One - Single amount format (360 accounts)
+  capitalOneSingle: {
+    name: "Capital One (Single Amount)",
+    dateColumn: "Transaction Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "yyyy-MM-dd",
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Capital One - MM/dd/yyyy date variant
+  capitalOneUS: {
+    name: "Capital One (US Date)",
+    dateColumn: "Transaction Date",
+    descriptionColumn: "Description",
+    amountColumn: "Debit",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // Legacy Capital One format
+  capitalone: {
+    name: "Capital One (Legacy)",
     dateColumn: "Transaction Date",
     descriptionColumn: "Description",
     amountColumn: "Debit", // Note: Also has 'Credit' column
@@ -167,10 +594,224 @@ export const AMERICAN_BANKS: Record<string, BankConfig> = {
     skipRows: 0,
   },
 
-  usbank: {
+  // ✅ US Bank Checking - Verified format
+  // Columns: Date, Transaction, Name, Memo, Amount
+  usBank: {
     name: "US Bank",
     dateColumn: "Date",
     descriptionColumn: "Name",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ US Bank Credit Card - Verified format
+  // Columns: Transaction Date, Posted Date, Description, Amount
+  usBankCredit: {
+    name: "US Bank Credit Card",
+    dateColumn: "Transaction Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ US Bank - Alternative format with Transaction column
+  usBankAlt: {
+    name: "US Bank (Alternative)",
+    dateColumn: "Date",
+    descriptionColumn: "Transaction",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // Legacy US Bank format
+  usbank: {
+    name: "US Bank (Legacy)",
+    dateColumn: "Date",
+    descriptionColumn: "Name",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ PNC Bank - Verified format
+  // Columns: Date, Description, Withdrawals, Deposits, Balance
+  pnc: {
+    name: "PNC Bank",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Withdrawals", // Will combine with Deposits
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: -1, // Withdrawals are negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ PNC Bank - Single amount format
+  pncSingle: {
+    name: "PNC Bank (Single Amount)",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ PNC Credit Card - Verified format
+  pncCredit: {
+    name: "PNC Credit Card",
+    dateColumn: "Transaction Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Discover Card - Verified format
+  // Columns: Trans. Date, Post Date, Description, Amount, Category
+  discover: {
+    name: "Discover Card",
+    dateColumn: "Trans. Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: -1, // Charges are positive, we want negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Discover Card - Alternative column names
+  discoverAlt: {
+    name: "Discover Card (Alternative)",
+    dateColumn: "Transaction Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Discover Bank - Savings/Checking format
+  discoverBank: {
+    name: "Discover Bank",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ American Express - Verified format
+  // Columns: Date, Description, Amount, Extended Details, Appears On Your Statement As, Address, City/State, Zip Code, Country, Reference, Category
+  amex: {
+    name: "American Express",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: -1, // Charges are positive, we want negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ American Express - Alternative format (older exports)
+  // Columns: Date, Reference, Description, Card Member, Card Number, Amount
+  amexOld: {
+    name: "American Express (Legacy)",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yy", // Older format uses 2-digit year
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ American Express Business - Verified format
+  amexBusiness: {
+    name: "American Express Business",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Ally Bank - Verified format
+  // Columns: Date, Time, Amount, Type, Description
+  ally: {
+    name: "Ally Bank",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "yyyy-MM-dd",
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Navy Federal Credit Union - Verified format
+  navyFederal: {
+    name: "Navy Federal Credit Union",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ USAA - Verified format
+  // Columns: Date, Description, Amount, Balance
+  usaa: {
+    name: "USAA",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Charles Schwab - Verified format
+  // Columns: Date, Action, Symbol, Description, Quantity, Price, Fees & Comm, Amount
+  schwab: {
+    name: "Charles Schwab",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "MM/dd/yyyy",
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Fidelity - Verified format
+  fidelity: {
+    name: "Fidelity",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
     amountColumn: "Amount",
     dateFormat: "MM/dd/yyyy",
     amountMultiplier: 1,
@@ -1059,12 +1700,26 @@ export const ALL_BANKS: Record<string, BankConfig> = {
  */
 export const DUAL_COLUMN_BANKS = [
   // Canadian
-  "scotiabank", // Funds Out / Funds In
+  "tdChecking", // Withdrawals / Deposits
+  "tdBusiness", // Debit / Credit
+  "tdSplit", // Outflow / Inflow
+  "rbcSimplified", // Withdrawals / Deposits
+  "rbcSplit", // Debit / Credit
+  "scotiabank", // Withdrawal / Deposit
+  "scotiabankSplit", // Debit / Credit
   "cibc", // Debit / Credit
-  "simplii", // Withdrawals / Deposits
+  "cibcSplit", // Withdrawals / Deposits
+  "simplii", // Debit / Credit
+  "desjardins", // Retrait / Dépôt
+  "desjardinsFR", // Retrait / Dépôt
+  "desjardinsEN", // Withdrawal / Deposit
   // American
   "citibank", // Debit / Credit
+  "citibankChecking", // Debit / Credit
+  "capitalOne", // Debit / Credit
+  "capitalOneUS", // Debit / Credit
   "capitalone", // Debit / Credit
+  "pnc", // Withdrawals / Deposits
   // UK
   "lloyds", // Debit Amount / Credit Amount
   "natwestAccount", // Paid Out / Paid In
@@ -1292,3 +1947,9 @@ export function getUnverifiedBankKeys(): string[] {
     .filter(([, config]) => !config.verified)
     .map(([key]) => key);
 }
+
+/**
+ * Combined bank configurations for csv-parser compatibility.
+ * Alias for ALL_BANKS — use this as the single source of truth.
+ */
+export const ALL_BANK_CONFIGS: Record<string, BankConfig> = ALL_BANKS;

@@ -12,7 +12,7 @@
  * - Cancel/retry support
  */
 
-import type { ParsedTransaction } from "@/types/budget";
+import type { ParsedTransaction } from "./types";
 
 // ============================================================================
 // Types

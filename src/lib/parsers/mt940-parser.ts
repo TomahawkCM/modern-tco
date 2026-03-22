@@ -12,7 +12,7 @@
  *   :62F: Closing balance
  */
 
-import type { ParsedTransaction } from "@/types/budget";
+import type { ParsedTransaction } from "./types";
 
 export interface MT940ParseOptions {
   locale?: string;
@@ -34,7 +34,7 @@ export async function parseMT940File(
 
     // mt940-js expects ArrayBuffer — convert string to ArrayBuffer
     const encoder = new TextEncoder();
-    const {buffer} = encoder.encode(content);
+    const { buffer } = encoder.encode(content);
 
     const statements = await mt940.read(buffer);
     const transactions: ParsedTransaction[] = [];
@@ -141,12 +141,12 @@ function parseMT940Manual(content: string): ParsedTransaction[] {
       let description = ref;
       let j = i + 1;
       while (j < lines.length && lines[j].startsWith(":86:")) {
-        description += ` ${  lines[j].substring(4).trim()}`;
+        description += ` ${lines[j].substring(4).trim()}`;
         j++;
       }
       // Also append continuation lines (not starting with :)
       while (j < lines.length && !lines[j].startsWith(":") && lines[j].trim().length > 0) {
-        description += ` ${  lines[j].trim()}`;
+        description += ` ${lines[j].trim()}`;
         j++;
       }
 

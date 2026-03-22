@@ -4,7 +4,7 @@
  * Normalizes dates, amounts, currencies, and descriptions.
  */
 
-import type { ParsedTransaction } from "@/types/budget";
+import type { ParsedTransaction } from "./types";
 import { parseAmount, detectCurrencySymbol } from "./intl-amount-parser";
 import { parseDate } from "./intl-date-parser";
 

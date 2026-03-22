@@ -14,7 +14,7 @@
  *   !Type:xxx = Account type header
  */
 
-import type { ParsedTransaction } from "@/types/budget";
+import type { ParsedTransaction } from "./types";
 import { parseDate } from "./intl-date-parser";
 import { parseAmount } from "./intl-amount-parser";
 
