@@ -1,8 +1,8 @@
 /**
- * MT940 (SWIFT) Bank Statement Parser
- * Parses MT940/SWIFT bank statement format, widely used in Europe and internationally.
+ * MT940/MT942 (SWIFT) Bank Statement Parser
+ * Parses SWIFT bank statement formats, widely used in Europe and internationally.
  *
- * MT940 uses tagged fields:
+ * MT940 (end-of-day statement) uses tagged fields:
  *   :20:  Transaction reference
  *   :25:  Account identification
  *   :28C: Statement number/sequence
@@ -10,6 +10,13 @@
  *   :61:  Statement line (transaction)
  *   :86:  Information to account owner (description)
  *   :62F: Closing balance
+ *
+ * MT942 (interim/intraday report) adds:
+ *   :34F: Floor limit indicator (currency + amount)
+ *   :13D: Date/time indication
+ *   :90D: Number and sum of debit entries
+ *   :90C: Number and sum of credit entries
+ * MT942 uses the same :61: and :86: tags for transactions.
  */
 
 import type { ParsedTransaction } from "./types";
@@ -173,8 +180,34 @@ function parseMT940Manual(content: string): ParsedTransaction[] {
 }
 
 /**
- * Detect if content is an MT940 file.
+ * Parse an MT942 (interim/intraday) file.
+ * Uses the same parser as MT940 since transaction tags (:61:, :86:) are identical.
+ */
+export async function parseMT942File(
+  content: string,
+  options: MT940ParseOptions = {}
+): Promise<ParsedTransaction[]> {
+  return parseMT940File(content, options);
+}
+
+/**
+ * Detect if content is an MT940 file (end-of-day statement).
  */
 export function isMT940Content(content: string): boolean {
   return content.includes(":20:") && (content.includes(":60F:") || content.includes(":61:"));
+}
+
+/**
+ * Detect if content is an MT942 file (interim/intraday report).
+ * MT942 has :34F: (floor limit) instead of :60F: (opening balance).
+ */
+export function isMT942Content(content: string): boolean {
+  return content.includes(":20:") && content.includes(":34F:") && content.includes(":61:");
+}
+
+/**
+ * Detect if content is any SWIFT MT format (MT940 or MT942).
+ */
+export function isSWIFTContent(content: string): boolean {
+  return isMT940Content(content) || isMT942Content(content);
 }

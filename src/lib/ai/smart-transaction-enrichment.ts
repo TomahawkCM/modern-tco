@@ -43,7 +43,7 @@ export interface EnrichedTransaction extends ParsedTransaction {
 
   // Recurring detection
   isLikelyRecurring?: boolean;
-  recurringFrequency?: "weekly" | "biweekly" | "monthly" | "quarterly" | "yearly";
+  recurringFrequency?: "weekly" | "biweekly" | "monthly" | "quarterly" | "semi-annual" | "yearly";
   recurringConfidence?: number; // 0-1 confidence in recurring pattern
 
   // Metadata
@@ -226,7 +226,7 @@ function detectRecurringPattern(
   allTransactions: ParsedTransaction[]
 ): {
   isLikelyRecurring: boolean;
-  frequency?: "weekly" | "biweekly" | "monthly" | "quarterly" | "yearly";
+  frequency?: "weekly" | "biweekly" | "monthly" | "quarterly" | "semi-annual" | "yearly";
   confidence: number;
 } {
   // Look for similar transactions (same merchant/amount)
@@ -243,7 +243,8 @@ function detectRecurringPattern(
   });
 
   // Need at least 2 similar transactions to detect pattern
-  if (similar.length < 2) {
+  // For annual patterns, 2 occurrences is enough (1 interval)
+  if (similar.length < 1) {
     return { isLikelyRecurring: false, confidence: 0 };
   }
 
@@ -264,17 +265,30 @@ function detectRecurringPattern(
   const stdDev = Math.sqrt(variance);
 
   // Low variance = more likely recurring
-  const consistencyScore = 1 / (1 + stdDev / avgInterval);
+  const consistencyScore = 1 / (1 + stdDev / Math.max(avgInterval, 1));
 
-  // Classify frequency
-  let frequency: "weekly" | "biweekly" | "monthly" | "quarterly" | "yearly" | undefined;
-  if (avgInterval >= 6 && avgInterval <= 8) frequency = "weekly";
-  else if (avgInterval >= 13 && avgInterval <= 15) frequency = "biweekly";
-  else if (avgInterval >= 28 && avgInterval <= 32) frequency = "monthly";
-  else if (avgInterval >= 88 && avgInterval <= 95) frequency = "quarterly";
-  else if (avgInterval >= 360 && avgInterval <= 370) frequency = "yearly";
+  // Classify frequency (widened windows for robustness)
+  let frequency:
+    | "weekly"
+    | "biweekly"
+    | "monthly"
+    | "quarterly"
+    | "semi-annual"
+    | "yearly"
+    | undefined;
+  if (avgInterval >= 5 && avgInterval <= 9) frequency = "weekly";
+  else if (avgInterval >= 12 && avgInterval <= 16) frequency = "biweekly";
+  else if (avgInterval >= 26 && avgInterval <= 35) frequency = "monthly";
+  else if (avgInterval >= 85 && avgInterval <= 100) frequency = "quarterly";
+  else if (avgInterval >= 165 && avgInterval <= 200) frequency = "semi-annual";
+  else if (avgInterval >= 350 && avgInterval <= 380) frequency = "yearly";
 
-  const isLikelyRecurring = frequency !== undefined && consistencyScore > 0.7;
+  // Require more occurrences for shorter intervals, fewer for longer
+  const minOccurrences = frequency === "yearly" ? 2 : frequency === "semi-annual" ? 2 : 3;
+  const totalOccurrences = similar.length + 1; // +1 for the transaction itself
+
+  const isLikelyRecurring =
+    frequency !== undefined && consistencyScore > 0.6 && totalOccurrences >= minOccurrences;
 
   return {
     isLikelyRecurring,

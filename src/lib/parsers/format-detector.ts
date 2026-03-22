@@ -12,7 +12,9 @@ export type FileFormat =
   | "pdf"
   | "qif"
   | "mt940"
+  | "camt052"
   | "camt053"
+  | "camt054"
   | "unknown";
 
 export interface FormatDetectionResult {
@@ -76,13 +78,24 @@ export function detectFromContent(content: string): {
         signature: "XML-OFX",
       };
     }
-    // Check for CAMT.053 (ISO 20022 bank-to-customer statement)
-    if (upper.includes("URN:ISO:STD:ISO:20022:TECH:XSD:CAMT.053")) {
-      return {
-        format: "camt053",
-        confidence: 0.95,
-        signature: "CAMT053",
-      };
+    // Check for ISO 20022 CAMT variants
+    if (
+      upper.includes("URN:ISO:STD:ISO:20022:TECH:XSD:CAMT.052") ||
+      upper.includes("<BKTOCSTMRACCTRPT")
+    ) {
+      return { format: "camt052", confidence: 0.95, signature: "CAMT052" };
+    }
+    if (
+      upper.includes("URN:ISO:STD:ISO:20022:TECH:XSD:CAMT.053") ||
+      upper.includes("<BKTOCSTMRSTMT")
+    ) {
+      return { format: "camt053", confidence: 0.95, signature: "CAMT053" };
+    }
+    if (
+      upper.includes("URN:ISO:STD:ISO:20022:TECH:XSD:CAMT.054") ||
+      upper.includes("<BKTOCSTMRDBTCDTNTFCTN")
+    ) {
+      return { format: "camt054", confidence: 0.95, signature: "CAMT054" };
     }
     // Might be some other XML format
     return {
@@ -115,17 +128,18 @@ export function detectFromContent(content: string): {
   }
 
   // ========================================
-  // CAMT.053 without XML declaration (starts with <Document>)
+  // CAMT without XML declaration (starts with <Document>)
   // ========================================
-  if (
-    trimmed.startsWith("<Document") &&
-    upper.includes("URN:ISO:STD:ISO:20022:TECH:XSD:CAMT.053")
-  ) {
-    return {
-      format: "camt053",
-      confidence: 0.95,
-      signature: "CAMT053",
-    };
+  if (trimmed.startsWith("<Document")) {
+    if (upper.includes("CAMT.052") || upper.includes("<BKTOCSTMRACCTRPT")) {
+      return { format: "camt052", confidence: 0.95, signature: "CAMT052" };
+    }
+    if (upper.includes("CAMT.054") || upper.includes("<BKTOCSTMRDBTCDTNTFCTN")) {
+      return { format: "camt054", confidence: 0.95, signature: "CAMT054" };
+    }
+    if (upper.includes("CAMT.053") || upper.includes("<BKTOCSTMRSTMT")) {
+      return { format: "camt053", confidence: 0.95, signature: "CAMT053" };
+    }
   }
 
   // ========================================
@@ -408,10 +422,21 @@ export function validateFormat(
       }
       break;
 
+    case "camt052":
+      if (!content.includes("camt.052") && !content.includes("BkToCstmrAcctRpt")) {
+        errors.push("Missing CAMT.052 namespace or root element");
+      }
+      break;
+
     case "camt053":
-      // Check for ISO 20022 CAMT.053 namespace
-      if (!content.includes("camt.053")) {
-        errors.push("Missing CAMT.053 namespace declaration");
+      if (!content.includes("camt.053") && !content.includes("BkToCstmrStmt")) {
+        errors.push("Missing CAMT.053 namespace or root element");
+      }
+      break;
+
+    case "camt054":
+      if (!content.includes("camt.054") && !content.includes("BkToCstmrDbtCdtNtfctn")) {
+        errors.push("Missing CAMT.054 namespace or root element");
       }
       break;
 
@@ -437,7 +462,9 @@ export function getFormatDisplayName(format: FileFormat): string {
     pdf: "PDF (Bank Statement)",
     qif: "QIF (Quicken Interchange Format)",
     mt940: "MT940 (SWIFT Bank Statement)",
+    camt052: "CAMT.052 (ISO 20022 Intraday Report)",
     camt053: "CAMT.053 (ISO 20022 Bank Statement)",
+    camt054: "CAMT.054 (ISO 20022 Debit/Credit Notification)",
     unknown: "Unknown Format",
   };
   return names[format] || "Unknown Format";
@@ -447,7 +474,7 @@ export function getFormatDisplayName(format: FileFormat): string {
  * Get supported formats list
  */
 export function getSupportedFormats(): FileFormat[] {
-  return ["csv", "ofx", "qfx", "pdf", "qif", "mt940", "camt053"];
+  return ["csv", "ofx", "qfx", "pdf", "qif", "mt940", "camt052", "camt053", "camt054"];
 }
 
 /**
