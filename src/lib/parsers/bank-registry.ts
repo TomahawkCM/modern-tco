@@ -3,10 +3,23 @@
  *
  * Runtime bank config registration, validation, and lookup.
  * Allows SDK consumers to add custom bank configs without code changes.
+ *
+ * Features:
+ * - Register/unregister banks at runtime
+ * - Load configs from JSON strings or files
+ * - Zod-based validation via bank-config-schema.ts
+ * - Auto-suggest config from CSV sample data
+ * - Export configs for community sharing
  */
 
 import type { BankConfig } from "./types";
 import { ALL_BANK_CONFIGS } from "./bank-configs";
+import {
+  parseBankConfigJSON,
+  validateBankConfigZod,
+  generateBankConfigTemplate,
+  exportBankConfig,
+} from "./bank-config-schema";
 
 // ---------------------------------------------------------------------------
 // Registry
@@ -105,6 +118,48 @@ export function registerBanksFromJSON(configs: Record<string, BankConfig>): {
 
   return { registered, errors };
 }
+
+/**
+ * Load and register banks from a JSON string.
+ * Accepts both config file format ({banks: {...}}) and plain key→config maps.
+ * Uses Zod validation for type safety.
+ *
+ * @example
+ * const json = fs.readFileSync('banks.json', 'utf-8');
+ * const result = loadBankConfigJSON(json);
+ * console.log(`Registered: ${result.registered.join(', ')}`);
+ */
+export function loadBankConfigJSON(jsonString: string): {
+  registered: string[];
+  errors: Record<string, string[]>;
+} {
+  const { valid, errors } = parseBankConfigJSON(jsonString);
+  const registered: string[] = [];
+
+  for (const [key, config] of Object.entries(valid)) {
+    customBanks[key] = config;
+    registered.push(key);
+  }
+
+  return { registered, errors };
+}
+
+/**
+ * Reset all custom bank registrations.
+ * Built-in banks are unaffected.
+ */
+export function resetCustomBanks(): void {
+  for (const key of Object.keys(customBanks)) {
+    delete customBanks[key];
+  }
+}
+
+// Re-export schema utilities for SDK consumers
+export {
+  generateBankConfigTemplate,
+  exportBankConfig,
+  validateBankConfigZod,
+} from "./bank-config-schema";
 
 // ---------------------------------------------------------------------------
 // Validation

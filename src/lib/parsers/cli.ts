@@ -24,6 +24,8 @@ import { parseCAMTFile } from "./camt-parser";
 import { detectBankWithConfidence } from "./bank-detector";
 import { getAllBankKeys, getBankConfig } from "./bank-configs";
 import { getBanksByRegion } from "./bank-configs";
+import { loadBankConfigJSON, suggestBankConfig, resetCustomBanks } from "./bank-registry";
+import { generateBankConfigTemplate } from "./bank-config-schema";
 import { exportTransactions, getSupportedExportFormats, type ExportFormat } from "./exporters";
 import type { ParsedTransaction, BankConfig } from "./types";
 
@@ -197,6 +199,97 @@ program
           `  ${key.padEnd(30)} ${(config?.name ?? "").padEnd(35)} [${region}]${verified}`
         );
       }
+    }
+  });
+
+// ============================================================================
+// config command
+// ============================================================================
+
+const configCmd = program.command("config").description("Manage bank configurations");
+
+configCmd
+  .command("template")
+  .description("Generate a bank config template JSON file")
+  .option("-k, --key <key>", "Bank key name", "my_bank")
+  .option("--out-file <path>", "Write template to file")
+  .action(async (opts) => {
+    const template = generateBankConfigTemplate(opts.key);
+    if (opts.outFile) {
+      await writeFile(resolve(opts.outFile), template, "utf-8");
+      console.error(`Template written to ${opts.outFile}`);
+    } else {
+      process.stdout.write(`${template}\n`);
+    }
+  });
+
+configCmd
+  .command("validate")
+  .description("Validate a bank config JSON file")
+  .argument("<file>", "Path to bank config JSON file")
+  .action(async (filePath: string) => {
+    try {
+      const content = await readFile(resolve(filePath), "utf-8");
+      const result = loadBankConfigJSON(content);
+      resetCustomBanks(); // Don't persist — just validate
+
+      const validCount = result.registered.length;
+      const errorCount = Object.keys(result.errors).length;
+
+      if (validCount > 0) {
+        console.log(`Valid banks (${validCount}): ${result.registered.join(", ")}`);
+      }
+      if (errorCount > 0) {
+        console.error(`\nErrors (${errorCount}):`);
+        for (const [key, errs] of Object.entries(result.errors)) {
+          console.error(`  ${key}:`);
+          for (const e of errs) {
+            console.error(`    - ${e}`);
+          }
+        }
+        process.exit(1);
+      }
+    } catch (err) {
+      console.error(`Error: ${err instanceof Error ? err.message : String(err)}`);
+      process.exit(1);
+    }
+  });
+
+configCmd
+  .command("suggest")
+  .description("Auto-suggest a bank config from a sample CSV file")
+  .argument("<file>", "Path to CSV file")
+  .action(async (filePath: string) => {
+    try {
+      const content = await readFile(resolve(filePath), "utf-8");
+      const lines = content.split("\n").filter((l) => l.trim());
+
+      if (lines.length < 2) {
+        console.error("Error: CSV must have at least a header and one data row.");
+        process.exit(1);
+      }
+
+      const headers = lines[0].split(",").map((h) => h.trim().replace(/^"|"$/g, ""));
+      const sampleRows = lines
+        .slice(1, 6)
+        .map((l) => l.split(",").map((c) => c.trim().replace(/^"|"$/g, "")));
+
+      const result = suggestBankConfig(headers, sampleRows);
+
+      console.log(
+        JSON.stringify(
+          {
+            confidence: `${Math.round(result.confidence * 100)}%`,
+            suggestedConfig: result.config,
+            suggestions: result.suggestions,
+          },
+          null,
+          2
+        )
+      );
+    } catch (err) {
+      console.error(`Error: ${err instanceof Error ? err.message : String(err)}`);
+      process.exit(1);
     }
   });
 
