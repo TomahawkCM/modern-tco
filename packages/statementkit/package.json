@@ -1,6 +1,6 @@
 {
   "name": "statementkit",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Privacy-first bank statement parsing SDK. Parse CSV, OFX, QFX, QIF, MT940, CAMT.052/053/054, and scanned PDFs. 30+ banks, 68 OCR languages, 70+ currencies. 100% offline.",
   "type": "module",
   "main": "./dist/index.cjs",
