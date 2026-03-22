@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /**
  * StatementKit CLI
  *
