@@ -325,8 +325,8 @@ async function parseFile(
     case "ofx":
     case "qfx":
     case "qbo": {
-      const result = await parseOFXFile(content);
-      return result;
+      const result = await parseOFXFile(content, "cli");
+      return result.transactions;
     }
 
     case "qif":
