@@ -106,22 +106,89 @@ const result = loadBankConfigJSON(json);
 console.log(`Registered: ${result.registered.join(", ")}`);
 ```
 
-## AI Enrichment (BYOK)
+## AI Enrichment (BYOK — Bring Your Own Key)
+
+All core parsing works **100% offline** with zero API keys. AI features are strictly opt-in for enhanced capabilities:
+
+- **Smart duplicate detection** — semantic matching beyond exact date/amount
+- **Merchant enrichment** — categorize transactions using LLM classification
+- **Column mapping** — AI-assisted column detection for unknown CSV formats
+- **Error recovery** — intelligent suggestions when parsing fails
+
+### OpenAI Example
 
 ```typescript
 import { setAIProvider, type AIProvider } from "statementkit";
+import OpenAI from "openai";
 
-const myProvider: AIProvider = {
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+const provider: AIProvider = {
   async chatCompletion(prompt, options) {
-    const response = await openai.chat.completions.create({
+    const res = await openai.chat.completions.create({
       model: options?.model ?? "gpt-4o-mini",
-      messages: [{ role: "user", content: prompt }],
+      messages: [
+        { role: "system", content: options?.systemPrompt ?? "You are a financial data assistant." },
+        { role: "user", content: prompt },
+      ],
+      temperature: options?.temperature ?? 0.1,
     });
-    return { success: true, data: response.choices[0].message.content ?? "" };
+    return { success: true, data: res.choices[0].message.content ?? "" };
   },
 };
 
-setAIProvider(myProvider);
+setAIProvider(provider);
+```
+
+### Anthropic Example
+
+```typescript
+import { setAIProvider, type AIProvider } from "statementkit";
+import Anthropic from "@anthropic-ai/sdk";
+
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
+const provider: AIProvider = {
+  async chatCompletion(prompt, options) {
+    const msg = await anthropic.messages.create({
+      model: options?.model ?? "claude-sonnet-4-20250514",
+      max_tokens: options?.maxTokens ?? 1024,
+      system: options?.systemPrompt ?? "You are a financial data assistant.",
+      messages: [{ role: "user", content: prompt }],
+    });
+    const text = msg.content[0].type === "text" ? msg.content[0].text : "";
+    return { success: true, data: text };
+  },
+};
+
+setAIProvider(provider);
+```
+
+### Testing with MockAIProvider
+
+```typescript
+import { setAIProvider, MockAIProvider } from "statementkit";
+
+const mock = new MockAIProvider();
+mock.when("categorize", JSON.stringify({ category: "Groceries" }));
+
+setAIProvider(mock);
+
+// After your test
+console.log(mock.getCalls()); // See what prompts were sent
+mock.reset();
+```
+
+### No AI? No Problem.
+
+```typescript
+// Simply don't call setAIProvider() — all parsing works without it.
+// AI features gracefully fall back to rule-based heuristics.
+import { parseOFXFile, exportTransactions } from "statementkit";
+
+const result = await parseOFXFile(content, "my-account");
+const csv = exportTransactions(result.transactions, "csv");
+// Works perfectly. Zero API calls. Zero network.
 ```
 
 ## License
