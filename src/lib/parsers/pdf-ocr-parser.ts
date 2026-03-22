@@ -13,6 +13,8 @@
  */
 
 import type { ParsedTransaction } from "./types";
+import { parseDate as parseIntlDate } from "./intl-date-parser";
+import { parseAmount as parseIntlAmount, detectCurrencySymbol } from "./intl-amount-parser";
 
 // ============================================================================
 // Types
@@ -51,7 +53,8 @@ export interface OCRResult {
 }
 
 export interface OCROptions {
-  language?: string; // Default: 'eng'
+  language?: string; // Default: 'eng' — Tesseract language code
+  locale?: string; // Default: 'en-US' — BCP 47 locale for date/amount parsing
   dpi?: number; // Default: 300
   preprocessImage?: boolean; // Default: true
   onProgress?: (progress: OCRProgress) => void;
@@ -63,18 +66,22 @@ export interface OCROptions {
 // ============================================================================
 
 /**
- * Dynamically import PDF.js (client-side only)
+ * Dynamically import PDF.js with environment-aware worker setup.
+ * Works in both browser and Node.js environments.
  */
 async function loadPdfJs() {
-  if (typeof window === "undefined") {
-    throw new Error("PDF.js can only be used in browser environment");
-  }
-
   const pdfjs = await import("pdfjs-dist");
 
-  // Set worker path for Next.js
-  // The worker needs to be served from public directory or use CDN
-  pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+  // Only set worker if not already configured
+  if (!pdfjs.GlobalWorkerOptions.workerSrc) {
+    if (typeof window !== "undefined") {
+      // Browser: use CDN worker matching the installed version
+      pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
+    } else {
+      // Node.js: disable worker (runs synchronously in main thread)
+      pdfjs.GlobalWorkerOptions.workerSrc = "";
+    }
+  }
 
   return pdfjs;
 }
@@ -228,16 +235,15 @@ async function loadTesseract() {
 }
 
 /**
- * Perform OCR on a canvas using Tesseract.js
+ * Create a reusable Tesseract worker for multi-page OCR.
+ * Worker is created once and reused across all pages.
  */
-async function performOCR(
-  canvas: HTMLCanvasElement,
+async function createOCRWorker(
   language: string = "eng",
   onProgress?: (progress: number) => void
-): Promise<{ text: string; confidence: number; words: TesseractWord[] }> {
+): Promise<any> {
   const Tesseract = await loadTesseract();
 
-  // Create worker
   const worker = await Tesseract.createWorker(language, 1, {
     logger: (m: any) => {
       if (m.status === "recognizing text" && onProgress) {
@@ -246,28 +252,34 @@ async function performOCR(
     },
   });
 
-  try {
-    // Configure for best accuracy with bank statements
-    await worker.setParameters({
-      preserve_interword_spaces: "1",
-    });
+  // Configure for best accuracy with bank statements
+  await worker.setParameters({
+    preserve_interword_spaces: "1",
+  });
 
-    // Perform OCR
-    const result = await worker.recognize(canvas);
-    const data = result.data as {
-      text: string;
-      confidence: number;
-      words?: TesseractWord[];
-    };
+  return worker;
+}
 
-    return {
-      text: data.text,
-      confidence: data.confidence / 100, // Convert to 0-1 scale
-      words: data.words || [],
-    };
-  } finally {
-    await worker.terminate();
-  }
+/**
+ * Perform OCR on a canvas using a Tesseract worker.
+ * Accepts an existing worker for reuse across pages.
+ */
+async function performOCR(
+  canvas: HTMLCanvasElement,
+  worker: any
+): Promise<{ text: string; confidence: number; words: TesseractWord[] }> {
+  const result = await worker.recognize(canvas);
+  const data = result.data as {
+    text: string;
+    confidence: number;
+    words?: TesseractWord[];
+  };
+
+  return {
+    text: data.text,
+    confidence: data.confidence / 100, // Convert to 0-1 scale
+    words: data.words || [],
+  };
 }
 
 // ============================================================================
@@ -275,95 +287,75 @@ async function performOCR(
 // ============================================================================
 
 /**
- * Parse OCR text to extract transaction rows
+ * Parse OCR text to extract transaction rows.
+ *
+ * Uses intl-date-parser (17 languages, CJK, Arabic) and intl-amount-parser
+ * (70+ currency symbols, locale-aware) for international bank statement support.
+ *
+ * @param text - Raw OCR text
+ * @param locale - BCP 47 locale hint for date/amount parsing (e.g., 'de-DE')
  */
-function parseTransactionRows(text: string): ParsedTransaction[] {
+function parseTransactionRows(text: string, locale?: string): ParsedTransaction[] {
   const transactions: ParsedTransaction[] = [];
   const lines = text
     .split("\n")
     .map((l) => l.trim())
     .filter((l) => l.length > 0);
 
-  // Date patterns
-  const datePatterns = [
-    /(\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4})/, // MM/DD/YYYY or DD/MM/YYYY
-    /(\d{4}[\/\-]\d{1,2}[\/\-]\d{1,2})/, // YYYY-MM-DD
-    /((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}(?:,?\s*\d{4})?)/i, // Month DD, YYYY
-  ];
+  // Date pattern: find date-like substrings (digits + separators, or month names)
+  // This extracts candidate strings that the intl-date-parser will validate
+  const dateExtractPattern =
+    /(\d{1,4}[\/\-\.]\d{1,2}[\/\-\.]\d{1,4})|(\d{4}年\d{1,2}月\d{1,2}日)|(\d{4}년\d{1,2}월\d{1,2}일)|((?:[A-Za-zÀ-ÿ]+)\s+\d{1,2}(?:,?\s*\d{4})?)/;
 
-  // Amount patterns
-  const amountPatterns = [
-    /\$?([\d,]+\.\d{2})/, // $1,234.56 or 1234.56
-    /\(([\d,]+\.\d{2})\)/, // (1,234.56) - negative
-    /-\$?([\d,]+\.\d{2})/, // -$1,234.56 - negative
-  ];
+  // Amount pattern: find numeric values with currency symbols or separators
+  // Broad pattern — intl-amount-parser handles locale-specific disambiguation
+  const amountExtractPattern =
+    /[()−-]?\s*(?:[^\d\s]{0,3})?\s*[\d.,\s']+(?:[.,]\d{1,4})?\s*(?:CR|DR)?/g;
 
   for (const line of lines) {
-    // Try to extract date
-    let dateStr: string | null = null;
-    let dateMatch: RegExpMatchArray | null = null;
+    // Try to extract date using regex, then validate with intl parser
+    const dateExtract = line.match(dateExtractPattern);
+    if (!dateExtract) continue;
 
-    for (const pattern of datePatterns) {
-      dateMatch = line.match(pattern);
-      if (dateMatch) {
-        dateStr = dateMatch[1];
-        break;
-      }
-    }
+    const dateStr = dateExtract[0];
+    const date = parseIntlDate(dateStr, locale);
+    if (!date) continue;
 
-    if (!dateStr) continue; // Skip lines without dates
-
-    // Try to extract amount
+    // Try to extract amount using intl parser
+    // Find all number-like substrings and try parsing each
+    const amountCandidates = line.match(amountExtractPattern) || [];
     let amount: number | null = null;
-    let isNegative = false;
 
-    // Check for parentheses (negative)
-    const parenMatch = line.match(/\(([\d,]+\.\d{2})\)/);
-    if (parenMatch) {
-      amount = parseFloat(parenMatch[1].replace(/,/g, ""));
-      isNegative = true;
-    }
+    for (const candidate of amountCandidates) {
+      const trimmed = candidate.trim();
+      if (!trimmed || /^[\/\-\.]+$/.test(trimmed)) continue;
 
-    // Check for negative sign
-    if (!amount) {
-      const negMatch = line.match(/-\$?([\d,]+\.\d{2})/);
-      if (negMatch) {
-        amount = parseFloat(negMatch[1].replace(/,/g, ""));
-        isNegative = true;
+      // Skip the date portion
+      if (trimmed === dateStr || dateStr.includes(trimmed)) continue;
+
+      const parsed = parseIntlAmount(trimmed, locale);
+      if (parsed !== null && parsed !== 0) {
+        amount = parsed;
+        break; // Take the first valid non-zero amount
       }
     }
 
-    // Check for regular amount
-    if (!amount) {
-      const amtMatch = line.match(/\$?([\d,]+\.\d{2})/);
-      if (amtMatch) {
-        amount = parseFloat(amtMatch[1].replace(/,/g, ""));
-      }
-    }
-
-    if (!amount) continue; // Skip lines without amounts
-
-    if (isNegative) {
-      amount = -Math.abs(amount);
-    }
+    if (amount === null) continue;
 
     // Extract description (everything between date and amount)
     let description = line;
 
     // Remove date from description
-    if (dateMatch) {
-      description = description.replace(dateMatch[0], "").trim();
+    description = description.replace(dateStr, "").trim();
+
+    // Remove amount-like patterns from description
+    // Detect currency symbol to help clean up
+    const currencySymbol = detectCurrencySymbol(line);
+    if (currencySymbol) {
+      description = description.replace(new RegExp(`\\${currencySymbol}`, "g"), "").trim();
     }
-
-    // Remove amount patterns from description
     description = description
-      .replace(/\$?[\d,]+\.\d{2}/g, "")
-      .replace(/\([\d,]+\.\d{2}\)/g, "")
-      .replace(/-\$?[\d,]+\.\d{2}/g, "")
-      .trim();
-
-    // Clean up description
-    description = description
+      .replace(/[()−-]?\s*[\d.,\s']+(?:[.,]\d{1,4})?\s*(?:CR|DR)?/g, "")
       .replace(/\s+/g, " ")
       .replace(/^\s*[-|]\s*/, "")
       .trim();
@@ -372,80 +364,17 @@ function parseTransactionRows(text: string): ParsedTransaction[] {
       description = "Unknown Transaction";
     }
 
-    // Parse date
-    const date = parseDateString(dateStr);
-    if (!date) continue;
-
     transactions.push({
       date,
       description,
       amount,
       isDuplicate: false,
-      confidence: 0.7, // Default OCR confidence
+      confidence: 0.7,
+      sourceFormat: "pdf",
     });
   }
 
   return transactions;
-}
-
-/**
- * Parse date string to Date object
- */
-function parseDateString(dateStr: string): Date | null {
-  // Try various date formats
-  const formats = [
-    // MM/DD/YYYY
-    /^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{4})$/,
-    // MM/DD/YY
-    /^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{2})$/,
-    // YYYY-MM-DD
-    /^(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})$/,
-    // Month DD, YYYY
-    /^(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+(\d{1,2})(?:,?\s*(\d{4}))?$/i,
-  ];
-
-  const months: Record<string, number> = {
-    jan: 0,
-    feb: 1,
-    mar: 2,
-    apr: 3,
-    may: 4,
-    jun: 5,
-    jul: 6,
-    aug: 7,
-    sep: 8,
-    oct: 9,
-    nov: 10,
-    dec: 11,
-  };
-
-  for (const format of formats) {
-    const match = dateStr.match(format);
-    if (match) {
-      if (format === formats[0]) {
-        // MM/DD/YYYY
-        return new Date(parseInt(match[3]), parseInt(match[1]) - 1, parseInt(match[2]));
-      } else if (format === formats[1]) {
-        // MM/DD/YY
-        const year = parseInt(match[3]) + 2000;
-        return new Date(year, parseInt(match[1]) - 1, parseInt(match[2]));
-      } else if (format === formats[2]) {
-        // YYYY-MM-DD
-        return new Date(parseInt(match[1]), parseInt(match[2]) - 1, parseInt(match[3]));
-      } else if (format === formats[3]) {
-        // Month DD, YYYY
-        const monthName = match[1].toLowerCase().substring(0, 3);
-        const month = months[monthName];
-        const day = parseInt(match[2]);
-        const year = match[3] ? parseInt(match[3]) : new Date().getFullYear();
-        return new Date(year, month, day);
-      }
-    }
-  }
-
-  // Fallback: try native Date parsing
-  const date = new Date(dateStr);
-  return isNaN(date.getTime()) ? null : date;
 }
 
 // ============================================================================
@@ -465,6 +394,7 @@ export async function performPDFOCR(
 ): Promise<OCRResult> {
   const {
     language = "eng",
+    locale,
     dpi = 300,
     preprocessImage: shouldPreprocess = true,
     onProgress,
@@ -520,69 +450,75 @@ export async function performPDFOCR(
       message: `Loaded PDF with ${totalPages} pages`,
     });
 
-    // Stage 2-4: Process each page
-    for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
-      checkAbort();
-
-      const pageProgress = 10 + (pageNum / totalPages) * 80;
-
-      // Render page to canvas
-      reportProgress({
-        stage: "rendering",
-        currentPage: pageNum,
-        totalPages,
-        progress: pageProgress,
-        message: `Rendering page ${pageNum}/${totalPages}...`,
-        estimatedTimeRemaining: Math.round((totalPages - pageNum + 1) * 5), // ~5s per page
-      });
-
-      const canvas = await renderPdfPageToCanvas(pdfDocument, pageNum, dpi);
-
-      // Preprocess image
-      if (shouldPreprocess) {
-        reportProgress({
-          stage: "preprocessing",
-          currentPage: pageNum,
-          totalPages,
-          progress: pageProgress + 5,
-          message: `Preprocessing page ${pageNum}/${totalPages}...`,
-        });
-
-        preprocessImageAdaptive(canvas);
-      }
-
-      // Perform OCR
+    // Create OCR worker once — reused across all pages
+    const worker = await createOCRWorker(language, (p) => {
       reportProgress({
         stage: "ocr",
-        currentPage: pageNum,
-        totalPages,
-        progress: pageProgress + 10,
-        message: `OCR processing page ${pageNum}/${totalPages}...`,
+        progress: p,
+        message: `OCR: ${Math.round(p)}%`,
       });
+    });
 
-      const ocrResult = await performOCR(canvas, language, (p) => {
+    try {
+      // Stage 2-4: Process each page
+      for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+        checkAbort();
+
+        const pageProgress = 10 + (pageNum / totalPages) * 80;
+
+        // Render page to canvas
+        reportProgress({
+          stage: "rendering",
+          currentPage: pageNum,
+          totalPages,
+          progress: pageProgress,
+          message: `Rendering page ${pageNum}/${totalPages}...`,
+          estimatedTimeRemaining: Math.round((totalPages - pageNum + 1) * 5),
+        });
+
+        const canvas = await renderPdfPageToCanvas(pdfDocument, pageNum, dpi);
+
+        // Preprocess image
+        if (shouldPreprocess) {
+          reportProgress({
+            stage: "preprocessing",
+            currentPage: pageNum,
+            totalPages,
+            progress: pageProgress + 5,
+            message: `Preprocessing page ${pageNum}/${totalPages}...`,
+          });
+
+          preprocessImageAdaptive(canvas);
+        }
+
+        // Perform OCR (reusing worker)
         reportProgress({
           stage: "ocr",
           currentPage: pageNum,
           totalPages,
-          progress: pageProgress + 10 + p * 0.6,
-          message: `OCR page ${pageNum}/${totalPages}: ${Math.round(p)}%`,
+          progress: pageProgress + 10,
+          message: `OCR processing page ${pageNum}/${totalPages}...`,
         });
-      });
 
-      pageTexts.push(ocrResult.text);
-      totalConfidence += ocrResult.confidence;
-      totalWords += ocrResult.words.length;
+        const ocrResult = await performOCR(canvas, worker);
 
-      // Count low confidence words
-      for (const word of ocrResult.words) {
-        if (word.confidence < 60) {
-          lowConfidenceWords++;
+        pageTexts.push(ocrResult.text);
+        totalConfidence += ocrResult.confidence;
+        totalWords += ocrResult.words.length;
+
+        // Count low confidence words
+        for (const word of ocrResult.words) {
+          if (word.confidence < 60) {
+            lowConfidenceWords++;
+          }
         }
-      }
 
-      // Clean up canvas
-      canvas.remove();
+        // Clean up canvas
+        canvas.remove();
+      }
+    } finally {
+      // Terminate worker after all pages are processed
+      await worker.terminate();
     }
 
     // Stage 5: Parse transactions
@@ -595,7 +531,7 @@ export async function performPDFOCR(
     });
 
     const rawText = pageTexts.join("\n\n--- Page Break ---\n\n");
-    const transactions = parseTransactionRows(rawText);
+    const transactions = parseTransactionRows(rawText, locale);
 
     // Calculate confidence warnings
     const avgConfidence = totalPages > 0 ? totalConfidence / totalPages : 0;
