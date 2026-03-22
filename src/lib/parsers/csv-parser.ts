@@ -70,6 +70,59 @@ export function parseCSVContent(content: string, skipRows: number = 0): CSVRow[]
 }
 
 /**
+ * Stream-parse a large CSV file in chunks, yielding rows incrementally.
+ * Use this for files with 1000+ transactions to avoid memory pressure.
+ *
+ * @param content - Full CSV content as string
+ * @param skipRows - Number of header rows to skip (e.g., BMO has 3)
+ * @param chunkSize - Number of data rows per yielded chunk (default: 1000)
+ */
+export async function* parseCSVContentStream(
+  content: string,
+  skipRows: number = 0,
+  chunkSize: number = 1000
+): AsyncGenerator<CSVRow[]> {
+  const cleanContent = content.replace(/^\uFEFF/, "");
+  const lines = cleanContent.trim().split("\n");
+
+  let startLine = skipRows;
+  while (startLine < lines.length && !lines[startLine].trim()) {
+    startLine++;
+  }
+
+  if (lines.length < startLine + 2) return;
+
+  const headerLine = lines[startLine];
+  const headers = parseCSVLine(headerLine).map((h) => h.trim());
+  const chunk: CSVRow[] = [];
+
+  for (let i = startLine + 1; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line) continue;
+
+    const values = parseCSVLine(line);
+    const row: CSVRow = {};
+
+    headers.forEach((header, index) => {
+      row[header] = values[index] ? values[index].trim() : "";
+    });
+
+    if (Object.values(row).some((v) => v !== "")) {
+      chunk.push(row);
+    }
+
+    if (chunk.length >= chunkSize) {
+      yield [...chunk];
+      chunk.length = 0;
+    }
+  }
+
+  if (chunk.length > 0) {
+    yield chunk;
+  }
+}
+
+/**
  * Parse a single CSV line handling quoted fields
  */
 function parseCSVLine(line: string): string[] {

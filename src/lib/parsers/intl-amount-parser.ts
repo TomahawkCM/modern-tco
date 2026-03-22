@@ -147,6 +147,59 @@ export function parseAmount(str: string, locale?: string): number | null {
 }
 
 /**
+ * Verbose amount parsing result with disambiguation metadata.
+ */
+export interface AmountParseResult {
+  value: number;
+  /** True when the format is genuinely ambiguous (e.g., "1,234" could be 1234 or 1.234) */
+  ambiguous: boolean;
+  /** How the last separator was interpreted */
+  interpretedAs: "decimal" | "thousands" | "unambiguous";
+}
+
+/**
+ * Parse an amount string and return metadata about disambiguation.
+ * Use this when you need to know whether the result could be wrong.
+ *
+ * @example
+ * parseAmountVerbose("1,234")     // { value: 1234, ambiguous: true, interpretedAs: "thousands" }
+ * parseAmountVerbose("1,234.56")  // { value: 1234.56, ambiguous: false, interpretedAs: "unambiguous" }
+ * parseAmountVerbose("1,23")      // { value: 1.23, ambiguous: false, interpretedAs: "decimal" }
+ */
+export function parseAmountVerbose(str: string, locale?: string): AmountParseResult | null {
+  const value = parseAmount(str, locale);
+  if (value === null) return null;
+
+  // Detect ambiguity: single comma/dot with exactly 3 digits after, no locale
+  const cleaned = str
+    .trim()
+    .replace(/[()−\-–]/g, "")
+    .replace(/[\s\u00A0\u202F]/g, "")
+    .replace(/'/g, "");
+  const stripped = removeCurrencySymbols(cleaned)
+    .replace(/\s*(?:DR|CR)\.?\s*$/i, "")
+    .trim();
+
+  const dots = (stripped.match(/\./g) || []).length;
+  const commas = (stripped.match(/,/g) || []).length;
+
+  // Ambiguous case: single separator with exactly 3 digits after
+  if (!locale && ((commas === 1 && dots === 0) || (dots === 1 && commas === 0))) {
+    const sep = commas === 1 ? "," : ".";
+    const afterSep = stripped.split(sep)[1];
+    if (afterSep && afterSep.length === 3) {
+      return {
+        value,
+        ambiguous: true,
+        interpretedAs: "thousands",
+      };
+    }
+  }
+
+  return { value, ambiguous: false, interpretedAs: "unambiguous" };
+}
+
+/**
  * Heuristic number parsing based on the string structure.
  * Detects decimal separator based on position and count of . and ,
  */
@@ -317,10 +370,7 @@ export function isZeroDecimalCurrency(currencyCode: string): boolean {
  * @param currencyCode - ISO 4217 currency code
  * @returns Warning message or null if valid
  */
-export function validateCurrencyDecimals(
-  amount: number,
-  currencyCode: string
-): string | null {
+export function validateCurrencyDecimals(amount: number, currencyCode: string): string | null {
   if (!currencyCode) return null;
 
   const isZeroDecimal = isZeroDecimalCurrency(currencyCode);
