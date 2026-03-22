@@ -1,0 +1,94 @@
+{
+  "name": "statementkit",
+  "version": "0.1.0",
+  "description": "Privacy-first bank statement parsing SDK. Parse CSV, OFX, QFX, QIF, MT940, CAMT.052/053/054, and scanned PDFs. 30+ banks, 68 OCR languages, 70+ currencies. 100% offline.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./cli": "./dist/cli.js",
+    "./exporters": {
+      "import": {
+        "types": "./dist/exporters/index.d.ts",
+        "default": "./dist/exporters/index.js"
+      },
+      "require": {
+        "types": "./dist/exporters/index.d.cts",
+        "default": "./dist/exporters/index.cjs"
+      }
+    }
+  },
+  "bin": {
+    "statementkit": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "bank-statement",
+    "parser",
+    "csv",
+    "ofx",
+    "qfx",
+    "qif",
+    "mt940",
+    "camt",
+    "iso20022",
+    "pdf",
+    "ocr",
+    "finance",
+    "banking",
+    "import",
+    "transactions",
+    "privacy-first",
+    "offline"
+  ],
+  "author": "TomahawkCM",
+  "license": "MIT",
+  "dependencies": {
+    "@internationalized/number": "^3.6.5",
+    "chrono-node": "^2.9.0",
+    "commander": "^14.0.0",
+    "fast-xml-parser": "^5.3.1",
+    "mt940-js": "^1.0.0",
+    "zod": "^4.1.11"
+  },
+  "optionalDependencies": {
+    "pdfjs-dist": "^5.4.449",
+    "tesseract.js": "^6.0.1"
+  },
+  "devDependencies": {
+    "tsup": "^8.4.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TomahawkCM/statementkit"
+  }
+}
