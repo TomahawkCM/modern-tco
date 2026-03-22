@@ -4,6 +4,10 @@
  * ~90% of bank-generated PDFs have a text layer, so this avoids OCR entirely.
  */
 
+import { loadPdfJs } from "./pdf-loader";
+
+export { setPdfWorkerSrc } from "./pdf-loader";
+
 export interface PageText {
   pageNumber: number;
   text: string;
@@ -26,25 +30,9 @@ export interface PdfTextResult {
   totalPages: number;
 }
 
-/**
- * Dynamically import PDF.js with environment-aware worker setup.
- * Works in both browser and Node.js environments.
- */
-async function loadPdfJs() {
-  const pdfjs = await import("pdfjs-dist");
-
-  // Only set worker if not already configured
-  if (!pdfjs.GlobalWorkerOptions.workerSrc) {
-    if (typeof window !== "undefined") {
-      pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
-    } else {
-      // Node.js: disable worker (runs synchronously in main thread)
-      pdfjs.GlobalWorkerOptions.workerSrc = "";
-    }
-  }
-
-  return pdfjs;
-}
+// PDF.js loading is handled by the shared pdf-loader.ts module.
+// Consumers can call setPdfWorkerSrc() to configure a custom worker path
+// for offline or air-gapped environments.
 
 /**
  * Extract all text from a PDF file using the native text layer.

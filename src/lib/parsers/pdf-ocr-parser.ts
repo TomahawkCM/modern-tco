@@ -15,6 +15,9 @@
 import type { ParsedTransaction } from "./types";
 import { parseDate as parseIntlDate } from "./intl-date-parser";
 import { parseAmount as parseIntlAmount, detectCurrencySymbol } from "./intl-amount-parser";
+import { loadPdfJs } from "./pdf-loader";
+
+export { setPdfWorkerSrc } from "./pdf-loader";
 
 // ============================================================================
 // Types
@@ -65,26 +68,9 @@ export interface OCROptions {
 // PDF.js Wrapper - Render PDF pages to canvas
 // ============================================================================
 
-/**
- * Dynamically import PDF.js with environment-aware worker setup.
- * Works in both browser and Node.js environments.
- */
-async function loadPdfJs() {
-  const pdfjs = await import("pdfjs-dist");
-
-  // Only set worker if not already configured
-  if (!pdfjs.GlobalWorkerOptions.workerSrc) {
-    if (typeof window !== "undefined") {
-      // Browser: use CDN worker matching the installed version
-      pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
-    } else {
-      // Node.js: disable worker (runs synchronously in main thread)
-      pdfjs.GlobalWorkerOptions.workerSrc = "";
-    }
-  }
-
-  return pdfjs;
-}
+// PDF.js loading is handled by the shared pdf-loader.ts module.
+// Consumers can call setPdfWorkerSrc() to configure a custom worker path
+// for offline or air-gapped environments.
 
 /**
  * Render a PDF page to canvas at specified DPI
@@ -295,17 +281,38 @@ async function performOCR(
  * @param text - Raw OCR text
  * @param locale - BCP 47 locale hint for date/amount parsing (e.g., 'de-DE')
  */
-function parseTransactionRows(text: string, locale?: string): ParsedTransaction[] {
+export function parseTransactionRows(text: string, locale?: string): ParsedTransaction[] {
   const transactions: ParsedTransaction[] = [];
   const lines = text
     .split("\n")
     .map((l) => l.trim())
     .filter((l) => l.length > 0);
 
-  // Date pattern: find date-like substrings (digits + separators, or month names)
-  // This extracts candidate strings that the intl-date-parser will validate
-  const dateExtractPattern =
-    /(\d{1,4}[\/\-\.]\d{1,2}[\/\-\.]\d{1,4})|(\d{4}年\d{1,2}月\d{1,2}日)|(\d{4}년\d{1,2}월\d{1,2}일)|((?:[A-Za-zÀ-ÿ]+)\s+\d{1,2}(?:,?\s*\d{4})?)/;
+  // Date candidate extraction — broad patterns that feed into parseIntlDate().
+  // The intl-date-parser handles validation; we just need to capture candidates.
+  // Uses \p{L} (any Unicode letter) and \p{M} (combining marks) to support
+  // Arabic, Cyrillic, Thai, Hindi (Devanagari vowel signs are \p{M}), Hebrew,
+  // and all other scripts — not just Latin [A-Za-zÀ-ÿ].
+  //
+  // Note: \p{M} is critical for scripts that use combining marks as part of
+  // words (Hindi जनवरी, Thai มกราคม, Arabic يناير with diacritics).
+  const dateExtractPattern = new RegExp(
+    // Numeric: DD/MM/YYYY, YYYY-MM-DD, MM.DD.YY, etc.
+    "(\\d{1,4}[/\\-.]\\d{1,2}[/\\-.]\\d{1,4})" +
+      // CJK Japanese/Chinese: 2025年1月15日 (also fullwidth digits)
+      "|(\\d{2,4}年\\d{1,2}月\\d{1,2}日)" +
+      // CJK Korean: 2025년 1월 15일
+      "|(\\d{2,4}년\\s*\\d{1,2}월\\s*\\d{1,2}일)" +
+      // Arabic-Indic digits: ١٥/٠١/٢٠٢٥
+      "|([\u0660-\u0669]{1,4}[/\\-.][\u0660-\u0669]{1,2}[/\\-.][\u0660-\u0669]{1,4})" +
+      // Day + month name (any script): "15 января 2025", "15 يناير 2025", "15 जनवरी 2025"
+      "|(\\d{1,2}\\s+[\\p{L}\\p{M}][\\p{L}\\p{M}.]{2,}\\s+\\d{2,4})" +
+      // Month name + day (any script): "January 15, 2025", "มกราคม 15, 2025"
+      "|([\\p{L}\\p{M}][\\p{L}\\p{M}.]{2,}\\s+\\d{1,2}[,]?\\s+\\d{2,4})" +
+      // Day + month name without year: "15 Jan", "15 января", "15 जनवरी"
+      "|(\\d{1,2}\\s+[\\p{L}\\p{M}]{3,})",
+    "u"
+  );
 
   // Amount pattern: find numeric values with currency symbols or separators
   // Broad pattern — intl-amount-parser handles locale-specific disambiguation
