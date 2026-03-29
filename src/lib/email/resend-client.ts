@@ -12,6 +12,7 @@ import type {
   BillReminderEmailProps,
   BudgetAlertEmailProps,
   GoalMilestoneEmailProps,
+  WeeklyDigestEmailProps,
   TestEmailProps,
 } from "@/types/email";
 
@@ -108,7 +109,12 @@ export async function sendEmail(
  */
 export function getEmailSubject(
   type: EmailType,
-  props: BillReminderEmailProps | BudgetAlertEmailProps | GoalMilestoneEmailProps | TestEmailProps
+  props:
+    | BillReminderEmailProps
+    | BudgetAlertEmailProps
+    | GoalMilestoneEmailProps
+    | WeeklyDigestEmailProps
+    | TestEmailProps
 ): string {
   switch (type) {
     case "bill_reminder": {
@@ -136,6 +142,10 @@ export function getEmailSubject(
       } else {
         return `Milestone reached: ${p.milestone}% of ${p.goalName}`;
       }
+    }
+    case "weekly_digest": {
+      const p = props as WeeklyDigestEmailProps;
+      return `Your Weekly Budget Digest — ${p.weekLabel}`;
     }
     case "test":
       return "Test notification from Budget App";

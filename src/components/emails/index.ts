@@ -8,4 +8,5 @@ export { BillReminderEmail } from "./BillReminderEmail";
 export { BudgetAlertEmail } from "./BudgetAlertEmail";
 export { GoalMilestoneEmail } from "./GoalMilestoneEmail";
 export { TestEmail } from "./TestEmail";
+export { WeeklyDigestEmail } from "./WeeklyDigestEmail";
 export { EmailLayout, emailStyles } from "./components/EmailLayout";

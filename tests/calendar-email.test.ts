@@ -181,5 +181,6 @@ describe("Email Types", () => {
     expect(DEFAULT_NOTIFICATION_SETTINGS.emailBillReminders).toBe(true);
     expect(DEFAULT_NOTIFICATION_SETTINGS.emailBudgetAlerts).toBe(true);
     expect(DEFAULT_NOTIFICATION_SETTINGS.emailGoalMilestones).toBe(true);
+    expect(DEFAULT_NOTIFICATION_SETTINGS.emailWeeklyDigest).toBe(true);
   });
 });

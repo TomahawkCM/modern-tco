@@ -12,6 +12,7 @@ import {
   BudgetAlertEmail,
   GoalMilestoneEmail,
   TestEmail,
+  WeeklyDigestEmail,
 } from "@/components/emails";
 import type {
   SendEmailRequest,
@@ -19,6 +20,7 @@ import type {
   BillReminderEmailProps,
   BudgetAlertEmailProps,
   GoalMilestoneEmailProps,
+  WeeklyDigestEmailProps,
   TestEmailProps,
 } from "@/types/email";
 
@@ -79,6 +81,9 @@ export async function POST(request: NextRequest): Promise<NextResponse<SendEmail
         break;
       case "goal_milestone":
         emailComponent = GoalMilestoneEmail(props as GoalMilestoneEmailProps);
+        break;
+      case "weekly_digest":
+        emailComponent = WeeklyDigestEmail(props as WeeklyDigestEmailProps);
         break;
       case "test":
         emailComponent = TestEmail(props as TestEmailProps);

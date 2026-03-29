@@ -108,6 +108,8 @@ function getTypeLabel(type: EmailType): string {
       return "budget alerts";
     case "goal_milestone":
       return "goal milestone notifications";
+    case "weekly_digest":
+      return "weekly digest emails";
     case "test":
       return "test notifications";
     default:
